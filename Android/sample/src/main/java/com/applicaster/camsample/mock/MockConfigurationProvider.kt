@@ -63,4 +63,8 @@ class MockConfigurationProvider : CamConfigurationProvider {
     override fun isEntitlementsValid() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
+
+    override fun getUIConfig(): Map<String, String> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 }

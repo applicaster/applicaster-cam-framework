@@ -21,4 +21,6 @@ interface CamConfigurationProvider {
     fun getEntitlements() //get purchase id (and corresponding data)
 
     fun isEntitlementsValid() //discuss the differences on diagram
+
+    fun getUIConfig(): Map<String, String>
 }
