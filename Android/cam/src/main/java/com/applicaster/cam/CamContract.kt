@@ -10,7 +10,7 @@ interface CamContract {
 
     fun resetPassword(callback: PasswordResetCallback)
 
-    fun activateRedeemCode(redeemCode: String, callback: ReedemCodeActivationCallback)
+    fun activateRedeemCode(redeemCode: String, callback: RedeemCodeActivationCallback)
 
     fun loginWithFacebook(callback: FacebookLoginCallback)
 

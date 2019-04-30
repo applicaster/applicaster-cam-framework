@@ -11,7 +11,7 @@ interface ContentAccessManager {
 interface LoginCallback : ActionCallback
 interface SignUpCallback : ActionCallback
 interface PasswordResetCallback : ActionCallback
-interface ReedemCodeActivationCallback: ActionCallback
+interface RedeemCodeActivationCallback: ActionCallback
 interface FacebookLoginCallback: ActionCallback
 interface ActionCallback {
     fun onFailure(msg: String)

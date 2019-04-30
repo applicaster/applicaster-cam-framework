@@ -17,7 +17,7 @@ class MockCamContract : CamContract {
         Handler().postDelayed({ callback.onSuccess() }, 1000)
     }
 
-    override fun activateRedeemCode(redeemCode: String, callback: ReedemCodeActivationCallback) {
+    override fun activateRedeemCode(redeemCode: String, callback: RedeemCodeActivationCallback) {
         Handler().postDelayed({ callback.onSuccess() }, 1000)
     }
 
