@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="ImageAdditionalAuth">
+        <item name="android:layout_width">@dimen/additional_auth_iv_size</item>
+        <item name="android:layout_height">@dimen/additional_auth_iv_size</item>
+        <item name="android:layout_marginTop">@dimen/additional_auth_iv_vert_margin</item>
+        <item name="android:layout_marginBottom">@dimen/additional_auth_iv_vert_margin</item>
+        <item name="android:layout_marginStart">@dimen/additional_auth_iv_horiz_margin</item>
+        <item name="android:layout_marginLeft">@dimen/additional_auth_iv_horiz_margin</item>
+        <item name="android:layout_marginEnd">@dimen/additional_auth_iv_horiz_margin</item>
+        <item name="android:layout_marginRight">@dimen/additional_auth_iv_horiz_margin</item>
+    </style>
+
+    <style name="EditTextAuthInput">
+        <item name="android:layout_width">@dimen/auth_et_width</item>
+        <item name="android:layout_height">@dimen/auth_et_height</item>
+    </style>
+
+
+</resources>

@@ -7,10 +7,8 @@
 
 
     <com.applicaster.util.ui.CustomEditText
-        android:id="@+id/input_email"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/edit_text_height"
-        android:layout_marginTop="0dp"
+        android:id="@+id/et_input_first"
+        style="@style/EditTextAuthInput"
         android:hint="E-mail"
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
@@ -18,36 +16,32 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.applicaster.util.ui.CustomEditText
-        android:id="@+id/input_password"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/edit_text_height"
+        android:id="@+id/et_input_sec"
+        style="@style/EditTextAuthInput"
+        android:layout_marginTop="7dp"
         android:hint="Password"
-        android:layout_marginTop="16dp"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/input_email" />
+        app:layout_constraintTop_toBottomOf="@id/et_input_first" />
 
     <com.applicaster.util.ui.CustomTextView
-        android:id="@+id/forgot_password"
+        android:id="@+id/tv_forgot_pwd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/input_password"
+        app:layout_constraintTop_toBottomOf="@id/et_input_sec"
         tools:text="Forgot password?" />
 
     <com.applicaster.util.ui.CustomButton
-        android:id="@+id/action_button"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/action_button_height"
-        android:layout_marginTop="20dp"
+        android:id="@+id/btn_input_action"
+        style="@style/EditTextAuthInput"
+        android:layout_marginTop="10dp"
         android:text="SIGN IN"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/forgot_password"
-        />
-
+        app:layout_constraintTop_toBottomOf="@id/tv_forgot_pwd" />
 
 </android.support.constraint.ConstraintLayout>
