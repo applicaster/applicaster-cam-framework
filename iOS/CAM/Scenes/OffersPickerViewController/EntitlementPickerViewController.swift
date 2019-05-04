@@ -22,7 +22,7 @@ class EntitlementPickerViewController: UIViewController {
     @IBOutlet weak var helpInfoContainer: UIView!
     @IBOutlet weak var helpInfoTextView: UITextView!
     
-    var presenter: EntitlementsPickerPresenter?
+    var presenter: EntitlementPickerPresenter?
     var entitlements = [CAMEntitlementItem]()
     var currentItemIndex = 0 // Used for store center cell for ipad
     var itemSpacing: CGFloat = 20
@@ -58,6 +58,13 @@ class EntitlementPickerViewController: UIViewController {
         entitlementCollectionView.dataSource = self
     }
     
+    @IBAction func backToPreviousScreen(_ sender: Any) {
+        presenter?.backToPreviousScreen()
+    }
+    
+    @IBAction func close(_ sender: Any) {
+        presenter?.close()
+    }
 }
 
 extension EntitlementPickerViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout  {
