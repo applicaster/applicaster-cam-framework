@@ -4,9 +4,9 @@ import android.view.View
 
 interface IBillingAdapter {
 
-    fun addPurchaseItems(items: List<BillingItem>)
+    fun addPurchaseItems(items: List<PurchaseItem>)
 
     fun removeAllPurchaseItems()
 
-    fun setItemListener(item: BillingItem, holderView: View)
+    fun setItemListener(item: PurchaseItem, holderView: View)
 }

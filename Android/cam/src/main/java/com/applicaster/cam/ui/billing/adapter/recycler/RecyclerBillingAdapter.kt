@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.applicaster.cam.R
-import com.applicaster.cam.ui.billing.adapter.BillingItem
+import com.applicaster.cam.ui.billing.adapter.PurchaseItem
 import com.applicaster.cam.ui.billing.adapter.IBillingAdapter
 import com.applicaster.cam.ui.billing.adapter.PurchaseInteractionListener
 
@@ -14,18 +14,18 @@ class RecyclerBillingAdapter(
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(),
     IBillingAdapter {
 
-    private val billingItemsList: ArrayList<BillingItem> = arrayListOf()
+    private val purchaseItemsList: ArrayList<PurchaseItem> = arrayListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.billing_item, parent, false)
         return BillingItemViewHolder(itemView)
     }
 
-    override fun getItemCount(): Int = billingItemsList.size
+    override fun getItemCount(): Int = purchaseItemsList.size
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is BillingItemViewHolder) {
-            val billingItem = billingItemsList[holder.adapterPosition]
+            val billingItem = purchaseItemsList[holder.adapterPosition]
             holder.tvTitle.text = billingItem.productTitle
             holder.tvDetails.text = billingItem.productDescription
             holder.btnSubscribe.text = billingItem.productPrice
@@ -34,17 +34,17 @@ class RecyclerBillingAdapter(
         }
     }
 
-    override fun addPurchaseItems(items: List<BillingItem>) {
-        billingItemsList.addAll(items)
+    override fun addPurchaseItems(items: List<PurchaseItem>) {
+        purchaseItemsList.addAll(items)
         notifyDataSetChanged()
     }
 
     override fun removeAllPurchaseItems() {
-        billingItemsList.clear()
+        purchaseItemsList.clear()
         notifyDataSetChanged()
     }
 
-    override fun setItemListener(item: BillingItem, holderView: View) {
+    override fun setItemListener(item: PurchaseItem, holderView: View) {
         holderView.setOnClickListener { purchaseListener.onPurchaseButtonClicked(item.productId) }
     }
 }

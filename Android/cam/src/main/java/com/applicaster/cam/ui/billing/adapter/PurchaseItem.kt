@@ -1,6 +1,6 @@
 package com.applicaster.cam.ui.billing.adapter
 
-data class BillingItem(
+data class PurchaseItem(
     var productId: String,
     var productTitle: String,
     var productDescription: String,

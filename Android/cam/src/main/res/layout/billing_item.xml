@@ -17,8 +17,8 @@
             android:orientation="vertical"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/card_layout_margin_top_bottom"
-            android:layout_marginBottom="@dimen/card_layout_margin_top_bottom"
+            android:layout_marginTop="@dimen/billing_layout_margin_top_bottom"
+            android:layout_marginBottom="@dimen/billing_layout_margin_top_bottom"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -30,19 +30,19 @@
                 android:id="@+id/tv_billing_item_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/card_tv_title_text_size"
+                android:textSize="@dimen/billing_tv_title_text_size"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/card_title_margin_top"
+                android:layout_marginTop="@dimen/billing_title_margin_top"
                 android:text="Monthly Subscription"/>
 
         <com.applicaster.util.ui.CustomTextView
                 android:id="@+id/tv_billing_item_details"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/card_details_margin_left_right"
-                android:layout_marginRight="@dimen/card_details_margin_left_right"
-                android:layout_marginTop="@dimen/card_details_margin_top"
-                android:textSize="@dimen/card_tv_details_text_size"
+                android:layout_marginLeft="@dimen/billing_details_margin_left_right"
+                android:layout_marginRight="@dimen/billing_details_margin_left_right"
+                android:layout_marginTop="@dimen/billing_details_margin_top"
+                android:textSize="@dimen/billing_tv_details_text_size"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center"
                 android:maxLines="2"
@@ -51,11 +51,11 @@
 
         <com.applicaster.util.ui.CustomButton
                 android:id="@+id/btn_billing_item_subscribe"
-                android:layout_width="@dimen/card_btn_subscribe_width"
-                android:layout_height="@dimen/card_btn_subscribe_height"
-                android:textSize="@dimen/card_btn_subscribe_text_size"
+                android:layout_width="@dimen/billing_btn_subscribe_width"
+                android:layout_height="@dimen/billing_btn_subscribe_height"
+                android:textSize="@dimen/billing_btn_subscribe_text_size"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/card_btn_subscribe_margin_top"
+                android:layout_marginTop="@dimen/billing_btn_subscribe_margin_top"
                 android:gravity="center_horizontal"
                 android:text="SUBSCRIBE FOR $4.99"/>
 
@@ -63,10 +63,10 @@
                 android:id="@+id/tv_billing_item_redeem"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/card_tv_redeem_text_size"
+                android:textSize="@dimen/billing_tv_redeem_text_size"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/card_tv_redeem_margin_top"
-                android:layout_marginBottom="@dimen/card_tv_redeem_margin_bottom"
+                android:layout_marginTop="@dimen/billing_tv_redeem_margin_top"
+                android:layout_marginBottom="@dimen/billing_tv_redeem_margin_bottom"
                 android:gravity="center_horizontal"
                 android:text="Redeem Code"/>
 

@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.applicaster.cam.R
-import com.applicaster.cam.ui.billing.adapter.BillingItem
+import com.applicaster.cam.ui.billing.adapter.PurchaseItem
 import com.applicaster.cam.ui.billing.adapter.IBillingAdapter
 import com.applicaster.cam.ui.billing.adapter.PurchaseInteractionListener
 import kotlinx.android.synthetic.main.billing_item.view.*
@@ -15,40 +15,40 @@ class PagerBillingAdapter(
 ) : PagerAdapter(),
     IBillingAdapter {
 
-    private val billingItemsList: ArrayList<BillingItem> = arrayListOf()
+    private val purchaseItemsList: ArrayList<PurchaseItem> = arrayListOf()
 
     override fun isViewFromObject(view: View, obj: Any): Boolean = (view == obj)
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val itemView = LayoutInflater.from(container.context).inflate(R.layout.billing_item, container, false)
         container.addView(itemView)
-        bindView(billingItemsList[position], itemView)
+        bindView(purchaseItemsList[position], itemView)
         return itemView
     }
 
-    override fun getCount(): Int = billingItemsList.size
+    override fun getCount(): Int = purchaseItemsList.size
 
     override fun getItemPosition(obj: Any): Int = POSITION_NONE
 
-    private fun bindView(billingItem: BillingItem, view: View) {
-        view.tv_billing_item_title.text = billingItem.productTitle
-        view.tv_billing_item_details.text = billingItem.productDescription
-        view.btn_billing_item_subscribe.text = billingItem.productPrice
+    private fun bindView(purchaseItem: PurchaseItem, view: View) {
+        view.tv_billing_item_title.text = purchaseItem.productTitle
+        view.tv_billing_item_details.text = purchaseItem.productDescription
+        view.btn_billing_item_subscribe.text = purchaseItem.productPrice
 
-        setItemListener(billingItem, view.btn_billing_item_subscribe)
+        setItemListener(purchaseItem, view.btn_billing_item_subscribe)
     }
 
-    override fun addPurchaseItems(items: List<BillingItem>) {
-        billingItemsList.addAll(items)
+    override fun addPurchaseItems(items: List<PurchaseItem>) {
+        purchaseItemsList.addAll(items)
         notifyDataSetChanged()
     }
 
     override fun removeAllPurchaseItems() {
-        billingItemsList.clear()
+        purchaseItemsList.clear()
         notifyDataSetChanged()
     }
 
-    override fun setItemListener(item: BillingItem, holderView: View) {
+    override fun setItemListener(item: PurchaseItem, holderView: View) {
         holderView.setOnClickListener { purchaseListener.onPurchaseButtonClicked(item.productId) }
     }
 }
