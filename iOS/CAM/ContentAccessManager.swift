@@ -23,6 +23,7 @@ public class ContentAccessManager {
     var completion: ((Bool) -> Void)!
     weak var configProvider: CAMConfigProtocol!
     weak var delegate: CAMDelegate!
+    weak var rootViewController: UIViewController!
     var childCoordinator: Coordinator?
     
     public static let shared = ContentAccessManager()
@@ -30,7 +31,8 @@ public class ContentAccessManager {
     private init() {
     }
     
-    public func startFlow(camDelegate: CAMDelegate, camConfigProtocol: CAMConfigProtocol, completion: @escaping (Bool) -> Void) {
+    public func startFlow(rootViewController: UIViewController, camDelegate: CAMDelegate, camConfigProtocol: CAMConfigProtocol, completion: @escaping (Bool) -> Void) {
+        self.rootViewController = rootViewController
         self.delegate = camDelegate
         self.configProvider = camConfigProtocol
         self.completion = completion
@@ -42,9 +44,9 @@ public class ContentAccessManager {
     }
     
     func authorize() {
-        UIViewController.topMostViewController?.present(navigationController, animated: true, completion: nil)
+        rootViewController.present(navigationController, animated: true, completion: nil)
         childCoordinator = AuthorizationCoordinator()
-        childCoordinator?.start(navigationController: self.navigationController, parentCoordinator: self, completion: { [weak self] (isUserLogged) in
+        childCoordinator?.start(navigationController: navigationController, parentCoordinator: self, completion: { [weak self] (isUserLogged) in
             self?.childCoordinator = nil
             self?.navigationController.setViewControllers([], animated: false)
             if isUserLogged {
@@ -59,11 +61,21 @@ public class ContentAccessManager {
         if self.configProvider.isEntitlementsValid() {
             finishFlow(true)
         } else {
-            if navigationController.parent == nil {
-                UIViewController.topMostViewController?.present(navigationController, animated: true, completion: nil)
+            if navigationController.presentingViewController == nil {
+                rootViewController.present(navigationController, animated: true, completion: nil)
             }
+            purchaseEntitlement()
         }
     }
+    
+    func purchaseEntitlement() {
+        childCoordinator = BillingCoordinator()
+        childCoordinator?.start(navigationController: navigationController, parentCoordinator: self, completion: { [weak self] (isUserHasAccess) in
+            self?.childCoordinator = nil
+            self?.finishFlow(isUserHasAccess)
+        })
+    }
+    
     
     func finishFlow(_ result: Bool) {
         navigationController.viewControllers.removeAll()

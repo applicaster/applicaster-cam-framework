@@ -10,6 +10,7 @@ import Foundation
 
 class ResetPasswordPresenter {
     weak var coordinatorDelegate: AuthorizationCoordinatorProtocol?
+    weak var camDelegate: CAMDelegate?
     
     func showResetPasswordScreen() {
         coordinatorDelegate?.showResetPasswordScreen()

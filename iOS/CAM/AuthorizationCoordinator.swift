@@ -40,9 +40,9 @@ class AuthorizationCoordinator: AuthorizationCoordinatorProtocol, Coordinator {
         loginVC.presenter = presenter
         
         presenter.coordinatorDelegate = self
+        presenter.camDelegate = parentCoordinator?.getCamDelegate()
         presenter.isRoot = isCoordinatorRootController
         loginVC.configProvider = parentCoordinator?.getConfigProvider() //setup ui provider
-        
         navigationController?.pushViewController(loginVC, animated: true)
     }
     
@@ -52,19 +52,19 @@ class AuthorizationCoordinator: AuthorizationCoordinatorProtocol, Coordinator {
         signUpVC.presenter = presenter
         
         presenter.coordinatorDelegate = self
+        presenter.camDelegate = parentCoordinator?.getCamDelegate()
         presenter.isRoot = isCoordinatorRootController
         signUpVC.configProvider = parentCoordinator?.getConfigProvider() //setup ui provider
-        
         navigationController?.pushViewController(signUpVC, animated: true)
     }
     
     func showResetPasswordScreen() {
         let restoreVC = ResetPasswordViewController.instantiateVC()
         let presenter = ResetPasswordPresenter()
-        
         restoreVC.presenter = presenter
         
         presenter.coordinatorDelegate = self
+        presenter.camDelegate = parentCoordinator?.getCamDelegate()
         navigationController?.pushViewController(restoreVC, animated: true)
     }
     
