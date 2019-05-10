@@ -169,12 +169,14 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-CAMFramework/Pods-CAMFramework-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ApplicasterIAP/ApplicasterIAP.framework",
 				"${BUILT_PRODUCTS_DIR}/CAM/CAM.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ApplicasterIAP.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CAM.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
