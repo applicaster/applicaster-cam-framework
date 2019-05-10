@@ -1,9 +1,11 @@
 package com.applicaster.cam
 
 import com.applicaster.cam.params.AuthField
+import com.applicaster.cam.params.AuthFieldConfig
 import com.applicaster.cam.params.AuthFieldsConverter
+import com.applicaster.cam.params.AuthScreenType
 
-class ContentAccessManagerImpl : ContentAccessManager {
+object ContentAccessManagerImpl : ContentAccessManager {
     private lateinit var contract: CamContract
     private lateinit var configurationProvider: CamConfigurationProvider
 
@@ -12,8 +14,13 @@ class ContentAccessManagerImpl : ContentAccessManager {
         this.configurationProvider = configurationProvider
     }
 
-    private fun getSignInAuthFields(): List<AuthField> {
+    fun getSignInAuthFields(): AuthFieldConfig {
         val jsonConfig = configurationProvider.getAuthFieldsConfig()
-        return AuthFieldsConverter.getFromJsonString(jsonConfig)
+        return AuthFieldsConverter.getFromJsonString(jsonConfig, AuthScreenType.SIGNUP)
+    }
+
+    fun getLoginAuthFields(): AuthFieldConfig {
+        val jsonConfig = configurationProvider.getAuthFieldsConfig()
+        return AuthFieldsConverter.getFromJsonString(jsonConfig, AuthScreenType.LOGIN)
     }
 }

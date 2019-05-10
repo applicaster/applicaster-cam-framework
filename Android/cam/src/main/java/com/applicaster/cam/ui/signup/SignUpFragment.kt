@@ -7,6 +7,10 @@ import android.view.ViewGroup
 import com.applicaster.cam.R
 import com.applicaster.cam.ui.CamNavigationRouter
 import com.applicaster.cam.ui.base.view.BaseFragment
+import kotlinx.android.synthetic.main.layout_auth_input.*
+import kotlinx.android.synthetic.main.layout_bottom_bar.*
+import kotlinx.android.synthetic.main.layout_text_with_action.*
+import kotlinx.android.synthetic.main.layout_toolbar_template.*
 
 class SignUpFragment : BaseFragment(), ISignUpView {
 
@@ -25,7 +29,28 @@ class SignUpFragment : BaseFragment(), ISignUpView {
         setPresenter(presenter)
         return inflater.inflate(R.layout.fragment_sign_up, container, false)
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setListeners()
+        super.onViewCreated(view, savedInstanceState)
+    }
+
     override fun setListeners() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        tv_forgot_pwd.setOnClickListener { presenter?.onForgotPasswordClicked() }
+        btn_input_action.setOnClickListener { presenter?.onSignUpButtonClicked() }
+        tv_hint_desc.setOnClickListener { presenter?.onLogInHintClicked() }
+        tv_hint_action.setOnClickListener { presenter?.onLogInHintClicked() }
+        tv_bottom_bar_desc.setOnClickListener { presenter?.onRestoreClicked() }
+        tv_bottom_bar_action.setOnClickListener { presenter?.onRestoreClicked() }
+        toolbar_back_button.setOnClickListener { presenter?.onToolbarBackClicked() }
+        toolbar_close_button.setOnClickListener { presenter?.onToolbarCloseClicked() }
+    }
+
+    override fun goBack() {
+        activity?.onBackPressed()
+    }
+
+    override fun close() {
+        activity?.finish()
     }
 }
