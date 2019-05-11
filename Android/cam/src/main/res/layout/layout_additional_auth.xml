@@ -64,17 +64,6 @@
         <ImageView
             style="@style/ImageAdditionalAuth"
             android:background="@color/white" />
-
-        <ImageView
-            android:layout_width="38dp"
-            android:layout_height="38dp"
-            android:layout_marginStart="7.5dp"
-            android:layout_marginLeft="7.5dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="7.5dp"
-            android:layout_marginRight="7.5dp"
-            android:layout_marginBottom="15dp"
-            android:background="@color/white" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

@@ -17,12 +17,13 @@ class MockConfigurationProvider : CamConfigurationProvider {
     override fun isFacebookLoginRequired(): Boolean = true
 
     override fun getAuthFieldsConfig(): String {
-        return "[{\"type\":\"TEXT\",\"key\":\"email\",\"title\":\"Email\",\"hint\":\"Email\",\"mandatory\":true},{\"type\":\"PASSWORD\",\"key\":\"password\",\"title\":\"Password\",\"hint\":\"Password\",\"mandatory\":true},{\"type\":\"NUMBER\",\"key\":\"phone\",\"title\":\"Phone\",\"hint\":\"Phone\",\"mandatory\":true},{\"type\":\"TEXT\",\"key\":\"gender\",\"title\":\"Gender\",\"hint\":\"Gender\",\"mandatory\":false}]"
-
+        return "{\"signup\":[{\"type\":\"TEXT\",\"key\":\"email\",\"title\":\"Email\",\"hint\":\"Email\",\"mandatory\":true},{\"type\":\"PASSWORD\",\"key\":\"password\",\"title\":\"Password\",\"hint\":\"Password\",\"mandatory\":true},{\"type\":\"NUMBER\",\"key\":\"phone\",\"title\":\"Phone\",\"hint\":\"Phone\",\"mandatory\":true},{\"type\":\"TEXT\",\"key\":\"gender\",\"title\":\"Gender\",\"hint\":\"Gender\",\"mandatory\":false}],\"login\":[{\"type\":\"TEXT\",\"key\":\"email\",\"title\":\"Email\",\"hint\":\"Email\",\"mandatory\":true},{\"type\":\"PASSWORD\",\"key\":\"password\",\"title\":\"Password\",\"hint\":\"Password\",\"mandatory\":true}]}"
         /**
          * raw formatted:
          *
-         * [
+         *
+        {
+        "signup": [
         {
         "type": "TEXT",
         "key": "email",
@@ -51,7 +52,24 @@ class MockConfigurationProvider : CamConfigurationProvider {
         "hint": "Gender",
         "mandatory": false
         }
+        ],
+        "login": [
+        {
+        "type": "TEXT",
+        "key": "email",
+        "title": "Email",
+        "hint": "Email",
+        "mandatory": true
+        },
+        {
+        "type": "PASSWORD",
+        "key": "password",
+        "title": "Password",
+        "hint": "Password",
+        "mandatory": true
+        }
         ]
+        }
          *
          */
     }

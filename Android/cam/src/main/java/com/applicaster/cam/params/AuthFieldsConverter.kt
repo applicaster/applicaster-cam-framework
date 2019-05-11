@@ -1,12 +1,11 @@
 package com.applicaster.cam.params
 
-import org.json.JSONArray
 import org.json.JSONObject
 
 object AuthFieldsConverter {
 
-    fun getFromJsonString(authDataJson: String): List<AuthField> {
-        val jsonArray = JSONArray(authDataJson)
+    fun getFromJsonString(authDataJson: String, configType: AuthScreenType): AuthFieldConfig {
+        val jsonArray = JSONObject(authDataJson).getJSONArray(configType.getKey())
         val authFields: MutableList<AuthField> = ArrayList()
         for (i in 0 until jsonArray.length()) {
 
@@ -21,6 +20,6 @@ object AuthFieldsConverter {
                     })
             }
         }
-        return authFields
+        return AuthFieldConfig(authFields, configType)
     }
 }

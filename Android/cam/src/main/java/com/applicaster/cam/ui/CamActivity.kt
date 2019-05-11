@@ -13,8 +13,8 @@ class CamActivity : BaseActivity() {
     private lateinit var fragmentsContainer: View
     private lateinit var navigationRouter: CamNavigationRouter
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cam)
 
         when {
@@ -22,6 +22,7 @@ class CamActivity : BaseActivity() {
             fragments_container_tablet != null -> fragmentsContainer = fragments_container_tablet
         }
         navigationRouter = CamNavigationRouter(this)
+        navigationRouter.attachSignUpFragment()
     }
 
     override fun getFragmentContainerType(): ContainerType {
