@@ -11,6 +11,21 @@ import Foundation
 class EntitlementPickerPresenter {
     weak var coordinatorDelegate: BillingCoordinatorProtocol?
     weak var camDelegate: CAMDelegate?
+    weak var view: EntitlementPickerViewController?
+    var availableProducts: [Product] = []
+    
+    func viewDidLoad() {
+        self.availableProducts = camDelegate?.availableProducts() ?? []
+        
+        let viewModels = self.availableProducts.map({ (product) -> OfferViewModel in
+            let buyAction = {}
+            return OfferViewModel(title: product.title,
+                                  description: product.description,
+                                  buyAction: buyAction)
+        })
+        
+        self.view?.showOffers(viewModels)
+    }
     
     func backToPreviousScreen() {
         coordinatorDelegate?.finishBillingFlow(isUserHasAccess: false)

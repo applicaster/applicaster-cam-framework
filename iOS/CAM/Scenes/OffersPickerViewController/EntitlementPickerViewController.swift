@@ -39,13 +39,12 @@ class EntitlementPickerViewController: UIViewController {
         return CGFloat(itemSize.width + itemSpacing)
     }
     
+    private var offerViewModels: [OfferViewModel] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+        presenter?.viewDidLoad()
     }
     
     func setupCollectionView() {
@@ -54,8 +53,6 @@ class EntitlementPickerViewController: UIViewController {
         customLayout.minimumLineSpacing = 20
         customLayout.scrollDirection = UIDevice.current.userInterfaceIdiom == .pad ? .horizontal : .vertical
         entitlementCollectionView.collectionViewLayout = customLayout
-        entitlementCollectionView.delegate = self
-        entitlementCollectionView.dataSource = self
     }
     
     @IBAction func backToPreviousScreen(_ sender: Any) {
@@ -64,6 +61,11 @@ class EntitlementPickerViewController: UIViewController {
     
     @IBAction func close(_ sender: Any) {
         presenter?.close()
+    }
+    
+    public func showOffers(_ offers: [OfferViewModel]) {
+        self.offerViewModels = offers
+        self.entitlementCollectionView.reloadData()
     }
 }
 
@@ -74,7 +76,15 @@ extension EntitlementPickerViewController: UICollectionViewDelegate, UICollectio
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return collectionView.dequeueReusableCell(withReuseIdentifier: "EntitlementCollectionViewCell", for: indexPath)
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EntitlementCollectionViewCell",
+                                                            for: indexPath) as? EntitlementCollectionViewCell else {
+            fatalError()
+        }
+        
+        let cellViewModel = self.offerViewModels[indexPath.row]
+        cell.configure(from: cellViewModel)
+        
+        return cell
     }
     
     private func indexOfMajorCell() -> Int {
@@ -82,7 +92,9 @@ extension EntitlementPickerViewController: UICollectionViewDelegate, UICollectio
         return Int(round(proportionalOffset))
     }
     
-    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView,
+                                   withVelocity velocity: CGPoint,
+                                   targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         if UIDevice.current.userInterfaceIdiom == .pad {
             let majorCell = indexOfMajorCell()
             let delta = abs(majorCell - currentItemIndex)
@@ -106,7 +118,8 @@ extension EntitlementPickerViewController: UICollectionViewDelegate, UICollectio
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, targetContentOffsetForProposedContentOffset proposedContentOffset: CGPoint) -> CGPoint {
+    func collectionView(_ collectionView: UICollectionView,
+                        targetContentOffsetForProposedContentOffset proposedContentOffset: CGPoint) -> CGPoint {
         return UIDevice.current.userInterfaceIdiom == .pad ? CGPoint(x: CGFloat(currentItemIndex) * pageWidth, y: 0) : proposedContentOffset
     }
 }

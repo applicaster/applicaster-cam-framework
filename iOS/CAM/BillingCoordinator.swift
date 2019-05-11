@@ -34,6 +34,8 @@ class BillingCoordinator: BillingCoordinatorProtocol, Coordinator {
         
         presenter.coordinatorDelegate = self
         presenter.camDelegate = parentCoordinator?.getCamDelegate()
+        presenter.view = pickerVC
+        
         navigationController?.pushViewController(pickerVC, animated: true)
     }
     

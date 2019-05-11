@@ -19,12 +19,19 @@ public enum CAMResult {
     case failure(description: String?)
 }
 
+public struct Product {
+    public let title: String
+    public let description: String
+    public let price: String
+}
+
 public protocol CAMDelegate: AnyObject {
     func login(authData: Dictionary<String, Any>, completion: (CAMResult) -> Void)
     func signUp(authData: Dictionary<String, Any>, completion: (CAMResult) -> Void)
     func resetPassword(completion: (CAMResult) -> Void)
     func itemPurchased(item: SKProduct)
     func itemsRestored(items: [SKProduct])
+    func availableProducts() -> [Product]
 }
 
 public protocol CAMConfigProtocol: AnyObject {
