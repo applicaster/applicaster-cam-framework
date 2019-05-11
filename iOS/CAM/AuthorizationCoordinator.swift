@@ -35,37 +35,18 @@ class AuthorizationCoordinator: AuthorizationCoordinatorProtocol, Coordinator {
     }
     
     func showLoginScreen(isCoordinatorRootController: Bool) {
-        let loginVC = LoginViewController.instantiateVC()
-        let presenter = LoginPresenter()
-        loginVC.presenter = presenter
-        
-        presenter.coordinatorDelegate = self
-        presenter.isRoot = isCoordinatorRootController
-        loginVC.configProvider = parentCoordinator?.getConfigProvider() //setup ui provider
-        
-        navigationController?.pushViewController(loginVC, animated: true)
+        let controller = ViewControllerFactory.createLoginScreen(pluginDataProvider: parentCoordinator, isRoot: isCoordinatorRootController, authCoordinator: self)
+        navigationController?.pushViewController(controller, animated: true)
     }
     
     func showSingUpScreen(isCoordinatorRootController: Bool) {
-        let signUpVC = SignUpViewController.instantiateVC()
-        let presenter = SignUpPresenter()
-        signUpVC.presenter = presenter
-        
-        presenter.coordinatorDelegate = self
-        presenter.isRoot = isCoordinatorRootController
-        signUpVC.configProvider = parentCoordinator?.getConfigProvider() //setup ui provider
-        
-        navigationController?.pushViewController(signUpVC, animated: true)
+        let controller = ViewControllerFactory.createSignUpScreen(pluginDataProvider: parentCoordinator, isRoot: isCoordinatorRootController, authCoordinator: self)
+        navigationController?.pushViewController(controller, animated: true)
     }
     
     func showResetPasswordScreen() {
-        let restoreVC = ResetPasswordViewController.instantiateVC()
-        let presenter = ResetPasswordPresenter()
-        
-        restoreVC.presenter = presenter
-        
-        presenter.coordinatorDelegate = self
-        navigationController?.pushViewController(restoreVC, animated: true)
+        let controller = ViewControllerFactory.createResetPasswordScreen(pluginDataProvider: parentCoordinator, authCoordinator: self)
+        navigationController?.pushViewController(controller, animated: true)
     }
     
     func popCurrentScreen() {

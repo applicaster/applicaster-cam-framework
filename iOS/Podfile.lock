@@ -1,0 +1,16 @@
+PODS:
+  - CAM (0.0.1)
+
+DEPENDENCIES:
+  - CAM (from `../CAM.podspec`)
+
+EXTERNAL SOURCES:
+  CAM:
+    :path: "../CAM.podspec"
+
+SPEC CHECKSUMS:
+  CAM: 45f36880d843d2e341d5dc732fdd3635e89b5a8b
+
+PODFILE CHECKSUM: 4158a3c98c8a932dee8739c7dccf7ef5943eeb52
+
+COCOAPODS: 1.6.1

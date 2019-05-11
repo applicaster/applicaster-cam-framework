@@ -10,6 +10,7 @@ import Foundation
 
 class LoginPresenter {
     weak var coordinatorDelegate: AuthorizationCoordinatorProtocol?
+    weak var camDelegate: CAMDelegate?
     var isRoot: Bool = false
     
     func showResetPasswordScreen() {

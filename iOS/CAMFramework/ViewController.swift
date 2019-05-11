@@ -13,7 +13,7 @@ import CAM
 class ViewController: UIViewController, CAMDelegate, CAMConfigProtocol {
 
     @IBAction func start(_ sender: Any) {
-        ContentAccessManager.shared.startFlow(camDelegate: self, camConfigProtocol: self, completion: { (r) in
+        ContentAccessManager.shared.startFlow(rootViewController: self, camDelegate: self, camConfigProtocol: self, completion: { (r) in
             print(r)
         })
     }
