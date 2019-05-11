@@ -17,3 +17,8 @@ interface ActionCallback {
     fun onFailure(msg: String)
     fun onSuccess()
 }
+
+interface EntitlementsLoadCallback {
+    fun onFailure(msg: String)
+    fun onSuccess(offers: List<Offer>)
+}

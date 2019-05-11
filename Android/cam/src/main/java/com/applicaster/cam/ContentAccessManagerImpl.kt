@@ -3,7 +3,7 @@ package com.applicaster.cam
 import com.applicaster.cam.params.AuthField
 import com.applicaster.cam.params.AuthFieldsConverter
 
-class ContentAccessManagerImpl : ContentAccessManager {
+object ContentAccessManagerImpl : ContentAccessManager {
     private lateinit var contract: CamContract
     private lateinit var configurationProvider: CamConfigurationProvider
 
@@ -16,4 +16,6 @@ class ContentAccessManagerImpl : ContentAccessManager {
         val jsonConfig = configurationProvider.getAuthFieldsConfig()
         return AuthFieldsConverter.getFromJsonString(jsonConfig)
     }
+
+    fun getContract(): CamContract = this.contract
 }

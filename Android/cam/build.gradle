@@ -7,7 +7,7 @@ android {
 
 
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 17
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -22,13 +22,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     // Applicaster SDK
-    def applicasterSDKPath = 'com.applicaster:applicaster-android-sdk:2.32.39'
+    def applicasterSDKPath = 'com.applicaster:applicaster-android-sdk:2.33.15'
     // Check if an open SDK is defined - if not use the closed one.
     def devSDK = findProject(':applicaster-android-sdk')
     if (devSDK != null) {

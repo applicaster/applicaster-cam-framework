@@ -32,4 +32,8 @@ class MockCamContract : CamContract {
     override fun onPurchasesRestored() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
+
+    override fun loadEntitlements(callback: EntitlementsLoadCallback) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 }
