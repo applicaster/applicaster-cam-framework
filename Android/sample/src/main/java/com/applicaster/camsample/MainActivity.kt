@@ -18,6 +18,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun startCamFlow() {
         val cam = ContentAccessManagerImpl
-        cam.onProcessStarted(MockCamContract(), MockConfigurationProvider())
+        cam.onProcessStarted(MockCamContract(), MockConfigurationProvider(), this)
     }
 }

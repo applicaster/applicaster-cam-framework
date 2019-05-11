@@ -62,8 +62,8 @@
             android:background="@color/white" />
 
         <ImageView
-                style="@style/ImageAdditionalAuth"
-                android:background="@color/white" />
+            style="@style/ImageAdditionalAuth"
+            android:background="@color/white" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

@@ -12,19 +12,19 @@ class SignUpPresenter(private val view: ISignUpView?, private val navigationRout
         super.onViewCreated()
 
        val authFieldConfig = ContentAccessManagerImpl.getSignInAuthFields()
-        Log.d("test", "test ${authFieldConfig.authFields}")
+       view?.populateAuthFieldsViews(authFieldConfig)
     }
 
     override fun onForgotPasswordClicked() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+//        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun onSignUpButtonClicked() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+//        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun onLogInHintClicked() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+//        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun onToolbarBackClicked() {
@@ -36,6 +36,6 @@ class SignUpPresenter(private val view: ISignUpView?, private val navigationRout
     }
 
     override fun onRestoreClicked() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+//        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

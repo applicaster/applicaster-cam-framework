@@ -1,7 +1,9 @@
 package com.applicaster.cam
 
+import android.content.Context
+
 interface ContentAccessManager {
-    fun onProcessStarted(contract: CamContract, configurationProvider: CamConfigurationProvider)
+    fun onProcessStarted(contract: CamContract, configurationProvider: CamConfigurationProvider, context: Context)
 }
 
 /**

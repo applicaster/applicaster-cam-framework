@@ -1,45 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-
-
-    <com.applicaster.util.ui.CustomEditText
-        android:id="@+id/et_input_first"
-        style="@style/EditTextAuthInput"
-        android:hint="E-mail"
-        android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.applicaster.util.ui.CustomEditText
-        android:id="@+id/et_input_sec"
-        style="@style/EditTextAuthInput"
-        android:layout_marginTop="7dp"
-        android:hint="Password"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_input_first" />
 
     <com.applicaster.util.ui.CustomTextView
         android:id="@+id/tv_forgot_pwd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:text="Forgot password?"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_input_sec"
-        tools:text="Forgot password?" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.applicaster.util.ui.CustomButton
         android:id="@+id/btn_input_action"
         style="@style/EditTextAuthInput"
         android:layout_marginTop="10dp"
         android:text="SIGN IN"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_forgot_pwd" />

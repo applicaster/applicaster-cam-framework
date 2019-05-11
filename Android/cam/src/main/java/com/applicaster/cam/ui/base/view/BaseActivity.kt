@@ -7,6 +7,7 @@ import com.applicaster.cam.ui.base.presenter.IBasePresenter
 
 abstract class BaseActivity : AppCompatActivity(), IBaseView {
     private var basePresenter: IBasePresenter? = null
+
     protected fun setPresenter(presenter: IBasePresenter?) {
         basePresenter = presenter
     }
