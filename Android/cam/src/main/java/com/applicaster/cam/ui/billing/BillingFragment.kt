@@ -1,10 +1,8 @@
 package com.applicaster.cam.ui.billing
 
 import android.os.Bundle
-import android.support.v4.view.ViewPager
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,9 +19,7 @@ import kotlinx.android.synthetic.main.fragment_billing.*
 class BillingFragment : BaseFragment(), IBillingView {
 
     private var presenter: IBillingPresenter? = null
-    private var recyclerBillingItemsContainer: RecyclerView? = null
     private var recyclerBillingAdapter: RecyclerBillingAdapter? = null
-    private var pagerBillingItemsContainer: ViewPager? = null
     private var pagerBillingAdapter: PagerBillingAdapter? = null
     private lateinit var purchaseListener: PurchaseInteractionListener
 
@@ -54,10 +50,9 @@ class BillingFragment : BaseFragment(), IBillingView {
     override fun initViewComponents(containerType: ContainerType) {
         when (containerType) {
             ContainerType.PHONE -> {
-                recyclerBillingItemsContainer = rv_billing_items
                 recyclerBillingAdapter = RecyclerBillingAdapter(purchaseListener)
                 val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-                recyclerBillingItemsContainer?. apply {
+                rv_billing_items?.apply {
                     this.layoutManager = layoutManager
                     this.itemAnimator = DefaultItemAnimator()
                     this.adapter = recyclerBillingAdapter
@@ -65,9 +60,8 @@ class BillingFragment : BaseFragment(), IBillingView {
             }
 
             ContainerType.TABLET -> {
-                pagerBillingItemsContainer = vp_billing_items
                 pagerBillingAdapter = PagerBillingAdapter(purchaseListener)
-                pagerBillingItemsContainer?.apply {
+                vp_billing_items?.apply {
                     this.adapter = pagerBillingAdapter
                 }
             }
