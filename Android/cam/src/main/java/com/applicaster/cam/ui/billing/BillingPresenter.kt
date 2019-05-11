@@ -6,6 +6,8 @@ import com.android.billingclient.api.BillingClient
 import com.android.billingclient.api.Purchase
 import com.android.billingclient.api.SkuDetails
 import com.applicaster.cam.*
+import com.applicaster.cam.params.billing.Offer
+import com.applicaster.cam.params.billing.ProductType
 import com.applicaster.cam.ui.CamNavigationRouter
 import com.applicaster.cam.ui.base.presenter.BasePresenter
 import com.applicaster.cam.ui.base.view.BaseActivity
@@ -23,7 +25,7 @@ class BillingPresenter(
     private val TAG = BillingPresenter::class.java.canonicalName
 
     private val skuDetailsList: ArrayList<SkuDetails> = arrayListOf()
-    private val camContract: CamContract = ContentAccessManagerImpl.getContract()
+    private val camContract: ICamContract = ContentAccessManager.contract
 
     override fun onViewCreated() {
         super.onViewCreated()
