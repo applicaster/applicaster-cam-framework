@@ -8,8 +8,10 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.LinearLayout
 import com.applicaster.cam.R
-import com.applicaster.cam.params.AuthField
-import com.applicaster.cam.params.AuthFieldConfig
+import com.applicaster.cam.config.ui.UIKey
+import com.applicaster.cam.config.ui.UIMapper
+import com.applicaster.cam.params.auth.AuthField
+import com.applicaster.cam.params.auth.AuthFieldConfig
 import com.applicaster.cam.ui.CamNavigationRouter
 import com.applicaster.cam.ui.base.view.BaseFragment
 import kotlinx.android.synthetic.main.fragment_sign_up.*
@@ -82,6 +84,11 @@ class SignUpFragment : BaseFragment(), ISignUpView {
         container_scrollable_input.layoutParams = container_scrollable_input.layoutParams.apply {
             height = parentMaxHeight
         }
+    }
+
+    override fun customize() {
+        UIMapper.map(tv_logo, UIKey.SIGN_UP_TITLE)
+        UIMapper.map(btn_input_action, UIKey.SIGN_UP_BUTTON)
     }
 
     override fun goBack() {

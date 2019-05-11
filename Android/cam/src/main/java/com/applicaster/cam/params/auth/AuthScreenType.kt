@@ -1,4 +1,4 @@
-package com.applicaster.cam.params
+package com.applicaster.cam.params.auth
 
 enum class AuthScreenType {
     LOGIN,
@@ -7,8 +7,8 @@ enum class AuthScreenType {
 
     fun getKey(): String {
         return when (this) {
-            AuthScreenType.LOGIN -> "login"
-            AuthScreenType.SIGNUP -> "signup"
+            LOGIN -> "login"
+            SIGNUP -> "signup"
             else -> "undefined"
         }
     }

@@ -1,22 +1,18 @@
 package com.applicaster.camsample.mock
 
-import com.applicaster.cam.CamConfigurationProvider
-import com.applicaster.cam.params.AuthScreenType
+import com.applicaster.cam.config.KEY_AUTH_FIELDS
+import com.applicaster.cam.config.KEY_FACEBOOK_LOGIN_REQ
+import com.applicaster.cam.config.KEY_PASSWORD_RESET_REQ
 
-class MockConfigurationProvider : CamConfigurationProvider {
-    override fun isTriggerOnAppLaunch(): Boolean = false
+object MockPluginConfiguration {
 
-    override fun isUserLogged(): Boolean = false
+    fun getPluginConfiguration() = mapOf(
+        KEY_AUTH_FIELDS to getAuthFieldsConfig(),
+        KEY_PASSWORD_RESET_REQ to "true",
+        KEY_FACEBOOK_LOGIN_REQ to "true"
+    )
 
-    override fun getDefaultAuthScreen(): AuthScreenType = AuthScreenType.SIGNUP
-
-    override fun isConfirmationScreenRequired(): Boolean = true
-
-    override fun isPasswordResetRequired(): Boolean = true
-
-    override fun isFacebookLoginRequired(): Boolean = true
-
-    override fun getAuthFieldsConfig(): String {
+    fun getAuthFieldsConfig(): String {
         return "{\"signup\":[{\"type\":\"TEXT\",\"key\":\"email\",\"title\":\"Email\",\"hint\":\"Email\",\"mandatory\":true},{\"type\":\"PASSWORD\",\"key\":\"password\",\"title\":\"Password\",\"hint\":\"Password\",\"mandatory\":true},{\"type\":\"NUMBER\",\"key\":\"phone\",\"title\":\"Phone\",\"hint\":\"Phone\",\"mandatory\":true},{\"type\":\"TEXT\",\"key\":\"gender\",\"title\":\"Gender\",\"hint\":\"Gender\",\"mandatory\":false}],\"login\":[{\"type\":\"TEXT\",\"key\":\"email\",\"title\":\"Email\",\"hint\":\"Email\",\"mandatory\":true},{\"type\":\"PASSWORD\",\"key\":\"password\",\"title\":\"Password\",\"hint\":\"Password\",\"mandatory\":true}]}"
         /**
          * raw formatted:
@@ -74,11 +70,4 @@ class MockConfigurationProvider : CamConfigurationProvider {
          */
     }
 
-    override fun isEntitlementsValid() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun getUIConfig(): Map<String, String> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 }

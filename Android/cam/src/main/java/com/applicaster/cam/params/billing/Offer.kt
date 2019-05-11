@@ -1,5 +1,4 @@
-package com.applicaster.cam
-
+package com.applicaster.cam.params.billing
 
 enum class ProductType {
     SUBS,

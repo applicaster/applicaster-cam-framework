@@ -1,4 +1,4 @@
-package com.applicaster.cam.params
+package com.applicaster.cam.params.auth
 
 import org.json.JSONObject
 
