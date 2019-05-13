@@ -1,12 +1,12 @@
 package com.applicaster.cam.ui.auth.login
 
+import android.view.View
 import com.applicaster.cam.config.ui.UIKey
 import com.applicaster.cam.config.ui.UIMapper
 import com.applicaster.cam.ui.CamNavigationRouter
 import com.applicaster.cam.ui.auth.AuthFragment
 import com.applicaster.cam.ui.auth.IAuthPresenter
 import kotlinx.android.synthetic.main.fragment_auth.*
-import kotlinx.android.synthetic.main.layout_auth_buttons.*
 
 class LoginFragment : AuthFragment(), ILoginView {
 
@@ -19,7 +19,13 @@ class LoginFragment : AuthFragment(), ILoginView {
     }
 
     override fun applyUICustomizations() {
+        tv_forgot_pwd.visibility = View.VISIBLE
         UIMapper.map(tv_logo, UIKey.SIGN_UP_TITLE)
         UIMapper.map(btn_input_action, UIKey.SIGN_UP_BUTTON)
+    }
+
+    override fun setListeners() {
+        tv_forgot_pwd.setOnClickListener { presenter?.onForgotPasswordClicked() }
+        super.setListeners()
     }
 }

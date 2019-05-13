@@ -22,7 +22,7 @@
         android:id="@+id/container_scrollable_input"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintBottom_toTopOf="@+id/container_auth_buttons"
+        app:layout_constraintBottom_toTopOf="@+id/tv_forgot_pwd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
@@ -34,17 +34,28 @@
             android:orientation="vertical" />
     </ScrollView>
 
-    <include
-        android:id="@+id/container_auth_buttons"
-        layout="@layout/layout_auth_buttons"
-        android:layout_width="0dp"
+    <com.applicaster.util.ui.CustomTextView
+        android:id="@+id/tv_forgot_pwd"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/additional_auth_container_margin"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="Forgot password?"
+        app:layout_constraintBottom_toTopOf="@+id/btn_input_action"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <com.applicaster.util.ui.CustomButton
+        android:id="@+id/btn_input_action"
+        style="@style/EditTextAuthInput"
         android:layout_marginBottom="@dimen/auth_container_margin_vertical"
+        android:layout_marginTop="10dp"
+        android:text="SIGN IN"
         app:layout_constraintBottom_toTopOf="@+id/container_bottom_bar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/container_toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/container_toolbar"  />
 
     <include
         android:id="@+id/container_additional_auth"
@@ -56,7 +67,7 @@
         app:layout_constraintBottom_toTopOf="@+id/container_auth_hint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/container_auth_buttons" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_input_action" />
 
     <include
         android:id="@+id/container_auth_hint"

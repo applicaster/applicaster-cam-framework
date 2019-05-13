@@ -6,4 +6,5 @@ import com.applicaster.cam.ui.base.view.IBaseView
 interface IAuthView : IBaseView {
     fun populateAuthFieldsViews(authFieldConfig: AuthFieldConfig)
     fun applyUICustomizations()
+    fun showToastMessage(msg: String)
 }

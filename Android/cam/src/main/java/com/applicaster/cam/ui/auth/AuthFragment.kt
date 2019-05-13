@@ -13,7 +13,6 @@ import com.applicaster.cam.params.auth.AuthFieldConfig
 import com.applicaster.cam.ui.CamNavigationRouter
 import com.applicaster.cam.ui.base.view.BaseFragment
 import kotlinx.android.synthetic.main.fragment_auth.*
-import kotlinx.android.synthetic.main.layout_auth_buttons.*
 import kotlinx.android.synthetic.main.layout_bottom_bar.*
 import kotlinx.android.synthetic.main.layout_text_with_action.*
 import kotlinx.android.synthetic.main.layout_toolbar_template.*
@@ -40,16 +39,14 @@ abstract class AuthFragment : BaseFragment(), IAuthView {
     }
 
     override fun setListeners() {
-        tv_forgot_pwd.setOnClickListener { presenter?.onForgotPasswordClicked() }
-        btn_input_action.setOnClickListener { presenter?.onSignUpButtonClicked() }
-        tv_hint_desc.setOnClickListener { presenter?.onLogInHintClicked() }
-        tv_hint_action.setOnClickListener { presenter?.onLogInHintClicked() }
+        btn_input_action.setOnClickListener { presenter?.onAuthActionButtonClicked() }
+        tv_hint_desc.setOnClickListener { presenter?.onAuthHintClicked() }
+        tv_hint_action.setOnClickListener { presenter?.onAuthHintClicked() }
         tv_bottom_bar_desc.setOnClickListener { presenter?.onRestoreClicked() }
         tv_bottom_bar_action.setOnClickListener { presenter?.onRestoreClicked() }
         toolbar_back_button.setOnClickListener { presenter?.onToolbarBackClicked() }
         toolbar_close_button.setOnClickListener { presenter?.onToolbarCloseClicked() }
     }
-
 
     override fun populateAuthFieldsViews(authFieldConfig: AuthFieldConfig) {
         val etWidth = resources.getDimensionPixelSize(R.dimen.auth_et_width)
@@ -91,12 +88,11 @@ private fun EditText.applyCustomizations(
     ).apply {
         topMargin = etMarginTop
     }
-    when (field.type) {
-        AuthField.Type.TEXT -> inputType = InputType.TYPE_CLASS_TEXT
-        AuthField.Type.PASSWORD -> inputType =
-            (InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD)
-        AuthField.Type.NUMBER -> inputType = InputType.TYPE_CLASS_NUMBER
-        else -> inputType = InputType.TYPE_CLASS_TEXT
+    inputType = when (field.type) {
+        AuthField.Type.TEXT -> InputType.TYPE_CLASS_TEXT
+        AuthField.Type.PASSWORD -> (InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD)
+        AuthField.Type.NUMBER -> InputType.TYPE_CLASS_NUMBER
+        else -> InputType.TYPE_CLASS_TEXT
     }
     hint = field.hint
 }
