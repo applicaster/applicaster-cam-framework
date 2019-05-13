@@ -20,6 +20,14 @@ open class BasePresenter(private var view: IBaseView?) : IBasePresenter {
     override fun onViewDestroyed() {
     }
 
+    override fun onToolbarBackClicked() {
+        view?.goBack()
+    }
+
+    override fun onToolbarCloseClicked() {
+        view?.close()
+    }
+
     protected val context = view?.getViewContext()
 
     fun getString(@StringRes resId: Int) = context?.run { getString(resId) } ?: ""

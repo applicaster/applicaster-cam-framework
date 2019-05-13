@@ -6,18 +6,18 @@
     <style name="ImageAdditionalAuth">
         <item name="android:layout_width">@dimen/additional_auth_iv_size</item>
         <item name="android:layout_height">@dimen/additional_auth_iv_size</item>
-        <item name="android:layout_marginTop">@dimen/additional_auth_iv_vert_margin</item>
-        <item name="android:layout_marginBottom">@dimen/additional_auth_iv_vert_margin</item>
-        <item name="android:layout_marginStart">@dimen/additional_auth_iv_horiz_margin</item>
-        <item name="android:layout_marginLeft">@dimen/additional_auth_iv_horiz_margin</item>
-        <item name="android:layout_marginEnd">@dimen/additional_auth_iv_horiz_margin</item>
-        <item name="android:layout_marginRight">@dimen/additional_auth_iv_horiz_margin</item>
+        <item name="android:layout_marginTop">@dimen/additional_auth_iv_margin_vertical</item>
+        <item name="android:layout_marginBottom">@dimen/additional_auth_iv_margin_vertical</item>
+        <item name="android:layout_marginStart">@dimen/additional_auth_iv_margin_horizontal</item>
+        <item name="android:layout_marginLeft">@dimen/additional_auth_iv_margin_horizontal</item>
+        <item name="android:layout_marginEnd">@dimen/additional_auth_iv_margin_horizontal</item>
+        <item name="android:layout_marginRight">@dimen/additional_auth_iv_margin_horizontal</item>
     </style>
 
     <style name="EditTextAuthInput" parent="AppTheme">
         <item name="android:layout_width">@dimen/auth_et_width</item>
         <item name="android:layout_height">@dimen/auth_et_height</item>
-        <item name="android:layout_marginTop">@dimen/auth_et_top_margin</item>
+        <item name="android:layout_marginTop">@dimen/auth_et_margin_top</item>
     </style>
 
 </resources>

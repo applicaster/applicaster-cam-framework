@@ -6,4 +6,6 @@ interface IBasePresenter {
     fun onViewStopped()
     fun onViewResumed()
     fun onViewDestroyed()
+    fun onToolbarBackClicked()
+    fun onToolbarCloseClicked()
 }

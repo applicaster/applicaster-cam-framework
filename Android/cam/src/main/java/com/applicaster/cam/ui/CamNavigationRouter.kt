@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentTransaction
 import com.applicaster.cam.ui.base.BaseNavigationRouter
 import com.applicaster.cam.ui.base.view.BaseActivity
-import com.applicaster.cam.ui.signup.SignUpFragment
+import com.applicaster.cam.ui.auth.signup.SignUpFragment
 
 class CamNavigationRouter(baseActivity: BaseActivity) : BaseNavigationRouter(baseActivity) {
 
