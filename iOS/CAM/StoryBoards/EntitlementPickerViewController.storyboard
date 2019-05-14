@@ -148,11 +148,23 @@ take up to two lines maximum</string>
                                                                 <action selector="purchaseItem:" destination="KiS-Ag-85C" eventType="touchUpInside" id="2ay-cj-god"/>
                                                             </connections>
                                                         </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="POA-5c-8eW" userLabel="Redeem Button">
+                                                            <rect key="frame" x="111" y="186" width="86" height="28"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                            <state key="normal" title="Redeem Code">
+                                                                <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="purchaseWithRedeemCode:" destination="KiS-Ag-85C" eventType="touchUpInside" id="5oU-rR-g37"/>
+                                                            </connections>
+                                                        </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstItem="wvC-r2-igl" firstAttribute="top" secondItem="B90-xo-GgL" secondAttribute="bottom" constant="17" id="1RN-qz-2sj"/>
+                                                        <constraint firstItem="POA-5c-8eW" firstAttribute="top" secondItem="f4O-U3-xFW" secondAttribute="bottom" constant="22" id="27K-Oa-Pi9"/>
                                                         <constraint firstItem="B90-xo-GgL" firstAttribute="top" secondItem="hGy-N7-TRU" secondAttribute="top" constant="31" id="8st-Gy-orC"/>
+                                                        <constraint firstItem="POA-5c-8eW" firstAttribute="centerX" secondItem="hGy-N7-TRU" secondAttribute="centerX" id="IOU-d1-IJ8"/>
                                                         <constraint firstItem="B90-xo-GgL" firstAttribute="centerX" secondItem="hGy-N7-TRU" secondAttribute="centerX" id="JYn-7f-JYc"/>
                                                         <constraint firstItem="wvC-r2-igl" firstAttribute="centerX" secondItem="hGy-N7-TRU" secondAttribute="centerX" id="aVd-ca-a8T"/>
                                                         <constraint firstItem="f4O-U3-xFW" firstAttribute="top" secondItem="wvC-r2-igl" secondAttribute="bottom" constant="19" id="nah-1g-VLP"/>

@@ -23,7 +23,6 @@ class EntitlementPickerViewController: UIViewController {
     @IBOutlet weak var helpInfoTextView: UITextView!
     
     var presenter: EntitlementPickerPresenter?
-    var entitlements = [CAMEntitlementItem]()
     var currentItemIndex = 0 // Used for store center cell for ipad
     var itemSpacing: CGFloat = 20
     
@@ -72,7 +71,7 @@ class EntitlementPickerViewController: UIViewController {
 extension EntitlementPickerViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout  {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return entitlements.count
+        return self.offerViewModels.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -110,8 +109,8 @@ extension EntitlementPickerViewController: UICollectionViewDelegate, UICollectio
             if currentItemIndex < 0 {
                 currentItemIndex = 0
             }
-            if currentItemIndex >= entitlements.count {
-                currentItemIndex = entitlements.count - 1
+            if currentItemIndex >= self.offerViewModels.count {
+                currentItemIndex = self.offerViewModels.count - 1
             }
             let point = CGPoint(x: CGFloat(currentItemIndex) * pageWidth, y: targetContentOffset.pointee.y)
             targetContentOffset.pointee = point
@@ -120,6 +119,8 @@ extension EntitlementPickerViewController: UICollectionViewDelegate, UICollectio
     
     func collectionView(_ collectionView: UICollectionView,
                         targetContentOffsetForProposedContentOffset proposedContentOffset: CGPoint) -> CGPoint {
-        return UIDevice.current.userInterfaceIdiom == .pad ? CGPoint(x: CGFloat(currentItemIndex) * pageWidth, y: 0) : proposedContentOffset
+        return UIDevice.current.userInterfaceIdiom == .pad
+            ? CGPoint(x: CGFloat(currentItemIndex) * pageWidth, y: 0)
+            : proposedContentOffset
     }
 }

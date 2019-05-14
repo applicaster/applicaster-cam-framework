@@ -37,12 +37,24 @@ class ViewController: UIViewController, CAMDelegate, CAMConfigProtocol {
         
     }
     
+    func availableProducts() -> [Product] {
+        let title = "Subscription 1"
+        let description = "Description"
+        let price = "4.99"
+        let skProduct = SKProduct()
+        let product = Product(title: title,
+                              description: description,
+                              price: price,
+                              skProduct: skProduct)
+        return Array(repeating: product, count: 3)
+    }
+    
     func isTriggerOnAppLaunch() -> Bool {
         return true
     }
     
     func isUserLogged() -> Bool {
-        return false
+        return true
     }
     
     func getDefaultAuthScreen() -> CAMDefaultAuthScreen {
@@ -78,3 +90,12 @@ class ViewController: UIViewController, CAMDelegate, CAMConfigProtocol {
 
 }
 
+private extension SKProduct {
+    
+    convenience init(identifier: String, price: String, priceLocale: Locale) {
+        self.init()
+        self.setValue(identifier, forKey: "productIdentifier")
+        self.setValue(NSDecimalNumber(string: price), forKey: "price")
+        self.setValue(priceLocale, forKey: "priceLocale")
+    }
+}
