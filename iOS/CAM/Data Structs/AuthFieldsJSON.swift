@@ -8,6 +8,16 @@
 
 import Foundation
 
+struct AuthFields : Codable {
+    let signup : [AuthField]?
+    let login : [AuthField]?
+    
+    enum CodingKeys: String, CodingKey {
+        case signup = "signup"
+        case login = "login"
+    }
+}
+
 enum AuthFieldInputType: String, Codable {
     case text = "text"
     case password = "password"
@@ -25,8 +35,5 @@ struct AuthField: Codable {
     let hint: String?
     let type: AuthFieldInputType
     let mandatory: Bool
-}
-
-struct AuthorizationFields: Codable {
-    let array: [AuthField]?
+    let text: String?
 }

@@ -26,11 +26,14 @@ class AuthorizationCoordinator: AuthorizationCoordinatorProtocol, Coordinator {
         self.completionHandler = completion
         self.parentCoordinator = parentCoordinator
         self.navigationController = navigationController
-        switch parentCoordinator.getConfigProvider().getDefaultAuthScreen() {
-        case .login:
+        let dictionary = parentCoordinator.getCamDelegate().getPluginConfig()
+        switch dictionary["default_auth_screen"] as? String {
+        case "login":
             showLoginScreen(isCoordinatorRootController: true)
-        case .registration:
+        case "registration":
             showSingUpScreen(isCoordinatorRootController: true)
+        default:
+            return
         }
     }
     

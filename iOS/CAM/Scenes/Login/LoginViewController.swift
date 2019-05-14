@@ -8,75 +8,70 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {    
+class LoginViewController: UIViewController {
     
-    @IBOutlet weak var backButton: UIButton!
-    @IBOutlet weak var closeButton: UIButton!
-    @IBOutlet weak var logoImageView: UIImageView!
+    var authFields = [AuthField]()
+    @IBOutlet var backgroundImageView: UIImageView!
+    @IBOutlet var backButton: UIButton!
+    @IBOutlet var closeButton: UIButton!
+    @IBOutlet var logoImageView: UIImageView!
     
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet var titleLabel: UILabel!
     
-    @IBOutlet weak var authFieldsTable: UITableView!
-    @IBOutlet weak var loginButton: UIButton!
-    @IBOutlet weak var resetPasswordButton: UIButton!
+    @IBOutlet var authFieldsTable: UITableView!
+    @IBOutlet var loginButton: UIButton!
+    @IBOutlet var resetPasswordButton: UIButton!
     
-    @IBOutlet weak var restoreContainer: UIView!
-    @IBOutlet weak var restoreCheckBox: UICheckBox!
-    @IBOutlet weak var restoreInfoLabel: UILabel!
+    @IBOutlet var restoreContainer: UIView!
+    @IBOutlet var restoreCheckBox: UICheckBox!
+    @IBOutlet var restoreInfoLabel: UILabel!
     
-    @IBOutlet weak var socialNetworksContainer: UIView!
-    @IBOutlet weak var alternateLabel: UILabel!
-    @IBOutlet weak var socialNetworksLabel: UILabel!
+    @IBOutlet var socialNetworksContainer: UIView!
+    @IBOutlet var alternateLabel: UILabel!
+    @IBOutlet var socialNetworksLabel: UILabel!
     
-    @IBOutlet weak var signUpContainer: UIView!
-    @IBOutlet weak var signUpLabel: UILabel!
-    @IBOutlet var signUpGestureRecognizer: UITapGestureRecognizer!
+    @IBOutlet var signUpContainer: UIView!
+    @IBOutlet var signUpButton: UIButton!
     
-    
-    @IBOutlet weak var socialNetworksContainerTopSpaceConstraint: NSLayoutConstraint!
-    @IBOutlet weak var inputComponentHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var authFieldsTableHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var titleLabelTopSpaceConstraint: NSLayoutConstraint!
+    @IBOutlet var inputContainerYConstraint: NSLayoutConstraint!
+    @IBOutlet var socialNetworksContainerTopSpaceConstraint: NSLayoutConstraint!
+    @IBOutlet var inputComponentHeightConstraint: NSLayoutConstraint!
+    @IBOutlet var authFieldsTableHeightConstraint: NSLayoutConstraint!
 
-    
-    weak var configProvider: CAMConfigProtocol?
     var presenter: LoginPresenter?
     
-    var centerFreeSpaceValue: CGFloat {
-        return signUpContainer.frame.minY - logoImageView.frame.maxY
-    }
-    
-    var additionalComponentTopHeight: CGFloat {
-        let result = titleLabel.isHidden ? 0 : titleLabel.frame.height + 40// 20 - min spacing
-        return result == 0 ? 50 : result
-    }
-    
-    var additionalComponentBottomHeight: CGFloat {
-        var result = restoreContainer.isHidden ? 0 : restoreContainer.frame.height
-        result += socialNetworksContainer.isHidden ? 0 : socialNetworksContainer.frame.height + 20 // 20 - min spacing
-        return result == 0 ? 50 : result
-    }
-    
-    var inputComponentHeight: CGFloat {
-        return centerFreeSpaceValue - additionalComponentTopHeight - additionalComponentBottomHeight
+    var visibleAuthFieldsCount: Int {
+        let centerFreeSpace = signUpContainer.frame.minY - logoImageView.frame.maxY
+        let topSpace: CGFloat = 50.0
+        var bottomSpace = restoreContainer.isHidden ? 0 : restoreContainer.frame.height
+        bottomSpace += socialNetworksContainer.isHidden ? 0 : socialNetworksContainer.frame.height + 20 // 20 - min spacing
+        bottomSpace = bottomSpace == 0 ? 50 : bottomSpace
+        let inputComponentMaxHeight = centerFreeSpace - topSpace - bottomSpace
+        let tableMaxHeight = inputComponentMaxHeight - 33 - 46
+        var maxCount = Int((tableMaxHeight - 7) / (48 + 7))
+        let fieldsCount = authFields.count
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            maxCount = maxCount > 4 ? 4 : maxCount
+        } else {
+            maxCount = maxCount > 6 ? 6 : maxCount
+        }
+        return maxCount > fieldsCount ? fieldsCount : maxCount
     }
     
     var authFieldsTableHeight: CGFloat {
-        return inputComponentHeight - loginButton.frame.height - resetPasswordButton.frame.height
+        let height = CGFloat(visibleAuthFieldsCount * 48 + (visibleAuthFieldsCount - 1) * 7)
+        return height
     }
     
     //MARK: - Flow & UI Setup
     
     override func loadView() {
         super.loadView()
-        self.navigationController?.isNavigationBarHidden = true
-        signUpLabel.isUserInteractionEnabled = true
-        resetPasswordButton.isUserInteractionEnabled = true
+        setupUI()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.isNavigationBarHidden = true
     }
 
     override func viewDidLayoutSubviews() {
@@ -85,21 +80,56 @@ class LoginViewController: UIViewController {
     }
     
     func setupUI() {
-        signUpLabel.isUserInteractionEnabled = true
+        self.navigationController?.isNavigationBarHidden = true
+        restoreContainer.isHidden = false
+        socialNetworksContainer.isHidden = false
+        setupTable()
+        configureElements()
+    }
+    
+    func setupTable() {
+        let configProvider = presenter?.camDelegate
+        if let json = configProvider?.getPluginConfig()["auth_fields"] as? String, let data = json.data(using: .utf8) {
+            if let jsonAuthFields = try? JSONDecoder().decode(AuthFields.self, from: data), let loginFields = jsonAuthFields.login {
+                authFields = loginFields
+            }
+        }
+        if authFields.count == visibleAuthFieldsCount {
+            authFieldsTable.isScrollEnabled = false
+        }
+    }
+    
+    func configureElements() {
+        let configProvider = presenter?.camDelegate
+        let array: [(UIView, UIElement)] = [(backgroundImageView, .backgroungImageView), (backButton, .backButton),
+                                            (closeButton, .closeButton), (logoImageView, .headerImageView),
+                                            (titleLabel, .loginTitleLabel), (loginButton, .loginButton),
+                                            (resetPasswordButton, .loginResetPasswordButton), (alternateLabel, .separatorLabel),
+                                            (socialNetworksLabel, .networksAuthLabel), (signUpContainer, .bottomBannerView),
+                                            (signUpButton, .loginAlternativeActionButton)]
+        array.forEach {
+            UIConfigurator.configureView(type: $0.1, view: $0.0, configProvider: configProvider)
+        }
     }
     
     func setupConstraints() {
-        inputComponentHeightConstraint.constant = inputComponentHeight
+        let inputComponentHeight = authFieldsTableHeight + loginButton.frame.height + resetPasswordButton.frame.height
         authFieldsTableHeightConstraint.constant = authFieldsTableHeight
-        let inputComponentMinY = (self.view.frame.height - inputComponentHeight) / 2 - 70
+        inputComponentHeightConstraint.constant = authFieldsTableHeight + loginButton.frame.height + resetPasswordButton.frame.height
+        let inputComponentMinY = (self.view.frame.height - inputComponentHeight) / 2 - 50 // 50 - space from center
         let inputComponentMaxY = inputComponentMinY + inputComponentHeight
-        titleLabelTopSpaceConstraint.constant = (inputComponentMinY - logoImageView.frame.maxY - titleLabel.frame.height) / 2
         if !socialNetworksContainer.isHidden {
             let restoreContainerHeight = restoreContainer.isHidden ? 0 : restoreContainer.frame.height
             socialNetworksContainerTopSpaceConstraint.constant = (signUpContainer.frame.minY - inputComponentMaxY + restoreContainerHeight - 100) / 2
+        } else {
+            if restoreContainer.isHidden {
+                self.inputContainerYConstraint.constant = 0
+            }
         }
         self.view.layoutIfNeeded()
     }
+    
+    //MARK: - Actions
     
     @IBAction func close(_ sender: UIButton) {
         presenter?.close()
@@ -125,10 +155,22 @@ class LoginViewController: UIViewController {
 extension LoginViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return authFields.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == authFields.count - 1 {
+            return 48
+        }
+        return 55
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "LoginAuthCell", for: indexPath) as? LoginAuthTableCell else {
+            return UITableViewCell()
+        }
+        UIConfigurator.configureAuthField(view: cell.inputTextField, data: authFields[indexPath.row], configProvider: presenter?.camDelegate)
+        cell.backgroundColor = .clear
+        return cell
     }
 }

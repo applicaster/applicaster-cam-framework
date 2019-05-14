@@ -17,7 +17,6 @@ class ViewControllerFactory {
         presenter.coordinatorDelegate = authCoordinator
         presenter.camDelegate = pluginDataProvider?.getCamDelegate()
         presenter.isRoot = isRoot
-        loginVC.configProvider = pluginDataProvider?.getConfigProvider() //setup ui provider
         return loginVC
     }
     
@@ -29,7 +28,6 @@ class ViewControllerFactory {
         presenter.coordinatorDelegate = authCoordinator
         presenter.camDelegate = pluginDataProvider?.getCamDelegate()
         presenter.isRoot = isRoot
-        signUpVC.configProvider = pluginDataProvider?.getConfigProvider() //setup ui provider
         return signUpVC
     }
     

@@ -35,7 +35,6 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var socialNetworksContainerTopSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var inputComponentHeightConstraint: NSLayoutConstraint!
     
-    weak var configProvider: CAMConfigProtocol?
     var presenter: SignUpPresenter?
     
     var centerFreeSpaceValue: CGFloat {

@@ -10,10 +10,24 @@ import UIKit
 import StoreKit
 import CAM
 
-class ViewController: UIViewController, CAMDelegate, CAMConfigProtocol {
+class ViewController: UIViewController, CAMDelegate {
+    func getPluginConfig() -> Dictionary<String, Any> {
+        if let path = Bundle.main.path(forResource: "mockJson", ofType: "json") {
+            do {
+                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+                let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
+                let dict = jsonResult as! Dictionary<String, Any>
+                return dict
+            } catch {
+            
+            }
+        }
+        return Dictionary<String, Any>()
+    }
+    
 
     @IBAction func start(_ sender: Any) {
-        ContentAccessManager.shared.startFlow(rootViewController: self, camDelegate: self, camConfigProtocol: self, completion: { (r) in
+        ContentAccessManager.shared.startFlow(rootViewController: self, camDelegate: self, completion: { (r) in
             print(r)
         })
     }
