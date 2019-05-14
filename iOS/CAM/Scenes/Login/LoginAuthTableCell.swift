@@ -7,19 +7,28 @@
 
 import UIKit
 
-class LoginAuthTableCell: UITableViewCell {
+class LoginAuthTableCell: UITableViewCell, UITextFieldDelegate {
 
-    @IBOutlet var inputTextField: UITextField!
+    @IBOutlet var textField: UITextField!
+    var textChanged: ((String?) -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        textField.delegate = self
+    }
+    
+    @objc func textFieldDidChange() {
+        textChanged?(textField.text)
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        textChanged?(textField.text)
+        return true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
 }

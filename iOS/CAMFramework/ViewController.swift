@@ -11,6 +11,16 @@ import StoreKit
 import CAM
 
 class ViewController: UIViewController, CAMDelegate {
+    func login(authData: [(key: String, value: String?)], completion: @escaping (CAMResult) -> Void) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
+            completion(.success)
+        })
+    }
+    
+    func signUp(authData: [(key: String, value: String?)], completion: @escaping (CAMResult) -> Void) {
+        
+    }
+    
     func getPluginConfig() -> Dictionary<String, Any> {
         if let path = Bundle.main.path(forResource: "mockJson", ofType: "json") {
             do {
@@ -30,13 +40,6 @@ class ViewController: UIViewController, CAMDelegate {
         ContentAccessManager.shared.startFlow(rootViewController: self, camDelegate: self, completion: { (r) in
             print(r)
         })
-    }
-    func login(authData: Dictionary<String, Any>, completion: (CAMResult) -> Void) {
-        
-    }
-    
-    func signUp(authData: Dictionary<String, Any>, completion: (CAMResult) -> Void) {
-        
     }
     
     func resetPassword(completion: (CAMResult) -> Void) {
@@ -71,7 +74,7 @@ class ViewController: UIViewController, CAMDelegate {
         return false
     }
     
-    func getEntitlementsData(completion: ([CAMEntitlementItem]) -> Void) {
+    func getEntitlementsData(completion: @escaping ([CAMEntitlementItem]) -> Void) {
         
     }
     

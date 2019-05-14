@@ -19,9 +19,9 @@ struct AuthFields : Codable {
 }
 
 enum AuthFieldInputType: String, Codable {
-    case text = "text"
-    case password = "password"
-    case number = "number"
+    case text = "TEXT"
+    case password = "PASSWORD"
+    case number = "NUMBER"
     case unknown
     
     public init(from decoder: Decoder) throws {
@@ -35,5 +35,5 @@ struct AuthField: Codable {
     let hint: String?
     let type: AuthFieldInputType
     let mandatory: Bool
-    let text: String?
+    var text: String?
 }

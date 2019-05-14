@@ -47,7 +47,7 @@ extension UILabel {
 }
 
 extension UITextField {
-    func configureWith(text: String? = nil, color: UIColor? = .black, fontName: String? = nil, fontSize: CGFloat = 12, placeholder: String? = nil, cornerRadius: CGFloat = 0) {
+    func configureWith(text: String? = nil, color: UIColor? = .black, fontName: String? = nil, fontSize: CGFloat = 12, placeholder: String? = nil, cornerRadius: CGFloat = 0, inputType: AuthFieldInputType = .text) {
         self.text = text
         self.textColor = color
         if let fontName = fontName, let font = UIFont(name: fontName, size: fontSize) {
@@ -56,88 +56,97 @@ extension UITextField {
         self.placeholder = placeholder
         self.layer.cornerRadius = cornerRadius
         self.clipsToBounds = true
+        switch inputType {
+        case .text, .unknown:
+            self.keyboardType = .default
+        case .number:
+            self.keyboardType = .numberPad
+        case .password:
+            self.keyboardType = .default
+            self.isSecureTextEntry = true
+        }
+        
     }
 }
 
 class UIConfigurator {
     
-    static func configureAuthField(view: UITextField, data: AuthField, configProvider: CAMDelegate?) {
-        view.configureWith(text: data.text, placeholder: data.hint, cornerRadius: 26.0)
+    static func configureAuthField(view: UITextField, data: AuthField, dict: Dictionary<String, Any>?) {
+        view.configureWith(text: data.text, placeholder: data.hint, cornerRadius: 26.0, inputType: data.type)
     }
     
-    static func configureView(type: UIElement, view: UIView, configProvider: CAMDelegate?) {
-        let dict = configProvider?.getPluginConfig()
+    static func configureView(type: UIElement, view: UIView, dict: Dictionary<String, Any>?) {
         switch type {
         case .backButton:
             if let backButton = view as? UIButton {
-                backButton.configureWith(bgImageName: dict?["back_button"] as? String)
+                backButton.configureWith(bgImageName: dict?[CAMKeys.back_button.rawValue] as? String)
             }
         case .closeButton:
             if let closeButton = view as? UIButton {
-                closeButton.configureWith(bgImageName: dict?["close_button"] as? String)
+                closeButton.configureWith(bgImageName: dict?[CAMKeys.close_button.rawValue] as? String)
             }
         case .headerImageView:
             if let headerImageView = view as? UIImageView {
-                headerImageView.configureWith(bgImageName: dict?["header_logo"] as? String)
+                headerImageView.configureWith(bgImageName: dict?[CAMKeys.header_logo.rawValue] as? String)
             }
         case .backgroungImageView:
             if let backgroundImageView = view as? UIImageView {
-                backgroundImageView.configureWith(bgImageName: dict?["background_image"] as? String)
+                backgroundImageView.configureWith(bgImageName: dict?[CAMKeys.background_image.rawValue] as? String)
             }
         case .separatorLabel:
             if let separatorLabel = view as? UILabel {
-                separatorLabel.configureWith(text: dict?["separator_text"] as? String)
+                separatorLabel.configureWith(text: dict?[CAMKeys.separator_text.rawValue] as? String)
             }
         case .networksAuthLabel:
             if let networksAuthLabel = view as? UILabel {
-                networksAuthLabel.configureWith(text: dict?["networks_auth_action_text"] as? String)
+                networksAuthLabel.configureWith(text: dict?[CAMKeys.networks_auth_action_text.rawValue] as? String)
             }
         case .bottomBannerView:
-            view.configureWith(bgColor: dict?["bottom_banner_bg_color"] as? UIColor)
+            view.configureWith(bgColor: dict?[CAMKeys.bottom_banner_bg_color.rawValue] as? UIColor)
         case .loginTitleLabel:
             if let loginTitleLabel = view as? UILabel {
-                loginTitleLabel.configureWith(text: dict?["login_screen_title_text"] as? String)
+                loginTitleLabel.configureWith(text: dict?[CAMKeys.login_screen_title_text.rawValue] as? String)
             }
         case .loginResetPasswordButton:
             if let restorePasswordLabel = view as? UIButton {
-                restorePasswordLabel.configureWith(text: dict?["reset_password_text"] as? String, state: .normal)
+                restorePasswordLabel.configureWith(text: dict?[CAMKeys.reset_password_text.rawValue] as? String, state: .normal)
             }
         case .loginAlternativeActionButton:
             if let loginAlternativeActionButton = view as? UIButton {
-                loginAlternativeActionButton.configureWith(text: dict?["alternative_login_promt_text"] as? String)
+                loginAlternativeActionButton.configureWith(text: dict?[CAMKeys.alternative_login_promt_text.rawValue] as? String)
             }
         case .loginButton:
             if let loginButton = view as? UIButton {
-                loginButton.configureWith(text: dict?["login_button_text"] as? String,
-                                          bgImageName: dict?["login_button_image"] as? String,
+                loginButton.configureWith(text: dict?[CAMKeys.login_button_text.rawValue] as? String,
+                                          bgImageName: dict?[CAMKeys.login_button_image.rawValue] as? String,
                                           state: .normal)
             }
         case .signUpTitleLabel:
             if let signUpTitleLabel = view as? UILabel {
-                signUpTitleLabel.configureWith(text: dict?["signup_screen_title_text"] as? String)
+                signUpTitleLabel.configureWith(text: dict?[CAMKeys.signup_screen_title_text.rawValue] as? String)
             }
         case .signUpAlternativeActionLabel:
             if let signUpAlternativeActionLabel = view as? UILabel {
-                signUpAlternativeActionLabel.configureWith(text: dict?["alternative_signup_promt_text"] as? String)
+                signUpAlternativeActionLabel.configureWith(text: dict?[CAMKeys.alternative_signup_promt_text.rawValue] as? String)
             }
         case .signUpButton:
             if let signUpButton = view as? UIButton {
-                signUpButton.configureWith(text: dict?["signup_button_text"] as? String,
-                                          bgImageName: dict?["signup_button_image"] as? String,
+                signUpButton.configureWith(text: dict?[CAMKeys.signup_button_text.rawValue] as? String,
+                                          bgImageName: dict?[CAMKeys.signup_button_image.rawValue] as? String,
                                           state: .normal)
             }
         case .resetPasswordTitleLabel:
             if let resetPasswordTitleLabel = view as? UILabel {
-                resetPasswordTitleLabel.configureWith(text: dict?["password_reset_title_text"] as? String)
+                resetPasswordTitleLabel.configureWith(text: dict?[CAMKeys.password_reset_title_text.rawValue] as? String)
             }
         case .resetPasswordInfoLabel:
             if let resetPasswordInfoLabel = view as? UILabel {
-                resetPasswordInfoLabel.configureWith(text: dict?["password_reset_info_text"] as? String)
+                resetPasswordInfoLabel.configureWith(text: dict?[CAMKeys.password_reset_info_text.rawValue] as? String)
             }
         case .resetPasswordButton:
             if let resetPasswordButton = view as? UIButton {
-                resetPasswordButton.configureWith(text: dict?["password_reset_button_text"] as? String,
-                                           bgImageName: dict?["password_reset_button_image"] as? String,
+                resetPasswordButton.configureWith(text: dict?[CAMKeys.password_reset_button_text.rawValue] as? String,
+                                           bgImageName: dict?[CAMKeys.password_alert_button_image.rawValue] as? String,
                                            state: .normal)
             }
         case .alertTitleLabel:
@@ -180,7 +189,6 @@ enum UIElement {
     case resetPasswordTitleLabel
     case resetPasswordInfoLabel
     case resetPasswordButton
-    
     
     case alertTitleLabel
     case alertInfoLabel

@@ -14,6 +14,7 @@ class ViewControllerFactory {
         let presenter = LoginPresenter()
         loginVC.presenter = presenter
         
+        presenter.view = loginVC
         presenter.coordinatorDelegate = authCoordinator
         presenter.camDelegate = pluginDataProvider?.getCamDelegate()
         presenter.isRoot = isRoot

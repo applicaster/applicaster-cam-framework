@@ -94,7 +94,7 @@
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <connections>
-                                                    <outlet property="inputTextField" destination="mPg-dL-YtB" id="cFU-sN-ttS"/>
+                                                    <outlet property="textField" destination="mPg-dL-YtB" id="cFU-sN-ttS"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>

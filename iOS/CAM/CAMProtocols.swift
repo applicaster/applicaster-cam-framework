@@ -23,9 +23,9 @@ public protocol CAMDelegate: AnyObject {
     func getPluginConfig() -> Dictionary<String, Any>
     func isUserLogged() -> Bool
     func isEntitlementsValid() -> Bool
-    func login(authData: Dictionary<String, Any>, completion: (CAMResult) -> Void)
-    func signUp(authData: Dictionary<String, Any>, completion: (CAMResult) -> Void)
-    func resetPassword(completion: (CAMResult) -> Void)
+    func login(authData: [(key: String, value: String?)], completion: @escaping (CAMResult) -> Void)
+    func signUp(authData: [(key: String, value: String?)], completion: @escaping (CAMResult) -> Void)
+    func resetPassword(completion: @escaping (CAMResult) -> Void)
     func itemPurchased(item: SKProduct)
     func itemsRestored(items: [SKProduct])
 }

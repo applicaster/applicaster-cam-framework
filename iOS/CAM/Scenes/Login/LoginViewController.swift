@@ -10,6 +10,7 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
+    var loadingPopover = LoadingPopover.nibInstance()
     var authFields = [AuthField]()
     @IBOutlet var backgroundImageView: UIImageView!
     @IBOutlet var backButton: UIButton!
@@ -38,6 +39,9 @@ class LoginViewController: UIViewController {
     @IBOutlet var inputComponentHeightConstraint: NSLayoutConstraint!
     @IBOutlet var authFieldsTableHeightConstraint: NSLayoutConstraint!
 
+    var configDictionary: Dictionary<String, Any>? {
+        return presenter?.camDelegate?.getPluginConfig()
+    }
     var presenter: LoginPresenter?
     
     var visibleAuthFieldsCount: Int {
@@ -76,31 +80,34 @@ class LoginViewController: UIViewController {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        loadingPopover.frame = self.view.bounds
         setupConstraints()
+        authFieldsTable.isScrollEnabled = authFieldsTable.contentSize.height > authFieldsTable.frame.height
     }
     
     func setupUI() {
         self.navigationController?.isNavigationBarHidden = true
-        restoreContainer.isHidden = false
-        socialNetworksContainer.isHidden = false
+        restoreContainer.isHidden = true
+        socialNetworksContainer.isHidden = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        view.addGestureRecognizer(tapGesture)
         setupTable()
         configureElements()
     }
     
     func setupTable() {
-        let configProvider = presenter?.camDelegate
-        if let json = configProvider?.getPluginConfig()["auth_fields"] as? String, let data = json.data(using: .utf8) {
+        if let json = configDictionary?[CAMKeys.auth_fields.rawValue] as? String, let data = json.data(using: .utf8) {
             if let jsonAuthFields = try? JSONDecoder().decode(AuthFields.self, from: data), let loginFields = jsonAuthFields.login {
                 authFields = loginFields
             }
         }
+        
         if authFields.count == visibleAuthFieldsCount {
             authFieldsTable.isScrollEnabled = false
         }
     }
     
     func configureElements() {
-        let configProvider = presenter?.camDelegate
         let array: [(UIView, UIElement)] = [(backgroundImageView, .backgroungImageView), (backButton, .backButton),
                                             (closeButton, .closeButton), (logoImageView, .headerImageView),
                                             (titleLabel, .loginTitleLabel), (loginButton, .loginButton),
@@ -108,7 +115,7 @@ class LoginViewController: UIViewController {
                                             (socialNetworksLabel, .networksAuthLabel), (signUpContainer, .bottomBannerView),
                                             (signUpButton, .loginAlternativeActionButton)]
         array.forEach {
-            UIConfigurator.configureView(type: $0.1, view: $0.0, configProvider: configProvider)
+            UIConfigurator.configureView(type: $0.1, view: $0.0, dict: configDictionary)
         }
     }
     
@@ -127,6 +134,12 @@ class LoginViewController: UIViewController {
             }
         }
         self.view.layoutIfNeeded()
+    }
+    
+    //MARK: - Keyboard
+    
+    @objc func hideKeyboard() {
+        view.endEditing(true)
     }
     
     //MARK: - Actions
@@ -148,11 +161,21 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func login(_ sender: UIButton) {
-        
+        hideKeyboard()
+        var result = [(key: String, value: String?)]()
+        for obj in authFields {
+            if obj.mandatory && (obj.text ?? "").isEmpty {
+                showError(description: "Mandatory field is Empty!")
+                return
+            }
+            result.append((key: (obj.key ?? ""), value: obj.text))
+        }
+        presenter?.login(data: result)
     }
 }
 
 extension LoginViewController: UITableViewDelegate, UITableViewDataSource {
+    // MARK: - Table Delegate
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return authFields.count
@@ -169,8 +192,29 @@ extension LoginViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "LoginAuthCell", for: indexPath) as? LoginAuthTableCell else {
             return UITableViewCell()
         }
-        UIConfigurator.configureAuthField(view: cell.inputTextField, data: authFields[indexPath.row], configProvider: presenter?.camDelegate)
+        UIConfigurator.configureAuthField(view: cell.textField, data: authFields[indexPath.row], dict: configDictionary)
         cell.backgroundColor = .clear
+        cell.textChanged = { text in
+            self.authFields[indexPath.row].text = text
+        }
         return cell
+    }
+}
+
+extension LoginViewController: LoginViewProtocol {
+    // MARK: - Login View Protocol
+    
+    func showLoadingScreen(_ show: Bool) {
+        if show {
+            self.view.addSubview(loadingPopover)
+        } else {
+            loadingPopover.removeFromSuperview()
+        }
+    }
+    
+    func showError(description: String?) {
+        let alert = UIAlertController(title: "Error", message: description, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
 }
