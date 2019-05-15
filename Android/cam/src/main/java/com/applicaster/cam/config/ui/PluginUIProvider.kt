@@ -1,6 +1,7 @@
 package com.applicaster.cam.config.ui
 
 import android.content.Context
+import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.util.Log
@@ -21,6 +22,8 @@ class PluginUIProvider(
 
     override fun getColor(key: String): Int {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        // default
+        return Color.WHITE
     }
 
     override fun getTextSize(key: String): Float {

@@ -9,4 +9,6 @@ interface IBillingAdapter {
     fun removeAllPurchaseItems()
 
     fun setItemListener(item: PurchaseItem, holderView: View)
+
+    fun customize(itemView: View)
 }

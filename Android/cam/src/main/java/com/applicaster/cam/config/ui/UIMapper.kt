@@ -34,45 +34,45 @@ object UIMapper {
 
     private fun setImage(view: View, key: String) {
         when (view) {
-            is ImageView -> view.background = uiProvider().getDrawable(key)
-            is Button -> view.background = uiProvider().getDrawable(key)
-            is ViewGroup -> view.background = uiProvider().getDrawable(key)
+            is ImageView -> view.background = uiProvider.getDrawable(key)
+            is Button -> view.background = uiProvider.getDrawable(key)
+            is ViewGroup -> view.background = uiProvider.getDrawable(key)
         }
     }
 
     private fun setText(view: View, key: String) {
         when (view) {
-            is TextView -> view.text = uiProvider().getText(key)
-            is EditText -> view.text = SpannableStringBuilder(uiProvider().getText(key))
+            is TextView -> view.text = uiProvider.getText(key)
+            is EditText -> view.text = SpannableStringBuilder(uiProvider.getText(key))
         }
     }
 
     private fun setHint(view: View, key: String) {
         when (view) {
-            is EditText -> view.hint = uiProvider().getText(key)
+            is EditText -> view.hint = uiProvider.getText(key)
         }
     }
 
     private fun setTextSize(view: View, key: String) {
         when (view) {
-            is TextView -> view.textSize = uiProvider().getTextSize(key)
-            is EditText -> view.textSize = uiProvider().getTextSize(key)
+            is TextView -> view.textSize = uiProvider.getTextSize(key)
+            is EditText -> view.textSize = uiProvider.getTextSize(key)
         }
     }
 
     private fun setTextColor(view: View, key: String) {
         when (view) {
-            is TextView -> view.setTextColor(uiProvider().getColor(key))
-            is EditText -> view.setTextColor(uiProvider().getColor(key))
+            is TextView -> view.setTextColor(uiProvider.getColor(key))
+            is EditText -> view.setTextColor(uiProvider.getColor(key))
         }
     }
 
     private fun setFont(view: View, key: String) {
         when (view) {
-            is TextView -> view.typeface = uiProvider().getFont(key)
-            is EditText -> view.typeface = uiProvider().getFont(key)
+            is TextView -> view.typeface = uiProvider.getFont(key)
+            is EditText -> view.typeface = uiProvider.getFont(key)
         }
     }
 
-    private fun uiProvider() = ContentAccessManager.pluginUIProvider
+    private val uiProvider: UIProvider by lazy { ContentAccessManager.pluginUIProvider }
 }
