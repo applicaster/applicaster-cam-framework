@@ -118,6 +118,7 @@ class UIConfigurator {
         case .loginButton:
             if let loginButton = view as? UIButton {
                 loginButton.configureWith(text: dict?[CAMKeys.login_button_text.rawValue] as? String,
+                                          cornerRadius: 24,
                                           bgImageName: dict?[CAMKeys.login_button_image.rawValue] as? String,
                                           state: .normal)
             }
@@ -125,15 +126,16 @@ class UIConfigurator {
             if let signUpTitleLabel = view as? UILabel {
                 signUpTitleLabel.configureWith(text: dict?[CAMKeys.signup_screen_title_text.rawValue] as? String)
             }
-        case .signUpAlternativeActionLabel:
-            if let signUpAlternativeActionLabel = view as? UILabel {
+        case .signUpAlternativeActionButton:
+            if let signUpAlternativeActionLabel = view as? UIButton {
                 signUpAlternativeActionLabel.configureWith(text: dict?[CAMKeys.alternative_signup_promt_text.rawValue] as? String)
             }
         case .signUpButton:
             if let signUpButton = view as? UIButton {
                 signUpButton.configureWith(text: dict?[CAMKeys.signup_button_text.rawValue] as? String,
-                                          bgImageName: dict?[CAMKeys.signup_button_image.rawValue] as? String,
-                                          state: .normal)
+                                           cornerRadius: 24,
+                                           bgImageName: dict?[CAMKeys.signup_button_image.rawValue] as? String,
+                                           state: .normal)
             }
         case .resetPasswordTitleLabel:
             if let resetPasswordTitleLabel = view as? UILabel {
@@ -143,25 +145,23 @@ class UIConfigurator {
             if let resetPasswordInfoLabel = view as? UILabel {
                 resetPasswordInfoLabel.configureWith(text: dict?[CAMKeys.password_reset_info_text.rawValue] as? String)
             }
+        case .resetPasswordTextField:
+            if let resetPasswordTextField = view as? UITextField {
+                resetPasswordTextField.configureWith(placeholder: "Email")
+            }
         case .resetPasswordButton:
             if let resetPasswordButton = view as? UIButton {
                 resetPasswordButton.configureWith(text: dict?[CAMKeys.password_reset_button_text.rawValue] as? String,
                                            bgImageName: dict?[CAMKeys.password_alert_button_image.rawValue] as? String,
                                            state: .normal)
             }
-        case .alertTitleLabel:
-            if let alertTitleLabel = view as? UILabel {
-                alertTitleLabel.configureWith(text: dict?["alert_title_text"] as? String)
-            }
-        case .alertInfoLabel:
-            if let alertInfoLabel = view as? UILabel {
-                alertInfoLabel.configureWith(text: dict?["alert_info_text"] as? String)
-            }
-        case .alertButton:
-            if let alertButton = view as? UIButton {
-                alertButton.configureWith(text: dict?["alert_button_text"] as? String,
-                                                  bgImageName: dict?["alert_button_image"] as? String,
-                                                  state: .normal)
+        case .passwordAlert:
+            if let alertView = view as? ConfirmationPopover {
+                alertView.titleLabel.configureWith(text: dict?["password_alert_title_text"] as? String)
+                alertView.DescriptionLabel.configureWith(text: dict?["password_alert_info_text"] as? String)
+                alertView.actionButton.configureWith(text: dict?["password_alert_button_text"] as? String,
+                                          bgImageName: dict?["password_alert_button_image"] as? String,
+                                          state: .normal)
             }
         }
     }
@@ -183,14 +183,13 @@ enum UIElement {
     case loginButton
     
     case signUpTitleLabel
-    case signUpAlternativeActionLabel
+    case signUpAlternativeActionButton
     case signUpButton
     
     case resetPasswordTitleLabel
     case resetPasswordInfoLabel
+    case resetPasswordTextField
     case resetPasswordButton
     
-    case alertTitleLabel
-    case alertInfoLabel
-    case alertButton
+    case passwordAlert
 }

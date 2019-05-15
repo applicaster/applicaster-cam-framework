@@ -11,6 +11,10 @@ import StoreKit
 import CAM
 
 class ViewController: UIViewController, CAMDelegate {
+    func resetPassword(email: String, completion: @escaping (CAMResult) -> Void) {
+        completion(.success)
+    }
+    
     func login(authData: [(key: String, value: String?)], completion: @escaping (CAMResult) -> Void) {
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
             completion(.success)
@@ -40,10 +44,6 @@ class ViewController: UIViewController, CAMDelegate {
         ContentAccessManager.shared.startFlow(rootViewController: self, camDelegate: self, completion: { (r) in
             print(r)
         })
-    }
-    
-    func resetPassword(completion: (CAMResult) -> Void) {
-        
     }
     
     func itemPurchased(item: SKProduct) {

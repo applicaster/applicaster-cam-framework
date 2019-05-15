@@ -34,8 +34,8 @@ enum CAMKeys: String {
     case password_reset_button_text = "password_reset_button_text"
     case password_reset_button_image = "password_reset_button_image"
     
-    case password_alert_title_text = "alert_title_text"
-    case password_alert_info_text = "alert_info_text"
-    case password_alert_button_text = "alert_button_text"
-    case password_alert_button_image = "alert_button_image"
+    case password_alert_title_text = "password_alert_title_text"
+    case password_alert_info_text = "password_alert_info_text"
+    case password_alert_button_text = "password_alert_button_text"
+    case password_alert_button_image = "password_alert_button_image"
 }

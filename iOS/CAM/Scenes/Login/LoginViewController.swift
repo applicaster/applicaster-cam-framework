@@ -36,7 +36,7 @@ class LoginViewController: UIViewController {
     
     @IBOutlet var inputContainerYConstraint: NSLayoutConstraint!
     @IBOutlet var socialNetworksContainerTopSpaceConstraint: NSLayoutConstraint!
-    @IBOutlet var inputComponentHeightConstraint: NSLayoutConstraint!
+    @IBOutlet var inputContainerHeightConstraint: NSLayoutConstraint!
     @IBOutlet var authFieldsTableHeightConstraint: NSLayoutConstraint!
 
     var configDictionary: Dictionary<String, Any>? {
@@ -76,6 +76,7 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter?.viewDidLoad()
     }
 
     override func viewDidLayoutSubviews() {
@@ -88,23 +89,12 @@ class LoginViewController: UIViewController {
     func setupUI() {
         self.navigationController?.isNavigationBarHidden = true
         restoreContainer.isHidden = true
-        socialNetworksContainer.isHidden = true
+        socialNetworksContainer.isHidden = false
+        authFieldsTable.backgroundView = UIView()
+        authFieldsTable.separatorStyle = .none
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         view.addGestureRecognizer(tapGesture)
-        setupTable()
         configureElements()
-    }
-    
-    func setupTable() {
-        if let json = configDictionary?[CAMKeys.auth_fields.rawValue] as? String, let data = json.data(using: .utf8) {
-            if let jsonAuthFields = try? JSONDecoder().decode(AuthFields.self, from: data), let loginFields = jsonAuthFields.login {
-                authFields = loginFields
-            }
-        }
-        
-        if authFields.count == visibleAuthFieldsCount {
-            authFieldsTable.isScrollEnabled = false
-        }
     }
     
     func configureElements() {
@@ -120,14 +110,14 @@ class LoginViewController: UIViewController {
     }
     
     func setupConstraints() {
-        let inputComponentHeight = authFieldsTableHeight + loginButton.frame.height + resetPasswordButton.frame.height
+        let inputContainerHeight = authFieldsTableHeight + loginButton.frame.height + resetPasswordButton.frame.height
         authFieldsTableHeightConstraint.constant = authFieldsTableHeight
-        inputComponentHeightConstraint.constant = authFieldsTableHeight + loginButton.frame.height + resetPasswordButton.frame.height
-        let inputComponentMinY = (self.view.frame.height - inputComponentHeight) / 2 - 50 // 50 - space from center
-        let inputComponentMaxY = inputComponentMinY + inputComponentHeight
+        inputContainerHeightConstraint.constant = inputContainerHeight
+        let inputContainerMinY = (self.view.frame.height - inputContainerHeight) / 2 - 50 // 50 - space from center
+        let inputContainerMaxY = inputContainerMinY + inputContainerHeight
         if !socialNetworksContainer.isHidden {
             let restoreContainerHeight = restoreContainer.isHidden ? 0 : restoreContainer.frame.height
-            socialNetworksContainerTopSpaceConstraint.constant = (signUpContainer.frame.minY - inputComponentMaxY + restoreContainerHeight - 100) / 2
+            socialNetworksContainerTopSpaceConstraint.constant = (signUpContainer.frame.minY - inputContainerMaxY + restoreContainerHeight - 100) / 2
         } else {
             if restoreContainer.isHidden {
                 self.inputContainerYConstraint.constant = 0
@@ -189,7 +179,7 @@ extension LoginViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "LoginAuthCell", for: indexPath) as? LoginAuthTableCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "AuthCell", for: indexPath) as? AuthTableCell else {
             return UITableViewCell()
         }
         UIConfigurator.configureAuthField(view: cell.textField, data: authFields[indexPath.row], dict: configDictionary)
@@ -202,7 +192,13 @@ extension LoginViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension LoginViewController: LoginViewProtocol {
+    
     // MARK: - Login View Protocol
+    
+    func updateTable(fields: [AuthField]) {
+        authFields = fields
+        authFieldsTable.reloadData()
+    }
     
     func showLoadingScreen(_ show: Bool) {
         if show {

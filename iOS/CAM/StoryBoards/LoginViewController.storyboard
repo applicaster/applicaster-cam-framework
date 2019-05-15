@@ -69,7 +69,7 @@
                                         </constraints>
                                         <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LoginAuthCell" id="JmM-K9-BDx" customClass="LoginAuthTableCell" customModule="CAM" customModuleProvider="target">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AuthCell" id="JmM-K9-BDx" customClass="AuthTableCell" customModule="CAM" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="28" width="250" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JmM-K9-BDx" id="kPs-Yk-MIh">
@@ -287,7 +287,7 @@
                         <outlet property="backButton" destination="kdc-pz-Jsm" id="GQf-pY-nwS"/>
                         <outlet property="backgroundImageView" destination="5I9-bH-qGg" id="Pfa-HE-f1s"/>
                         <outlet property="closeButton" destination="8YH-d8-P5Z" id="GC2-K4-HDt"/>
-                        <outlet property="inputComponentHeightConstraint" destination="f96-cR-pkM" id="waS-aj-hlg"/>
+                        <outlet property="inputContainerHeightConstraint" destination="f96-cR-pkM" id="waS-aj-hlg"/>
                         <outlet property="inputContainerYConstraint" destination="B6f-Tg-82U" id="d0e-ow-Z0C"/>
                         <outlet property="loginButton" destination="g7t-dz-Krv" id="vrg-rP-ZtI"/>
                         <outlet property="logoImageView" destination="Qt9-xh-807" id="zwZ-UU-HOP"/>
