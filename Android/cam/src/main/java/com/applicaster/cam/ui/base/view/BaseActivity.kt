@@ -36,6 +36,14 @@ abstract class BaseActivity : AppCompatActivity(), IBaseView {
         return this
     }
 
+    override fun goBack() {
+        onBackPressed()
+    }
+
+    override fun close() {
+        finish()
+    }
+
     abstract fun getFragmentContainerType(): ContainerType
     abstract fun getFragmentContainerId(): Int
     abstract fun getNavigationRouter(): BaseNavigationRouter?

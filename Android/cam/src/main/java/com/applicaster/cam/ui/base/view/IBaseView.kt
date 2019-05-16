@@ -4,4 +4,6 @@ import android.content.Context
 
 interface IBaseView {
     fun getViewContext(): Context?
+    fun goBack()
+    fun close()
 }

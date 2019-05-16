@@ -1,4 +1,4 @@
-package com.applicaster.cam.ui.signup
+package com.applicaster.cam.ui.auth
 
 import android.os.Bundle
 import android.text.InputType
@@ -8,34 +8,31 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.LinearLayout
 import com.applicaster.cam.R
-import com.applicaster.cam.config.ui.UIKey
-import com.applicaster.cam.config.ui.UIMapper
 import com.applicaster.cam.params.auth.AuthField
 import com.applicaster.cam.params.auth.AuthFieldConfig
 import com.applicaster.cam.ui.CamNavigationRouter
 import com.applicaster.cam.ui.base.view.BaseFragment
-import kotlinx.android.synthetic.main.fragment_sign_up.*
-import kotlinx.android.synthetic.main.layout_auth_buttons.*
+import kotlinx.android.synthetic.main.fragment_auth.*
 import kotlinx.android.synthetic.main.layout_bottom_bar.*
 import kotlinx.android.synthetic.main.layout_text_with_action.*
 import kotlinx.android.synthetic.main.layout_toolbar_template.*
 
-class SignUpFragment : BaseFragment(), ISignUpView {
-
-    private var presenter: ISignUpPresenter? = null
+abstract class AuthFragment : BaseFragment(), IAuthView {
+    private var presenter: IAuthPresenter? = null
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
+        val rootView = inflater.inflate(R.layout.fragment_auth, container, false)
+
         val navigationManager = if (baseActivity.getNavigationRouter() is CamNavigationRouter)
             baseActivity.getNavigationRouter() as CamNavigationRouter
         else
             CamNavigationRouter(baseActivity)
+        presenter = initPresenter(navigationManager)
 
-        presenter = SignUpPresenter(this, navigationManager)
-        setPresenter(presenter)
-        return inflater.inflate(R.layout.fragment_sign_up, container, false)
+        return rootView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -44,10 +41,9 @@ class SignUpFragment : BaseFragment(), ISignUpView {
     }
 
     override fun setListeners() {
-        tv_forgot_pwd.setOnClickListener { presenter?.onForgotPasswordClicked() }
-        btn_input_action.setOnClickListener { presenter?.onSignUpButtonClicked() }
-        tv_hint_desc.setOnClickListener { presenter?.onLogInHintClicked() }
-        tv_hint_action.setOnClickListener { presenter?.onLogInHintClicked() }
+        btn_input_action.setOnClickListener { presenter?.onAuthActionButtonClicked() }
+        tv_hint_desc.setOnClickListener { presenter?.onAuthHintClicked() }
+        tv_hint_action.setOnClickListener { presenter?.onAuthHintClicked() }
         tv_bottom_bar_desc.setOnClickListener { presenter?.onRestoreClicked() }
         tv_bottom_bar_action.setOnClickListener { presenter?.onRestoreClicked() }
         toolbar_back_button.setOnClickListener { presenter?.onToolbarBackClicked() }
@@ -57,27 +53,16 @@ class SignUpFragment : BaseFragment(), ISignUpView {
     override fun populateAuthFieldsViews(authFieldConfig: AuthFieldConfig) {
         val etWidth = resources.getDimensionPixelSize(R.dimen.auth_et_width)
         val etHeight = resources.getDimensionPixelSize(R.dimen.auth_et_height)
-        val etMarginTop = resources.getDimensionPixelSize(R.dimen.auth_et_top_margin)
+        val etMarginTop = resources.getDimensionPixelSize(R.dimen.auth_et_margin_top)
 
         for (field in authFieldConfig.authFields) {
             val editText = EditText(context)
-            editText.layoutParams = LinearLayout.LayoutParams(
-                    etWidth,
-                    etHeight
-            ).apply {
-                topMargin = etMarginTop
-            }
-            when (field.type) {
-                AuthField.Type.TEXT -> editText.inputType = InputType.TYPE_CLASS_TEXT
-                AuthField.Type.PASSWORD -> editText.inputType = (InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD)
-                AuthField.Type.NUMBER -> editText.inputType = InputType.TYPE_CLASS_NUMBER
-                else -> editText.inputType = InputType.TYPE_CLASS_TEXT
-            }
-            editText.hint = field.hint
+            editText.applyCustomizations(etWidth, etHeight, etMarginTop, field)
             container_linear_input.addView(editText)
         }
-        val visibleViewsCount = if (authFieldConfig.authFields.size < MAX_NON_SCROLLABLE_AUTH_FIELDS)
-            authFieldConfig.authFields.size else MAX_NON_SCROLLABLE_AUTH_FIELDS
+        val visibleViewsCount =
+            if (authFieldConfig.authFields.size < MAX_NON_SCROLLABLE_AUTH_FIELDS)
+                authFieldConfig.authFields.size else MAX_NON_SCROLLABLE_AUTH_FIELDS
         val parentMaxHeight = (etHeight + etMarginTop) * visibleViewsCount
 
         //recalculating scroll view height to match design spec
@@ -86,20 +71,30 @@ class SignUpFragment : BaseFragment(), ISignUpView {
         }
     }
 
-    override fun customize() {
-        UIMapper.map(tv_logo, UIKey.SIGN_UP_TITLE)
-        UIMapper.map(btn_input_action, UIKey.SIGN_UP_BUTTON)
-    }
-
-    override fun goBack() {
-        activity?.onBackPressed()
-    }
-
-    override fun close() {
-        activity?.finish()
-    }
+    abstract fun initPresenter(navigationManager: CamNavigationRouter): IAuthPresenter
 
     companion object {
         const val MAX_NON_SCROLLABLE_AUTH_FIELDS = 4
     }
+}
+
+private fun EditText.applyCustomizations(
+    etWidth: Int,
+    etHeight: Int,
+    etMarginTop: Int,
+    field: AuthField
+) {
+    layoutParams = LinearLayout.LayoutParams(
+        etWidth,
+        etHeight
+    ).apply {
+        topMargin = etMarginTop
+    }
+    inputType = when (field.type) {
+        AuthField.Type.TEXT -> InputType.TYPE_CLASS_TEXT
+        AuthField.Type.PASSWORD -> (InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD)
+        AuthField.Type.NUMBER -> InputType.TYPE_CLASS_NUMBER
+        else -> InputType.TYPE_CLASS_TEXT
+    }
+    hint = field.hint
 }

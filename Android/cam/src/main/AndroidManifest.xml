@@ -5,6 +5,7 @@
     <application>
         <activity
             android:name=".ui.CamActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustNothing" />
     </application>
 

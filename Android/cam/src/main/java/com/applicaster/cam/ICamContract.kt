@@ -20,8 +20,6 @@ interface ICamContract {
 
     fun loadEntitlements(callback: EntitlementsLoadCallback) //get purchase id (and corresponding data)
 
-    fun getAuthFieldsConfig(): String //json with auth data
-
     fun isUserLogged(): Boolean
 
     fun getPluginConfig(): Map<String, String>

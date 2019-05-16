@@ -3,17 +3,27 @@
 
     <!--Common-->
     <dimen name="bottom_bar_height">70dp</dimen>
-    <dimen name="tool_bar_icon_width">38dp</dimen>
-    <dimen name="tool_bar_height">44dp</dimen>
+    <dimen name="toolbar_icon_width">38dp</dimen>
+    <dimen name="toolbar_height">44dp</dimen>
+    <dimen name="toolbar_logo_width">200dp</dimen>
+    <dimen name="toolbar_logo_height">44dp</dimen>
 
     <!--Auth-->
     <dimen name="auth_et_width">250dp</dimen>
     <dimen name="auth_et_height">48dp</dimen>
-    <dimen name="auth_et_top_margin">7dp</dimen>
+    <dimen name="auth_et_margin_top">7dp</dimen>
     <dimen name="auth_max_height">220dp</dimen>
+    <dimen name="auth_text_margin">10dp</dimen>
+    <dimen name="auth_container_margin_vertical">40dp</dimen>
+    <dimen name="auth_hint_margin_bottom">18dp</dimen>
     <dimen name="additional_auth_iv_size">38dp</dimen>
-    <dimen name="additional_auth_iv_vert_margin">15dp</dimen>
-    <dimen name="additional_auth_iv_horiz_margin">7.5dp</dimen>
+    <dimen name="additional_auth_iv_margin_vertical">15dp</dimen>
+    <dimen name="additional_auth_iv_margin_horizontal">7.5dp</dimen>
+    <dimen name="additional_auth_container_margin">8dp</dimen>
+    <dimen name="auth_text_size">16sp</dimen>
+    <dimen name="additional_auth_divider_width">66dp</dimen>
+    <dimen name="additional_auth_divider_height">1dp</dimen>
+    <dimen name="additional_auth_margin">8dp</dimen>
 
     <!-- Region Billing view -->
     <dimen name="billing_title_margin_top">22dp</dimen>

@@ -38,10 +38,6 @@ class MockCamContract : ICamContract {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun getAuthFieldsConfig(): String {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
     override fun isUserLogged() = false
 
     override fun getPluginConfig() = MockPluginConfiguration.getPluginConfiguration()

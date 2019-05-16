@@ -1,11 +1,10 @@
-package com.applicaster.cam.ui.signup
+package com.applicaster.cam.ui.auth
 
 import com.applicaster.cam.params.auth.AuthFieldConfig
 import com.applicaster.cam.ui.base.view.IBaseView
 
-interface ISignUpView : IBaseView {
-    fun goBack()
-    fun close()
+interface IAuthView : IBaseView {
     fun populateAuthFieldsViews(authFieldConfig: AuthFieldConfig)
-    fun customize()
+    fun applyUICustomizations()
+    fun showToastMessage(msg: String)
 }

@@ -1,10 +1,12 @@
 package com.applicaster.cam.config.ui
 
 import android.content.Context
+import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.util.Log
 import com.applicaster.app.CustomApplication
+import com.applicaster.cam.R
 import com.applicaster.util.StringUtil
 
 class PluginUIProvider(
@@ -16,15 +18,21 @@ class PluginUIProvider(
         /**
          *  TODO: get values from [OSUtil] or pluginConfig
          */
-        return ""
+        return "dummy text"
     }
 
     override fun getColor(key: String): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        /**
+         *  TODO: get values from [OSUtil] or pluginConfig
+         */
+        return Color.BLACK
     }
 
     override fun getTextSize(key: String): Float {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        /**
+         *  TODO: get values from [OSUtil] or pluginConfig
+         */
+        return context.resources.getDimension(R.dimen.auth_text_size)
     }
 
     override fun getDrawable(key: String): Drawable {
