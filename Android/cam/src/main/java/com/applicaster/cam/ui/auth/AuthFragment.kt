@@ -24,13 +24,15 @@ abstract class AuthFragment : BaseFragment(), IAuthView {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val rootView = inflater.inflate(R.layout.fragment_auth, container, false)
+
         val navigationManager = if (baseActivity.getNavigationRouter() is CamNavigationRouter)
             baseActivity.getNavigationRouter() as CamNavigationRouter
         else
             CamNavigationRouter(baseActivity)
-
         presenter = initPresenter(navigationManager)
-        return inflater.inflate(R.layout.fragment_auth, container, false)
+
+        return rootView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
