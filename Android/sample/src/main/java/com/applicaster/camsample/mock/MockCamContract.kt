@@ -1,10 +1,11 @@
 package com.applicaster.camsample.mock
 
+import android.content.Context
 import android.os.Handler
 import com.applicaster.cam.*
 import com.applicaster.cam.params.auth.AuthField
 
-class MockCamContract : ICamContract {
+class MockCamContract(val context: Context) : ICamContract {
 
     override fun login(authFields: List<AuthField>, callback: LoginCallback) {
         Handler().postDelayed({ callback.onSuccess() }, 1000)
@@ -40,5 +41,5 @@ class MockCamContract : ICamContract {
 
     override fun isUserLogged() = false
 
-    override fun getPluginConfig() = MockPluginConfiguration.getPluginConfiguration()
+    override fun getPluginConfig() = MockPluginConfiguration.getPluginConfiguration(context)
 }
