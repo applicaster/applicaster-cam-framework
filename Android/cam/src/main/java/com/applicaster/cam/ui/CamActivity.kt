@@ -1,7 +1,6 @@
 package com.applicaster.cam.ui
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.View
 import com.applicaster.cam.R
 import com.applicaster.cam.ui.base.view.BaseActivity

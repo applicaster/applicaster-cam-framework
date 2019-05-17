@@ -18,7 +18,7 @@ enum class UIKey(
     BILLING_ITEM_REDEEM(text = UI_KEY_BILLING_ITEM_REDEEM_TEXT, textSize = UI_KEY_BILLING_ITEM_REDEEM_TEXT_SIZE),
     BILLING_LAYOUT(image = UI_KEY_BILLING_BCKG),
     BILLING_TITLE(text = UI_KEY_BILLING_TITLE_TEXT, textSize = UI_KEY_BILLING_TITLE_TEXT_SIZE),
-    BILLING_PROMPT(text = UI_KEY_BILLING_PROMPT_TEXT, textSize = UI_KEY_BILLING_PROMPT_TEXT_SIZE),
+    BILLING_PROMPT(text = UI_KEY_BILLING_RESTORE_TEXT, textSize = UI_KEY_BILLING_RESTORE_TEXT_SIZE),
     BILLING_LINK(text = UI_KEY_BILLING_LINK_TEXT, textSize = UI_KEY_BILLING_LINK_TEXT_SIZE)
     // @formatter:on
 }
@@ -47,8 +47,10 @@ const val UI_KEY_BILLING_ITEM_LABEL_BCKG = "key_billing_item_label_img"
 const val UI_KEY_BILLING_BCKG = "key_billing_bckg"
 const val UI_KEY_BILLING_TITLE_TEXT = "key_billing_title_text"
 const val UI_KEY_BILLING_TITLE_TEXT_SIZE = "key_billing_title_text_size"
-const val UI_KEY_BILLING_PROMPT_TEXT = "key_billing_prompt_text"
-const val UI_KEY_BILLING_PROMPT_TEXT_SIZE = "key_billing_prompt_text_size"
+const val UI_KEY_BILLING_RESTORE_TEXT = "key_billing_prompt_text"
+const val UI_KEY_BILLING_RESTORE_TEXT_SIZE = "key_billing_prompt_text_size"
+const val UI_KEY_BILLING_RESTORE_ACTION = "key_billing_prompt_text"
+const val UI_KEY_BILLING_RESTORE_ACTION_SIZE = "key_billing_prompt_text_size"
 const val UI_KEY_BILLING_LINK_TEXT = "key_billing_link_text"
 const val UI_KEY_BILLING_LINK_TEXT_SIZE = "key_billing_link_text_size"
 // endregion
