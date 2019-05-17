@@ -5,9 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.applicaster.cam.R
+import com.applicaster.cam.config.ui.UIKey
+import com.applicaster.cam.config.ui.UIMapper
 import com.applicaster.cam.ui.billing.adapter.PurchaseItem
 import com.applicaster.cam.ui.billing.adapter.IBillingAdapter
 import com.applicaster.cam.ui.billing.adapter.PurchaseInteractionListener
+import kotlinx.android.synthetic.main.billing_item.view.*
 
 class RecyclerBillingAdapter(
     private val purchaseListener: PurchaseInteractionListener
@@ -26,11 +29,18 @@ class RecyclerBillingAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is BillingItemViewHolder) {
             val billingItem = purchaseItemsList[holder.adapterPosition]
-            holder.tvTitle.text = billingItem.productTitle
-            holder.tvDetails.text = billingItem.productDescription
-            holder.btnSubscribe.text = billingItem.productPrice
+            customize(holder.itemView)
 
             setItemListener(billingItem, holder.btnSubscribe)
+        }
+    }
+
+    override fun customize(itemView: View) {
+        UIMapper.apply {
+            map(itemView.tv_billing_item_title, UIKey.BILLING_ITEM_TITLE)
+            map(itemView.tv_billing_item_details, UIKey.BILLING_ITEM_DETAILS)
+            map(itemView.tv_billing_item_redeem, UIKey.BILLING_ITEM_REDEEM)
+            map(itemView.btn_billing_item_subscribe, UIKey.BILLING_ITEM_SUBS_BUTTON)
         }
     }
 

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.applicaster.cam.ContentAccessManager
 import com.applicaster.camsample.mock.MockCamContract
+import com.applicaster.camsample.mock.MockPluginConfiguration
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -17,5 +18,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun startCamFlow() {
         ContentAccessManager.onProcessStarted(MockCamContract(), this)
+        val config = MockPluginConfiguration.getPluginConfig(this)
     }
 }

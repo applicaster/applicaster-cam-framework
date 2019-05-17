@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.applicaster.cam.R
+import com.applicaster.cam.config.ui.UIKey
+import com.applicaster.cam.config.ui.UIMapper
 import com.applicaster.cam.ui.CamNavigationRouter
 import com.applicaster.cam.ui.base.view.BaseFragment
 import com.applicaster.cam.ui.base.view.ContainerType
@@ -48,6 +50,7 @@ class BillingFragment : BaseFragment(), IBillingView {
     }
 
     override fun initViewComponents(containerType: ContainerType) {
+        // init toolbar here
         when (containerType) {
             ContainerType.PHONE -> {
                 recyclerBillingAdapter = RecyclerBillingAdapter(purchaseListener)
@@ -65,6 +68,15 @@ class BillingFragment : BaseFragment(), IBillingView {
                     this.adapter = pagerBillingAdapter
                 }
             }
+        }
+    }
+
+    override fun customize() {
+        UIMapper.apply {
+            map(layout_billing, UIKey.BILLING_LAYOUT)
+            map(tv_billing_title_text, UIKey.BILLING_TITLE)
+//            map(tv_billing_prompt_text, UIKey.BILLING_PROMPT)
+//            map(tv_billing_link_text, UIKey.BILLING_LINK)
         }
     }
 

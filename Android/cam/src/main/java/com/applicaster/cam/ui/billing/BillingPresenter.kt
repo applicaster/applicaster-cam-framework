@@ -90,15 +90,15 @@ class BillingPresenter(
     private fun fetchSkuDetailsByType(offers: List<Offer>) {
         offers.apply {
             //filter offers by SkuType.SUBS and map result to list of products IDs
-            val subs: List<String> = filter { offer ->
+            val subs: List<String> = filter { offer: Offer ->
                 offer.productType == ProductType.SUBS
-            }.map { offer -> offer.productId }
+            }.map { offer: Offer -> offer.productId }
             GoogleBillingHelper.loadSkuDetails(BillingClient.SkuType.SUBS, subs)
 
             //filter offers by SkuType.INAPP and map result to list of products IDs
-            val inapps: List<String> = filter { offer ->
+            val inapps: List<String> = filter { offer: Offer ->
                 offer.productType == ProductType.INAPP
-            }.map { offer -> offer.productId }
+            }.map { offer: Offer -> offer.productId }
             GoogleBillingHelper.loadSkuDetails(BillingClient.SkuType.INAPP, inapps)
         }
     }

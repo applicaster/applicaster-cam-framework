@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.applicaster.cam.R
+import com.applicaster.cam.config.ui.UIKey
+import com.applicaster.cam.config.ui.UIMapper
 import com.applicaster.cam.ui.billing.adapter.PurchaseItem
 import com.applicaster.cam.ui.billing.adapter.IBillingAdapter
 import com.applicaster.cam.ui.billing.adapter.PurchaseInteractionListener
@@ -23,6 +25,7 @@ class PagerBillingAdapter(
         val itemView = LayoutInflater.from(container.context).inflate(R.layout.billing_item, container, false)
         container.addView(itemView)
         bindView(purchaseItemsList[position], itemView)
+        customize(itemView)
         return itemView
     }
 
@@ -36,6 +39,15 @@ class PagerBillingAdapter(
         view.btn_billing_item_subscribe.text = purchaseItem.productPrice
 
         setItemListener(purchaseItem, view.btn_billing_item_subscribe)
+    }
+
+    override fun customize(itemView: View) {
+        UIMapper.apply {
+            map(itemView.tv_billing_item_title, UIKey.BILLING_ITEM_TITLE)
+            map(itemView.tv_billing_item_details, UIKey.BILLING_ITEM_DETAILS)
+            map(itemView.tv_billing_item_redeem, UIKey.BILLING_ITEM_REDEEM)
+            map(itemView.btn_billing_item_subscribe, UIKey.BILLING_ITEM_SUBS_BUTTON)
+        }
     }
 
     override fun addPurchaseItems(items: List<PurchaseItem>) {
