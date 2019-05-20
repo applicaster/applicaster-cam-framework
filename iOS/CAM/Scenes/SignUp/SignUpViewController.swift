@@ -35,11 +35,11 @@ class SignUpViewController: UIViewController {
     @IBOutlet var loginButton: UIButton!
     
     @IBOutlet var authFieldsTableHeightConstraint: NSLayoutConstraint!
-    @IBOutlet var socialNetworksContainerTopSpaceConstraint: NSLayoutConstraint!
+    @IBOutlet var socialNetworksContainerTopConstraint: NSLayoutConstraint!
     @IBOutlet var inputContainerYConstraint: NSLayoutConstraint!
     @IBOutlet var inputContainerHeightConstraint: NSLayoutConstraint!
     
-    var configDictionary: Dictionary<String, Any>? {
+    var configDictionary: [String: Any]? {
         return presenter?.camDelegate?.getPluginConfig()
     }
     var presenter: SignUpPresenter?
@@ -67,7 +67,7 @@ class SignUpViewController: UIViewController {
         return height
     }
     
-     //MARK: - Flow & UI Setup
+     // MARK: - Flow & UI Setup
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -98,7 +98,7 @@ class SignUpViewController: UIViewController {
         let inputContainerMaxY = inputContainerMinY + inputContainerHeight
         if !socialNetworksContainer.isHidden {
             let restoreContainerHeight = restoreContainer.isHidden ? 0 : restoreContainer.frame.height
-            socialNetworksContainerTopSpaceConstraint.constant = (loginContainer.frame.minY - inputContainerMaxY + restoreContainerHeight - 100) / 2
+            socialNetworksContainerTopConstraint.constant = (loginContainer.frame.minY - inputContainerMaxY + restoreContainerHeight - 100) / 2
         } else {
             if restoreContainer.isHidden {
                 self.inputContainerYConstraint.constant = 0
@@ -112,13 +112,13 @@ class SignUpViewController: UIViewController {
                                             (closeButton, .closeButton), (logoImageView, .headerImageView),
                                             (titleLabel, .signUpTitleLabel), (signUpButton, .signUpButton),
                                             (alternateLabel, .separatorLabel), (socialNetworksLabel, .networksAuthLabel),
-                                            (loginContainer, .bottomBannerView),(loginButton, .signUpAlternativeActionButton)]
+                                            (loginContainer, .bottomBannerView), (loginButton, .signUpAlternativeActionButton)]
         array.forEach {
             UIConfigurator.configureView(type: $0.1, view: $0.0, dict: configDictionary)
         }
     }
     
-    //MARK: - Keyboard
+    // MARK: - Keyboard
     
     @IBAction func hideKeyboard() {
         view.endEditing(true)
@@ -152,8 +152,8 @@ class SignUpViewController: UIViewController {
     }
 }
 
+// MARK: - Table Delegate
 extension SignUpViewController: UITableViewDelegate, UITableViewDataSource {
-    // MARK: - Table Delegate
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return authFields.count
@@ -197,7 +197,7 @@ extension SignUpViewController: SignUpViewProtocol {
     }
     
     func showError(description: String?) {
-        let alert = UIAlertController(title: "Error", message: description, preferredStyle: UIAlertController.Style.alert)
+        let alert = UIAlertController(title: "Error", message: description, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }

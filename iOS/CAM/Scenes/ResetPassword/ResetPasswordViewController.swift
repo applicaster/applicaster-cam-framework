@@ -25,7 +25,7 @@ class ResetPasswordViewController: UIViewController {
     
     var presenter: ResetPasswordPresenter?
     
-    //MARK: - Flow & UI Setup
+    // MARK: - Flow & UI Setup
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +43,7 @@ class ResetPasswordViewController: UIViewController {
         let array: [(UIView, UIElement)] = [(backgroundImageView, .backgroungImageView), (backButton, .backButton),
                                             (closeButton, .closeButton), (logoImageView, .headerImageView),
                                             (titleLabel, .resetPasswordTitleLabel), (infoLabel, .resetPasswordInfoLabel),
-                                            (emailTextField, .resetPasswordTextField),(resetButton, .resetPasswordButton)]
+                                            (emailTextField, .resetPasswordTextField), (resetButton, .resetPasswordButton)]
         array.forEach {
             UIConfigurator.configureView(type: $0.1, view: $0.0, dict: configDictionary)
         }
@@ -54,7 +54,7 @@ class ResetPasswordViewController: UIViewController {
         self.view.layoutIfNeeded()
     }
     
-    //MARK: - Keyboard
+    // MARK: - Keyboard
     
     @IBAction func hideKeyboard() {
         view.endEditing(true)
@@ -84,9 +84,8 @@ class ResetPasswordViewController: UIViewController {
     }
 }
 
+// MARK: - ResetPasswordViewProtocol
 extension ResetPasswordViewController: ResetPasswordViewProtocol {
-    
-    // MARK: - ResetPasswordViewProtocol
     
     func showLoadingScreen(_ show: Bool) {
         if show {
@@ -97,16 +96,16 @@ extension ResetPasswordViewController: ResetPasswordViewProtocol {
     }
     
     func showError(description: String?) {
-        let alert = UIAlertController(title: "Error", message: description, preferredStyle: UIAlertController.Style.alert)
+        let alert = UIAlertController(title: "Error", message: description, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
     
     func showConfirmationScreenIfNeeded() {
         let dictionary = presenter?.camDelegate?.getPluginConfig()
-        if let _ = dictionary?[CAMKeys.password_alert_title_text.rawValue] as? String,
-           let _ = dictionary?[CAMKeys.password_alert_info_text.rawValue] as? String,
-           let _ = dictionary?[CAMKeys.password_alert_button_text.rawValue] as? String {
+        if dictionary?[CAMKeys.password_alert_title_text.rawValue] != nil ||
+           dictionary?[CAMKeys.password_alert_info_text.rawValue] != nil ||
+           dictionary?[CAMKeys.password_alert_button_text.rawValue] != nil {
             let confirmationPopover = ConfirmationPopover.nibInstance()
             confirmationPopover.frame = self.view.frame
             confirmationPopover.buttonPressedAction = { [weak self] in
@@ -119,4 +118,3 @@ extension ResetPasswordViewController: ResetPasswordViewProtocol {
         }
     }
 }
-

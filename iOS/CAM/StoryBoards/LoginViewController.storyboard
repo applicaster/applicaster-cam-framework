@@ -303,7 +303,7 @@
                         <outlet property="signUpButton" destination="szx-wQ-fAQ" id="c6F-Xb-d8r"/>
                         <outlet property="signUpContainer" destination="uuM-0v-2FY" id="BMm-ZP-253"/>
                         <outlet property="socialNetworksContainer" destination="rPw-cz-xFd" id="ack-an-19a"/>
-                        <outlet property="socialNetworksContainerTopSpaceConstraint" destination="Qdh-Hz-xjw" id="E93-xJ-F7m"/>
+                        <outlet property="socialNetworksContainerTopConstraint" destination="Qdh-Hz-xjw" id="E93-xJ-F7m"/>
                         <outlet property="socialNetworksLabel" destination="2hZ-yk-KYh" id="127-ig-Tnk"/>
                         <outlet property="titleLabel" destination="yqR-eQ-1AS" id="FQ8-BA-uNY"/>
                     </connections>

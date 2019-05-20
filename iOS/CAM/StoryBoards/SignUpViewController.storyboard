@@ -285,7 +285,7 @@
                         <outlet property="restoreInfoLabel" destination="Wse-rp-mih" id="Fe6-1R-IVD"/>
                         <outlet property="signUpButton" destination="Y9P-Bm-Hsb" id="xxm-kX-KsG"/>
                         <outlet property="socialNetworksContainer" destination="fUH-ug-4EB" id="CAf-fw-1c7"/>
-                        <outlet property="socialNetworksContainerTopSpaceConstraint" destination="Vd7-nJ-KRM" id="MVH-AS-pMo"/>
+                        <outlet property="socialNetworksContainerTopConstraint" destination="Vd7-nJ-KRM" id="MVH-AS-pMo"/>
                         <outlet property="socialNetworksLabel" destination="ure-l1-hnT" id="E3Y-FG-yCD"/>
                         <outlet property="titleLabel" destination="5Ge-wn-yW9" id="2zY-xS-yvY"/>
                     </connections>

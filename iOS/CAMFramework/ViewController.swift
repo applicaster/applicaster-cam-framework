@@ -10,6 +10,8 @@ import UIKit
 import StoreKit
 import CAM
 
+// swiftlint:disable all
+
 class ViewController: UIViewController, CAMDelegate {
     func resetPassword(email: String, completion: @escaping (CAMResult) -> Void) {
         completion(.success)
@@ -38,7 +40,6 @@ class ViewController: UIViewController, CAMDelegate {
         }
         return Dictionary<String, Any>()
     }
-    
 
     @IBAction func start(_ sender: Any) {
         ContentAccessManager.shared.startFlow(rootViewController: self, camDelegate: self, completion: { (r) in
@@ -81,7 +82,6 @@ class ViewController: UIViewController, CAMDelegate {
     func isEntitlementsValid() -> Bool {
         return false
     }
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -92,6 +92,4 @@ class ViewController: UIViewController, CAMDelegate {
         super.viewDidAppear(animated)
     }
 
-
 }
-

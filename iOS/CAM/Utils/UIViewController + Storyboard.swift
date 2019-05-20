@@ -7,6 +7,8 @@
 
 import UIKit
 
+// swiftlint:disable all
+
 public extension UIViewController {
     class func instantiateVC() -> Self {
         return initFromStoryboard()

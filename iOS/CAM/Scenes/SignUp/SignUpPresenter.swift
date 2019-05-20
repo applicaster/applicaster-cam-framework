@@ -21,8 +21,10 @@ class SignUpPresenter {
     var isRoot: Bool = false
     
     func viewDidLoad() {
-        if let json = camDelegate?.getPluginConfig()[CAMKeys.auth_fields.rawValue] as? String, let data = json.data(using: .utf8) {
-            if let jsonAuthFields = try? JSONDecoder().decode(AuthFields.self, from: data), let signUpFields = jsonAuthFields.signup {
+        if let json = camDelegate?.getPluginConfig()[CAMKeys.auth_fields.rawValue] as? String,
+           let data = json.data(using: .utf8) {
+            if let jsonAuthFields = try? JSONDecoder().decode(AuthFields.self, from: data),
+                let signUpFields = jsonAuthFields.signup {
                 view?.updateTable(fields: signUpFields)
             }
         }

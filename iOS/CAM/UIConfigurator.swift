@@ -9,7 +9,7 @@ import UIKit
 
 extension UIButton {
     func configureWith(text: String? = nil, color: UIColor? = nil, fontName: String? = nil, fontSize: CGFloat = 12,
-                          cornerRadius: CGFloat = 0, bgImageName: String? = nil, state: UIControl.State = .normal) {
+                       cornerRadius: CGFloat = 0, bgImageName: String? = nil, state: UIControl.State = .normal) {
         self.layer.cornerRadius = cornerRadius
         self.setTitle(text, for: state)
         self.setTitleColor(color, for: state)
@@ -29,7 +29,7 @@ extension UIView {
 }
 
 extension UIImageView {
-    func configureWith(bgImageName : String? = nil) {
+    func configureWith(bgImageName: String? = nil) {
         if let imageName = bgImageName, let image = UIImage(named: imageName) {
             self.image = image
         }
@@ -47,7 +47,8 @@ extension UILabel {
 }
 
 extension UITextField {
-    func configureWith(text: String? = nil, color: UIColor? = .black, fontName: String? = nil, fontSize: CGFloat = 12, placeholder: String? = nil, cornerRadius: CGFloat = 0, inputType: AuthFieldInputType = .text) {
+    func configureWith(text: String? = nil, color: UIColor? = .black, fontName: String? = nil, fontSize: CGFloat = 12,
+                       placeholder: String? = nil, cornerRadius: CGFloat = 0, inputType: AuthFieldInputType = .text) {
         self.text = text
         self.textColor = color
         if let fontName = fontName, let font = UIFont(name: fontName, size: fontSize) {
@@ -68,6 +69,8 @@ extension UITextField {
         
     }
 }
+
+// swiftlint:disable all
 
 class UIConfigurator {
     
@@ -158,7 +161,7 @@ class UIConfigurator {
         case .passwordAlert:
             if let alertView = view as? ConfirmationPopover {
                 alertView.titleLabel.configureWith(text: dict?["password_alert_title_text"] as? String)
-                alertView.DescriptionLabel.configureWith(text: dict?["password_alert_info_text"] as? String)
+                alertView.descriptionLabel.configureWith(text: dict?["password_alert_info_text"] as? String)
                 alertView.actionButton.configureWith(text: dict?["password_alert_button_text"] as? String,
                                           bgImageName: dict?["password_alert_button_image"] as? String,
                                           state: .normal)

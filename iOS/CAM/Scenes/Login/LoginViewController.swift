@@ -35,11 +35,11 @@ class LoginViewController: UIViewController {
     @IBOutlet var signUpButton: UIButton!
     
     @IBOutlet var inputContainerYConstraint: NSLayoutConstraint!
-    @IBOutlet var socialNetworksContainerTopSpaceConstraint: NSLayoutConstraint!
+    @IBOutlet var socialNetworksContainerTopConstraint: NSLayoutConstraint!
     @IBOutlet var inputContainerHeightConstraint: NSLayoutConstraint!
     @IBOutlet var authFieldsTableHeightConstraint: NSLayoutConstraint!
 
-    var configDictionary: Dictionary<String, Any>? {
+    var configDictionary: [String: Any]? {
         return presenter?.camDelegate?.getPluginConfig()
     }
     var presenter: LoginPresenter?
@@ -67,7 +67,7 @@ class LoginViewController: UIViewController {
         return height
     }
     
-    //MARK: - Flow & UI Setup
+    // MARK: - Flow & UI Setup
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -110,7 +110,7 @@ class LoginViewController: UIViewController {
         let inputContainerMaxY = inputContainerMinY + inputContainerHeight
         if !socialNetworksContainer.isHidden {
             let restoreContainerHeight = restoreContainer.isHidden ? 0 : restoreContainer.frame.height
-            socialNetworksContainerTopSpaceConstraint.constant = (signUpContainer.frame.minY - inputContainerMaxY + restoreContainerHeight - 100) / 2
+            socialNetworksContainerTopConstraint.constant = (signUpContainer.frame.minY - inputContainerMaxY + restoreContainerHeight - 100) / 2
         } else {
             if restoreContainer.isHidden {
                 self.inputContainerYConstraint.constant = 0
@@ -119,13 +119,13 @@ class LoginViewController: UIViewController {
         self.view.layoutIfNeeded()
     }
     
-    //MARK: - Keyboard
+    // MARK: - Keyboard
     
     @IBAction func hideKeyboard() {
         view.endEditing(true)
     }
     
-    //MARK: - Actions
+    // MARK: - Actions
     
     @IBAction func close(_ sender: UIButton) {
         presenter?.close()
@@ -157,8 +157,8 @@ class LoginViewController: UIViewController {
     }
 }
 
+// MARK: - Table Delegate
 extension LoginViewController: UITableViewDelegate, UITableViewDataSource {
-    // MARK: - Table Delegate
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return authFields.count
@@ -202,7 +202,7 @@ extension LoginViewController: LoginViewProtocol {
     }
     
     func showError(description: String?) {
-        let alert = UIAlertController(title: "Error", message: description, preferredStyle: UIAlertController.Style.alert)
+        let alert = UIAlertController(title: "Error", message: description, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }

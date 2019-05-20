@@ -20,7 +20,7 @@ public enum CAMResult {
 }
 
 public protocol CAMDelegate: AnyObject {
-    func getPluginConfig() -> Dictionary<String, Any>
+    func getPluginConfig() -> [String: Any]
     func isUserLogged() -> Bool
     func isEntitlementsValid() -> Bool
     func login(authData: [(key: String, value: String?)], completion: @escaping (CAMResult) -> Void)
