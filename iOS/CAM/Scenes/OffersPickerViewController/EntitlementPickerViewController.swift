@@ -66,6 +66,14 @@ class EntitlementPickerViewController: UIViewController {
         self.offerViewModels = offers
         self.entitlementCollectionView.reloadData()
     }
+    
+    public func showLoadingIndicator() {
+        entitlementsLoadingIndicator.startAnimating()
+    }
+    
+    public func hideLoadingIndicator() {
+        entitlementsLoadingIndicator.stopAnimating()
+    }
 }
 
 extension EntitlementPickerViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout  {

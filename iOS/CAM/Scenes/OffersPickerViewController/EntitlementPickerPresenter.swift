@@ -20,6 +20,7 @@ class EntitlementPickerPresenter {
     func viewDidLoad() {
         self.availableProducts = camDelegate?.availableProducts() ?? []
         self.showOffers()
+        self.view?.hideLoadingIndicator()
     }
     
     func backToPreviousScreen() {
