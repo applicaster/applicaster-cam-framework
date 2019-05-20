@@ -69,13 +69,9 @@ class LoginViewController: UIViewController {
     
     //MARK: - Flow & UI Setup
     
-    override func loadView() {
-        super.loadView()
-        setupUI()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
         presenter?.viewDidLoad()
     }
 
@@ -88,12 +84,9 @@ class LoginViewController: UIViewController {
     
     func setupUI() {
         self.navigationController?.isNavigationBarHidden = true
-        restoreContainer.isHidden = true
+        restoreContainer.isHidden = false
         socialNetworksContainer.isHidden = false
         authFieldsTable.backgroundView = UIView()
-        authFieldsTable.separatorStyle = .none
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
-        view.addGestureRecognizer(tapGesture)
         configureElements()
     }
     
@@ -128,7 +121,7 @@ class LoginViewController: UIViewController {
     
     //MARK: - Keyboard
     
-    @objc func hideKeyboard() {
+    @IBAction func hideKeyboard() {
         view.endEditing(true)
     }
     

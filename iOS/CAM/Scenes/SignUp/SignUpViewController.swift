@@ -68,14 +68,10 @@ class SignUpViewController: UIViewController {
     }
     
      //MARK: - Flow & UI Setup
-
-    override func loadView() {
-        super.loadView()
-        setupUI()
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
         presenter?.viewDidLoad()
     }
 
@@ -91,9 +87,6 @@ class SignUpViewController: UIViewController {
         restoreContainer.isHidden = true
         socialNetworksContainer.isHidden = false
         authFieldsTable.backgroundView = UIView()
-        authFieldsTable.separatorStyle = .none
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
-        view.addGestureRecognizer(tapGesture)
         configureElements()
     }
     
@@ -127,7 +120,7 @@ class SignUpViewController: UIViewController {
     
     //MARK: - Keyboard
     
-    @objc func hideKeyboard() {
+    @IBAction func hideKeyboard() {
         view.endEditing(true)
     }
     

@@ -20,6 +20,7 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TJT-92-e4a" userLabel="backgroundImageView">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <gestureRecognizers/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7ky-A3-QmL" userLabel="closeButton">
                                 <rect key="frame" x="337" y="20" width="38" height="44"/>
@@ -61,7 +62,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9L2-y3-bnH" userLabel="inputContainer">
                                 <rect key="frame" x="62.5" y="174" width="250" height="179"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7jO-yv-8NZ" userLabel="authFieldsTable">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7jO-yv-8NZ" userLabel="authFieldsTable">
                                         <rect key="frame" x="0.0" y="0.0" width="250" height="120"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -72,7 +73,7 @@
                                                 <rect key="frame" x="0.0" y="28" width="250" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5rA-tP-ETl" id="fYW-Vz-DEN">
-                                                    <rect key="frame" x="0.0" y="0.0" width="250" height="43.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="250" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="E6q-BO-zog">
@@ -233,6 +234,7 @@
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.23921568630000001" green="0.28235294119999998" blue="0.3294117647" alpha="1" colorSpace="calibratedRGB"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="9L2-y3-bnH" firstAttribute="centerX" secondItem="8nE-V8-aaX" secondAttribute="centerX" id="2Ms-Sw-eDI"/>
                             <constraint firstItem="5RK-MM-w7P" firstAttribute="top" secondItem="50m-OE-UOc" secondAttribute="top" id="5I0-kp-ydC"/>
@@ -262,6 +264,9 @@
                             <constraint firstItem="44O-Vj-bh7" firstAttribute="centerX" secondItem="8nE-V8-aaX" secondAttribute="centerX" id="zpd-av-9Fg"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="50m-OE-UOc"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="QEf-Bn-Fj2" appends="YES" id="yah-Yf-uCL"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="alternateLabel" destination="UOj-KQ-353" id="elF-nk-exw"/>
@@ -286,6 +291,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="prH-GM-0C2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="QEf-Bn-Fj2">
+                    <connections>
+                        <action selector="hideKeyboard" destination="e86-j8-Zrq" id="Qpp-cG-gJ7"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="331.875" y="-142.6056338028169"/>
         </scene>

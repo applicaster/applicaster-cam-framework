@@ -27,25 +27,15 @@ class ResetPasswordViewController: UIViewController {
     
     //MARK: - Flow & UI Setup
     
-    override func loadView() {
-        super.loadView()
-        setupUI()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureElements()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         loadingPopover.frame = self.view.bounds
         setupConstraints()
-    }
-
-    func setupUI() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
-        view.addGestureRecognizer(tapGesture)
-        configureElements()
     }
     
     func configureElements() {
@@ -66,7 +56,7 @@ class ResetPasswordViewController: UIViewController {
     
     //MARK: - Keyboard
     
-    @objc func hideKeyboard() {
+    @IBAction func hideKeyboard() {
         view.endEditing(true)
     }
     
