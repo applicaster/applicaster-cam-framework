@@ -20,19 +20,12 @@ public enum CAMResult {
 }
 
 public protocol CAMDelegate: AnyObject {
-    func login(authData: Dictionary<String, Any>, completion: (CAMResult) -> Void)
-    func signUp(authData: Dictionary<String, Any>, completion: (CAMResult) -> Void)
-    func resetPassword(completion: (CAMResult) -> Void)
+    func getPluginConfig() -> Dictionary<String, Any>
+    func isUserLogged() -> Bool
+    func isEntitlementsValid() -> Bool
+    func login(authData: [(key: String, value: String?)], completion: @escaping (CAMResult) -> Void)
+    func signUp(authData: [(key: String, value: String?)], completion: @escaping (CAMResult) -> Void)
+    func resetPassword(email: String, completion: @escaping (CAMResult) -> Void)
     func itemPurchased(item: SKProduct)
     func itemsRestored(items: [SKProduct])
-}
-
-public protocol CAMConfigProtocol: AnyObject {
-    func isTriggerOnAppLaunch() -> Bool
-    func isUserLogged() -> Bool
-    func getDefaultAuthScreen() -> CAMDefaultAuthScreen
-    func isConfirmationScreenRequired() -> Bool
-    func isPasswordResetRequired() -> Bool
-    func getEntitlementsData(completion: ([CAMEntitlementItem]) -> Void)
-    func isEntitlementsValid() -> Bool
 }

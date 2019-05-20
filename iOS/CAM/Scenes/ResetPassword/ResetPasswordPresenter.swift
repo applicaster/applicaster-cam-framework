@@ -8,7 +8,14 @@
 
 import Foundation
 
+protocol ResetPasswordViewProtocol: AnyObject {
+    func showError(description: String?)
+    func showLoadingScreen(_ show: Bool)
+    func showConfirmationScreenIfNeeded()
+}
+
 class ResetPasswordPresenter {
+    weak var view: ResetPasswordViewProtocol?
     weak var coordinatorDelegate: AuthorizationCoordinatorProtocol?
     weak var camDelegate: CAMDelegate?
     
@@ -20,8 +27,17 @@ class ResetPasswordPresenter {
         coordinatorDelegate?.popCurrentScreen()
     }
     
-    func resetPassword() {
-        
+    func resetPassword(email: String) {
+        self.view?.showLoadingScreen(true)
+        camDelegate?.resetPassword(email: email, completion: { (result) in
+            switch result {
+            case .success:
+                self.view?.showConfirmationScreenIfNeeded()
+            case .failure(let description):
+                self.view?.showLoadingScreen(false)
+                self.view?.showError(description: description)
+            }
+        })
     }
     
     func close() {

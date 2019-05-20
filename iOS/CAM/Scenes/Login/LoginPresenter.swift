@@ -8,10 +8,25 @@
 
 import Foundation
 
+protocol LoginViewProtocol: AnyObject {
+    func showError(description: String?)
+    func showLoadingScreen(_ show: Bool)
+    func updateTable(fields: [AuthField])
+}
+
 class LoginPresenter {
+    weak var view: LoginViewProtocol?
     weak var coordinatorDelegate: AuthorizationCoordinatorProtocol?
     weak var camDelegate: CAMDelegate?
     var isRoot: Bool = false
+    
+    func viewDidLoad() {
+        if let json = camDelegate?.getPluginConfig()[CAMKeys.auth_fields.rawValue] as? String, let data = json.data(using: .utf8) {
+            if let jsonAuthFields = try? JSONDecoder().decode(AuthFields.self, from: data), let loginFields = jsonAuthFields.login {
+                view?.updateTable(fields: loginFields)
+            }
+        }
+    }
     
     func showResetPasswordScreen() {
         coordinatorDelegate?.showResetPasswordScreen()
@@ -34,5 +49,18 @@ class LoginPresenter {
     
     func close() {
         coordinatorDelegate?.finishAuthorizationFlow(isUserLogged: false)
+    }
+    
+    func login(data: [(key: String, value: String?)]) {
+        view?.showLoadingScreen(true)
+        camDelegate?.login(authData: data, completion: { (result) in
+            switch result {
+            case .success:
+                self.coordinatorDelegate?.finishAuthorizationFlow(isUserLogged: true)
+            case .failure(let description):
+                self.view?.showLoadingScreen(false)
+                self.view?.showError(description: description)
+            }
+        })
     }
 }

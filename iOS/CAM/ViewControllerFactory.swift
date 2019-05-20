@@ -14,10 +14,10 @@ class ViewControllerFactory {
         let presenter = LoginPresenter()
         loginVC.presenter = presenter
         
+        presenter.view = loginVC
         presenter.coordinatorDelegate = authCoordinator
         presenter.camDelegate = pluginDataProvider?.getCamDelegate()
         presenter.isRoot = isRoot
-        loginVC.configProvider = pluginDataProvider?.getConfigProvider() //setup ui provider
         return loginVC
     }
     
@@ -26,21 +26,22 @@ class ViewControllerFactory {
         let presenter = SignUpPresenter()
         signUpVC.presenter = presenter
         
+        presenter.view = signUpVC
         presenter.coordinatorDelegate = authCoordinator
         presenter.camDelegate = pluginDataProvider?.getCamDelegate()
         presenter.isRoot = isRoot
-        signUpVC.configProvider = pluginDataProvider?.getConfigProvider() //setup ui provider
         return signUpVC
     }
     
     static func createResetPasswordScreen(pluginDataProvider: PluginDataProviderProtocol?, authCoordinator: AuthorizationCoordinatorProtocol) -> ResetPasswordViewController {
-        let restoreVC = ResetPasswordViewController.instantiateVC()
+        let resetPasswordVC = ResetPasswordViewController.instantiateVC()
         let presenter = ResetPasswordPresenter()
-        restoreVC.presenter = presenter
+        resetPasswordVC.presenter = presenter
         
+        presenter.view = resetPasswordVC
         presenter.coordinatorDelegate = authCoordinator
         presenter.camDelegate = pluginDataProvider?.getCamDelegate()
-        return restoreVC
+        return resetPasswordVC
     }
     
     static func createEntitlementPicker(pluginDataProvider: PluginDataProviderProtocol?, billingCoordinator: BillingCoordinatorProtocol) -> EntitlementPickerViewController {

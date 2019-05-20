@@ -8,10 +8,25 @@
 
 import Foundation
 
+protocol SignUpViewProtocol: AnyObject {
+    func showError(description: String?)
+    func showLoadingScreen(_ show: Bool)
+    func updateTable(fields: [AuthField])
+}
+
 class SignUpPresenter {
+    weak var view: SignUpViewProtocol?
     weak var coordinatorDelegate: AuthorizationCoordinatorProtocol?
     weak var camDelegate: CAMDelegate?
     var isRoot: Bool = false
+    
+    func viewDidLoad() {
+        if let json = camDelegate?.getPluginConfig()[CAMKeys.auth_fields.rawValue] as? String, let data = json.data(using: .utf8) {
+            if let jsonAuthFields = try? JSONDecoder().decode(AuthFields.self, from: data), let signUpFields = jsonAuthFields.signup {
+                view?.updateTable(fields: signUpFields)
+            }
+        }
+    }
     
     func backToPreviousScreen() {
         coordinatorDelegate?.popCurrentScreen()
@@ -30,5 +45,18 @@ class SignUpPresenter {
     
     func close() {
         coordinatorDelegate?.finishAuthorizationFlow(isUserLogged: false)
+    }
+    
+    func signUp(data: [(key: String, value: String?)]) {
+        view?.showLoadingScreen(true)
+        camDelegate?.signUp(authData: data, completion: { (result) in
+            switch result {
+            case .success:
+                self.coordinatorDelegate?.finishAuthorizationFlow(isUserLogged: true)
+            case .failure(let description):
+                self.view?.showLoadingScreen(false)
+                self.view?.showError(description: description)
+            }
+        })
     }
 }
