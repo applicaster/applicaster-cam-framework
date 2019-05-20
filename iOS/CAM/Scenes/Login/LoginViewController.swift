@@ -184,8 +184,8 @@ extension LoginViewController: UITableViewDelegate, UITableViewDataSource {
         }
         UIConfigurator.configureAuthField(view: cell.textField, data: authFields[indexPath.row], dict: configDictionary)
         cell.backgroundColor = .clear
-        cell.textChanged = { text in
-            self.authFields[indexPath.row].text = text
+        cell.textChanged = { [weak self] text in
+            self?.authFields[indexPath.row].text = text
         }
         return cell
     }
