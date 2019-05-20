@@ -12,7 +12,7 @@ import com.applicaster.cam.params.auth.AuthField
 import com.applicaster.cam.params.auth.AuthFieldConfig
 import com.applicaster.cam.ui.CamNavigationRouter
 import com.applicaster.cam.ui.base.view.BaseFragment
-import kotlinx.android.synthetic.main.fragment_auth.*
+import kotlinx.android.synthetic.main.layout_auth_input.*
 import kotlinx.android.synthetic.main.layout_bottom_bar.*
 import kotlinx.android.synthetic.main.layout_text_with_action.*
 import kotlinx.android.synthetic.main.layout_toolbar_template.*
@@ -69,6 +69,7 @@ abstract class AuthFragment : BaseFragment(), IAuthView {
         container_scrollable_input.layoutParams = container_scrollable_input.layoutParams.apply {
             height = parentMaxHeight
         }
+//        container.invalidate()
     }
 
     abstract fun initPresenter(navigationManager: CamNavigationRouter): IAuthPresenter

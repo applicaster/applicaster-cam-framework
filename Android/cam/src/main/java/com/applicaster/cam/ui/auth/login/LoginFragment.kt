@@ -7,6 +7,7 @@ import com.applicaster.cam.ui.CamNavigationRouter
 import com.applicaster.cam.ui.auth.AuthFragment
 import com.applicaster.cam.ui.auth.IAuthPresenter
 import kotlinx.android.synthetic.main.fragment_auth.*
+import kotlinx.android.synthetic.main.layout_auth_input.*
 
 class LoginFragment : AuthFragment(), ILoginView {
 
