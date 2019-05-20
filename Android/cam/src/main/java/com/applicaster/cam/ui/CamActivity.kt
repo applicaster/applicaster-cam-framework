@@ -1,7 +1,6 @@
 package com.applicaster.cam.ui
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.View
 import com.applicaster.cam.R
 import com.applicaster.cam.ui.base.view.BaseActivity
@@ -13,15 +12,25 @@ class CamActivity : BaseActivity() {
     private lateinit var fragmentsContainer: View
     private lateinit var navigationRouter: CamNavigationRouter
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cam)
 
         when {
             fragments_container_phone != null -> fragmentsContainer = fragments_container_phone
             fragments_container_tablet != null -> fragmentsContainer = fragments_container_tablet
         }
+
+        makeFullscreen(fragmentsContainer)
         navigationRouter = CamNavigationRouter(this)
+        navigationRouter.attachLoginFragment()
+    }
+
+    private fun makeFullscreen(rootLayout: View?) {
+        rootLayout?.apply {
+            fitsSystemWindows = true
+            parent?.requestFitSystemWindows()
+        }
     }
 
     override fun getFragmentContainerType(): ContainerType {

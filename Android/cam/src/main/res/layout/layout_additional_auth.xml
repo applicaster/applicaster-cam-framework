@@ -6,10 +6,7 @@
     android:background="@color/blue">
 
     <View
-        android:layout_width="66dp"
-        android:layout_height="1dp"
-        android:layout_margin="8dp"
-        android:background="@color/white"
+        style="@style/AuthDivider"
         app:layout_constraintBottom_toBottomOf="@+id/tv_add_auth_or"
         app:layout_constraintEnd_toStartOf="@+id/tv_add_auth_or"
         app:layout_constraintTop_toTopOf="@+id/tv_add_auth_or" />
@@ -26,10 +23,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <View
-        android:layout_width="66dp"
-        android:layout_height="1dp"
-        android:layout_margin="8dp"
-        android:background="@color/white"
+        style="@style/AuthDivider"
         app:layout_constraintBottom_toBottomOf="@+id/tv_add_auth_or"
         app:layout_constraintStart_toEndOf="@+id/tv_add_auth_or"
         app:layout_constraintTop_toTopOf="@+id/tv_add_auth_or" />
@@ -38,7 +32,7 @@
         android:id="@+id/tv_add_auth_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/additional_auth_margin"
         android:text="Log In with Social Networks"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -48,8 +42,6 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
         android:background="@color/black"
         android:gravity="center"
         android:orientation="horizontal"
@@ -63,17 +55,6 @@
 
         <ImageView
             style="@style/ImageAdditionalAuth"
-            android:background="@color/white" />
-
-        <ImageView
-            android:layout_width="38dp"
-            android:layout_height="38dp"
-            android:layout_marginStart="7.5dp"
-            android:layout_marginLeft="7.5dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="7.5dp"
-            android:layout_marginRight="7.5dp"
-            android:layout_marginBottom="15dp"
             android:background="@color/white" />
     </LinearLayout>
 

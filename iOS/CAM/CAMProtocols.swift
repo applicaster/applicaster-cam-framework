@@ -19,35 +19,13 @@ public enum CAMResult {
     case failure(description: String?)
 }
 
-public struct Product {
-    public let title: String
-    public let description: String
-    public let price: String
-    public let skProduct: SKProduct
-    
-    public init(title: String, description: String, price: String, skProduct: SKProduct) {
-        self.title = title
-        self.description = description
-        self.price = price
-        self.skProduct = skProduct
-    }
-}
-
 public protocol CAMDelegate: AnyObject {
-    func login(authData: Dictionary<String, Any>, completion: (CAMResult) -> Void)
-    func signUp(authData: Dictionary<String, Any>, completion: (CAMResult) -> Void)
-    func resetPassword(completion: (CAMResult) -> Void)
+    func getPluginConfig() -> Dictionary<String, Any>
+    func isUserLogged() -> Bool
+    func isEntitlementsValid() -> Bool
+    func login(authData: [(key: String, value: String?)], completion: @escaping (CAMResult) -> Void)
+    func signUp(authData: [(key: String, value: String?)], completion: @escaping (CAMResult) -> Void)
+    func resetPassword(email: String, completion: @escaping (CAMResult) -> Void)
     func itemPurchased(item: SKProduct)
     func itemsRestored(items: [SKProduct])
-    func availableProducts() -> [Product]
-}
-
-public protocol CAMConfigProtocol: AnyObject {
-    func isTriggerOnAppLaunch() -> Bool
-    func isUserLogged() -> Bool
-    func getDefaultAuthScreen() -> CAMDefaultAuthScreen
-    func isConfirmationScreenRequired() -> Bool
-    func isPasswordResetRequired() -> Bool
-    func getEntitlementsData(completion: ([CAMEntitlementItem]) -> Void)
-    func isEntitlementsValid() -> Bool
 }

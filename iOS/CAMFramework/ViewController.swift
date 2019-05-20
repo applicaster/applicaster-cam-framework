@@ -10,23 +10,40 @@ import UIKit
 import StoreKit
 import CAM
 
-class ViewController: UIViewController, CAMDelegate, CAMConfigProtocol {
-
-    @IBAction func start(_ sender: Any) {
-        ContentAccessManager.shared.startFlow(rootViewController: self, camDelegate: self, camConfigProtocol: self, completion: { (r) in
-            print(r)
+class ViewController: UIViewController, CAMDelegate {
+    func resetPassword(email: String, completion: @escaping (CAMResult) -> Void) {
+        completion(.success)
+    }
+    
+    func login(authData: [(key: String, value: String?)], completion: @escaping (CAMResult) -> Void) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
+            completion(.success)
         })
     }
-    func login(authData: Dictionary<String, Any>, completion: (CAMResult) -> Void) {
+    
+    func signUp(authData: [(key: String, value: String?)], completion: @escaping (CAMResult) -> Void) {
         
     }
     
-    func signUp(authData: Dictionary<String, Any>, completion: (CAMResult) -> Void) {
-        
+    func getPluginConfig() -> Dictionary<String, Any> {
+        if let path = Bundle.main.path(forResource: "mockJson", ofType: "json") {
+            do {
+                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+                let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
+                let dict = jsonResult as! Dictionary<String, Any>
+                return dict
+            } catch {
+            
+            }
+        }
+        return Dictionary<String, Any>()
     }
     
-    func resetPassword(completion: (CAMResult) -> Void) {
-        
+
+    @IBAction func start(_ sender: Any) {
+        ContentAccessManager.shared.startFlow(rootViewController: self, camDelegate: self, completion: { (r) in
+            print(r)
+        })
     }
     
     func itemPurchased(item: SKProduct) {
@@ -69,7 +86,7 @@ class ViewController: UIViewController, CAMDelegate, CAMConfigProtocol {
         return false
     }
     
-    func getEntitlementsData(completion: ([CAMEntitlementItem]) -> Void) {
+    func getEntitlementsData(completion: @escaping ([CAMEntitlementItem]) -> Void) {
         
     }
     

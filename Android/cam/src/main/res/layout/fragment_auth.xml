@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parent_auth"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -13,19 +13,45 @@
         android:id="@+id/tv_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/container_user_input"
+        android:text="Create an Account"
+        app:layout_constraintBottom_toTopOf="@+id/container_scrollable_input"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/container_toolbar"
-        tools:text="Create an Account" />
+        app:layout_constraintTop_toBottomOf="@id/container_toolbar" />
 
-    <include
-        android:id="@+id/container_user_input"
-        layout="@layout/layout_user_input"
+    <ScrollView
+        android:id="@+id/container_scrollable_input"
         android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_forgot_pwd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:id="@+id/container_linear_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical" />
+    </ScrollView>
+
+    <com.applicaster.util.ui.CustomTextView
+        android:id="@+id/tv_forgot_pwd"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="70dp"
+        android:layout_marginTop="@dimen/auth_text_margin"
+        android:layout_marginBottom="@dimen/auth_text_margin"
+        android:text="Forgot password?"
+        app:layout_constraintBottom_toTopOf="@+id/btn_input_action"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.applicaster.util.ui.CustomButton
+        android:id="@+id/btn_input_action"
+        style="@style/EditTextAuthInput"
+        android:layout_marginTop="@dimen/auth_text_margin"
+        android:layout_marginBottom="@dimen/auth_container_margin_vertical"
+        android:text="SIGN IN"
         app:layout_constraintBottom_toTopOf="@+id/container_bottom_bar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,19 +62,19 @@
         layout="@layout/layout_additional_auth"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/container_sign_in_hint"
+        android:layout_marginTop="@dimen/additional_auth_container_margin"
+        android:layout_marginBottom="@dimen/additional_auth_container_margin"
+        app:layout_constraintBottom_toTopOf="@+id/container_auth_hint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/container_user_input" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_input_action" />
 
     <include
-        android:id="@+id/container_sign_in_hint"
+        android:id="@+id/container_auth_hint"
         layout="@layout/layout_text_with_action"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="18dp"
+        android:layout_marginBottom="@dimen/auth_hint_margin_bottom"
         app:layout_constraintBottom_toTopOf="@id/container_bottom_bar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

@@ -1,8 +1,8 @@
 package com.applicaster.cam
 
-import com.applicaster.cam.params.AuthField
+import com.applicaster.cam.params.auth.AuthField
 
-interface CamContract {
+interface ICamContract {
 
     fun login(authFields: List<AuthField>, callback: LoginCallback)
 
@@ -17,4 +17,10 @@ interface CamContract {
     fun onItemPurchased(/*item*/)
 
     fun onPurchasesRestored(/*items*/)
+
+    fun loadEntitlements(callback: EntitlementsLoadCallback) //get purchase id (and corresponding data)
+
+    fun isUserLogged(): Boolean
+
+    fun getPluginConfig(): Map<String, String>
 }

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:id="@+id/root_layout_billing_item">
+
+    <LinearLayout
+            android:id="@+id/layout_billing_item"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/billing_layout_margin_top_bottom"
+            android:layout_marginBottom="@dimen/billing_layout_margin_top_bottom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
+        <com.applicaster.util.ui.CustomTextView
+                android:id="@+id/tv_billing_item_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/billing_tv_title_text_size"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/billing_title_margin_top"
+                android:text="Monthly Subscription"/>
+
+        <com.applicaster.util.ui.CustomTextView
+                android:id="@+id/tv_billing_item_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/billing_details_margin_left_right"
+                android:layout_marginRight="@dimen/billing_details_margin_left_right"
+                android:layout_marginTop="@dimen/billing_details_margin_top"
+                android:textSize="@dimen/billing_tv_details_text_size"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:text="Subscription details go here and might take up to two lines maximum"/>
+
+        <com.applicaster.util.ui.CustomButton
+                android:id="@+id/btn_billing_item_subscribe"
+                android:layout_width="@dimen/billing_btn_subscribe_width"
+                android:layout_height="@dimen/billing_btn_subscribe_height"
+                android:textSize="@dimen/billing_btn_subscribe_text_size"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/billing_btn_subscribe_margin_top"
+                android:gravity="center_horizontal"
+                android:text="SUBSCRIBE FOR $4.99"/>
+
+        <com.applicaster.util.ui.CustomTextView
+                android:id="@+id/tv_billing_item_redeem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/billing_tv_redeem_text_size"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/billing_tv_redeem_margin_top"
+                android:layout_marginBottom="@dimen/billing_tv_redeem_margin_bottom"
+                android:gravity="center_horizontal"
+                android:text="Redeem Code" tools:visibility="visible"/>
+
+    </LinearLayout>
+
+    <com.applicaster.util.ui.CustomTextView
+            android:id="@+id/tv_billing_item_label"
+            android:layout_width="56dp"
+            android:layout_height="28dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/red"
+            android:maxLines="2"
+            android:text="1 MONTH FREE"
+            android:textSize="9sp"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:gravity="center_horizontal|center_vertical"
+            app:layout_constraintTop_toTopOf="@+id/layout_billing_item"
+            app:layout_constraintBottom_toTopOf="@+id/layout_billing_item"
+            app:layout_constraintEnd_toEndOf="@+id/layout_billing_item"/>
+
+</android.support.constraint.ConstraintLayout>

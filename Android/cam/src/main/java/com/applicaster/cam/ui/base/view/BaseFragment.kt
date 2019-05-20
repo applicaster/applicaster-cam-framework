@@ -63,5 +63,13 @@ abstract class BaseFragment : Fragment(), IBaseView {
         }
     }
 
+    override fun goBack() {
+        activity?.onBackPressed()
+    }
+
+    override fun close() {
+        activity?.finish()
+    }
+
     protected abstract fun setListeners()
 }

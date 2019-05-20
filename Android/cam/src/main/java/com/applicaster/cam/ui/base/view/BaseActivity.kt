@@ -7,6 +7,7 @@ import com.applicaster.cam.ui.base.presenter.IBasePresenter
 
 abstract class BaseActivity : AppCompatActivity(), IBaseView {
     private var basePresenter: IBasePresenter? = null
+
     protected fun setPresenter(presenter: IBasePresenter?) {
         basePresenter = presenter
     }
@@ -33,6 +34,14 @@ abstract class BaseActivity : AppCompatActivity(), IBaseView {
 
     override fun getViewContext(): Context {
         return this
+    }
+
+    override fun goBack() {
+        onBackPressed()
+    }
+
+    override fun close() {
+        finish()
     }
 
     abstract fun getFragmentContainerType(): ContainerType

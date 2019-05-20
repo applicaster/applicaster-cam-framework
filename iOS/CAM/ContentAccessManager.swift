@@ -9,7 +9,6 @@
 import UIKit
 
 protocol PluginDataProviderProtocol: AnyObject {
-    func getConfigProvider() -> CAMConfigProtocol
     func getCamDelegate() -> CAMDelegate
 }
 
@@ -21,7 +20,6 @@ public class ContentAccessManager {
     
     var navigationController = UINavigationController()
     var completion: ((Bool) -> Void)!
-    weak var configProvider: CAMConfigProtocol!
     weak var delegate: CAMDelegate!
     weak var rootViewController: UIViewController!
     var childCoordinator: Coordinator?
@@ -31,12 +29,11 @@ public class ContentAccessManager {
     private init() {
     }
     
-    public func startFlow(rootViewController: UIViewController, camDelegate: CAMDelegate, camConfigProtocol: CAMConfigProtocol, completion: @escaping (Bool) -> Void) {
+    public func startFlow(rootViewController: UIViewController, camDelegate: CAMDelegate, completion: @escaping (Bool) -> Void) {
         self.rootViewController = rootViewController
         self.delegate = camDelegate
-        self.configProvider = camConfigProtocol
         self.completion = completion
-        if configProvider.isUserLogged() {
+        if delegate.isUserLogged() {
             checkUserAccess()
         } else {
             authorize()
@@ -58,7 +55,7 @@ public class ContentAccessManager {
     }
     
     func checkUserAccess() {
-        if self.configProvider.isEntitlementsValid() {
+        if delegate.isEntitlementsValid() {
             finishFlow(true)
         } else {
             if navigationController.presentingViewController == nil {
@@ -87,10 +84,6 @@ public class ContentAccessManager {
 }
 
 extension ContentAccessManager: PluginDataProviderProtocol {
-    
-    func getConfigProvider() -> CAMConfigProtocol {
-        return configProvider
-    }
     
     func getCamDelegate() -> CAMDelegate {
         return delegate

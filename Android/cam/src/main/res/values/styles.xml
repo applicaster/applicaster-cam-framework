@@ -1,21 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+    </style>
+
     <style name="ImageAdditionalAuth">
         <item name="android:layout_width">@dimen/additional_auth_iv_size</item>
         <item name="android:layout_height">@dimen/additional_auth_iv_size</item>
-        <item name="android:layout_marginTop">@dimen/additional_auth_iv_vert_margin</item>
-        <item name="android:layout_marginBottom">@dimen/additional_auth_iv_vert_margin</item>
-        <item name="android:layout_marginStart">@dimen/additional_auth_iv_horiz_margin</item>
-        <item name="android:layout_marginLeft">@dimen/additional_auth_iv_horiz_margin</item>
-        <item name="android:layout_marginEnd">@dimen/additional_auth_iv_horiz_margin</item>
-        <item name="android:layout_marginRight">@dimen/additional_auth_iv_horiz_margin</item>
+        <item name="android:layout_marginTop">@dimen/additional_auth_iv_margin_vertical</item>
+        <item name="android:layout_marginBottom">@dimen/additional_auth_iv_margin_vertical</item>
+        <item name="android:layout_marginStart">@dimen/additional_auth_iv_margin_horizontal</item>
+        <item name="android:layout_marginLeft">@dimen/additional_auth_iv_margin_horizontal</item>
+        <item name="android:layout_marginEnd">@dimen/additional_auth_iv_margin_horizontal</item>
+        <item name="android:layout_marginRight">@dimen/additional_auth_iv_margin_horizontal</item>
     </style>
 
-    <style name="EditTextAuthInput">
+    <style name="AuthDivider">
+        <item name="android:layout_width">@dimen/additional_auth_divider_width</item>
+        <item name="android:layout_height">@dimen/additional_auth_divider_height</item>
+        <item name="android:layout_margin">@dimen/additional_auth_margin</item>
+        <item name="android:background">@color/white</item>
+    </style>
+
+    <style name="EditTextAuthInput" parent="AppTheme">
         <item name="android:layout_width">@dimen/auth_et_width</item>
         <item name="android:layout_height">@dimen/auth_et_height</item>
+        <item name="android:layout_marginTop">@dimen/auth_et_margin_top</item>
     </style>
-
 
 </resources>
