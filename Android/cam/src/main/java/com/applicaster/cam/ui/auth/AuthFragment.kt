@@ -57,7 +57,7 @@ abstract class AuthFragment : BaseFragment(), IAuthView {
         UIMapper.map(toolbar_back_button, UIKey.TOOLBAR_BACK_BUTTON)
         UIMapper.map(toolbar_close_button, UIKey.TOOLBAR_CLOSE_BUTTON)
         UIMapper.map(app_logo, UIKey.TOOLBAR_HEADER_LOGO)
-//        UIMapper.map(container_parent_auth, UIKey.BACKGROUND_IMAGE)
+        UIMapper.map(container_parent_auth, UIKey.BACKGROUND_IMAGE)
     }
 
     override fun populateAuthFieldsViews(authFieldConfig: AuthFieldConfig) {

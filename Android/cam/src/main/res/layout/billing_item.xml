@@ -13,7 +13,7 @@
             android:id="@+id/layout_billing_item"
             android:background="@color/white"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="@dimen/layout_billing_item_height"
             android:orientation="vertical"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"

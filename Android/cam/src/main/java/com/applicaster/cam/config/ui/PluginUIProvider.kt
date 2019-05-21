@@ -4,9 +4,11 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
+import android.os.Build
 import android.util.Log
 import com.applicaster.app.CustomApplication
 import com.applicaster.cam.R
+import com.applicaster.util.OSUtil
 import com.applicaster.util.StringUtil
 
 class PluginUIProvider(
@@ -15,9 +17,6 @@ class PluginUIProvider(
 ) : UIProvider {
 
     override fun getText(key: String): String {
-        /**
-         *  TODO: get values from [OSUtil] or pluginConfig
-         */
         return let {
             if (pluginConfig.containsKey(key)) {
                 pluginConfig[key] ?: context.getString(R.string.default_text)
@@ -35,9 +34,6 @@ class PluginUIProvider(
     }
 
     override fun getTextSize(key: String): Float {
-        /**
-         *  TODO: get values from [OSUtil] or pluginConfig
-         */
         return let {
             if (pluginConfig.containsKey(key)) {
                 pluginConfig[key]?.toFloat() ?: context.resources.getDimension(R.dimen.default_text_size)
@@ -48,10 +44,18 @@ class PluginUIProvider(
     }
 
     override fun getDrawable(key: String): Drawable {
-        /**
-         *  TODO: get values from [OSUtil] or pluginConfig
-         */
-        return context.resources.getDrawable(R.drawable.btn_dummy)
+        val drawableId = OSUtil.getDrawableResourceIdentifier(key)
+        return if (drawableId != 0) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+                context.resources.getDrawable(drawableId, context.theme)
+             else
+                context.resources.getDrawable(drawableId)
+        } else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+                context.resources.getDrawable(R.drawable.btn_dummy, context.theme)
+            else
+                context.resources.getDrawable(R.drawable.btn_dummy)
+        }
     }
 
     override fun getFont(key: String): Typeface {
