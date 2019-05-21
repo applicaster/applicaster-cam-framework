@@ -15,10 +15,7 @@ class PluginUIProvider(
 ) : UIProvider {
 
     override fun getText(key: String): String {
-        /**
-         *  TODO: get values from [OSUtil] or pluginConfig
-         */
-        return "dummy text"
+        return pluginConfig[key] ?: "dummy text"
     }
 
     override fun getColor(key: String): Int {
@@ -36,7 +33,10 @@ class PluginUIProvider(
     }
 
     override fun getDrawable(key: String): Drawable {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        /**
+         *  TODO: get values from [OSUtil] or pluginConfig
+         */
+        return context.resources.getDrawable(R.drawable.btn_dummy)
     }
 
     override fun getFont(key: String): Typeface {
