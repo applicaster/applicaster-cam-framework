@@ -1,8 +1,10 @@
 package com.applicaster.camsample.mock
 
 import android.content.Context
-import com.applicaster.camsample.R
-import com.google.gson.Gson
+import com.applicaster.cam.config.KEY_AUTH_FIELDS
+import com.applicaster.cam.config.KEY_FACEBOOK_LOGIN_REQ
+import com.applicaster.cam.config.KEY_PASSWORD_RESET_REQ
+import org.json.JSONObject
 import java.io.IOException
 import java.nio.charset.Charset
 
@@ -18,7 +20,7 @@ object MockPluginConfiguration {
             context.resources.openRawResource(R.raw.mock_config)
         val size = inputStream.available()
 
-        var json: String? = null
+        val json: String?
 
         try {
             val buffer = ByteArray(size)

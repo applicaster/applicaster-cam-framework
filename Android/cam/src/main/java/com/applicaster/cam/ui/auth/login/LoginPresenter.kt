@@ -20,6 +20,8 @@ class LoginPresenter(
 
     override fun onAuthActionButtonClicked() {
         view?.showToastMessage("login action")
+        //TODO: added for test implementation and should be removed after
+        navigationRouter.attachBillingFragment()
     }
 
     override fun onAuthHintClicked() {

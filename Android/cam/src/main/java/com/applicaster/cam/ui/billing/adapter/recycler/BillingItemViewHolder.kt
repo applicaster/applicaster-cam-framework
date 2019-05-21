@@ -12,5 +12,5 @@ class BillingItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) 
     var tvDetails: CustomTextView = itemView.tv_billing_item_details
     var btnSubscribe: Button = itemView.btn_billing_item_subscribe
     var tvRedeem: CustomTextView = itemView.tv_billing_item_redeem
-    var ivLabel: CustomTextView = itemView.tv_billing_item_label
+//    var ivLabel: CustomTextView = itemView.tv_billing_item_label
 }

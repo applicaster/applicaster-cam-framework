@@ -31,13 +31,23 @@
   "alert_button_text": "Ok",
   "alert_button_image": "alert_image",
 
+  "payment_option_screen_background_img": "",
   "payment_option_screen_title_text": "Choose your subscription",
+  "payment_option_screen_title_text_size": "19",
   "payment_option_screen_hint_desc": "Have already subscribed?",
+  "payment_option_screen_hint_desc_size": "13",
   "payment_option_screen_hint_action": "Restore",
+  "payment_option_screen_hint_action_size": "13",
 
   "payment_option_title_text": "Monthly Subscription",
+  "payment_option_title_text_size": "20",
   "payment_option_details_text": "Subscription details go here nad might take up to two lines maximum",
+  "payment_option_details_text_size": "14",
+  "payment_option_redeem_text": "Redeem",
+  "payment_option_redeem_text_size": "13",
   "payment_option_button_text": "Subscribe for",
+  "payment_option_button_text_size": "12",
+  "payment_option_button_img": "",
   "payment_option_promo_text": "1 MONTH FREE",
 
   "pwd_reset_required" : "true",

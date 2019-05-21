@@ -5,7 +5,8 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/layout_billing"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@android:color/holo_blue_light">
 
     <include
             android:id="@+id/toolbar"
@@ -16,6 +17,9 @@
             android:id="@+id/tv_billing_title_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:text="Title"
+            android:gravity="center"
+            android:textSize="19sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar"/>
@@ -39,6 +43,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/container_restore"/>
+            app:layout_constraintTop_toBottomOf="@+id/container_restore"
+            android:scrollbarStyle="outsideOverlay"
+            android:scrollbars="vertical"
+            android:overScrollMode="never"
+            android:layout_marginEnd="36dp"
+            android:layout_marginStart="36dp"/>
 
 </android.support.constraint.ConstraintLayout>

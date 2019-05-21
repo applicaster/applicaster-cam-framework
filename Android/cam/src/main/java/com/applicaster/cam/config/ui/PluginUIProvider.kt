@@ -15,7 +15,16 @@ class PluginUIProvider(
 ) : UIProvider {
 
     override fun getText(key: String): String {
-        return pluginConfig[key] ?: "dummy text"
+        /**
+         *  TODO: get values from [OSUtil] or pluginConfig
+         */
+        return let {
+            if (pluginConfig.containsKey(key)) {
+                pluginConfig[key] ?: context.getString(R.string.default_text)
+            } else {
+                context.getString(R.string.default_text)
+            }
+        }
     }
 
     override fun getColor(key: String): Int {
@@ -29,7 +38,13 @@ class PluginUIProvider(
         /**
          *  TODO: get values from [OSUtil] or pluginConfig
          */
-        return context.resources.getDimension(R.dimen.auth_text_size)
+        return let {
+            if (pluginConfig.containsKey(key)) {
+                pluginConfig[key]?.toFloat() ?: context.resources.getDimension(R.dimen.default_text_size)
+            } else {
+                context.resources.getDimension(R.dimen.default_text_size)
+            }
+        }
     }
 
     override fun getDrawable(key: String): Drawable {

@@ -4,6 +4,8 @@ import android.content.Context
 import android.os.Handler
 import com.applicaster.cam.*
 import com.applicaster.cam.params.auth.AuthField
+import com.applicaster.cam.params.billing.Offer
+import com.applicaster.cam.params.billing.ProductType
 
 class MockCamContract(val context: Context) : ICamContract {
 
@@ -36,7 +38,11 @@ class MockCamContract(val context: Context) : ICamContract {
     }
 
     override fun loadEntitlements(callback: EntitlementsLoadCallback) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val offer = Offer(
+            "Test product id",
+            ProductType.INAPP
+        )
+        callback.onSuccess(arrayListOf(offer, offer, offer))
     }
 
     override fun isUserLogged() = false
