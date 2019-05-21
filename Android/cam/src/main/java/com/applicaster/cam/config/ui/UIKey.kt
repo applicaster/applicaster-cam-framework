@@ -9,9 +9,22 @@ enum class UIKey(
     val image: String? = null
 ) {
     // @formatter:off
-    SIGN_UP_TITLE(text = UI_KEY_SIGN_UP_TITLE_TEXT, textColor = UI_KEY_SIGN_UP_TITLE_COLOR),
-    SIGN_UP_BUTTON(text = UI_KEY_SIGN_UP_BUTTON_TEXT, textSize = UI_KEY_SIGN_UP_BUTTON_TEXT_SIZE),
-    THIRD_PARTY_AUTH_DESC(text= UI_KEY_THIRD_PARTY_AUTH_TEXT, image = UI_KEY_THIRD_PARTY_AUTH_BCKG),
+    TOOLBAR_BACK_BUTTON(image = UI_KEY_TOOLBAR_BACK),
+    TOOLBAR_CLOSE_BUTTON(image = UI_KEY_TOOLBAR_CLOSE),
+    TOOLBAR_HEADER_LOGO(image = UI_KEY_TOOLBAR_LOGO),
+    BACKGROUND_IMAGE(image = UI_KEY_BACKGROUND_IMAGE),
+    LOGIN_TITLE(text =UI_KEY_LOGIN_TITLE_TEXT),
+    LOGIN_RESET_PWD(text = UI_KEY_LOGIN_RESET_PWD_TEXT),
+    LOGIN_ALT_AUTH_TEXT(text = UI_KEY_THIRD_PARTY_LOGIN_TEXT),
+    LOGIN_BTN_TEXT(text = UI_KEY_LOGIN_BUTTON_TEXT, image = UI_KEY_LOGIN_BUTTON_IMAGE),
+    LOGIN_PROMPT_TEXT(text = UI_KEY_LOGIN_PROMPT_TEXT),
+    LOGIN_PROMPT_ACTION_TEXT(text = UI_KEY_LOGIN_PROMPT_ACTION_TEXT),
+    SIGN_UP_TITLE(text = UI_KEY_SIGN_UP_TITLE_TEXT),
+    SIGN_UP_ALT_AUTH_TEXT(text = UI_KEY_THIRD_PARTY_SIGN_UP_TEXT),
+    SIGN_UP_BUTTON(text = UI_KEY_SIGN_UP_BUTTON_TEXT, image = UI_KEY_SIGN_UP_BUTTON_IMAGE),
+    SIGN_UP_PROMPT_TEXT(text = UI_KEY_SIGN_UP_PROMPT_TEXT),
+    SIGN_UP_PROMPT_ACTION_TEXT(text = UI_KEY_SIGN_UP_PROMPT_ACTION_TEXT),
+    SEPARATOR_TEXT(text = UI_KEY_THIRD_PARTY_SEPARATOR_TEXT),
     BILLING_ITEM_SUBS_BUTTON(text = UI_KEY_BILLING_ITEM_SUBS_BUTTON_TEXT, textSize = UI_KEY_BILLING_ITEM_SUBS_BUTTON_TEXT_SIZE, image = UI_KEY_BILLING_ITEM_SUBS_BUTTON_BCKG),
     BILLING_ITEM_TITLE(textSize = UI_KEY_BILLING_ITEM_TITLE_TEXT_SIZE),
     BILLING_ITEM_DETAILS(textSize = UI_KEY_BILLING_ITEM_DETAILS_TEXT_SIZE),
@@ -23,13 +36,28 @@ enum class UIKey(
     // @formatter:on
 }
 
+// region Common UI keys
+const val UI_KEY_TOOLBAR_BACK = "back_button"
+const val UI_KEY_TOOLBAR_CLOSE = "close_button"
+const val UI_KEY_TOOLBAR_LOGO = "header_logo"
+const val UI_KEY_BACKGROUND_IMAGE = "background_image"
+// endregion
+
 // region Sign up UI keys
-const val UI_KEY_SIGN_UP_TITLE_TEXT = "key_sign_up_title"
-const val UI_KEY_SIGN_UP_TITLE_COLOR = "key_sign_up_color"
-const val UI_KEY_SIGN_UP_BUTTON_TEXT = "key_sign_up_button"
-const val UI_KEY_SIGN_UP_BUTTON_TEXT_SIZE = "key_sign_up_button_size"
-const val UI_KEY_THIRD_PARTY_AUTH_TEXT = "key_third_party_auth_title"
-const val UI_KEY_THIRD_PARTY_AUTH_BCKG = "key_third_party_auth_img"
+const val UI_KEY_SIGN_UP_TITLE_TEXT = "signup_screen_title_text"
+const val UI_KEY_SIGN_UP_BUTTON_TEXT = "signup_button_text"
+const val UI_KEY_SIGN_UP_BUTTON_IMAGE = "signup_button_image"
+const val UI_KEY_LOGIN_RESET_PWD_TEXT = "reset_password_text"
+const val UI_KEY_SIGN_UP_PROMPT_TEXT = "sign_up_prompt_text"
+const val UI_KEY_SIGN_UP_PROMPT_ACTION_TEXT = "sign_up_prompt_action_text"
+const val UI_KEY_LOGIN_TITLE_TEXT = "login_screen_title_text"
+const val UI_KEY_LOGIN_BUTTON_TEXT = "login_button_text"
+const val UI_KEY_LOGIN_BUTTON_IMAGE = "login_button_image"
+const val UI_KEY_LOGIN_PROMPT_TEXT = "login_prompt_text"
+const val UI_KEY_LOGIN_PROMPT_ACTION_TEXT = "login_prompt_action_text"
+const val UI_KEY_THIRD_PARTY_SIGN_UP_TEXT = "alternative_sign_up_action_prompt_text"
+const val UI_KEY_THIRD_PARTY_LOGIN_TEXT = "alternative_login_action_prompt_text"
+const val UI_KEY_THIRD_PARTY_SEPARATOR_TEXT = "separator_text"
 // endregion
 
 // region Billing item UI keys

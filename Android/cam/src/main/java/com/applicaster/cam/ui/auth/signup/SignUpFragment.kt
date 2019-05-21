@@ -8,6 +8,9 @@ import com.applicaster.cam.ui.auth.AuthFragment
 import com.applicaster.cam.ui.auth.AuthPresenter
 import com.applicaster.cam.ui.auth.IAuthPresenter
 import kotlinx.android.synthetic.main.fragment_auth.*
+import kotlinx.android.synthetic.main.layout_additional_auth.*
+import kotlinx.android.synthetic.main.layout_auth_input.*
+import kotlinx.android.synthetic.main.layout_text_with_action.*
 
 class SignUpFragment : AuthFragment(), ISignUpView {
 
@@ -20,8 +23,13 @@ class SignUpFragment : AuthFragment(), ISignUpView {
     }
 
     override fun applyUICustomizations() {
+        super.applyUICustomizations()
         tv_forgot_pwd.visibility = View.GONE
         UIMapper.map(tv_logo, UIKey.SIGN_UP_TITLE)
         UIMapper.map(btn_input_action, UIKey.SIGN_UP_BUTTON)
+        UIMapper.map(tv_add_auth_or, UIKey.SEPARATOR_TEXT)
+        UIMapper.map(tv_add_auth_desc, UIKey.SIGN_UP_ALT_AUTH_TEXT)
+        UIMapper.map(tv_hint_desc, UIKey.SIGN_UP_PROMPT_TEXT)
+        UIMapper.map(tv_hint_action, UIKey.SIGN_UP_PROMPT_ACTION_TEXT)
     }
 }

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container_auth_input"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/auth_container_margin_vertical"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    app:layout_constraintBottom_toTopOf="@+id/container_bottom_bar"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/container_toolbar"
+    tools:showIn="@layout/fragment_auth">
+
+    <ScrollView
+        android:id="@+id/container_scrollable_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/red">
+
+        <LinearLayout
+            android:id="@+id/container_linear_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical" />
+    </ScrollView>
+
+    <com.applicaster.util.ui.CustomTextView
+        android:id="@+id/tv_forgot_pwd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/auth_text_margin"
+        android:text="Forgot password?" />
+
+    <com.applicaster.util.ui.CustomButton
+        android:id="@+id/btn_input_action"
+        style="@style/EditTextAuthInput"
+        android:layout_marginTop="@dimen/auth_text_margin"
+        android:text="SIGN IN" />
+</LinearLayout>
