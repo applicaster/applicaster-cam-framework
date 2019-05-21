@@ -1,10 +1,8 @@
 package com.applicaster.camsample.mock
 
 import android.content.Context
-import com.applicaster.cam.config.KEY_AUTH_FIELDS
-import com.applicaster.cam.config.KEY_FACEBOOK_LOGIN_REQ
-import com.applicaster.cam.config.KEY_PASSWORD_RESET_REQ
-import org.json.JSONObject
+import com.applicaster.camsample.R
+import com.google.gson.Gson
 import java.io.IOException
 import java.nio.charset.Charset
 
@@ -12,12 +10,11 @@ import java.nio.charset.Charset
 object MockPluginConfiguration {
 
     fun getPluginConfiguration(context: Context): Map<String, String> =
-        Gson().fromJson(getConfigFromAssets(context), Map::class.java) as Map<String, String>
-
+            Gson().fromJson(getConfigFromAssets(context), Map::class.java) as Map<String, String>
 
     private fun getConfigFromAssets(context: Context): String {
         val inputStream =
-            context.resources.openRawResource(R.raw.mock_config)
+                context.resources.openRawResource(R.raw.mock_config)
         val size = inputStream.available()
 
         val json: String?
