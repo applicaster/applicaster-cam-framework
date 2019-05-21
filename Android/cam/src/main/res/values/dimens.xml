@@ -41,4 +41,8 @@
     <dimen name="billing_layout_margin_top_bottom">16dp</dimen>
     <!-- End region -->
 
+    <!--Region default dimens-->
+    <dimen name="default_text_size">12sp</dimen>
+    <!-- End region -->
+
 </resources>

@@ -68,7 +68,8 @@
                 android:layout_marginTop="@dimen/billing_tv_redeem_margin_top"
                 android:layout_marginBottom="@dimen/billing_tv_redeem_margin_bottom"
                 android:gravity="center_horizontal"
-                android:text="Redeem Code" tools:visibility="visible"/>
+                android:text="@string/tv_billing_item_redeem_code"
+                tools:visibility="visible"/>
 
     </LinearLayout>
 

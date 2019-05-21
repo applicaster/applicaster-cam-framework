@@ -17,6 +17,7 @@ import com.applicaster.cam.ui.billing.adapter.PurchaseItem
 import com.applicaster.cam.ui.billing.adapter.pager.PagerBillingAdapter
 import com.applicaster.cam.ui.billing.adapter.recycler.RecyclerBillingAdapter
 import kotlinx.android.synthetic.main.fragment_billing.*
+import kotlinx.android.synthetic.main.layout_text_with_action.*
 
 class BillingFragment : BaseFragment(), IBillingView {
 
@@ -69,14 +70,15 @@ class BillingFragment : BaseFragment(), IBillingView {
                 }
             }
         }
+        customize()
     }
 
     override fun customize() {
         UIMapper.apply {
-            map(layout_billing, UIKey.BILLING_LAYOUT)
+//            map(layout_billing, UIKey.BILLING_LAYOUT)
             map(tv_billing_title_text, UIKey.BILLING_TITLE)
-//            map(tv_billing_prompt_text, UIKey.BILLING_PROMPT)
-//            map(tv_billing_link_text, UIKey.BILLING_LINK)
+            map(tv_hint_desc, UIKey.BILLING_RESTORE_HINT_DESC)
+            map(tv_hint_action, UIKey.BILLING_RESTORE_ACTION)
         }
     }
 
@@ -88,5 +90,9 @@ class BillingFragment : BaseFragment(), IBillingView {
     override fun clearBillingContainer() {
         recyclerBillingAdapter?.apply { removeAllPurchaseItems() }
         pagerBillingAdapter?.apply { removeAllPurchaseItems() }
+    }
+
+    override fun showToastMessage(msg: String) {
+        super.showToastMessage(msg)
     }
 }

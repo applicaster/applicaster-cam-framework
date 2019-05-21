@@ -52,6 +52,7 @@ class BillingPresenter(
         }?.also { skuDetails ->
             GoogleBillingHelper.purchase(getBaseActivity(), skuDetails)
         }
+        view.showToastMessage("Subscribe button clicked")
     }
 
     override fun onPurchaseConsumed(purchaseToken: String) {
@@ -93,13 +94,23 @@ class BillingPresenter(
             val subs: List<String> = filter { offer: Offer ->
                 offer.productType == ProductType.SUBS
             }.map { offer: Offer -> offer.productId }
-            GoogleBillingHelper.loadSkuDetails(BillingClient.SkuType.SUBS, subs)
+            // TODO: needs to implement this line later
+//            GoogleBillingHelper.loadSkuDetails(BillingClient.SkuType.SUBS, subs)
 
             //filter offers by SkuType.INAPP and map result to list of products IDs
             val inapps: List<String> = filter { offer: Offer ->
                 offer.productType == ProductType.INAPP
             }.map { offer: Offer -> offer.productId }
-            GoogleBillingHelper.loadSkuDetails(BillingClient.SkuType.INAPP, inapps)
+            // TODO: needs to implement this line later
+//            GoogleBillingHelper.loadSkuDetails(BillingClient.SkuType.INAPP, inapps)
+            val purchaseItem = PurchaseItem(
+                "Test sku",
+                "Test title",
+                "Test description",
+                "5$",
+                ""
+            )
+            view.populateBillingContainer(arrayListOf(purchaseItem, purchaseItem, purchaseItem))
         }
     }
 

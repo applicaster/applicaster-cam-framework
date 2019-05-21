@@ -1,5 +1,6 @@
 package com.applicaster.cam.ui.base.view
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -51,7 +52,8 @@ abstract class BaseFragment : Fragment(), IBaseView {
         return context
     }
 
-    fun showToastMessage(message: String) {
+    @SuppressLint("ShowToast")
+    open fun showToastMessage(message: String) {
         if (isAdded && context != null && !activity?.isFinishing!!) {
             if (toast == null) {
                 toast = Toast.makeText(context, message, Toast.LENGTH_SHORT)

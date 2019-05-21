@@ -1,85 +1,25 @@
 package com.applicaster.camsample.mock
 
 import android.content.Context
-import com.applicaster.cam.config.KEY_AUTH_FIELDS
-import com.applicaster.cam.config.KEY_FACEBOOK_LOGIN_REQ
-import com.applicaster.cam.config.KEY_PASSWORD_RESET_REQ
-import org.json.JSONObject
+import com.applicaster.camsample.R
+import com.google.gson.Gson
+import org.intellij.lang.annotations.Language
 import java.io.IOException
 import java.nio.charset.Charset
 
 
 object MockPluginConfiguration {
 
-    fun getPluginConfiguration() = mapOf(
-        KEY_AUTH_FIELDS to getAuthFieldsConfig(),
-        KEY_PASSWORD_RESET_REQ to "true",
-        KEY_FACEBOOK_LOGIN_REQ to "true"
-    )
+    fun getPluginConfiguration(context: Context): Map<String, String> =
+        Gson().fromJson(getConfigFromAssets(context), Map::class.java) as Map<String, String>
 
-    fun getAuthFieldsConfig(): String {
-        return "{\"signup\":[{\"type\":\"TEXT\",\"key\":\"email\",\"title\":\"Email\",\"hint\":\"Email\",\"mandatory\":true},{\"type\":\"PASSWORD\",\"key\":\"password\",\"title\":\"Password\",\"hint\":\"Password\",\"mandatory\":true},{\"type\":\"NUMBER\",\"key\":\"phone\",\"title\":\"Phone\",\"hint\":\"Phone\",\"mandatory\":true},{\"type\":\"TEXT\",\"key\":\"gender\",\"title\":\"Gender\",\"hint\":\"Gender\",\"mandatory\":false}],\"login\":[{\"type\":\"TEXT\",\"key\":\"email\",\"title\":\"Email\",\"hint\":\"Email\",\"mandatory\":true},{\"type\":\"PASSWORD\",\"key\":\"password\",\"title\":\"Password\",\"hint\":\"Password\",\"mandatory\":true}]}"
-        /**
-         * raw formatted:
-         *
-         *
-        {
-        "signup": [
-        {
-        "type": "TEXT",
-        "key": "email",
-        "title": "Email",
-        "hint": "Email",
-        "mandatory": true
-        },
-        {
-        "type": "PASSWORD",
-        "key": "password",
-        "title": "Password",
-        "hint": "Password",
-        "mandatory": true
-        },
-        {
-        "type": "NUMBER",
-        "key": "phone",
-        "title": "Phone",
-        "hint": "Phone",
-        "mandatory": true
-        },
-        {
-        "type": "TEXT",
-        "key": "gender",
-        "title": "Gender",
-        "hint": "Gender",
-        "mandatory": false
-        }
-        ],
-        "login": [
-        {
-        "type": "TEXT",
-        "key": "email",
-        "title": "Email",
-        "hint": "Email",
-        "mandatory": true
-        },
-        {
-        "type": "PASSWORD",
-        "key": "password",
-        "title": "Password",
-        "hint": "Password",
-        "mandatory": true
-        }
-        ]
-        }
-         *
-         */
-    }
 
-    fun getPluginConfig(context: Context): JSONObject {
-        val inputStream = context.resources.openRawResource(com.applicaster.camsample.R.raw.mock_config)
+    private fun getConfigFromAssets(context: Context): String {
+        val inputStream =
+            context.resources.openRawResource(R.raw.mock_config)
         val size = inputStream.available()
 
-        var json: String? = null
+        val json: String?
 
         try {
             val buffer = ByteArray(size)
@@ -89,9 +29,64 @@ object MockPluginConfiguration {
             json = String(buffer, Charset.forName("UTF-8"))
         } catch (e: IOException) {
             e.printStackTrace()
+            return ""
         }
-//        Toast.makeText(context, json, Toast.LENGTH_LONG).show()
-        val obj = JSONObject(json)
-        return obj
+
+        return json
     }
+
+    /**
+     * raw formatted auth config
+     *
+     *
+    {
+    "signup": [
+    {
+    "type": "TEXT",
+    "key": "email",
+    "title": "Email",
+    "hint": "Email",
+    "mandatory": true
+    },
+    {
+    "type": "PASSWORD",
+    "key": "password",
+    "title": "Password",
+    "hint": "Password",
+    "mandatory": true
+    },
+    {
+    "type": "NUMBER",
+    "key": "phone",
+    "title": "Phone",
+    "hint": "Phone",
+    "mandatory": true
+    },
+    {
+    "type": "TEXT",
+    "key": "gender",
+    "title": "Gender",
+    "hint": "Gender",
+    "mandatory": false
+    }
+    ],
+    "login": [
+    {
+    "type": "TEXT",
+    "key": "email",
+    "title": "Email",
+    "hint": "Email",
+    "mandatory": true
+    },
+    {
+    "type": "PASSWORD",
+    "key": "password",
+    "title": "Password",
+    "hint": "Password",
+    "mandatory": true
+    }
+    ]
+    }
+     *
+     */
 }

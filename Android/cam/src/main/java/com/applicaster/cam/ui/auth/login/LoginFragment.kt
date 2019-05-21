@@ -26,6 +26,8 @@ class LoginFragment : AuthFragment(), ILoginView {
 
     override fun setListeners() {
         tv_forgot_pwd.setOnClickListener { presenter?.onForgotPasswordClicked() }
+        //TODO: added for test implementation and should be removed after
+        btn_input_action.setOnClickListener { presenter?.onAuthActionButtonClicked() }
         super.setListeners()
     }
 }
