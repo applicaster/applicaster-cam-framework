@@ -95,4 +95,12 @@ class BillingFragment : BaseFragment(), IBillingView {
     override fun showToastMessage(msg: String) {
         super.showToastMessage(msg)
     }
+
+    override fun showLoadingIndicator() {
+        super.showLoadingIndicator()
+    }
+
+    override fun hideLoadingIndicator() {
+        super.hideLoadingIndicator()
+    }
 }

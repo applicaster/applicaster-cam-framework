@@ -65,6 +65,14 @@ abstract class BaseFragment : Fragment(), IBaseView {
         }
     }
 
+    open fun showLoadingIndicator() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    open fun hideLoadingIndicator() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     override fun goBack() {
         activity?.onBackPressed()
     }

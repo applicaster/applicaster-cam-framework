@@ -73,20 +73,20 @@
 
     </LinearLayout>
 
-    <com.applicaster.util.ui.CustomTextView
-            android:id="@+id/tv_billing_item_label"
-            android:layout_width="56dp"
-            android:layout_height="28dp"
-            android:layout_marginEnd="8dp"
-            android:background="@color/red"
-            android:maxLines="2"
-            android:text="1 MONTH FREE"
-            android:textSize="9sp"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:gravity="center_horizontal|center_vertical"
-            app:layout_constraintTop_toTopOf="@+id/layout_billing_item"
-            app:layout_constraintBottom_toTopOf="@+id/layout_billing_item"
-            app:layout_constraintEnd_toEndOf="@+id/layout_billing_item"/>
+    <!--<com.applicaster.util.ui.CustomTextView-->
+            <!--android:id="@+id/tv_billing_item_label"-->
+            <!--android:layout_width="56dp"-->
+            <!--android:layout_height="28dp"-->
+            <!--android:layout_marginEnd="8dp"-->
+            <!--android:background="@color/red"-->
+            <!--android:maxLines="2"-->
+            <!--android:text="1 MONTH FREE"-->
+            <!--android:textSize="9sp"-->
+            <!--android:textAlignment="center"-->
+            <!--android:textColor="@color/white"-->
+            <!--android:gravity="center_horizontal|center_vertical"-->
+            <!--app:layout_constraintTop_toTopOf="@+id/layout_billing_item"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/layout_billing_item"-->
+            <!--app:layout_constraintEnd_toEndOf="@+id/layout_billing_item"/>-->
 
 </android.support.constraint.ConstraintLayout>
