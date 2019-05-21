@@ -17,9 +17,13 @@ enum class UIKey(
     LOGIN_RESET_PWD(text = UI_KEY_SIGN_UP_RESET_PWD_TEXT),
     LOGIN_ALT_AUTH_TEXT(text = UI_KEY_THIRD_PARTY_LOGIN_TEXT),
     LOGIN_BTN_TEXT(text = UI_KEY_LOGIN_BUTTON_TEXT, image = UI_KEY_LOGIN_BUTTON_IMAGE),
+    LOGIN_PROMPT_TEXT(text = UI_KEY_LOGIN_PROMPT_TEXT),
+    LOGIN_PROMPT_ACTION_TEXT(text = UI_KEY_LOGIN_PROMPT_ACTION_TEXT),
     SIGN_UP_TITLE(text = UI_KEY_SIGN_UP_TITLE_TEXT),
     SIGN_UP_ALT_AUTH_TEXT(text = UI_KEY_THIRD_PARTY_SIGN_UP_TEXT),
     SIGN_UP_BUTTON(text = UI_KEY_SIGN_UP_BUTTON_TEXT, image = UI_KEY_SIGN_UP_BUTTON_IMAGE),
+    SIGN_UP_PROMPT_TEXT(text = UI_KEY_SIGN_UP_PROMPT_TEXT),
+    SIGN_UP_PROMPT_ACTION_TEXT(text = UI_KEY_SIGN_UP_PROMPT_ACTION_TEXT),
     SEPARATOR_TEXT(text = UI_KEY_THIRD_PARTY_SEPARATOR_TEXT),
     BILLING_ITEM_SUBS_BUTTON(text = UI_KEY_BILLING_ITEM_SUBS_BUTTON_TEXT, textSize = UI_KEY_BILLING_ITEM_SUBS_BUTTON_TEXT_SIZE, image = UI_KEY_BILLING_ITEM_SUBS_BUTTON_BCKG),
     BILLING_ITEM_TITLE(textSize = UI_KEY_BILLING_ITEM_TITLE_TEXT_SIZE),
@@ -44,9 +48,13 @@ const val UI_KEY_SIGN_UP_TITLE_TEXT = "signup_screen_title_text"
 const val UI_KEY_SIGN_UP_BUTTON_TEXT = "signup_button_text"
 const val UI_KEY_SIGN_UP_BUTTON_IMAGE = "signup_button_image"
 const val UI_KEY_SIGN_UP_RESET_PWD_TEXT = "reset_password_text"
+const val UI_KEY_SIGN_UP_PROMPT_TEXT = "sign_up_prompt_text"
+const val UI_KEY_SIGN_UP_PROMPT_ACTION_TEXT = "sign_up_prompt_action_text"
 const val UI_KEY_LOGIN_TITLE_TEXT = "login_screen_title_text"
 const val UI_KEY_LOGIN_BUTTON_TEXT = "login_button_text"
 const val UI_KEY_LOGIN_BUTTON_IMAGE = "login_button_image"
+const val UI_KEY_LOGIN_PROMPT_TEXT = "login_prompt_text"
+const val UI_KEY_LOGIN_PROMPT_ACTION_TEXT = "login_prompt_action_text"
 const val UI_KEY_THIRD_PARTY_SIGN_UP_TEXT = "alternative_signup_promt_text"
 const val UI_KEY_THIRD_PARTY_LOGIN_TEXT = "alternative_login_promt_text"
 const val UI_KEY_THIRD_PARTY_SEPARATOR_TEXT = "separator_text"
