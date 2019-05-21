@@ -28,15 +28,17 @@ class LoginFragment : AuthFragment(), ILoginView {
         super.setListeners()
     }
 
-    override fun applyUICustomizations() {
-        super.applyUICustomizations()
+    override fun customize() {
+        super.customize()
         tv_forgot_pwd.visibility = View.VISIBLE
-        UIMapper.map(tv_logo, UIKey.LOGIN_TITLE)
-        UIMapper.map(tv_forgot_pwd, UIKey.LOGIN_RESET_PWD)
-        UIMapper.map(btn_input_action, UIKey.LOGIN_BTN_TEXT)
-        UIMapper.map(tv_add_auth_or, UIKey.AUTH_SEPARATOR_TEXT)
-        UIMapper.map(tv_add_auth_desc, UIKey.LOGIN_ALT_AUTH_TEXT)
-        UIMapper.map(tv_hint_desc, UIKey.LOGIN_PROMPT_TEXT)
-        UIMapper.map(tv_hint_action, UIKey.LOGIN_PROMPT_ACTION_TEXT)
+        UIMapper.apply {
+            map(tv_logo, UIKey.LOGIN_TITLE)
+            map(tv_forgot_pwd, UIKey.LOGIN_RESET_PWD)
+            map(btn_input_action, UIKey.LOGIN_BTN_TEXT)
+            map(tv_add_auth_or, UIKey.AUTH_SEPARATOR_TEXT)
+            map(tv_add_auth_desc, UIKey.LOGIN_ALT_AUTH_TEXT)
+            map(tv_hint_desc, UIKey.LOGIN_PROMPT_TEXT)
+            map(tv_hint_action, UIKey.LOGIN_PROMPT_ACTION_TEXT)
+        }
     }
 }

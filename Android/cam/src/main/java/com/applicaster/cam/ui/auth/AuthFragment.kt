@@ -24,8 +24,8 @@ abstract class AuthFragment : BaseFragment(), IAuthView {
     private var presenter: IAuthPresenter? = null
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         val rootView = inflater.inflate(R.layout.fragment_auth, container, false)
 
@@ -53,12 +53,17 @@ abstract class AuthFragment : BaseFragment(), IAuthView {
         toolbar_close_button.setOnClickListener { presenter?.onToolbarCloseClicked() }
     }
 
-    override fun applyUICustomizations() {
-        UIMapper.map(toolbar_back_button, UIKey.TOOLBAR_BACK_BUTTON)
-        UIMapper.map(toolbar_close_button, UIKey.TOOLBAR_CLOSE_BUTTON)
-        UIMapper.map(app_logo, UIKey.TOOLBAR_HEADER_LOGO)
-        UIMapper.map(container_parent_auth, UIKey.BACKGROUND_IMAGE)
+    override fun customize() {
+        super.customize()
+        UIMapper.apply {
+            map(toolbar_back_button, UIKey.TOOLBAR_BACK_BUTTON)
+            map(toolbar_close_button, UIKey.TOOLBAR_CLOSE_BUTTON)
+            map(app_logo, UIKey.TOOLBAR_HEADER_LOGO)
+            map(container_parent_auth, UIKey.BACKGROUND_IMAGE)
+        }
     }
+
+    override fun getParentView() = container_parent_auth
 
     override fun populateAuthFieldsViews(authFieldConfig: AuthFieldConfig) {
         val etWidth = resources.getDimensionPixelSize(R.dimen.auth_et_width)
@@ -71,8 +76,8 @@ abstract class AuthFragment : BaseFragment(), IAuthView {
             container_linear_input.addView(editText)
         }
         val visibleViewsCount =
-            if (authFieldConfig.authFields.size < MAX_NON_SCROLLABLE_AUTH_FIELDS)
-                authFieldConfig.authFields.size else MAX_NON_SCROLLABLE_AUTH_FIELDS
+                if (authFieldConfig.authFields.size < MAX_NON_SCROLLABLE_AUTH_FIELDS)
+                    authFieldConfig.authFields.size else MAX_NON_SCROLLABLE_AUTH_FIELDS
         val parentMaxHeight = (etHeight + etMarginTop) * visibleViewsCount
 
         //recalculating scroll view height to match design spec
@@ -89,14 +94,14 @@ abstract class AuthFragment : BaseFragment(), IAuthView {
 }
 
 private fun EditText.applyCustomizations(
-    etWidth: Int,
-    etHeight: Int,
-    etMarginTop: Int,
-    field: AuthField
+        etWidth: Int,
+        etHeight: Int,
+        etMarginTop: Int,
+        field: AuthField
 ) {
     layoutParams = LinearLayout.LayoutParams(
-        etWidth,
-        etHeight
+            etWidth,
+            etHeight
     ).apply {
         topMargin = etMarginTop
     }

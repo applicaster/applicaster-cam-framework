@@ -14,7 +14,7 @@ abstract class AuthPresenter(
         super.onViewCreated()
 
         view?.populateAuthFieldsViews(getAuthFieldConfig())
-        view?.applyUICustomizations()
+        view?.customize()
     }
 
     override fun onRestoreClicked() {

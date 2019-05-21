@@ -9,6 +9,4 @@ interface IBillingView : IBaseView {
     fun initViewComponents(containerType: ContainerType)
     fun populateBillingContainer(purchaseItems: List<PurchaseItem>)
     fun clearBillingContainer()
-    fun customize()
-    fun showToastMessage(msg: String)
 }

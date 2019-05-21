@@ -16,7 +16,6 @@ import com.applicaster.cam.ui.billing.adapter.PurchaseInteractionListener
 import com.applicaster.cam.ui.billing.adapter.PurchaseItem
 import com.applicaster.cam.ui.billing.adapter.pager.PagerBillingAdapter
 import com.applicaster.cam.ui.billing.adapter.recycler.RecyclerBillingAdapter
-import kotlinx.android.synthetic.main.fragment_auth.*
 import kotlinx.android.synthetic.main.fragment_billing.*
 import kotlinx.android.synthetic.main.layout_text_with_action.*
 import kotlinx.android.synthetic.main.layout_toolbar_template.*
@@ -30,9 +29,9 @@ class BillingFragment : BaseFragment(), IBillingView {
 
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         val navigationManager = if (baseActivity.getNavigationRouter() is CamNavigationRouter)
             baseActivity.getNavigationRouter() as CamNavigationRouter
@@ -76,6 +75,7 @@ class BillingFragment : BaseFragment(), IBillingView {
     }
 
     override fun customize() {
+        super.customize()
         UIMapper.apply {
             map(toolbar_back_button, UIKey.TOOLBAR_BACK_BUTTON)
             map(toolbar_close_button, UIKey.TOOLBAR_CLOSE_BUTTON)
@@ -86,6 +86,8 @@ class BillingFragment : BaseFragment(), IBillingView {
             map(tv_hint_action, UIKey.BILLING_RESTORE_ACTION)
         }
     }
+
+    override fun getParentView() = layout_billing
 
     override fun populateBillingContainer(purchaseItems: List<PurchaseItem>) {
         recyclerBillingAdapter?.apply { addPurchaseItems(purchaseItems) }
