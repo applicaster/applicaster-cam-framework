@@ -3,20 +3,17 @@
   "back_button": "back_button",
   "close_button": "close_button",
   "header_logo": "header_logo",
-  "background_image": "background_image",
   "separator_text": "Or",
 
   "login_screen_title_text": "Login To Your Account",
   "reset_password_text": "Forgot Password?",
   "alternative_login_action_prompt_text": "Log In with Social Networks",
   "login_button_text": "Log In",
-  "login_button_image": "login_button",
   "login_prompt_text": "Don't have an account?",
   "login_prompt_action_text": "Sign Up",
 
   "signup_screen_title_text": "Create an Account",
   "signup_button_text": "Sign Up",
-  "signup_button_image": "signup_button",
   "alternative_sign_up_action_prompt_text": "Sign Up with Social Networks",
   "sign_up_prompt_text": "Have already an account?",
   "sign_up_prompt_action_text": "Log In",
@@ -24,14 +21,12 @@
   "password_reset_title_text": "Reset Password",
   "password_reset_info_text": "Type in you e-mail so we would send you the new password",
   "password_reset_button_text": "Reset Password",
-  "password_reset_button_image": "password_reset_button",
-  
+
   "alert_title_text": "Congratulations",
   "alert_info_text": "Success",
   "alert_button_text": "Ok",
   "alert_button_image": "alert_image",
 
-  "payment_option_screen_background_img": "",
   "payment_option_screen_title_text": "Choose your subscription",
   "payment_option_screen_title_text_size": "19",
   "payment_option_screen_hint_desc": "Have already subscribed?",
@@ -47,7 +42,6 @@
   "payment_option_redeem_text_size": "13",
   "payment_option_button_text": "Subscribe for",
   "payment_option_button_text_size": "12",
-  "payment_option_button_img": "",
   "payment_option_promo_text": "1 MONTH FREE",
 
   "pwd_reset_required" : "true",

@@ -43,6 +43,7 @@ class PagerBillingAdapter(
 
     override fun customize(itemView: View) {
         UIMapper.apply {
+            map(itemView.layout_billing_item, UIKey.BILLING_ITEM_PARENT)
             map(itemView.tv_billing_item_title, UIKey.BILLING_ITEM_TITLE)
             map(itemView.tv_billing_item_details, UIKey.BILLING_ITEM_DETAILS)
             map(itemView.tv_billing_item_redeem, UIKey.BILLING_ITEM_REDEEM)
