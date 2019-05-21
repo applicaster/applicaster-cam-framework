@@ -8,10 +8,13 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.LinearLayout
 import com.applicaster.cam.R
+import com.applicaster.cam.config.ui.UIKey
+import com.applicaster.cam.config.ui.UIMapper
 import com.applicaster.cam.params.auth.AuthField
 import com.applicaster.cam.params.auth.AuthFieldConfig
 import com.applicaster.cam.ui.CamNavigationRouter
 import com.applicaster.cam.ui.base.view.BaseFragment
+import kotlinx.android.synthetic.main.fragment_auth.*
 import kotlinx.android.synthetic.main.layout_auth_input.*
 import kotlinx.android.synthetic.main.layout_bottom_bar.*
 import kotlinx.android.synthetic.main.layout_text_with_action.*
@@ -50,6 +53,13 @@ abstract class AuthFragment : BaseFragment(), IAuthView {
         toolbar_close_button.setOnClickListener { presenter?.onToolbarCloseClicked() }
     }
 
+    override fun applyUICustomizations() {
+        UIMapper.map(toolbar_back_button, UIKey.TOOLBAR_BACK_BUTTON)
+        UIMapper.map(toolbar_close_button, UIKey.TOOLBAR_CLOSE_BUTTON)
+        UIMapper.map(app_logo, UIKey.TOOLBAR_HEADER_LOGO)
+        UIMapper.map(container_parent_auth, UIKey.BACKGROUND_IMAGE)
+    }
+
     override fun populateAuthFieldsViews(authFieldConfig: AuthFieldConfig) {
         val etWidth = resources.getDimensionPixelSize(R.dimen.auth_et_width)
         val etHeight = resources.getDimensionPixelSize(R.dimen.auth_et_height)
@@ -69,7 +79,6 @@ abstract class AuthFragment : BaseFragment(), IAuthView {
         container_scrollable_input.layoutParams = container_scrollable_input.layoutParams.apply {
             height = parentMaxHeight
         }
-//        container.invalidate()
     }
 
     abstract fun initPresenter(navigationManager: CamNavigationRouter): IAuthPresenter

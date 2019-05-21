@@ -36,8 +36,8 @@
         android:text="Forgot password?" />
 
     <com.applicaster.util.ui.CustomButton
-        android:layout_marginTop="@dimen/auth_text_margin"
         android:id="@+id/btn_input_action"
         style="@style/EditTextAuthInput"
-        android:text="SIGN IN"/>
+        android:layout_marginTop="@dimen/auth_text_margin"
+        android:text="SIGN IN" />
 </LinearLayout>
