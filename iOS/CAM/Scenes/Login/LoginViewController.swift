@@ -39,8 +39,8 @@ class LoginViewController: UIViewController {
     @IBOutlet var inputContainerHeightConstraint: NSLayoutConstraint!
     @IBOutlet var authFieldsTableHeightConstraint: NSLayoutConstraint!
 
-    var configDictionary: [String: Any]? {
-        return presenter?.camDelegate?.getPluginConfig()
+    var configDictionary: [String: Any] {
+        return presenter?.camDelegate?.getPluginConfig() ?? [String: Any]()
     }
     var presenter: LoginPresenter?
     
@@ -84,22 +84,26 @@ class LoginViewController: UIViewController {
     
     func setupUI() {
         self.navigationController?.isNavigationBarHidden = true
-        restoreContainer.isHidden = false
-        socialNetworksContainer.isHidden = false
+        restoreContainer.isHidden = true
+        socialNetworksContainer.isHidden = !(configDictionary[CAMKeys.facebookLoginEnabled.rawValue] as? String ?? "false").bool
+        resetPasswordButton.isHidden = !(configDictionary[CAMKeys.passwordResetEnabled.rawValue] as? String ?? "false").bool
         authFieldsTable.backgroundView = UIView()
         configureElements()
     }
     
     func configureElements() {
-        let array: [(UIView, UIElement)] = [(backgroundImageView, .backgroungImageView), (backButton, .backButton),
-                                            (closeButton, .closeButton), (logoImageView, .headerImageView),
-                                            (titleLabel, .loginTitleLabel), (loginButton, .loginButton),
-                                            (resetPasswordButton, .loginResetPasswordButton), (alternateLabel, .separatorLabel),
-                                            (socialNetworksLabel, .networksAuthLabel), (signUpContainer, .bottomBannerView),
-                                            (signUpButton, .loginAlternativeActionButton)]
-        array.forEach {
-            UIConfigurator.configureView(type: $0.1, view: $0.0, dict: configDictionary)
-        }
+        backgroundImageView.configureWith(bgImageName: configDictionary[CAMKeys.backgroundImage.rawValue] as? String)
+        backButton.configureWith(bgImageName: configDictionary[CAMKeys.backButtonImage.rawValue] as? String)
+        closeButton.configureWith(bgImageName: configDictionary[CAMKeys.closeButtonImage.rawValue] as? String)
+        logoImageView.configureWith(bgImageName: configDictionary[CAMKeys.headerLogo.rawValue] as? String)
+        titleLabel.configureWith(text: configDictionary[CAMKeys.loginScreenTitleText.rawValue] as? String)
+        loginButton.configureWith(text: configDictionary[CAMKeys.loginButtonText.rawValue] as? String,
+                                  bgImageName: configDictionary[CAMKeys.loginButtonImage.rawValue] as? String)
+        resetPasswordButton.configureWith(text: configDictionary[CAMKeys.loginResetPasswordButtonText.rawValue] as? String)
+        alternateLabel.configureWith(text: configDictionary[CAMKeys.separatorText.rawValue] as? String)
+        socialNetworksLabel.configureWith(text: configDictionary[CAMKeys.alternativeLoginPromtText.rawValue] as? String)
+        signUpButton.configureWith(text: (configDictionary[CAMKeys.loginSingUpPromtText.rawValue] as? String ?? "") +
+                                         (configDictionary[CAMKeys.loginSingUpActionText.rawValue] as? String ?? ""))
     }
     
     func setupConstraints() {
@@ -148,7 +152,8 @@ class LoginViewController: UIViewController {
         var result = [(key: String, value: String?)]()
         for obj in authFields {
             if obj.mandatory && (obj.text ?? "").isEmpty {
-                showError(description: "Mandatory field is Empty!")
+                let message = configDictionary[CAMKeys.emptyFieldsMessage.rawValue] as? String
+                showError(description: message)
                 return
             }
             result.append((key: (obj.key ?? ""), value: obj.text))
@@ -175,7 +180,7 @@ extension LoginViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "AuthCell", for: indexPath) as? AuthTableCell else {
             return UITableViewCell()
         }
-        UIConfigurator.configureAuthField(view: cell.textField, data: authFields[indexPath.row], dict: configDictionary)
+        cell.textField.configureInputField(data: authFields[indexPath.row])
         cell.backgroundColor = .clear
         cell.textChanged = { [weak self] text in
             self?.authFields[indexPath.row].text = text

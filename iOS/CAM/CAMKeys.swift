@@ -8,34 +8,52 @@
 import Foundation
 
 enum CAMKeys: String {
-    case auth_fields = "auth_fields"
-    case default_auth_screen = "default_auth_screen"
-    case back_button = "back_button"
-    case close_button = "close_button"
-    case header_logo = "header_logo"
-    case background_image = "background_image"
-    case separator_text = "separator_text"
-    case networks_auth_action_text = "networks_auth_action_text"
-    case bottom_banner_bg_color = "botton_banner_bg_color"
+
+    case passwordResetEnabled = "pwd_reset_required"
+    case facebookLoginEnabled = "facebook_login_required"
+    case authFields = "auth_fields"
+    case defaultAuthScreen = "default_auth_screen"
+    case authFieldImage = "auth_field_image"
     
-    case login_screen_title_text = "login_screen_title_text"
-    case reset_password_text = "reset_password_text"
-    case alternative_login_promt_text = "alternative_login_promt_text"
-    case login_button_text = "login_button_text"
-    case login_button_image = "login_button_image"
+    case backButtonImage = "back_button"
+    case closeButtonImage = "close_button"
+    case headerLogo = "header_logo"
+    case backgroundImage = "background_image"
+    case separatorText = "separator_text"
     
-    case signup_screen_title_text = "signup_screen_title_text"
-    case signup_button_text = "signup_button_text"
-    case signup_button_image = "signup_button_image"
-    case alternative_signup_promt_text = "alternative_signup_promt_text"
+    case emptyFieldsMessage = "madatory_field_empty_error"
     
-    case password_reset_title_text = "password_reset_title_text"
-    case password_reset_info_text = "password_reset_info_text"
-    case password_reset_button_text = "password_reset_button_text"
-    case password_reset_button_image = "password_reset_button_image"
+    //Login
     
-    case password_alert_title_text = "password_alert_title_text"
-    case password_alert_info_text = "password_alert_info_text"
-    case password_alert_button_text = "password_alert_button_text"
-    case password_alert_button_image = "password_alert_button_image"
+    case loginScreenTitleText = "login_screen_title_text"
+    case loginButtonText = "login_button_text"
+    case loginButtonImage = "login_button_image"
+    case loginResetPasswordButtonText = "reset_password_text"
+    case alternativeLoginPromtText = "alternative_login_action_prompt_text"
+    case loginSingUpPromtText = "login_promt_text"
+    case loginSingUpActionText = "login_prompt_action_text"
+    
+    //SignUp
+    
+    case signUpScreenTitleText = "signup_screen_title_text"
+    case signUpButtonText = "signup_button_text"
+    case signUpButtonImage = "signup_button_image"
+    case alternativeSignUpPromtText = "alternative_signup_action_promt_text"
+    case singUpLoginPromtText = "signup_promt_text"
+    case singUpLoginActionText = "signup_prompt_action_text"
+    
+    //Reset Password
+    
+    case passwordResetTitleText = "password_reset_title_text"
+    case passwordResetInfoText = "password_reset_description_text"
+    case passwordResetButtonText = "password_reset_button_text"
+    case passwordResetButtonImage = "password_reset_button_image"
+    case passwordInputFieldPlaceholder = "password_input_field_placeholder"
+    
+    //Reset Password alert
+    
+    case passwordAlertTitleText = "password_alert_title_text"
+    case passwordAlertInfoText = "password_alert_description_text"
+    case passwordAlertButtonText = "password_alert_button_text"
+    case passwordAlertButtonImage = "password_alert_button_image"
 }

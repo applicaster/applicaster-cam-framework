@@ -27,7 +27,7 @@ class AuthorizationCoordinator: AuthorizationCoordinatorProtocol, Coordinator {
         self.parentCoordinator = parentCoordinator
         self.navigationController = navigationController
         let dictionary = parentCoordinator.getCamDelegate().getPluginConfig()
-        switch dictionary[CAMKeys.default_auth_screen.rawValue] as? String {
+        switch dictionary[CAMKeys.defaultAuthScreen.rawValue] as? String {
         case "login":
             showLoginScreen(isCoordinatorRootController: true)
         case "registration":

@@ -39,8 +39,8 @@ class SignUpViewController: UIViewController {
     @IBOutlet var inputContainerYConstraint: NSLayoutConstraint!
     @IBOutlet var inputContainerHeightConstraint: NSLayoutConstraint!
     
-    var configDictionary: [String: Any]? {
-        return presenter?.camDelegate?.getPluginConfig()
+    var configDictionary: [String: Any] {
+        return presenter?.camDelegate?.getPluginConfig() ?? [String: Any]()
     }
     var presenter: SignUpPresenter?
     
@@ -85,7 +85,7 @@ class SignUpViewController: UIViewController {
     func setupUI() {
         self.navigationController?.isNavigationBarHidden = true
         restoreContainer.isHidden = true
-        socialNetworksContainer.isHidden = false
+        socialNetworksContainer.isHidden = (configDictionary[CAMKeys.facebookLoginEnabled.rawValue] as? String ?? "false").bool
         authFieldsTable.backgroundView = UIView()
         configureElements()
     }
@@ -108,14 +108,16 @@ class SignUpViewController: UIViewController {
     }
     
     func configureElements() {
-        let array: [(UIView, UIElement)] = [(backgroundImageView, .backgroungImageView), (backButton, .backButton),
-                                            (closeButton, .closeButton), (logoImageView, .headerImageView),
-                                            (titleLabel, .signUpTitleLabel), (signUpButton, .signUpButton),
-                                            (alternateLabel, .separatorLabel), (socialNetworksLabel, .networksAuthLabel),
-                                            (loginContainer, .bottomBannerView), (loginButton, .signUpAlternativeActionButton)]
-        array.forEach {
-            UIConfigurator.configureView(type: $0.1, view: $0.0, dict: configDictionary)
-        }
+        backgroundImageView.configureWith(bgImageName: configDictionary[CAMKeys.backgroundImage.rawValue] as? String)
+        backButton.configureWith(bgImageName: configDictionary[CAMKeys.backButtonImage.rawValue] as? String)
+        closeButton.configureWith(bgImageName: configDictionary[CAMKeys.closeButtonImage.rawValue] as? String)
+        logoImageView.configureWith(bgImageName: configDictionary[CAMKeys.headerLogo.rawValue] as? String)
+        titleLabel.configureWith(text: configDictionary[CAMKeys.signUpScreenTitleText.rawValue] as? String)
+        signUpButton.configureWith(text: configDictionary[CAMKeys.signUpButtonText.rawValue] as? String,
+                                  bgImageName: configDictionary[CAMKeys.signUpButtonImage.rawValue] as? String)
+        alternateLabel.configureWith(text: configDictionary[CAMKeys.separatorText.rawValue] as? String)
+        socialNetworksLabel.configureWith(text: configDictionary[CAMKeys.alternativeSignUpPromtText.rawValue] as? String)
+        loginButton.configureWith(text: configDictionary[CAMKeys.singUpLoginPromtText.rawValue] as? String)
     }
     
     // MARK: - Keyboard
@@ -139,7 +141,8 @@ class SignUpViewController: UIViewController {
         var result = [(key: String, value: String?)]()
         for obj in authFields {
             if obj.mandatory && (obj.text ?? "").isEmpty {
-                showError(description: "Mandatory field is Empty!")
+                let message = configDictionary[CAMKeys.emptyFieldsMessage.rawValue] as? String
+                showError(description: message)
                 return
             }
             result.append((key: (obj.key ?? ""), value: obj.text))
@@ -170,7 +173,7 @@ extension SignUpViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "AuthCell", for: indexPath) as? AuthTableCell else {
             return UITableViewCell()
         }
-        UIConfigurator.configureAuthField(view: cell.textField, data: authFields[indexPath.row], dict: configDictionary)
+        cell.textField.configureInputField(data: authFields[indexPath.row])
         cell.backgroundColor = .clear
         cell.textChanged = { [weak self] text in
             self?.authFields[indexPath.row].text = text
