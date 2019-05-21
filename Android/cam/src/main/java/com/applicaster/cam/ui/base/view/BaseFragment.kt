@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import com.applicaster.cam.ui.base.presenter.IBasePresenter
 
@@ -53,7 +54,7 @@ abstract class BaseFragment : Fragment(), IBaseView {
     }
 
     @SuppressLint("ShowToast")
-    open fun showToastMessage(message: String) {
+    override fun showToastMessage(message: String) {
         if (isAdded && context != null && !activity?.isFinishing!!) {
             if (toast == null) {
                 toast = Toast.makeText(context, message, Toast.LENGTH_SHORT)
@@ -63,6 +64,10 @@ abstract class BaseFragment : Fragment(), IBaseView {
             }
             toast?.show()
         }
+    }
+
+    override fun customize() {
+        makeFullscreen(getParentView())
     }
 
     open fun showLoadingIndicator() {
@@ -81,5 +86,13 @@ abstract class BaseFragment : Fragment(), IBaseView {
         activity?.finish()
     }
 
+    private fun makeFullscreen(rootLayout: View?) {
+        rootLayout?.apply {
+            fitsSystemWindows = true
+            parent?.requestFitSystemWindows()
+        }
+    }
+
     protected abstract fun setListeners()
+    protected abstract fun getParentView(): ViewGroup?
 }

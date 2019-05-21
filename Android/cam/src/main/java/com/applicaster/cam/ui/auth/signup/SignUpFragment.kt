@@ -22,14 +22,16 @@ class SignUpFragment : AuthFragment(), ISignUpView {
         return presenter as AuthPresenter
     }
 
-    override fun applyUICustomizations() {
-        super.applyUICustomizations()
+    override fun customize() {
+        super.customize()
         tv_forgot_pwd.visibility = View.GONE
-        UIMapper.map(tv_logo, UIKey.SIGN_UP_TITLE)
-        UIMapper.map(btn_input_action, UIKey.SIGN_UP_BUTTON)
-        UIMapper.map(tv_add_auth_or, UIKey.AUTH_SEPARATOR_TEXT)
-        UIMapper.map(tv_add_auth_desc, UIKey.SIGN_UP_ALT_AUTH_TEXT)
-        UIMapper.map(tv_hint_desc, UIKey.SIGN_UP_PROMPT_TEXT)
-        UIMapper.map(tv_hint_action, UIKey.SIGN_UP_PROMPT_ACTION_TEXT)
+        UIMapper.apply {
+            map(tv_logo, UIKey.SIGN_UP_TITLE)
+            map(btn_input_action, UIKey.SIGN_UP_BUTTON)
+            map(tv_add_auth_or, UIKey.AUTH_SEPARATOR_TEXT)
+            map(tv_add_auth_desc, UIKey.SIGN_UP_ALT_AUTH_TEXT)
+            map(tv_hint_desc, UIKey.SIGN_UP_PROMPT_TEXT)
+            map(tv_hint_action, UIKey.SIGN_UP_PROMPT_ACTION_TEXT)
+        }
     }
 }

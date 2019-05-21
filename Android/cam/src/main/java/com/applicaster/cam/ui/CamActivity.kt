@@ -21,16 +21,8 @@ class CamActivity : BaseActivity() {
             fragments_container_tablet != null -> fragmentsContainer = fragments_container_tablet
         }
 
-        makeFullscreen(fragmentsContainer)
         navigationRouter = CamNavigationRouter(this)
         navigationRouter.attachLoginFragment()
-    }
-
-    private fun makeFullscreen(rootLayout: View?) {
-        rootLayout?.apply {
-            fitsSystemWindows = true
-            parent?.requestFitSystemWindows()
-        }
     }
 
     override fun getFragmentContainerType(): ContainerType {
