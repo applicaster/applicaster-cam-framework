@@ -1,12 +1,10 @@
 package com.applicaster.cam
 
-import com.applicaster.cam.params.auth.AuthField
-
 interface ICamContract {
 
-    fun login(authFields: List<AuthField>, callback: LoginCallback)
+    fun login(authFieldsInput: HashMap<String, String>, callback: LoginCallback)
 
-    fun signUp(authFields: List<AuthField>, callback: SignUpCallback)
+    fun signUp(authFieldsInput: HashMap<String, String>, callback: SignUpCallback)
 
     fun resetPassword(callback: PasswordResetCallback)
 

@@ -46,7 +46,7 @@ abstract class AuthFragment : BaseFragment(), IAuthView {
     }
 
     override fun setListeners() {
-        btn_input_action.setOnClickListener { presenter?.onAuthActionButtonClicked() }
+        btn_input_action.setOnClickListener { presenter?.onAuthActionButtonClicked(getInputFieldsValues()) }
         tv_hint_desc.setOnClickListener { presenter?.onAuthHintClicked() }
         tv_hint_action.setOnClickListener { presenter?.onAuthHintClicked() }
         tv_bottom_bar_desc.setOnClickListener { presenter?.onRestoreClicked() }
@@ -99,6 +99,16 @@ abstract class AuthFragment : BaseFragment(), IAuthView {
         }
     }
 
+    private fun getInputFieldsValues(): HashMap<String, String> {
+        val inputValues = HashMap<String, String>()
+        for (i in 0 until container_linear_input.childCount) {
+            val child = container_linear_input.getChildAt(i) as? EditText
+            if (child != null)
+                inputValues[(child.tag as AuthField).key!!] = child.text.toString()
+        }
+        return inputValues
+    }
+
     abstract fun initPresenter(navigationManager: CamNavigationRouter): IAuthPresenter
 
     companion object {
@@ -119,6 +129,7 @@ private fun EditText.applyCustomizations(
         topMargin = etMarginTop
 
     }
+    tag = field
     val paddingHorizontal = resources.getDimensionPixelSize(R.dimen.auth_et_padding_horizontal)
     setPadding(paddingHorizontal, 0, paddingHorizontal, 0)
     UIMapper.map(this, UIKey.AUTH_INPUT_FIELD)

@@ -21,7 +21,17 @@ abstract class AuthPresenter(
         view?.showToastMessage("restore action")
     }
 
-    abstract override fun onAuthActionButtonClicked()
+    protected fun isAuthInputFieldsValid(inputValues: HashMap<String, String>): Boolean {
+        for (inputValue in inputValues) {
+            if (inputValue.value.isEmpty()) {
+                view?.showToastMessage("You must fill all fields")
+                return true
+            }
+        }
+        return false
+    }
+
+    abstract override fun onAuthActionButtonClicked(inputValues: HashMap<String, String>)
     abstract override fun onAuthHintClicked()
     abstract fun getAuthFieldConfig(): AuthFieldConfig
 }

@@ -3,18 +3,17 @@ package com.applicaster.camsample.mock
 import android.content.Context
 import android.os.Handler
 import com.applicaster.cam.*
-import com.applicaster.cam.params.auth.AuthField
 import com.applicaster.cam.params.billing.Offer
 import com.applicaster.cam.params.billing.ProductType
 
 class MockCamContract(private val context: Context) : ICamContract {
 
-    override fun login(authFields: List<AuthField>, callback: LoginCallback) {
-        Handler().postDelayed({ callback.onSuccess() }, 1000)
+    override fun login(authFieldsInput: HashMap<String, String>, callback: LoginCallback) {
+        Handler().postDelayed({ callback.onSuccess() }, 1250)
     }
 
-    override fun signUp(authFields: List<AuthField>, callback: SignUpCallback) {
-        Handler().postDelayed({ callback.onSuccess() }, 1000)
+    override fun signUp(authFieldsInput: HashMap<String, String>, callback: SignUpCallback) {
+        Handler().postDelayed({ callback.onSuccess() }, 1250)
     }
 
     override fun resetPassword(callback: PasswordResetCallback) {
