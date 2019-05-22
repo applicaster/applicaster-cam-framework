@@ -1,16 +1,23 @@
 PODS:
-  - CAM (0.0.1)
+  - CAM (0.0.1):
+    - ZappPlugins
+  - ZappPlugins (8.3.1)
 
 DEPENDENCIES:
   - CAM (from `../CAM.podspec`)
+
+SPEC REPOS:
+  "git@github.com:applicaster/CocoaPods.git":
+    - ZappPlugins
 
 EXTERNAL SOURCES:
   CAM:
     :path: "../CAM.podspec"
 
 SPEC CHECKSUMS:
-  CAM: 45f36880d843d2e341d5dc732fdd3635e89b5a8b
+  CAM: 0038b1cfdcf16fd9fcf95e1e3da13fe9b4e8d387
+  ZappPlugins: c83e7569d70312a3203dde46d7743fdad394589c
 
 PODFILE CHECKSUM: 4158a3c98c8a932dee8739c7dccf7ef5943eeb52
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.6.0
