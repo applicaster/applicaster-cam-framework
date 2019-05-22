@@ -12,4 +12,14 @@ enum class AuthScreenType {
             else -> "undefined"
         }
     }
+
+    companion object {
+        fun fromKey(key: String): AuthScreenType {
+            return when (key) {
+                "login" -> LOGIN
+                "signup" -> SIGNUP
+                else -> UNDEFINED
+            }
+        }
+    }
 }

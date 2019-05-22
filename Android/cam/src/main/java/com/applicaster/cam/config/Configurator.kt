@@ -11,6 +11,8 @@ interface Configurator {
 
     fun getDefaultAuthScreen(): AuthScreenType
 
+    fun isAuthRestoreRequired(): Boolean
+
     fun isPasswordResetRequired(): Boolean
 
     fun isFacebookLoginRequired(): Boolean

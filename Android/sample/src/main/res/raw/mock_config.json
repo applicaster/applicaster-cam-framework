@@ -1,10 +1,4 @@
 {
-  "default_auth_screen": "login",
-  "back_button": "back_button",
-  "close_button": "close_button",
-  "header_logo": "header_logo",
-  "separator_text": "Or",
-
   "login_screen_title_text": "Login To Your Account",
   "reset_password_text": "Forgot Password?",
   "alternative_login_action_prompt_text": "Log In with Social Networks",
@@ -12,11 +6,12 @@
   "login_prompt_text": "Don't have an account?",
   "login_prompt_action_text": "Sign Up",
 
-  "signup_screen_title_text": "Create an Account",
-  "signup_button_text": "Sign Up",
+  "sign_up_screen_title_text": "Create an Account",
+  "sign_up_button_text": "Sign Up",
   "alternative_sign_up_action_prompt_text": "Sign Up with Social Networks",
   "sign_up_prompt_text": "Have already an account?",
   "sign_up_prompt_action_text": "Log In",
+  "separator_text": "Or",
 
   "password_reset_title_text": "Reset Password",
   "password_reset_info_text": "Type in you e-mail so we would send you the new password",
@@ -44,6 +39,8 @@
   "payment_option_button_text_size": "12",
   "payment_option_promo_text": "1 MONTH FREE",
 
+  "default_auth_screen": "signup",
+  "auth_restore_required": "true",
   "pwd_reset_required" : "true",
   "facebook_login_required" : "true",
 

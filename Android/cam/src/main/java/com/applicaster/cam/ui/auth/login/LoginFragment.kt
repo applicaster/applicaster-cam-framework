@@ -1,6 +1,7 @@
 package com.applicaster.cam.ui.auth.login
 
 import android.view.View
+import com.applicaster.cam.ContentAccessManager
 import com.applicaster.cam.config.ui.UIKey
 import com.applicaster.cam.config.ui.UIMapper
 import com.applicaster.cam.ui.CamNavigationRouter
@@ -30,7 +31,10 @@ class LoginFragment : AuthFragment(), ILoginView {
 
     override fun customize() {
         super.customize()
-        tv_forgot_pwd.visibility = View.VISIBLE
+        tv_forgot_pwd?.apply {
+            visibility =
+                if (ContentAccessManager.pluginConfigurator.isPasswordResetRequired()) View.VISIBLE else View.GONE
+        }
         UIMapper.apply {
             map(tv_logo, UIKey.LOGIN_TITLE)
             map(tv_forgot_pwd, UIKey.LOGIN_RESET_PWD)
