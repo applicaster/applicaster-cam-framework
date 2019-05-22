@@ -27,8 +27,8 @@ class CamActivity : BaseActivity() {
 
 
         when (ContentAccessManager.pluginConfigurator.getDefaultAuthScreen()) {
-            AuthScreenType.LOGIN -> navigationRouter.attachLoginFragment()
-            AuthScreenType.SIGNUP -> navigationRouter.attachSignUpFragment()
+            AuthScreenType.LOGIN -> navigationRouter.attachLoginFragment(true)
+            AuthScreenType.SIGNUP -> navigationRouter.attachSignUpFragment(true)
         }
     }
 
