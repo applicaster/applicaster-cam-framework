@@ -33,16 +33,6 @@ class PluginUIProvider(
         return Color.BLACK
     }
 
-    override fun getTextSize(key: String): Float {
-        return let {
-            if (pluginConfig.containsKey(key)) {
-                pluginConfig[key]?.toFloat() ?: context.resources.getDimension(R.dimen.default_text_size)
-            } else {
-                context.resources.getDimension(R.dimen.default_text_size)
-            }
-        }
-    }
-
     override fun getDrawable(key: String): Drawable {
         val drawableId = OSUtil.getDrawableResourceIdentifier(key)
         return if (drawableId != 0) {
@@ -80,5 +70,14 @@ class PluginUIProvider(
             }
         }
         return Typeface.DEFAULT
+    }
+
+    override fun getStyleResId(key: String): Int {
+        val styleResId = OSUtil.getStyleResourceIdentifier(key)
+        return if (styleResId != 0) {
+            styleResId
+        } else {
+            OSUtil.getStyleResourceIdentifier("DefaultTextStyle")
+        }
     }
 }

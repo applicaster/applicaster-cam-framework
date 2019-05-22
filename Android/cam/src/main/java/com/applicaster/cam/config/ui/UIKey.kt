@@ -3,9 +3,7 @@ package com.applicaster.cam.config.ui
 enum class UIKey(
     val text: String? = null,
     val hint: String? = null,
-    val textSize: String? = null,
-    val textColor: String? = null,
-    val font: String? = null,
+    val textStyle: String? = null,
     val image: String? = null
 ) {
     // @formatter:off
@@ -13,7 +11,7 @@ enum class UIKey(
     TOOLBAR_CLOSE_BUTTON(image = UI_KEY_TOOLBAR_CLOSE_IMAGE),
     TOOLBAR_HEADER_LOGO(image = UI_KEY_TOOLBAR_LOGO_IMAGE),
     BACKGROUND_IMAGE(image = UI_KEY_BACKGROUND_IMAGE),
-    LOGIN_TITLE(text =UI_KEY_LOGIN_TITLE_TEXT),
+    LOGIN_TITLE(text = UI_KEY_LOGIN_TITLE_TEXT),
     LOGIN_RESET_PWD(text = UI_KEY_LOGIN_RESET_PWD_TEXT),
     LOGIN_ALT_AUTH_TEXT(text = UI_KEY_THIRD_PARTY_LOGIN_TEXT),
     LOGIN_BTN_TEXT(text = UI_KEY_LOGIN_BUTTON_TEXT, image = UI_KEY_LOGIN_BUTTON_IMAGE),
@@ -27,15 +25,15 @@ enum class UIKey(
     AUTH_SEPARATOR_TEXT(text = UI_KEY_THIRD_PARTY_SEPARATOR_TEXT),
     AUTH_INPUT_FIELD(image = UI_KEY_INPUT_FIELD_IMAGE),
     AUTH_FACEBOOK_IMAGE(image = UI_KEY_FACEBOOK_IMAGE),
-    BILLING_ITEM_SUBS_BUTTON(text = UI_KEY_BILLING_ITEM_SUBS_BUTTON_TEXT, textSize = UI_KEY_BILLING_ITEM_SUBS_BUTTON_TEXT_SIZE, image = UI_KEY_BILLING_ITEM_SUBS_BUTTON_IMAGE),
+    BILLING_ITEM_SUBS_BUTTON(text = UI_KEY_BILLING_ITEM_SUBS_BUTTON_TEXT, textStyle = UI_KEY_BILLING_ITEM_SUBS_BUTTON_TEXT, image = UI_KEY_BILLING_ITEM_SUBS_BUTTON_IMAGE),
     BILLING_ITEM_PARENT(image = UI_KEY_BILLING_ITEM_BCKG),
-    BILLING_ITEM_TITLE(textSize = UI_KEY_BILLING_ITEM_TITLE_TEXT_SIZE),
-    BILLING_ITEM_DETAILS(textSize = UI_KEY_BILLING_ITEM_DETAILS_TEXT_SIZE),
-    BILLING_ITEM_REDEEM(text = UI_KEY_BILLING_ITEM_REDEEM_TEXT, textSize = UI_KEY_BILLING_ITEM_REDEEM_TEXT_SIZE),
-    BILLING_TITLE(text = UI_KEY_BILLING_TITLE_TEXT, textSize = UI_KEY_BILLING_TITLE_TEXT_SIZE),
-    BILLING_PROMPT(text = UI_KEY_BILLING_RESTORE_DESC, textSize = UI_KEY_BILLING_RESTORE_DESC_SIZE),
-    BILLING_RESTORE_ACTION(text = UI_KEY_BILLING_RESTORE_ACTION, textSize = UI_KEY_BILLING_RESTORE_ACTION_SIZE),
-    BILLING_RESTORE_HINT_DESC(text = UI_KEY_BILLING_RESTORE_DESC, textSize = UI_KEY_BILLING_RESTORE_DESC_SIZE)
+    BILLING_ITEM_TITLE(textStyle = UI_KEY_BILLING_ITEM_TITLE_TEXT),
+    BILLING_ITEM_DETAILS(textStyle = UI_KEY_BILLING_ITEM_DETAILS_TEXT),
+    BILLING_ITEM_REDEEM(text = UI_KEY_BILLING_ITEM_REDEEM_TEXT, textStyle = UI_KEY_BILLING_ITEM_REDEEM_TEXT),
+    BILLING_TITLE(text = UI_KEY_BILLING_TITLE_TEXT, textStyle = UI_KEY_BILLING_TITLE_TEXT),
+    BILLING_PROMPT(text = UI_KEY_BILLING_RESTORE_DESC, textStyle = UI_KEY_BILLING_RESTORE_DESC),
+    BILLING_RESTORE_ACTION(text = UI_KEY_BILLING_RESTORE_ACTION, textStyle = UI_KEY_BILLING_RESTORE_ACTION),
+    BILLING_RESTORE_HINT_DESC(text = UI_KEY_BILLING_RESTORE_DESC, textStyle = UI_KEY_BILLING_RESTORE_DESC)
     // @formatter:on
 }
 
@@ -68,23 +66,16 @@ const val UI_KEY_FACEBOOK_IMAGE = "facebook_button_icon"
 // region Billing item UI keys
 const val UI_KEY_BILLING_ITEM_SUBS_BUTTON_IMAGE = "payment_option_button_asset"
 const val UI_KEY_BILLING_ITEM_SUBS_BUTTON_TEXT = "payment_option_button_text"
-const val UI_KEY_BILLING_ITEM_SUBS_BUTTON_TEXT_SIZE = "payment_option_button_text_size"
 const val UI_KEY_BILLING_ITEM_BCKG = "payment_option_component_asset"
 const val UI_KEY_BILLING_ITEM_TITLE_TEXT = "payment_option_title_text"
-const val UI_KEY_BILLING_ITEM_TITLE_TEXT_SIZE = "payment_option_title_text_size"
 const val UI_KEY_BILLING_ITEM_DETAILS_TEXT = "payment_option_details_text"
-const val UI_KEY_BILLING_ITEM_DETAILS_TEXT_SIZE = "payment_option_details_text_size"
 const val UI_KEY_BILLING_ITEM_REDEEM_TEXT = "payment_option_redeem_text"
-const val UI_KEY_BILLING_ITEM_REDEEM_TEXT_SIZE = "payment_option_redeem_text_size"
 const val UI_KEY_BILLING_ITEM_LABEL_BCKG = "payment_option_promo_img"
 const val UI_KEY_BILLING_ITEM_LABEL_TEXT = "payment_option_promo_text"
 // region Billing fragments
 const val UI_KEY_BILLING_TITLE_TEXT = "payment_option_screen_title_text"
-const val UI_KEY_BILLING_TITLE_TEXT_SIZE = "payment_option_screen_title_text_size"
 const val UI_KEY_BILLING_RESTORE_DESC = "payment_option_screen_hint_desc"
-const val UI_KEY_BILLING_RESTORE_DESC_SIZE = "payment_option_screen_hint_desc_size"
 const val UI_KEY_BILLING_RESTORE_ACTION = "payment_option_screen_hint_action"
-const val UI_KEY_BILLING_RESTORE_ACTION_SIZE = "payment_option_screen_hint_action_size"
 // endregion
 // endregion
 

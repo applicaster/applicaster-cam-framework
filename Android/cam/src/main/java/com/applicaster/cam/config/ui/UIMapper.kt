@@ -1,5 +1,6 @@
 package com.applicaster.cam.config.ui
 
+import android.os.Build
 import android.text.SpannableStringBuilder
 import android.view.View
 import android.view.ViewGroup
@@ -18,14 +19,8 @@ object UIMapper {
         if (!key.hint.isNullOrEmpty()) {
             setHint(view, key.hint)
         }
-        if (!key.textSize.isNullOrEmpty()) {
-            setTextSize(view, key.textSize)
-        }
-        if (!key.textColor.isNullOrEmpty()) {
-            setTextColor(view, key.textColor)
-        }
-        if (!key.font.isNullOrEmpty()) {
-            setFont(view, key.font)
+        if (!key.textStyle.isNullOrEmpty()) {
+            setTextStyle(view, key.textStyle)
         }
         if (!key.image.isNullOrEmpty()) {
             setImage(view, key.image)
@@ -54,24 +49,20 @@ object UIMapper {
         }
     }
 
-    private fun setTextSize(view: View, key: String) {
+    private fun setTextStyle(view: View, key: String) {
         when (view) {
-            is TextView -> view.textSize = uiProvider.getTextSize(key)
-            is EditText -> view.textSize = uiProvider.getTextSize(key)
-        }
-    }
-
-    private fun setTextColor(view: View, key: String) {
-        when (view) {
-            is TextView -> view.setTextColor(uiProvider.getColor(key))
-            is EditText -> view.setTextColor(uiProvider.getColor(key))
-        }
-    }
-
-    private fun setFont(view: View, key: String) {
-        when (view) {
-            is TextView -> view.typeface = uiProvider.getFont(key)
-            is EditText -> view.typeface = uiProvider.getFont(key)
+            is TextView -> {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+                    view.setTextAppearance(uiProvider.getStyleResId(key))
+                else
+                    view.setTextAppearance(view.context, uiProvider.getStyleResId(key))
+            }
+            is EditText -> {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+                    view.setTextAppearance(uiProvider.getStyleResId(key))
+                else
+                    view.setTextAppearance(view.context, uiProvider.getStyleResId(key))
+            }
         }
     }
 

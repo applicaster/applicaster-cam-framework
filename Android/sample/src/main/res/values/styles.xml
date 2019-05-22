@@ -7,5 +7,50 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    
+    <!-- Default style for text -->
+    <style name="DefaultTextStyle">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@android:color/darker_gray</item>
+    </style>
+    <!-- end Default style for text -->
+
+    <!-- Payment options screen styles -->
+    <style name="payment_option_screen_title_text">
+        <item name="android:fontFamily">@font/sf_pro_display_bold</item>
+        <item name="android:textSize">19sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="payment_option_screen_hint_desc">
+        <item name="android:fontFamily">@font/sf_pro_display_light</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="payment_option_screen_hint_action">
+        <item name="android:fontFamily">@font/sf_pro_display_bold</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="payment_option_title_text">
+        <item name="android:fontFamily">@font/sf_pro_display_bold</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/colorCustomBlack</item>
+    </style>
+    <style name="payment_option_details_text">
+        <item name="android:fontFamily">@font/sf_pro_display_regular</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/colorCustomBlack</item>
+    </style>
+    <style name="payment_option_redeem_text">
+        <item name="android:fontFamily">@font/sf_pro_display_regular</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/colorCustomBlack</item>
+    </style>
+    <style name="payment_option_button_text">
+        <item name="android:fontFamily">@font/sf_pro_display_bold</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <!-- end Payment options screen styles-->
 
 </resources>

@@ -27,7 +27,7 @@
         <item name="android:layout_width">@dimen/additional_auth_divider_width</item>
         <item name="android:layout_height">@dimen/additional_auth_divider_height</item>
         <item name="android:layout_margin">@dimen/additional_auth_margin</item>
-        <item name="android:background">@color/white</item>
+        <item name="android:background">@color/white</item>custom
     </style>
 
     <style name="EditTextAuthInput" parent="AppTheme">
