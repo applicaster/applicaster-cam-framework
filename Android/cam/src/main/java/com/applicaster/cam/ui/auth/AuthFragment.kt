@@ -117,7 +117,11 @@ private fun EditText.applyCustomizations(
         etHeight
     ).apply {
         topMargin = etMarginTop
+
     }
+    val paddingHorizontal = resources.getDimensionPixelSize(R.dimen.auth_et_padding_horizontal)
+    setPadding(paddingHorizontal, 0, paddingHorizontal, 0)
+    UIMapper.map(this, UIKey.AUTH_INPUT_FIELD)
     inputType = when (field.type) {
         AuthField.Type.TEXT -> InputType.TYPE_CLASS_TEXT
         AuthField.Type.PASSWORD -> (InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD)
