@@ -171,27 +171,16 @@ take up to two lines maximum</string>
                                                         <constraint firstItem="f4O-U3-xFW" firstAttribute="centerX" secondItem="hGy-N7-TRU" secondAttribute="centerX" id="nxG-6W-v65"/>
                                                     </constraints>
                                                 </view>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LnF-XJ-25d">
-                                                    <rect key="frame" x="247" y="0.0" width="55" height="28"/>
-                                                    <color key="backgroundColor" red="1" green="0.051292712499999997" blue="0.09409615482" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="28" id="gcw-ni-Le6"/>
-                                                        <constraint firstAttribute="width" constant="55" id="juT-fu-sY2"/>
-                                                    </constraints>
-                                                </imageView>
                                             </subviews>
                                         </view>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="hGy-N7-TRU" secondAttribute="trailing" constant="6" id="0xa-o4-MR6"/>
                                             <constraint firstItem="hGy-N7-TRU" firstAttribute="leading" secondItem="KiS-Ag-85C" secondAttribute="leading" constant="6" id="AjF-0d-Ack"/>
-                                            <constraint firstAttribute="trailingMargin" secondItem="LnF-XJ-25d" secondAttribute="trailing" constant="10" id="K62-Oj-4IS"/>
-                                            <constraint firstItem="LnF-XJ-25d" firstAttribute="top" secondItem="KiS-Ag-85C" secondAttribute="top" id="Rgp-j7-hgB"/>
                                             <constraint firstAttribute="bottom" secondItem="hGy-N7-TRU" secondAttribute="bottom" id="jgQ-xb-83q"/>
                                             <constraint firstItem="hGy-N7-TRU" firstAttribute="top" secondItem="KiS-Ag-85C" secondAttribute="top" constant="9" id="vyx-qL-ekA"/>
                                         </constraints>
                                         <connections>
-                                            <outlet property="freePeriodImageView" destination="LnF-XJ-25d" id="UHb-bm-rkF"/>
                                             <outlet property="infoLabel" destination="wvC-r2-igl" id="hKq-04-ccG"/>
                                             <outlet property="purchaseButton" destination="f4O-U3-xFW" id="W0A-3Q-QGD"/>
                                             <outlet property="titleLabel" destination="B90-xo-GgL" id="2Fs-z9-0We"/>
@@ -220,7 +209,7 @@ take up to two lines maximum</string>
                                 </connections>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ly1-rl-Hp7">
-                                <rect key="frame" x="0.0" y="504" width="320" height="64"/>
+                                <rect key="frame" x="0.0" y="484" width="320" height="84"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="iEt-bg-rhl">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
@@ -236,6 +225,7 @@ take up to two lines maximum</string>
                                 </subviews>
                                 <color key="backgroundColor" red="0.078431372549019607" green="0.23137254901960785" blue="0.40784313725490196" alpha="0.5" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="height" constant="84" id="HpU-Ew-m9X"/>
                                     <constraint firstItem="iEt-bg-rhl" firstAttribute="top" secondItem="Ly1-rl-Hp7" secondAttribute="top" id="OFw-gg-IIJ"/>
                                     <constraint firstAttribute="trailing" secondItem="iEt-bg-rhl" secondAttribute="trailing" id="bLc-JV-4rt"/>
                                     <constraint firstItem="iEt-bg-rhl" firstAttribute="leading" secondItem="Ly1-rl-Hp7" secondAttribute="leading" id="nSS-LR-dEh"/>
@@ -245,7 +235,7 @@ take up to two lines maximum</string>
                         <color key="backgroundColor" red="0.23921568630000001" green="0.28235294119999998" blue="0.3294117647" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="BZT-8a-6sn" secondAttribute="bottom" id="2RK-su-3vv"/>
-                            <constraint firstItem="Ly1-rl-Hp7" firstAttribute="top" secondItem="0qm-JL-SHB" secondAttribute="bottom" constant="-64" id="3iy-uU-gbB"/>
+                            <constraint firstItem="Ly1-rl-Hp7" firstAttribute="top" secondItem="0qm-JL-SHB" secondAttribute="bottom" constant="-84" id="3iy-uU-gbB"/>
                             <constraint firstItem="fwb-4x-wqx" firstAttribute="leading" secondItem="0qm-JL-SHB" secondAttribute="leading" constant="10" id="9nr-G9-FGT"/>
                             <constraint firstItem="6Qv-70-8Sd" firstAttribute="top" secondItem="0qm-JL-SHB" secondAttribute="top" id="BvI-MD-cAM"/>
                             <constraint firstItem="BZT-8a-6sn" firstAttribute="leading" secondItem="0qm-JL-SHB" secondAttribute="leading" id="CkZ-8C-fb7"/>

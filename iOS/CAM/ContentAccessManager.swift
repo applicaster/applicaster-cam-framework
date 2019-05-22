@@ -27,6 +27,7 @@ public class ContentAccessManager {
     public static let shared = ContentAccessManager()
     
     private init() {
+        self.navigationController.isNavigationBarHidden = true
     }
     
     public func startFlow(rootViewController: UIViewController, camDelegate: CAMDelegate, completion: @escaping (Bool) -> Void) {

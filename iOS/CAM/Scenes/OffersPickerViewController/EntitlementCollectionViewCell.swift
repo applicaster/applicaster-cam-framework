@@ -26,14 +26,12 @@ final class OfferViewModel {
 }
 
 class EntitlementCollectionViewCell: UICollectionViewCell {
-    @IBOutlet weak var freePeriodImageView: UIImageView!
+    @IBOutlet private var titleLabel: UILabel!
+    @IBOutlet private var infoLabel: UILabel!
+    @IBOutlet private var purchaseButton: UIButton!
     
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var infoLabel: UILabel!
-    @IBOutlet weak var purchaseButton: UIButton!
-    
-    var buyAction: () -> Void = {}
-    var redeemAction: () -> Void = {}
+    private var buyAction: () -> Void = {}
+    private var redeemAction: () -> Void = {}
     
     public func configure(from viewModel: OfferViewModel) {
         self.titleLabel.text = viewModel.title
@@ -42,14 +40,11 @@ class EntitlementCollectionViewCell: UICollectionViewCell {
         self.redeemAction = viewModel.redeemAction
     }
 
-    @IBAction func purchaseItem(_ sender: UIButton) {
+    @IBAction private func purchaseItem(_ sender: UIButton) {
         buyAction()
     }
     
-    @IBAction func purchaseWithRedeemCode(_ sender: UIButton) {
+    @IBAction private func purchaseWithRedeemCode(_ sender: UIButton) {
         redeemAction()
     }
-    
-    
-
 }
