@@ -7,7 +7,7 @@ import com.applicaster.cam.params.auth.AuthField
 import com.applicaster.cam.params.billing.Offer
 import com.applicaster.cam.params.billing.ProductType
 
-class MockCamContract(val context: Context) : ICamContract {
+class MockCamContract(private val context: Context) : ICamContract {
 
     override fun login(authFields: List<AuthField>, callback: LoginCallback) {
         Handler().postDelayed({ callback.onSuccess() }, 1000)

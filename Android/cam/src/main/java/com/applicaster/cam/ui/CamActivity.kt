@@ -2,7 +2,9 @@ package com.applicaster.cam.ui
 
 import android.os.Bundle
 import android.view.View
+import com.applicaster.cam.ContentAccessManager
 import com.applicaster.cam.R
+import com.applicaster.cam.params.auth.AuthScreenType
 import com.applicaster.cam.ui.base.view.BaseActivity
 import com.applicaster.cam.ui.base.view.ContainerType
 import kotlinx.android.synthetic.main.activity_cam.*
@@ -22,7 +24,12 @@ class CamActivity : BaseActivity() {
         }
 
         navigationRouter = CamNavigationRouter(this)
-        navigationRouter.attachLoginFragment()
+
+
+        when (ContentAccessManager.pluginConfigurator.getDefaultAuthScreen()) {
+            AuthScreenType.LOGIN -> navigationRouter.attachLoginFragment()
+            AuthScreenType.SIGNUP -> navigationRouter.attachSignUpFragment()
+        }
     }
 
     override fun getFragmentContainerType(): ContainerType {

@@ -46,8 +46,8 @@ const val UI_KEY_BACKGROUND_IMAGE = "background_image"
 // endregion
 
 // region Sign up UI keys
-const val UI_KEY_SIGN_UP_TITLE_TEXT = "signup_screen_title_text"
-const val UI_KEY_SIGN_UP_BUTTON_TEXT = "signup_button_text"
+const val UI_KEY_SIGN_UP_TITLE_TEXT = "sign_up_screen_title_text"
+const val UI_KEY_SIGN_UP_BUTTON_TEXT = "sign_up_button_text"
 const val UI_KEY_SIGN_UP_BUTTON_IMAGE = "signup_button_image"
 const val UI_KEY_LOGIN_RESET_PWD_TEXT = "reset_password_text"
 const val UI_KEY_SIGN_UP_PROMPT_TEXT = "sign_up_prompt_text"
