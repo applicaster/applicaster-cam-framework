@@ -9,9 +9,9 @@ interface UIProvider {
     @ColorInt
     fun getColor(key: String): Int
 
-    fun getTextSize(key: String): Float
-
     fun getDrawable(key: String): Drawable
 
     fun getFont(key: String) : Typeface
+
+    fun getStyleResId(key: String): Int
 }
