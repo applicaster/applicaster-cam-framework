@@ -21,8 +21,10 @@ class LoginPresenter {
     var isRoot: Bool = false
     
     func viewDidLoad() {
-        if let json = camDelegate?.getPluginConfig()[CAMKeys.auth_fields.rawValue] as? String, let data = json.data(using: .utf8) {
-            if let jsonAuthFields = try? JSONDecoder().decode(AuthFields.self, from: data), let loginFields = jsonAuthFields.login {
+        if let json = camDelegate?.getPluginConfig()[CAMKeys.authFields.rawValue],
+           let data = json.data(using: .utf8) {
+            if let jsonAuthFields = try? JSONDecoder().decode(AuthFields.self, from: data),
+               let loginFields = jsonAuthFields.login {
                 view?.updateTable(fields: loginFields)
             }
         }

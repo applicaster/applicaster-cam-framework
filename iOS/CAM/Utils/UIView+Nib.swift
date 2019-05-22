@@ -8,6 +8,8 @@
 
 import UIKit
 
+// swiftlint:disable all
+
 extension UIView {
     
     class func nibInstance() -> Self {

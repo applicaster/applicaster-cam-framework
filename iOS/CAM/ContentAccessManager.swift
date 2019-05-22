@@ -16,7 +16,7 @@ protocol Coordinator {
     func start(navigationController: UINavigationController, parentCoordinator: PluginDataProviderProtocol, completion: @escaping (Bool) -> Void)
 }
 
-public class ContentAccessManager {
+open class ContentAccessManager {
     
     var navigationController = UINavigationController()
     var completion: ((Bool) -> Void)!
@@ -40,7 +40,7 @@ public class ContentAccessManager {
         }
     }
     
-    func authorize() {
+    private func authorize() {
         rootViewController.present(navigationController, animated: true, completion: nil)
         childCoordinator = AuthorizationCoordinator()
         childCoordinator?.start(navigationController: navigationController, parentCoordinator: self, completion: { [weak self] (isUserLogged) in
@@ -54,7 +54,7 @@ public class ContentAccessManager {
         })
     }
     
-    func checkUserAccess() {
+    private func checkUserAccess() {
         if delegate.isEntitlementsValid() {
             finishFlow(true)
         } else {
@@ -65,7 +65,7 @@ public class ContentAccessManager {
         }
     }
     
-    func purchaseEntitlement() {
+    private func purchaseEntitlement() {
         childCoordinator = BillingCoordinator()
         childCoordinator?.start(navigationController: navigationController, parentCoordinator: self, completion: { [weak self] (isUserHasAccess) in
             self?.childCoordinator = nil
@@ -73,14 +73,12 @@ public class ContentAccessManager {
         })
     }
     
-    
-    func finishFlow(_ result: Bool) {
+    private func finishFlow(_ result: Bool) {
         navigationController.viewControllers.removeAll()
         self.navigationController.dismiss(animated: true, completion: {
             self.completion(result)
         })
     }
-
 }
 
 extension ContentAccessManager: PluginDataProviderProtocol {

@@ -8,14 +8,9 @@
 
 import Foundation
 
-struct AuthFields : Codable {
-    let signup : [AuthField]?
-    let login : [AuthField]?
-    
-    enum CodingKeys: String, CodingKey {
-        case signup = "signup"
-        case login = "login"
-    }
+struct AuthFields: Codable {
+    let signup: [AuthField]?
+    let login: [AuthField]?
 }
 
 enum AuthFieldInputType: String, Codable {

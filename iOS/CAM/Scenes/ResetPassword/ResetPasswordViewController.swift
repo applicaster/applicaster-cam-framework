@@ -23,17 +23,16 @@ class ResetPasswordViewController: UIViewController {
     
     @IBOutlet var titleTopSpaceConstraint: NSLayoutConstraint!
     
+    var configDictionary: [String: String] {
+        return presenter?.camDelegate?.getPluginConfig() ?? [String: String]()
+    }
     var presenter: ResetPasswordPresenter?
     
-    //MARK: - Flow & UI Setup
-    
-    override func loadView() {
-        super.loadView()
-        setupUI()
-    }
+    // MARK: - Flow & UI Setup
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureElements()
     }
     
     override func viewDidLayoutSubviews() {
@@ -41,22 +40,17 @@ class ResetPasswordViewController: UIViewController {
         loadingPopover.frame = self.view.bounds
         setupConstraints()
     }
-
-    func setupUI() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
-        view.addGestureRecognizer(tapGesture)
-        configureElements()
-    }
     
     func configureElements() {
-        let configDictionary = presenter?.camDelegate?.getPluginConfig()
-        let array: [(UIView, UIElement)] = [(backgroundImageView, .backgroungImageView), (backButton, .backButton),
-                                            (closeButton, .closeButton), (logoImageView, .headerImageView),
-                                            (titleLabel, .resetPasswordTitleLabel), (infoLabel, .resetPasswordInfoLabel),
-                                            (emailTextField, .resetPasswordTextField),(resetButton, .resetPasswordButton)]
-        array.forEach {
-            UIConfigurator.configureView(type: $0.1, view: $0.0, dict: configDictionary)
-        }
+        backgroundImageView.setZappStyle(withAsset: .backgroundImage)
+        backButton.setZappStyle(withIconAsset: .backButtonImage)
+        closeButton.setZappStyle(withIconAsset: .closeButtonImage)
+        logoImageView.setZappStyle(withAsset: .headerLogo)
+        titleLabel.setZappStyle(text: configDictionary[CAMKeys.passwordResetTitleText.rawValue], style: .screenTitle)
+        infoLabel.setZappStyle(text: configDictionary[CAMKeys.passwordResetInfoText.rawValue], style: .screenDescription)
+        emailTextField.setZappStyle(backgroundAsset: .authFieldImage, textStyle: .inputField, placeholder:
+                                    configDictionary[CAMKeys.passwordInputFieldPlaceholder.rawValue])
+        resetButton.setZappStyle(backgroundAsset: .passwordResetButtonImage, title: configDictionary[CAMKeys.passwordResetButtonText.rawValue], style: .actionButton)
     }
     
     func setupConstraints() {
@@ -64,9 +58,9 @@ class ResetPasswordViewController: UIViewController {
         self.view.layoutIfNeeded()
     }
     
-    //MARK: - Keyboard
+    // MARK: - Keyboard
     
-    @objc func hideKeyboard() {
+    @IBAction func hideKeyboard() {
         view.endEditing(true)
     }
     
@@ -75,11 +69,13 @@ class ResetPasswordViewController: UIViewController {
     @IBAction func resetPassword(_ sender: UIButton) {
         hideKeyboard()
         guard let email = emailTextField.text else {
-            showError(description: "Mandatory field is Empty!")
+            let message = configDictionary[CAMKeys.emptyFieldsMessage.rawValue]
+            showError(description: message)
             return
         }
         if email.isEmpty {
-            showError(description: "Mandatory field is Empty!")
+            let message = configDictionary[CAMKeys.emptyFieldsMessage.rawValue]
+            showError(description: message)
             return
         }
         presenter?.resetPassword(email: email)
@@ -94,9 +90,8 @@ class ResetPasswordViewController: UIViewController {
     }
 }
 
+// MARK: - ResetPasswordViewProtocol
 extension ResetPasswordViewController: ResetPasswordViewProtocol {
-    
-    // MARK: - ResetPasswordViewProtocol
     
     func showLoadingScreen(_ show: Bool) {
         if show {
@@ -107,26 +102,27 @@ extension ResetPasswordViewController: ResetPasswordViewProtocol {
     }
     
     func showError(description: String?) {
-        let alert = UIAlertController(title: "Error", message: description, preferredStyle: UIAlertController.Style.alert)
+        let alert = UIAlertController(title: "Error", message: description, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
     
     func showConfirmationScreenIfNeeded() {
-        let dictionary = presenter?.camDelegate?.getPluginConfig()
-        if let _ = dictionary?[CAMKeys.password_alert_title_text.rawValue] as? String,
-           let _ = dictionary?[CAMKeys.password_alert_info_text.rawValue] as? String,
-           let _ = dictionary?[CAMKeys.password_alert_button_text.rawValue] as? String {
+        if configDictionary[CAMKeys.passwordAlertTitleText.rawValue] != nil &&
+           configDictionary[CAMKeys.passwordAlertInfoText.rawValue] != nil &&
+           configDictionary[CAMKeys.passwordAlertButtonText.rawValue] != nil {
             let confirmationPopover = ConfirmationPopover.nibInstance()
             confirmationPopover.frame = self.view.frame
             confirmationPopover.buttonPressedAction = { [weak self] in
                 self?.presenter?.backToPreviousScreen()
             }
-            UIConfigurator.configureView(type: .passwordAlert, view: confirmationPopover, dict: dictionary)
+//            confirmationPopover.titleLabel.configureWith(text: configDictionary[CAMKeys.passwordAlertTitleText.rawValue])
+//            confirmationPopover.descriptionLabel.configureWith(text: configDictionary[CAMKeys.passwordAlertInfoText.rawValue])
+//            confirmationPopover.actionButton.configureWith(text: configDictionary[CAMKeys.passwordAlertButtonText.rawValue],
+//                                                           bgImageName: configDictionary[CAMKeys.passwordAlertButtonImage.rawValue])
             self.view.addSubview(confirmationPopover)
         } else {
             presenter?.backToPreviousScreen()
         }
     }
 }
-

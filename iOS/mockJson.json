@@ -5,18 +5,22 @@
     "header_logo": "header_logo",
     "background_image": "background_image",
     "separator_text": "Or",
-    "networks_auth_action_text": "Login using social networks",
+    "madatory_field_empty_error": "Mandatory field is empty!",
     
     "login_screen_title_text": "Login To Your Account",
     "reset_password_text": "Forgot Password?",
-    "alternative_login_promt_text": "Dont have an account? Sign UP",
+    "alternative_login_action_prompt_text": "Log In with Social Networks",
     "login_button_text": "Log In",
     "login_button_image": "login_button",
+    "login_promt_text": "Don't have an account?",
+    "login_promt_action_text": "Sign Up",
     
-    "signup_screen_title_text": "Sign UP",
-    "signup_button_text": "Sign Up",
-    "signup_button_image": "signup_button",
-    "alternative_signup_promt_text": "Have already an account? Log In",
+    "sign_up_screen_title_text": "Sign UP",
+    "sign_up_button_text": "Sign Up",
+    "sign_up_button_image": "signup_button",
+    "alternative_sign_up_action_prompt_text": "Sign Up with Social Networks",
+    "sign_up_promt_text": "Have already an account?",
+    "sign_up_promt_action_text": "Log In",
     
     "password_reset_title_text": "Reset Password",
     "password_reset_info_text": "Type in you e-mail so we would send you the new password",
@@ -27,5 +31,8 @@
     "password_alert_info_text": "Success",
     "password_alert_button_text": "Ok",
     "password_alert_button_image": "alert_image",
+    
+    "pwd_reset_required" : "true",
+    "facebook_login_required" : "true",
     "auth_fields": "{ \"signup\": [{\"type\": \"TEXT\",\"key\": \"email\",\"title\": \"Email\",\"hint\": \"Email\",\"mandatory\": true },{\"type\": \"PASSWORD\",\"key\": \"password\",\"title\": \"Password\",\"hint\": \"Password\",\"mandatory\": true },{\"type\": \"NUMBER\",\"key\": \"Phone\",\"title\": \"Phone\",\"hint\": \"Phone\",\"mandatory\": true},{\"type\": \"TEXT\",\"key\": \"gender\",\"title\": \"Gender\",\"hint\": \"Gender\",\"mandatory\": false }],\"login\": [{\"type\": \"TEXT\",\"key\": \"email\",\"title\": \"Email\",\"hint\": \"Email\",\"mandatory\": true},{\"type\": \"PASSWORD\",\"key\": \"password\",\"title\": \"Password\",\"hint\": \"Password\",\"mandatory\": true},{\"type\": \"NUMBER\",\"key\": \"birthdate\",\"title\": \"Birth Date\",\"hint\": \"Birth Date\",\"mandatory\": true},{\"type\": \"NUMBER\",\"key\": \"birthdate\",\"title\": \"Birth Date\",\"hint\": \"Birth Date\",\"mandatory\": true}, {\"type\": \"NUMBER\",\"key\": \"birthdate\",\"title\": \"Birth Date\",\"hint\": \"Birth Date\",\"mandatory\": true}]}"
 }
