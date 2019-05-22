@@ -23,8 +23,8 @@ class ResetPasswordViewController: UIViewController {
     
     @IBOutlet var titleTopSpaceConstraint: NSLayoutConstraint!
     
-    var configDictionary: [String: Any] {
-        return presenter?.camDelegate?.getPluginConfig() ?? [String: Any]()
+    var configDictionary: [String: String] {
+        return presenter?.camDelegate?.getPluginConfig() ?? [String: String]()
     }
     var presenter: ResetPasswordPresenter?
     
@@ -42,15 +42,15 @@ class ResetPasswordViewController: UIViewController {
     }
     
     func configureElements() {
-        backgroundImageView.configureWith(bgImageName: configDictionary[CAMKeys.backgroundImage.rawValue] as? String)
-        backButton.configureWith(bgImageName: configDictionary[CAMKeys.backButtonImage.rawValue] as? String)
-        closeButton.configureWith(bgImageName: configDictionary[CAMKeys.closeButtonImage.rawValue] as? String)
-        logoImageView.configureWith(bgImageName: configDictionary[CAMKeys.headerLogo.rawValue] as? String)
-        titleLabel.configureWith(text: configDictionary[CAMKeys.passwordResetTitleText.rawValue] as? String)
-        infoLabel.configureWith(text: configDictionary[CAMKeys.passwordResetInfoText.rawValue] as? String)
-        emailTextField.configureWith(text: configDictionary[CAMKeys.passwordInputFieldPlaceholder.rawValue] as? String)
-        resetButton.configureWith(text: configDictionary[CAMKeys.passwordResetButtonText.rawValue] as? String,
-                                  bgImageName: configDictionary[CAMKeys.passwordResetButtonImage.rawValue] as? String)
+        backgroundImageView.setZappStyle(withAsset: .backgroundImage)
+        backButton.setZappStyle(withIconAsset: .backButtonImage)
+        closeButton.setZappStyle(withIconAsset: .closeButtonImage)
+        logoImageView.setZappStyle(withAsset: .headerLogo)
+        titleLabel.setZappStyle(text: configDictionary[CAMKeys.passwordResetTitleText.rawValue], style: .screenTitle)
+        infoLabel.setZappStyle(text: configDictionary[CAMKeys.passwordResetInfoText.rawValue], style: .screenDescription)
+        emailTextField.setZappStyle(backgroundAsset: .authFieldImage, textStyle: .inputField, placeholder:
+                                    configDictionary[CAMKeys.passwordInputFieldPlaceholder.rawValue])
+        resetButton.setZappStyle(backgroundAsset: .passwordResetButtonImage, title: configDictionary[CAMKeys.passwordResetButtonText.rawValue], style: .actionButton)
     }
     
     func setupConstraints() {
@@ -69,12 +69,12 @@ class ResetPasswordViewController: UIViewController {
     @IBAction func resetPassword(_ sender: UIButton) {
         hideKeyboard()
         guard let email = emailTextField.text else {
-            let message = configDictionary[CAMKeys.emptyFieldsMessage.rawValue] as? String
+            let message = configDictionary[CAMKeys.emptyFieldsMessage.rawValue]
             showError(description: message)
             return
         }
         if email.isEmpty {
-            let message = configDictionary[CAMKeys.emptyFieldsMessage.rawValue] as? String
+            let message = configDictionary[CAMKeys.emptyFieldsMessage.rawValue]
             showError(description: message)
             return
         }
@@ -116,10 +116,10 @@ extension ResetPasswordViewController: ResetPasswordViewProtocol {
             confirmationPopover.buttonPressedAction = { [weak self] in
                 self?.presenter?.backToPreviousScreen()
             }
-            confirmationPopover.titleLabel.configureWith(text: configDictionary[CAMKeys.passwordAlertTitleText.rawValue] as? String)
-            confirmationPopover.descriptionLabel.configureWith(text: configDictionary[CAMKeys.passwordAlertInfoText.rawValue] as? String)
-            confirmationPopover.actionButton.configureWith(text: configDictionary[CAMKeys.passwordAlertButtonText.rawValue] as? String,
-                                                           bgImageName: configDictionary[CAMKeys.passwordAlertButtonImage.rawValue] as? String)
+//            confirmationPopover.titleLabel.configureWith(text: configDictionary[CAMKeys.passwordAlertTitleText.rawValue])
+//            confirmationPopover.descriptionLabel.configureWith(text: configDictionary[CAMKeys.passwordAlertInfoText.rawValue])
+//            confirmationPopover.actionButton.configureWith(text: configDictionary[CAMKeys.passwordAlertButtonText.rawValue],
+//                                                           bgImageName: configDictionary[CAMKeys.passwordAlertButtonImage.rawValue])
             self.view.addSubview(confirmationPopover)
         } else {
             presenter?.backToPreviousScreen()

@@ -21,7 +21,7 @@ class LoginPresenter {
     var isRoot: Bool = false
     
     func viewDidLoad() {
-        if let json = camDelegate?.getPluginConfig()[CAMKeys.authFields.rawValue] as? String,
+        if let json = camDelegate?.getPluginConfig()[CAMKeys.authFields.rawValue],
            let data = json.data(using: .utf8) {
             if let jsonAuthFields = try? JSONDecoder().decode(AuthFields.self, from: data),
                let loginFields = jsonAuthFields.login {

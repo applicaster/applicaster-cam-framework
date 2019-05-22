@@ -39,8 +39,8 @@ class LoginViewController: UIViewController {
     @IBOutlet var inputContainerHeightConstraint: NSLayoutConstraint!
     @IBOutlet var authFieldsTableHeightConstraint: NSLayoutConstraint!
 
-    var configDictionary: [String: Any] {
-        return presenter?.camDelegate?.getPluginConfig() ?? [String: Any]()
+    var configDictionary: [String: String] {
+        return presenter?.camDelegate?.getPluginConfig() ?? [String: String]()
     }
     var presenter: LoginPresenter?
     
@@ -84,26 +84,35 @@ class LoginViewController: UIViewController {
     
     func setupUI() {
         self.navigationController?.isNavigationBarHidden = true
+        signUpButton.titleLabel?.numberOfLines = 0
+        signUpButton.titleLabel?.textAlignment = .center
         restoreContainer.isHidden = true
-        socialNetworksContainer.isHidden = !(configDictionary[CAMKeys.facebookLoginEnabled.rawValue] as? String ?? "false").bool
-        resetPasswordButton.isHidden = !(configDictionary[CAMKeys.passwordResetEnabled.rawValue] as? String ?? "false").bool
+        socialNetworksContainer.isHidden = !(configDictionary[CAMKeys.facebookLoginEnabled.rawValue] ?? "false").bool
+        resetPasswordButton.isHidden = !(configDictionary[CAMKeys.passwordResetEnabled.rawValue] ?? "false").bool
         authFieldsTable.backgroundView = UIView()
         configureElements()
     }
     
     func configureElements() {
-        backgroundImageView.configureWith(bgImageName: configDictionary[CAMKeys.backgroundImage.rawValue] as? String)
-        backButton.configureWith(bgImageName: configDictionary[CAMKeys.backButtonImage.rawValue] as? String)
-        closeButton.configureWith(bgImageName: configDictionary[CAMKeys.closeButtonImage.rawValue] as? String)
-        logoImageView.configureWith(bgImageName: configDictionary[CAMKeys.headerLogo.rawValue] as? String)
-        titleLabel.configureWith(text: configDictionary[CAMKeys.loginScreenTitleText.rawValue] as? String)
-        loginButton.configureWith(text: configDictionary[CAMKeys.loginButtonText.rawValue] as? String,
-                                  bgImageName: configDictionary[CAMKeys.loginButtonImage.rawValue] as? String)
-        resetPasswordButton.configureWith(text: configDictionary[CAMKeys.loginResetPasswordButtonText.rawValue] as? String)
-        alternateLabel.configureWith(text: configDictionary[CAMKeys.separatorText.rawValue] as? String)
-        socialNetworksLabel.configureWith(text: configDictionary[CAMKeys.alternativeLoginPromtText.rawValue] as? String)
-        signUpButton.configureWith(text: (configDictionary[CAMKeys.loginSingUpPromtText.rawValue] as? String ?? "") +
-                                         (configDictionary[CAMKeys.loginSingUpActionText.rawValue] as? String ?? ""))
+        backgroundImageView.setZappStyle(withAsset: .backgroundImage)
+        backButton.setZappStyle(withIconAsset: .backButtonImage)
+        closeButton.setZappStyle(withIconAsset: .closeButtonImage)
+        logoImageView.setZappStyle(withAsset: .headerLogo)
+        titleLabel.setZappStyle(text: configDictionary[CAMKeys.loginScreenTitleText.rawValue], style: .screenTitle)
+        loginButton.setZappStyle(backgroundAsset: .loginButtonImage,
+                                 title: configDictionary[CAMKeys.loginButtonText.rawValue],
+                                 style: .actionButton)
+        resetPasswordButton.setZappStyle(title: configDictionary[CAMKeys.loginResetPasswordButtonText.rawValue],
+                                         style: .resetPassword)
+        alternateLabel.setZappStyle(text: configDictionary[CAMKeys.separatorText.rawValue], style: .separator)
+        socialNetworksLabel.setZappStyle(text: configDictionary[CAMKeys.alternativeLoginPromtText.rawValue], style: .alternativeLoginText)
+        signUpButton.setAttributedZappStyle(attributedTitle: [(style: .promtText,
+                                                               string: configDictionary[CAMKeys.loginSingUpPromtText.rawValue] ?? "",
+                                                               additionalAttributes: nil),
+                                                              (style: .promtAction,
+                                                               string: "\n\(configDictionary[CAMKeys.loginSingUpActionText.rawValue] ?? "")",
+                                                               additionalAttributes: nil)])
+        signUpContainer.setZappStyle(withBackgroundColor: .alternateActionBannerColor)
     }
     
     func setupConstraints() {
@@ -152,7 +161,7 @@ class LoginViewController: UIViewController {
         var result = [(key: String, value: String?)]()
         for obj in authFields {
             if obj.mandatory && (obj.text ?? "").isEmpty {
-                let message = configDictionary[CAMKeys.emptyFieldsMessage.rawValue] as? String
+                let message = configDictionary[CAMKeys.emptyFieldsMessage.rawValue]
                 showError(description: message)
                 return
             }
@@ -180,6 +189,7 @@ extension LoginViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "AuthCell", for: indexPath) as? AuthTableCell else {
             return UITableViewCell()
         }
+        cell.textField.setZappStyle(backgroundAsset: .authFieldImage, textStyle: .inputField, placeholder: authFields[indexPath.row].hint)
         cell.textField.configureInputField(data: authFields[indexPath.row])
         cell.backgroundColor = .clear
         cell.textChanged = { [weak self] text in

@@ -16,6 +16,7 @@
 		B69986852270615C0093FBEC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B69986842270615C0093FBEC /* Assets.xcassets */; };
 		B69986882270615C0093FBEC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B69986862270615C0093FBEC /* LaunchScreen.storyboard */; };
 		B6998690227061750093FBEC /* MockDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B699868F227061750093FBEC /* MockDataClass.swift */; };
+		B6CE74B3229582A2002A5FEB /* ZAAppConnector+Local.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CE74B2229582A2002A5FEB /* ZAAppConnector+Local.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		B69986872270615C0093FBEC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B69986892270615C0093FBEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B699868F227061750093FBEC /* MockDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDataClass.swift; sourceTree = "<group>"; };
+		B6CE74B2229582A2002A5FEB /* ZAAppConnector+Local.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ZAAppConnector+Local.swift"; sourceTree = "<group>"; };
 		CCFEA2A8CCFC3453BBD4F107 /* Pods-CAMFramework.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CAMFramework.release.xcconfig"; path = "Target Support Files/Pods-CAMFramework/Pods-CAMFramework.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -78,6 +80,7 @@
 			children = (
 				B699867D2270615B0093FBEC /* AppDelegate.swift */,
 				B699867F2270615B0093FBEC /* ViewController.swift */,
+				B6CE74B2229582A2002A5FEB /* ZAAppConnector+Local.swift */,
 				B699868F227061750093FBEC /* MockDataClass.swift */,
 				B69986812270615B0093FBEC /* Main.storyboard */,
 				B69986842270615C0093FBEC /* Assets.xcassets */,
@@ -176,12 +179,14 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-CAMFramework/Pods-CAMFramework-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/CAM/CAM.framework",
+				"${PODS_ROOT}/ZappPlugins/Frameworks/iOS/ZappPlugins.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CAM.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZappPlugins.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -236,6 +241,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B69986802270615B0093FBEC /* ViewController.swift in Sources */,
+				B6CE74B3229582A2002A5FEB /* ZAAppConnector+Local.swift in Sources */,
 				B66551B82286F7F000670F62 /* mockJson.json in Sources */,
 				B6998690227061750093FBEC /* MockDataClass.swift in Sources */,
 				B699867E2270615B0093FBEC /* AppDelegate.swift in Sources */,

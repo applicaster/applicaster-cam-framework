@@ -11,4 +11,7 @@ Pod::Spec.new do |s|
   s.resources = 'iOS/CAM/**/*.{xib,nib,storyboard}'
   s.source_files = 'iOS/CAM/**/*.{swift,h,m}'
   s.requires_arc = true
+
+  s.dependency 'ZappPlugins'
+
 end

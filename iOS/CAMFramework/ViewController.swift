@@ -13,32 +13,37 @@ import CAM
 // swiftlint:disable all
 
 class ViewController: UIViewController, CAMDelegate {
+    
+    let myConnector = MyConnector()
+    
     func resetPassword(email: String, completion: @escaping (CAMResult) -> Void) {
         completion(.success)
     }
     
     func login(authData: [(key: String, value: String?)], completion: @escaping (CAMResult) -> Void) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
             completion(.success)
         })
     }
     
     func signUp(authData: [(key: String, value: String?)], completion: @escaping (CAMResult) -> Void) {
-        
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+            completion(.success)
+        })
     }
     
-    func getPluginConfig() -> Dictionary<String, Any> {
+    func getPluginConfig() -> Dictionary<String, String> {
         if let path = Bundle.main.path(forResource: "mockJson", ofType: "json") {
             do {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
                 let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
-                let dict = jsonResult as! Dictionary<String, Any>
+                let dict = jsonResult as! Dictionary<String, String>
                 return dict
             } catch {
             
             }
         }
-        return Dictionary<String, Any>()
+        return Dictionary<String, String>()
     }
 
     @IBAction func start(_ sender: Any) {

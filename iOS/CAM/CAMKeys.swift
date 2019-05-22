@@ -7,13 +7,13 @@
 
 import Foundation
 
-enum CAMKeys: String {
+public enum CAMKeys: String {
 
     case passwordResetEnabled = "pwd_reset_required"
     case facebookLoginEnabled = "facebook_login_required"
     case authFields = "auth_fields"
-    case defaultAuthScreen = "default_auth_screen"
     case authFieldImage = "auth_field_image"
+    case defaultAuthScreen = "default_auth_screen"
     
     case backButtonImage = "back_button"
     case closeButtonImage = "close_button"
@@ -31,16 +31,16 @@ enum CAMKeys: String {
     case loginResetPasswordButtonText = "reset_password_text"
     case alternativeLoginPromtText = "alternative_login_action_prompt_text"
     case loginSingUpPromtText = "login_promt_text"
-    case loginSingUpActionText = "login_prompt_action_text"
+    case loginSingUpActionText = "login_promt_action_text"
     
     //SignUp
     
-    case signUpScreenTitleText = "signup_screen_title_text"
-    case signUpButtonText = "signup_button_text"
-    case signUpButtonImage = "signup_button_image"
-    case alternativeSignUpPromtText = "alternative_signup_action_promt_text"
-    case singUpLoginPromtText = "signup_promt_text"
-    case singUpLoginActionText = "signup_prompt_action_text"
+    case signUpScreenTitleText = "sign_up_screen_title_text"
+    case signUpButtonText = "sign_up_button_text"
+    case signUpButtonImage = "sign_up_button_image"
+    case alternativeSignUpPromtText = "alternative_sign_up_action_promt_text"
+    case singUpLoginPromtText = "sign_up_promt_text"
+    case singUpLoginActionText = "sign_up_promt_action_text"
     
     //Reset Password
     
@@ -56,4 +56,17 @@ enum CAMKeys: String {
     case passwordAlertInfoText = "password_alert_description_text"
     case passwordAlertButtonText = "password_alert_button_text"
     case passwordAlertButtonImage = "password_alert_button_image"
+}
+
+public enum CAMStyles: String {
+    case screenTitle = "screen_title_text"
+    case screenDescription = "screen_description_text"
+    case inputField = "input_label_text"
+    case actionButton = "action_button_text"
+    case resetPassword = "restore_password_text"
+    case promtText = "promt_text"
+    case promtAction = "promt_action_text"
+    case separator = "separator_text"
+    case alternativeLoginText = "alternative_login_promt_text"
+    case alternateActionBannerColor = "alternate_action_banner_bg_color"
 }
