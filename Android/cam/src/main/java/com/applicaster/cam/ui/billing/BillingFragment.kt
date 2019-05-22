@@ -27,11 +27,10 @@ class BillingFragment : BaseFragment(), IBillingView {
     private var pagerBillingAdapter: PagerBillingAdapter? = null
     private lateinit var purchaseListener: PurchaseInteractionListener
 
-
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         val navigationManager = if (baseActivity.getNavigationRouter() is CamNavigationRouter)
             baseActivity.getNavigationRouter() as CamNavigationRouter
@@ -44,6 +43,8 @@ class BillingFragment : BaseFragment(), IBillingView {
     }
 
     override fun setListeners() {
+        toolbar_back_button.setOnClickListener { presenter?.onToolbarBackClicked() }
+        toolbar_close_button.setOnClickListener { presenter?.onToolbarCloseClicked() }
         purchaseListener = object : PurchaseInteractionListener {
             override fun onPurchaseButtonClicked(skuId: String) {
                 presenter?.onPurchaseButtonClicked(skuId)
@@ -97,17 +98,5 @@ class BillingFragment : BaseFragment(), IBillingView {
     override fun clearBillingContainer() {
         recyclerBillingAdapter?.apply { removeAllPurchaseItems() }
         pagerBillingAdapter?.apply { removeAllPurchaseItems() }
-    }
-
-    override fun showToastMessage(msg: String) {
-        super.showToastMessage(msg)
-    }
-
-    override fun showLoadingIndicator() {
-        super.showLoadingIndicator()
-    }
-
-    override fun hideLoadingIndicator() {
-        super.hideLoadingIndicator()
     }
 }

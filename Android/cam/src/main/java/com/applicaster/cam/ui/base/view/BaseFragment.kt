@@ -4,9 +4,11 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AlertDialog
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.applicaster.cam.R
 import com.applicaster.cam.ui.base.presenter.IBasePresenter
 
 abstract class BaseFragment : Fragment(), IBaseView {
@@ -14,6 +16,7 @@ abstract class BaseFragment : Fragment(), IBaseView {
     protected lateinit var baseActivity: BaseActivity
     private var basePresenter: IBasePresenter? = null
     private var toast: Toast? = null
+    private var dialog: AlertDialog? = null
 
     protected fun setPresenter(presenter: IBasePresenter?) {
         basePresenter = presenter
@@ -70,12 +73,19 @@ abstract class BaseFragment : Fragment(), IBaseView {
         makeFullscreen(getParentView())
     }
 
-    open fun showLoadingIndicator() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun showLoadingIndicator() {
+        context?.apply {
+            if (dialog == null) {
+                val builder = AlertDialog.Builder(this)
+                builder.setView(R.layout.layout_progress)
+                dialog = builder.create()
+            }
+            dialog?.show()
+        }
     }
 
-    open fun hideLoadingIndicator() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun hideLoadingIndicator() {
+        dialog?.dismiss()
     }
 
     override fun goBack() {

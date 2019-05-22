@@ -8,4 +8,6 @@ interface IBaseView {
     fun goBack()
     fun close()
     fun showToastMessage(msg: String)
+    fun showLoadingIndicator()
+    fun hideLoadingIndicator()
 }
