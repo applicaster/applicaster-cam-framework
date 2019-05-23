@@ -4,13 +4,14 @@ import android.support.v4.view.PagerAdapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.applicaster.cam.R
 import com.applicaster.cam.config.ui.UIKey
 import com.applicaster.cam.config.ui.UIMapper
 import com.applicaster.cam.ui.billing.adapter.PurchaseItem
 import com.applicaster.cam.ui.billing.adapter.IBillingAdapter
 import com.applicaster.cam.ui.billing.adapter.PurchaseInteractionListener
 import kotlinx.android.synthetic.main.billing_item.view.*
+import android.support.v4.view.ViewPager
+
 
 class PagerBillingAdapter(
     private val purchaseListener: PurchaseInteractionListener
@@ -22,11 +23,15 @@ class PagerBillingAdapter(
     override fun isViewFromObject(view: View, obj: Any): Boolean = (view == obj)
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
-        val itemView = LayoutInflater.from(container.context).inflate(R.layout.billing_item, container, false)
+        val itemView = LayoutInflater.from(container.context).inflate(com.applicaster.cam.R.layout.billing_item, container, false)
         container.addView(itemView)
         bindView(purchaseItemsList[position], itemView)
         customize(itemView)
         return itemView
+    }
+
+    override fun destroyItem(container: ViewGroup, position: Int, obj: Any) {
+        (container as ViewPager).removeView(obj as View)
     }
 
     override fun getCount(): Int = purchaseItemsList.size
@@ -34,9 +39,7 @@ class PagerBillingAdapter(
     override fun getItemPosition(obj: Any): Int = POSITION_NONE
 
     private fun bindView(purchaseItem: PurchaseItem, view: View) {
-        view.tv_billing_item_title.text = purchaseItem.productTitle
-        view.tv_billing_item_details.text = purchaseItem.productDescription
-        view.btn_billing_item_subscribe.text = purchaseItem.productPrice
+        customize(view)
 
         setItemListener(purchaseItem, view.btn_billing_item_subscribe)
     }
@@ -49,6 +52,10 @@ class PagerBillingAdapter(
             map(itemView.tv_billing_item_redeem, UIKey.BILLING_ITEM_REDEEM)
             map(itemView.btn_billing_item_subscribe, UIKey.BILLING_ITEM_SUBS_BUTTON)
         }
+    }
+
+    override fun getPageWidth(position: Int): Float {
+        return 0.4f
     }
 
     override fun addPurchaseItems(items: List<PurchaseItem>) {

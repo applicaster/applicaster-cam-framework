@@ -48,30 +48,6 @@ class PluginUIProvider(
         }
     }
 
-    override fun getFont(key: String): Typeface {
-        if (StringUtil.isNotEmpty(key)) {
-            try {
-                val firstSuffix = ".otf"
-                val secondSuffix = ".ttf"
-                var customFontTypeface = Typeface.createFromAsset(
-                    CustomApplication.getAppContext().assets,
-                    "fonts/$key$firstSuffix"
-                )
-
-                if (customFontTypeface == null) {
-                    customFontTypeface = Typeface.createFromAsset(
-                        CustomApplication.getAppContext().assets,
-                        "fonts/$key$secondSuffix"
-                    )
-                }
-                return customFontTypeface
-            } catch (e: Exception) {
-                Log.d("", "")
-            }
-        }
-        return Typeface.DEFAULT
-    }
-
     override fun getStyleResId(key: String): Int {
         val styleResId = OSUtil.getStyleResourceIdentifier(key)
         return if (styleResId != 0) {
