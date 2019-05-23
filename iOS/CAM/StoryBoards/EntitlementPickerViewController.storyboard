@@ -21,7 +21,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wYX-hB-tp5" userLabel="backgroundImageView">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gGD-ZL-8ay" userLabel="closeButton">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gGD-ZL-8ay" userLabel="closeButton">
                                 <rect key="frame" x="338" y="35.5" width="18.5" height="18.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="18.5" id="BDN-B6-vQL"/>
@@ -32,10 +32,10 @@
                                     <action selector="close:" destination="Ab9-b4-2xb" eventType="touchUpInside" id="Jg8-db-Kdh"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ofW-uD-S0R" userLabel="backButton">
-                                <rect key="frame" x="21" y="31" width="10" height="20"/>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ofW-uD-S0R" userLabel="backButton">
+                                <rect key="frame" x="21" y="31" width="20" height="20"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="10" id="KbV-9I-ekH"/>
+                                    <constraint firstAttribute="width" constant="20" id="KbV-9I-ekH"/>
                                     <constraint firstAttribute="height" constant="20" id="aYt-ch-Lvg"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
@@ -92,7 +92,7 @@
                                     <constraint firstAttribute="height" constant="30" id="DIb-Ko-iqA"/>
                                 </constraints>
                             </activityIndicatorView>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="BZT-8a-6sn">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="BZT-8a-6sn">
                                 <rect key="frame" x="27.5" y="191" width="320" height="476"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -150,7 +150,10 @@ take up to two lines maximum</string>
                                                                 <constraint firstAttribute="height" constant="33" id="SAG-oM-gEy"/>
                                                                 <constraint firstAttribute="width" constant="187" id="u8L-GO-Frh"/>
                                                             </constraints>
-                                                            <state key="normal" title="SUBSCRIBE FOR $4.99"/>
+                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                                            <state key="normal" title="SUBSCRIBE FOR $4.99">
+                                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            </state>
                                                             <connections>
                                                                 <action selector="purchaseItem:" destination="KiS-Ag-85C" eventType="touchUpInside" id="2ay-cj-god"/>
                                                             </connections>
@@ -210,23 +213,24 @@ take up to two lines maximum</string>
                                 <rect key="frame" x="0.0" y="583" width="375" height="84"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="iEt-bg-rhl">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                        <rect key="frame" x="28" y="0.0" width="347" height="64"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="64" id="3vL-9D-gLk"/>
                                         </constraints>
-                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                        <mutableString key="text">Payment will be charged to iTunes Account at confirmation of purchase. Subscription automatically renews unless auto-renew is turned off at least 24-hours before the end of the current periodAccount will be charged for renewal within 24-hours prior to the end of the current period, and identify the cost of the renewal. Subscriptions may be managed by the user and auto-renewal may be turned off by going to the user's Account Settings after purchaseAny unused portion of a free trial period, if offered, will be forfeited when the user purchases a subscription to that publication, where applicable</mutableString>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.078431372549019607" green="0.23137254901960785" blue="0.40784313725490196" alpha="0.5" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="84" id="HpU-Ew-m9X"/>
+                                    <constraint firstAttribute="trailing" secondItem="iEt-bg-rhl" secondAttribute="trailing" constant="28" id="I3S-tV-DWO"/>
                                     <constraint firstItem="iEt-bg-rhl" firstAttribute="top" secondItem="Ly1-rl-Hp7" secondAttribute="top" id="OFw-gg-IIJ"/>
+                                    <constraint firstItem="iEt-bg-rhl" firstAttribute="leading" secondItem="Ly1-rl-Hp7" secondAttribute="leading" constant="28" id="RfI-7a-zu6"/>
                                     <constraint firstAttribute="trailing" secondItem="iEt-bg-rhl" secondAttribute="trailing" id="bLc-JV-4rt"/>
-                                    <constraint firstItem="iEt-bg-rhl" firstAttribute="leading" secondItem="Ly1-rl-Hp7" secondAttribute="leading" id="nSS-LR-dEh"/>
                                 </constraints>
                             </view>
                         </subviews>

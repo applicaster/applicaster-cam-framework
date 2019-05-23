@@ -78,7 +78,7 @@ class ViewController: UIViewController, CAMDelegate {
     }
     
     func isUserLogged() -> Bool {
-        return true
+        return false
     }
     
     func getDefaultAuthScreen() -> CAMDefaultAuthScreen {

@@ -44,6 +44,11 @@ class EntitlementPickerViewController: UIViewController {
         super.viewDidLoad()
         setupCollectionView()
         presenter?.viewDidLoad()
+        
+        backgroundImageView.setZappStyle(withAsset: .backgroundImage)
+        backButton.setZappStyle(withIconAsset: .backButtonImage)
+        closeButton.setZappStyle(withIconAsset: .closeButtonImage)
+        logoImageView.setZappStyle(withAsset: .headerLogo)
     }
     
     func setupCollectionView() {

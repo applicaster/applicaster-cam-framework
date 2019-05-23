@@ -56,6 +56,11 @@ public enum CAMKeys: String {
     case passwordAlertInfoText = "password_alert_description_text"
     case passwordAlertButtonText = "password_alert_button_text"
     case passwordAlertButtonImage = "password_alert_button_image"
+    
+    // Payment Options
+    
+    case purchaseButtonText = "payment_option_button_text"
+    case purchaseButtonImage = "purchase_button_image"
 }
 
 public enum CAMStyles: String {

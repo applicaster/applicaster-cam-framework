@@ -38,6 +38,7 @@ class EntitlementCollectionViewCell: UICollectionViewCell {
         self.infoLabel.text = viewModel.description
         self.buyAction = viewModel.buyAction
         self.redeemAction = viewModel.redeemAction
+        self.purchaseButton.setZappStyle(backgroundAsset: .purchaseButtonImage, title: "SUBSCRIBE FOR $4.99")
     }
 
     @IBAction private func purchaseItem(_ sender: UIButton) {
