@@ -60,12 +60,25 @@ class ViewController: UIViewController, CAMDelegate {
         
     }
     
+    func availableProducts() -> [Product] {
+//        let title = "Monthly Subscription Monthly Subscription Monthly Subscription"
+        let title = "Monthly Subscription Subscription"
+        let description = "Subscription details go here and might take up to two lines maximum"
+        let price = "4.99"
+        let skProduct = SKProduct()
+        let product = Product(title: title,
+                              description: description,
+                              price: price,
+                              skProduct: skProduct)
+        return Array(repeating: product, count: 3)
+    }
+    
     func isTriggerOnAppLaunch() -> Bool {
         return true
     }
     
     func isUserLogged() -> Bool {
-        return false
+        return true
     }
     
     func getDefaultAuthScreen() -> CAMDefaultAuthScreen {

@@ -178,6 +178,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-CAMFramework/Pods-CAMFramework-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ApplicasterIAP/ApplicasterIAP.framework",
 				"${BUILT_PRODUCTS_DIR}/CAM/CAM.framework",
 				"${PODS_ROOT}/ZappPlugins/Frameworks/iOS/ZappPlugins.framework",
 			);
@@ -185,6 +186,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ApplicasterIAP.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CAM.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZappPlugins.framework",
 			);

@@ -29,6 +29,12 @@ class BillingCoordinator: BillingCoordinatorProtocol, Coordinator {
     
     func showEntitlementPicker() {
         let controller = ViewControllerFactory.createEntitlementPicker(pluginDataProvider: parentCoordinator, billingCoordinator: self)
+        let presenter = EntitlementPickerPresenter()
+        controller.presenter = presenter
+        
+        presenter.coordinatorDelegate = self
+        presenter.camDelegate = parentCoordinator?.getCamDelegate()
+        presenter.view = controller
         navigationController?.pushViewController(controller, animated: true)
     }
     

@@ -23,7 +23,6 @@ class EntitlementPickerViewController: UIViewController {
     @IBOutlet weak var helpInfoTextView: UITextView!
     
     var presenter: EntitlementPickerPresenter?
-    var entitlements = [CAMEntitlementItem]()
     var currentItemIndex = 0 // Used for store center cell for ipad
     var itemSpacing: CGFloat = 20
     
@@ -39,13 +38,12 @@ class EntitlementPickerViewController: UIViewController {
         return CGFloat(itemSize.width + itemSpacing)
     }
     
+    private var offerViewModels: [OfferViewModel] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+        presenter?.viewDidLoad()
     }
     
     func setupCollectionView() {
@@ -54,8 +52,6 @@ class EntitlementPickerViewController: UIViewController {
         customLayout.minimumLineSpacing = 20
         customLayout.scrollDirection = UIDevice.current.userInterfaceIdiom == .pad ? .horizontal : .vertical
         entitlementCollectionView.collectionViewLayout = customLayout
-        entitlementCollectionView.delegate = self
-        entitlementCollectionView.dataSource = self
     }
     
     @IBAction func backToPreviousScreen(_ sender: Any) {
@@ -65,16 +61,37 @@ class EntitlementPickerViewController: UIViewController {
     @IBAction func close(_ sender: Any) {
         presenter?.close()
     }
+    
+    public func showOffers(_ offers: [OfferViewModel]) {
+        self.offerViewModels = offers
+        self.entitlementCollectionView.reloadData()
+    }
+    
+    public func showLoadingIndicator() {
+        entitlementsLoadingIndicator.startAnimating()
+    }
+    
+    public func hideLoadingIndicator() {
+        entitlementsLoadingIndicator.stopAnimating()
+    }
 }
 
 extension EntitlementPickerViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return entitlements.count
+        return self.offerViewModels.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return collectionView.dequeueReusableCell(withReuseIdentifier: "EntitlementCollectionViewCell", for: indexPath)
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EntitlementCollectionViewCell",
+                                                            for: indexPath) as? EntitlementCollectionViewCell else {
+            fatalError()
+        }
+        
+        let cellViewModel = self.offerViewModels[indexPath.row]
+        cell.configure(from: cellViewModel)
+        
+        return cell
     }
     
     private func indexOfMajorCell() -> Int {
@@ -82,7 +99,9 @@ extension EntitlementPickerViewController: UICollectionViewDelegate, UICollectio
         return Int(round(proportionalOffset))
     }
     
-    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView,
+                                   withVelocity velocity: CGPoint,
+                                   targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         if UIDevice.current.userInterfaceIdiom == .pad {
             let majorCell = indexOfMajorCell()
             let delta = abs(majorCell - currentItemIndex)
@@ -98,15 +117,18 @@ extension EntitlementPickerViewController: UICollectionViewDelegate, UICollectio
             if currentItemIndex < 0 {
                 currentItemIndex = 0
             }
-            if currentItemIndex >= entitlements.count {
-                currentItemIndex = entitlements.count - 1
+            if currentItemIndex >= self.offerViewModels.count {
+                currentItemIndex = self.offerViewModels.count - 1
             }
             let point = CGPoint(x: CGFloat(currentItemIndex) * pageWidth, y: targetContentOffset.pointee.y)
             targetContentOffset.pointee = point
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, targetContentOffsetForProposedContentOffset proposedContentOffset: CGPoint) -> CGPoint {
-        return UIDevice.current.userInterfaceIdiom == .pad ? CGPoint(x: CGFloat(currentItemIndex) * pageWidth, y: 0) : proposedContentOffset
+    func collectionView(_ collectionView: UICollectionView,
+                        targetContentOffsetForProposedContentOffset proposedContentOffset: CGPoint) -> CGPoint {
+        return UIDevice.current.userInterfaceIdiom == .pad
+            ? CGPoint(x: CGFloat(currentItemIndex) * pageWidth, y: 0)
+            : proposedContentOffset
     }
 }

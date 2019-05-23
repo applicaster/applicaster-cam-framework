@@ -12,6 +12,7 @@ Pod::Spec.new do |s|
   s.source_files = 'iOS/CAM/**/*.{swift,h,m}'
   s.requires_arc = true
 
-  s.dependency 'ZappPlugins'
-
+  s.dependency 'ZappPlugins'  
+  s.dependency 'ApplicasterIAP'
+  
 end
