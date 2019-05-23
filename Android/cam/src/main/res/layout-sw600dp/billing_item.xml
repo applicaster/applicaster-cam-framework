@@ -5,16 +5,16 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:orientation="vertical"
         android:layout_gravity="center_horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/layout_tablet_billing_item_width"
+        android:layout_height="@dimen/layout_tablet_billing_item_height"
         android:background="@android:color/transparent"
         android:id="@+id/root_layout_billing_item">
 
     <LinearLayout
             android:id="@+id/layout_billing_item"
             android:background="@color/white"
-            android:layout_width="@dimen/layout_billing_item_width"
-            android:layout_height="@dimen/layout_billing_item_height"
+            android:layout_width="@dimen/layout_tablet_billing_item_width"
+            android:layout_height="@dimen/layout_tablet_billing_item_height"
             android:orientation="vertical"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"

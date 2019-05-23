@@ -41,6 +41,9 @@
     <dimen name="billing_tv_title_text_size">20sp</dimen>
     <dimen name="billing_layout_margin_top_bottom">16dp</dimen>
     <dimen name="layout_billing_item_height">192dp</dimen>
+    <dimen name="layout_billing_item_width">304dp</dimen>
+    <dimen name="layout_tablet_billing_item_height">278dp</dimen>
+    <dimen name="layout_tablet_billing_item_width">362dp</dimen>
     <!-- End region -->
 
     <!--Region default dimens-->
