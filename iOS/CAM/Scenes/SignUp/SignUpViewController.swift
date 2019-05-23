@@ -84,11 +84,15 @@ class SignUpViewController: UIViewController {
     
     func setupUI() {
         self.navigationController?.isNavigationBarHidden = true
+        if let isHidden = presenter?.isRoot {
+            backButton.isHidden = isHidden
+        }
         loginButton.titleLabel?.numberOfLines = 0
         loginButton.titleLabel?.textAlignment = .center
         restoreContainer.isHidden = true
         socialNetworksContainer.isHidden = !(configDictionary[CAMKeys.facebookLoginEnabled.rawValue] ?? "false").bool
         authFieldsTable.backgroundView = UIView()
+        authFieldsTable.allowsSelection = false
         configureElements()
     }
     
@@ -115,7 +119,7 @@ class SignUpViewController: UIViewController {
         closeButton.setZappStyle(withIconAsset: .closeButtonImage)
         logoImageView.setZappStyle(withAsset: .headerLogo)
         titleLabel.setZappStyle(text: configDictionary[CAMKeys.signUpScreenTitleText.rawValue], style: .screenTitle)
-        loginButton.setZappStyle(backgroundAsset: .loginButtonImage,
+        signUpButton.setZappStyle(backgroundAsset: .signUpButtonImage,
                                  title: configDictionary[CAMKeys.signUpButtonText.rawValue],
                                  style: .actionButton)
         alternateLabel.setZappStyle(text: configDictionary[CAMKeys.separatorText.rawValue], style: .separator)
