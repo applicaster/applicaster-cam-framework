@@ -61,7 +61,7 @@ class MyConnector : NSObject, ZAAppDelegateConnectorLayoutsStylesProtocol, ZAApp
                 ]
             case .inputField: return [
                 "font" : UIFont(name: "HelveticaNeue", size: 14)!,
-                "color" : UIColor.gray
+                "color" : UIColor.black
                 ]
             case .promtAction: return [
                 "font" : UIFont(name: "HelveticaNeue-Light", size: 14)!,

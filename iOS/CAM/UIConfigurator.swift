@@ -137,12 +137,14 @@ extension UILabel {
 }
 
 extension UITextField {
+    
     func setZappStyle(backgroundAsset: CAMKeys? = nil,
                       textStyle: CAMStyles? = nil,
                       placeholder: String? = nil) {
         
         if let backgroundAsset = backgroundAsset?.rawValue , let imageIcon = ZAAppConnector.sharedInstance().image(forAsset: backgroundAsset) {
             self.background = imageIcon
+            self.borderStyle = .none
         }
         
         var placeholderStyle: [String:Any]?

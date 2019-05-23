@@ -84,12 +84,16 @@ class LoginViewController: UIViewController {
     
     func setupUI() {
         self.navigationController?.isNavigationBarHidden = true
+        if let isHidden = presenter?.isRoot {
+            backButton.isHidden = isHidden
+        }
         signUpButton.titleLabel?.numberOfLines = 0
         signUpButton.titleLabel?.textAlignment = .center
         restoreContainer.isHidden = true
         socialNetworksContainer.isHidden = !(configDictionary[CAMKeys.facebookLoginEnabled.rawValue] ?? "false").bool
         resetPasswordButton.isHidden = !(configDictionary[CAMKeys.passwordResetEnabled.rawValue] ?? "false").bool
         authFieldsTable.backgroundView = UIView()
+        authFieldsTable.allowsSelection = false
         configureElements()
     }
     

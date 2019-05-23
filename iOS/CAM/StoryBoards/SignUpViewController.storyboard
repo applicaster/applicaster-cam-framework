@@ -76,7 +76,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="250" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="E6q-BO-zog">
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="E6q-BO-zog" customClass="PaddingTextField" customModule="CAM" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="250" height="48"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="48" id="Gau-0q-n0e"/>
