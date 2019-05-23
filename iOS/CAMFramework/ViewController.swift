@@ -55,8 +55,9 @@ class ViewController: UIViewController, CAMDelegate {
     }
     
     func availableProducts() -> [Product] {
-        let title = "Subscription 1"
-        let description = "Description"
+//        let title = "Monthly Subscription Monthly Subscription Monthly Subscription"
+        let title = "Monthly Subscription Subscription"
+        let description = "Subscription details go here and might take up to two lines maximum"
         let price = "4.99"
         let skProduct = SKProduct()
         let product = Product(title: title,

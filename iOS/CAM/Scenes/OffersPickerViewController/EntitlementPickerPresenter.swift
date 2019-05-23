@@ -36,15 +36,15 @@ class EntitlementPickerPresenter {
     private func showOffers() {
         let viewModels = self.availableProducts.map({ (product) -> OfferViewModel in
             let buyAction = {
-                BillingHelper.sharedInstance.purchase(product.skProduct, completion: { [weak self] (result) in
-                    switch result {
-                    case .success(let purchase):
-                        self?.camDelegate?.itemPurchased(item: purchase.item)
-                        self?.coordinatorDelegate?.finishBillingFlow(isUserHasAccess: true)
-                    case .failure(let error):
-                        print(error.localizedDescription)
-                    }
-                })
+//                BillingHelper.sharedInstance.purchase(product.skProduct, completion: { [weak self] (result) in
+//                    switch result {
+//                    case .success(let purchase):
+//                        self?.camDelegate?.itemPurchased(item: purchase.item)
+//                        self?.coordinatorDelegate?.finishBillingFlow(isUserHasAccess: true)
+//                    case .failure(let error):
+//                        print(error.localizedDescription)
+//                    }
+//                })
             }
             
             let redeemAction: () -> Void = { [weak self] in
