@@ -67,8 +67,14 @@ class BillingFragment : BaseFragment(), IBillingView {
 
             ContainerType.TABLET -> {
                 pagerBillingAdapter = PagerBillingAdapter(purchaseListener)
-                vp_billing_items?.apply {
+                layout_pager_container?.viewPager?.apply {
                     this.adapter = pagerBillingAdapter
+                    this.offscreenPageLimit = 3
+                    //space between pages
+                    this.pageMargin = 20
+                    //If hardware acceleration is enabled, you should also remove
+                    // clipping on the pager for its children.
+                    this.clipChildren = false
                 }
             }
         }

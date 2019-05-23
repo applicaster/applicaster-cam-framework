@@ -5,16 +5,16 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:orientation="vertical"
         android:layout_gravity="center_horizontal"
-        android:layout_width="@dimen/layout_tablet_billing_item_width"
-        android:layout_height="@dimen/layout_tablet_billing_item_height"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:id="@+id/root_layout_billing_item">
 
     <LinearLayout
             android:id="@+id/layout_billing_item"
             android:background="@color/white"
-            android:layout_width="@dimen/layout_tablet_billing_item_width"
-            android:layout_height="@dimen/layout_tablet_billing_item_height"
+            android:layout_width="@dimen/tablet_layout_billing_item_width"
+            android:layout_height="@dimen/tablet_layout_billing_item_height"
             android:orientation="vertical"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
@@ -31,19 +31,19 @@
                 android:id="@+id/tv_billing_item_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/billing_tv_title_text_size"
+                android:textSize="@dimen/tablet_billing_tv_title_text_size"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/billing_title_margin_top"
+                android:layout_marginTop="@dimen/tablet_billing_title_margin_top"
                 android:text="Monthly Subscription"/>
 
         <com.applicaster.util.ui.CustomTextView
                 android:id="@+id/tv_billing_item_details"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/billing_details_margin_left_right"
-                android:layout_marginRight="@dimen/billing_details_margin_left_right"
-                android:layout_marginTop="@dimen/billing_details_margin_top"
-                android:textSize="@dimen/billing_tv_details_text_size"
+                android:layout_marginLeft="@dimen/tablet_billing_details_margin_left_right"
+                android:layout_marginRight="@dimen/tablet_billing_details_margin_left_right"
+                android:layout_marginTop="@dimen/tablet_billing_details_margin_top"
+                android:textSize="@dimen/tablet_billing_tv_details_text_size"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center"
                 android:maxLines="2"
@@ -56,7 +56,7 @@
                 android:layout_height="@dimen/billing_btn_subscribe_height"
                 android:textSize="@dimen/billing_btn_subscribe_text_size"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/billing_btn_subscribe_margin_top"
+                android:layout_marginTop="@dimen/tablet_billing_btn_subscribe_margin_top"
                 android:gravity="center_horizontal"
                 android:text="SUBSCRIBE FOR $4.99"/>
 
@@ -66,8 +66,8 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/billing_tv_redeem_text_size"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/billing_tv_redeem_margin_top"
-                android:layout_marginBottom="@dimen/billing_tv_redeem_margin_bottom"
+                android:layout_marginTop="@dimen/tablet_billing_tv_redeem_margin_top"
+                android:layout_marginBottom="@dimen/tablet_billing_tv_redeem_margin_bottom"
                 android:gravity="center_horizontal"
                 android:text="@string/tv_billing_item_redeem_code"
                 tools:visibility="visible"/>

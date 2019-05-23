@@ -54,10 +54,6 @@ class PagerBillingAdapter(
         }
     }
 
-    override fun getPageWidth(position: Int): Float {
-        return 0.4f
-    }
-
     override fun addPurchaseItems(items: List<PurchaseItem>) {
         purchaseItemsList.addAll(items)
         notifyDataSetChanged()
