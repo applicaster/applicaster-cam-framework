@@ -47,6 +47,7 @@ class BillingFragment : BaseFragment(), IBillingView {
     override fun setListeners() {
         toolbar_back_button.setOnClickListener { presenter?.onToolbarBackClicked() }
         toolbar_close_button.setOnClickListener { presenter?.onToolbarCloseClicked() }
+        container_restore.setOnClickListener { presenter?.onRestoreClicked() }
         purchaseListener = object : PurchaseInteractionListener {
             override fun onPurchaseButtonClicked(skuId: String) {
                 presenter?.onPurchaseButtonClicked(skuId)
