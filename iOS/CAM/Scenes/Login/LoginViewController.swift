@@ -72,6 +72,7 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        subscribeKeyboardNotifications()
         presenter?.viewDidLoad()
     }
 
@@ -142,6 +143,25 @@ class LoginViewController: UIViewController {
         view.endEditing(true)
     }
     
+    func subscribeKeyboardNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardNotification(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardNotification(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardNotification(_ notification: NSNotification) {
+        if notification.name == UIResponder.keyboardWillShowNotification {
+            setViewYCoordinate(value: -100)
+        } else {
+            setViewYCoordinate(value: 0)
+        }
+    }
+    
+    func setViewYCoordinate(value: CGFloat) {
+        if self.view.frame.origin.y > value || value == 0 {
+            self.view.frame.origin.y = value
+        }
+    }
+    
     // MARK: - Actions
     
     @IBAction func close(_ sender: UIButton) {
@@ -153,10 +173,12 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func resetPassword(_ sender: Any) {
+        hideKeyboard()
         presenter?.showResetPasswordScreen()
     }
     
     @IBAction func showSignUpScreen(_ sender: Any) {
+        hideKeyboard()
         presenter?.showSignUpScreen()
     }
     
@@ -172,6 +194,10 @@ class LoginViewController: UIViewController {
             result.append((key: (obj.key ?? ""), value: obj.text))
         }
         presenter?.login(data: result)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 }
 
@@ -221,8 +247,6 @@ extension LoginViewController: LoginViewProtocol {
     }
     
     func showError(description: String?) {
-        let alert = UIAlertController(title: "Error", message: description, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        self.showAlert(description: description)
     }
 }

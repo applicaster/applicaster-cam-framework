@@ -27,6 +27,10 @@ class AuthTableCell: UITableViewCell, UITextFieldDelegate {
         return true
     }
 
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return textField.resignFirstResponder()
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }

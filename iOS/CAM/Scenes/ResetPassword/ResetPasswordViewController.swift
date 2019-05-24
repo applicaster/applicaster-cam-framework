@@ -32,6 +32,7 @@ class ResetPasswordViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        subscribeKeyboardNotifications()
         configureElements()
     }
     
@@ -64,6 +65,25 @@ class ResetPasswordViewController: UIViewController {
         view.endEditing(true)
     }
     
+    func subscribeKeyboardNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardNotification(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardNotification(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardNotification(_ notification: NSNotification) {
+        if notification.name == UIResponder.keyboardWillShowNotification {
+            setViewYCoordinate(value: -100)
+        } else {
+            setViewYCoordinate(value: 0)
+        }
+    }
+    
+    func setViewYCoordinate(value: CGFloat) {
+        if self.view.frame.origin.y > value || value == 0 {
+            self.view.frame.origin.y = value
+        }
+    }
+    
     // MARK: - Actions
     
     @IBAction func resetPassword(_ sender: UIButton) {
@@ -88,6 +108,10 @@ class ResetPasswordViewController: UIViewController {
     @IBAction func close(_ sender: UIButton) {
         presenter?.close()
     }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
 }
 
 // MARK: - ResetPasswordViewProtocol
@@ -102,27 +126,25 @@ extension ResetPasswordViewController: ResetPasswordViewProtocol {
     }
     
     func showError(description: String?) {
-        let alert = UIAlertController(title: "Error", message: description, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        self.showAlert(description: description)
     }
     
     func showConfirmationScreenIfNeeded() {
-        if configDictionary[CAMKeys.passwordAlertTitleText.rawValue] != nil &&
-           configDictionary[CAMKeys.passwordAlertInfoText.rawValue] != nil &&
-           configDictionary[CAMKeys.passwordAlertButtonText.rawValue] != nil {
-            let confirmationPopover = ConfirmationPopover.nibInstance()
-            confirmationPopover.frame = self.view.frame
-            confirmationPopover.buttonPressedAction = { [weak self] in
+        if let title = configDictionary[CAMKeys.passwordAlertTitleText.rawValue],
+           let description = configDictionary[CAMKeys.passwordAlertInfoText.rawValue],
+           let buttonText = configDictionary[CAMKeys.alertButtonText.rawValue] {
+            self.showConfirmationScreen(title: title, description: description, buttonText: buttonText, action: { [weak self] in
                 self?.presenter?.backToPreviousScreen()
-            }
-//            confirmationPopover.titleLabel.configureWith(text: configDictionary[CAMKeys.passwordAlertTitleText.rawValue])
-//            confirmationPopover.descriptionLabel.configureWith(text: configDictionary[CAMKeys.passwordAlertInfoText.rawValue])
-//            confirmationPopover.actionButton.configureWith(text: configDictionary[CAMKeys.passwordAlertButtonText.rawValue],
-//                                                           bgImageName: configDictionary[CAMKeys.passwordAlertButtonImage.rawValue])
-            self.view.addSubview(confirmationPopover)
+            })
         } else {
             presenter?.backToPreviousScreen()
         }
+    }
+}
+
+extension ResetPasswordViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return textField.resignFirstResponder()
     }
 }
