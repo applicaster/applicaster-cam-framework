@@ -89,7 +89,10 @@ class MyConnector : NSObject, ZAAppDelegateConnectorLayoutsStylesProtocol, ZAApp
                 ]
             case .alternateActionBannerColor: return ["color" :UIColor(hex: "#FFFFFF50")]
             default:
-                break
+                return [
+                    "font" : UIFont(name: "HelveticaNeue-Light", size: 12)!,
+                    "color" : UIColor.black
+                ]
             }
         } else {
             return defaultStylesDelegate?.styleParams?(byStyleName:styleName)

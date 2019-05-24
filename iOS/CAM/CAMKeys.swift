@@ -50,17 +50,19 @@ public enum CAMKeys: String {
     case passwordResetButtonImage = "password_reset_button_image"
     case passwordInputFieldPlaceholder = "password_input_field_placeholder"
     
-    //Reset Password alert
+    //Alert
     
     case passwordAlertTitleText = "password_alert_title_text"
     case passwordAlertInfoText = "password_alert_description_text"
-    case passwordAlertButtonText = "password_alert_button_text"
-    case passwordAlertButtonImage = "password_alert_button_image"
+    case alertButtonText = "alert_button_text"
+    case alertButtonImage = "alert_button_image"
     
     // Payment Options
     
     case purchaseButtonText = "payment_option_button_text"
     case purchaseButtonImage = "purchase_button_image"
+    
+    //
 }
 
 public enum CAMStyles: String {
@@ -74,4 +76,6 @@ public enum CAMStyles: String {
     case separator = "separator_text"
     case alternativeLoginText = "alternative_login_promt_text"
     case alternateActionBannerColor = "alternate_action_banner_bg_color"
+    case alertTitle = "alert_title_text"
+    case alertDescription = "alert_description_text"
 }
