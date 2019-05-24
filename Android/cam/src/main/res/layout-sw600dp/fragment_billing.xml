@@ -32,22 +32,19 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintTop_toBottomOf="@+id/tv_billing_title_text"/>
 
-    <com.applicaster.cam.ui.billing.adapter.pager.PagerContainer
-            android:id="@+id/layout_pager_container"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@color/transparent"
-            app:layout_constraintEnd_toEndOf="parent"
+    <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_billing_items"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="54dp"
+            android:layout_marginLeft="54dp"
+            android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/container_restore">
-
-        <android.support.v4.view.ViewPager
-                android:id="@+id/vp_billing_items"
-                android:layout_width="@dimen/tablet_layout_billing_item_width"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal">
-        </android.support.v4.view.ViewPager>
-    </com.applicaster.cam.ui.billing.adapter.pager.PagerContainer>
+            app:layout_constraintTop_toBottomOf="@+id/container_restore"
+            android:scrollbarStyle="outsideOverlay"
+            android:scrollbars="horizontal"
+            android:overScrollMode="never"/>
 
 </android.support.constraint.ConstraintLayout>

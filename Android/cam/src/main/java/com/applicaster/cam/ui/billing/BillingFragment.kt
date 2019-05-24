@@ -3,6 +3,7 @@ package com.applicaster.cam.ui.billing
 import android.os.Bundle
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.PagerSnapHelper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,17 +15,18 @@ import com.applicaster.cam.ui.base.view.BaseFragment
 import com.applicaster.cam.ui.base.view.ContainerType
 import com.applicaster.cam.ui.billing.adapter.PurchaseInteractionListener
 import com.applicaster.cam.ui.billing.adapter.PurchaseItem
-import com.applicaster.cam.ui.billing.adapter.pager.PagerBillingAdapter
 import com.applicaster.cam.ui.billing.adapter.recycler.RecyclerBillingAdapter
 import kotlinx.android.synthetic.main.fragment_billing.*
 import kotlinx.android.synthetic.main.layout_text_with_action.*
 import kotlinx.android.synthetic.main.layout_toolbar_template.*
+import com.applicaster.cam.ui.billing.adapter.recycler.SpaceItemDecoration
+
 
 class BillingFragment : BaseFragment(), IBillingView {
 
     private var presenter: IBillingPresenter? = null
     private var recyclerBillingAdapter: RecyclerBillingAdapter? = null
-    private var pagerBillingAdapter: PagerBillingAdapter? = null
+    private var pagerBillingAdapter: RecyclerBillingAdapter? = null
     private lateinit var purchaseListener: PurchaseInteractionListener
 
     override fun onCreateView(
@@ -66,15 +68,16 @@ class BillingFragment : BaseFragment(), IBillingView {
             }
 
             ContainerType.TABLET -> {
-                pagerBillingAdapter = PagerBillingAdapter(purchaseListener)
-                layout_pager_container?.viewPager?.apply {
+                pagerBillingAdapter = RecyclerBillingAdapter(purchaseListener)
+                val layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                val snapHelper = PagerSnapHelper()
+                val itemDecoration = SpaceItemDecoration(horizontalSpaceHeight = 20)
+                rv_billing_items?.apply {
+                    this.layoutManager = layoutManager
+                    snapHelper.attachToRecyclerView(this)
+                    this.itemAnimator = DefaultItemAnimator()
+                    addItemDecoration(itemDecoration)
                     this.adapter = pagerBillingAdapter
-                    this.offscreenPageLimit = 3
-                    //space between pages
-                    this.pageMargin = 20
-                    //If hardware acceleration is enabled, you should also remove
-                    // clipping on the pager for its children.
-                    this.clipChildren = false
                 }
             }
         }
