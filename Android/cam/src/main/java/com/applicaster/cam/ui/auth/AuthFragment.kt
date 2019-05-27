@@ -26,8 +26,8 @@ abstract class AuthFragment : BaseFragment(), IAuthView {
     private var presenter: IAuthPresenter? = null
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         val rootView = inflater.inflate(R.layout.fragment_auth, container, false)
 
@@ -60,11 +60,11 @@ abstract class AuthFragment : BaseFragment(), IAuthView {
 
         container_additional_auth?.apply {
             visibility =
-                if (ContentAccessManager.pluginConfigurator.isFacebookLoginRequired()) View.VISIBLE else View.GONE
+                    if (ContentAccessManager.pluginConfigurator.isFacebookLoginRequired()) View.VISIBLE else View.GONE
         }
         container_bottom_bar?.apply {
             visibility =
-                if (ContentAccessManager.pluginConfigurator.isAuthRestoreRequired()) View.VISIBLE else View.GONE
+                    if (ContentAccessManager.pluginConfigurator.isAuthRestoreRequired()) View.VISIBLE else View.GONE
         }
 
         UIMapper.apply {
@@ -73,6 +73,8 @@ abstract class AuthFragment : BaseFragment(), IAuthView {
             map(app_logo, UIKey.TOOLBAR_HEADER_LOGO)
             map(container_parent_auth, UIKey.BACKGROUND_IMAGE)
             map(iv_facebook_auth, UIKey.AUTH_FACEBOOK_IMAGE)
+            map(iv_left_divider, UIKey.AUTH_LEFT_DIVIDER)
+            map(iv_right_divider, UIKey.AUTH_RIGHT_DIVIDER)
         }
     }
 
@@ -89,8 +91,8 @@ abstract class AuthFragment : BaseFragment(), IAuthView {
             container_linear_input.addView(editText)
         }
         val visibleViewsCount =
-            if (authFieldConfig.authFields.size < MAX_NON_SCROLLABLE_AUTH_FIELDS)
-                authFieldConfig.authFields.size else MAX_NON_SCROLLABLE_AUTH_FIELDS
+                if (authFieldConfig.authFields.size < MAX_NON_SCROLLABLE_AUTH_FIELDS)
+                    authFieldConfig.authFields.size else MAX_NON_SCROLLABLE_AUTH_FIELDS
         val parentMaxHeight = (etHeight + etMarginTop) * visibleViewsCount
 
         //recalculating scroll view height to match design spec
@@ -117,14 +119,14 @@ abstract class AuthFragment : BaseFragment(), IAuthView {
 }
 
 private fun EditText.applyCustomizations(
-    etWidth: Int,
-    etHeight: Int,
-    etMarginTop: Int,
-    field: AuthField
+        etWidth: Int,
+        etHeight: Int,
+        etMarginTop: Int,
+        field: AuthField
 ) {
     layoutParams = LinearLayout.LayoutParams(
-        etWidth,
-        etHeight
+            etWidth,
+            etHeight
     ).apply {
         topMargin = etMarginTop
 
