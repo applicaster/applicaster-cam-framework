@@ -26,7 +26,7 @@ class PluginConfigurator(private val pluginConfig: Map<String, String>) : Config
     }
 
     override fun isAuthRestoreRequired() =
-        pluginConfig.getValue(KEY_DEFAULT_AUTH_SCEEN).toBoolean()
+        pluginConfig.getValue(KEY_AUTH_RESTORE_REQ).toBoolean()
 }
 
 const val KEY_AUTH_FIELDS = "auth_fields"
