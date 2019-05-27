@@ -35,6 +35,5 @@
   "auth_restore_required": "true",
   "pwd_reset_required" : "true",
   "facebook_login_required" : "true",
-
-  "auth_fields": "{ \"signup\": [{\"type\": \"TEXT\",\"key\": \"email\",\"title\": \"Email\",\"hint\": \"Email\",\"mandatory\": true },{\"type\": \"PASSWORD\",\"key\": \"password\",\"title\": \"Password\",\"hint\": \"Password\",\"mandatory\": true },{\"type\": \"NUMBER\",\"key\": \"Phone\",\"title\": \"Phone\",\"hint\": \"Phone\",\"mandatory\": true},{\"type\": \"TEXT\",\"key\": \"gender\",\"title\": \"Gender\",\"hint\": \"Gender\",\"mandatory\": false }],\"login\": [{\"type\": \"TEXT\",\"key\": \"email\",\"title\": \"Email\",\"hint\": \"Email\",\"mandatory\": true},{\"type\": \"PASSWORD\",\"key\": \"password\",\"title\": \"Password\",\"hint\": \"Password\",\"mandatory\": true}]}"
+  "auth_fields": "{\"signup\":[{\"type\":\"TEXT\",\"key\":\"email\",\"title\":\"Email\",\"hint\":\"Email\",\"mandatory\":true},{\"type\":\"PASSWORD\",\"key\":\"password\",\"title\":\"Password\",\"hint\":\"Password\",\"mandatory\":true},{\"type\":\"NUMBER\",\"key\":\"phone\",\"title\":\"Phone\",\"hint\":\"Phone\",\"mandatory\":true},{\"type\":\"TEXT\",\"key\":\"gender\",\"title\":\"Gender\",\"hint\":\"Gender\",\"mandatory\":false}],\"login\":[{\"type\":\"TEXT\",\"key\":\"email\",\"title\":\"Email\",\"hint\":\"Email\",\"mandatory\":true},{\"type\":\"PASSWORD\",\"key\":\"password\",\"title\":\"Password\",\"hint\":\"Password\",\"mandatory\":true}],\"password_reset\":[{\"type\":\"TEXT\",\"key\":\"email\",\"title\":\"Email\",\"hint\":\"Email\",\"mandatory\":true}]}"
 }

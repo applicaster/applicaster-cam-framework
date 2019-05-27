@@ -83,6 +83,15 @@ object MockPluginConfiguration {
     "hint": "Password",
     "mandatory": true
     }
+    ],
+    "password_reset": [
+    {
+    "type": "TEXT",
+    "key": "email",
+    "title": "Email",
+    "hint": "Email",
+    "mandatory": true
+    }
     ]
     }
      *

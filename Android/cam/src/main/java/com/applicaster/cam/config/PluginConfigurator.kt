@@ -27,7 +27,7 @@ class PluginConfigurator(private val pluginConfig: Map<String, String>) : Config
 
     override fun getPasswordResetAuthFields(): AuthFieldConfig {
         val jsonConfig = pluginConfig.getValue(KEY_AUTH_FIELDS)
-        return AuthFieldsConverter.getFromJsonString(jsonConfig, AuthScreenType.LOGIN)
+        return AuthFieldsConverter.getFromJsonString(jsonConfig, AuthScreenType.PASSWORD_RESET)
     }
 
     override fun isAuthRestoreRequired() =

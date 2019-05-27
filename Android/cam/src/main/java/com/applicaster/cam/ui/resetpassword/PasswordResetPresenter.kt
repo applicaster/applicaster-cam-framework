@@ -35,5 +35,5 @@ class PasswordResetPresenter(
     }
 
     fun getAuthFieldConfig(): AuthFieldConfig =
-            ContentAccessManager.pluginConfigurator.getLoginAuthFields()
+            ContentAccessManager.pluginConfigurator.getPasswordResetAuthFields()
 }
