@@ -9,18 +9,18 @@
 import UIKit
 
 class EntitlementPickerViewController: UIViewController {
-    @IBOutlet weak var backgroundImageView: UIImageView!
-    @IBOutlet weak var logoImageView: UIImageView!
-    @IBOutlet weak var closeButton: UIButton!
-    @IBOutlet weak var backButton: UIButton!
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet private var backgroundImageView: UIImageView!
+    @IBOutlet private var logoImageView: UIImageView!
+    @IBOutlet private var closeButton: UIButton!
+    @IBOutlet private var backButton: UIButton!
+    @IBOutlet private var titleLabel: UILabel!
     
-    @IBOutlet weak var entitlementsLoadingIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var entitlementCollectionView: UICollectionView!
-    @IBOutlet weak var restorePurchaseLabel: UILabel!
+    @IBOutlet private var entitlementsLoadingIndicator: UIActivityIndicatorView!
+    @IBOutlet private var entitlementCollectionView: UICollectionView!
+    @IBOutlet private var restorePurchaseLabel: UILabel!
     
-    @IBOutlet weak var helpInfoContainer: UIView!
-    @IBOutlet weak var helpInfoTextView: UITextView!
+    @IBOutlet private var helpInfoContainer: UIView!
+    @IBOutlet private var helpInfoTextView: UITextView!
     
     var presenter: EntitlementPickerPresenter?
     var currentItemIndex = 0 // Used for store center cell for ipad

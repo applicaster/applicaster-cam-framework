@@ -16,25 +16,26 @@ protocol BillingCoordinatorProtocol: AnyObject {
 }
 
 class BillingCoordinator: BillingCoordinatorProtocol, Coordinator {
-    weak var parentCoordinator: PluginDataProviderProtocol?
-    weak var navigationController: UINavigationController?
-    var completionHandler: ((Bool) -> Void)?
     
-    func start(navigationController: UINavigationController, parentCoordinator: PluginDataProviderProtocol, completion: @escaping (Bool) -> Void) {
-        self.completionHandler = completion
-        self.parentCoordinator = parentCoordinator
+    weak var navigationController: UINavigationController?
+    weak var parentCoordinator: PluginDataProviderProtocol?
+    var completionHandler: (Bool) -> Void
+    
+    public init(navigationController: UINavigationController,
+                parentCoordinator: PluginDataProviderProtocol,
+                completion: @escaping (Bool) -> Void) {
         self.navigationController = navigationController
+        self.parentCoordinator = parentCoordinator
+        self.completionHandler = completion
+    }
+    
+    func start() {
         showEntitlementPicker()
     }
     
     func showEntitlementPicker() {
-        let controller = ViewControllerFactory.createEntitlementPicker(pluginDataProvider: parentCoordinator, billingCoordinator: self)
-        let presenter = EntitlementPickerPresenter()
-        controller.presenter = presenter
-        
-        presenter.coordinatorDelegate = self
-        presenter.camDelegate = parentCoordinator?.getCamDelegate()
-        presenter.view = controller
+        let controller = ViewControllerFactory.createEntitlementPicker(pluginDataProvider: parentCoordinator,
+                                                                       billingCoordinator: self)
         navigationController?.pushViewController(controller, animated: true)
     }
     
@@ -47,6 +48,6 @@ class BillingCoordinator: BillingCoordinatorProtocol, Coordinator {
     }
     
     func finishBillingFlow(isUserHasAccess: Bool) {
-        completionHandler?(isUserHasAccess)
+        completionHandler(isUserHasAccess)
     }
 }
