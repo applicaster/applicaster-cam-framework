@@ -47,20 +47,20 @@ const val UI_KEY_BACKGROUND_IMAGE = "background_image"
 // region Sign up UI keys
 const val UI_KEY_SIGN_UP_TITLE_TEXT = "sign_up_screen_title_text"
 const val UI_KEY_SIGN_UP_BUTTON_TEXT = "sign_up_button_text"
-const val UI_KEY_SIGN_UP_BUTTON_IMAGE = "signup_button_image"
+const val UI_KEY_SIGN_UP_BUTTON_IMAGE = "action_button_asset"
 const val UI_KEY_LOGIN_RESET_PWD_TEXT = "reset_password_text"
 const val UI_KEY_SIGN_UP_PROMPT_TEXT = "sign_up_prompt_text"
 const val UI_KEY_SIGN_UP_PROMPT_ACTION_TEXT = "sign_up_prompt_action_text"
 const val UI_KEY_LOGIN_TITLE_TEXT = "login_screen_title_text"
 const val UI_KEY_LOGIN_BUTTON_TEXT = "login_button_text"
-const val UI_KEY_LOGIN_BUTTON_IMAGE = "login_button_image"
+const val UI_KEY_LOGIN_BUTTON_IMAGE = "action_button_asset"
 const val UI_KEY_LOGIN_PROMPT_TEXT = "login_prompt_text"
 const val UI_KEY_LOGIN_PROMPT_ACTION_TEXT = "login_prompt_action_text"
 const val UI_KEY_THIRD_PARTY_SIGN_UP_TEXT = "alternative_sign_up_action_prompt_text"
 const val UI_KEY_THIRD_PARTY_LOGIN_TEXT = "alternative_login_action_prompt_text"
 const val UI_KEY_THIRD_PARTY_SEPARATOR_TEXT = "separator_text"
 const val UI_KEY_INPUT_FIELD_IMAGE = "input_field_asset"
-const val UI_KEY_FACEBOOK_IMAGE = "facebook_button_icon"
+const val UI_KEY_FACEBOOK_IMAGE = "icon_1"
 // endregion
 
 // region Billing item UI keys
