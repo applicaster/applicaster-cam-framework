@@ -5,10 +5,10 @@ import com.applicaster.cam.ui.CamNavigationRouter
 import com.applicaster.cam.ui.base.presenter.BasePresenter
 
 abstract class AuthPresenter(
-    private val view: IAuthView?,
-    private val navigationRouter: CamNavigationRouter
+        private val view: IAuthView?,
+        private val navigationRouter: CamNavigationRouter
 ) :
-    BasePresenter(view), IAuthPresenter {
+        BasePresenter(view), IAuthPresenter {
 
     override fun onViewCreated() {
         super.onViewCreated()

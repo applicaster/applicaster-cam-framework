@@ -34,7 +34,7 @@ class LoginFragment : AuthFragment(), ILoginView {
                 if (ContentAccessManager.pluginConfigurator.isPasswordResetRequired()) View.VISIBLE else View.GONE
         }
         UIMapper.apply {
-            map(tv_logo, UIKey.LOGIN_TITLE)
+            map(tv_auth_title, UIKey.LOGIN_TITLE)
             map(tv_forgot_pwd, UIKey.LOGIN_RESET_PWD)
             map(btn_input_action, UIKey.LOGIN_BTN_TEXT)
             map(tv_add_auth_or, UIKey.AUTH_SEPARATOR_TEXT)
