@@ -18,27 +18,26 @@ extension ZAAppConnector {
         } else if let url = self.urlDelegate.fileUrl(withName: asset, extension: "png") {
             if let image = UIImage(contentsOfFile: url.path) ?? UIImage(contentsOfFile: url.absoluteString) {
                 return image
-            } else if let data = try? Data(contentsOf: url) , let image = UIImage(data: data, scale: 0) {
+            } else if let data = try? Data(contentsOf: url), let image = UIImage(data: data, scale: 0) {
                 return image
             } else {
                 return nil
             }
-        }
-        else { return nil }
+        } else { return nil }
     }
 }
 
 extension UIView {
     func setZappStyle(withBackgroundColor color: CAMStyles) {
-        ZAAppConnector.sharedInstance().layoutsStylesDelegate.setViewStyle?(self, withKeys: [kZappLayoutStylesBackgroundColorKey : color.rawValue])
+        ZAAppConnector.sharedInstance().layoutsStylesDelegate.setViewStyle?(self, withKeys: [kZappLayoutStylesBackgroundColorKey: color.rawValue])
     }
 }
 
 extension UIImageView {
     func setZappStyle(withAsset asset: CAMKeys,
                       stretchableImage: Bool = false) {
-        ZAAppConnector.sharedInstance().layoutsStylesDelegate.setViewStyle?(self, withKeys: [kZappLayoutStylesBackgroundImageKey : asset.rawValue])
-        if stretchableImage , let image = self.image {
+        ZAAppConnector.sharedInstance().layoutsStylesDelegate.setViewStyle?(self, withKeys: [kZappLayoutStylesBackgroundImageKey: asset.rawValue])
+        if stretchableImage, let image = self.image {
             let halfSize = CGSize(width: (image.size.width * 0.5) - 0.5, height: (image.size.height * 0.5) - 0.5)
             self.image = image.resizableImage(withCapInsets: UIEdgeInsets(top: halfSize.height, left: halfSize.width, bottom: halfSize.height, right: halfSize.width))
         }
@@ -52,13 +51,12 @@ extension UIButton {
                       style: CAMStyles? = nil,
                       forState state: UIControl.State = .normal) {
         
-        if let iconAsset = iconAsset?.rawValue , let imageIcon = ZAAppConnector.sharedInstance().image(forAsset: iconAsset) {
+        if let iconAsset = iconAsset?.rawValue, let imageIcon = ZAAppConnector.sharedInstance().image(forAsset: iconAsset) {
             self.setImage(imageIcon, for: state)
         }
         
-        
-        if let style = style?.rawValue , let dict = ZAAppConnector.sharedInstance().layoutsStylesDelegate.styleParams?(byStyleName: style) as? [String:Any] {
-            if state == .normal , let font = dict["font"] as? UIFont {
+        if let style = style?.rawValue, let dict = ZAAppConnector.sharedInstance().layoutsStylesDelegate.styleParams?(byStyleName: style) as? [String: Any] {
+            if state == .normal, let font = dict["font"] as? UIFont {
                 self.titleLabel?.font = font
             }
             
@@ -78,10 +76,10 @@ extension UIButton {
     
     func setAttributedZappStyle(withIconAsset iconAsset: CAMKeys? = nil,
                                 backgroundAsset: CAMKeys? = nil,
-                                attributedTitle: [(style: CAMStyles?, string: String, additionalAttributes: [NSAttributedString.Key : Any]?)]? = nil,
+                                attributedTitle: [(style: CAMStyles?, string: String, additionalAttributes: [NSAttributedString.Key: Any]?)]? = nil,
                                 forState state: UIControl.State = .normal) {
         
-        if let iconAsset = iconAsset?.rawValue , let imageIcon = ZAAppConnector.sharedInstance().image(forAsset: iconAsset) {
+        if let iconAsset = iconAsset?.rawValue, let imageIcon = ZAAppConnector.sharedInstance().image(forAsset: iconAsset) {
             self.setImage(imageIcon, for: state)
         }
         
@@ -90,8 +88,8 @@ extension UIButton {
             for index in 0..<attributedTitle.count {
                 let subTitle = attributedTitle[index]
                 
-                var attrs: [NSAttributedString.Key : Any] = subTitle.additionalAttributes ?? [:]
-                if let style = subTitle.style?.rawValue , let dict = ZAAppConnector.sharedInstance().layoutsStylesDelegate.styleParams?(byStyleName: style) as? [String:Any] {
+                var attrs: [NSAttributedString.Key: Any] = subTitle.additionalAttributes ?? [:]
+                if let style = subTitle.style?.rawValue, let dict = ZAAppConnector.sharedInstance().layoutsStylesDelegate.styleParams?(byStyleName: style) as? [String: Any] {
                     if let font = dict["font"] as? UIFont { attrs[.font] = font }
                     if let color = dict["color"] as? UIColor { attrs[.foregroundColor] = color }
                 }
@@ -109,7 +107,7 @@ extension UILabel {
     func setZappStyle(text: String? = nil,
                       style: CAMStyles? = nil) {
         
-        var keys: [String:String] = [:]
+        var keys: [String: String] = [:]
         if let style = style { keys[kZappLayoutStylesFontKey] = style.rawValue }
         
         ZAAppConnector.sharedInstance().layoutsStylesDelegate.setLabelStyle?(self, withKeys: keys)
@@ -117,13 +115,13 @@ extension UILabel {
     }
     
     func setAttributedZappStyle(attributedText: [(style: CAMStyles?, string: String,
-                                additionalAttributes: [NSAttributedString.Key : Any]?)]) {
+                                additionalAttributes: [NSAttributedString.Key: Any]?)]) {
         let str = NSMutableAttributedString(string: "")
         for index in 0..<attributedText.count {
             let subText = attributedText[index]
             
-            var attrs: [NSAttributedString.Key : Any] = subText.additionalAttributes ?? [:]
-            if let style = subText.style?.rawValue , let dict = ZAAppConnector.sharedInstance().layoutsStylesDelegate.styleParams?(byStyleName: style) as? [String:Any] {
+            var attrs: [NSAttributedString.Key: Any] = subText.additionalAttributes ?? [:]
+            if let style = subText.style?.rawValue, let dict = ZAAppConnector.sharedInstance().layoutsStylesDelegate.styleParams?(byStyleName: style) as? [String: Any] {
                 if let font = dict["font"] as? UIFont { attrs[.font] = font }
                 if let color = dict["color"] as? UIColor { attrs[.foregroundColor] = color }
             }
@@ -142,13 +140,13 @@ extension UITextField {
                       textStyle: CAMStyles? = nil,
                       placeholder: String? = nil) {
         
-        if let backgroundAsset = backgroundAsset?.rawValue , let imageIcon = ZAAppConnector.sharedInstance().image(forAsset: backgroundAsset) {
+        if let backgroundAsset = backgroundAsset?.rawValue, let imageIcon = ZAAppConnector.sharedInstance().image(forAsset: backgroundAsset) {
             self.background = imageIcon
             self.borderStyle = .none
         }
         
-        var placeholderStyle: [String:Any]?
-        if let style = textStyle?.rawValue , let dict = ZAAppConnector.sharedInstance().layoutsStylesDelegate.styleParams?(byStyleName: style) as? [String:Any] {
+        var placeholderStyle: [String: Any]?
+        if let style = textStyle?.rawValue, let dict = ZAAppConnector.sharedInstance().layoutsStylesDelegate.styleParams?(byStyleName: style) as? [String: Any] {
             placeholderStyle = dict
             self.font = dict["font"] as? UIFont
             self.textColor = dict["color"] as? UIColor
@@ -156,7 +154,7 @@ extension UITextField {
         
         if let placeholder = placeholder {
             if let placeholderStyle = placeholderStyle {
-                var attrs: [NSAttributedString.Key : Any] = [:]
+                var attrs: [NSAttributedString.Key: Any] = [:]
                 if let font = placeholderStyle["font"] as? UIFont { attrs[.font] = font }
                 if let color = placeholderStyle["color"] as? UIColor { attrs[.foregroundColor] = color.withAlphaComponent(0.6) }
                 attributedPlaceholder = NSAttributedString(string: placeholder, attributes: attrs)
