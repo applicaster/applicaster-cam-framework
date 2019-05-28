@@ -13,14 +13,6 @@
   "sign_up_prompt_action_text": "Log In",
   "separator_text": "OR",
 
-  "password_reset_title_text": "Reset Password",
-  "password_reset_info_text": "Type in you e-mail so we would send you the new password",
-  "password_reset_button_text": "Reset Password",
-
-  "alert_title_text": "Congratulations",
-  "alert_info_text": "Success",
-  "alert_button_text": "Ok",
-
   "reset_password_title_text": "Reset Password",
   "reset_password_details_text": "Type in you e-mail so we would send you the new password",
   "reset_password_action_button_text": "RESTORE",
@@ -36,7 +28,6 @@
   "payment_option_promo_text": "1 MONTH FREE",
 
   "default_auth_screen": "signup",
-  "auth_restore_required": "true",
   "pwd_reset_required" : "true",
   "facebook_login_required" : "true",
   "auth_fields": "{\"signup\":[{\"type\":\"TEXT\",\"key\":\"email\",\"title\":\"Email\",\"hint\":\"Email\",\"mandatory\":true},{\"type\":\"PASSWORD\",\"key\":\"password\",\"title\":\"Password\",\"hint\":\"Password\",\"mandatory\":true},{\"type\":\"NUMBER\",\"key\":\"phone\",\"title\":\"Phone\",\"hint\":\"Phone\",\"mandatory\":true},{\"type\":\"TEXT\",\"key\":\"gender\",\"title\":\"Gender\",\"hint\":\"Gender\",\"mandatory\":false}],\"login\":[{\"type\":\"TEXT\",\"key\":\"email\",\"title\":\"Email\",\"hint\":\"Email\",\"mandatory\":true},{\"type\":\"PASSWORD\",\"key\":\"password\",\"title\":\"Password\",\"hint\":\"Password\",\"mandatory\":true}],\"password_reset\":[{\"type\":\"TEXT\",\"key\":\"email\",\"title\":\"Email\",\"hint\":\"Email\",\"mandatory\":true}]}"

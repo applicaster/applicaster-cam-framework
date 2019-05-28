@@ -1,4 +1,4 @@
-package com.applicaster.cam.ui.resetpassword
+package com.applicaster.cam.ui.auth.password.reset
 
 import android.os.Bundle
 import android.view.LayoutInflater
