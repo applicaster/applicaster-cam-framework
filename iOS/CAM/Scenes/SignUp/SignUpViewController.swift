@@ -212,7 +212,6 @@ extension SignUpViewController: UITableViewDelegate, UITableViewDataSource {
         }
         cell.textField.setZappStyle(backgroundAsset: .authFieldImage, textStyle: .inputField, placeholder: authFields[indexPath.row].hint)
         cell.textField.configureInputField(data: authFields[indexPath.row])
-        cell.backgroundColor = .clear
         cell.textChanged = { [weak self] text in
             self?.authFields[indexPath.row].text = text
         }

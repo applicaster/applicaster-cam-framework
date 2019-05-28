@@ -12,12 +12,23 @@ protocol ResetPasswordViewProtocol: AnyObject {
     func showError(description: String?)
     func showLoadingScreen(_ show: Bool)
     func showConfirmationScreenIfNeeded()
+    func updateTable(fields: [AuthField])
 }
 
 class ResetPasswordPresenter {
     weak var view: ResetPasswordViewProtocol?
     weak var coordinatorDelegate: AuthorizationCoordinatorProtocol?
     weak var camDelegate: CAMDelegate?
+    
+    func viewDidLoad() {
+        if let json = camDelegate?.getPluginConfig()[CAMKeys.authFields.rawValue],
+            let data = json.data(using: .utf8) {
+            if let jsonAuthFields = try? JSONDecoder().decode(AuthFields.self, from: data),
+                let loginFields = jsonAuthFields.password {
+                view?.updateTable(fields: loginFields)
+            }
+        }
+    }
     
     func showResetPasswordScreen() {
         coordinatorDelegate?.showResetPasswordScreen()
@@ -27,9 +38,9 @@ class ResetPasswordPresenter {
         coordinatorDelegate?.popCurrentScreen()
     }
     
-    func resetPassword(email: String) {
+    func resetPassword(data: [(key: String, value: String?)]) {
         self.view?.showLoadingScreen(true)
-        camDelegate?.resetPassword(email: email, completion: { (result) in
+        camDelegate?.resetPassword(data: data, completion: { (result) in
             switch result {
             case .success:
                 self.view?.showConfirmationScreenIfNeeded()

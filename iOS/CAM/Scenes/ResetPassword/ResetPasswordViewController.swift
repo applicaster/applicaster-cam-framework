@@ -11,27 +11,35 @@ import UIKit
 class ResetPasswordViewController: UIViewController {
 
     var loadingPopover = LoadingPopover.nibInstance()
+    var resetPasswordFields = [AuthField]()
+    @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var backgroundImageView: UIImageView!
     @IBOutlet var backButton: UIButton!
     @IBOutlet var closeButton: UIButton!
     @IBOutlet var logoImageView: UIImageView!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var infoLabel: UILabel!
-    
-    @IBOutlet var emailTextField: UITextField!
+    @IBOutlet var resetPasswordFieldsTable: UITableView!
     @IBOutlet var resetButton: UIButton!
     
-    @IBOutlet var titleTopSpaceConstraint: NSLayoutConstraint!
+    @IBOutlet var tableHeightConstraint: NSLayoutConstraint!
     
     var configDictionary: [String: String] {
         return presenter?.camDelegate?.getPluginConfig() ?? [String: String]()
     }
+    
     var presenter: ResetPasswordPresenter?
+    
+    var resetPasswordFieldsTableHeight: CGFloat {
+        return CGFloat(resetPasswordFields.count) * 48 + CGFloat((resetPasswordFields.count - 1) * 7)
+    }
     
     // MARK: - Flow & UI Setup
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter?.viewDidLoad()
+        setupUI()
         subscribeKeyboardNotifications()
         configureElements()
     }
@@ -49,14 +57,17 @@ class ResetPasswordViewController: UIViewController {
         logoImageView.setZappStyle(withAsset: .headerLogo)
         titleLabel.setZappStyle(text: configDictionary[CAMKeys.passwordResetTitleText.rawValue], style: .screenTitle)
         infoLabel.setZappStyle(text: configDictionary[CAMKeys.passwordResetInfoText.rawValue], style: .screenDescription)
-        emailTextField.setZappStyle(backgroundAsset: .authFieldImage, textStyle: .inputField, placeholder:
-                                    configDictionary[CAMKeys.passwordInputFieldPlaceholder.rawValue])
         resetButton.setZappStyle(backgroundAsset: .passwordResetButtonImage, title: configDictionary[CAMKeys.passwordResetButtonText.rawValue], style: .actionButton)
     }
     
     func setupConstraints() {
-        titleTopSpaceConstraint.constant = (emailTextField.frame.minY - logoImageView.frame.maxY) / 2 - 46
+        tableHeightConstraint.constant = resetPasswordFieldsTableHeight
         self.view.layoutIfNeeded()
+    }
+    
+    func setupUI() {
+        resetPasswordFieldsTable.backgroundView = UIView()
+        resetPasswordFieldsTable.allowsSelection = false
     }
     
     // MARK: - Keyboard
@@ -88,17 +99,16 @@ class ResetPasswordViewController: UIViewController {
     
     @IBAction func resetPassword(_ sender: UIButton) {
         hideKeyboard()
-        guard let email = emailTextField.text else {
-            let message = configDictionary[CAMKeys.emptyFieldsMessage.rawValue]
-            showError(description: message)
-            return
+        var result = [(key: String, value: String?)]()
+        for obj in resetPasswordFields {
+            if obj.mandatory && (obj.text ?? "").isEmpty {
+                let message = configDictionary[CAMKeys.emptyFieldsMessage.rawValue]
+                showError(description: message)
+                return
+            }
+            result.append((key: (obj.key ?? ""), value: obj.text))
         }
-        if email.isEmpty {
-            let message = configDictionary[CAMKeys.emptyFieldsMessage.rawValue]
-            showError(description: message)
-            return
-        }
-        presenter?.resetPassword(email: email)
+        presenter?.resetPassword(data: result)
     }
     
     @IBAction func backToPreviousScreen(_ sender: UIButton) {
@@ -116,6 +126,11 @@ class ResetPasswordViewController: UIViewController {
 
 // MARK: - ResetPasswordViewProtocol
 extension ResetPasswordViewController: ResetPasswordViewProtocol {
+    
+    func updateTable(fields: [AuthField]) {
+        resetPasswordFields = fields
+        resetPasswordFieldsTable.reloadData()
+    }
     
     func showLoadingScreen(_ show: Bool) {
         if show {
@@ -142,9 +157,30 @@ extension ResetPasswordViewController: ResetPasswordViewProtocol {
     }
 }
 
-extension ResetPasswordViewController: UITextFieldDelegate {
+// MARK: - Table Delegate
+
+extension ResetPasswordViewController: UITableViewDelegate, UITableViewDataSource {
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        return textField.resignFirstResponder()
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return resetPasswordFields.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == resetPasswordFields.count - 1 {
+            return 48
+        }
+        return 55
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "AuthCell", for: indexPath) as? AuthTableCell else {
+            return UITableViewCell()
+        }
+        cell.textField.setZappStyle(backgroundAsset: .authFieldImage, textStyle: .inputField, placeholder: resetPasswordFields[indexPath.row].hint)
+        cell.textField.configureInputField(data: resetPasswordFields[indexPath.row])
+        cell.textChanged = { [weak self] text in
+            self?.resetPasswordFields[indexPath.row].text = text
+        }
+        return cell
     }
 }
