@@ -54,6 +54,10 @@ class PasswordResetFragment : BaseFragment(), IPasswordResetView {
             map(toolbar_close_button, UIKey.TOOLBAR_CLOSE_BUTTON)
             map(app_logo, UIKey.TOOLBAR_HEADER_LOGO_IMAGE)
             map(container_reset_password, UIKey.BACKGROUND_IMAGE)
+
+            map(tv_reset_title, UIKey.PASSWORD_RESET_TITLE_TEXT)
+            map(tv_reset_title_desc, UIKey.PASSWORD_RESET_DESC_TEXT)
+            map(btn_reset, UIKey.PASSWORD_RESET_ACTION_BUTTON)
         }
     }
 

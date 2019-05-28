@@ -74,9 +74,9 @@ const val UI_KEY_FACEBOOK_IMAGE = "icon_1"
 // endregion
 
 // region Password reset UI keys
-const val UI_KEY_PWD_RESET_TITLE_TEXT = "reset_password_action_button_text"
-const val UI_KEY_PWD_RESET_DESC_TEXT = "reset_password_action_text"
-const val UI_KEY_PWD_RESET_BUTTON_TEXT = "reset_password_action_text"
+const val UI_KEY_PWD_RESET_TITLE_TEXT = "reset_password_title_text"
+const val UI_KEY_PWD_RESET_DESC_TEXT = "reset_password_details_text"
+const val UI_KEY_PWD_RESET_BUTTON_TEXT = "reset_password_action_button_text"
 const val UI_KEY_PWD_RESET_BUTTON_IMAGE= "action_button_asset"
 // endregion
 
