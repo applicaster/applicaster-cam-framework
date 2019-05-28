@@ -24,8 +24,12 @@ class MockCamContract(private val context: Context) : ICamContract {
         Handler().postDelayed({ callback.onSuccess() }, 1000)
     }
 
-    override fun loginWithFacebook(callback: FacebookLoginCallback) {
-        Handler().postDelayed({ callback.onSuccess() }, 1000)
+    override fun loginWithFacebook(email: String, id: String, callback: FacebookAuthCallback) {
+        Handler().postDelayed({ callback.onSuccess() }, 1250)
+    }
+
+    override fun signupWithFacebook(email: String, id: String, callback: FacebookAuthCallback) {
+        Handler().postDelayed({ callback.onSuccess() }, 1250)
     }
 
     override fun onItemPurchased() {

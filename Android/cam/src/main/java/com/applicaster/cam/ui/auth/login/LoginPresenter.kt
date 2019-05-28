@@ -1,6 +1,7 @@
 package com.applicaster.cam.ui.auth.login
 
 import com.applicaster.cam.ContentAccessManager
+import com.applicaster.cam.FacebookAuthCallback
 import com.applicaster.cam.LoginCallback
 import com.applicaster.cam.params.auth.AuthFieldConfig
 import com.applicaster.cam.ui.CamNavigationRouter
@@ -10,7 +11,7 @@ class LoginPresenter(
     private val view: ILoginView?,
     private val navigationRouter: CamNavigationRouter
 ) :
-    AuthPresenter(view, navigationRouter), ILoginPresenter, LoginCallback {
+    AuthPresenter(view), ILoginPresenter, LoginCallback, FacebookAuthCallback {
 
     override fun getAuthFieldConfig(): AuthFieldConfig =
         ContentAccessManager.pluginConfigurator.getLoginAuthFields()
@@ -20,7 +21,7 @@ class LoginPresenter(
     }
 
     override fun onAuthActionButtonClicked(inputValues: HashMap<String, String>) {
-        if (isAuthInputFieldsValid(inputValues)) return
+        if (!isAuthInputFieldsValid(inputValues)) return
         view?.showLoadingIndicator()
         ContentAccessManager.contract.login(inputValues, this)
     }
@@ -36,5 +37,10 @@ class LoginPresenter(
 
     override fun onAuthHintClicked() {
         navigationRouter.attachSignUpFragment()
+    }
+
+    override fun onFacebookAuthActionCompleted(email: String, id: String) {
+        view?.showLoadingIndicator()
+        ContentAccessManager.contract.loginWithFacebook(email, id, this)
     }
 }
