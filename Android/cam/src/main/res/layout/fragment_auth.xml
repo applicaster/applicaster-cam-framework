@@ -7,10 +7,12 @@
 
     <include
         android:id="@+id/container_toolbar"
-        layout="@layout/layout_toolbar_template" />
+        layout="@layout/layout_toolbar_template"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/toolbar_height" />
 
     <com.applicaster.util.ui.CustomTextView
-        android:id="@+id/tv_logo"
+        android:id="@+id/tv_auth_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Create an Account"

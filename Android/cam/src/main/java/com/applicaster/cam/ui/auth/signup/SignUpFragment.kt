@@ -26,7 +26,7 @@ class SignUpFragment : AuthFragment(), ISignUpView {
         super.customize()
         tv_forgot_pwd.visibility = View.GONE
         UIMapper.apply {
-            map(tv_logo, UIKey.SIGN_UP_TITLE)
+            map(tv_auth_title, UIKey.SIGN_UP_TITLE)
             map(btn_input_action, UIKey.SIGN_UP_BUTTON)
             map(tv_add_auth_or, UIKey.AUTH_SEPARATOR_TEXT)
             map(tv_add_auth_desc, UIKey.SIGN_UP_ALT_AUTH_TEXT)
