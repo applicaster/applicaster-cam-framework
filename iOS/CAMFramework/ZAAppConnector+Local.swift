@@ -119,7 +119,10 @@ class MyConnector: NSObject, ZAAppDelegateConnectorLayoutsStylesProtocol, ZAAppD
         if let color = keys?[kZappLayoutStylesBackgroundColorKey] as? String {
             let uiColor: UIColor?
             switch color {
-            case "alternate_action_banner_bg_color": uiColor = UIColor(hex: "#FFFFFF50")
+            case "alternate_action_banner_bg_color": uiColor = UIColor(red: 0.0,
+                                                                       green: 44.0/255.0,
+                                                                       blue: 95.0/255.0,
+                                                                       alpha: 0.84)
             default: uiColor = nil
             }
             

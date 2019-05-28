@@ -50,6 +50,7 @@ class EntitlementPickerViewController: UIViewController {
         backButton.setZappStyle(withIconAsset: .backButtonImage)
         closeButton.setZappStyle(withIconAsset: .closeButtonImage)
         logoImageView.setZappStyle(withAsset: .headerLogo)
+        helpInfoContainer.setZappStyle(withBackgroundColor: .alternateActionBannerColor)
         
         setupGradient()
     }
