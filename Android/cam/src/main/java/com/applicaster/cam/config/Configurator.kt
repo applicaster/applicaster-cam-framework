@@ -9,6 +9,8 @@ interface Configurator {
 
     fun getLoginAuthFields(): AuthFieldConfig
 
+    fun getPasswordResetAuthFields(): AuthFieldConfig
+
     fun getDefaultAuthScreen(): AuthScreenType
 
     fun isAuthRestoreRequired(): Boolean

@@ -1,37 +1,30 @@
 {
     "default_auth_screen": "login",
-    "back_button": "back_button",
-    "close_button": "close_button",
-    "header_logo": "header_logo",
-    "background_image": "background_image",
     "separator_text": "Or",
     "madatory_field_empty_error": "Mandatory field is empty!",
     
-    "login_screen_title_text": "Login To Your Account",
+    "login_screen_title_text": "Login",
     "reset_password_text": "Forgot Password?",
     "alternative_login_action_prompt_text": "Log In with Social Networks",
     "login_button_text": "Log In",
-    "login_button_image": "login_button",
     "login_promt_text": "Don't have an account?",
     "login_promt_action_text": "Sign Up",
     
     "sign_up_screen_title_text": "Sign UP",
     "sign_up_button_text": "Sign Up",
-    "sign_up_button_image": "signup_button",
     "alternative_sign_up_action_prompt_text": "Sign Up with Social Networks",
     "sign_up_promt_text": "Have already an account?",
     "sign_up_promt_action_text": "Log In",
     
     "password_reset_title_text": "Reset Password",
-    "password_reset_info_text": "Type in you e-mail so we would send you the new password",
+    "password_reset_description_text": "Type in you e-mail so we would send you the new password",
     "password_reset_button_text": "Reset Password",
-    "password_reset_button_image": "password_reset_button",
     
     "password_alert_title_text": "Congratulations",
-    "password_alert_info_text": "Success",
-    "password_alert_button_text": "Ok",
-    "password_alert_button_image": "alert_image",
+    "password_alert_description_text": "Success",
     "password_input_field_placeholder": "Email",
+    
+    "alert_button_text": "Ok",
     
     "payment_option_title_text": "Monthly Subscription",
     "payment_option_details_text": "Subscription details go here nad might take up to two lines maximum",
@@ -39,7 +32,6 @@
     "payment_option_button_text": "Subscribe for $4.99",
     "payment_option_promo_text": "1 MONTH FREE",
 
-    "pwd_reset_required" : "true",
     "facebook_login_required" : "true",
-    "auth_fields": "{ \"signup\": [{\"type\": \"TEXT\",\"key\": \"email\",\"title\": \"Email\",\"hint\": \"Email\",\"mandatory\": true },{\"type\": \"PASSWORD\",\"key\": \"password\",\"title\": \"Password\",\"hint\": \"Password\",\"mandatory\": true },{\"type\": \"NUMBER\",\"key\": \"Phone\",\"title\": \"Phone\",\"hint\": \"Phone\",\"mandatory\": true},{\"type\": \"TEXT\",\"key\": \"gender\",\"title\": \"Gender\",\"hint\": \"Gender\",\"mandatory\": false }],\"login\": [{\"type\": \"TEXT\",\"key\": \"email\",\"title\": \"Email\",\"hint\": \"Email\",\"mandatory\": true},{\"type\": \"PASSWORD\",\"key\": \"password\",\"title\": \"Password\",\"hint\": \"Password\",\"mandatory\": true},{\"type\": \"NUMBER\",\"key\": \"birthdate\",\"title\": \"Birth Date\",\"hint\": \"Birth Date\",\"mandatory\": true},{\"type\": \"NUMBER\",\"key\": \"birthdate\",\"title\": \"Birth Date\",\"hint\": \"Birth Date\",\"mandatory\": true}, {\"type\": \"NUMBER\",\"key\": \"birthdate\",\"title\": \"Birth Date\",\"hint\": \"Birth Date\",\"mandatory\": true}]}"
+    "auth_fields": "{ \"signup\": [{\"type\": \"TEXT\",\"key\": \"email\",\"title\": \"Email\",\"hint\": \"Email\",\"mandatory\": true },{\"type\": \"PASSWORD\",\"key\": \"password\",\"title\": \"Password\",\"hint\": \"Password\",\"mandatory\": true },{\"type\": \"NUMBER\",\"key\": \"Phone\",\"title\": \"Phone\",\"hint\": \"Phone\",\"mandatory\": true},{\"type\": \"TEXT\",\"key\": \"gender\",\"title\": \"Gender\",\"hint\": \"Gender\",\"mandatory\": false }],\"login\": [{\"type\": \"TEXT\",\"key\": \"email\",\"title\": \"Email\",\"hint\": \"Email\",\"mandatory\": true},{\"type\": \"PASSWORD\",\"key\": \"password\",\"title\": \"Password\",\"hint\": \"Password\",\"mandatory\": true},{\"type\": \"NUMBER\",\"key\": \"birthdate\",\"title\": \"Birth Date\",\"hint\": \"Birth Date\",\"mandatory\": true},{\"type\": \"NUMBER\",\"key\": \"birthdate\",\"title\": \"Birth Date\",\"hint\": \"Birth Date\",\"mandatory\": true}, {\"type\": \"NUMBER\",\"key\": \"birthdate\",\"title\": \"Birth Date\",\"hint\": \"Birth Date\",\"mandatory\": true}],\"password\": [{\"type\": \"NUMBER\",\"key\": \"birthdate\",\"title\": \"Birth Date\",\"hint\": \"Birth Date\",\"mandatory\": true},{\"type\": \"PASSWORD\",\"key\": \"password\",\"title\": \"Password\",\"hint\": \"Password\",\"mandatory\": true }]}"
 }

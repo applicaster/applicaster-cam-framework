@@ -16,7 +16,7 @@ class LoginPresenter(
         ContentAccessManager.pluginConfigurator.getLoginAuthFields()
 
     override fun onForgotPasswordClicked() {
-        view?.showToastMessage("forgot pwd action")
+        navigationRouter.attachPasswordResetFragment()
     }
 
     override fun onAuthActionButtonClicked(inputValues: HashMap<String, String>) {

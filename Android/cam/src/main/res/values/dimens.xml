@@ -8,7 +8,7 @@
     <dimen name="toolbar_logo_width">200dp</dimen>
     <dimen name="toolbar_logo_height">44dp</dimen>
 
-    <!--Auth-->
+    <!-- Region Auth-->
     <dimen name="auth_et_width">250dp</dimen>
     <dimen name="auth_et_height">48dp</dimen>
     <dimen name="auth_et_margin_top">7dp</dimen>
@@ -23,8 +23,16 @@
     <dimen name="additional_auth_container_margin">8dp</dimen>
     <dimen name="auth_text_size">16sp</dimen>
     <dimen name="additional_auth_divider_width">66dp</dimen>
-    <dimen name="additional_auth_divider_height">1dp</dimen>
+    <dimen name="additional_auth_divider_height">3dp</dimen>
     <dimen name="additional_auth_margin">8dp</dimen>
+    <!-- End region -->
+
+    <!-- Region Password reset-->
+    <dimen name="password_reset_title_margin_top">50dp</dimen>
+    <dimen name="password_reset_desc_margin_top">20dp</dimen>
+    <dimen name="password_reset_desc_width">375dp</dimen>
+    <dimen name="password_reset_input_fields_margin_top">70dp</dimen>
+    <!-- End region -->
 
     <!-- Region Billing view -->
     <dimen name="billing_title_margin_top">22dp</dimen>
@@ -41,6 +49,11 @@
     <dimen name="billing_tv_title_text_size">20sp</dimen>
     <dimen name="billing_layout_margin_top_bottom">16dp</dimen>
     <dimen name="layout_billing_item_height">192dp</dimen>
+    <dimen name="layout_billing_item_width">304dp</dimen>
+    <dimen name="billing_tv_title_text_margin_top">8dp</dimen>
+    <dimen name="billing_layout_details_margin_top">14dp</dimen>
+    <dimen name="billing_rv_items_margin_end">36dp</dimen>
+    <dimen name="billing_rv_items_margin_start">36dp</dimen>
     <!-- End region -->
 
     <!--Region default dimens-->

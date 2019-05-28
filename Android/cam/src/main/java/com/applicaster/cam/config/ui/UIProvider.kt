@@ -11,7 +11,5 @@ interface UIProvider {
 
     fun getDrawable(key: String): Drawable
 
-    fun getFont(key: String) : Typeface
-
     fun getStyleResId(key: String): Int
 }

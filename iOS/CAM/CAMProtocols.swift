@@ -25,7 +25,7 @@ public protocol CAMDelegate: AnyObject {
     func isEntitlementsValid() -> Bool
     func login(authData: [(key: String, value: String?)], completion: @escaping (CAMResult) -> Void)
     func signUp(authData: [(key: String, value: String?)], completion: @escaping (CAMResult) -> Void)
-    func resetPassword(email: String, completion: @escaping (CAMResult) -> Void)
+    func resetPassword(data: [(key: String, value: String?)], completion: @escaping (CAMResult) -> Void)
     func itemPurchased(item: SKProduct)
     func itemsRestored(items: [SKProduct])
     func availableProducts() -> [Product]

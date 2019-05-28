@@ -13,14 +13,15 @@ import CAM
 // swiftlint:disable all
 
 class ViewController: UIViewController, CAMDelegate {
+    func resetPassword(data: [(key: String, value: String?)], completion: @escaping (CAMResult) -> Void) {
+        completion(.success)
+    }
+    
     
     var cam: ContentAccessManager?
     
     let myConnector = MyConnector()
     
-    func resetPassword(email: String, completion: @escaping (CAMResult) -> Void) {
-        completion(.success)
-    }
     
     func login(authData: [(key: String, value: String?)], completion: @escaping (CAMResult) -> Void) {
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {

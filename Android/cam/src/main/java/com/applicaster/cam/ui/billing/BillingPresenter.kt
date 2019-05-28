@@ -114,6 +114,10 @@ class BillingPresenter(
         }
     }
 
+    override fun onRestoreClicked() {
+        view.showToastMessage("Restore clicked")
+    }
+
     private fun getViewContext(): Context = view.getViewContext() ?: throw RuntimeException("Context should not be null")
 
     private fun getBaseActivity(): BaseActivity = getViewContext() as BaseActivity

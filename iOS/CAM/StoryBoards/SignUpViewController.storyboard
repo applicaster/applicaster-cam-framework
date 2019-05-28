@@ -68,6 +68,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="120" id="3sT-Uy-aKT"/>
                                         </constraints>
+                                        <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AuthCell" id="5rA-tP-ETl" customClass="AuthTableCell" customModule="CAM" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="28" width="250" height="44"/>
@@ -93,6 +94,7 @@
                                                         <constraint firstItem="E6q-BO-zog" firstAttribute="top" secondItem="fYW-Vz-DEN" secondAttribute="top" id="byu-DD-BAS"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <connections>
                                                     <outlet property="textField" destination="E6q-BO-zog" id="kG5-Kd-RaM"/>
                                                 </connections>

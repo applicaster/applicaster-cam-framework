@@ -1,12 +1,10 @@
 package com.applicaster.cam.ui.auth
 
 import android.os.Bundle
-import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import android.widget.LinearLayout
 import com.applicaster.cam.ContentAccessManager
 import com.applicaster.cam.R
 import com.applicaster.cam.config.ui.UIKey
@@ -26,8 +24,8 @@ abstract class AuthFragment : BaseFragment(), IAuthView {
     private var presenter: IAuthPresenter? = null
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         val rootView = inflater.inflate(R.layout.fragment_auth, container, false)
 
@@ -60,42 +58,34 @@ abstract class AuthFragment : BaseFragment(), IAuthView {
 
         container_additional_auth?.apply {
             visibility =
-                if (ContentAccessManager.pluginConfigurator.isFacebookLoginRequired()) View.VISIBLE else View.GONE
+                    if (ContentAccessManager.pluginConfigurator.isFacebookLoginRequired()) View.VISIBLE else View.GONE
         }
         container_bottom_bar?.apply {
             visibility =
-                if (ContentAccessManager.pluginConfigurator.isAuthRestoreRequired()) View.VISIBLE else View.GONE
+                    if (ContentAccessManager.pluginConfigurator.isAuthRestoreRequired()) View.VISIBLE else View.GONE
         }
 
         UIMapper.apply {
             map(toolbar_back_button, UIKey.TOOLBAR_BACK_BUTTON)
             map(toolbar_close_button, UIKey.TOOLBAR_CLOSE_BUTTON)
-            map(app_logo, UIKey.TOOLBAR_HEADER_LOGO)
+            map(app_logo, UIKey.TOOLBAR_HEADER_LOGO_IMAGE)
             map(container_parent_auth, UIKey.BACKGROUND_IMAGE)
             map(iv_facebook_auth, UIKey.AUTH_FACEBOOK_IMAGE)
+            map(iv_left_divider, UIKey.AUTH_LEFT_DIVIDER_IMAGE)
+            map(iv_right_divider, UIKey.AUTH_RIGHT_DIVIDER_IMAGE)
         }
     }
 
     override fun getParentView() = container_parent_auth
 
     override fun populateAuthFieldsViews(authFieldConfig: AuthFieldConfig) {
-        val etWidth = resources.getDimensionPixelSize(R.dimen.auth_et_width)
-        val etHeight = resources.getDimensionPixelSize(R.dimen.auth_et_height)
-        val etMarginTop = resources.getDimensionPixelSize(R.dimen.auth_et_margin_top)
-
-        for (field in authFieldConfig.authFields) {
-            val editText = EditText(context)
-            editText.applyCustomizations(etWidth, etHeight, etMarginTop, field)
-            container_linear_input.addView(editText)
-        }
-        val visibleViewsCount =
-            if (authFieldConfig.authFields.size < MAX_NON_SCROLLABLE_AUTH_FIELDS)
-                authFieldConfig.authFields.size else MAX_NON_SCROLLABLE_AUTH_FIELDS
-        val parentMaxHeight = (etHeight + etMarginTop) * visibleViewsCount
-
-        //recalculating scroll view height to match design spec
-        container_scrollable_input.layoutParams = container_scrollable_input.layoutParams.apply {
-            height = parentMaxHeight
+        context?.apply {
+            InputFieldViewCustomizer.populateAuthFields(
+                    this,
+                    linearParent = container_linear_input,
+                    scrollableParent = container_scrollable_input,
+                    authFieldConfig = authFieldConfig
+            )
         }
     }
 
@@ -110,34 +100,4 @@ abstract class AuthFragment : BaseFragment(), IAuthView {
     }
 
     abstract fun initPresenter(navigationManager: CamNavigationRouter): IAuthPresenter
-
-    companion object {
-        const val MAX_NON_SCROLLABLE_AUTH_FIELDS = 4
-    }
-}
-
-private fun EditText.applyCustomizations(
-    etWidth: Int,
-    etHeight: Int,
-    etMarginTop: Int,
-    field: AuthField
-) {
-    layoutParams = LinearLayout.LayoutParams(
-        etWidth,
-        etHeight
-    ).apply {
-        topMargin = etMarginTop
-
-    }
-    tag = field
-    val paddingHorizontal = resources.getDimensionPixelSize(R.dimen.auth_et_padding_horizontal)
-    setPadding(paddingHorizontal, 0, paddingHorizontal, 0)
-    UIMapper.map(this, UIKey.AUTH_INPUT_FIELD)
-    inputType = when (field.type) {
-        AuthField.Type.TEXT -> InputType.TYPE_CLASS_TEXT
-        AuthField.Type.PASSWORD -> (InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD)
-        AuthField.Type.NUMBER -> InputType.TYPE_CLASS_NUMBER
-        else -> InputType.TYPE_CLASS_TEXT
-    }
-    hint = field.hint
 }

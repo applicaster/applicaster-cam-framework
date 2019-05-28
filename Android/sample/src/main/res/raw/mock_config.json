@@ -2,16 +2,16 @@
   "login_screen_title_text": "Login To Your Account",
   "reset_password_text": "Forgot Password?",
   "alternative_login_action_prompt_text": "Log In with Social Networks",
-  "login_button_text": "Log In",
+  "login_button_text": "LOG IN",
   "login_prompt_text": "Don't have an account?",
   "login_prompt_action_text": "Sign Up",
 
   "sign_up_screen_title_text": "Create an Account",
-  "sign_up_button_text": "Sign Up",
+  "sign_up_button_text": "SIGN UP",
   "alternative_sign_up_action_prompt_text": "Sign Up with Social Networks",
   "sign_up_prompt_text": "Have already an account?",
   "sign_up_prompt_action_text": "Log In",
-  "separator_text": "Or",
+  "separator_text": "OR",
 
   "password_reset_title_text": "Reset Password",
   "password_reset_info_text": "Type in you e-mail so we would send you the new password",
@@ -20,7 +20,10 @@
   "alert_title_text": "Congratulations",
   "alert_info_text": "Success",
   "alert_button_text": "Ok",
-  "alert_button_image": "alert_image",
+
+  "reset_password_title_text": "Reset Password",
+  "reset_password_details_text": "Type in you e-mail so we would send you the new password",
+  "reset_password_action_button_text": "RESTORE",
 
   "payment_option_screen_title_text": "Choose your subscription",
   "payment_option_screen_hint_desc": "Have already subscribed?",
@@ -36,6 +39,5 @@
   "auth_restore_required": "true",
   "pwd_reset_required" : "true",
   "facebook_login_required" : "true",
-
-  "auth_fields": "{ \"signup\": [{\"type\": \"TEXT\",\"key\": \"email\",\"title\": \"Email\",\"hint\": \"Email\",\"mandatory\": true },{\"type\": \"PASSWORD\",\"key\": \"password\",\"title\": \"Password\",\"hint\": \"Password\",\"mandatory\": true },{\"type\": \"NUMBER\",\"key\": \"Phone\",\"title\": \"Phone\",\"hint\": \"Phone\",\"mandatory\": true},{\"type\": \"TEXT\",\"key\": \"gender\",\"title\": \"Gender\",\"hint\": \"Gender\",\"mandatory\": false }],\"login\": [{\"type\": \"TEXT\",\"key\": \"email\",\"title\": \"Email\",\"hint\": \"Email\",\"mandatory\": true},{\"type\": \"PASSWORD\",\"key\": \"password\",\"title\": \"Password\",\"hint\": \"Password\",\"mandatory\": true}]}"
+  "auth_fields": "{\"signup\":[{\"type\":\"TEXT\",\"key\":\"email\",\"title\":\"Email\",\"hint\":\"Email\",\"mandatory\":true},{\"type\":\"PASSWORD\",\"key\":\"password\",\"title\":\"Password\",\"hint\":\"Password\",\"mandatory\":true},{\"type\":\"NUMBER\",\"key\":\"phone\",\"title\":\"Phone\",\"hint\":\"Phone\",\"mandatory\":true},{\"type\":\"TEXT\",\"key\":\"gender\",\"title\":\"Gender\",\"hint\":\"Gender\",\"mandatory\":false}],\"login\":[{\"type\":\"TEXT\",\"key\":\"email\",\"title\":\"Email\",\"hint\":\"Email\",\"mandatory\":true},{\"type\":\"PASSWORD\",\"key\":\"password\",\"title\":\"Password\",\"hint\":\"Password\",\"mandatory\":true}],\"password_reset\":[{\"type\":\"TEXT\",\"key\":\"email\",\"title\":\"Email\",\"hint\":\"Email\",\"mandatory\":true}]}"
 }
