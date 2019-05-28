@@ -137,7 +137,7 @@ take up to two lines maximum</string>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
-                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstItem="wvC-r2-igl" firstAttribute="centerY" secondItem="egR-Ox-pGu" secondAttribute="centerY" id="AwF-qI-v28"/>
                                                                 <constraint firstItem="wvC-r2-igl" firstAttribute="leading" secondItem="egR-Ox-pGu" secondAttribute="leading" id="SC7-rU-puV"/>
@@ -159,7 +159,7 @@ take up to two lines maximum</string>
                                                             </connections>
                                                         </button>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstItem="B90-xo-GgL" firstAttribute="top" secondItem="hGy-N7-TRU" secondAttribute="top" constant="25" id="8st-Gy-orC"/>
                                                         <constraint firstItem="B90-xo-GgL" firstAttribute="leading" secondItem="hGy-N7-TRU" secondAttribute="leading" id="Bzj-DM-9hg"/>
