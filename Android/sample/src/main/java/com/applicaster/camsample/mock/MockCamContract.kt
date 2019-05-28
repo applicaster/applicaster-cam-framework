@@ -16,8 +16,8 @@ class MockCamContract(private val context: Context) : ICamContract {
         Handler().postDelayed({ callback.onSuccess() }, 1250)
     }
 
-    override fun resetPassword(callback: PasswordResetCallback) {
-        Handler().postDelayed({ callback.onSuccess() }, 1000)
+    override fun resetPassword(authFieldsInput: HashMap<String, String>, callback: PasswordResetCallback) {
+        Handler().postDelayed({ callback.onSuccess() }, 1250)
     }
 
     override fun activateRedeemCode(redeemCode: String, callback: RedeemCodeActivationCallback) {

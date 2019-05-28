@@ -1,6 +1,7 @@
-package com.applicaster.cam.ui.resetpassword
+package com.applicaster.cam.ui.auth.password.reset
 
 import com.applicaster.cam.ContentAccessManager
+import com.applicaster.cam.PasswordResetCallback
 import com.applicaster.cam.params.auth.AuthFieldConfig
 import com.applicaster.cam.ui.CamNavigationRouter
 import com.applicaster.cam.ui.base.presenter.BasePresenter
@@ -9,7 +10,7 @@ class PasswordResetPresenter(
     private val view: IPasswordResetView?,
     private val navigationRouter: CamNavigationRouter
 ) :
-    BasePresenter(view), IPasswordResetPresenter {
+    BasePresenter(view), IPasswordResetPresenter, PasswordResetCallback {
 
     override fun onViewCreated() {
         super.onViewCreated()
@@ -20,9 +21,21 @@ class PasswordResetPresenter(
 
 
     override fun onResetButtonClicked(inputValues: HashMap<String, String>) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        if (!isAuthInputFieldsValid(inputValues)) return
+        view?.showLoadingIndicator()
+        ContentAccessManager.contract.resetPassword(inputValues, this)
     }
 
+    override fun onFailure(msg: String) {
+        view?.hideLoadingIndicator()
+        view?.showToastMessage(msg)
+    }
+
+    override fun onSuccess() {
+        view?.hideLoadingIndicator()
+        //TODO: add confirmation dialog handling here
+        view?.goBack()
+    }
 
     private fun isAuthInputFieldsValid(inputValues: HashMap<String, String>): Boolean {
         for (inputValue in inputValues) {
@@ -35,5 +48,5 @@ class PasswordResetPresenter(
     }
 
     fun getAuthFieldConfig(): AuthFieldConfig =
-            ContentAccessManager.pluginConfigurator.getPasswordResetAuthFields()
+        ContentAccessManager.pluginConfigurator.getPasswordResetAuthFields()
 }
