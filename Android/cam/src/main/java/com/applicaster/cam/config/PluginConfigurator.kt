@@ -1,10 +1,13 @@
 package com.applicaster.cam.config
 
+import com.applicaster.cam.config.ui.*
 import com.applicaster.cam.params.auth.AuthFieldConfig
 import com.applicaster.cam.params.auth.AuthFieldsConverter
 import com.applicaster.cam.params.auth.AuthScreenType
 
 class PluginConfigurator(private val pluginConfig: Map<String, String>) : Configurator {
+
+    private val confirmationKeysAmount = 3
 
     override fun getDefaultAuthScreen() =
         AuthScreenType.fromKey(pluginConfig.getValue(KEY_DEFAULT_AUTH_SCREEN))
@@ -36,6 +39,30 @@ class PluginConfigurator(private val pluginConfig: Map<String, String>) : Config
      */
     override fun isAuthRestoreRequired() =
        !getPasswordResetAuthFields().authFields.isNullOrEmpty()
+
+    override fun isShowConfirmationPasswordReset(): Boolean {
+        return  pluginConfig.filterKeys { key: String ->
+            key == UI_KEY_PWD_CONFIRMATION_TITLE_TEXT
+                    || key == UI_KEY_PWD_CONFIRMATION_DESC_TEXT
+                    || key == UI_KEY_PWD_CONFIRMATION_BUTTON_TEXT
+        }.size == confirmationKeysAmount
+    }
+
+    override fun isShowConfirmationPayment(): Boolean {
+        return  pluginConfig.filterKeys { key: String ->
+            key == UI_KEY_PAYMENT_CONFIRMATION_TITLE_TEXT
+                    || key == UI_KEY_PAYMENT_CONFIRMATION_DESC_TEXT
+                    || key == UI_KEY_PAYMENT_CONFIRMATION_BUTTON_TEXT
+        }.size == confirmationKeysAmount
+    }
+
+    override fun isShowConfiramtionRestorePurchases(): Boolean {
+        return  pluginConfig.filterKeys { key: String ->
+            key == UI_KEY_RESTORE_CONFIRMATION_TITLE_TEXT
+                    || key == UI_KEY_RESTORE_CONFIRMATION_DESC_TEXT
+                    || key == UI_KEY_RESTORE_CONFIRMATION_BUTTON_TEXT
+        }.size == confirmationKeysAmount
+    }
 }
 
 const val KEY_AUTH_FIELDS = "auth_fields"

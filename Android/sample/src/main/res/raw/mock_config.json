@@ -27,6 +27,10 @@
   "payment_option_button_text": "Subscribe for $4.99",
   "payment_option_promo_text": "1 MONTH FREE",
 
+  "payment_confirmation_title_text": "Congratulations!",
+  "payment_confirmation_description_text": "You are successfully subscribed to SportsMax channels!",
+  "payment_confirmation_button_text": "OK",
+
   "default_auth_screen": "signup",
   "pwd_reset_required" : "true",
   "facebook_login_required" : "true",

@@ -18,4 +18,10 @@ interface Configurator {
     fun isPasswordResetRequired(): Boolean
 
     fun isFacebookLoginRequired(): Boolean
+
+    fun isShowConfirmationPasswordReset(): Boolean
+
+    fun isShowConfirmationPayment(): Boolean
+
+    fun isShowConfiramtionRestorePurchases(): Boolean
 }

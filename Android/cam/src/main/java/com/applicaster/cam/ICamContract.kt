@@ -16,7 +16,7 @@ interface ICamContract {
 
     fun onItemPurchased(/*item*/)
 
-    fun onPurchasesRestored(/*items*/)
+    fun onPurchasesRestored(callback: RestoreCallback)
 
     fun loadEntitlements(callback: EntitlementsLoadCallback) //get purchase id (and corresponding data)
 

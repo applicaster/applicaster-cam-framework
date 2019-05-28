@@ -34,14 +34,26 @@ enum class UIKey(
     PASSWORD_RESET_ACTION_BUTTON(text = UI_KEY_PWD_RESET_BUTTON_TEXT, image = UI_KEY_PWD_RESET_BUTTON_IMAGE, textStyle = UI_KEY_ACTION_BUTTON_TEXT_STYLE),
     BILLING_ITEM_SUBS_BUTTON(text = UI_KEY_BILLING_ITEM_SUBS_BUTTON_TEXT, textStyle = UI_KEY_BILLING_ITEM_SUBS_BUTTON_TEXT, image = UI_KEY_BILLING_ITEM_SUBS_BUTTON_IMAGE),
 
-    BILLING_ITEM_PARENT(image = UI_KEY_BILLING_ITEM_BCKG),
+    BILLING_ITEM_PARENT(image = UI_KEY_BILLING_ITEM_IMAGE),
     BILLING_ITEM_TITLE(textStyle = UI_KEY_BILLING_ITEM_TITLE_TEXT),
     BILLING_ITEM_DETAILS_TEXT(textStyle = UI_KEY_BILLING_ITEM_DETAILS_TEXT),
     BILLING_ITEM_REDEEM_TEXT(text = UI_KEY_BILLING_ITEM_REDEEM_TEXT, textStyle = UI_KEY_BILLING_ITEM_REDEEM_TEXT),
     BILLING_TITLE(text = UI_KEY_BILLING_TITLE_TEXT, textStyle = UI_KEY_TITLE_TEXT_STYLE),
     BILLING_PROMPT_TEXT(text = UI_KEY_BILLING_RESTORE_DESC, textStyle = UI_KEY_BILLING_RESTORE_DESC),
     BILLING_RESTORE_ACTION_TEXT(text = UI_KEY_BILLING_RESTORE_ACTION, textStyle = UI_KEY_BILLING_RESTORE_ACTION),
-    BILLING_RESTORE_HINT_DESC_TEXT(text = UI_KEY_BILLING_RESTORE_DESC, textStyle = UI_KEY_BILLING_RESTORE_DESC)
+    BILLING_RESTORE_HINT_DESC_TEXT(text = UI_KEY_BILLING_RESTORE_DESC, textStyle = UI_KEY_BILLING_RESTORE_DESC),
+    BILLING_CONFIRMATION_IMAGE(image = UI_KEY_ALERT_COMPONENT_IMAGE),
+    BILLING_CONFIRMATION_TITLE_TEXT(text = UI_KEY_PAYMENT_CONFIRMATION_TITLE_TEXT, textStyle = UI_KEY_ALERT_TITLE_TEXT_STYLE),
+    BILLING_CONFIRMATION_DESC_TEXT(text = UI_KEY_PAYMENT_CONFIRMATION_DESC_TEXT, textStyle =UI_KEY_ALERT_DESC_TEXT_STYLE),
+    BILLING_CONFIRMATION_BUTTON_TEXT(text = UI_KEY_PAYMENT_CONFIRMATION_BUTTON_TEXT, textStyle = UI_KEY_ALERT_BUTTON_TEXT_STYLE, image = UI_KEY_ALERT_BUTTON_IMAGE),
+    RESET_PWD_CONFIRMATION_IMAGE(image = UI_KEY_ALERT_COMPONENT_IMAGE),
+    RESET_PWD_CONFIRMATION_TITLE_TEXT(text = UI_KEY_PAYMENT_CONFIRMATION_TITLE_TEXT, textStyle = UI_KEY_ALERT_TITLE_TEXT_STYLE),
+    RESET_PWD_CONFIRMATION_DESC_TEXT(text = UI_KEY_PAYMENT_CONFIRMATION_DESC_TEXT, textStyle = UI_KEY_ALERT_DESC_TEXT_STYLE),
+    RESET_PWD_CONFIRMATION_BUTTON_TEXT(text = UI_KEY_PAYMENT_CONFIRMATION_BUTTON_TEXT, textStyle = UI_KEY_ALERT_BUTTON_TEXT_STYLE, image = UI_KEY_ALERT_BUTTON_IMAGE),
+    RESTORE_CONFIRMATION_IMAGE(image = UI_KEY_ALERT_COMPONENT_IMAGE),
+    RESTORE_CONFIRMATION_TITLE_TEXT(text = UI_KEY_PAYMENT_CONFIRMATION_TITLE_TEXT, textStyle = UI_KEY_ALERT_TITLE_TEXT_STYLE),
+    RESTORE_CONFIRMATION_DESC_TEXT(text = UI_KEY_PAYMENT_CONFIRMATION_DESC_TEXT, textStyle = UI_KEY_ALERT_DESC_TEXT_STYLE),
+    RESTORE_CONFIRMATION_BUTTON_TEXT(text = UI_KEY_PAYMENT_CONFIRMATION_BUTTON_TEXT, textStyle = UI_KEY_ALERT_BUTTON_TEXT_STYLE, image = UI_KEY_ALERT_BUTTON_IMAGE)
     // @formatter:on
 }
 
@@ -53,6 +65,11 @@ const val UI_KEY_BACKGROUND_IMAGE = "background_image"
 const val UI_KEY_ACTION_BUTTON_TEXT_STYLE = "Action_button_text"
 const val UI_KEY_TITLE_TEXT_STYLE = "Screen_title_text"
 const val UI_KEY_DESC_TEXT_STYLE = "Screen_description_text"
+const val UI_KEY_ALERT_COMPONENT_IMAGE = "alert_component"
+const val UI_KEY_ALERT_TITLE_TEXT_STYLE = "Alert_title"
+const val UI_KEY_ALERT_DESC_TEXT_STYLE = "Alert_description"
+const val UI_KEY_ALERT_BUTTON_TEXT_STYLE = "alert_button_text"
+const val UI_KEY_ALERT_BUTTON_IMAGE = "alert_button_asset"
 // endregion
 
 // region auth UI keys
@@ -86,17 +103,32 @@ const val UI_KEY_PWD_RESET_BUTTON_IMAGE= "action_button_asset"
 // region Billing item UI keys
 const val UI_KEY_BILLING_ITEM_SUBS_BUTTON_IMAGE = "payment_option_button_asset"
 const val UI_KEY_BILLING_ITEM_SUBS_BUTTON_TEXT = "payment_option_button_text"
-const val UI_KEY_BILLING_ITEM_BCKG = "payment_option_component_asset"
+const val UI_KEY_BILLING_ITEM_IMAGE = "payment_option_component_asset"
 const val UI_KEY_BILLING_ITEM_TITLE_TEXT = "payment_option_title_text"
 const val UI_KEY_BILLING_ITEM_DETAILS_TEXT = "payment_option_details_text"
 const val UI_KEY_BILLING_ITEM_REDEEM_TEXT = "payment_option_redeem_text"
-const val UI_KEY_BILLING_ITEM_LABEL_BCKG = "payment_option_promo_img"
+const val UI_KEY_BILLING_ITEM_LABEL_IMAGE = "payment_option_promo_img"
 const val UI_KEY_BILLING_ITEM_LABEL_TEXT = "payment_option_promo_text"
 // region Billing fragments
 const val UI_KEY_BILLING_TITLE_TEXT = "payment_option_screen_title_text"
 const val UI_KEY_BILLING_RESTORE_DESC = "payment_option_screen_hint_desc"
 const val UI_KEY_BILLING_RESTORE_ACTION = "payment_option_screen_hint_action"
 // endregion
+// endregion
+
+// region Confirmation dialog
+// payments
+const val UI_KEY_PAYMENT_CONFIRMATION_TITLE_TEXT = "payment_confirmation_title_text"
+const val UI_KEY_PAYMENT_CONFIRMATION_DESC_TEXT = "payment_confirmation_description_text"
+const val UI_KEY_PAYMENT_CONFIRMATION_BUTTON_TEXT = "payment_confirmation_button_text"
+// reset password
+const val UI_KEY_PWD_CONFIRMATION_TITLE_TEXT = "pwd_confirmation_title_text"
+const val UI_KEY_PWD_CONFIRMATION_DESC_TEXT = "pwd_confirmation_description_text"
+const val UI_KEY_PWD_CONFIRMATION_BUTTON_TEXT = "pwd_confirmation_button_text"
+// restore purchases
+const val UI_KEY_RESTORE_CONFIRMATION_TITLE_TEXT = "restore_confirmation_title_text"
+const val UI_KEY_RESTORE_CONFIRMATION_DESC_TEXT = "restore_confirmation_description_text"
+const val UI_KEY_RESTORE_CONFIRMATION_BUTTON_TEXT = "restore_confirmation_button_text"
 // endregion
 
 // region Other
