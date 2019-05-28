@@ -10,7 +10,9 @@ interface ICamContract {
 
     fun activateRedeemCode(redeemCode: String, callback: RedeemCodeActivationCallback)
 
-    fun loginWithFacebook(callback: FacebookLoginCallback)
+    fun loginWithFacebook(email: String, id: String, callback: FacebookAuthCallback)
+
+    fun signupWithFacebook(email: String, id: String, callback: FacebookAuthCallback)
 
     fun onItemPurchased(/*item*/)
 

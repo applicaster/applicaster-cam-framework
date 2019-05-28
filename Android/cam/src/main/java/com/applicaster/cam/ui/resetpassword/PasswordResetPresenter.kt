@@ -28,10 +28,10 @@ class PasswordResetPresenter(
         for (inputValue in inputValues) {
             if (inputValue.value.isEmpty()) {
                 view?.showToastMessage("You must fill all fields")
-                return true
+                return false
             }
         }
-        return false
+        return true
     }
 
     fun getAuthFieldConfig(): AuthFieldConfig =
