@@ -36,8 +36,8 @@ class MockCamContract(private val context: Context) : ICamContract {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun onPurchasesRestored() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun onPurchasesRestored(callback: RestoreCallback) {
+        Handler().postDelayed({ callback.onSuccess(arrayListOf()) }, 1250)
     }
 
     override fun loadEntitlements(callback: EntitlementsLoadCallback) {

@@ -10,6 +10,7 @@ import com.applicaster.cam.params.billing.Offer
 import com.applicaster.cam.params.billing.ProductType
 import com.applicaster.cam.ui.CamNavigationRouter
 import com.applicaster.cam.ui.base.presenter.BasePresenter
+import com.applicaster.cam.ui.base.view.AlertDialogType
 import com.applicaster.cam.ui.base.view.BaseActivity
 import com.applicaster.cam.ui.billing.adapter.PurchaseItem
 import com.applicaster.iap.BillingListener
@@ -33,6 +34,7 @@ class BillingPresenter(
         view.setListeners()
 
         view.initViewComponents(getBaseActivity().getFragmentContainerType())
+        view.customize()
 
         //load entitlements
         camContract.loadEntitlements(object : EntitlementsLoadCallback {
@@ -53,6 +55,8 @@ class BillingPresenter(
             GoogleBillingHelper.purchase(getBaseActivity(), skuDetails)
         }
         view.showToastMessage("Subscribe button clicked")
+        if (ContentAccessManager.pluginConfigurator.isShowConfirmationPayment())
+            navigationRouter.showConfirmationDialog(AlertDialogType.BILLING)
     }
 
     override fun onPurchaseConsumed(purchaseToken: String) {
@@ -64,7 +68,8 @@ class BillingPresenter(
     }
 
     override fun onPurchaseLoaded(purchases: List<Purchase>) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        if (ContentAccessManager.pluginConfigurator.isShowConfirmationPayment())
+            navigationRouter.showConfirmationDialog(AlertDialogType.BILLING )
     }
 
     override fun onPurchaseLoadingFailed(statusCode: Int, description: String) {

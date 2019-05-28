@@ -82,7 +82,6 @@ class BillingFragment : BaseFragment(), IBillingView {
                 }
             }
         }
-        customize()
     }
 
     override fun customize() {

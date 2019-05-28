@@ -25,3 +25,5 @@ interface EntitlementsLoadCallback {
     fun onFailure(msg: String)
     fun onSuccess(offers: List<Offer>)
 }
+
+interface RestoreCallback : EntitlementsLoadCallback
