@@ -30,8 +30,12 @@ class PluginConfigurator(private val pluginConfig: Map<String, String>) : Config
         return AuthFieldsConverter.getFromJsonString(jsonConfig, AuthScreenType.PASSWORD_RESET)
     }
 
+    /**
+     * Check if need to show auth restore UI element on login screen depending on screen configs
+     * If there is no "password reset" config then hide corresponding UI, otherwise show it
+     */
     override fun isAuthRestoreRequired() =
-        pluginConfig.getValue(KEY_AUTH_RESTORE_REQ).toBoolean()
+       !getPasswordResetAuthFields().authFields.isNullOrEmpty()
 }
 
 const val KEY_AUTH_FIELDS = "auth_fields"

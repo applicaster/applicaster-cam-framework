@@ -68,11 +68,11 @@ abstract class AuthFragment : BaseFragment(), IAuthView {
         UIMapper.apply {
             map(toolbar_back_button, UIKey.TOOLBAR_BACK_BUTTON)
             map(toolbar_close_button, UIKey.TOOLBAR_CLOSE_BUTTON)
-            map(app_logo, UIKey.TOOLBAR_HEADER_LOGO)
+            map(app_logo, UIKey.TOOLBAR_HEADER_LOGO_IMAGE)
             map(container_parent_auth, UIKey.BACKGROUND_IMAGE)
             map(iv_facebook_auth, UIKey.AUTH_FACEBOOK_IMAGE)
-            map(iv_left_divider, UIKey.AUTH_LEFT_DIVIDER)
-            map(iv_right_divider, UIKey.AUTH_RIGHT_DIVIDER)
+            map(iv_left_divider, UIKey.AUTH_LEFT_DIVIDER_IMAGE)
+            map(iv_right_divider, UIKey.AUTH_RIGHT_DIVIDER_IMAGE)
         }
     }
 

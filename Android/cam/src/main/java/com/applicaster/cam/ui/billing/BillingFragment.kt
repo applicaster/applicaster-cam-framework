@@ -90,11 +90,11 @@ class BillingFragment : BaseFragment(), IBillingView {
         UIMapper.apply {
             map(toolbar_back_button, UIKey.TOOLBAR_BACK_BUTTON)
             map(toolbar_close_button, UIKey.TOOLBAR_CLOSE_BUTTON)
-            map(app_logo, UIKey.TOOLBAR_HEADER_LOGO)
+            map(app_logo, UIKey.TOOLBAR_HEADER_LOGO_IMAGE)
             map(layout_billing, UIKey.BACKGROUND_IMAGE)
             map(tv_billing_title_text, UIKey.BILLING_TITLE)
-            map(tv_hint_desc, UIKey.BILLING_RESTORE_HINT_DESC)
-            map(tv_hint_action, UIKey.BILLING_RESTORE_ACTION)
+            map(tv_hint_desc, UIKey.BILLING_RESTORE_HINT_DESC_TEXT)
+            map(tv_hint_action, UIKey.BILLING_RESTORE_ACTION_TEXT)
         }
     }
 
