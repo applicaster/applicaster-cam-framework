@@ -1,0 +1,1142 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		F8BDB43DA9C9150CE86BC47458920E7F /* ZappPlugins */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = C0765C75119C4D2AC90A51AADA3ADD01 /* Build configuration list for PBXAggregateTarget "ZappPlugins" */;
+			buildPhases = (
+			);
+			dependencies = (
+			);
+			name = ZappPlugins;
+			productName = ZappPlugins;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		0A5DC7141B4E9C5035CC5241A078AFE6 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2569F1EC7FD424DF6DEED62F9408426A /* Result.swift */; };
+		0C1699A90F160AF254EA425FB497D929 /* CAM-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEE7DB82F6CB115563482851229A48E /* CAM-dummy.m */; };
+		0DCB6F6B1E48C9BBB8A6224414C2F452 /* PaddingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35383E03B7534E447EBC2AE66EDD8AE4 /* PaddingTextField.swift */; };
+		1336F60EEBD46E6EFAEA7AFDB351083D /* CAMProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19611F3329CC73E316717223B2230460 /* CAMProtocols.swift */; };
+		1767AA86B3CD09F00F9A8337838AC477 /* ContentAccessManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B52BE23655AB63539E6347742B6DD0 /* ContentAccessManager.swift */; };
+		229028430B9A9EEA7879771D16E0E238 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DF14DE0675F7CE1ADAB4161C33FCF4B /* Foundation.framework */; };
+		27613F3D5321968843A1652B6425A256 /* ApplicasterIAP-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = DA13F3EEEE25825FBCA387EDA5793BDB /* ApplicasterIAP-dummy.m */; };
+		2F7F100F1105A39C499A910AC1AC523E /* ConfirmationPopover.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E6EF820D28C18FA37336B222E224DA7 /* ConfirmationPopover.xib */; };
+		32574BECC4BB190BCA1F367AC148486E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DF14DE0675F7CE1ADAB4161C33FCF4B /* Foundation.framework */; };
+		3A8943ABD8DC02B42777953B35246279 /* ResetPasswordViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4ABB4C0CDDEE330746E05C5ED40303F /* ResetPasswordViewController.storyboard */; };
+		3C5EBEBAA624F484C15AA6CBB3F21982 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64D4702290D662B78349DEC134697F2A /* SignUpViewController.swift */; };
+		3D61E11957EB3D597DD09A340B2D2ECE /* EntitlementPickerViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA8287CFD263F82F48D3839EA01D6D99 /* EntitlementPickerViewController.storyboard */; };
+		4183C2D899F683F3CA20155460770411 /* AuthorizationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBA989E70EB4AE3CD83774714D28D01 /* AuthorizationCoordinator.swift */; };
+		46035A6CEA13D117D137F7CF8676F52F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C4B873D1E9E2BE60C2EF2ED985248B /* LoginViewController.swift */; };
+		46FFC9E2F0BBE6EE42F8D980DC989F6A /* SignUpPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C59DB8D88F36B98EEF21E862E9656CA /* SignUpPresenter.swift */; };
+		4E0C231BFFE0FDCE7AA0D7EAACF01F63 /* LoginViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B149BB8611AE7E11CD5B85285BEFB491 /* LoginViewController.storyboard */; };
+		4EDE842845B925A9B47BA6F673923BB1 /* LoadingPopover.xib in Resources */ = {isa = PBXBuildFile; fileRef = 826C8F9CF0C84C4EE92F6782598D5D9A /* LoadingPopover.xib */; };
+		529C6C168EED451E3C04D176B4658353 /* Pods-CAMFramework-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B34F4905CB88AF731AABA52B5C283AB /* Pods-CAMFramework-dummy.m */; };
+		5B502596D1252B8D47310D7F43EABC7B /* ViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE9DC6185A081DB558D072B88DF380C /* ViewControllerFactory.swift */; };
+		5BDAA9524E5BA158859E232A5A402E6C /* ProductsQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9622C962567DF32A4E647229137A71A6 /* ProductsQuery.swift */; };
+		6142BD320188DF187783385E3FFF78A0 /* UIConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF6506FBF1B8A90C001BAD0F66A569D /* UIConfigurator.swift */; };
+		717FA45FBFE810C483716F56F9106710 /* CAMKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42553C5268DD48A26DE3AD10A1C002C7 /* CAMKeys.swift */; };
+		75CA38D469CA35E830386E6E7510DFCB /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE88ADDFDEDC37DDD51487878DFB74B /* LoginPresenter.swift */; };
+		7ADCF1D72266E6C64CCABC006B351B0A /* UICheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4B9369BCF539013CCB29DE87BC3D26 /* UICheckBox.swift */; };
+		7E384E041B983DF843FC4059214C65D9 /* ConfirmationPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C6AC01410C25D837DF98F277F79988 /* ConfirmationPopover.swift */; };
+		844A05DACD5E162F52FCE3F25C3C1D00 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DF14DE0675F7CE1ADAB4161C33FCF4B /* Foundation.framework */; };
+		8489EC35D152A27B273478FE509E60E6 /* StoreObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94FCA8704B2098B7CE4A3EE32991588 /* StoreObserver.swift */; };
+		872B3461536E0AF8A4E07885C4AFE67D /* CAM-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 83473174D26A306471D9B677A6663D7B /* CAM-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8D0BEB9FB12A359FDD674756FEC0869A /* EntitlementCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E1C916B2F5239C33B626FA787F620B /* EntitlementCollectionViewCell.swift */; };
+		8DB90807906F1223CC4AA50A11799EE0 /* AuthTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C236373FE2C31CDCAC8F61087B20183A /* AuthTableCell.swift */; };
+		905ABB75B151302E2721EE2E7BFA1D1E /* EntitlementPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99EDCD6EEE169B9DD99F6EE0A760617 /* EntitlementPickerViewController.swift */; };
+		92A27D898C4346BBF441F7E078496193 /* BillingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2963CFE177EBE3B544157134CE504D /* BillingHelper.swift */; };
+		9641EF92D556CB061FE84A5C83092EAE /* CustomFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = D855B069A55681BF51141E440C2D1FC8 /* CustomFlowLayout.swift */; };
+		979C63968AC712FF3E4C695088FB75DC /* AuthFieldsJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654EF4DE56646A303A0D0261F1AF8077 /* AuthFieldsJSON.swift */; };
+		98BD78C2789BD497EC2A63AF7F2896BD /* EntitlementItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C857D41D44124F19CF4B10C0870F3B54 /* EntitlementItem.swift */; };
+		9E1D4A72C139DBC80F5203C31508FCEA /* ApplicasterIAP-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 282D37CB5458DD29434ED64FC039FE71 /* ApplicasterIAP-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9F03FFF9FC824C4AEBEE9518B7C89D4A /* String+Bool .swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0830FF56A4E83AC6BE3E0241B3358F /* String+Bool .swift */; };
+		A057F52EB1DE92D05B9BD97BA235D411 /* UIView+Nib.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35CED2A1C5ACC49FB4F7EDCB03A1331 /* UIView+Nib.swift */; };
+		A1E1D0976413B9880A95C8FF257D97F4 /* Pods-CAMFramework-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2485334AA55FAC9B2AB606B0539763A6 /* Pods-CAMFramework-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AABB98E63CC1C17EA3F8593941C8F958 /* ReceiptRefreshQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798AD0E292F9E25FF1F7464365C9BF3E /* ReceiptRefreshQuery.swift */; };
+		AF382D1EA7F80928E4D69EC3523266F0 /* ResetPasswordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67D1439E717396937AEDCA3B88ED402 /* ResetPasswordPresenter.swift */; };
+		B48AE75DEE814E049A30372B6151E935 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8310C3ABC321A11130CB849DF4BA6D /* ResetPasswordViewController.swift */; };
+		C4F0549ECA397248CBB1EE2FC7030EE8 /* EntitlementPickerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D36EE00F918E5BA2391B7E2A1A8DC1C /* EntitlementPickerPresenter.swift */; };
+		CE5B30D51CC728205A9C41D231372BCD /* UIViewController+Storyboard+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6164B441558E0DE38BA3F9154BD29B0 /* UIViewController+Storyboard+Alert.swift */; };
+		D45CF16BA3C2755A2428E290C639F814 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2120197944E2D8F461B7704633061215 /* UIColor+Hex.swift */; };
+		D5F3C7D595485F3919EB4A7E03F3D0AC /* LoadingPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66FA0D03C2726F4D52B789A0A08C1F9 /* LoadingPopover.swift */; };
+		D9659AEBA906C956B121E9E85D595F16 /* Purchase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7F2E2EB34BC14421F920FEF1BCA30C /* Purchase.swift */; };
+		D9C21164581CB18FF5CB7F7F85FB980B /* SignUpViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91388D7437BE8718A48DFC682BB06EA2 /* SignUpViewController.storyboard */; };
+		EAF43FE1F0D873236907F2DF7F280B64 /* ApplicasterIAP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CE51DA19B293492DB25F5D1DF7E3174 /* ApplicasterIAP.framework */; };
+		F1081C6ADF505C07E37E0690EC1E5F93 /* BillingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B9320BAEB46F8CF18BF31840521DA4 /* BillingCoordinator.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		091952068F626191DC544C6F92FDFBAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F8BDB43DA9C9150CE86BC47458920E7F;
+			remoteInfo = ZappPlugins;
+		};
+		2D804041D3885C433513AE87B7D043DC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CBFE2DAE2D5B2D71A3784E6C2EE62E19;
+			remoteInfo = CAM;
+		};
+		8ADE622D0C20385563E9C447A9DF2F41 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 574F7BA7E648E7D44B7C85C6D05DE1F0;
+			remoteInfo = ApplicasterIAP;
+		};
+		E3AD0B5A368883DE5A29EF537C5E35E8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 574F7BA7E648E7D44B7C85C6D05DE1F0;
+			remoteInfo = ApplicasterIAP;
+		};
+		F196FCA648DA426109604F55A04B260D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F8BDB43DA9C9150CE86BC47458920E7F;
+			remoteInfo = ZappPlugins;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		09CF45DB78333DA8382249FD754C73E4 /* Pods-CAMFramework.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-CAMFramework.modulemap"; sourceTree = "<group>"; };
+		0CF85DF4E9DF69F92489AD9D75A2B8B6 /* ZappPlugins.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ZappPlugins.framework; path = Frameworks/iOS/ZappPlugins.framework; sourceTree = "<group>"; };
+		0FB87610D35FC0156D1849B5D94FEA0E /* CAM.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = CAM.modulemap; sourceTree = "<group>"; };
+		114D5D27BA2DDAACB47E1F07B14E849C /* CAM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CAM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		17062057D094EE7CA5B6638F82BE4FF3 /* CAM.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = CAM.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		19611F3329CC73E316717223B2230460 /* CAMProtocols.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CAMProtocols.swift; path = iOS/CAM/CAMProtocols.swift; sourceTree = "<group>"; };
+		1CE51DA19B293492DB25F5D1DF7E3174 /* ApplicasterIAP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ApplicasterIAP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D36EE00F918E5BA2391B7E2A1A8DC1C /* EntitlementPickerPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EntitlementPickerPresenter.swift; sourceTree = "<group>"; };
+		1E4B9369BCF539013CCB29DE87BC3D26 /* UICheckBox.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UICheckBox.swift; sourceTree = "<group>"; };
+		1EF6506FBF1B8A90C001BAD0F66A569D /* UIConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UIConfigurator.swift; path = iOS/CAM/UIConfigurator.swift; sourceTree = "<group>"; };
+		1F2963CFE177EBE3B544157134CE504D /* BillingHelper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BillingHelper.swift; path = iOS/ApplicasterIAP/BillingHelper.swift; sourceTree = "<group>"; };
+		1FEE7DB82F6CB115563482851229A48E /* CAM-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CAM-dummy.m"; sourceTree = "<group>"; };
+		2120197944E2D8F461B7704633061215 /* UIColor+Hex.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
+		23811B03B935418A891161607729F4C2 /* CAM-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CAM-prefix.pch"; sourceTree = "<group>"; };
+		2485334AA55FAC9B2AB606B0539763A6 /* Pods-CAMFramework-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-CAMFramework-umbrella.h"; sourceTree = "<group>"; };
+		2569F1EC7FD424DF6DEED62F9408426A /* Result.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Result.swift; path = iOS/ApplicasterIAP/Result.swift; sourceTree = "<group>"; };
+		257FF57B51AF306FB7065230D613FE57 /* Pods-CAMFramework-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CAMFramework-acknowledgements.plist"; sourceTree = "<group>"; };
+		261FFFD46B276C9BD8D2205AE9D3845F /* ZappPlugins.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ZappPlugins.xcconfig; sourceTree = "<group>"; };
+		282D37CB5458DD29434ED64FC039FE71 /* ApplicasterIAP-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ApplicasterIAP-umbrella.h"; sourceTree = "<group>"; };
+		28F1DA38C89362E02B63B7E8E6054502 /* Pods-CAMFramework-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CAMFramework-Info.plist"; sourceTree = "<group>"; };
+		29C4B873D1E9E2BE60C2EF2ED985248B /* LoginViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		2B34F4905CB88AF731AABA52B5C283AB /* Pods-CAMFramework-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-CAMFramework-dummy.m"; sourceTree = "<group>"; };
+		2B63BE9B63D13A4CFB8181BCE0769E2B /* Pods-CAMFramework.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CAMFramework.release.xcconfig"; sourceTree = "<group>"; };
+		2DF14DE0675F7CE1ADAB4161C33FCF4B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		32F4C33D225F4E37082B02FD1E45794A /* ApplicasterIAP.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = ApplicasterIAP.modulemap; sourceTree = "<group>"; };
+		35383E03B7534E447EBC2AE66EDD8AE4 /* PaddingTextField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PaddingTextField.swift; sourceTree = "<group>"; };
+		3F7F2E2EB34BC14421F920FEF1BCA30C /* Purchase.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Purchase.swift; path = iOS/ApplicasterIAP/Purchase.swift; sourceTree = "<group>"; };
+		4188FDF50B48026885DF626A67996B82 /* Pods-CAMFramework-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-CAMFramework-acknowledgements.markdown"; sourceTree = "<group>"; };
+		42553C5268DD48A26DE3AD10A1C002C7 /* CAMKeys.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CAMKeys.swift; path = iOS/CAM/CAMKeys.swift; sourceTree = "<group>"; };
+		4B8310C3ABC321A11130CB849DF4BA6D /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
+		4C59DB8D88F36B98EEF21E862E9656CA /* SignUpPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SignUpPresenter.swift; sourceTree = "<group>"; };
+		4CE88ADDFDEDC37DDD51487878DFB74B /* LoginPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
+		4E6EF820D28C18FA37336B222E224DA7 /* ConfirmationPopover.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; name = ConfirmationPopover.xib; path = iOS/CAM/StoryBoards/ConfirmationPopover.xib; sourceTree = "<group>"; };
+		4EA8ED6C8AC81C568DD2A2C0C3F1FA28 /* ApplicasterIAP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ApplicasterIAP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B0830FF56A4E83AC6BE3E0241B3358F /* String+Bool .swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "String+Bool .swift"; sourceTree = "<group>"; };
+		5CBA989E70EB4AE3CD83774714D28D01 /* AuthorizationCoordinator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AuthorizationCoordinator.swift; path = iOS/CAM/AuthorizationCoordinator.swift; sourceTree = "<group>"; };
+		642CCB8B2DE1D8FD39A445D0E200716D /* ApplicasterIAP.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ApplicasterIAP.xcconfig; sourceTree = "<group>"; };
+		64D4702290D662B78349DEC134697F2A /* SignUpViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		654EF4DE56646A303A0D0261F1AF8077 /* AuthFieldsJSON.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AuthFieldsJSON.swift; sourceTree = "<group>"; };
+		68B9320BAEB46F8CF18BF31840521DA4 /* BillingCoordinator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BillingCoordinator.swift; path = iOS/CAM/BillingCoordinator.swift; sourceTree = "<group>"; };
+		71B52BE23655AB63539E6347742B6DD0 /* ContentAccessManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ContentAccessManager.swift; path = iOS/CAM/ContentAccessManager.swift; sourceTree = "<group>"; };
+		798AD0E292F9E25FF1F7464365C9BF3E /* ReceiptRefreshQuery.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ReceiptRefreshQuery.swift; path = iOS/ApplicasterIAP/ReceiptRefreshQuery.swift; sourceTree = "<group>"; };
+		826C8F9CF0C84C4EE92F6782598D5D9A /* LoadingPopover.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; name = LoadingPopover.xib; path = iOS/CAM/StoryBoards/LoadingPopover.xib; sourceTree = "<group>"; };
+		83473174D26A306471D9B677A6663D7B /* CAM-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CAM-umbrella.h"; sourceTree = "<group>"; };
+		9011DD74494E6542630119AE641B1E18 /* Pods-CAMFramework-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-CAMFramework-frameworks.sh"; sourceTree = "<group>"; };
+		91388D7437BE8718A48DFC682BB06EA2 /* SignUpViewController.storyboard */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.storyboard; name = SignUpViewController.storyboard; path = iOS/CAM/StoryBoards/SignUpViewController.storyboard; sourceTree = "<group>"; };
+		93C6AC01410C25D837DF98F277F79988 /* ConfirmationPopover.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ConfirmationPopover.swift; sourceTree = "<group>"; };
+		959D14074EAA6CB00C8FA06AA9941C25 /* Pods-CAMFramework.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CAMFramework.debug.xcconfig"; sourceTree = "<group>"; };
+		9622C962567DF32A4E647229137A71A6 /* ProductsQuery.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ProductsQuery.swift; path = iOS/ApplicasterIAP/ProductsQuery.swift; sourceTree = "<group>"; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		A99EDCD6EEE169B9DD99F6EE0A760617 /* EntitlementPickerViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EntitlementPickerViewController.swift; sourceTree = "<group>"; };
+		B149BB8611AE7E11CD5B85285BEFB491 /* LoginViewController.storyboard */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.storyboard; name = LoginViewController.storyboard; path = iOS/CAM/StoryBoards/LoginViewController.storyboard; sourceTree = "<group>"; };
+		B99639B13C874C3CC0CD008C323D8819 /* CAM-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "CAM-Info.plist"; sourceTree = "<group>"; };
+		C236373FE2C31CDCAC8F61087B20183A /* AuthTableCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AuthTableCell.swift; sourceTree = "<group>"; };
+		C35CED2A1C5ACC49FB4F7EDCB03A1331 /* UIView+Nib.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "UIView+Nib.swift"; sourceTree = "<group>"; };
+		C6164B441558E0DE38BA3F9154BD29B0 /* UIViewController+Storyboard+Alert.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "UIViewController+Storyboard+Alert.swift"; sourceTree = "<group>"; };
+		C857D41D44124F19CF4B10C0870F3B54 /* EntitlementItem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EntitlementItem.swift; sourceTree = "<group>"; };
+		CA5699759E5FA80203518B2126ACF742 /* ApplicasterIAP-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ApplicasterIAP-Info.plist"; sourceTree = "<group>"; };
+		CA8287CFD263F82F48D3839EA01D6D99 /* EntitlementPickerViewController.storyboard */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.storyboard; name = EntitlementPickerViewController.storyboard; path = iOS/CAM/StoryBoards/EntitlementPickerViewController.storyboard; sourceTree = "<group>"; };
+		D4ABB4C0CDDEE330746E05C5ED40303F /* ResetPasswordViewController.storyboard */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.storyboard; name = ResetPasswordViewController.storyboard; path = iOS/CAM/StoryBoards/ResetPasswordViewController.storyboard; sourceTree = "<group>"; };
+		D855B069A55681BF51141E440C2D1FC8 /* CustomFlowLayout.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CustomFlowLayout.swift; sourceTree = "<group>"; };
+		DA13F3EEEE25825FBCA387EDA5793BDB /* ApplicasterIAP-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "ApplicasterIAP-dummy.m"; sourceTree = "<group>"; };
+		DD2B6F7F0A1D44CABF48785FD7EF15EC /* CAM.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = CAM.xcconfig; sourceTree = "<group>"; };
+		E4173C7FC7D098B5A1053B0D0A4DF8E0 /* ApplicasterIAP-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ApplicasterIAP-prefix.pch"; sourceTree = "<group>"; };
+		E67D1439E717396937AEDCA3B88ED402 /* ResetPasswordPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ResetPasswordPresenter.swift; sourceTree = "<group>"; };
+		E94FCA8704B2098B7CE4A3EE32991588 /* StoreObserver.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StoreObserver.swift; path = iOS/ApplicasterIAP/StoreObserver.swift; sourceTree = "<group>"; };
+		ECE9DC6185A081DB558D072B88DF380C /* ViewControllerFactory.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ViewControllerFactory.swift; path = iOS/CAM/ViewControllerFactory.swift; sourceTree = "<group>"; };
+		EDAEF7C74955B2B585AECF531216208E /* Pods_CAMFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CAMFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F3E1C916B2F5239C33B626FA787F620B /* EntitlementCollectionViewCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EntitlementCollectionViewCell.swift; sourceTree = "<group>"; };
+		F66FA0D03C2726F4D52B789A0A08C1F9 /* LoadingPopover.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LoadingPopover.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		81139928B6EB6703AA7D2A164238533B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				32574BECC4BB190BCA1F367AC148486E /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		98D87D7C49E7055D8D5A7AC79839589B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				844A05DACD5E162F52FCE3F25C3C1D00 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B45000AAFDFB6EAED2E333645E5223B0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EAF43FE1F0D873236907F2DF7F280B64 /* ApplicasterIAP.framework in Frameworks */,
+				229028430B9A9EEA7879771D16E0E238 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0C113E83F5C3658EB258362AD9B974E8 /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				17062057D094EE7CA5B6638F82BE4FF3 /* CAM.podspec */,
+			);
+			name = Pod;
+			sourceTree = "<group>";
+		};
+		20D5DCA2DE8A73CCB92541B2888AE6FE /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				2DF14DE0675F7CE1ADAB4161C33FCF4B /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		2D6B57E666015C3CE777D9486D4F153B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8C9C766664F88A0BC6448CBA8E0EFC83 /* ApplicasterIAP */,
+				58B244F8DA995A86855C09006678DE41 /* ZappPlugins */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		4579E2C513F18AAFE5C565A6DC3A8F9E /* ResetPassword */ = {
+			isa = PBXGroup;
+			children = (
+				E67D1439E717396937AEDCA3B88ED402 /* ResetPasswordPresenter.swift */,
+				4B8310C3ABC321A11130CB849DF4BA6D /* ResetPasswordViewController.swift */,
+			);
+			path = ResetPassword;
+			sourceTree = "<group>";
+		};
+		4C13E264BAA8CA49B2E01B52DC9C77E2 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				93C6AC01410C25D837DF98F277F79988 /* ConfirmationPopover.swift */,
+				F66FA0D03C2726F4D52B789A0A08C1F9 /* LoadingPopover.swift */,
+				35383E03B7534E447EBC2AE66EDD8AE4 /* PaddingTextField.swift */,
+				1E4B9369BCF539013CCB29DE87BC3D26 /* UICheckBox.swift */,
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
+		58B244F8DA995A86855C09006678DE41 /* ZappPlugins */ = {
+			isa = PBXGroup;
+			children = (
+				B24F4D2B0A62476CB8FEDB9E6CB17BB5 /* Frameworks */,
+				F90A4B829F955517DA26ECAABE0F3740 /* Support Files */,
+			);
+			path = ZappPlugins;
+			sourceTree = "<group>";
+		};
+		5F5E73B02E093F4293690892D73D9729 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				4C59DB8D88F36B98EEF21E862E9656CA /* SignUpPresenter.swift */,
+				64D4702290D662B78349DEC134697F2A /* SignUpViewController.swift */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
+		78C298CDE856360BD1E462D5381F9C81 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B64CE0FC229D77F000996F87 /* KEKS */,
+				4E6EF820D28C18FA37336B222E224DA7 /* ConfirmationPopover.xib */,
+				CA8287CFD263F82F48D3839EA01D6D99 /* EntitlementPickerViewController.storyboard */,
+				826C8F9CF0C84C4EE92F6782598D5D9A /* LoadingPopover.xib */,
+				B149BB8611AE7E11CD5B85285BEFB491 /* LoginViewController.storyboard */,
+				D4ABB4C0CDDEE330746E05C5ED40303F /* ResetPasswordViewController.storyboard */,
+				91388D7437BE8718A48DFC682BB06EA2 /* SignUpViewController.storyboard */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		86230316ECF35DBA9533CAAFD2A09220 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1CE51DA19B293492DB25F5D1DF7E3174 /* ApplicasterIAP.framework */,
+				20D5DCA2DE8A73CCB92541B2888AE6FE /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8C9C766664F88A0BC6448CBA8E0EFC83 /* ApplicasterIAP */ = {
+			isa = PBXGroup;
+			children = (
+				1F2963CFE177EBE3B544157134CE504D /* BillingHelper.swift */,
+				9622C962567DF32A4E647229137A71A6 /* ProductsQuery.swift */,
+				3F7F2E2EB34BC14421F920FEF1BCA30C /* Purchase.swift */,
+				798AD0E292F9E25FF1F7464365C9BF3E /* ReceiptRefreshQuery.swift */,
+				2569F1EC7FD424DF6DEED62F9408426A /* Result.swift */,
+				E94FCA8704B2098B7CE4A3EE32991588 /* StoreObserver.swift */,
+				DF0BBEF0484F20615426967455D7142F /* Support Files */,
+			);
+			path = ApplicasterIAP;
+			sourceTree = "<group>";
+		};
+		9585B36BEE45E44B4223CE8845E7D083 /* CAM */ = {
+			isa = PBXGroup;
+			children = (
+				5CBA989E70EB4AE3CD83774714D28D01 /* AuthorizationCoordinator.swift */,
+				68B9320BAEB46F8CF18BF31840521DA4 /* BillingCoordinator.swift */,
+				42553C5268DD48A26DE3AD10A1C002C7 /* CAMKeys.swift */,
+				19611F3329CC73E316717223B2230460 /* CAMProtocols.swift */,
+				71B52BE23655AB63539E6347742B6DD0 /* ContentAccessManager.swift */,
+				1EF6506FBF1B8A90C001BAD0F66A569D /* UIConfigurator.swift */,
+				ECE9DC6185A081DB558D072B88DF380C /* ViewControllerFactory.swift */,
+				F167820C891000594B736F56CDF20CD4 /* Data Structs */,
+				E75AE85E96DCD5B86A5664545C6A7F9A /* Extensions */,
+				0C113E83F5C3658EB258362AD9B974E8 /* Pod */,
+				78C298CDE856360BD1E462D5381F9C81 /* Resources */,
+				B78824387B5223FEA411B940315B2F17 /* Scenes */,
+				BAFB002B3BC369E312A9A3CD8E4A52D2 /* Support Files */,
+			);
+			name = CAM;
+			path = ../..;
+			sourceTree = "<group>";
+		};
+		A1C55027C63E0113A3DAFCCDCC1C9F35 /* OffersPickerViewController */ = {
+			isa = PBXGroup;
+			children = (
+				D855B069A55681BF51141E440C2D1FC8 /* CustomFlowLayout.swift */,
+				F3E1C916B2F5239C33B626FA787F620B /* EntitlementCollectionViewCell.swift */,
+				1D36EE00F918E5BA2391B7E2A1A8DC1C /* EntitlementPickerPresenter.swift */,
+				A99EDCD6EEE169B9DD99F6EE0A760617 /* EntitlementPickerViewController.swift */,
+			);
+			path = OffersPickerViewController;
+			sourceTree = "<group>";
+		};
+		B24F4D2B0A62476CB8FEDB9E6CB17BB5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0CF85DF4E9DF69F92489AD9D75A2B8B6 /* ZappPlugins.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B64CE0FC229D77F000996F87 /* KEKS */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = KEKS;
+			sourceTree = "<group>";
+		};
+		B78824387B5223FEA411B940315B2F17 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				4C13E264BAA8CA49B2E01B52DC9C77E2 /* CustomViews */,
+				F4CB91D9208147ED932FD33FB0841F5D /* Login */,
+				5F5E73B02E093F4293690892D73D9729 /* SignUp */,
+				4579E2C513F18AAFE5C565A6DC3A8F9E /* ResetPassword */,
+				A1C55027C63E0113A3DAFCCDCC1C9F35 /* OffersPickerViewController */,
+			);
+			name = Scenes;
+			path = iOS/CAM/Scenes;
+			sourceTree = "<group>";
+		};
+		BAFB002B3BC369E312A9A3CD8E4A52D2 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				0FB87610D35FC0156D1849B5D94FEA0E /* CAM.modulemap */,
+				DD2B6F7F0A1D44CABF48785FD7EF15EC /* CAM.xcconfig */,
+				1FEE7DB82F6CB115563482851229A48E /* CAM-dummy.m */,
+				B99639B13C874C3CC0CD008C323D8819 /* CAM-Info.plist */,
+				23811B03B935418A891161607729F4C2 /* CAM-prefix.pch */,
+				83473174D26A306471D9B677A6663D7B /* CAM-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "iOS/Pods/Target Support Files/CAM";
+			sourceTree = "<group>";
+		};
+		BC33AB083F719D4EBF91666422F59054 /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9585B36BEE45E44B4223CE8845E7D083 /* CAM */,
+			);
+			name = "Development Pods";
+			sourceTree = "<group>";
+		};
+		CF1408CF629C7361332E53B88F7BD30C = {
+			isa = PBXGroup;
+			children = (
+				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
+				BC33AB083F719D4EBF91666422F59054 /* Development Pods */,
+				86230316ECF35DBA9533CAAFD2A09220 /* Frameworks */,
+				2D6B57E666015C3CE777D9486D4F153B /* Pods */,
+				ED83E9D5D211799DB408D9161FCFF76D /* Products */,
+				F2C7535DDD0B3312B0956C40EC6370E2 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		DF0BBEF0484F20615426967455D7142F /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				32F4C33D225F4E37082B02FD1E45794A /* ApplicasterIAP.modulemap */,
+				642CCB8B2DE1D8FD39A445D0E200716D /* ApplicasterIAP.xcconfig */,
+				DA13F3EEEE25825FBCA387EDA5793BDB /* ApplicasterIAP-dummy.m */,
+				CA5699759E5FA80203518B2126ACF742 /* ApplicasterIAP-Info.plist */,
+				E4173C7FC7D098B5A1053B0D0A4DF8E0 /* ApplicasterIAP-prefix.pch */,
+				282D37CB5458DD29434ED64FC039FE71 /* ApplicasterIAP-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/ApplicasterIAP";
+			sourceTree = "<group>";
+		};
+		E7355506E6645C89CE8B083489B99181 /* Pods-CAMFramework */ = {
+			isa = PBXGroup;
+			children = (
+				09CF45DB78333DA8382249FD754C73E4 /* Pods-CAMFramework.modulemap */,
+				4188FDF50B48026885DF626A67996B82 /* Pods-CAMFramework-acknowledgements.markdown */,
+				257FF57B51AF306FB7065230D613FE57 /* Pods-CAMFramework-acknowledgements.plist */,
+				2B34F4905CB88AF731AABA52B5C283AB /* Pods-CAMFramework-dummy.m */,
+				9011DD74494E6542630119AE641B1E18 /* Pods-CAMFramework-frameworks.sh */,
+				28F1DA38C89362E02B63B7E8E6054502 /* Pods-CAMFramework-Info.plist */,
+				2485334AA55FAC9B2AB606B0539763A6 /* Pods-CAMFramework-umbrella.h */,
+				959D14074EAA6CB00C8FA06AA9941C25 /* Pods-CAMFramework.debug.xcconfig */,
+				2B63BE9B63D13A4CFB8181BCE0769E2B /* Pods-CAMFramework.release.xcconfig */,
+			);
+			name = "Pods-CAMFramework";
+			path = "Target Support Files/Pods-CAMFramework";
+			sourceTree = "<group>";
+		};
+		E75AE85E96DCD5B86A5664545C6A7F9A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				5B0830FF56A4E83AC6BE3E0241B3358F /* String+Bool .swift */,
+				2120197944E2D8F461B7704633061215 /* UIColor+Hex.swift */,
+				C35CED2A1C5ACC49FB4F7EDCB03A1331 /* UIView+Nib.swift */,
+				C6164B441558E0DE38BA3F9154BD29B0 /* UIViewController+Storyboard+Alert.swift */,
+			);
+			name = Extensions;
+			path = iOS/CAM/Extensions;
+			sourceTree = "<group>";
+		};
+		ED83E9D5D211799DB408D9161FCFF76D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4EA8ED6C8AC81C568DD2A2C0C3F1FA28 /* ApplicasterIAP.framework */,
+				114D5D27BA2DDAACB47E1F07B14E849C /* CAM.framework */,
+				EDAEF7C74955B2B585AECF531216208E /* Pods_CAMFramework.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F167820C891000594B736F56CDF20CD4 /* Data Structs */ = {
+			isa = PBXGroup;
+			children = (
+				654EF4DE56646A303A0D0261F1AF8077 /* AuthFieldsJSON.swift */,
+				C857D41D44124F19CF4B10C0870F3B54 /* EntitlementItem.swift */,
+			);
+			name = "Data Structs";
+			path = "iOS/CAM/Data Structs";
+			sourceTree = "<group>";
+		};
+		F2C7535DDD0B3312B0956C40EC6370E2 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				E7355506E6645C89CE8B083489B99181 /* Pods-CAMFramework */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		F4CB91D9208147ED932FD33FB0841F5D /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				C236373FE2C31CDCAC8F61087B20183A /* AuthTableCell.swift */,
+				4CE88ADDFDEDC37DDD51487878DFB74B /* LoginPresenter.swift */,
+				29C4B873D1E9E2BE60C2EF2ED985248B /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		F90A4B829F955517DA26ECAABE0F3740 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				261FFFD46B276C9BD8D2205AE9D3845F /* ZappPlugins.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/ZappPlugins";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		1F475DA463FC016863F62B91F818254D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9E1D4A72C139DBC80F5203C31508FCEA /* ApplicasterIAP-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2E55D78FB5EF106639C5CAA1EBAE7B73 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				872B3461536E0AF8A4E07885C4AFE67D /* CAM-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5C54A4DC785C6CC92F092394CA2BB38F /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1E1D0976413B9880A95C8FF257D97F4 /* Pods-CAMFramework-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		574F7BA7E648E7D44B7C85C6D05DE1F0 /* ApplicasterIAP */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AEF61921F91FCE0642E2B646172B485E /* Build configuration list for PBXNativeTarget "ApplicasterIAP" */;
+			buildPhases = (
+				1F475DA463FC016863F62B91F818254D /* Headers */,
+				8737BB72A5E1A4FC651AF2469BED010A /* Sources */,
+				98D87D7C49E7055D8D5A7AC79839589B /* Frameworks */,
+				38BE6BEEA9962FE183CA968B76879166 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ApplicasterIAP;
+			productName = ApplicasterIAP;
+			productReference = 4EA8ED6C8AC81C568DD2A2C0C3F1FA28 /* ApplicasterIAP.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		CBFE2DAE2D5B2D71A3784E6C2EE62E19 /* CAM */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C0F12512457BD5F77ABDF6CF0E2F9853 /* Build configuration list for PBXNativeTarget "CAM" */;
+			buildPhases = (
+				2E55D78FB5EF106639C5CAA1EBAE7B73 /* Headers */,
+				2FF292973D2A153440206D7DE34135A4 /* Sources */,
+				B45000AAFDFB6EAED2E333645E5223B0 /* Frameworks */,
+				E72B4F2074974B7F2B0574229935C3CD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D7B781A4F8B39D88E3F578FC1A7AF977 /* PBXTargetDependency */,
+				3C67CAC08DBC63E554352DE5418C0097 /* PBXTargetDependency */,
+			);
+			name = CAM;
+			productName = CAM;
+			productReference = 114D5D27BA2DDAACB47E1F07B14E849C /* CAM.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		DD8B568E2B8D07C33940450ADB3AC5CC /* Pods-CAMFramework */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 055A305C353ADA3F352C87E8CADA87D0 /* Build configuration list for PBXNativeTarget "Pods-CAMFramework" */;
+			buildPhases = (
+				5C54A4DC785C6CC92F092394CA2BB38F /* Headers */,
+				7F3FF607B6304DA0B1986A8804DE4802 /* Sources */,
+				81139928B6EB6703AA7D2A164238533B /* Frameworks */,
+				6D9C10567574B72B3189D301FF9DAB9D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CF7AC3AEC63B500B0ED800340921DBDB /* PBXTargetDependency */,
+				8B2A15CF2261B1F07FFD5B9A5E1170B2 /* PBXTargetDependency */,
+				CFF11595BDF0BA90BA307562FAAA1C0A /* PBXTargetDependency */,
+			);
+			name = "Pods-CAMFramework";
+			productName = "Pods-CAMFramework";
+			productReference = EDAEF7C74955B2B585AECF531216208E /* Pods_CAMFramework.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0930;
+				LastUpgradeCheck = 0930;
+			};
+			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
+			productRefGroup = ED83E9D5D211799DB408D9161FCFF76D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				574F7BA7E648E7D44B7C85C6D05DE1F0 /* ApplicasterIAP */,
+				CBFE2DAE2D5B2D71A3784E6C2EE62E19 /* CAM */,
+				DD8B568E2B8D07C33940450ADB3AC5CC /* Pods-CAMFramework */,
+				F8BDB43DA9C9150CE86BC47458920E7F /* ZappPlugins */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		38BE6BEEA9962FE183CA968B76879166 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6D9C10567574B72B3189D301FF9DAB9D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E72B4F2074974B7F2B0574229935C3CD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2F7F100F1105A39C499A910AC1AC523E /* ConfirmationPopover.xib in Resources */,
+				3D61E11957EB3D597DD09A340B2D2ECE /* EntitlementPickerViewController.storyboard in Resources */,
+				4EDE842845B925A9B47BA6F673923BB1 /* LoadingPopover.xib in Resources */,
+				4E0C231BFFE0FDCE7AA0D7EAACF01F63 /* LoginViewController.storyboard in Resources */,
+				3A8943ABD8DC02B42777953B35246279 /* ResetPasswordViewController.storyboard in Resources */,
+				D9C21164581CB18FF5CB7F7F85FB980B /* SignUpViewController.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2FF292973D2A153440206D7DE34135A4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				979C63968AC712FF3E4C695088FB75DC /* AuthFieldsJSON.swift in Sources */,
+				4183C2D899F683F3CA20155460770411 /* AuthorizationCoordinator.swift in Sources */,
+				8DB90807906F1223CC4AA50A11799EE0 /* AuthTableCell.swift in Sources */,
+				F1081C6ADF505C07E37E0690EC1E5F93 /* BillingCoordinator.swift in Sources */,
+				0C1699A90F160AF254EA425FB497D929 /* CAM-dummy.m in Sources */,
+				717FA45FBFE810C483716F56F9106710 /* CAMKeys.swift in Sources */,
+				1336F60EEBD46E6EFAEA7AFDB351083D /* CAMProtocols.swift in Sources */,
+				7E384E041B983DF843FC4059214C65D9 /* ConfirmationPopover.swift in Sources */,
+				1767AA86B3CD09F00F9A8337838AC477 /* ContentAccessManager.swift in Sources */,
+				9641EF92D556CB061FE84A5C83092EAE /* CustomFlowLayout.swift in Sources */,
+				8D0BEB9FB12A359FDD674756FEC0869A /* EntitlementCollectionViewCell.swift in Sources */,
+				98BD78C2789BD497EC2A63AF7F2896BD /* EntitlementItem.swift in Sources */,
+				C4F0549ECA397248CBB1EE2FC7030EE8 /* EntitlementPickerPresenter.swift in Sources */,
+				905ABB75B151302E2721EE2E7BFA1D1E /* EntitlementPickerViewController.swift in Sources */,
+				D5F3C7D595485F3919EB4A7E03F3D0AC /* LoadingPopover.swift in Sources */,
+				75CA38D469CA35E830386E6E7510DFCB /* LoginPresenter.swift in Sources */,
+				46035A6CEA13D117D137F7CF8676F52F /* LoginViewController.swift in Sources */,
+				0DCB6F6B1E48C9BBB8A6224414C2F452 /* PaddingTextField.swift in Sources */,
+				AF382D1EA7F80928E4D69EC3523266F0 /* ResetPasswordPresenter.swift in Sources */,
+				B48AE75DEE814E049A30372B6151E935 /* ResetPasswordViewController.swift in Sources */,
+				46FFC9E2F0BBE6EE42F8D980DC989F6A /* SignUpPresenter.swift in Sources */,
+				3C5EBEBAA624F484C15AA6CBB3F21982 /* SignUpViewController.swift in Sources */,
+				9F03FFF9FC824C4AEBEE9518B7C89D4A /* String+Bool .swift in Sources */,
+				7ADCF1D72266E6C64CCABC006B351B0A /* UICheckBox.swift in Sources */,
+				D45CF16BA3C2755A2428E290C639F814 /* UIColor+Hex.swift in Sources */,
+				6142BD320188DF187783385E3FFF78A0 /* UIConfigurator.swift in Sources */,
+				A057F52EB1DE92D05B9BD97BA235D411 /* UIView+Nib.swift in Sources */,
+				CE5B30D51CC728205A9C41D231372BCD /* UIViewController+Storyboard+Alert.swift in Sources */,
+				5B502596D1252B8D47310D7F43EABC7B /* ViewControllerFactory.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7F3FF607B6304DA0B1986A8804DE4802 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				529C6C168EED451E3C04D176B4658353 /* Pods-CAMFramework-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8737BB72A5E1A4FC651AF2469BED010A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				27613F3D5321968843A1652B6425A256 /* ApplicasterIAP-dummy.m in Sources */,
+				92A27D898C4346BBF441F7E078496193 /* BillingHelper.swift in Sources */,
+				5BDAA9524E5BA158859E232A5A402E6C /* ProductsQuery.swift in Sources */,
+				D9659AEBA906C956B121E9E85D595F16 /* Purchase.swift in Sources */,
+				AABB98E63CC1C17EA3F8593941C8F958 /* ReceiptRefreshQuery.swift in Sources */,
+				0A5DC7141B4E9C5035CC5241A078AFE6 /* Result.swift in Sources */,
+				8489EC35D152A27B273478FE509E60E6 /* StoreObserver.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3C67CAC08DBC63E554352DE5418C0097 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ZappPlugins;
+			target = F8BDB43DA9C9150CE86BC47458920E7F /* ZappPlugins */;
+			targetProxy = F196FCA648DA426109604F55A04B260D /* PBXContainerItemProxy */;
+		};
+		8B2A15CF2261B1F07FFD5B9A5E1170B2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = CAM;
+			target = CBFE2DAE2D5B2D71A3784E6C2EE62E19 /* CAM */;
+			targetProxy = 2D804041D3885C433513AE87B7D043DC /* PBXContainerItemProxy */;
+		};
+		CF7AC3AEC63B500B0ED800340921DBDB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ApplicasterIAP;
+			target = 574F7BA7E648E7D44B7C85C6D05DE1F0 /* ApplicasterIAP */;
+			targetProxy = E3AD0B5A368883DE5A29EF537C5E35E8 /* PBXContainerItemProxy */;
+		};
+		CFF11595BDF0BA90BA307562FAAA1C0A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ZappPlugins;
+			target = F8BDB43DA9C9150CE86BC47458920E7F /* ZappPlugins */;
+			targetProxy = 091952068F626191DC544C6F92FDFBAA /* PBXContainerItemProxy */;
+		};
+		D7B781A4F8B39D88E3F578FC1A7AF977 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ApplicasterIAP;
+			target = 574F7BA7E648E7D44B7C85C6D05DE1F0 /* ApplicasterIAP */;
+			targetProxy = 8ADE622D0C20385563E9C447A9DF2F41 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1B57E6C18202C67458A6244537A1D383 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 642CCB8B2DE1D8FD39A445D0E200716D /* ApplicasterIAP.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/ApplicasterIAP/ApplicasterIAP-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/ApplicasterIAP/ApplicasterIAP-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/ApplicasterIAP/ApplicasterIAP.modulemap";
+				PRODUCT_MODULE_NAME = ApplicasterIAP;
+				PRODUCT_NAME = ApplicasterIAP;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		230BF9AB75924CD9DCC747D80188A424 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2B63BE9B63D13A4CFB8181BCE0769E2B /* Pods-CAMFramework.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-CAMFramework/Pods-CAMFramework-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-CAMFramework/Pods-CAMFramework.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		3048B0C5C704DFFF688DA57F5380ED58 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.2;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		4B2438BB9B07B0481850A6462D50C084 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DD2B6F7F0A1D44CABF48785FD7EF15EC /* CAM.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/CAM/CAM-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/CAM/CAM-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/CAM/CAM.modulemap";
+				PRODUCT_MODULE_NAME = CAM;
+				PRODUCT_NAME = CAM;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		5492A10273FA046A0871C65B6F0A6494 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 959D14074EAA6CB00C8FA06AA9941C25 /* Pods-CAMFramework.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-CAMFramework/Pods-CAMFramework-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-CAMFramework/Pods-CAMFramework.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		5B0C8287D755FD95091CF35D87FB8B2D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		7A2BF26E80B536C7552056EF860803C5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 261FFFD46B276C9BD8D2205AE9D3845F /* ZappPlugins.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9BBA263EC7B1BDBA0C23B648121D3488 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DD2B6F7F0A1D44CABF48785FD7EF15EC /* CAM.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/CAM/CAM-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/CAM/CAM-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/CAM/CAM.modulemap";
+				PRODUCT_MODULE_NAME = CAM;
+				PRODUCT_NAME = CAM;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		C9DD74112C1BDF41D97F5C6B59B0E0B0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 642CCB8B2DE1D8FD39A445D0E200716D /* ApplicasterIAP.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/ApplicasterIAP/ApplicasterIAP-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/ApplicasterIAP/ApplicasterIAP-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/ApplicasterIAP/ApplicasterIAP.modulemap";
+				PRODUCT_MODULE_NAME = ApplicasterIAP;
+				PRODUCT_NAME = ApplicasterIAP;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		EE61CBEB9B9D01A7811FE086EAD609A6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 261FFFD46B276C9BD8D2205AE9D3845F /* ZappPlugins.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		055A305C353ADA3F352C87E8CADA87D0 /* Build configuration list for PBXNativeTarget "Pods-CAMFramework" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5492A10273FA046A0871C65B6F0A6494 /* Debug */,
+				230BF9AB75924CD9DCC747D80188A424 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5B0C8287D755FD95091CF35D87FB8B2D /* Debug */,
+				3048B0C5C704DFFF688DA57F5380ED58 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AEF61921F91FCE0642E2B646172B485E /* Build configuration list for PBXNativeTarget "ApplicasterIAP" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C9DD74112C1BDF41D97F5C6B59B0E0B0 /* Debug */,
+				1B57E6C18202C67458A6244537A1D383 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C0765C75119C4D2AC90A51AADA3ADD01 /* Build configuration list for PBXAggregateTarget "ZappPlugins" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7A2BF26E80B536C7552056EF860803C5 /* Debug */,
+				EE61CBEB9B9D01A7811FE086EAD609A6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C0F12512457BD5F77ABDF6CF0E2F9853 /* Build configuration list for PBXNativeTarget "CAM" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9BBA263EC7B1BDBA0C23B648121D3488 /* Debug */,
+				4B2438BB9B07B0481850A6462D50C084 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+}

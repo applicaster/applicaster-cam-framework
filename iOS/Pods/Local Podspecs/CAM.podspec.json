@@ -1,0 +1,29 @@
+{
+  "name": "CAM",
+  "version": "0.0.1",
+  "summary": "Content Access Manager framework",
+  "license": "MIT",
+  "homepage": "https://github.com/applicaster/applicaster-cam-framework",
+  "authors": {
+    "Brel Egor": "brel@scand.com"
+  },
+  "platforms": {
+    "ios": "10.0"
+  },
+  "swift_version": "4.2",
+  "source": {
+    "git": "https://github.com/applicaster/applicaster-cam-framework",
+    "tag": "0.0.1"
+  },
+  "resources": "iOS/CAM/**/*.{xib,nib,storyboard}",
+  "source_files": "iOS/CAM/**/*.{swift,h,m}",
+  "requires_arc": true,
+  "dependencies": {
+    "ZappPlugins": [
+
+    ],
+    "ApplicasterIAP": [
+
+    ]
+  }
+}

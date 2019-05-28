@@ -1,0 +1,28 @@
+PODS:
+  - ApplicasterIAP (0.0.3)
+  - CAM (0.0.1):
+    - ApplicasterIAP
+    - ZappPlugins
+  - ZappPlugins (8.3.1)
+
+DEPENDENCIES:
+  - CAM (from `../CAM.podspec`)
+
+SPEC REPOS:
+  "git@github.com:applicaster/CocoaPods.git":
+    - ZappPlugins
+  https://github.com/applicaster/applicaster-iap-framework:
+    - ApplicasterIAP
+
+EXTERNAL SOURCES:
+  CAM:
+    :path: "../CAM.podspec"
+
+SPEC CHECKSUMS:
+  ApplicasterIAP: 3e02eab421049bae6a12e4dcfd03b467e7dac847
+  CAM: 56848f709be229ed75443f7f0b118bbeddc5d0cd
+  ZappPlugins: c83e7569d70312a3203dde46d7743fdad394589c
+
+PODFILE CHECKSUM: 24f63755dcd1da2635b2ec8e61e673b4f4349f99
+
+COCOAPODS: 1.6.0
