@@ -92,10 +92,22 @@ class LoginViewController: UIViewController {
         signUpButton.titleLabel?.textAlignment = .center
         restoreContainer.isHidden = true
         socialNetworksContainer.isHidden = !(configDictionary[CAMKeys.facebookLoginEnabled.rawValue] ?? "false").bool
-        resetPasswordButton.isHidden = !(configDictionary[CAMKeys.passwordResetEnabled.rawValue] ?? "false").bool
+        resetPasswordButton.isHidden = !(configDictionary[CAMKeys.authFields.rawValue] ?? "false").bool
         authFieldsTable.backgroundView = UIView()
         authFieldsTable.allowsSelection = false
+        setupResetPasswordButton()
         configureElements()
+    }
+    
+    func setupResetPasswordButton() {
+        if let json = configDictionary[CAMKeys.authFields.rawValue],
+            let data = json.data(using: .utf8) {
+            if let jsonAuthFields = try? JSONDecoder().decode(AuthFields.self, from: data) {
+                resetPasswordButton.isHidden = jsonAuthFields.password == nil
+                return
+            }
+        }
+        resetPasswordButton.isHidden = true
     }
     
     func configureElements() {

@@ -11,6 +11,7 @@ import Foundation
 struct AuthFields: Codable {
     let signup: [AuthField]?
     let login: [AuthField]?
+    let password: [AuthField]?
 }
 
 enum AuthFieldInputType: String, Codable {
