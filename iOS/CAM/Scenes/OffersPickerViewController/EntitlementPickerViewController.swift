@@ -87,7 +87,8 @@ extension EntitlementPickerViewController: UICollectionViewDelegate, UICollectio
         return self.offerViewModels.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EntitlementCollectionViewCell",
                                                             for: indexPath) as? EntitlementCollectionViewCell else {
             fatalError()

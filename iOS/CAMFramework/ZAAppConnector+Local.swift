@@ -97,7 +97,10 @@ class MyConnector: NSObject, ZAAppDelegateConnectorLayoutsStylesProtocol, ZAAppD
     }
     
     func setViewStyle(_ view: UIView!, withKeys keys: [AnyHashable: Any]!) {
-        if let styleKey = keys?[kZappLayoutStylesFontKey] as? String, let style = styleParams(byStyleName: styleKey), let font = style["font"] as? UIFont, let color = style["color"] as? UIColor {
+        if let styleKey = keys?[kZappLayoutStylesFontKey] as? String,
+            let style = styleParams(byStyleName: styleKey),
+            let font = style["font"] as? UIFont,
+            let color = style["color"] as? UIColor {
             if let textView = view as? UITextView {
                 textView.font = font
                 textView.textColor = color
@@ -125,7 +128,8 @@ class MyConnector: NSObject, ZAAppDelegateConnectorLayoutsStylesProtocol, ZAAppD
             }
         }
         
-        if let imageKey = keys?[kZappLayoutStylesBackgroundImageKey] as? String, let imageURL = self.fileUrl(withName: imageKey, extension: nil) {
+        if let imageKey = keys?[kZappLayoutStylesBackgroundImageKey] as? String,
+            let imageURL = self.fileUrl(withName: imageKey, extension: nil) {
             if let imageView = view as? UIImageView {
                 if let image = UIImage(contentsOfFile: imageURL.path) ?? UIImage(contentsOfFile: imageURL.absoluteString) {
                     imageView.image = image
@@ -155,7 +159,10 @@ class MyConnector: NSObject, ZAAppDelegateConnectorLayoutsStylesProtocol, ZAAppD
     }
     
     func setLabelStyle(_ label: UILabel!, withKeys keys: [AnyHashable: Any]!) {
-        if let styleKey = keys?[kZappLayoutStylesFontKey] as? String, let style = styleParams(byStyleName: styleKey), let font = style["font"] as? UIFont, let color = style["color"] as? UIColor {
+        if let styleKey = keys?[kZappLayoutStylesFontKey] as? String,
+            let style = styleParams(byStyleName: styleKey),
+            let font = style["font"] as? UIFont,
+            let color = style["color"] as? UIColor {
             label.font = font
             label.textColor = color
         }
@@ -166,12 +173,16 @@ class MyConnector: NSObject, ZAAppDelegateConnectorLayoutsStylesProtocol, ZAAppD
     }
     
     func setButtonStyle(_ button: UIButton!, withKeys keys: [AnyHashable: Any]!) {
-        if let styleKey = keys?[kZappLayoutStylesFontKey] as? String, let style = styleParams(byStyleName: styleKey), let font = style["font"] as? UIFont, let color = style["color"] as? UIColor {
+        if let styleKey = keys?[kZappLayoutStylesFontKey] as? String,
+            let style = styleParams(byStyleName: styleKey),
+            let font = style["font"] as? UIFont,
+            let color = style["color"] as? UIColor {
             button.setTitleColor(color, for: .normal)
             button.titleLabel?.font = font
         }
         
-        if let imageKey = keys?[kZappLayoutStylesBackgroundImageKey] as? String, let imageURL = self.fileUrl(withName: imageKey, extension: nil) {
+        if let imageKey = keys?[kZappLayoutStylesBackgroundImageKey] as? String,
+            let imageURL = self.fileUrl(withName: imageKey, extension: nil) {
             if let image = UIImage(contentsOfFile: imageURL.path) ?? UIImage(contentsOfFile: imageURL.absoluteString) {
                 button.setImage(image, for: .normal)
             } else if let data = try? Data(contentsOf: imageURL), let image = UIImage(data: data, scale: 0) {

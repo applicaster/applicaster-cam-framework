@@ -22,7 +22,9 @@ class AuthTableCell: UITableViewCell, UITextFieldDelegate {
         textChanged?(textField.text)
     }
     
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    func textField(_ textField: UITextField,
+                   shouldChangeCharactersIn range: NSRange,
+                   replacementString string: String) -> Bool {
         textChanged?(textField.text)
         return true
     }
