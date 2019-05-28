@@ -21,6 +21,7 @@ class EntitlementPickerViewController: UIViewController {
     
     @IBOutlet private var helpInfoContainer: UIView!
     @IBOutlet private var helpInfoTextView: UITextView!
+    private var gradientLayer: CAGradientLayer!
     
     var presenter: EntitlementPickerPresenter?
     var currentItemIndex = 0 // Used for store center cell for ipad
@@ -49,6 +50,14 @@ class EntitlementPickerViewController: UIViewController {
         backButton.setZappStyle(withIconAsset: .backButtonImage)
         closeButton.setZappStyle(withIconAsset: .closeButtonImage)
         logoImageView.setZappStyle(withAsset: .headerLogo)
+        
+        setupGradient()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        self.gradientLayer.frame = self.helpInfoTextView.frame
     }
     
     func setupCollectionView() {
@@ -78,6 +87,19 @@ class EntitlementPickerViewController: UIViewController {
     
     public func hideLoadingIndicator() {
         entitlementsLoadingIndicator.stopAnimating()
+    }
+    
+    // MARK: - Private methods
+    
+    private func setupGradient() {
+        let from = UIColor.clear.cgColor
+        let to = self.helpInfoContainer.backgroundColor!.withAlphaComponent(0.8).cgColor
+        
+        self.gradientLayer = CAGradientLayer()
+        self.gradientLayer.colors = [from, to]
+        self.gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.4)
+        self.gradientLayer.endPoint = CGPoint(x: 0.0, y: 1.0)
+        self.helpInfoContainer.layer.addSublayer(self.gradientLayer)
     }
 }
 
