@@ -7,7 +7,7 @@ import com.applicaster.cam.params.auth.AuthScreenType
 class PluginConfigurator(private val pluginConfig: Map<String, String>) : Configurator {
 
     override fun getDefaultAuthScreen() =
-        AuthScreenType.fromKey(pluginConfig.getValue(KEY_DEFAULT_AUTH_SCEEN))
+        AuthScreenType.fromKey(pluginConfig.getValue(KEY_DEFAULT_AUTH_SCREEN))
 
     override fun isFacebookLoginRequired() =
         pluginConfig.getValue(KEY_FACEBOOK_LOGIN_REQ).toBoolean()
@@ -40,6 +40,5 @@ class PluginConfigurator(private val pluginConfig: Map<String, String>) : Config
 
 const val KEY_AUTH_FIELDS = "auth_fields"
 const val KEY_PASSWORD_RESET_REQ = "pwd_reset_required"
-const val KEY_AUTH_RESTORE_REQ = "auth_restore_required"
-const val KEY_DEFAULT_AUTH_SCEEN = "default_auth_screen"
+const val KEY_DEFAULT_AUTH_SCREEN = "default_auth_screen"
 const val KEY_FACEBOOK_LOGIN_REQ = "facebook_login_required"
