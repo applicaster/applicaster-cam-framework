@@ -120,7 +120,9 @@ extension UILabel {
                       style: CAMStyles? = nil) {
         
         var keys: [String: String] = [:]
-        if let style = style { keys[kZappLayoutStylesFontKey] = style.rawValue }
+        if let style = style {
+            keys[kZappLayoutStylesFontKey] = style.rawValue
+        }
         
         ZAAppConnector.sharedInstance().layoutsStylesDelegate.setLabelStyle?(self, withKeys: keys)
         self.text = text

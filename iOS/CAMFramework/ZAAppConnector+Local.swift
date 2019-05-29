@@ -88,6 +88,17 @@ class MyConnector: NSObject, ZAAppDelegateConnectorLayoutsStylesProtocol, ZAAppD
                 "color": UIColor.white
                 ]
             case .alternateActionBannerColor: return ["color": UIColor(hex: "#FFFFFF50")]
+            case .alertTitle:
+                return [
+                    "font": UIFont.boldSystemFont(ofSize: 25),
+                    "color": UIColor.black
+                ]
+            case .alertDescription:
+                return [
+                    "font": UIFont.systemFont(ofSize: 20,
+                                              weight: .light),
+                    "color": UIColor.black
+                ]
             default:
                 return [
                     "font" : UIFont(name: "HelveticaNeue-Light", size: 12)!,
