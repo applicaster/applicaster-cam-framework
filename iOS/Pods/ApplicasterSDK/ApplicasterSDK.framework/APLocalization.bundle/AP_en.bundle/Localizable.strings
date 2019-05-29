@@ -1,0 +1,404 @@
+//Common
+"CommonAlertOK"						=	"OK";
+"CommonDateFormat"					=	"dd/MM/yyyy";
+
+//PSTV - Interface
+
+"IFeatured"                         =   "FEATURED";
+"IChannels"                         =   "CHANNELS";
+"IMyChannel"                        =   "MY CHANNEL";
+"IMore"                             =   "MORE";
+"IPSTVPicks"                        =   "PSTV PICKS";
+"ILatestEpisodes"                   =   "LATEST EPISODES";
+"INowPlaying"                       =   "Now Playing";
+"IEdit"                             =   "EDIT";
+"IDelete"                           =   "DELETE";
+"IPlayAll"                          =   "Play All";
+"IDone"                             =   "Done";
+"IMyQueue"                          =   "My Queue";
+"IDownloads"                        =   "DOWNLOADS";
+"IQueued"                           =   "QUEUED";
+"IDownloading"                      =   "Downloading";
+"IShare"                            =   "Share";
+
+//NO Audio Slides:
+
+"NANoAudioSlideText"                =   "Video cannot be displayed due to limited bandwidth or low carrier data signal";
+
+//General Error Messages
+
+"GENoContent"                       =   "There is no content to display";
+"GECantLoadURL"                     =   "The url can't be loaded";
+"GENoItems"                         =   "There are no items to display";
+"GENoContentTryLater"               =   "There is no content, Please try again later";
+"GENoItemsInChannel"                =   "There are no items in your channel";
+
+//App rater
+
+"ARMessagePart1"                         =   "Do you like";
+"ARMessagePart2"                         =   "? It only takes a minute to rate us! Thank you.";
+"ARNoThanks"                        =   "No, Thank You";
+"ARRate"                            =   "Rate";
+"ARRemindMeLater"                   =   "Remind Me Later";
+
+//Back From Background
+"BGResume"                          =   "Resume";
+"BGRestart"                         =   "Restart";
+
+//HIV = HQME Item View
+"HIVCancelButton"					=	"CANCEL";
+"HIVDeleteButton"					=	"DELETE";
+"HIVDownloadButton"					=	"DOWNLOAD";
+"HIVDownloadFailureAlertTitle"		=	"Download Failure";
+"HIVDownloadFailureAlewrtMessage"	=	"There is no internet connection . Please try again later";
+"HIVExpiresLabelFormat"				=	"EXPIRES: %@";
+"HIVExpiredLabelFormat"				=	"EXPIRED (%@)";
+"HIVDownloadFailedAlertTitle"       =   "Download Error";
+"HIVDownloadFailedAlertMessage"     =   "Please try again later.";
+"HIVItemAvailableMessage"           =   "Available in 'My Library'";
+
+//MB = Menu Bar
+"MBNoConnectionAlertTitle"			=	"Notice";
+"MBNoConnectionAlertMessage"		=	"There is no internet connection . Please try again later";
+"MBOnlineButton"					=	"Online";
+"MBMyLibraryButton"					=	"My Library";
+"MBDownloadButton"					=	"Download";
+"MBSettingsButton"					=	"Settings";
+"MBSubscribeButton"					=	"Subscribe";
+
+//SC = Settings Control
+"SCLanguageChangedAlertTitle"		=	"Language has changed.";
+"SCLanguageChangedAlertMessage"		=	"Loading the selected language.";
+"SCLanguageSegment"					=	"Language";
+"SCLanguageAccountSegment"			=	"Account";
+"SCMoreSegment"						=	"More";
+
+//AD = Application Delegate
+"ADMyLibraryEmptyMessage"			=	"'My Library' is empty. Please connect to the internet and go to 'Download' to save videos to your device.";
+"ADNotSubscribedAlertTitle"			=	"Notice";
+"ADNotSubscribedAlertMessage"		=	"You must be subscribed to view this content.";
+
+//SP = Splash view
+"SPCommunicationFailureMessage"		=	"There is no internet connection. Please try again later";
+
+//OV = Offline View
+"OVNoDownloadedContentAlertTitle"   =   "Notice";
+"OVNoDownloadedContentAlertMessage" =   "'My Library' is empty. Please save videos to your device via 'Download'.";
+
+//Applicaster Framework
+"APMailNotConfigured"				=   "Email sending is not configured for this device. Cannot send mail.";
+"APCouldNotCompletePurchase"		=   "Could not compelete purchase.";
+"APPurchsesesDisabledForDevice"		=	"Purchases are disabled for this device";
+
+//SF - restore subscription
+"SFRestoreSubscription"             =   "Restore Subscription";
+"SFRedeem Voucher" = "Redeem Voucher";
+
+//Application Rating
+"ARRate"                            =   "Rate";
+"ARNoThanks"                        =   "No Thanks";
+"ARRemindMeLater"                   =   "Remind Me Later";
+
+// Item expiration
+"IEYour item has expired" = "Your item has expired";
+"IEIf you have a valid subscription please try again while connected to the internet"	= "If you have a valid subscription please try again while connected to the internet";
+
+// Store kit
+"SKPurchaseFailed"					= "Purchase Failed";
+"SKRestorePreviousPurchases"		= "Would you like to restore previous purchases?";
+"SKRestoreButtonYes"				= "Restore";
+"SKRestoreButtonNo"					= "No";
+
+// Player
+"PLLoading"                         = "Loading";
+"PLAudioOnlyMessage"                = "Streaming only audio due to poor connectivity.";
+"PLLoadingFailed"                   = "Loading failed, please try again later.";
+
+"LNItemAvilableLocally"				= "The item you requested is now available for viewing.";
+"LNOpenAppToContinueDownloading"	= "Please open %@ to continue downloading content.";
+"LNOpenAppToContinueDownloadingPart1"	= "Please open";
+"LNOpenAppToContinueDownloadingPart2"	= "to continue downloading content.";
+
+// Support mail
+"APSupportSubjectPrefix"        = "Support for";
+"APSupportProblemDescription"	= "Problem description";
+"APSupportDoNotDelete"			= "Please don't remove the following";
+
+// Facebook Native Message
+"FBMessageTo"                   = "To: ";
+"FBMessageSend"                 = "Send";
+
+//Facebook Chat & Invite
+"InviteFriendsToWatchTheShow"   = "Invite friends to watch the show";
+
+// Capture a moment
+
+"BGCaptureResume"					=	"Continue from last stop";
+"BGCaptureRestart"					=	"Play again";
+"BGCaptureShare"					=	"Share with your friends";
+"APCaptureReshareWithYourFriends"   =   "Re-Share this video capture with your friends";
+"APCaptureShareWithYourFriends"     =   "Share this video capture with your friends";
+"CaptureMomentSubject"              =   "Thought you should see this:";
+
+// C = Chat
+"CInviteFriendsCancel"              = "Cancel";
+"CSearchFriends"                    = "Search Friends";
+"CJoinMeToWatchLeftString"          = "Hi, i'm watching ";
+"CJoinMeToWatchRightString"         = ". want to join me?";
+"CInviteFriendsToWatchTheShow"      = "Invite friends to watch the show";
+"CGoOn"                             = "Go online and chat with your friends";
+"CSend"                             = "Send";
+"CEnterText"                        = "Enter Text";
+"CHasLeftTheChat"                   = " has left the chat";
+"CIsTyping"                         = " is typing";
+"CIsOnline"                         = " is online";
+"CIsOffline"                        = " is offline";
+"CEnteredChat"                      = "has entered the chat.";
+
+//Player
+"APPlayerScrubbingFast"             = "Hi-Speed Scrubbing\nSlide your finger down to adjust the scrubbing rate";
+"APPlayerScrubbingMedium"           = "Half-Speed Scrubbing\nSlide your finger down to adjust the scrubbing rate";
+"APPlayerScrubbingSlow"             = "Quarter-Speed Scrubbing\nSlide your finger down to adjust the scrubbing rate";
+"APPlayerScrubbingFine"             = "Fine Scrubbing\nSlide your finger down to adjust the scrubbing rate";
+
+//EPG
+"APEPGProgramIsPlayingNow"          = "Now";
+
+// Notification for program
+
+"APProgramLocalNoficiationAlertBody" = "Your scheduled program is about to start - ";
+
+// Chat
+"APFacebookInstructionIntroduceChatButton"      = "Introducing the chat button that allows you to talk to your Facebook friends while you are watching";
+"APFacebookInstructionWhatToDo"                 = "What do you need to do?";
+"APFacebookInstructionAuthorizeFacebook"        = "Approve the Facebook Login";
+"APFacebookInstructionInviteFriends"            = "Invite friends to watch with you";
+"APFacebookInstructionConnectDisclaimerLabel"   = "acebook Login is for chat purposes only";
+"APFacebookInstructionOKButton"                 = "OK";
+"APFacebookInstructionCancelButton"             = "Cancel";
+"ChatIsON"                                      = "Chat is ON";
+"ChatIsOFF"                                     = "Chat is OFF";
+
+//CM
+"CMShareBtn"                                    = "Share";
+"CMVideoSaved"                                  = "Video saved";
+"CMImageSaved"                                  = "Image saved";
+"CMYouCanFindItInYourPhotoGallery"              = "You can find it in your photo gallery";
+
+"CMSharingLinkLabel"                            = "Click here to view";
+
+"CMRecommandMessage1"                           = "I am friend with %@. Do you want to be %@'s friend as well?";
+"CMRecommandMessage2"                           = "I am friend with %@. Do you want to be %@'s friend so we can share exclusive content?";
+"CMRecommandMessage3"                           = "Did you know %@ is a good friend of mine?";
+"CMRecommandComment"                            = "Choose your %@ friend as well";
+
+"CMSharingComment"                              = "Look what I received from %@. You can also get your exclusive content in %@.";
+
+"CMConnectToCharacterAlertMessage"              = "Do you want to become friends with %@";
+"CMReplaceCharacterAlertMessage"                = "Do you want to start a new friendship with %@ instead of %@ You can only change friends %d more times until the season ends.";
+
+"CMReplaceCharacterAlertMessageForLastSubstitution" = "Do you want to start a new friendship with %@ instead of %@ You can only change friends %d more time until the season ends.";
+
+"CMReplaceCharacterAlertMessageForUnlimitedNumberOfSubstitution" = "Do you want to be friends with %@ instead of %@? Be careful - your friends may not fully trust you if you switch friends too often.";
+
+"CMCannotReplaceCharacterAlertMessage"          = "Sorry, you have reached the limit for changing friends this season.";
+
+"CMConnectToCharacterAlertCancelBtn"            = "No";
+"CMConnectToCharacterAlertOkBtn"                = "Yes!";
+
+"CMReplaceCharacterAlertCancelBtn"              = "Cancel";
+"CMReplaceCharacterAlertOkBtn"                  = "Change Friends";
+
+"CMCannotReplaceCharacterAlertOkBtn"            = "OK";
+
+"CMInviteYourFriendBtn"                         = "Invite your friends";
+"CMMessagesLabel"                               = "Messages";
+
+"CMFriendStatus"                                = "Friend";
+"CMX-FriendStatus"                              = "X-Friend";
+
+"CMLearnMoreAboutLabel"                         = "Learn more about %@";
+"CMLastMessageRecievedLabel"                    = "Last message recieved %@  %@";
+
+"CMSelectionCharacterHeadline"                  = "Let’s be friends";
+"CMSelectionCharacterSubHeadline"               = "Become friends with your favorite character to get exclusive messages and content.";
+
+"CMCharacterProfilePageStatus"                  = "- FRIEND";
+"CMCharacterProfilePageFollowButton"            = "Befriend";
+"CMCharacterProfilePageRecommendButton"         = "Recommend";
+
+// ----------- Feed1.5 ----------- //
+
+// Feed 1.5 Events
+"Feed1.5FacebookLikeButton"						= "Like";
+"Feed1.5FacebookCommentButton"                  = "Comment";
+"Feed1.5FacebookLikes"							= "Likes";
+"Feed1.5FacebookComments"						= "Comments";
+"Feed1.5FacebookComment"						= "Comment";
+"Feed1.5ConnectFacebookTwitter"					= "Connect to Facebook and Twitter to view the content";
+"Feed1.5ConnectFacebook"						= "Connect to Facebook to view the content";
+"Feed1.5ConnectTwitter"							= "Connect to Twitter to view the content";
+"Feed1.5SendPostButton"                         = "Post";
+"Feed1.5ConnectButton"                          = "Connect";
+"Feed1.5CreatePostButton"                       = "Write a post";
+"Feed1.5CreatePostPlaceholderText"              = "Write something ...";
+"Feed1.5ShareEvent"                             = "I'm watching %@, want to join me?";
+"Feed1.5Retweet"                                = "Retweet";
+"Feed1.5BackButtonTitle"                        = "Back";
+
+// ----------- Feed2.0 ----------- //
+
+"Feed2_DetailFacebookTitle"                     = "Post";
+"Feed2_CreatePostTitle"                         = "Write a Post";
+"Feed2_CreatePostBack"                          = "Cancel";
+"Feed2_CreatePostSend"                          = "Post";
+"Feed2_CreateTweetSend"                         = "Tweet";
+"Feed2_ClickOnLinkEvent"                        = " Click Here >> ";
+"Feed2_TakePhoto"                               = "Take Photo";
+"Feed2_ChoosePhoto"                             = "Choose Photo";
+"Feed2_CancelPhoto"                             = "Cancel";
+"Feed2_CreatePostPlaceholder"                   = "What's on your mind?";
+"Feed2_AlertOK"                                 = "OK";
+"Feed2_AlertTwitterSignInRequireTitle"          = "Sign In Required:";
+"Feed2_AlertTwitterSignInRequireMessage"        = "Please sign in to twitter and authorize app in device settings";
+"Feed2_AlertTwitterSendFailedTitle"             = "Error:";
+"Feed2_AlertTwitterSendFailedMessage"           = "Failed to send tweet";
+"Feed2_AlertFacebookSendFailedTitle"            = "Error:";
+"Feed2_AlertFacebookSendFailedMessage"          = "Failed to post";
+"Feed2_AlertEmptyCommentNoticeTitle"            = "Notice";
+"Feed2_AlertEmptyCommentNoticeMessage"          = "Please add text to your comment before posting";
+
+"Feed2_SendComment"                             = "Post";
+"Feed2_DetailedFacebookCounters"                = "%d likes %d comments";
+"Feed2_DetailedTwitterCounters"                 = "%d retweets";
+"Feed2_SocialOnButtonText"                      = "Social on";
+"Feed2_SocialOffButtonText"                     = "Social off";
+"Feed2_WriteAPostButtonText"                    = "Post";
+"Feed2_LeaderboardButtonText"                   = "Leaderboard";
+"Feed2_AchievementPointsText"                   = "Points";
+
+"Feed2_SignInContent"                           = "For more content sign in to";
+
+"Feed2_FilterAll"                               = "All";
+"Feed2_FilterBroadcaster"                       = "Activities";
+"Feed2_NewStories"                              = "New Stories";
+
+"Feed2_WelcomeTitle"                            = "Welcome";
+"Feed2_WelcomeSignIn"                           = "Sign in for more updates and content";
+"Feed2_WidgetTimeIsUp"                          = "Time's up!";
+"Feed2_NewQuestionText"                         = "New Question";
+"Feed2_NewQuestionSecLeftText"                  = "sec left";
+"Feed2_NewQuestionLeftText"                     = "left";
+
+"Feed2_ShareEvent"                              = "I'm watching %@, want to join me?";
+"Feed2_ShareEventFacebook"                      = "I'm watching %@, want to join me?";
+"Feed2_ShareEventTwitter"                       = "I'm watching %@, want to join me?";
+"Feed2_ShareEventMail"                          = "I'm watching %@, want to join me?";
+"Feed2_ShareEventSMS"                           = "I'm watching %@, want to join me?";
+"Feed2_ShareEventWhatsApp"                      = "I'm watching %@, want to join me?";
+"Feed2_SubjectShareEvent"                       = "This %@ item was shared with you";
+"feed2_commentOnDetailView"                     = "What's on your mind?";
+"Feed2_back"                                    = "Back";
+"Feed2_SaveImage"                               = "Save Image";
+"Feed2_ClickHere"                               = "Click here";
+
+//Twitter
+"Feed2_NotLoggedInToTwitter"					= "You can not send a tweet right now. Go to device settings to add your Twitter account.";
+"Feed2_TwitterSorry"							= "Sorry!";
+"Feed2_TwitterTweetFailed"						= "Twitter Tweet Failed";
+"Feed2_Dismiss"				    				= "Dismiss";
+"Feed2_EnableTweets"							= "Please go to the device settings -> Twitter and make sure this app is enabled";
+"Feed2_TwitterLoginFailed"						= "Twitter Login Failed";
+
+
+// ----------- Time Strings ----------- //
+
+"Time_Second"                                   = "second";
+"Time_Seconds"                                  = "seconds";
+"Time_Minute"                                   = "minute";
+"Time_Minutes"                                  = "minutes";
+"Time_Hour"                                     = "hour";
+"Time_Hours"                                    = "hours";
+"Time_Day"                                      = "day";
+"Time_Days"                                     = "days";
+"Time_Week"                                     = "week";
+"Time_Weeks"                                    = "weeks";
+"Time_Month"                                    = "month";
+"Time_Months"                                   = "months";
+"Time_Year"                                     = "year";
+"Time_Years"                                    = "years";
+"Time_Decade"                                   = "decade";
+"Time_Decades"                                  = "decades";
+
+"Time_AgoDescription"                           = "%li %@ ago";
+"Time_AgoDescriptionPlural"                     = "%li %@ ago";
+
+// ----------- Achievement Center ----------- //
+
+"Achievement_HowToPlayPopup"                    = "See how to play";
+"Achievement_DailyLimitErrorMessage"            = "You have reached your daily limit, try again later.";
+"Achievement_DailyLimitCancelBtnError"          = "Cancel";
+
+//WelcomeBack screen
+"Achievement_WelcomeBackTitle"                  = "Welcome back";
+"Achievement_WelcomeBackTitleAfterWin"          = "You won";
+"Achievement_WelcomeBackSubTiltle"              = "Your points";
+"Achievement_WelcomeBackSubTiltleAfterWin"      = "Points";
+"Achievement_WelcomeBackDescription"            = "Earn your free points";
+"Achievement_WelcomebackTitleError"             = "Adding points failed";
+"Achievement_WelcomebackMessageError"           = "Try next time";
+
+//Action screen
+"Achievement_TitleActionScreen_iPad"            = "Welcome to the new feed";
+"Achievement_DescriptionActionScreen"           = "Check out how you earn your points and beat your friends now!";
+"Achievement_TitleActionScreen_iPhone"          = "Welcome to the new feed check out how you earn your points and beat your friends now!";
+"Achievement_maxActionText"                     = "Max";
+
+//Leaderboard screen
+"Achievement_FilterGlobal"                      = "Global";
+"Achievement_FilterFriends"                     = "Friends";
+"Achievement_K_Sign_Rank"                       = "K";
+
+"Achievement_ShareText"                         = "I'm a player in the %@ competition. Try to beat me!";
+"Achievement_ShareFacebook"                     = "I'm a player in the %@ competition. Try to beat me!";
+"Achievement_ShareTwitter"                      = "I'm a player in the %@ competition. Try to beat me!";
+"Achievement_ShareMail"                         = "I'm a player in the %@ competition. Try to beat me!";
+"Achievement_ShareSMS"                          = "I'm a player in the %@ competition. Try to beat me!";
+"Achievement_ShareWhatsApp"                     = "I'm a player in the %@ competition. Try to beat me!";
+"Achievement_SubjectShareEvent"                 = "This %@ item was shared with you. Join your friends in the competition!";
+
+"Achievement_LoginFBText"                       = "Please login to see full friens leaderboard";
+"Achievement_LoginFacebookButton"               = "facebook";
+"Achievement_ShareButton"                       = "Share";
+"Achievement_NoFriendLabel"                     = "No friends yet";
+
+"Achievement_Me_Name"                           = "Me";
+"Achievement_Anonymous_Name"                    = "Anonymous";
+
+//Winner Screen
+"Achievement_WinnerCongratulations"             = "Congratulations";
+"Achievement_WinnerYouWonText"                  = "You won!";
+"Achievement_WinnerRank"                        = "You have reached %d place";
+"Achievement_WinnerCollectPrize"                = "Click here to collect your prize";
+
+// ----------- Civolution --------------//
+
+"Civolution_tapToSync"                          = "Tap to Sync";
+"Civolution_listening"                          = "Listening...";
+"Civolution_audioSyncEvent"                     = "Audio synced event!";
+"Civolution_outOfsync"                          = "Out of sync";
+"Civolution_explain"                            = "Please make sure that your T.V and the speakers are on. You are about to get synced.";
+
+// Sharing
+
+"SharingTwitterMessageText"              =  "Watching:";
+"MailSharingMessage1Text"                =  "I’m sharing with you";
+"MailSharingMessage2Text"                =  "Follow the link to watch on ";
+
+"SharingArticleMessageText"              =  "Reading an article on";
+"SharingPhotoMessageText"                =  "Looking at a photo on";
+
+"MailSharingArticleMessage1Text"         =  "I’m sharing with you this article from";
+"MailSharingPhotoMessage1Text"           =  "I’m sharing with you this photo from";
+
+"MailSharingArticleOrPhotoMessage2Text"  =  "Follow the link to view it:";

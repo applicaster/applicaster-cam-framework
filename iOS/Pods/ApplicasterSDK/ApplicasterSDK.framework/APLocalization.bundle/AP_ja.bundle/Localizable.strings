@@ -1,0 +1,61 @@
+//Common
+"CommonAlertOK"						=	"OK";
+"CommonDateFormat"					=	"dd/MM/yyyy";
+
+//HIV = HQME Item View
+"HIVCancelButton"					=	"キャンセル";
+"HIVDeleteButton"					=	"削除";
+"HIVDownloadButton"					=	"ダウンロード";
+"HIVDownloadFailureAlertTitle"		=	"ダウンロード失敗";
+"HIVDownloadFailureAlewrtMessage"	=	"インターネットの接続が切れています。しばらくしてからまたお試しください";
+"HIVExpiresLabelFormat"				=	"有効期限: %@";
+"HIVExpiredLabelFormat"				=	"有効期限切れ (%@)";
+"HIVDownloadFailedAlertTitle"       =   "ダウンロードエラー";
+"HIVDownloadFailedAlertMessage"     =   "しばらくしてからまたお試しください。";
+"HIVItemAvailableMessage"           =   "マイライブラリで入手可能";
+
+//MB = Menu Bar
+"MBNoConnectionAlertTitle"			=	"通知";
+"MBNoConnectionAlertMessage"		=	"インターネットの接続が切れています。しばらくしてからまたお試しください";
+"MBOnlineButton"					=	"オンライン";
+"MBMyLibraryButton"					=	"マイライブラリ";
+"MBDownloadButton"					=	"ダウンロード";
+"MBSettingsButton"					=	"設定";
+"MBSubscribeButton"					=	"登録";
+
+//SC = Settings Control
+"SCLanguageChangedAlertTitle"		=	"言語が変更されました。";
+"SCLanguageChangedAlertMessage"		=	"言語が変更されました。";
+"SCLanguageSegment"					=	"言語";
+"SCLanguageAccountSegment"			=	"アカウント";
+"SCMoreSegment"						=	"もっと見る";
+
+//AD = Application Delegate
+"ADMyLibraryEmptyMessage"			=	"「マイライブラリ」に何も入っていません。インターネットに接続し、「ダウンロード」画面からビデオを取り込んでください。";
+"ADNotSubscribedAlertTitle"			=	"通知";
+"ADNotSubscribedAlertMessage"		=	"このコンテンツ視聴は登録者のみに限られます。";
+
+//SP = Splash view
+"SPCommunicationFailureMessage"		=	"インターネットの接続が切れています。しばらくしてからまたお試しください";
+
+//OV = Offline View
+"OVNoDownloadedContentAlertTitle"   =   "通知";
+"OVNoDownloadedContentAlertMessage" =   "「マイライブラリ」に何も入っていません。「ダウンロード」画面からビデオを取り込んでください。";
+
+//Applicaster Framework
+"APMailNotConfigured"				=   "この機器ではE-mail送信機能が設定されていません。メールを送信できません。";
+"APCouldNotCompletePurchase"		=   "購入できませんでした。";
+"APPurchsesesDisabledForDevice"		=	"このデバイス用の購入は無効です";
+
+//SF - restore subscription
+"SFRestoreSubscription"             =   "購読を復活";
+"SFRedeem Voucher" = "クーポンを利用";
+
+//Application Rating
+"ARRate"                            =   "レーティング";
+"ARNoThanks"                        =   "いいえ、結構です";
+"ARRemindMeLater"                   =   "後で";
+
+// Item expiration
+"IEYour item has expired" = "あなたのアイテムは有効期限が切れました。";
+"IEIf you have a valid subscription please try again while connected to the internet"	= "契約が有効であれば、インターネットに接続されている間に再度お試しください";

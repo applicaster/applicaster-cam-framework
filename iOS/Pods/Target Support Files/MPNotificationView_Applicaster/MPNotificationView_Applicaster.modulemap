@@ -1,0 +1,6 @@
+framework module MPNotificationView_Applicaster {
+  umbrella header "MPNotificationView_Applicaster-umbrella.h"
+
+  export *
+  module * { export * }
+}

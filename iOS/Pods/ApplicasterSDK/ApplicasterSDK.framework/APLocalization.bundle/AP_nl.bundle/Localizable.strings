@@ -1,0 +1,325 @@
+//Common
+"CommonAlertOK"						=	"OK";
+"CommonDateFormat"					=	"dd/MM/yyyy";
+
+//PSTV - Interface
+
+"IFeatured"                         =   "UITGELICHT";
+"IChannels"                         =   "KANALEN";
+"IMyChannel"                        =   "MIJN KANAAL";
+"IMore"                             =   "MEER";
+"IPSTVPicks"                        =   "FAVORIETEN VAN PSTV";
+"ILatestEpisodes"                   =   "NIEUWSTE AFLEVERINGEN";
+"INowPlaying"                       =   "Nu speelt";
+"IEdit"                             =   "BEWERKEN";
+"IDelete"                           =   "VERWIJDEREN";
+"IPlayAll"                          =   "Alles spelen";
+"IDone"                             =   "Klaar";
+"IMyQueue"                          =   "Mijn wachtrij";
+"IDownloads"                        =   "DOWNLOADS";
+"IQueued"                           =   "IN DE WACHTRIJ";
+"IDownloading"                      =   "Aan het downloaden";
+"IShare"                            =   "Delen";
+
+//NO Audio Slides:
+
+"NANoAudioSlideText"                =   "Video kan niet worden vertoond door te weinig bandbreedte of kleine datasignaal van de drager";
+
+//General Error Messages
+
+"GENoContent"                       =   "Er is geen content om te laten zien";
+"GECantLoadURL"                     =   "De URL kan niet worden geladen";
+"GENoItems"                         =   "Er zijn geen items om te tonen";
+"GENoContentTryLater"               =   "Er is geen content, probeer het later opnieuw";
+"GENoItemsInChannel"                =   "Er zijn geen items in je kanaal";
+
+//App rater
+
+"ARMessagePart1"                         =   "Vind je het leuk";
+"ARMessagePart2"                         =   "Het duurt maar een minuut om ons te beoordelen! Dank je wel.";
+"ARNoThanks"                        =   "Nee, bedankt";
+"ARRate"                            =   "Beoordelen";
+"ARRemindMeLater"                   =   "Herinner me later";
+
+//Back From Background
+"BGResume"                          =   "Hervatten";
+"BGRestart"                         =   "Opnieuw starten";
+
+//HIV = HQME Item View
+"HIVCancelButton"					=	"ANNULEREN";
+"HIVDeleteButton"					=	"VERWIJDEREN";
+"HIVDownloadButton"					=	"DOWNLOADEN";
+"HIVDownloadFailureAlertTitle"		=	"Downloadfout";
+"HIVDownloadFailureAlewrtMessage"	=	"Er is geen verbinding met het internet. Probeer het later opnieuw";
+"HIVExpiresLabelFormat"				=	"VERLOOPT OP: %@";
+"HIVDownloadFailedAlertTitle"       =   "Downloadfout";
+"HIVDownloadFailedAlertMessage"     =   "Probeer het later opnieuw.";
+"HIVItemAvailableMessage"           =   "Beschikbaar in 'Mijn bibliotheek'";
+
+//MB = Menu Bar
+"MBNoConnectionAlertTitle"			=	"Bericht";
+"MBNoConnectionAlertMessage"		=	"Er is geen internetverbinding. Probeer het later opnieuw";
+"MBOnlineButton"					=	"Online";
+"MBMyLibraryButton"					=	"Mijn bibliotheek";
+"MBDownloadButton"					=	"Downloaden";
+"MBSettingsButton"					=	"Instellingen";
+"MBSubscribeButton"					=	"Abonneren";
+
+//SC = Settings Control
+"SCLanguageChangedAlertTitle"		=	"Taal is gewijzigd.";
+"SCLanguageChangedAlertMessage"		=	"Laden van de geselecteerde taal";
+"SCLanguageSegment"					=	"Taal";
+"SCLanguageAccountSegment"			=	"Account";
+"SCMoreSegment"						=	"Meer";
+
+//AD = Application Delegate
+"ADMyLibraryEmptyMessage"			=	"Mijn bibliotheek' is leeg. Maak verbinding met het internet en ga naar 'Downloaden' om de video's op te slaan op je apparaat.";
+"ADNotSubscribedAlertTitle"			=	"Bericht";
+"ADNotSubscribedAlertMessage"		=	"Je moet een abonnement hebben om deze content te bekijken.";
+
+//SP = Splash view
+"SPCommunicationFailureMessage"		=	"Er is geen internetverbinding. Probeer het later opnieuw";
+
+//OV = Offline View
+"OVNoDownloadedContentAlertTitle"   =   "Bericht";
+"OVNoDownloadedContentAlertMessage" =   "'Mijn bibliotheek 'is leeg. Sla video's op op uw apparaat via 'Downloaden'.";
+
+//Applicaster Framework
+"APMailNotConfigured"				= "Verzenden van e-mails is niet geconfigureerd voor dit apparaat. E-mail kan niet worden verzonden.";
+"APCouldNotCompletePurchase"		= "Kon de aankoop niet afronden.";
+"APPurchsesesDisabledForDevice"		=	"Aankopen zijn uitgeschakeld voor dit apparaat.";
+
+//SF - restore subscription
+"SFRestoreSubscription"             =   "Abonnement herstellen";
+"SFRedeem Voucher" = "Voucher inwisselen";
+
+//Application Rating
+"ARRate"                            =   "Beoordelen";
+"ARNoThanks"                        =   "Nee bedankt";
+"ARRemindMeLater"                   =   "Herinner me later";
+
+// Item expiration
+"IEYour item has expired" = "Je item is verlopen";
+"IEIf you have a valid subscription please try again while connected to the internet" = "Als je een geldig abonnement hebt, probeer het opnieuw terwijl je bent verbonden met het internet";
+
+// Store kit
+"SKPurchaseFailed"					= "Aankoop mislukt";
+"SKRestorePreviousPurchases"		= "Wil je de vorige aankopen herstellen?";
+"SKRestoreButtonYes"				= "Herstellen";
+"SKRestoreButtonNo"					= "Nee";
+
+// Player
+"PLLoading"                         = "Aan het laden";
+"PLAudioOnlyMessage"                = "Kan alleen audio streamen als gevolg van slechte verbindingen.";
+"PLLoadingFailed"                   = "Laden mislukt, probeer het later opnieuw.";
+
+"LNItemAvilableLocally"		= "Het gevraagde item kan nu worden bekeken.";
+"LNOpenAppToContinueDownloading"	= "Open %@ om door te gaan met het downloaden van content";
+"LNOpenAppToContinueDownloadingPart1"	= "Open";
+"LNOpenAppToContinueDownloadingPart2"	= "om door te gaan met het downloaden van content.";
+
+// Support mail
+"APSupportSubjectPrefix"        = "Ondersteuning voor";
+"APSupportProblemDescription"	= "Beschrijving van het probleem";
+"APSupportDoNotDelete"		= "Verwijder het volgende niet";
+
+// Facebook Native Message
+"FBMessageTo"                   = "Naar: ";
+"FBMessageSend"                 = "Verzenden";
+
+//Facebook Chat & Invite
+"InviteFriendsToWatchTheShow"   = "Nodig vrienden uit om het programma te bekijken";
+
+// Capture a moment
+
+"BGCaptureResume"			=	"Doorgaan vanaf de laatste stop";
+"BGCaptureRestart"			=	"Opnieuw spelen";
+"BGCaptureShare"			=	"Delen met je vrienden";
+"APCaptureReshareWithYourFriends"   =   "Deel deze video-opname opnieuw met je vrienden";
+"APCaptureShareWithYourFriends"     =   "Deel deze video-opname met je vrienden";
+"CaptureMomentSubject"              =   "Dacht dat je deze zou moeten zien:";
+
+// C = Chat
+"CInviteFriendsCancel"              = "Annuleren";
+"CSearchFriends"                    = "Naar vrienden zoeken";
+"CJoinMeToWatchLeftString"          = "Hoi, ik ben aan het kijken naar ";
+"CJoinMeToWatchRightString"         = "Wil je met me meekijken?";
+"CInviteFriendsToWatchTheShow"      = "Nodig vrienden uit om het programma te bekijken";
+"CGoOn"                             = "Ga online en chat met je vrienden";
+"CSend"                             = "Verzenden";
+"CEnterText"                        = "Tekst invoeren";
+"CHasLeftTheChat"                   = " heeft de chat verlaten";
+"CIsTyping"                         = " is aan het schrijven";
+"CIsOnline"                         = " is online";
+"CIsOffline"                        = " is offline";
+"CEnteredChat"                      = "is de chat binnengekomen.";
+
+//Player
+"APPlayerScrubbingFast"             = "Zeer snel scrubben\nSchuif je vinger omlaag om de scrubsnelheid aan te passen";
+"APPlayerScrubbingMedium"           = "Half snel scrubben\nSchuif je vinger omlaag om de scrubsnelheid aan te passen";
+"APPlayerScrubbingSlow"             = "Kwart snel scrubben\nSchuif je vinger omlaag om de scrubsnelheid aan te passen";
+"APPlayerScrubbingFine"             = "Fijn scrubben\nSchuif je vinger omlaag om de scrubsnelheid aan te passen";
+
+//EPG
+"APEPGProgramIsPlayingNow"          = "Nu";
+
+// Notification for program
+
+"APProgramLocalNoficiationAlertBody" = "Je geplande programma gaat bijna beginnen - ";
+
+// Chat
+"APFacebookInstructionIntroduceChatButton"      = "Introductie van de chat-knop waarmee je met je Facebook-vrienden kunt praten terwijl je aan het kijken bent";
+"APFacebookInstructionWhatToDo"                 = "Wat moet je doen?";
+"APFacebookInstructionAuthorizeFacebook"        = "Keur de Facebook-login goed";
+"APFacebookInstructionInviteFriends"            = "Nodig vrienden uit om met je te kijken ";
+"APFacebookInstructionConnectDisclaimerLabel"   = "Facebook-login is alleen voor chatdoeleinden";
+"APFacebookInstructionOKButton"                 = "OK";
+"APFacebookInstructionCancelButton"             = "Annuleren";
+"ChatIsON"                                      = "Chat is AAN";
+"ChatIsOFF"                                     = "Chat is UIT";
+
+//CM
+"CMShareBtn"                                    = "Delen";
+"CMVideoSaved"                                  = "Video opgeslagen";
+"CMImageSaved"                                  = "Afbeelding opgeslagen";
+"CMYouCanFindItInYourPhotoGallery"              = "Je kunt hem vinden in je fotogalerij";
+
+"CMSharingLinkLabel"                            = "Klik hier om te bekijken";
+
+"CMRecommandMessage1"                           = "Ik ben vrienden met %@. Wil je ook vrienden worden met %@?";
+"CMRecommandMessage2"                           = "Ik ben vrienden met %@. Wil je ook vrienden worden met %@ zodat we exclusieve content kunnen deze?";
+"CMRecommandMessage3"                           = "Wist je dat %@ een goede vriend van mij is?";
+"CMRecommandComment"                            = "Kies ook jouw %@-vriend";
+
+"CMSharingComment"                              = "Zie wat ik heb ontvangen van %@. Jij kunt ook je exclusieve content krijgen in %@.";
+
+"CMConnectToCharacterAlertMessage"              = "Wil je vrienden worden met %@";
+"CMReplaceCharacterAlertMessage"                = "Wil je een nieuwe vriendschap beginnen met %@ in plaats van met %@ Je kunt nog maar %d keer van vrienden wisselen tot het eind van het seizoen.";
+
+"CMReplaceCharacterAlertMessageForLastSubstitution" = "Wil je een nieuwe vriendschap beginnen met %@ in plaats van met %@ Je kunt nog maar %d keer van vrienden wisselen tot het eind van het seizoen.";
+
+"CMReplaceCharacterAlertMessageForUnlimitedNumberOfSubstitution" = "Wil je vrienden zijn met %@ in plaats van met %@? Wees wel voorzichtig - je vrienden zullen je misschien niet helemaal meer vertrouwen als je te vaak van vrienden wisselt.";
+
+"CMCannotReplaceCharacterAlertMessage"          = "Sorry, je hebt de limiet voor het veranderen van vrienden bereikt voor dit seizoen.";
+
+"CMConnectToCharacterAlertCancelBtn"            = "Nee";
+"CMConnectToCharacterAlertOkBtn"                = "Ja!";
+
+"CMReplaceCharacterAlertCancelBtn"              = "Annuleren";
+"CMReplaceCharacterAlertOkBtn"                  = "Vrienden wisselen";
+
+"CMCannotReplaceCharacterAlertOkBtn"            = "OK";
+
+"CMInviteYourFriendBtn"                         = "Je vrienden uitnodigen";
+"CMMessagesLabel"                               = "Berichten";
+
+"CMFriendStatus"                                = "Vriend";
+"CMX-FriendStatus"                              = "X-vriend";
+
+"CMLearnMoreAboutLabel"                         = "Kom meer te weten over %@";
+"CMLastMessageRecievedLabel"                    = "Laaste bericht ontvangen %@  %@";
+
+"CMSelectionCharacterHeadline"                  = "Laten we vrienden worden";
+"CMSelectionCharacterSubHeadline"               = "Word vrienden met je favoriete personage om exclusieve berichten en content te krijgen.";
+
+"CMCharacterProfilePageStatus"                  = "- VRIEND";
+"CMCharacterProfilePageFollowButton"            = "Word vrienden";
+"CMCharacterProfilePageRecommendButton"         = "Aanbevolen";
+
+// ----------- Feed1.5 ----------- //
+
+// Feed 1.5 Events
+//Feed1.5FacebookLikeButton
+"Feed1.5FacebookCommentButton"                  = "Reactie";
+//Feed1.5FacebookLikes
+//Feed1.5FacebookComments
+//Feed1.5FacebookComment
+//Feed1.5ConnectFacebookTwitter
+//Feed1.5ConnectFacebook
+//Feed1.5ConnectTwitter
+"Feed1.5SendPostButton"                         = "Plaatsen";
+"Feed1.5ConnectButton"                          = "Verbinden";
+"Feed1.5CreatePostButton"                       = "Schrijf een bericht";
+"Feed1.5CreatePostPlaceholderText"              = "Schrijf iets...";
+"Feed1.5ShareEvent"                             = "Ik kijk naar %@, wil je met me meekijken?";
+"Feed1.5Retweet"                                = "Retweet";
+"Feed1.5BackButtonTitle"                        = "Terug";
+
+// Feed 1.5 Twitter feed
+//Feed1.5NotLoggedInToTwitter
+//Feed1.5TwitterSorry
+//Feed1.5TwitterTweetFailed
+//Feed1.5Dismiss
+//Feed1.5EnableTweets
+//Feed1.5TwitterLoginFailed
+
+// ----------- Feed2.0 ----------- //
+
+"Feed2_DetailFacebookTitle"                     = "Plaatsen";
+"Feed2_CreatePostTitle"                         = "Schrijf een bericht";
+"Feed2_CreatePostBack"                          = "Annuleren";
+"Feed2_CreatePostSend"                          = "Plaatsen";
+"Feed2_CreateTweetSend"                         = "Tweet";
+"Feed2_ClickOnLinkEvent"                        = " Klik hier >> ";
+"Feed2_TakePhoto"                               = "Neem een foto";
+"Feed2_ChoosePhoto"                             = "Kies een foto";
+"Feed2_CancelPhoto"                             = "Annuleren";
+"Feed2_CreatePostPlaceholder"                   = "Waar denk je aan?";
+"Feed2_AlertOK"                                 = "OK";
+"Feed2_AlertTwitterSignInRequireTitle"          = "Aanmelden veriest:";
+"Feed2_AlertTwitterSignInRequireMessage"        = "Meld je aan om bij Twitter en machtig de app in de instellingen van het apparaat";
+"Feed2_AlertTwitterSendFailedTitle"             = "Fout:";
+"Feed2_AlertTwitterSendFailedMessage"           = "Kan tweet niet verzenden";
+"Feed2_AlertFacebookSendFailedTitle"            = "Fout:";
+"Feed2_AlertFacebookSendFailedMessage"          = "Kan niet plaatsen";
+"Feed2_AlertEmptyCommentNoticeTitle"            = "Melding";
+"Feed2_AlertEmptyCommentNoticeMessage"          = "Voeg tekst toe aan je reactie voordat je een reactie plaatst ";
+
+"Feed2_SendComment"                             = "Plaatsen";
+"Feed2_DetailedFacebookCounters"                = "%d vindt het leuk %d reacties";
+"Feed2_DetailedTwitterCounters"                 = "%d retweets";
+
+"Feed2_SignInContent"                           = "Voor meer content, log in bij";
+
+"Feed2_FilterAll"                               = "Alles";
+"Feed2_FilterBroadcaster"                       = "Activiteiten";
+"Feed2_NewStories"                              = "Nieuwe verhalen";
+
+"Feed2_WelcomeTitle"                            = "Welkom";
+"Feed2_WelcomeSignIn"                           = "Log in voor meer updates en content";
+"Feed2_WidgetTimeIsUp"                          = "Tijd is voorbij!";
+"Feed2_ShareEvent"                              = "Ik kijk naar %@, wil je met me meekijken?";
+"feed2_commentOnDetailView"                     = "Waar denk je aan?";
+"Feed2_back"                                    = "Terug";
+"Feed2_SaveImage"                               = "Afbeelding opslaan";
+"Feed2_ClickHere"                               = "Klik hier";
+
+// ----------- Time Strings ----------- //
+
+"Time_Second"                                   = "seconde";
+"Time_Seconds"                                  = "seconden";
+"Time_Minute"                                   = "minuut";
+"Time_Minutes"                                  = "minuten";
+"Time_Hour"                                     = "uur";
+"Time_Hours"                                    = "uren";
+"Time_Day"                                      = "dag";
+"Time_Days"                                     = "dagen";
+"Time_Week"                                     = "week";
+"Time_Weeks"                                    = "weken";
+"Time_Month"                                    = "maand";
+"Time_Months"                                   = "maanden";
+"Time_Year"                                     = "jaar";
+"Time_Years"                                    = "jaren";
+"Time_Decade"                                   = "decennium";
+"Time_Decades"                                  = "decennia";
+
+"Time_AgoDescription"                           = "%li %@ geleden";
+"Time_AgoDescriptionPlural"                     = "%li %@ geleden";
+
+// ----------- Civolution --------------//
+
+"Civolution_tapToSync"                          = "Tik om te synchroniseren";
+"Civolution_listening"                          = "Listening...";
+"Civolution_audioSyncEvent"                     = "Audiogesynchroniseerd evenement!";
+"Civolution_outOfsync"                          = "Loopt niet synchroom";
+"Civolution_explain"                            = "Zorg ervoor dat tv en de speakers aan staan. Je gaat bijna synchroniseren.";

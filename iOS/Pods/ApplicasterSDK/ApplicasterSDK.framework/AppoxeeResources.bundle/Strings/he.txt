@@ -1,0 +1,32 @@
+INBOX
+תיבת דואר
+
+MORE_APPS
+עוד אפליקציות
+
+FEEDBACK
+פידבק
+
+DELETE
+מחק
+
+RELEASE_TO_UPDATE
+עזוב כדי לעדכן.
+
+PULL_DOWN_TO_UPDATE
+משוך כדי לעדכן
+
+UPDATING_MESSAGES
+מעדכן הודעות
+
+LAST_UPDATED
+עודכן לאחרונה
+
+NO_MESSAGES
+אין הודעות
+
+NO_CONNECTION
+אין חיבוריות
+
+LOADING
+טוען

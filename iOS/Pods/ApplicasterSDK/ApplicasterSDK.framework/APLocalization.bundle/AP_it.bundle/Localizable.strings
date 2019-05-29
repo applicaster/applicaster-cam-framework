@@ -1,0 +1,114 @@
+
+//Common
+"CommonAlertOK"						=	"OK";
+"CommonDateFormat"					=	"dd/MM/yyyy";
+
+//PSTV - Interface
+
+"IFeatured"                         =   "In Primo Piano";
+"IChannels"                         =   "Canali";
+"IMyChannel"                        =   "Il mio canale";
+"IMore"                             =   "Altro";
+"IPSTVPicks"                        =   "Il meglio di PSTV";
+"ILatestEpisodes"                   =   "Ultimi Episodi";
+"INowPlaying"                       =   "Adesso in onda";
+"IEdit"                             =   "Modifica";
+"IDelete"                           =   "Cancella";
+"IPlayAll"                          =   "Riproduci tutti i video";
+"IDone"                             =   "Fatto";
+"IMyQueue"                          =   "I miei video";
+"IDownloads"                        =   "Scaricati";
+"IQueued"                           =   "In attesa";
+"IDownloading"                      =   "In download";
+"IShare"                            =   "Condividi";
+"IMostViewed"                       =   "I Più Visti";
+"IAllVideos"                        =   "Tutti i Video";
+"GENoItemsInQueue"                  =   "Non ci sono video";
+"GENoItemsInDownloads"              =   "Non ci sono articoli nei tuoi download";
+"SMSBody"                           =   "Scarica la nuova PokerStars TV app. È ideale per teste da poker come te! Potrai guardare i video dei tornei più importanti! Scaricala ora http://pstars.im/NOxgCf";
+"EmailBody2" = "Ho appena scaricato la nuova PokerStars TV app e penso che piacera' tanto anche a te!";
+"EmailBody3" = "Ti permette di vedere i video dei tornei di poker live e online più importanti oppure le singole mani giocate: tutti i filmati sono in alta qualita' e visibili direttamente sul tuo iPhone, iPad o iPod Touch!";
+"EmailBody4" = "Con tutti gli eventi più importanti - come ICOOP, SCOOP, EPT e PCA – direi che e' la video app fondamentale per teste da poker come noi che non ne hanno mai abbastanza di poker!";
+"EmailBody5" = "Clicca qui per scaricare adesso";
+"ToDownload" = "PokerStars TV!";
+
+//NO Audio Slides:
+
+"NANoAudioSlideText"                =   "Il video non può essere riprodotto a causa di una connessione a banda limitata o per motivi legati al segnale debole fornito dal suo internet provider";
+
+//General Error Messages
+
+"GENoContent"                       =   "Nessun contenuto da mostrare";
+"GECantLoadURL"                     =   "L'url non può essere caricato";
+"GENoItems"                         =   "Nessun video da mostrare";
+"GENoContentTryLater"               =   "Nessun contenuto attualmente disponibile, si prega di riprovare più tardi";
+"GENoItemsInChannel"                =   "Non ci sono video nel suo canale";
+
+//App rater
+
+"ARMessage"                         =   "Do you like this app? It only takes a minute to rate us! Thank you.";
+"ARNoThanks"                        =   "No, Thank You";
+"ARRate"                            =   "Rate";
+"ARRemindMeLater"                   =   "Remind Me Later";
+
+//Back From Background
+"BGResume"                          =   "Resume";
+"BGRestart"                         =   "Restart";
+
+//HIV = HQME Item View
+"HIVCancelButton"					=	"ANNULLA";
+"HIVDeleteButton"					=	"CANCELLA";
+"HIVDownloadButton"					=	"DOWNLOAD";
+"HIVDownloadFailureAlertTitle"		=	"Download non eseguito";
+"HIVDownloadFailureAlewrtMessage"	=	"Connessione Internet inesistente. Riprova più tardi";
+"HIVExpiresLabelFormat"				=	"Scade: %@";
+"HIVExpiredLabelFormat"				=	"Scaduto (%@)";
+"HIVDownloadFailedAlertTitle"       =   "Download Error";
+"HIVDownloadFailedAlertMessage"     =   "Riprova più tardi.";
+"HIVItemAvailableMessage"           =   "Disponibile nella Biblioteca";
+
+//MB = Menu Bar
+"MBNoConnectionAlertTitle"			=	"Notifica";
+"MBNoConnectionAlertMessage"		=	"Connessione Internet inesistente. Riprova più tardi";
+"MBOnlineButton"					=	"Online";
+"MBMyLibraryButton"					=	"Biblioteca";
+"MBDownloadButton"					=	"Download";
+"MBSettingsButton"					=	"Impostazioni";
+"MBSubscribeButton"					=	"Iscriviti";
+
+//SC = Settings Control
+"SCLanguageChangedAlertTitle"		=	"La lingua è stata cambiata.";
+"SCLanguageChangedAlertMessage"		=	"La lingua è stata cambiata.";
+"SCLanguageSegment"					=	"Lingua";
+"SCLanguageAccountSegment"			=	"Account";
+"SCMoreSegment"						=	"Altro";
+
+//AD = Application Delegate
+"ADMyLibraryEmptyMessage"			=	"La tua 'Biblioteca' è vuota. Per salvare i video sul tuo dispositivo, devi connettiti ad Internet e andare alla sezione 'Download'.";
+"ADNotSubscribedAlertTitle"			=	"Notice";
+"ADNotSubscribedAlertMessage"		=	"Per visualizzare questo contenuto devi registrarti.";
+
+//SP = Splash view
+"SPCommunicationFailureMessage"		=	"Connessione Internet inesistente. Riprova più tardi";
+
+//OV = Offline View
+"OVNoDownloadedContentAlertTitle"   =   "Notifica";
+"OVNoDownloadedContentAlertMessage" =   "La tua 'Biblioteca' è vuota. Salva i video sul tuo dispositivo dalla sezione 'Download'.";
+
+//Applicaster Framework
+"APMailNotConfigured"				=   "Impossibile inviare email. La funzione di invio email non è configurata per questo dispositivo.";
+"APCouldNotCompletePurchase"		=   "Impossibile completare l'acquisto.";
+"APPurchsesesDisabledForDevice"		=	"Gli Acquisti sono disabilitati per questo dispositivo";
+
+//SF - restore subscription
+"SFRestoreSubscription"             =   "Ripristina l'iscrizione";
+"SFRedeem Voucher" = "Riscatta il tuo voucher";
+
+//Application Rating
+"ARRate"                            =   "Giudizio";
+"ARNoThanks"                        =   "No, grazie";
+"ARRemindMeLater"                   =   "Ricordamelo più tardi";
+
+// Item expiration
+"IEYour item has expired" = "Il tuo articolo è scaduto";
+"IEIf you have a valid subscription please try again while connected to the internet"	= "Se hai un'iscrizione valida, prova nuovamente quando sarai connesso ad internet";

@@ -11,6 +11,7 @@ public enum CAMKeys: String {
 
     case passwordResetEnabled = "pwd_reset_required"
     case facebookLoginEnabled = "facebook_login_required"
+    case facebookImage = "facebook_login_image"
     case authFields = "auth_fields"
     case authFieldImage = "auth_field_image"
     case defaultAuthScreen = "default_auth_screen"

@@ -1,0 +1,63 @@
+//Common
+"CommonAlertOK"						=	"OK";
+"CommonDateFormat"					=	"dd/MM/yyyy";
+
+//HIV = HQME Item View
+"HIVCancelButton"					=	"CANCELAR";
+"HIVDeleteButton"					=	"EXCLUIR";
+"HIVDownloadButton"					=	"DOWNLOAD";
+"HIVDownloadFailureAlertTitle"		=	"Falha ao fazer download";
+"HIVDownloadFailureAlewrtMessage"	=	"Não há uma conexão com a internet . Tente novamente mais tarde";
+"HIVExpiresLabelFormat"				=	"Expiração: %@";
+"HIVExpiredLabelFormat"				=	"Expirado (%@)";
+"HIVDownloadFailedAlertTitle"       =   "Erro ao fazer download";
+"HIVDownloadFailedAlertMessage"     =   "Tente novamente mais tarde.";
+"HIVItemAvailableMessage"           =   "Disponível em 'Minha Biblioteca'";
+
+//MB = Menu Bar
+"MBNoConnectionAlertTitle"			=	"Aviso";
+"MBNoConnectionAlertMessage"		=	"Não há uma conexão com a internet . Tente novamente mais tarde";
+"MBOnlineButton"					=	"Online";
+"MBMyLibraryButton"					=	"Minha Biblioteca";
+"MBDownloadButton"					=	"Download";
+"MBSettingsButton"					=	"Configurações";
+"MBSubscribeButton"					=	"Inscrição";
+
+//SC = Settings Control
+"SCLanguageChangedAlertTitle"		=	"O idioma foi alterado.";
+"SCLanguageChangedAlertMessage"		=   "O idioma foi alterado.";
+"SCLanguageSegment"					=	"Idioma";
+"SCLanguageAccountSegment"			=	"Conta";
+"SCMoreSegment"						=	"Mais";
+
+//AD = Application Delegate
+"ADMyLibraryEmptyMessage"			=	"Minha Biblioteca' está vazia. Conecte-se à internet e acesse 'Download' para salvar vídeos no seu dispositivo.";
+"ADNotSubscribedAlertTitle"			=	"Aviso";
+"ADNotSubscribedAlertMessage"		=	"Você deve estar inscrito para visualizar este conteúdo.";
+
+//SP = Splash view
+"SPCommunicationFailureMessage"		=	"Não há uma conexão com a internet . Tente novamente mais tarde";
+
+//OV = Offline View
+"OVNoDownloadedContentAlertTitle"   =   "Aviso";
+"OVNoDownloadedContentAlertMessage" =   "Minha Biblioteca' está vazia. Salve vídeos no seu dispositivo usando 'Download'.";
+
+//Applicaster Framework
+"APMailNotConfigured"				=   "O envio de email não está configurado para este dispositivo. Não é possível enviar emails.";
+"APCouldNotCompletePurchase"		=   "Não foi possível concluir a compra.";
+"APPurchsesesDisabledForDevice"		=	"Compras desabilitadas para este dispositivo";
+
+//SF - restore subscription
+"SFRestoreSubscription"             =   "Restaurar Subscrição";
+"SFRedeem Voucher" = "Trocar Vale";
+
+//Application Rating
+"ARMessagePart1"                    =   "Gosta do";
+"ARMessagePart2"                    =   "? Demora apenas um minuto para nos avaliar! Obrigado.";
+"ARRate"                            =   "Avaliação";
+"ARNoThanks"                        =   "Não Obrigado";
+"ARRemindMeLater"                   =   "Lembrar-me mais tarde";
+
+// Item expiration
+"IEYour item has expired" = "O seu item expirou";
+"IEIf you have a valid subscription please try again while connected to the internet"	= "Se tem uma subscrição válida, por favor tente novamente enquanto estiver ligado à Internet";

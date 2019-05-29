@@ -1,0 +1,228 @@
+//Common
+"CommonAlertOK"						=	"אישור";
+"CommonDateFormat"					=	"dd/MM/yyyy";
+"APError"							=   "שגיאה";
+
+//App rater
+"ARMessagePart1"                    =   "אהבתם את";
+"ARMessagePart2"                    =   "? דרגו אותנו עכשיו.";
+"ARNoThanks"                        =   "לא תודה";
+"ARRate"                            =   "לדירוג";
+"ARRemindMeLater"                   =   "הזכר לי בהמשך";
+
+//Back From Background
+"BGResume"                          =   "המשך מנק' צפייה אחרונה";
+"BGRestart"                         =   "התחל מחדש";
+"BGClose"                           =   "חזור";
+
+"BGCaptureResume"					=	"המשך מנק' צפייה אחרונה";
+"BGCaptureRestart"					=	"נגן שוב";
+"BGCaptureShare"					=	"שתף עם חבריך";
+
+"APCaptureReshareWithYourFriends"   =   "שתף את הקטע עם חבריך";
+"APCaptureShareWithYourFriends"     =   "שתף את הקטע עם חבריך";
+"CaptureMomentSubject"              =   "כנסו לראות קטע מגניב:";
+
+// Store kit
+"SKPurchaseFailed"					= "הרכישה נכשלה";
+"SKRestorePreviousPurchases"		= "האם לחבר מנוי קיים?";
+"SKRestoreButtonYes"				= "אישור";
+"SKRestoreButtonNo"					= "ביטול";
+
+// Player
+"PLLoading"                         = "טוען";
+"PLAudioOnlyMessage"                = "לא ניתן להציג תמונה עקב מהירות חיבור איטית או בעיית קליטה.";
+"PLLoadingFailed"                   = "בעיה בטעינה, אנא נסה שנית מאוחר יותר";
+
+"LNItemAvilableLocally"				= "הקטע שבחרת להוריד זמין לצפייה";
+"LNOpenAppToContinueDownloading"	= "שימו לב, עליכם לפתוח את %@ כדי להמשיך להוריד את הקטע.";
+"LNOpenAppToContinueDownloadingPart1"	= "שימו לב, עליכם לפתוח את";
+"LNOpenAppToContinueDownloadingPart2"	= "כדי להמשיך להוריד את הקטע.";
+"APPlayerScrubbingFast"             = "מעבר במהירות גבוהה/nהחלק את האצבע כלפי מטה לקביעת מהירות המעבר";
+"APPlayerScrubbingMedium"           = "מעבר בחצי מהירות/nהחלק את האצבע כלפי מטה לקביעת מהירות המעבר";
+"APPlayerScrubbingSlow"             = "מעבר ברבע מהירות/nהחלק את האצבע כלפי מטה לקביעת מהירות המעבר";
+"APPlayerScrubbingFine"             = "מעבר עדין/nהחלק את האצבע כלפי מטה לקביעת מהירות המעבר";
+
+"APUGCActionSheetCancelButtonTitle" = "בטל";
+
+// Support mail
+"APSupportProblemDescription"	= "תיאור הבעיה";
+"APSupportDoNotDelete"			= "נא לא למחוק מידע זה";
+
+"SPCommunicationFailureMessage"     = "בעיה בטעינת האפליקציה, אנא נסה שנית מאוחר יותר.";
+
+// UGC
+"APUGCSendEmailTitle"				= "שלח מייל";
+"APUGCTakePhotoOrVideo"				= "צלם תמונה או וידאו";
+"APUGCTakePhoto"					= "צלם תמונה";
+"APUGCTakeVideo"					= "צלם וידאו";
+"APUGCSelectFromSavedPhotosTitle"	= "בחר מהסיפריה";
+"APUGCActionSheetCancelButtonTitle"	= "בטל";
+
+// Chat
+"APFacebookInstructionIntroduceChatButton"      = "הכירו את כפתור הצ'אט המאפשר לכם לדבר עם חברים מהפייסבוק בזמן הצפייה";
+"APFacebookInstructionWhatToDo"                 = "מה עושים?";
+"APFacebookInstructionAuthorizeFacebook"        = "אשרו התחברות לפייסבוק";
+"APFacebookInstructionInviteFriends"            = "הזמינו חברים לצפות אתכם";
+"APFacebookInstructionConnectDisclaimerLabel"   = "האישור בפייסבוק הוא לצורכי הפעלת הצ'אט בלבד";
+"APFacebookInstructionOKButton"                 = "OK";
+"APFacebookInstructionCancelButton"             = "Cancel";
+
+// Invite
+"InviteFriendsToWatchTheShow" = "";
+
+"ChatIsON"                                      = "Chat is ON";
+"ChatIsOFF"                                     = "Chat is OFF";
+
+//CM
+"CMShareBtn"                                    = "שתפו";
+"CMVideoSaved"                                  = "וידאו נשמר";
+"CMImageSaved"                                  = "תמונה נשמרה";
+"CMYouCanFindItInYourPhotoGallery"              = "תוכלו למצוא את הקובץ בגלרית התמונות";
+
+"CMSharingLinkLabel"                            = "הצג";
+
+"CMRecommandMessage1"                           = "אני חבר של %@. תרצו להיות חברים של %@ גם";
+"CMRecommandMessage2"                           = "תראו מה קבלתי מ%@. הצטרפו ל%@ וגם אתם תוכלו להיות חברים של אחת מדמויות התוכנית";
+"CMRecommandMessage3"                           = "אתה יודע שאני ו%@ חברים?";
+"CMRecommandComment"                            = "בחרו את החבר המועדף עליכם";
+
+"CMSharingComment"                              = "תראו מה קבלתי מ%@. הצטרפו ל%@ וגם אתם תוכלו להיות חברים של אחת מדמויות התוכנית.";
+
+"CMConnectToCharacterAlertMessage"              = "האם תרצו להיות חברים של %@?";
+"CMReplaceCharacterAlertMessage"                = "האם תרצו להיות חברים של %@ במקום %@? שימו לב - חבריכם לא יבטחו בכם אם תחליפו חברים לעיתים קרובות מדי. באפשרותכם להחליף חבר עוד %d פעמים עד לסוף העונה";
+
+"CMReplaceCharacterAlertMessageForLastSubstitution" = "האם תרצו להיות חברים של %@ במקום %@? שימו לב - חבריכם לא יבטחו בכם אם תחליפו חברים לעיתים קרובות מדי. באפשרותכם להחליף חבר עוד %d פעמים עד לסוף העונה";
+
+"CMReplaceCharacterAlertMessageForUnlimitedNumberOfSubstitution" = "האם תרצו להיות חברים של %@ במקום %@? שימו לב - חבריכם לא יבטחו בכם אם תחליפו חברים לעיתים קרובות מדי. באפשרותכם להחליף חבר עוד %d פעמים עד לסוף העונה";
+
+"CMCannotReplaceCharacterAlertMessage"          = "מצטערים, הגעתם לגבול החלפת החברים לעונה";
+
+"CMConnectToCharacterAlertCancelBtn"            = "לא";
+"CMConnectToCharacterAlertOkBtn"                = "כן";
+
+"CMReplaceCharacterAlertCancelBtn"              = "בטל";
+"CMReplaceCharacterAlertOkBtn"                  = "החלפת חברים";
+
+"CMCannotReplaceCharacterAlertOkBtn"            = "אוקיי";
+
+"CMInviteYourFriendBtn"                         = "הזמינו את חבריכם";
+"CMMessagesLabel"                               = "הודעות";
+
+"CMFriendStatus"                                = "חברים";
+"CMX-FriendStatus"                              = "חברים לשעבר";
+
+"CMLearnMoreAboutLabel"                         = "למדו עוד על %@";
+"CMLastMessageRecievedLabel"                    = "הודעה אחרונה התקבלה ב- %@ %@";
+
+"CMSelectionCharacterHeadline"                  = "בואו נהיה חברים";
+"CMSelectionCharacterSubHeadline"               = "בחרו חבר או חברה ומהיום תדעו מה שרק חברים יכולים לדעת";
+
+"CMCharacterProfilePageStatus"                  = "- חברים";
+"CMCharacterProfilePageFollowButton"            = "התחברו";
+"CMCharacterProfilePageRecommendButton"         = "המליצו";
+
+// ----------- Feed1.5 ----------- //
+
+// Feed 1.5 Events
+"Feed1.5FacebookLikeButton"						= "אהבתי";
+"Feed1.5FacebookCommentButton"                  = "הגיבו";
+"Feed1.5FacebookLikes"							= "אהבו";
+"Feed1.5FacebookComments"						= "תגובות";
+"Feed1.5FacebookComment"						= "הגיבו";
+"Feed1.5ConnectFacebookTwitter"					= "התחברו לפייסבוק וטוויטר כדי לקבל את העדכונים הכי חמים";
+"Feed1.5ConnectFacebook"						= "התחברו לפייסבוק כדי לקבל את העדכונים הכי חמים";
+"Feed1.5ConnectTwitter"							= "התחברו לטוויטר כדי לקבל את העדכונים הכי חמים";
+"Feed1.5SendPostButton"                         = "פרסם";
+"Feed1.5ConnectButton"                          = "התחברו";
+"Feed1.5CreatePostButton"                       = "פרסמו";
+"Feed1.5CreatePostPlaceholderText"              = "כיתבו משהו...";
+"Feed1.5ShareEvent"                             = "אני צופה ב-%@, הצטרפו אליי";
+"Feed1.5Retweet"                                = "Retweet";
+"Feed1.5BackButtonTitle"                        = "חזור";
+
+// Feed 1.5 Twitter feed
+"Feed1.5NotLoggedInToTwitter"					= "לא ניתן לצייץ טוויטים כעת, יש להוסיף חשבון טוויטר בהגדרות המכשיר";
+"Feed1.5TwitterSorry"							= "סליחה";
+"Feed1.5TwitterTweetFailed"						= "פרסום הציוץ נכשל";
+"Feed1.5Dismiss"								= "בטל";
+"Feed1.5EnableTweets"							= "תוכלו לאפשר טוויטים לאפליקציה זו בעמוד ההגדרות של טוויטר";
+"Feed1.5TwitterLoginFailed"					    = "החיבור לטוויטר נכשל";
+
+// ----------- Feed2.0 ----------- //
+
+"Feed2_CreatePostTitle"                         = "עריכת פוסט";
+"Feed2_CreatePostBack"                          = "בטל";
+"Feed2_CreatePostSend"                          = "פרסם";
+"Feed2_CreateTweetSend"                         = "צייץ";
+"Feed2_ClickOnLinkEvent"                        = " לחץ כאן >> ";
+"Feed2_CreatePostPlaceholder"                   = "כתבו משהו...";
+"Feed2_TakePhoto"                               = "צלם תמונה";
+"Feed2_ChoosePhoto"                             = "בחר מהאלבום";
+"Feed2_CancelPhoto"                             = "בטל";
+"Feed2_AlertOK"                                 = "OK";
+"Feed2_AlertTwitterSignInRequireTitle"          = "לא מחובר";
+"Feed2_AlertTwitterSignInRequireMessage"        = "התחברו לטוויטר כדי לקבל את העדכונים הכי חמים";
+"Feed2_AlertTwitterSendFailedTitle"             = "שגיאה";
+"Feed2_AlertTwitterSendFailedMessage"           = "שליחת הציוץ נכשלה";
+"Feed2_AlertFacebookSendFailedTitle"            = "שגיאה";
+"Feed2_AlertFacebookSendFailedMessage"          = "שליחת הפוסט נכשלה";
+"Feed2_AlertEmptyCommentNoticeTitle"            = "הודעה";
+"Feed2_AlertEmptyCommentNoticeMessage"          = "אין אפשרות לשלוח הודעה ריקה";
+
+"Feed2_SendComment"                             = "פרסם";
+"Feed2_DetailedFacebookCounters"                = "אהבו %d תגובות %d";
+"Feed2_DetailedTwitterCounters"                 = "ריטוויטים %d";
+
+"Feed2_SignInContent"                           = "התחברו כדי לקבל עוד תוכן";
+"feed2_commentOnDetailView"                     = "מה עולה בדעתך?";
+
+"Feed2_FilterAll"                               = "הכל";
+"Feed2_FilterBroadcaster"                       = "פעילות";
+"Feed2_NewStories"                              = "סיפורים חדשים";
+
+"Feed2_WelcomeTitle"                            = "ברוכים הבאים";
+"Feed2_WelcomeSignIn"                           = "התחברו לפייסבוק ולטוויטר כדי לקבל את העדכונים הכי חמים";
+"Feed2_WidgetTimeIsUp"                          = "תם הזמן!";
+"Feed2_ShareEvent"                              = "אני צופה ב-%@, הצטרפו אליי";
+"Feed2_ShareEventFacebook"                      = "אני צופה ב-%@, הצטרפו אליי";
+"Feed2_ShareEventTwitter"                       = "אני צופה ב-%@, הצטרפו אליי";
+"Feed2_ShareEventMail"                          = "אני צופה ב-%@, הצטרפו אליי";
+"Feed2_ShareEventSMS"                           = "אני צופה ב-%@, הצטרפו אליי";
+"Feed2_ShareEventWhatsApp"                      = "אני צופה ב-%@, הצטרפו אליי";
+"Feed2_back"                                    = "חזרה";
+"Feed2_SaveImage"                               = "שמור תמונה";
+"Feed2_ClickHere"                               = "לחץ כאן";
+
+// ----------- Time Strings ----------- //
+
+"Time_Second"                                   = "שנייה";
+"Time_Seconds"                                  = "שניות";
+"Time_Minute"                                   = "דקה";
+"Time_Minutes"                                  = "דקות";
+"Time_Hour"                                     = "שעה";
+"Time_Hours"                                    = "שעות";
+"Time_Day"                                      = "יום";
+"Time_Days"                                     = "ימים";
+"Time_Week"                                     = "שבוע";
+"Time_Weeks"                                    = "שבועות";
+"Time_Month"                                    = "חודש";
+"Time_Months"                                   = "חודשים";
+"Time_Year"                                     = "שנה";
+"Time_Years"                                    = "שנים";
+"Time_Decade"                                   = "עשור";
+"Time_Decades"                                  = "עשורים";
+
+"Time_AgoDescription"                           = "לפני %li %@";
+"Time_AgoDescriptionPlural"                     = "לפני %li %@";
+
+// -----------
+
+// Notification for program
+
+"APProgramLocalNoficiationAlertBody" = "התכנית הבאה עומדת להתחיל: ";
+
+//Sharing
+"SharingTwitterMessageText"                      = "אני צופה ב-";
+"MailSharingMessage1Text"                        = "אני משתף איתך";
+"MailSharingMessage2Text"                        = "לחץ על הקישור כדי לצפות";

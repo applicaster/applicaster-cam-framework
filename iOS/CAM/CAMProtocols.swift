@@ -23,6 +23,8 @@ public protocol CAMDelegate: AnyObject {
     func getPluginConfig() -> [String: String]
     func isUserLogged() -> Bool
     func isEntitlementsValid() -> Bool
+    func facebookLogin(userData: (email: String, userId: String), completion: @escaping (CAMResult) -> Void)
+    func facebookSignUp(userData: (email: String, userId: String), completion: @escaping (CAMResult) -> Void)
     func login(authData: [(key: String, value: String?)], completion: @escaping (CAMResult) -> Void)
     func signUp(authData: [(key: String, value: String?)], completion: @escaping (CAMResult) -> Void)
     func resetPassword(data: [(key: String, value: String?)], completion: @escaping (CAMResult) -> Void)

@@ -30,6 +30,7 @@ class SignUpViewController: UIViewController {
     @IBOutlet var socialNetworksContainer: UIView!
     @IBOutlet var alternateLabel: UILabel!
     @IBOutlet var socialNetworksLabel: UILabel!
+    @IBOutlet var stackView: UIStackView!
     
     @IBOutlet var loginContainer: UIView!
     @IBOutlet var loginButton: UIButton!
@@ -94,7 +95,23 @@ class SignUpViewController: UIViewController {
         socialNetworksContainer.isHidden = !(configDictionary[CAMKeys.facebookLoginEnabled.rawValue] ?? "false").bool
         authFieldsTable.backgroundView = UIView()
         authFieldsTable.allowsSelection = false
+        setupSocialNetworksContainer()
         configureElements()
+    }
+    
+    func setupSocialNetworksContainer() {
+        let facebookButton = UIButton()
+        facebookButton.setZappStyle(withIconAsset: CAMKeys.facebookImage)
+        facebookButton.translatesAutoresizingMaskIntoConstraints = false
+        facebookButton.heightAnchor.constraint(equalToConstant: 36).isActive = true
+        facebookButton.widthAnchor.constraint(equalToConstant: 36).isActive = true
+        facebookButton.addTarget(self, action: #selector(facebookSignUp), for: .touchUpInside)
+        
+        stackView.axis = .horizontal
+        stackView.distribution = .equalCentering
+        stackView.alignment = .center
+        stackView.spacing = 20
+        stackView.addArrangedSubview(facebookButton)
     }
     
     func setupConstraints() {
@@ -185,6 +202,10 @@ class SignUpViewController: UIViewController {
     
     @IBAction func showLoginScreen(_ sender: Any) {
         presenter?.showLoginScreen()
+    }
+    
+    @objc func facebookSignUp() {
+        presenter?.showFacebookAuthScreen()
     }
     
     deinit {

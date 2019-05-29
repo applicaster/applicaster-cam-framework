@@ -1,0 +1,63 @@
+//Common
+"CommonAlertOK"						=	"确定";
+"CommonDateFormat"					=	"dd/MM/yyyy";
+
+//HIV = HQME Item View
+"HIVCancelButton"					=	"取消";
+"HIVDeleteButton"					=	"删除";
+"HIVDownloadButton"					=	"下载";
+"HIVDownloadFailureAlertTitle"		=	"下载错误";
+"HIVDownloadFailureAlewrtMessage"	=	"无网络连接。请稍后再试";
+"HIVExpiresLabelFormat"				=	"到期: %@";
+"HIVExpiredLabelFormat"				=	"已过期 (%@)";
+"HIVDownloadFailedAlertTitle"       =   "下载错误";
+"HIVDownloadFailedAlertMessage"     =   "请稍后再试。";
+"HIVItemAvailableMessage"           =   "在“我的资料库”获取";
+
+//MB = Menu Bar
+"MBNoConnectionAlertTitle"			=	"通知";
+"MBNoConnectionAlertMessage"		=	"无网络连接。请稍后再试";
+"MBOnlineButton"					=	"在线";
+"MBMyLibraryButton"					=	"我的资料库";
+"MBDownloadButton"					=	"下载";
+"MBSettingsButton"					=	"设置";
+"MBSubscribeButton"					=	"订购";
+
+//SC = Settings Control
+"SCLanguageChangedAlertTitle"		=	"语言已改变。";
+"SCLanguageChangedAlertMessage"		=	"语言已改变。";
+"SCLanguageSegment"					=	"语言";
+"SCLanguageAccountSegment"			=	"帐户";
+"SCMoreSegment"						=	"更多";
+
+//AD = Application Delegate
+"ADMyLibraryEmptyMessage"			=	"“我的资料库”是空的。请连接到网络，然后访问“下载”页面，将视频保存到您的设备。";
+"ADNotSubscribedAlertTitle"			=	"通知";
+"ADNotSubscribedAlertMessage"		=	"您必须订购才能查看此内容。";
+
+//SP = Splash view
+"SPCommunicationFailureMessage"		=	"无网络连接。请稍后再试";
+
+//OV = Offline View
+"OVNoDownloadedContentAlertTitle"   =   "通知";
+"OVNoDownloadedContentAlertMessage" =   "“我的资料库”是空的。请通过“下载”页面将视频保存到您的设备。";
+
+//Applicaster Framework
+"APMailNotConfigured"				=   "“设备未配置电子邮件设置。无法发送电子邮件。";
+"APCouldNotCompletePurchase"		=   "无法完成购买。";
+"APPurchsesesDisabledForDevice"		=	"本设备无法使用购买功能";
+
+//SF - restore subscription
+"SFRestoreSubscription"             =   "恢复订阅";
+"SFRedeem Voucher" = "兑换兑奖券";
+
+//Application Rating
+"ARMessagePart1"                    =   "您喜歡";
+"ARMessagePart2"                    =   "嗎？給我們評分只需要一分鐘！謝謝";
+"ARRate"                            =   "评价";
+"ARNoThanks"                        =   "不，谢谢";
+"ARRemindMeLater"                   =   "稍后提醒我";
+
+// Item expiration
+"IEYour item has expired" = "您的项目已过期";
+"IEIf you have a valid subscription please try again while connected to the internet"	= "如果您有一个有效订购，当连接到互联网时，请再试一次。";

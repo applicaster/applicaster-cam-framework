@@ -30,6 +30,7 @@ class LoginViewController: UIViewController {
     @IBOutlet var socialNetworksContainer: UIView!
     @IBOutlet var alternateLabel: UILabel!
     @IBOutlet var socialNetworksLabel: UILabel!
+    @IBOutlet var stackView: UIStackView!
     
     @IBOutlet var signUpContainer: UIView!
     @IBOutlet var signUpButton: UIButton!
@@ -96,6 +97,7 @@ class LoginViewController: UIViewController {
         authFieldsTable.backgroundView = UIView()
         authFieldsTable.allowsSelection = false
         setupResetPasswordButton()
+        setupSocialNetworksContainer()
         configureElements()
     }
     
@@ -108,6 +110,21 @@ class LoginViewController: UIViewController {
             }
         }
         resetPasswordButton.isHidden = true
+    }
+    
+    func setupSocialNetworksContainer() {
+        let facebookButton = UIButton()
+        facebookButton.setZappStyle(withIconAsset: CAMKeys.facebookImage)
+        facebookButton.translatesAutoresizingMaskIntoConstraints = false
+        facebookButton.heightAnchor.constraint(equalToConstant: 36).isActive = true
+        facebookButton.widthAnchor.constraint(equalToConstant: 36).isActive = true
+        facebookButton.addTarget(self, action: #selector(facebookSignUp), for: .touchUpInside)
+       
+        stackView.axis = .horizontal
+        stackView.distribution = .equalCentering
+        stackView.alignment = .center
+        stackView.spacing = 20
+        stackView.addArrangedSubview(facebookButton)
     }
     
     func configureElements() {
@@ -206,6 +223,10 @@ class LoginViewController: UIViewController {
             result.append((key: (obj.key ?? ""), value: obj.text))
         }
         presenter?.login(data: result)
+    }
+    
+    @objc func facebookSignUp() {
+        presenter?.showFacebookAuthScreen()
     }
     
     deinit {

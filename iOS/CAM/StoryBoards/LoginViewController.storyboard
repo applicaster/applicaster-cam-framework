@@ -162,13 +162,13 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZcR-FD-3dY">
-                                        <rect key="frame" x="116.5" y="4" width="17" height="14.5"/>
+                                        <rect key="frame" x="116.5" y="4" width="17" height="15"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="deviceRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log In With Social Networks" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2hZ-yk-KYh">
-                                        <rect key="frame" x="0.0" y="26.5" width="250" height="17"/>
+                                        <rect key="frame" x="0.0" y="27" width="250" height="17"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="17" id="qkD-BQ-PBx"/>
@@ -185,17 +185,26 @@
                                             <constraint firstAttribute="height" constant="1" id="m0m-Ys-cSS"/>
                                         </constraints>
                                     </view>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kBn-16-WPa">
+                                        <rect key="frame" x="107" y="59" width="36" height="34"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="36" id="mJk-ue-hQl"/>
+                                        </constraints>
+                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="ZcR-FD-3dY" firstAttribute="top" secondItem="rPw-cz-xFd" secondAttribute="top" constant="4" id="1D9-rP-hWu"/>
+                                    <constraint firstAttribute="bottom" secondItem="kBn-16-WPa" secondAttribute="bottom" constant="7" id="1S4-bX-Ett"/>
                                     <constraint firstAttribute="height" constant="100" id="GlW-db-Cp7"/>
                                     <constraint firstItem="vSH-Qy-bXo" firstAttribute="trailing" secondItem="ZcR-FD-3dY" secondAttribute="leading" constant="-10" id="JhB-no-PqL"/>
                                     <constraint firstItem="2hZ-yk-KYh" firstAttribute="top" secondItem="ZcR-FD-3dY" secondAttribute="bottom" constant="8" id="UUx-MM-EDC"/>
                                     <constraint firstItem="ZcR-FD-3dY" firstAttribute="centerX" secondItem="rPw-cz-xFd" secondAttribute="centerX" id="ZOC-8m-nOv"/>
                                     <constraint firstItem="zcJ-es-40T" firstAttribute="leading" secondItem="ZcR-FD-3dY" secondAttribute="trailing" constant="10" id="bsb-tH-XOG"/>
                                     <constraint firstItem="2hZ-yk-KYh" firstAttribute="leading" secondItem="rPw-cz-xFd" secondAttribute="leading" id="djb-zP-H6a"/>
+                                    <constraint firstItem="kBn-16-WPa" firstAttribute="centerX" secondItem="rPw-cz-xFd" secondAttribute="centerX" id="nLy-kJ-qQv"/>
                                     <constraint firstAttribute="trailing" secondItem="2hZ-yk-KYh" secondAttribute="trailing" id="qJo-gY-o6d"/>
+                                    <constraint firstItem="kBn-16-WPa" firstAttribute="top" secondItem="2hZ-yk-KYh" secondAttribute="bottom" constant="15" id="u2g-xj-DcW"/>
                                     <constraint firstItem="vSH-Qy-bXo" firstAttribute="top" secondItem="rPw-cz-xFd" secondAttribute="top" constant="10" id="wB2-68-h2m"/>
                                     <constraint firstItem="zcJ-es-40T" firstAttribute="top" secondItem="rPw-cz-xFd" secondAttribute="top" constant="10" id="z30-9X-xRQ"/>
                                 </constraints>
@@ -306,6 +315,7 @@
                         <outlet property="socialNetworksContainer" destination="rPw-cz-xFd" id="ack-an-19a"/>
                         <outlet property="socialNetworksContainerTopConstraint" destination="Qdh-Hz-xjw" id="E93-xJ-F7m"/>
                         <outlet property="socialNetworksLabel" destination="2hZ-yk-KYh" id="127-ig-Tnk"/>
+                        <outlet property="stackView" destination="kBn-16-WPa" id="HGo-LA-mTx"/>
                         <outlet property="titleLabel" destination="yqR-eQ-1AS" id="FQ8-BA-uNY"/>
                     </connections>
                 </viewController>
@@ -316,7 +326,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="331.62518301610538" y="-142.96875"/>
+            <point key="canvasLocation" x="330" y="-143.66197183098592"/>
         </scene>
     </scenes>
 </document>

@@ -13,6 +13,14 @@ import CAM
 // swiftlint:disable all
 
 class ViewController: UIViewController, CAMDelegate {
+    func facebookSignUp(userData: (email: String, userId: String), completion: @escaping (CAMResult) -> Void) {
+        completion(.success)
+    }
+    
+    func facebookLogin(userData: (email: String, userId: String), completion: @escaping (CAMResult) -> Void) {
+        completion(.failure(description: "Test"))
+    }
+    
     func resetPassword(data: [(key: String, value: String?)], completion: @escaping (CAMResult) -> Void) {
         completion(.success)
     }

@@ -1,0 +1,73 @@
+
+//Common
+"CommonAlertOK"						=	"OK";
+"CommonDateFormat"					=	"dd/MM/yyyy";
+
+//HIV = HQME Item View
+"HIVCancelButton"					=	"CANCEL";
+"HIVDeleteButton"					=	"DELETE";
+"HIVDownloadButton"					=	"DOWNLOAD";
+"HIVDownloadFailureAlertTitle"		=	"Download Failure";
+"HIVDownloadFailureAlewrtMessage"	=	"There is no internet connection . Please try again later";
+"HIVExpiresLabelFormat"				=	"EXPIRES: %@";
+"HIVExpiredLabelFormat"				=	"EXPIRED (%@)";
+"HIVDownloadFailedAlertTitle"       =   "Download Error";
+"HIVDownloadFailedAlertMessage"     =   "Please try again later.";
+"HIVItemAvailableMessage"           =   "Available in 'My Library'";
+
+//MB = Menu Bar
+"MBNoConnectionAlertTitle"			=	"Notice";
+"MBNoConnectionAlertMessage"		=	"There is no internet connection . Please try again later";
+"MBOnlineButton"					=	"Online";
+"MBMyLibraryButton"					=	"My Library";
+"MBDownloadButton"					=	"Download";
+"MBSettingsButton"					=	"Settings";
+"MBSubscribeButton"					=	"Subscribe";
+
+//SC = Settings Control
+"SCLanguageChangedAlertTitle"		=	"Language has changed.";
+"SCLanguageChangedAlertMessage"		=	"Loading the selected language.";
+"SCLanguageSegment"					=	"Language";
+"SCLanguageAccountSegment"			=	"Account";
+"SCMoreSegment"						=	"More";
+
+//AD = Application Delegate
+"ADMyLibraryEmptyMessage"			=	"'My Library' is empty. Please connect to the internet and go to 'Download' to save videos to your device.";
+"ADNotSubscribedAlertTitle"			=	"Notice";
+"ADNotSubscribedAlertMessage"		=	"You must be subscribed to view this content.";
+
+//SP = Splash view
+"SPCommunicationFailureMessage"		=	"There is no internet connection . Please try again later";
+
+//OV = Offline View
+"OVNoDownloadedContentAlertTitle"   =   "Notice";
+"OVNoDownloadedContentAlertMessage" =   "'My Library' is empty. Please save videos to your device via 'Download'.";
+
+//Applicaster Framework
+"APMailNotConfigured"				=   "Email sending is not configured for this device. Cannot send mail.";
+"APSMSNotConfigure"                 =   "SMS sending is not configured for this device. Cannot send SMS.";
+"APCouldNotCompletePurchase"		=   "Could not compelete purchase.";
+"APPurchsesesDisabledForDevice"		=	"Purchases are disabled for this device";
+
+//SF - restore subscription
+"SFRestoreSubscription"             =   "Restore Subscription";
+"SFRedeem Voucher" = "Redeem Voucher";
+
+//Application Rating
+"ARRate"                            =   "Rate";
+"ARNoThanks"                        =   "No Thanks";
+"ARRemindMeLater"                   =   "Remind Me Later";
+
+// Item expiration
+"IEYour item has expired" = "Your item has expired";
+"IEIf you have a valid subscription please try again while connected to the internet"	= "If you have a valid subscription please try again while connected to the internet";
+
+// Store kit
+"SKPurchaseFailed"					= "Purchase Failed";
+"SKRestorePreviousPurchases"		= "Would you like to restore previous purchases?";
+"SKRestoreButtonYes"				= "Restore";
+"SKRestoreButtonNo"					= "No"
+
+// Support mail
+"APSupportProblemDescription"	= "Problem description";
+"APSupportDoNotDelete"			= "Please don't remove the following";
