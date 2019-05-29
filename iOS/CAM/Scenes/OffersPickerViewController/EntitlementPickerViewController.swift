@@ -77,6 +77,10 @@ class EntitlementPickerViewController: UIViewController {
         presenter?.close()
     }
     
+    @IBAction func restore(_ sender: Any) {
+        presenter?.restore()
+    }
+    
     public func showOffers(_ offers: [OfferViewModel]) {
         self.offerViewModels = offers
         self.entitlementCollectionView.reloadData()

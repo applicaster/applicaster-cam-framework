@@ -31,6 +31,20 @@ class EntitlementPickerPresenter {
        coordinatorDelegate?.finishBillingFlow(isUserHasAccess: false)
     }
     
+    func restore() {
+        BillingHelper.sharedInstance.restore { (result) in
+            switch result {
+            case .success(let response):
+                self.camDelegate?.itemsRestored(items: response)
+                if self.camDelegate?.isEntitlementsValid() == true {
+                    self.showConfirmationScreen()
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
     // MARK: - Private methods
     
     private func showOffers() {
