@@ -27,7 +27,7 @@ public protocol CAMDelegate: AnyObject {
     func signUp(authData: [(key: String, value: String?)], completion: @escaping (CAMResult) -> Void)
     func resetPassword(data: [(key: String, value: String?)], completion: @escaping (CAMResult) -> Void)
     func itemPurchased(item: SKProduct)
-    func itemsRestored(items: [SKProduct])
+    func itemsRestored(items: [SKPaymentTransaction])
     func availableProducts() -> [Product]
 }
 

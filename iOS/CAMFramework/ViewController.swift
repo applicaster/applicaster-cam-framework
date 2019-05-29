@@ -60,7 +60,7 @@ class ViewController: UIViewController, CAMDelegate {
         
     }
     
-    func itemsRestored(items: [SKProduct]) {
+    func itemsRestored(items: [SKPaymentTransaction]) {
         
     }
     
