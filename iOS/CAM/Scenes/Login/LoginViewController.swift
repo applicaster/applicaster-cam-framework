@@ -114,14 +114,14 @@ class LoginViewController: UIViewController {
     
     func setupSocialNetworksContainer() {
         let facebookButton = UIButton()
-        facebookButton.frame = CGRect(x: <#T##CGFloat#>, y: <#T##CGFloat#>, width: <#T##CGFloat#>, height: <#T##CGFloat#>)
         facebookButton.setZappStyle(withIconAsset: CAMKeys.facebookImage)
         facebookButton.translatesAutoresizingMaskIntoConstraints = false
         facebookButton.heightAnchor.constraint(equalToConstant: 36).isActive = true
         facebookButton.widthAnchor.constraint(equalToConstant: 36).isActive = true
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+        facebookButton.addTarget(self, action: #selector(facebookSignUp), for: .touchUpInside)
+       
         stackView.axis = .horizontal
-        stackView.distribution = .equalSpacing
+        stackView.distribution = .equalCentering
         stackView.alignment = .center
         stackView.spacing = 20
         stackView.addArrangedSubview(facebookButton)
@@ -223,6 +223,10 @@ class LoginViewController: UIViewController {
             result.append((key: (obj.key ?? ""), value: obj.text))
         }
         presenter?.login(data: result)
+    }
+    
+    @objc func facebookSignUp() {
+        presenter?.showFacebookAuthScreen()
     }
     
     deinit {

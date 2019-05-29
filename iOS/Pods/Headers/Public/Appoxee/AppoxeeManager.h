@@ -1,0 +1,1 @@
+../../../Appoxee/AppoxeeSDK_3.2.7/AppoxeeManager.h

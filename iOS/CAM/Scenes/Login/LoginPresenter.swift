@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import ApplicasterSDK
 
 protocol LoginViewProtocol: AnyObject {
     func showError(description: String?)
@@ -61,6 +62,48 @@ class LoginPresenter {
                 self.coordinatorDelegate?.finishAuthorizationFlow(isUserLogged: true)
             case .failure(let description):
                 self.view?.showLoadingScreen(false)
+                self.view?.showError(description: description)
+            }
+        })
+    }
+    
+    func showFacebookAuthScreen() {
+        view?.showLoadingScreen(true)
+        let facebookID = Bundle.main.object(forInfoDictionaryKey: "FacebookAppID") as? String
+        let facebookDisplayName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String
+        if let facebookClient =  APFacebookSDKClient.facebookSDK(withFacebookAppID: facebookID, andAppDisplayName: facebookDisplayName) {
+            facebookClient.authorizeFacebook(true, completion: { (isUserLogged, error) in
+                if isUserLogged {
+                    self.getFacebookUser()
+                } else {
+                    self.view?.showLoadingScreen(false)
+                    if let error = error {
+                        self.view?.showError(description: error.localizedDescription)
+                    }
+                }
+            })
+        }
+    }
+    
+    func getFacebookUser() {
+        APFacebookSDKClient.sharedInstance()?.getCurrentUser(completionHandler: { (user, error) in
+            self.view?.showLoadingScreen(false)
+            if let error = error {
+                self.view?.showError(description: error.localizedDescription)
+                return
+            }
+            if let user = user, let email = user.email, let userId = APFacebookSDKClient.sharedInstance()?.userID() {
+                self.facebookLogin(email: email, userId: userId)
+            }
+        })
+    }
+    
+    func facebookLogin(email: String, userId: String) {
+        self.camDelegate?.facebookLogin(userData: (email: email, userId: userId), completion: { (result) in
+            switch result {
+            case .success:
+                self.coordinatorDelegate?.finishAuthorizationFlow(isUserLogged: true)
+            case .failure(description: let description):
                 self.view?.showError(description: description)
             }
         })

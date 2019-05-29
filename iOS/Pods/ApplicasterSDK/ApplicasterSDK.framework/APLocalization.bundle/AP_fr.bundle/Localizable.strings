@@ -1,0 +1,120 @@
+
+//Common
+"CommonAlertOK"						=	"OK";
+"CommonDateFormat"					=	"dd/MM/yyyy";
+
+//PSTV - Interface
+
+"IFeatured"                         =   "A l'affiche";
+"IChannels"                         =   "Chaines";
+"IMyChannel"                        =   "Ma chaine";
+"IMore"                             =   "Plus";
+"IPSTVPicks"                        =   "Le meilleur de PSTV";
+"ILatestEpisodes"                   =   "Derniers épisodes";
+"INowPlaying"                       =   "Lecture";
+"IEdit"                             =   "Modifier";
+"IDelete"                           =   "Effacer";
+"IPlayAll"                          =   "Lire les vidéos";
+"IDone"                             =   "OK";
+"IMyQueue"                          =   "Ma Liste";
+"IDownloads"                        =   "TÉLÉCHARGEMENTS";
+"IQueued"                           =   "LISTE";
+"IDownloading"                      =   "Téléchargement";
+"IShare"                            =   "Partager";
+"IMostViewed"                       =   "Les plus vues";
+"IAllVideos"                        =   "Toutes les vidéos";
+"GENoItemsInQueue"                  =   "Il n'y a pas d'articles dans votre liste";
+"GENoItemsInDownloads"              =   "Il n'y a pas d'articles dans vos téléchargements";
+
+"SMSBody"                           =   "La nouvelle application PokerStarsTV donne accès aux meilleures émissions de poker en HD et dans leur intégralité. C’est gratuit : http://pstars.im/NOxgCf";
+"EmailBody1" = "Salut,";
+"EmailBody2" = "Je t’envoie cet email pour te faire partager la nouvelle application PokerStarsTV.";
+"EmailBody3" = "Tu pourras regarder en HD tes émissions de poker préférées dans leurs intégralités (The Big Game, l’European Poker Tour, les France Poker Series, Direct Poker et La Maison du Bluff), et le meilleur du poker outre-Atlantique (PCA, Millions Dollar Challenge, The Poker Star, WCOOP…).";
+"EmailBody4" = "Cette formidable application est disponible sur iPhone, iPad et iPod Touch.";
+"EmailBody5" = "";
+"ToDownload" = "Télécharger l’application PokerStarsTV !";
+
+
+//NO Audio Slides:
+
+"NANoAudioSlideText"                =   "La vidéo ne peut être jouée";
+
+//General Error Messages
+
+"GENoContent"                       =   "Il n'y a pas de contenu à afficher";
+"GECantLoadURL"                     =   "L'url ne peut être chargée";
+"GENoItems"                         =   "Il n'y a pas de vidéo à afficher";
+"GENoContentTryLater"               =   "Il n'y a pas de contenu. Veuillez réessayer plus tard";
+"GENoItemsInChannel"                =   "Il n'y a pas de vidéo  sur votre chaine";
+
+//App rater
+
+"ARMessage"                         =   "Do you like this app? It only takes a minute to rate us! Thank you.";
+"ARMessagePart1"                    =   "Aimez-vous";
+"ARMessagePart2"                    =   "? Nous évaluer ne demande qu’une minute ! Merci.";
+"ARNoThanks"                        =   "No, Thank You";
+"ARRate"                            =   "Rate";
+"ARRemindMeLater"                   =   "Remind Me Later";
+
+//Back From Background
+"BGResume"                          =   "Resume";
+"BGRestart"                         =   "Restart";
+
+
+//HIV = HQME Item View
+"HIVCancelButton"					=	"ANNULER";
+"HIVDeleteButton"					=	"SUPPRIMER";
+"HIVDownloadButton"					=	"Télécharger";
+"HIVDownloadFailureAlertTitle"		=	"Échec du téléchargement";
+"HIVDownloadFailureAlewrtMessage"	=	"La connexion au réseau est absente. Veuillez réessayer ultérieurement";
+"HIVExpiresLabelFormat"				=	"Expire le: %@";
+"HIVExpiredLabelFormat"				=	"Expiré (%@)";
+"HIVDownloadFailedAlertTitle"       =   "Erreur de téléchargement";
+"HIVDownloadFailedAlertMessage"     =   "Veuillez réessayer ultérieurement.";
+"HIVItemAvailableMessage"           =   "Disponible dans 'Ma bibliothèque'";
+
+//MB = Menu Bar
+"MBNoConnectionAlertTitle"			=	"Avis";
+"MBNoConnectionAlertMessage"		=	"La connexion au réseau est absente. Veuillez réessayer ultérieurement";
+"MBOnlineButton"					=	"En ligne";
+"MBMyLibraryButton"					=	"Ma bibliothèque";
+"MBDownloadButton"					=	"Télécharger";
+"MBSettingsButton"					=	"Paramètres";
+"MBSubscribeButton"					=	"M'abonner";
+
+//SC = Settings Control
+"SCLanguageChangedAlertTitle"		=	"La langue a été modifiée.";
+"SCLanguageChangedAlertMessage"		=	"La langue a été modifiée.";
+"SCLanguageSegment"					=	"Langue";
+"SCLanguageAccountSegment"			=	"Compte";
+"SCMoreSegment"						=	"Plus";
+
+//AD = Application Delegate
+"ADMyLibraryEmptyMessage"			=	"Ma Bibliothèque' est vide. Veuillez vous connecter à internet et vous rendre sur la section 'Télécharger' afin d'enregistrer les vidéos sur votre appareil.";
+"ADNotSubscribedAlertTitle"			=	"Avis";
+"ADNotSubscribedAlertMessage"		=	"Vous devez être abonné(e) pour visualiser ce contenu.";
+
+//SP = Splash view
+"SPCommunicationFailureMessage"		=	"La connexion au réseau est absente. Veuillez réessayer ultérieurement";
+
+//OV = Offline View
+"OVNoDownloadedContentAlertTitle"   =   "Avis";
+"OVNoDownloadedContentAlertMessage" =   "Ma bibliothèque' est vide. Veuillez enregistrer les vidéos sur votre appareil en utilisant la fonction 'Télécharger'.";
+
+//Applicaster Framework
+"APMailNotConfigured"				=   "L'envoi d'e-mail n'est pas configuré sur cet appareil. Impossible d'envoyer un message.";
+"APCouldNotCompletePurchase"		=   "Impossible de finaliser la transaction.";
+"APPurchsesesDisabledForDevice"		=	"Purchases are disabled for this device";
+
+//SF - restore subscription
+"SFRestoreSubscription"             =   "Réactiver l'abonnement";
+"SFRedeem Voucher" = "Échanger le coupon";
+
+//Application Rating
+"ARRate"                            =   "Évaluer";
+"ARNoThanks"                        =   "Non merci";
+"ARRemindMeLater"                   =   "Me le rappeler plus tard";
+
+// Item expiration
+"IEYour item has expired" = "Votre article a expiré";
+"IEIf you have a valid subscription please try again while connected to the internet"	= "Si vous êtes titulaire d'un abonnement en cours, veuillez recommencer après vous être connecté à internet";

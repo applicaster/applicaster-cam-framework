@@ -1,0 +1,6 @@
+framework module ApplicasterSDK {
+  umbrella header "ApplicasterSDK.h"
+
+  export *
+  module * { export * }
+}

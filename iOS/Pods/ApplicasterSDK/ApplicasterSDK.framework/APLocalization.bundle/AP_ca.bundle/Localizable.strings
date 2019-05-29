@@ -1,0 +1,304 @@
+//Common
+
+"CommonAlertOK"						=	"OK";
+"CommonDateFormat"					=	"dd/MM/yyyy";
+
+//App rater
+
+"ARMessagePart1"                    =   "T’agrada?";
+"ARMessagePart2"                    =   "Només tardem un minut. Gràcies.";
+"ARNoThanks"                        =   "No, Gràcies";
+"ARRate"                            =   "Validar";
+"ARRemindMeLater"                   =   "Recorda’m-ho més tard";
+
+//Back From Background
+"BGResume"                          =   "Continuar";
+"BGRestart"                         =   "Tornar a començar";
+"BGClose"                           =   "Tancar";
+
+//HIV = HQME Item View
+"HIVCancelButton"					=	"Cancel·lar";
+"HIVDeleteButton"					=	"ESBORRAR";
+"HIVDownloadButton"					=	"DESCARREGAR";
+"HIVDownloadFailureAlertTitle"		=	"Descàrrega fallida";
+"HIVDownloadFailureAlewrtMessage"	=	"No hi ha connexió a internet. Si us plau, intenta-ho més tard.";
+"HIVExpiresLabelFormat"				=	"Venciment: %@";
+"HIVExpiredLabelFormat"				=	"Vençut (%@)";
+"HIVDownloadFailedAlertTitle"       =   "Error a la descàrrega";
+"HIVDownloadFailedAlertMessage"     =   "Sisplau, intenta-ho més tard.";
+"HIVItemAvailableMessage"           =   "Disponible a ‘La meva Biblioteca'";
+
+//MB = Menu Bar
+"MBNoConnectionAlertTitle"			=	"Notificació";
+"MBNoConnectionAlertMessage"		=	"No hi ha connexió a internet. Si us plau, intenta-ho més tard.";
+"MBOnlineButton"					=	"En linia";
+"MBMyLibraryButton"					=	"La meva biblioteca";
+"MBDownloadButton"					=	"Descarregar";
+"MBSettingsButton"					=	"Configuració";
+"MBSubscribeButton"					=	"Subscriure";
+
+//SC = Settings Control
+"SCLanguageChangedAlertTitle"		=	"S’ha canviat l’idioma.";
+"SCLanguageChangedAlertMessage"		=	"S’ha canviat l’idioma.";
+"SCLanguageSegment"					=	"Idioma";
+"SCLanguageAccountSegment"			=	"Compte";
+"SCMoreSegment"						=	"Més";
+
+//AD = Application Delegate
+"ADMyLibraryEmptyMessage"			=	"’La meva biblioteca' està buida. Si us plau, assegura’t que estàs connectat a la xarxa i ves a 'Descarregar' per guardar els vídeos al teu  dispositiu.";
+"ADNotSubscribedAlertTitle"			=	"Notificació";
+"ADNotSubscribedAlertMessage"		=	"Has d’estar subscrit per veure aquest contingut.";
+
+//SP = Splash view
+"SPCommunicationFailureMessage"		=	"No hi ha connexió a internet. Si us plau, intenta-ho més tard.";
+
+//OV = Offline View
+"OVNoDownloadedContentAlertTitle"   =   "Notificació";
+"OVNoDownloadedContentAlertMessage" =   "’La meva biblioteca' està buida. Si us plau, desa els vídeos al teu dispositiu prement 'Descarregar'.";
+
+//Applicaster Framework
+"APMailNotConfigured"				=   "L’enviament de correu-e no està configurat en aquest dispositiu. No es pot enviar el correu.";
+"APCouldNotCompletePurchase"		=   "No s’ha pogut completar la compra.";
+"APPurchsesesDisabledForDevice"		=	"No estan habilitades les compres per aquest dispositiu";
+
+//SF - restore subscription
+"SFRestoreSubscription"				= "Recuperar subscripció";
+"SFRedeem Voucher"					= "Bescanviar cupó";
+
+// Item expiration
+"IEYour item has expired" = "El seu article ha expirat";
+"IEIf you have a valid subscription please try again while connected to the internet" = "Si te una subscripció vàlida, torna-ho a intentar mentre estàs connectat a la xarxa";
+
+// Store kit
+"SKPurchaseFailed"					= "Error";
+"SKRestorePreviousPurchases"		= "Vols veure les compres anteriors?";
+"SKRestoreButtonYes"				= "Restablir";
+"SKRestoreButtonNo"					= "No";
+
+// Callback handler
+"APTwitterNotAvailable" = "Twitter no està disponible ara.";
+
+// Downloading
+"LNOpenAppToContinueDownloadingPart1"	= "Si us plau, obre";
+"LNOpenAppToContinueDownloadingPart2"	= "Continua baixant el vídeo.";
+
+// UGC
+"APUGCSendEmailTitle"				= "Enviar un correu";
+"APUGCTakePhotoOrVideo"				= "Fer una foto o vídeo";
+"APUGCTakePhoto"					= "Fer una foto";
+"APUGCTakeVideo"					= "Fer un vídeo";
+"APUGCSelectFromSavedPhotosTitle"	= "Escollir des de la biblioteca";
+"APUGCActionSheetCancelButtonTitle"	= "Cancel·lar";
+
+// Player
+"PLAudioOnlyMessage"                = "Transmissió només d’àudio per baixa connectivitat.";
+"PLLoadingFailed"                   = "Error de connexió. Si us plau, intenta-ho més tard.";
+
+// Capture a moment
+
+"BGCaptureResume"					=	"Continuar veient";
+"BGCaptureRestart"					=	"Veure una altra vegada";
+"BGCaptureShare"					=	"Compartir";
+"APCaptureReshareWithYourFriends"   =   "Comparteix aquest moment amb els teus amics";
+"APCaptureShareWithYourFriends"     =   "Comparteix aquest moment amb els teus amics";
+"CaptureMomentSubject"              =   "Vull compartir amb tu aquest moment. Mira’l:";
+
+// Facebook Native Message
+"FBMessageTo"                       = "Destinatari: ";
+"FBMessageSend"                     = "Enviar";
+
+//Facebook Chat & Invite
+"InviteFriendsToWatchTheShow"       = "Convida els teus amics";
+
+// C = Chat
+"InviteFriendsCancel"               = "Tancar";
+"CSearchFriends"                    = "Cercar amics";
+"CJoinMeToWatchLeftString"          = "Hola, estic mirant ";
+"CJoinMeToWatchRightString"         = "Vols unir-te?";
+"CInviteFriendsToWatchTheShow"      = "Convida els teus amics";
+"CGoOn"                             = "Connecta’t i xateja amb els teus amics";
+"CSend"                             = "Enviar";
+"CEnterText"                        = "Escriu aquí";
+"CHasLeftTheChat"                   = " ha deixat el xat";
+"CIsTyping"                         = " està escrivint";
+"CIsOnline"                         = " està online";
+"CIsOffline"                        = " està offline";
+"CEnteredChat"                      = "ha entrat al xat.";
+
+// Player
+"APPlayerScrubbingFast"             = "Reproducció a alta velocitat \nLlisca el dit per ajustar la velocitat";
+"APPlayerScrubbingMedium"           = "Reproducció a velocitat mitja \nLlisca el dit per ajustar la velocitat";
+"APPlayerScrubbingSlow"             = "Reproducció a baixa velocitat \nLlisca el dit per ajustar la velocitat";
+"APPlayerScrubbingFine"             = "Reproducció a velocitat real \nLlisca el dit per ajustar la velocitat";
+
+//EPG
+"APEPGProgramIsPlayingNow"          = "Ara";
+"APProgramLocalNoficiationAlertBody"= "El programa és a punt de començar. ";
+
+
+// Chat
+"APFacebookInstructionIntroduceChatButton"      = "Et presentem el botó de xat que et permetrà parlar amb els teus amics de Facebook:";
+"APFacebookInstructionWhatToDo"                 = "Què necessites fer?";
+"APFacebookInstructionAuthorizeFacebook"        = "Cal que donis permís a Facebook.";
+"APFacebookInstructionInviteFriends"            = "Convida els teus amics a veure’l amb tu.";
+"APFacebookInstructionConnectDisclaimerLabel"   = "El permís per Facebook és només pel xat.";
+"APFacebookInstructionOKButton"                 = "D’acord";
+"APFacebookInstructionCancelButton"             = "Cancel·lar";
+"ChatIsON"                                      = "Xat activat";
+"ChatIsOFF"                                     = "Xat desactivat";
+
+//CM
+"CMShareBtn"                                    = "Compartir";
+"CMVideoSaved"                                  = "Vídeo desat";
+"CMImageSaved"                                  = "Imatge desada";
+"CMYouCanFindItInYourPhotoGallery"              = "Pots trobar-ho a la teva galeria";
+
+"CMSharingLinkLabel"                            = "Prem aquí per a veure";
+
+"CMRecommandMessage1"                           = "%@ i jo som amics. Tu també vols ser amic de %@?";
+"CMRecommandMessage2"                           = "Hola, sóc amic de %@. Vols ser amic de %@ perquè puguem compartir secrets?";
+"CMRecommandMessage3"                           = "Sabies que %@ i jo som bons amics?";
+"CMRecommandComment"                            = "Escull també ser amic de %@";
+
+"CMSharingComment"                              = "Jo sé tots els secrets de %@, i tu?";
+
+"CMConnectToCharacterAlertMessage"              = "Vols ser amic de %@?";
+"CMReplaceCharacterAlertMessage"                = "Vols començar una nova amistat amb %@ en compres de %@? Només pots canviar d’amic %d vegades aquesta temporada.";
+"CMReplaceCharacterAlertMessageForLastSubstitution" = "Vols començar una nova amistat amb %@ en comptes de %@? Sols pots canviar d’amic %d vegades aquesta temporada.";
+
+"CMReplaceCharacterAlertMessageForUnlimitedNumberOfSubstitution" = "Vols ser amic de %@ en comptes de %@? Si canvies tota l’estona d’amic, potser deixin de confiar en tu.";
+
+"CMCannotReplaceCharacterAlertMessage"          = "Ho sentim. Has arribat al límit de canvis d’amics per aquesta temporada.";
+
+"CMConnectToCharacterAlertCancelBtn"            = "No!";
+"CMConnectToCharacterAlertOkBtn"                = "Sí!";
+
+"CMReplaceCharacterAlertCancelBtn"              = "Cancel·lar";
+"CMReplaceCharacterAlertOkBtn"                  = "Canviar d’amic";
+
+"CMCannotReplaceCharacterAlertOkBtn"            = "OK";
+
+"CMInviteYourFriendBtn"                         = "Convida als teus amics";
+"CMMessagesLabel"                               = "Missatges";
+
+"CMFriendStatus"                                = "Amics";
+"CMX-FriendStatus"                              = "Ex-amics";
+
+"CMLearnMoreAboutLabel"                         = "Coneix més de %@";
+"CMLastMessageRecievedLabel"                    = "Últim missatge rebut %@  %@";
+
+"CMSelectionCharacterHeadline"                  = "Siguem amics";
+"CMSelectionCharacterSubHeadline"               = "Fes-te amic del teu personatge favorit i rebras missatges i contingut exclusiu.";
+
+"CMCharacterProfilePageStatus"                  = "- AMICS";
+"CMCharacterProfilePageFollowButton"            = "SIGUEM AMICS";
+"CMCharacterProfilePageRecommendButton"         = "RECOMENAR";
+
+
+// Support mail
+"APSupportSubjectPrefix"						= "Reportar un problema";
+"APSupportProblemDescription"					= "Descripció del problema";
+"APSupportDoNotDelete"							= "Si us plau, no esborri aquest text";
+
+// ----------- Feed1.5 ----------- //
+
+// Feed 1.5 Events
+"Feed1.5FacebookLikeButton"						= "M’agrada";
+"Feed1.5FacebookCommentButton"                  = "Comentar";
+"Feed1.5FacebookLikes"							= "M’agrada";
+"Feed1.5FacebookComments"						= "Comentaris";
+"Feed1.5FacebookComment"						= "Comentari";
+"Feed1.5ConnectFacebookTwitter"					= "Connecta’t a Facebook i Twitter per poder veure més contingut";
+"Feed1.5ConnectFacebook"						= "Connecta’t a Facebook per poder veure més contingut";
+"Feed1.5ConnectTwitter"							= "Connecta’t a Twitter per poder veure més contingut";
+"Feed1.5SendPostButton"                         = "Compartir";
+"Feed1.5ConnectButton"                          = "Connecta’t";
+"Feed1.5CreatePostButton"                       = "Escriure un comentari";
+"Feed1.5CreatePostPlaceholderText"              = "Escriu alguna cosa ...";
+"Feed1.5ShareEvent"                             = "Estic participant a %@";
+"Feed1.5Retweet"                                = "Retuit";
+"Feed1.5BackButtonTitle"                        = "Tornar";
+
+// ----------- Feed2.0 ----------- //
+
+"Feed2_DetailFacebookTitle"                     = "Publicar";
+"Feed2_CreatePostTitle"                         = "Escriu un comentari...";
+"Feed2_CreatePostBack"                          = "Cancel·lar";
+"Feed2_CreatePostSend"                          = "Publicar";
+"Feed2_CreateTweetSend"                         = "Tuitejar";
+"feed2_commentOnDetailView"                     = "Escriu un comentari....";
+"Feed2_ClickOnLinkEvent"                        = " Clica aquí>> ";
+"Feed2_CreatePostPlaceholder"                   = "Escriu alguna cosa...";
+"Feed2_back"                                    = "Tornar";
+"Feed2_AlertOK"                                 = "OK";
+"Feed2_AlertTwitterSignInRequireTitle"          = "Convé iniciar sessió:";
+"Feed2_AlertTwitterSignInRequireMessage"        = "Si us plau, connecta’t a Twitter i autoritza l’aplicació a la configuració del dispositiu";
+"Feed2_AlertTwitterSendFailedTitle"             = "Error:";
+"Feed2_AlertTwitterSendFailedMessage"           = "No s’ha pogut enviar el tuit";
+"Feed2_AlertFacebookSendFailedTitle"            = "Error:";
+"Feed2_AlertFacebookSendFailedMessage"          = "No s’ha pogut enviar el missatge";
+"Feed2_AlertEmptyCommentNoticeTitle"            = "Avís:";
+"Feed2_AlertEmptyCommentNoticeMessage"          = "Si us plau, afegeix text al comentari abans de publicar";
+
+"Feed2_SendComment"                             = "Publicar";
+"Feed2_DetailedFacebookCounters"                = "%d M’agrada %d Comentaris";
+"Feed2_DetailedTwitterCounters"                 = "%d Retuits";
+
+"Feed2_SignInContent"                           = "Connecta’t per veure més contingut";
+
+"Feed2_FilterAll"                               = "Tot";
+"Feed2_FilterBroadcaster"                       = "Activitats";
+"Feed2_NewStories"                              = "Nova activitat";
+"Feed2_TakePhoto"                               = "Fer foto";
+"Feed2_ChoosePhoto"                             = "Seleccionar existent";
+"Feed2_CancelPhoto"                             = "Cancel·lar";
+"Feed2_WelcomeTitle"                            = "Benvingut";
+"Feed2_WelcomeSignIn"                           = "Connecta’t a Facebook i Twitter per veure més contingut";
+"Feed2_WidgetTimeIsUp"                          = "Temps!";
+"Feed2_ShareEvent"                              = "Estic participant a %@";
+"Feed2_ShareEventFacebook"                      = "Estic participant a %@";
+"Feed2_ShareEventTwitter"                       = "Estic participant a %@";
+"Feed2_ShareEventMail"                          = "Estic participant a %@";
+"Feed2_ShareEventSMS"                           = "Estic participant a %@";
+"Feed2_ShareEventWhatsApp"                      = "Estic participant a %@";
+"Feed2_SaveImage"                               = "desar la imatge";
+"Feed2_ClickHere"                               = "Toca aqui";
+
+//Twitter 
+"Feed2_NotLoggedInToTwitter"					= "No es pot enviar un tuit en aquests moments. Anar a la configuració del dispositiu per a agregar el compte de Twitter";
+"Feed2_TwitterSorry"							= "Ho sentim!";
+"Feed2_TwitterTweetFailed"						= "El tuit no s’ha enviat";
+"Feed2_Dismiss"							     	= "Descartar";
+"Feed2_EnableTweets"							= "Per veure els tuits, activa Twitter a la pàgina de configuració de xarxes socials";
+"Feed2_TwitterLoginFailed"						= "L’inici de sessió a Twitter és incorrecte";
+
+// ----------- Time Strings ----------- //
+
+"Time_Second"                                   = "segon";
+"Time_Seconds"                                  = "segons";
+"Time_Minute"                                   = "minut";
+"Time_Minutes"                                  = "minuts";
+"Time_Hour"                                     = "hora";
+"Time_Hours"                                    = "hores";
+"Time_Day"                                      = "dia";
+"Time_Days"                                     = "dies";
+"Time_Week"                                     = "setmana";
+"Time_Weeks"                                    = "setmanes";
+"Time_Month"                                    = "mes";
+"Time_Months"                                   = "mesos";
+"Time_Year"                                     = "any";
+"Time_Years"                                    = "anys";
+"Time_Decade"                                   = "dècada";
+"Time_Decades"                                  = "dècades";
+
+"Time_AgoDescription"                           = "Fa %li %@";
+"Time_AgoDescriptionPlural"                     = "Fa %li %@";
+
+// ----------- Sharing ----------- //
+
+"SharingTwitterMessageText" =  "Veient:";
+"MailSharingMessage1Text"   =  "Compartir amb tu";
+"MailSharingMessage2Text"   =  "Segueix l’enllaç per a veure a ";
+
+// -------------------------- //
+

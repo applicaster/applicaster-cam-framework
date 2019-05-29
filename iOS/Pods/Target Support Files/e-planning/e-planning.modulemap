@@ -1,0 +1,6 @@
+framework module e_planning {
+  umbrella header "e-planning-umbrella.h"
+
+  export *
+  module * { export * }
+}

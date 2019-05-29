@@ -1,0 +1,32 @@
+INBOX
+Inbox
+
+MORE_APPS
+More Apps
+
+FEEDBACK
+Feedback
+
+DELETE
+Delete
+
+RELEASE_TO_UPDATE
+Release to update
+
+PULL_DOWN_TO_UPDATE
+Pull down to update
+
+UPDATING_MESSAGES
+Updating messages
+
+LAST_UPDATED
+Last Updated
+
+NO_MESSAGES
+No Messages
+
+NO_CONNECTION
+No Connection
+
+LOADING
+Loading

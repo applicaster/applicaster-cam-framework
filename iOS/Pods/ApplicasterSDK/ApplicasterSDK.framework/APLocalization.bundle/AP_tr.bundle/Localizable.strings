@@ -1,0 +1,149 @@
+
+//Common
+"CommonAlertOK"						=	"Tamam";
+"CommonDateFormat"					=	"dd/MM/yyyy";
+
+//PSTV - Interface
+
+"IFeatured"                         =   "ÖNE ÇIKAN";
+"IChannels"                         =   "KANALLAR";
+"IMyChannel"                        =   "KANALIM";
+"IMore"                             =   "Daha Fazla";
+"IPSTVPicks"                        =   "PSTV SEÇİMLERİ";
+"ILatestEpisodes"                   =   "SON BÖLÜMLER";
+"INowPlaying"                       =   "Şimdi Oynatılıyor";
+"IEdit"                             =   "DÜZENLE";
+"IDelete"                           =   "SİL";
+"IPlayAll"                          =   "Tümünü Yürüt";
+"IDone"                             =   "Tamamlandı";
+"IMyQueue"                          =   "My Queue";
+"IDownloads"                        =   "DOWNLOADS";
+"IQueued"                           =   "KUYRUĞA EKLENDİ";
+"IDownloading"                      =   "İndiriliyor";
+"IShare"                            =   "Paylaş";
+
+//NO Audio Slides:
+
+"NANoAudioSlideText"                =   "Sınırlı bant genişliği ya da düşük operatör veri sinyali nedeniyle vide oynatılamıyor";
+
+//General Error Messages
+
+"GENoContent"                       =   "Görüntülenecek içerik yok";
+"GECantLoadURL"                     =   "URL yüklenemiyor";
+"GENoItems"                         =   "Görüntülenecek öğe yok";
+"GENoContentTryLater"               =   "İçerik yok, Lütfen daha sonra yeniden deneyin";
+"GENoItemsInChannel"                =   "Kanalınızda herhangi bir öğe yok";
+
+//App rater
+
+"ARMessagePart1"                         =   "Beğendiniz mi";
+"ARMessagePart2"                         =   "? Bizi değerlendirmeniz sadece birkaç dakikanızı alır! Teşekkürler.";
+"ARNoThanks"                        =   "Hayır, istemiyorum";
+"ARRate"                            =   "Değerlendir";
+"ARRemindMeLater"                   =   "Daha sonra hatırlat";
+
+//Back From Background
+"BGResume"                          =   "Devam Et";
+"BGRestart"                         =   "Yeniden Başlat";
+
+//HIV = HQME Item View
+"HIVCancelButton"					=	"İPTAL";
+"HIVDeleteButton"					=	"SİL";
+"HIVDownloadButton"					=	"İndir";
+"HIVDownloadFailureAlertTitle"		=	"İndirme Hatası";
+"HIVDownloadFailureAlewrtMessage"	=	"Internet bağlantısı yok. Lütfen daha sonra yeniden deneyin";
+"HIVExpiresLabelFormat"				=	"GEÇERLİLİĞİ SONA ERİYOR: %@";
+"HIVExpiredLabelFormat"				=	"GEÇERLİLİĞİ SONA ERDİ (%@)";
+"HIVDownloadFailedAlertTitle"       =   "İndirme Hatası";
+"HIVDownloadFailedAlertMessage"     =   "Lütfen daha sonra yeniden deneyin.";
+"HIVItemAvailableMessage"           =   "'Kitaplığımda' mevcut";
+
+//MB = Menu Bar
+"MBNoConnectionAlertTitle"			=	"Uyarı";
+"MBNoConnectionAlertMessage"		=	"Internet bağlantısı yok. Lütfen daha sonra yeniden deneyin";
+"MBOnlineButton"					=	"Çevrimiçi";
+"MBMyLibraryButton"					=	"Kitaplığım";
+"MBDownloadButton"					=	"İndir";
+"MBSettingsButton"					=	"Ayarlar";
+"MBSubscribeButton"					=	"Abone ol";
+
+//SC = Settings Control
+"SCLanguageChangedAlertTitle"		=	"Dil değiştirildi.";
+"SCLanguageChangedAlertMessage"		=	"Seçilen dil yükleniyor.";
+"SCLanguageSegment"					=	"Dil";
+"SCLanguageAccountSegment"			=	"Hesap";
+"SCMoreSegment"						=	"Daha Fazla";
+
+//AD = Application Delegate
+"ADMyLibraryEmptyMessage"			=	"'Kitaplığı' boş. Lütfen 'İndir' seçeneğini kullanarak videoları cihazınıza kaydedin.";
+"ADNotSubscribedAlertTitle"			=	"Uyarı";
+"ADNotSubscribedAlertMessage"		=	"Bu içeriği görüntüleyebilmek için abone olmanız gereklidir.";
+
+//SP = Splash view
+"SPCommunicationFailureMessage"		=	"İçerik yok, Lütfen daha sonra yeniden deneyin";
+
+//OV = Offline View
+"OVNoDownloadedContentAlertTitle"   =   "Uyarı";
+"OVNoDownloadedContentAlertMessage" =   "'Kitaplığı' boş. Lütfen 'İndir' seçeneğini kullanarak videoları cihazınıza kaydedin.";
+
+//Applicaster Framework
+"APMailNotConfigured"				=   "E-posta gönderilmesi bu cihaz için yapılandırılmamış. Posta gönderilemedi.";
+"APCouldNotCompletePurchase"		=   "Satın alma işlemi tamamlanamadı.";
+"APPurchsesesDisabledForDevice"		=	"Satın alma işlemleri bu cihaz için devre dışı bırakılmış";
+
+//SF - restore subscription
+"SFRestoreSubscription"             =   "Aboneliği Geri Yükle";
+"SFRedeem Voucher"                  =   "Hediye Çeki Kullan";
+
+//Application Rating
+"ARRate"                            =   "Değerlendir";
+"ARNoThanks"                        =   "Hayır, istemiyorum";
+"ARRemindMeLater"                   =   "Daha sonra hatırlat";
+
+// Item expiration
+"IEYour item has expired" = "Öğenizin geçerliliği sona erdi";
+"IEIf you have a valid subscription please try again while connected to the internet"	= "Geçerli bir aboneliğiniz varsa lütfen Internet'e bağlıyken yeniden deneyin";
+
+// Store kit
+"SKPurchaseFailed"					= "Satın Alma İşlemi Başarısız Oldu";
+"SKRestorePreviousPurchases"		= "Önceki alışverişlerinizin geri yüklenmesini ister misiniz?";
+"SKRestoreButtonYes"				= "Geri Yükle";
+"SKRestoreButtonNo"					= "Hayır";
+
+// Player
+"PLLoading"                         = "Yükleniyor";
+"PLAudioOnlyMessage"                = "Zayıf bağlantı nedeniyle sadece ses akışı sunuluyor.";
+"PLLoadingFailed"                   = "Yükleme başarısız, lütfen daha sonra yeniden deneyin.";
+
+"LNItemAvilableLocally"				= "Talep etmiş olduğunuz öğe görüntülenmek için uygun değil.";
+"LNOpenAppToContinueDownloading"	= "İçeriğin indirilmesine devam etmek için lütfen açın: %@.";
+"LNOpenAppToContinueDownloadingPart1"	= "İçeriğin indirilmesine devam etmek için lütfen açın:";
+"LNOpenAppToContinueDownloadingPart2"	= "";
+
+// Support mail
+"APSupportProblemDescription"	= "Sorun açıklaması";
+"APSupportDoNotDelete"			= "Lütfen aşağıdakileri kaldırmayın";
+
+//Facebook Chat & Infite
+"InviteFriendsToWatchTheShow"   = "Invite friends to watch the show";
+
+// Capture a moment
+
+"BGCaptureResume"					=	"Continue from last stop";
+"BGCaptureRestart"					=	"Play again";
+"BGCaptureShare"					=	"Share with your friends";
+"APCaptureReshareWithYourFriends"   =   "Re-Share this video capture with your friends";
+"APCaptureShareWithYourFriends"     =   "Share this video capture with your friends";
+"CaptureMomentSubject"              =   "Thought you should see this:";
+
+// C = Chat
+"CJoinMeToWatchLeftString"          = "Hi, i'm watching ";
+"CJoinMeToWatchRightString"         = ". want to join me?";
+"CInviteFriendsToWatchTheShow"      = "Invite friends to watch the show";
+"CGoOn"                             = "Go online and chat with your friends";
+"CSend"                             = "Send";
+"CEnterText"                        = "Enter Text";
+"CHasLeftTheChat"                   = " has left the chat";
+"CIsTyping"                         = " is typing";
+"CIsOnline"                         = " is online";
+"CIsOffline"                        = " is offline";

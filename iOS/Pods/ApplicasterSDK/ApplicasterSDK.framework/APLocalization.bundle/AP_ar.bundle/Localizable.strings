@@ -1,0 +1,61 @@
+//Common
+"CommonAlertOK"						=	"موافق";
+"CommonDateFormat"					=	"dd/MM/yyyy";
+
+//HIV = HQME Item View
+"HIVCancelButton"					=	"إلغاء";
+"HIVDeleteButton"					=	"حذف";
+"HIVDownloadButton"					=	"تنزيل";
+"HIVDownloadFailureAlertTitle"		=	"خطأ في التنزيل";
+"HIVDownloadFailureAlewrtMessage"	=	"لايوجد اتصال بالإنترنت. رجاء المحاولة مرة أخرى لاحقاً";
+"HIVExpiresLabelFormat"				=	"ينتهي في: %@";
+"HIVExpiredLabelFormat"				=	"انتهى (%@)";
+"HIVDownloadFailedAlertTitle"       =   "خطأ تنزيل؛";
+"HIVDownloadFailedAlertMessage"     =   "يرجى المحاولة مرة أخرة لاحقا";
+"HIVItemAvailableMessage"           =   "متاح في مكتبتي";
+
+//MB = Menu Bar
+"MBNoConnectionAlertTitle"			=	"ملحوظة";
+"MBNoConnectionAlertMessage"		=	"لايوجد اتصال بالإنترنت. رجاء المحاولة مرة أخرى لاحقاً";
+"MBOnlineButton"					=	"على الإنترنت";
+"MBMyLibraryButton"					=	"مكتبتي";
+"MBDownloadButton"					=	"تنزيل";
+"MBSettingsButton"					=	"الإعدادات";
+"MBSubscribeButton"					=	"اشترك";
+
+//SC = Settings Control
+"SCLanguageChangedAlertTitle"		=	"تم تغيير اللغة";
+"SCLanguageChangedAlertMessage"		=	"تم تغيير اللغة";
+"SCLanguageSegment"					=	"اللغة";
+"SCLanguageAccountSegment"			=	"الحساب";
+"SCMoreSegment"						=	"المزيد";
+
+//AD = Application Delegate
+"ADMyLibraryEmptyMessage"			=	"مكتبتي فارغة. رجاء الاتصال بالإنترنت والذهاب إلى تنزيل لحفظ الفيديوهات على جهازك";
+"ADNotSubscribedAlertTitle"			=	"ملحوظة";
+"ADNotSubscribedAlertMessage"		=	"يجب أن تكون مشتركاً لمشاهدة هذا المحتوى";
+
+//SP = Splash view
+"SPCommunicationFailureMessage"		=	"لايوجد اتصال بالإنترنت. رجاء المحاولة مرة أخرى لاحقاً";
+
+//OV = Offline View
+"OVNoDownloadedContentAlertTitle"   =   "ملحوظة";
+"OVNoDownloadedContentAlertMessage" =   "مكتبتي فارغة. يرجى حفظ مقاطع الفيديو على جهازك عن طريق زر تنزيل ";
+
+//Applicaster Framework
+"APMailNotConfigured"				=   "لم يتم إعداد إرسال رسائل بريد إلكتروني من هذا الجهاز. لا يمكن إرسال الرسالة";
+"APCouldNotCompletePurchase"		=   "لم نتمكن من إكمال عملية الشراء";
+"APPurchsesesDisabledForDevice"		=	"تم تعطيل المشتريات لهذا الحساب";
+
+//SF - restore subscription
+"SFRestoreSubscription"					= "استعادة الاشتراك";
+"SFRedeem Voucher"							=	"قسيمة شراء";
+
+//Application Rating
+"ARRate"                            =   "التقييم";
+"ARNoThanks"                        =   "لا شكراً";
+"ARRemindMeLater"                   =   "ذكرني لاحقاً";
+
+// Item expiration
+"IEYour item has expired" = "لقد انتهى طلبك";
+"IEIf you have a valid subscription please try again while connected to the internet" = "إذا كان لديك اشتراك ساري. يرجى المحاولة مرة أخرى أثناء الاتصال بالإنترنت.";

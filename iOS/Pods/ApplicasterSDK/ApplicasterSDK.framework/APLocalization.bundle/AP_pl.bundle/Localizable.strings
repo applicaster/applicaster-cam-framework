@@ -1,0 +1,61 @@
+//Common
+"CommonAlertOK"						=	"OK";
+"CommonDateFormat"					=	"dd/MM/yyyy";
+
+//HIV = HQME Item View
+"HIVCancelButton"					=	"ANULUJ";
+"HIVDeleteButton"					=	"USUŃ";
+"HIVDownloadButton"					=	"Pobierz";
+"HIVDownloadFailureAlertTitle"		=	"Pobieranie nieudane";
+"HIVDownloadFailureAlewrtMessage"	=	"Brak połączenia z Internetem. Spróbuj ponownie później";
+"HIVExpiresLabelFormat"				=	"Ważność wygasa: %@";
+"HIVExpiredLabelFormat"				=	"Ważność wygasła (%@)";
+"HIVDownloadFailedAlertTitle"       =   "Błąd pobierania";
+"HIVDownloadFailedAlertMessage"     =   "Spróbuj ponownie później";
+"HIVItemAvailableMessage"           =   "Dostępne w 'Mojej Bibliotece'";
+
+//MB = Menu Bar
+"MBNoConnectionAlertTitle"			=	"Uwaga";
+"MBNoConnectionAlertMessage"		=	"Brak połączenia z Internetem. Spróbuj ponownie później";
+"MBOnlineButton"					=	"Online";
+"MBMyLibraryButton"					=	"Moja Biblioteka";
+"MBDownloadButton"					=	"Pobierz";
+"MBSettingsButton"					=	"Ustawienia";
+"MBSubscribeButton"					=	"Subskrybuj";
+
+//SC = Settings Control
+"SCLanguageChangedAlertTitle"		=	"Język został zmieniony.";
+"SCLanguageChangedAlertMessage"		=   "Język został zmieniony.";
+"SCLanguageSegment"					=	"Język";
+"SCLanguageAccountSegment"			=	"Konto";
+"SCMoreSegment"						=	"Więcej";
+
+//AD = Application Delegate
+"ADMyLibraryEmptyMessage"			=	"'Moja Biblioteka' jest pusta. Połącz się z Internetem i przejdź do sekcji 'Pobierz' by zapisać pliki wideo na swoim urządzeniu.";
+"ADNotSubscribedAlertTitle"			=	"Uwaga";
+"ADNotSubscribedAlertMessage"		=	"Musisz być subskrybentem by obejrzeć tę zawartość.";
+
+//SP = Splash view
+"SPCommunicationFailureMessage"		=	"Brak połączenia z Internetem. Spróbuj ponownie później";
+
+//OV = Offline View
+"OVNoDownloadedContentAlertTitle"   =   "Uwaga";
+"OVNoDownloadedContentAlertMessage" =   "'Moja Biblioteka' jest pusta. Zapisz pliki wideo na swoim urządzeniu używając opcji 'Pobierz'.";
+
+//Applicaster Framework
+"APMailNotConfigured"				=   "Wysyłanie emaili z tego urządzenia nie zostało skonfigurowane. Nie można wysłać wiadomości.";
+"APCouldNotCompletePurchase"		=   "Nie udało się zakończyć zakupu.";
+"APPurchsesesDisabledForDevice"		=	"Zakupy dla tego urządzenia są wyłączone";
+
+//SF - restore subscription
+"SFRestoreSubscription"             =   "Przywróć subskrypcję";
+"SFRedeem Voucher" = "Zrealizuj kupon";
+
+//Application Rating
+"ARRate"                            =   "Ocena";
+"ARNoThanks"                        =   "Nie, dzięki";
+"ARRemindMeLater"                   =   "Przypomnij mi później";
+
+// Item expiration
+"IEYour item has expired" = "Twoja pozycja straciła ważność";
+"IEIf you have a valid subscription please try again while connected to the internet"	= "Jeśli posiadasz ważną subskrypcję, proszę spróbować ponownie będąc podłączonym do Internetu";

@@ -1,0 +1,147 @@
+
+//Common
+"CommonAlertOK"						= "Ок";
+"CommonDateFormat"					= "dd/MM/yyyy";
+
+//App rater
+
+"ARMessagePart1"                    = "Вам нравится приложение";
+"ARMessagePart2"                    = "? Оценка приложения займет всего минуту. Спасибо!";
+"ARNoThanks"                        = "Нет, спасибо";
+"ARRate"                            = "Оценить";
+"ARRemindMeLater"                   = "Напомнить позже";
+
+//Back From Background
+"BGResume"                          = "Смотреть далее";
+"BGRestart"                         = "Посмотреть еще раз";
+"BGClose"                           = "Закрыть";
+
+//SP = Splash view
+"SPCommunicationFailureMessage"		= "Произошла ошибка загрузки приложения. Пожалуйста, попробуйте позже";
+
+//Applicaster Framework
+"APMailNotConfigured"				= "Невозможно отправить письмо, почтовый клиент не настроен.";
+"APCouldNotCompletePurchase"		= "Could not compelete purchase.";
+"APPurchsesesDisabledForDevice"		= "Purchases are disabled for this device";
+
+//SF - restore subscription
+"SFRestoreSubscription"             = "Restore Subscription";
+"SFRedeem Voucher"                  = "Redeem Voucher";
+
+// Store kit
+"SKPurchaseFailed"					= "Purchase Failed";
+"SKRestorePreviousPurchases"		= "Would you like to restore previous purchases?";
+"SKRestoreButtonYes"				= "Restore";
+"SKRestoreButtonNo"					= "No";
+
+// Player
+"PLLoading"                         = "Загрузка";
+"PLAudioOnlyMessage"                = "Streaming only audio due to poor connectivity.";
+"PLLoadingFailed"                   = "Ошибка загрузки. Попробуйте позже.";
+
+"LNItemAvilableLocally"				= "The item you requested is now available for viewing.";
+"LNOpenAppToContinueDownloading"	= "Please open %@ to continue downloading content.";
+"LNOpenAppToContinueDownloadingPart1"	= "Please open";
+"LNOpenAppToContinueDownloadingPart2"	= "to continue downloading content.";
+
+// Support mail
+"APSupportSubjectPrefix"        = "Поддержка";
+"APSupportProblemDescription"	= "Описание проблемы";
+"APSupportDoNotDelete"			= "Пожалуйста, не удаляйте следующее";
+
+// Facebook Native Message
+"FBMessageTo"                   = "Кому: ";
+"FBMessageSend"                 = "Отпр";
+
+//Facebook Chat & Invite
+"InviteFriendsToWatchTheShow"   = "Пригласить друзей смотреть вместе";
+
+// Capture a moment
+
+"BGCaptureResume"					=	"Continue from last stop";
+"BGCaptureRestart"					=	"Play again";
+"BGCaptureShare"					=	"Share with your friends";
+"APCaptureReshareWithYourFriends"   =   "Re-Share this video capture with your friends";
+"APCaptureShareWithYourFriends"     =   "Share this video capture with your friends";
+"CaptureMomentSubject"              =   "Thought you should see this:";
+
+// C = Chat
+"CInviteFriendsCancel"              = "Отмена";
+"CSearchFriends"                    = "Найти друзей";
+"CJoinMeToWatchLeftString"          = "Привет! Я смотрю ";
+"CJoinMeToWatchRightString"         = ". Присоединишься?";
+"CInviteFriendsToWatchTheShow"      = "Пригласить друзей смотреть вместе";
+"CGoOn"                             = "Войти и обсудить с друзьями";
+"CSend"                             = "Отпр";
+"CEnterText"                        = "Введите текст";
+"CHasLeftTheChat"                   = " покинул чат";
+"CIsTyping"                         = " печатает";
+"CIsOnline"                         = " в сети";
+"CIsOffline"                        = " не в сети";
+"CEnteredChat"                      = "присоединился в чат";
+
+//Player
+"APPlayerScrubbingFast"             = "Высокая скорость воспроизведения.\nПроведите пальцами вниз для изменения скорости";
+"APPlayerScrubbingMedium"           = "Средняя скорость воспроизведения.\nПроведите пальцами вниз для изменения скорости";
+"APPlayerScrubbingSlow"             = "Низкая скорость воспроизведения.\nПроведите пальцами вниз для изменения скорости";
+"APPlayerScrubbingFine"             = "Нормальная скорость воспроизведения.\nПроведите пальцами вниз для изменения скорости воспроизведения";
+
+//EPG
+"APEPGProgramIsPlayingNow"          = "сейчас";
+
+// Chat
+"APFacebookInstructionIntroduceChatButton"      = "Кнопка \"чат\" позволит вам общаться с друзьями прямо во время просмотра";
+"APFacebookInstructionWhatToDo"                 = "Что вам нужно сделать?";
+"APFacebookInstructionAuthorizeFacebook"        = "Разрешить авторизацию Facebook";
+"APFacebookInstructionInviteFriends"            = "Пригласить друзей смотреть вместе";
+"APFacebookInstructionConnectDisclaimerLabel"   = "Авторизация Facebook только для чата";
+"APFacebookInstructionOKButton"                 = "ОК";
+"APFacebookInstructionCancelButton"             = "Отмена";
+"ChatIsON"                                      = "Чат включен";
+"ChatIsOFF"                                     = "Чат выключен";
+
+//CM
+"CMShareBtn"                                    = "Share";
+"CMVideoSaved"                                  = "Video saved";
+"CMImageSaved"                                  = "Image saved";
+"CMYouCanFindItInYourPhotoGallery"              = "You can find it in your photo gallery";
+
+"CMSharingLinkLabel"                            = "Click here to view";
+
+"CMRecommandMessage1"                           = "I am friend with %@. Do you want to be %@'s friend as well?";
+"CMRecommandMessage2"                           = "I am friend with %@. Do you want to be %@'s friend?";
+"CMRecommandMessage3"                           = "Did you know %@ is a good friend of mine?";
+"CMRecommandComment"                            = "Choose your %@ friend as well";
+
+"CMSharingComment"                              = "Look what I received from %@. You can also get your exclusive content.";
+
+"CMConnectToCharacterAlertMessage"              = "Do you want to become friends with %@";
+"CMReplaceCharacterAlertMessage"                = "Do you want to start a new friendship with %@ instead of %@ You can only change friends %d more times until the season ends.";
+
+"CMReplaceCharacterAlertMessageForLastSubstitution" = "Do you want to start a new friendship with %@ instead of %@ You can only change friends %d more time until the season ends.";
+
+"CMCannotReplaceCharacterAlertMessage"          = "Sorry, you have reached the limit for changing friends this season.";
+
+"CMConnectToCharacterAlertCancelBtn"            = "No";
+"CMConnectToCharacterAlertOkBtn"                = "Yes!";
+
+"CMReplaceCharacterAlertCancelBtn"              = "Cancel";
+"CMReplaceCharacterAlertOkBtn"                  = "Change Friends";
+
+"CMCannotReplaceCharacterAlertOkBtn"            = "OK";
+
+"CMInviteYourFriendBtn"                         = "Invite your friends";
+"CMMessagesLabel"                               = "Messages";
+
+"CMFriendStatus"                                = "Friend";
+"CMX-FriendStatus"                              = "X-Friend";
+
+"CMLearnMoreAboutLabel"                         = "Learn more about %@";
+"CMLastMessageRecievedLabel"                    = "Last message recieved %@  %@";
+
+"CMSelectionCharacterHeadline"                  = "Let’s be friends";
+"CMSelectionCharacterSubHeadline"               = "Become friends with your favorite character to get exclusive messages and content.";
+
+"CMCharacterProfilePageStatus"                  = "- FRIEND";
+"CMCharacterProfilePageFollowButton"            = "Befriend";
+"CMCharacterProfilePageRecommendButton"         = "Recommend";
