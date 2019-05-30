@@ -1,5 +1,6 @@
 package com.applicaster.cam.ui.billing
 
+import android.content.res.Resources
 import android.os.Bundle
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
@@ -67,25 +68,31 @@ class BillingFragment : BaseFragment(), IBillingView {
             ContainerType.PHONE -> {
                 recyclerBillingAdapter = RecyclerBillingAdapter(purchaseListener, billingItemType)
                 val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-                val itemDecoration = SpaceItemDecoration(verticalSpaceHeight = resources.getDimensionPixelSize(R.dimen.billing_list_vertical_space))
                 rv_billing_items?.apply {
                     this.layoutManager = layoutManager
+                    addItemDecoration(
+                        SpaceItemDecoration(verticalSpaceHeight = resources.getDimensionPixelSize(R.dimen.billing_list_vertical_space))
+                    )
                     this.itemAnimator = DefaultItemAnimator()
-                    addItemDecoration(itemDecoration)
                     this.adapter = recyclerBillingAdapter
                 }
             }
 
             ContainerType.TABLET -> {
                 pagerBillingAdapter = RecyclerBillingAdapter(purchaseListener, billingItemType)
+                val rootWidth = Resources.getSystem().displayMetrics.widthPixels
+                val childWidth = resources.getDimension(R.dimen.layout_billing_item_width).toInt()
+                val parentPadding = (rootWidth / 2) - (childWidth / 2)
                 val layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                 val snapHelper = PagerSnapHelper()
-                val itemDecoration = SpaceItemDecoration(horizontalSpaceHeight = resources.getDimensionPixelSize(R.dimen.billing_list_horizontal_space))
                 rv_billing_items?.apply {
-                    this.layoutManager = layoutManager
+                    setPadding(parentPadding, 0, parentPadding, 0)
                     snapHelper.attachToRecyclerView(this)
+                    this.layoutManager = layoutManager
+                    addItemDecoration(
+                        SpaceItemDecoration(horizontalSpaceHeight = resources.getDimensionPixelSize(R.dimen.billing_list_horizontal_space))
+                    )
                     this.itemAnimator = DefaultItemAnimator()
-                    addItemDecoration(itemDecoration)
                     this.adapter = pagerBillingAdapter
                 }
             }

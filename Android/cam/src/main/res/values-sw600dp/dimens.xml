@@ -6,6 +6,8 @@
     <dimen name="toolbar_height">44dp</dimen>
     <dimen name="toolbar_logo_width">200dp</dimen>
     <dimen name="toolbar_logo_height">44dp</dimen>
+    <dimen name="confirmation_layout_width">342dp</dimen>
+    <dimen name="confirmation_layout_height">342dp</dimen>
 
     <!--Auth-->
     <dimen name="auth_et_width">250dp</dimen>
@@ -43,7 +45,8 @@
     <dimen name="billing_tv_title_text_size">24sp</dimen>
     <dimen name="billing_layout_margin_top">16dp</dimen>
     <dimen name="billing_layout_margin_bottom">16dp</dimen>
-    <dimen name="layout_billing_item_height">278dp</dimen>
+    <dimen name="layout_billing_item_height">238dp</dimen>
+    <dimen name="layout_billing_no_redeem_item_height">227dp</dimen>
     <dimen name="layout_billing_item_width">362dp</dimen>
     <dimen name="billing_tv_title_text_margin_top">8dp</dimen>
     <dimen name="billing_layout_details_margin_top">14dp</dimen>
