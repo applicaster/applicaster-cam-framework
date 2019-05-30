@@ -28,6 +28,9 @@ class SignUpViewController: UIViewController {
     @IBOutlet var restoreInfoLabel: UILabel!
     
     @IBOutlet var socialNetworksContainer: UIView!
+    
+    @IBOutlet var leftSeparatorView: UIImageView!
+    @IBOutlet var rightSeparatorView: UIImageView!
     @IBOutlet var alternateLabel: UILabel!
     @IBOutlet var socialNetworksLabel: UILabel!
     @IBOutlet var stackView: UIStackView!
@@ -140,6 +143,8 @@ class SignUpViewController: UIViewController {
         signUpButton.setZappStyle(backgroundAsset: .signUpButtonImage,
                                  title: configDictionary[CAMKeys.signUpButtonText.rawValue],
                                  style: .actionButton)
+        leftSeparatorView.setZappStyle(withAsset: CAMKeys.leftSeparatorImage)
+        rightSeparatorView.setZappStyle(withAsset: CAMKeys.rightSeparatorImage)
         alternateLabel.setZappStyle(text: configDictionary[CAMKeys.separatorText.rawValue], style: .separator)
         socialNetworksLabel.setZappStyle(text: configDictionary[CAMKeys.alternativeLoginPromtText.rawValue],
                                          style: .alternativeLoginText)
@@ -189,16 +194,7 @@ class SignUpViewController: UIViewController {
     
     @IBAction func signUp(_ sender: UIButton) {
         hideKeyboard()
-        var result = [(key: String, value: String?)]()
-        for obj in authFields {
-            if obj.mandatory && (obj.text ?? "").isEmpty {
-                let message = configDictionary[CAMKeys.emptyFieldsMessage.rawValue]
-                showError(description: message)
-                return
-            }
-            result.append((key: (obj.key ?? ""), value: obj.text))
-        }
-        presenter?.signUp(data: result)
+        presenter?.signUp(data: authFields)
     }
     
     @IBAction func showLoginScreen(_ sender: Any) {

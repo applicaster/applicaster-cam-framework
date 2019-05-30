@@ -15,6 +15,8 @@ public enum CAMKeys: String {
     case authFields = "auth_fields"
     case authFieldImage = "auth_field_image"
     case defaultAuthScreen = "default_auth_screen"
+    case leftSeparatorImage = "separator_asset_left"
+    case rightSeparatorImage = "separator_asset_right"
     
     case backButtonImage = "back_button"
     case closeButtonImage = "close_button"
@@ -55,7 +57,7 @@ public enum CAMKeys: String {
     
     case passwordAlertTitleText = "password_alert_title_text"
     case passwordAlertInfoText = "password_alert_description_text"
-    case alertButtonText = "alert_button_text"
+    case passwordAlertButtonText = "password_alert_button_text"
     case alertButtonImage = "alert_button_image"
     
     // Payment Options

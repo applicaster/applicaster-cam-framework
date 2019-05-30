@@ -20,11 +20,10 @@
     "password_reset_description_text": "Type in you e-mail so we would send you the new password",
     "password_reset_button_text": "Reset Password",
     
+    "password_alert_button_text": "Ok",
     "password_alert_title_text": "Congratulations",
     "password_alert_description_text": "Success",
     "password_input_field_placeholder": "Email",
-    
-    "alert_button_text": "Ok",
     
     "payment_option_title_text": "Monthly Subscription",
     "payment_option_details_text": "Subscription details go here nad might take up to two lines maximum",
