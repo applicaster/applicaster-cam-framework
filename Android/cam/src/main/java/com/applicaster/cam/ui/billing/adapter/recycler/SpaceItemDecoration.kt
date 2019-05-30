@@ -10,10 +10,18 @@ class SpaceItemDecoration(
 ) : RecyclerView.ItemDecoration() {
 
     override fun getItemOffsets(
-        outRect: Rect, view: View, parent: RecyclerView,
+        outRect: Rect,
+        view: View,
+        parent: RecyclerView,
         state: RecyclerView.State
     ) {
-        verticalSpaceHeight?.run { outRect.bottom = this }
-        horizontalSpaceHeight?.run { outRect.right = this }
+        verticalSpaceHeight?.run {
+            outRect.top = this / 2
+            outRect.bottom = this / 2
+        }
+        horizontalSpaceHeight?.run {
+            outRect.left = this / 2
+            outRect.right = this / 2
+        }
     }
 }

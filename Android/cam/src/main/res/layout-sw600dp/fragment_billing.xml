@@ -35,14 +35,11 @@
 
     <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_billing_items"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/billing_rv_items_margin_start"
-            android:layout_marginEnd="@dimen/billing_rv_items_margin_end"
             android:orientation="horizontal"
-            android:scrollbarStyle="outsideOverlay"
-            android:scrollbars="horizontal"
             android:overScrollMode="never"
+            android:clipToPadding="false"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
