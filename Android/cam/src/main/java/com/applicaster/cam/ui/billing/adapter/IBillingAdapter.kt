@@ -1,6 +1,7 @@
 package com.applicaster.cam.ui.billing.adapter
 
 import android.view.View
+import com.applicaster.cam.ui.billing.adapter.recycler.BillingItemType
 
 interface IBillingAdapter {
 
@@ -8,7 +9,5 @@ interface IBillingAdapter {
 
     fun removeAllPurchaseItems()
 
-    fun setItemListener(item: PurchaseItem, holderView: View)
-
-    fun customize(itemView: View)
+    fun customize(itemView: View, itemType: BillingItemType)
 }
