@@ -38,17 +38,33 @@ class ResetPasswordPresenter {
         coordinatorDelegate?.popCurrentScreen()
     }
     
-    func resetPassword(data: [(key: String, value: String?)]) {
+    func resetPassword(data: [AuthField]) {
         self.view?.showLoadingScreen(true)
-        camDelegate?.resetPassword(data: data, completion: { (result) in
-            switch result {
-            case .success:
-                self.view?.showConfirmationScreenIfNeeded()
-            case .failure(let description):
+        if let data = validate(data: data) {
+            camDelegate?.resetPassword(data: data, completion: { (result) in
+                switch result {
+                case .success:
+                    self.view?.showConfirmationScreenIfNeeded()
+                case .failure(let description):
+                    self.view?.showLoadingScreen(false)
+                    self.view?.showError(description: description)
+                }
+            })
+        }
+    }
+    
+    func validate(data: [AuthField]) -> [(key: String, value: String?)]? {
+        var result = [(key: String, value: String?)]()
+        for obj in data {
+            if obj.mandatory && (obj.text ?? "").isEmpty {
+                let message = camDelegate?.getPluginConfig()[CAMKeys.emptyFieldsMessage.rawValue]
                 self.view?.showLoadingScreen(false)
-                self.view?.showError(description: description)
+                view?.showError(description: message)
+                return nil
             }
-        })
+            result.append((key: (obj.key ?? ""), value: obj.text))
+        }
+        return result
     }
     
     func close() {

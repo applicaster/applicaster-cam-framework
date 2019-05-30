@@ -15,6 +15,8 @@ public enum CAMKeys: String {
     case authFields = "auth_fields"
     case authFieldImage = "auth_field_image"
     case defaultAuthScreen = "default_auth_screen"
+    case leftSeparatorImage = "separator_asset_left"
+    case rightSeparatorImage = "separator_asset_right"
     
     case backButtonImage = "back_button"
     case closeButtonImage = "close_button"

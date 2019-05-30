@@ -99,16 +99,7 @@ class ResetPasswordViewController: UIViewController {
     
     @IBAction func resetPassword(_ sender: UIButton) {
         hideKeyboard()
-        var result = [(key: String, value: String?)]()
-        for obj in resetPasswordFields {
-            if obj.mandatory && (obj.text ?? "").isEmpty {
-                let message = configDictionary[CAMKeys.emptyFieldsMessage.rawValue]
-                showError(description: message)
-                return
-            }
-            result.append((key: (obj.key ?? ""), value: obj.text))
-        }
-        presenter?.resetPassword(data: result)
+        presenter?.resetPassword(data: resetPasswordFields)
     }
     
     @IBAction func backToPreviousScreen(_ sender: UIButton) {
