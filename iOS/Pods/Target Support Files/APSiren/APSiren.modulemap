@@ -1,6 +1,0 @@
-framework module APSiren {
-  umbrella header "APSiren-umbrella.h"
-
-  export *
-  module * { export * }
-}

@@ -83,18 +83,17 @@ class SignUpPresenter {
         view?.showLoadingScreen(true)
         let facebookID = Bundle.main.object(forInfoDictionaryKey: "FacebookAppID") as? String
         let facebookDisplayName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String
-        if let facebookClient =  APFacebookSDKClient.facebookSDK(withFacebookAppID: facebookID, andAppDisplayName: facebookDisplayName) {
-            facebookClient.authorizeFacebook(true, completion: { (isUserLogged, error) in
-                if isUserLogged {
-                    self.getFacebookUser()
-                } else {
-                    self.view?.showLoadingScreen(false)
-                    if let error = error {
-                        self.view?.showError(description: error.localizedDescription)
-                    }
+        let facebookClient =  APFacebookSDKClient.facebookSDK(withFacebookAppID: facebookID, andAppDisplayName: facebookDisplayName)
+        facebookClient.authorizeFacebook(true, completion: { (isUserLogged, error) in
+            if isUserLogged {
+                self.getFacebookUser()
+            } else {
+                self.view?.showLoadingScreen(false)
+                if let error = error {
+                    self.view?.showError(description: error.localizedDescription)
                 }
-            })
-        }
+            }
+        })
     }
     
     func getFacebookUser() {
