@@ -1,6 +1,0 @@
-framework module FLAnimatedImage_Applicaster {
-  umbrella header "FLAnimatedImage_Applicaster-umbrella.h"
-
-  export *
-  module * { export * }
-}

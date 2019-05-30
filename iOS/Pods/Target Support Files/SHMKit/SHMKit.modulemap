@@ -1,6 +1,0 @@
-framework module SHMKit {
-  umbrella header "SHMKit-umbrella.h"
-
-  export *
-  module * { export * }
-}
