@@ -33,6 +33,16 @@ class EntitlementCollectionViewCell: UICollectionViewCell {
     private var buyAction: () -> Void = {}
     private var redeemAction: () -> Void = {}
     
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        let backgroundImageView = UIImageView(frame: .zero)
+        backgroundImageView.setZappStyle(withAsset: .purchaseBackgroundImage)
+        backgroundImageView.frame = self.frame
+        
+        self.backgroundView = backgroundImageView
+    }
+    
     public func configure(from viewModel: OfferViewModel) {
         self.titleLabel.text = viewModel.title
         self.infoLabel.text = viewModel.description

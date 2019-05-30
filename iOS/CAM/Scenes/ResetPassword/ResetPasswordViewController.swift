@@ -55,9 +55,13 @@ class ResetPasswordViewController: UIViewController {
         backButton.setZappStyle(withIconAsset: .backButtonImage)
         closeButton.setZappStyle(withIconAsset: .closeButtonImage)
         logoImageView.setZappStyle(withAsset: .headerLogo)
-        titleLabel.setZappStyle(text: configDictionary[CAMKeys.passwordResetTitleText.rawValue], style: .screenTitle)
-        infoLabel.setZappStyle(text: configDictionary[CAMKeys.passwordResetInfoText.rawValue], style: .screenDescription)
-        resetButton.setZappStyle(backgroundAsset: .passwordResetButtonImage, title: configDictionary[CAMKeys.passwordResetButtonText.rawValue], style: .actionButton)
+        titleLabel.setZappStyle(text: configDictionary[CAMKeys.passwordResetTitleText.rawValue],
+                                style: .screenTitle)
+        infoLabel.setZappStyle(text: configDictionary[CAMKeys.passwordResetInfoText.rawValue],
+                               style: .screenDescription)
+        resetButton.setZappStyle(backgroundAsset: .passwordResetButtonImage,
+                                 title: configDictionary[CAMKeys.passwordResetButtonText.rawValue],
+                                 style: .actionButton)
     }
     
     func setupConstraints() {

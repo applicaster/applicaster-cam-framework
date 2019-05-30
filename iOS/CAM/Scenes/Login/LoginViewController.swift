@@ -139,7 +139,8 @@ class LoginViewController: UIViewController {
         resetPasswordButton.setZappStyle(title: configDictionary[CAMKeys.loginResetPasswordButtonText.rawValue],
                                          style: .resetPassword)
         alternateLabel.setZappStyle(text: configDictionary[CAMKeys.separatorText.rawValue], style: .separator)
-        socialNetworksLabel.setZappStyle(text: configDictionary[CAMKeys.alternativeLoginPromtText.rawValue], style: .alternativeLoginText)
+        socialNetworksLabel.setZappStyle(text: configDictionary[CAMKeys.alternativeLoginPromtText.rawValue],
+                                         style: .alternativeLoginText)
         signUpButton.setAttributedZappStyle(attributedTitle: [(style: .promtText,
                                                                string: configDictionary[CAMKeys.loginSingUpPromtText.rawValue] ?? "",
                                                                additionalAttributes: nil),
@@ -249,10 +250,13 @@ extension LoginViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "AuthCell", for: indexPath) as? AuthTableCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "AuthCell",
+                                                       for: indexPath) as? AuthTableCell else {
             return UITableViewCell()
         }
-        cell.textField.setZappStyle(backgroundAsset: .authFieldImage, textStyle: .inputField, placeholder: authFields[indexPath.row].hint)
+        cell.textField.setZappStyle(backgroundAsset: .authFieldImage,
+                                    textStyle: .inputField,
+                                    placeholder: authFields[indexPath.row].hint)
         cell.textField.configureInputField(data: authFields[indexPath.row])
         cell.backgroundColor = .clear
         cell.textChanged = { [weak self] text in

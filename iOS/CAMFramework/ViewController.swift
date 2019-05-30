@@ -26,6 +26,8 @@ class ViewController: UIViewController, CAMDelegate {
     }
     
     
+    var cam: ContentAccessManager?
+    
     let myConnector = MyConnector()
     
     
@@ -56,16 +58,17 @@ class ViewController: UIViewController, CAMDelegate {
     }
 
     @IBAction func start(_ sender: Any) {
-        ContentAccessManager.shared.startFlow(rootViewController: self, camDelegate: self, completion: { (r) in
+        self.cam = ContentAccessManager(rootViewController: self, camDelegate: self) { (r) in
             print(r)
-        })
+        }
+        self.cam?.startFlow()
     }
     
     func itemPurchased(item: SKProduct) {
         
     }
     
-    func itemsRestored(items: [SKProduct]) {
+    func itemsRestored(items: [SKPaymentTransaction]) {
         
     }
     

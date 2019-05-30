@@ -9,18 +9,19 @@
 import UIKit
 
 class EntitlementPickerViewController: UIViewController {
-    @IBOutlet weak var backgroundImageView: UIImageView!
-    @IBOutlet weak var logoImageView: UIImageView!
-    @IBOutlet weak var closeButton: UIButton!
-    @IBOutlet weak var backButton: UIButton!
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet private var backgroundImageView: UIImageView!
+    @IBOutlet private var logoImageView: UIImageView!
+    @IBOutlet private var closeButton: UIButton!
+    @IBOutlet private var backButton: UIButton!
+    @IBOutlet private var titleLabel: UILabel!
     
-    @IBOutlet weak var entitlementsLoadingIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var entitlementCollectionView: UICollectionView!
-    @IBOutlet weak var restorePurchaseLabel: UILabel!
+    @IBOutlet private var entitlementsLoadingIndicator: UIActivityIndicatorView!
+    @IBOutlet private var entitlementCollectionView: UICollectionView!
+    @IBOutlet private var restorePurchaseLabel: UILabel!
     
-    @IBOutlet weak var helpInfoContainer: UIView!
-    @IBOutlet weak var helpInfoTextView: UITextView!
+    @IBOutlet private var helpInfoContainer: UIView!
+    @IBOutlet private var helpInfoTextView: UITextView!
+    private var gradientLayer: CAGradientLayer!
     
     var presenter: EntitlementPickerPresenter?
     var currentItemIndex = 0 // Used for store center cell for ipad
@@ -49,6 +50,15 @@ class EntitlementPickerViewController: UIViewController {
         backButton.setZappStyle(withIconAsset: .backButtonImage)
         closeButton.setZappStyle(withIconAsset: .closeButtonImage)
         logoImageView.setZappStyle(withAsset: .headerLogo)
+        helpInfoContainer.setZappStyle(withBackgroundColor: .alternateActionBannerColor)
+        
+        setupGradient()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        self.gradientLayer.frame = self.helpInfoTextView.frame
     }
     
     func setupCollectionView() {
@@ -67,6 +77,10 @@ class EntitlementPickerViewController: UIViewController {
         presenter?.close()
     }
     
+    @IBAction func restore(_ sender: Any) {
+        presenter?.restore()
+    }
+    
     public func showOffers(_ offers: [OfferViewModel]) {
         self.offerViewModels = offers
         self.entitlementCollectionView.reloadData()
@@ -79,6 +93,19 @@ class EntitlementPickerViewController: UIViewController {
     public func hideLoadingIndicator() {
         entitlementsLoadingIndicator.stopAnimating()
     }
+    
+    // MARK: - Private methods
+    
+    private func setupGradient() {
+        let from = UIColor.clear.cgColor
+        let to = self.helpInfoContainer.backgroundColor!.withAlphaComponent(0.8).cgColor
+        
+        self.gradientLayer = CAGradientLayer()
+        self.gradientLayer.colors = [from, to]
+        self.gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.4)
+        self.gradientLayer.endPoint = CGPoint(x: 0.0, y: 1.0)
+        self.helpInfoContainer.layer.addSublayer(self.gradientLayer)
+    }
 }
 
 extension EntitlementPickerViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -87,7 +114,8 @@ extension EntitlementPickerViewController: UICollectionViewDelegate, UICollectio
         return self.offerViewModels.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EntitlementCollectionViewCell",
                                                             for: indexPath) as? EntitlementCollectionViewCell else {
             fatalError()

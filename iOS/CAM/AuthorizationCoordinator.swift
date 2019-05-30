@@ -18,15 +18,20 @@ protocol AuthorizationCoordinatorProtocol: AnyObject {
 
 class AuthorizationCoordinator: AuthorizationCoordinatorProtocol, Coordinator {
 
-    weak var parentCoordinator: PluginDataProviderProtocol?
     weak var navigationController: UINavigationController?
+    unowned var parentCoordinator: PluginDataProviderProtocol
     var completionHandler: ((Bool) -> Void)?
     
-    func start(navigationController: UINavigationController, parentCoordinator: PluginDataProviderProtocol, completion: @escaping (Bool) -> Void) {
-        self.completionHandler = completion
-        self.parentCoordinator = parentCoordinator
+    public init(navigationController: UINavigationController,
+                parentCoordinator: PluginDataProviderProtocol,
+                completion: @escaping (Bool) -> Void) {
         self.navigationController = navigationController
-        let dictionary = parentCoordinator.getCamDelegate().getPluginConfig()
+        self.parentCoordinator = parentCoordinator
+        self.completionHandler = completion
+    }
+    
+    func start() {
+        let dictionary = self.parentCoordinator.getCamDelegate().getPluginConfig()
         switch dictionary[CAMKeys.defaultAuthScreen.rawValue] {
         case "login":
             showLoginScreen(isCoordinatorRootController: true)
@@ -38,17 +43,22 @@ class AuthorizationCoordinator: AuthorizationCoordinatorProtocol, Coordinator {
     }
     
     func showLoginScreen(isCoordinatorRootController: Bool) {
-        let controller = ViewControllerFactory.createLoginScreen(pluginDataProvider: parentCoordinator, isRoot: isCoordinatorRootController, authCoordinator: self)
+        let controller = ViewControllerFactory.createLoginScreen(pluginDataProvider: parentCoordinator,
+                                                                 isRoot: isCoordinatorRootController,
+                                                                 authCoordinator: self)
         navigationController?.pushViewController(controller, animated: true)
     }
     
     func showSingUpScreen(isCoordinatorRootController: Bool) {
-        let controller = ViewControllerFactory.createSignUpScreen(pluginDataProvider: parentCoordinator, isRoot: isCoordinatorRootController, authCoordinator: self)
+        let controller = ViewControllerFactory.createSignUpScreen(pluginDataProvider: parentCoordinator,
+                                                                  isRoot: isCoordinatorRootController,
+                                                                  authCoordinator: self)
         navigationController?.pushViewController(controller, animated: true)
     }
     
     func showResetPasswordScreen() {
-        let controller = ViewControllerFactory.createResetPasswordScreen(pluginDataProvider: parentCoordinator, authCoordinator: self)
+        let controller = ViewControllerFactory.createResetPasswordScreen(pluginDataProvider: parentCoordinator,
+                                                                         authCoordinator: self)
         navigationController?.pushViewController(controller, animated: true)
     }
     

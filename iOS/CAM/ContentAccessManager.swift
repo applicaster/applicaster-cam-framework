@@ -13,27 +13,28 @@ protocol PluginDataProviderProtocol: AnyObject {
 }
 
 protocol Coordinator {
-    func start(navigationController: UINavigationController, parentCoordinator: PluginDataProviderProtocol, completion: @escaping (Bool) -> Void)
+    func start()
 }
 
 open class ContentAccessManager {
     
-    var navigationController = UINavigationController()
-    var completion: ((Bool) -> Void)!
-    weak var delegate: CAMDelegate!
-    weak var rootViewController: UIViewController!
-    var childCoordinator: Coordinator?
+    private var navigationController: UINavigationController
+    private var completion: (Bool) -> Void
+    private weak var delegate: CAMDelegate!
+    private weak var rootViewController: UIViewController!
+    private var childCoordinator: Coordinator?
     
-    public static let shared = ContentAccessManager()
-    
-    private init() {
-        self.navigationController.isNavigationBarHidden = true
-    }
-    
-    public func startFlow(rootViewController: UIViewController, camDelegate: CAMDelegate, completion: @escaping (Bool) -> Void) {
+    public init(rootViewController: UIViewController,
+                camDelegate: CAMDelegate,
+                completion: @escaping (Bool) -> Void) {
         self.rootViewController = rootViewController
         self.delegate = camDelegate
         self.completion = completion
+        self.navigationController = UINavigationController()
+        self.navigationController.isNavigationBarHidden = true
+    }
+    
+    public func startFlow() {
         if delegate.isUserLogged() {
             checkUserAccess()
         } else {
@@ -41,10 +42,10 @@ open class ContentAccessManager {
         }
     }
     
+    // MARK: - Private methods
+    
     private func authorize() {
-        rootViewController.present(navigationController, animated: true, completion: nil)
-        childCoordinator = AuthorizationCoordinator()
-        childCoordinator?.start(navigationController: navigationController, parentCoordinator: self, completion: { [weak self] (isUserLogged) in
+        let authorizeCompletion: (Bool) -> Void = { [weak self] (isUserLogged) in
             self?.childCoordinator = nil
             self?.navigationController.setViewControllers([], animated: false)
             if isUserLogged {
@@ -52,7 +53,12 @@ open class ContentAccessManager {
             } else {
                 self?.finishFlow(false)
             }
-        })
+        }
+        rootViewController.present(navigationController, animated: true, completion: nil)
+        childCoordinator = AuthorizationCoordinator(navigationController: self.navigationController,
+                                                    parentCoordinator: self,
+                                                    completion: authorizeCompletion)
+        childCoordinator!.start()
     }
     
     private func checkUserAccess() {
@@ -67,11 +73,15 @@ open class ContentAccessManager {
     }
     
     private func purchaseEntitlement() {
-        childCoordinator = BillingCoordinator()
-        childCoordinator?.start(navigationController: navigationController, parentCoordinator: self, completion: { [weak self] (isUserHasAccess) in
+        let purchaseCompletion: (Bool) -> Void = { [weak self] (isUserHasAccess) in
             self?.childCoordinator = nil
             self?.finishFlow(isUserHasAccess)
-        })
+        }
+        
+        childCoordinator = BillingCoordinator(navigationController: navigationController,
+                                              parentCoordinator: self,
+                                              completion: purchaseCompletion)
+        childCoordinator!.start()
     }
     
     private func finishFlow(_ result: Bool) {

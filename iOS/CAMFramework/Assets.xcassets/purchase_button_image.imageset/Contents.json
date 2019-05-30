@@ -14,6 +14,16 @@
       "idiom" : "universal",
       "filename" : "login_button_image.png",
       "scale" : "3x"
+    },
+    {
+      "idiom" : "ipad",
+      "filename" : "Payment_option_button_asset~ipad.png",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "ipad",
+      "filename" : "Payment_option_button_asset@2x~ipad.png",
+      "scale" : "2x"
     }
   ],
   "info" : {

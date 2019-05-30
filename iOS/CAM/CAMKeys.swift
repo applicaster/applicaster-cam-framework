@@ -62,8 +62,13 @@ public enum CAMKeys: String {
     
     case purchaseButtonText = "payment_option_button_text"
     case purchaseButtonImage = "purchase_button_image"
+    case purchaseBackgroundImage = "payment_option_component_asset"
     
-    //
+    // Payment alert
+    
+    case paymentAlertTitle = "payment_alert_title_text"
+    case paymentAlertInfo = "payment_alert_info_text"
+    case paymentAlertButtonText = "payment_alert_button_text"
 }
 
 public enum CAMStyles: String {

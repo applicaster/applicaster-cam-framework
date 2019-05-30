@@ -141,10 +141,11 @@ class SignUpViewController: UIViewController {
                                  title: configDictionary[CAMKeys.signUpButtonText.rawValue],
                                  style: .actionButton)
         alternateLabel.setZappStyle(text: configDictionary[CAMKeys.separatorText.rawValue], style: .separator)
-        socialNetworksLabel.setZappStyle(text: configDictionary[CAMKeys.alternativeLoginPromtText.rawValue], style: .alternativeLoginText)
+        socialNetworksLabel.setZappStyle(text: configDictionary[CAMKeys.alternativeLoginPromtText.rawValue],
+                                         style: .alternativeLoginText)
         loginButton.setAttributedZappStyle(attributedTitle: [(style: .promtText,
-                                                               string: configDictionary[CAMKeys.singUpLoginPromtText.rawValue] ?? "",
-                                                               additionalAttributes: nil),
+                                                              string: configDictionary[CAMKeys.singUpLoginPromtText.rawValue] ?? "",
+                                                              additionalAttributes: nil),
                                                               (style: .promtAction,
                                                                string: "\n\(configDictionary[CAMKeys.singUpLoginActionText.rawValue] ?? "")",
                                                                 additionalAttributes: nil)])
@@ -228,10 +229,13 @@ extension SignUpViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "AuthCell", for: indexPath) as? AuthTableCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "AuthCell",
+                                                       for: indexPath) as? AuthTableCell else {
             return UITableViewCell()
         }
-        cell.textField.setZappStyle(backgroundAsset: .authFieldImage, textStyle: .inputField, placeholder: authFields[indexPath.row].hint)
+        cell.textField.setZappStyle(backgroundAsset: .authFieldImage,
+                                    textStyle: .inputField,
+                                    placeholder: authFields[indexPath.row].hint)
         cell.textField.configureInputField(data: authFields[indexPath.row])
         cell.textChanged = { [weak self] text in
             self?.authFields[indexPath.row].text = text
