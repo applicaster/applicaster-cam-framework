@@ -30,6 +30,7 @@
     "payment_option_redeem_text": "Redeem",
     "payment_option_button_text": "Subscribe for $4.99",
     "payment_option_promo_text": "1 MONTH FREE",
+    "payment_button_text": "SUBSCRIBE FOR",
 
     "facebook_login_required" : "true",
     "auth_fields": "{ \"signup\": [{\"type\": \"TEXT\",\"key\": \"email\",\"title\": \"Email\",\"hint\": \"Email\",\"mandatory\": true },{\"type\": \"PASSWORD\",\"key\": \"password\",\"title\": \"Password\",\"hint\": \"Password\",\"mandatory\": true },{\"type\": \"NUMBER\",\"key\": \"Phone\",\"title\": \"Phone\",\"hint\": \"Phone\",\"mandatory\": true},{\"type\": \"TEXT\",\"key\": \"gender\",\"title\": \"Gender\",\"hint\": \"Gender\",\"mandatory\": false }],\"login\": [{\"type\": \"TEXT\",\"key\": \"email\",\"title\": \"Email\",\"hint\": \"Email\",\"mandatory\": true},{\"type\": \"PASSWORD\",\"key\": \"password\",\"title\": \"Password\",\"hint\": \"Password\",\"mandatory\": true},{\"type\": \"NUMBER\",\"key\": \"birthdate\",\"title\": \"Birth Date\",\"hint\": \"Birth Date\",\"mandatory\": true},{\"type\": \"NUMBER\",\"key\": \"birthdate\",\"title\": \"Birth Date\",\"hint\": \"Birth Date\",\"mandatory\": true}, {\"type\": \"NUMBER\",\"key\": \"birthdate\",\"title\": \"Birth Date\",\"hint\": \"Birth Date\",\"mandatory\": true}],\"password\": [{\"type\": \"NUMBER\",\"key\": \"birthdate\",\"title\": \"Birth Date\",\"hint\": \"Birth Date\",\"mandatory\": true},{\"type\": \"PASSWORD\",\"key\": \"password\",\"title\": \"Password\",\"hint\": \"Password\",\"mandatory\": true }]}",
