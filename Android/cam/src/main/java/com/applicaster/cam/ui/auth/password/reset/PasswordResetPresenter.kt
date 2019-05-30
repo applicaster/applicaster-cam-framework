@@ -5,6 +5,7 @@ import com.applicaster.cam.PasswordResetCallback
 import com.applicaster.cam.params.auth.AuthFieldConfig
 import com.applicaster.cam.ui.CamNavigationRouter
 import com.applicaster.cam.ui.base.presenter.BasePresenter
+import com.applicaster.cam.ui.confirmation.AlertDialogType
 
 class PasswordResetPresenter(
     private val view: IPasswordResetView?,
@@ -33,8 +34,10 @@ class PasswordResetPresenter(
 
     override fun onSuccess() {
         view?.hideLoadingIndicator()
-        //TODO: add confirmation dialog handling here
-        view?.goBack()
+        if (ContentAccessManager.pluginConfigurator.isShowConfirmationPasswordReset())
+            navigationRouter.showConfirmationDialog(AlertDialogType.BILLING)
+        else
+            view?.goBack()
     }
 
     private fun isAuthInputFieldsValid(inputValues: HashMap<String, String>): Boolean {

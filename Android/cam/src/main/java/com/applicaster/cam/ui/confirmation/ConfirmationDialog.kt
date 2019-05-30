@@ -1,4 +1,4 @@
-package com.applicaster.cam.ui.base.view
+package com.applicaster.cam.ui.confirmation
 
 import android.app.Activity
 import android.app.Dialog
@@ -23,18 +23,8 @@ class ConfirmationDialog : DialogFragment() {
     private var dialogView: View? = null
     private lateinit var dialogType: AlertDialogType
 
-    companion object {
-        fun newInstance(dialogType: AlertDialogType): ConfirmationDialog {
-            return ConfirmationDialog().apply {
-                val extras = Bundle()
-                extras.putString("key_dialog_type", dialogType.name)
-                arguments = extras
-            }
-        }
-    }
-
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        dialogType = AlertDialogType.valueOf(arguments?.getString("key_dialog_type") ?: AlertDialogType.UNDEFINED.name)
+        dialogType = AlertDialogType.valueOf(arguments?.getString(KEY_TYPE) ?: AlertDialogType.UNDEFINED.name)
         return activity?.let {
             setUpDialogView(it)
             setUpListeners()
@@ -82,6 +72,18 @@ class ConfirmationDialog : DialogFragment() {
                 }
             }
             AlertDialogType.UNDEFINED -> {
+            }
+        }
+    }
+
+    companion object {
+        const val KEY_TYPE = "key_dialog_type"
+
+        fun newInstance(dialogType: AlertDialogType): ConfirmationDialog {
+            return ConfirmationDialog().apply {
+                val extras = Bundle()
+                extras.putString(KEY_TYPE, dialogType.name)
+                arguments = extras
             }
         }
     }

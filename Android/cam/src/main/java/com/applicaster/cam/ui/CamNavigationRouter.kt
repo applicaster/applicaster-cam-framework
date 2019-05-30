@@ -5,9 +5,9 @@ import android.support.v4.app.FragmentTransaction
 import com.applicaster.cam.ui.auth.login.LoginFragment
 import com.applicaster.cam.ui.auth.signup.SignUpFragment
 import com.applicaster.cam.ui.base.BaseNavigationRouter
-import com.applicaster.cam.ui.base.view.AlertDialogType
+import com.applicaster.cam.ui.confirmation.AlertDialogType
 import com.applicaster.cam.ui.base.view.BaseActivity
-import com.applicaster.cam.ui.base.view.ConfirmationDialog
+import com.applicaster.cam.ui.confirmation.ConfirmationDialog
 import com.applicaster.cam.ui.billing.BillingFragment
 import com.applicaster.cam.ui.auth.password.reset.PasswordResetFragment
 

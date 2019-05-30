@@ -88,6 +88,8 @@ abstract class BaseFragment : Fragment(), IBaseView {
         dialog?.dismiss()
     }
 
+    override fun getFragmentContainerType(): ContainerType = baseActivity.getFragmentContainerType()
+
     override fun goBack() {
         activity?.onBackPressed()
     }
