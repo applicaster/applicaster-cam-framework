@@ -10,4 +10,5 @@ interface IBaseView {
     fun showToastMessage(msg: String)
     fun showLoadingIndicator()
     fun hideLoadingIndicator()
+    fun getFragmentContainerType() : ContainerType
 }

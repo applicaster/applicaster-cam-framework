@@ -1,15 +1,16 @@
 package com.applicaster.cam.ui
 
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.applicaster.cam.ContentAccessManager
 import com.applicaster.cam.R
 import com.applicaster.cam.params.auth.AuthScreenType
-import com.applicaster.cam.ui.base.view.BaseActivity
 import com.applicaster.cam.ui.base.view.ContainerType
+import com.applicaster.cam.ui.base.view.IBaseActivity
 import kotlinx.android.synthetic.main.activity_cam.*
 
-class CamActivity : BaseActivity() {
+class CamActivity : AppCompatActivity(), IBaseActivity {
 
     private lateinit var fragmentsContainer: View
     private lateinit var navigationRouter: CamNavigationRouter
@@ -42,4 +43,12 @@ class CamActivity : BaseActivity() {
     override fun getFragmentContainerId() = fragmentsContainer.id
 
     override fun getNavigationRouter() = navigationRouter
+
+    override fun goBack() {
+        onBackPressed()
+    }
+
+    override fun close() {
+        finish()
+    }
 }

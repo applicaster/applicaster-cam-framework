@@ -1,24 +1,24 @@
 package com.applicaster.cam.ui.billing
 
-import android.content.Context
+import android.app.Activity
 import android.util.Log
-import com.android.billingclient.api.BillingClient
 import com.android.billingclient.api.Purchase
 import com.android.billingclient.api.SkuDetails
-import com.applicaster.cam.*
+import com.applicaster.cam.ContentAccessManager
+import com.applicaster.cam.EntitlementsLoadCallback
+import com.applicaster.cam.ICamContract
 import com.applicaster.cam.params.billing.Offer
 import com.applicaster.cam.params.billing.ProductType
 import com.applicaster.cam.ui.CamNavigationRouter
 import com.applicaster.cam.ui.base.presenter.BasePresenter
-import com.applicaster.cam.ui.base.view.AlertDialogType
-import com.applicaster.cam.ui.base.view.BaseActivity
 import com.applicaster.cam.ui.billing.adapter.PurchaseItem
 import com.applicaster.cam.ui.billing.adapter.recycler.BillingItemType
+import com.applicaster.cam.ui.confirmation.AlertDialogType
 import com.applicaster.iap.BillingListener
 import com.applicaster.iap.GoogleBillingHelper
 
 class BillingPresenter(
-    private val view: IBillingView,
+    private val view: IBillingView?,
     private val navigationRouter: CamNavigationRouter
 ) : BasePresenter(view),
     IBillingPresenter,
@@ -31,12 +31,14 @@ class BillingPresenter(
 
     override fun onViewCreated() {
         super.onViewCreated()
-        GoogleBillingHelper.init(getBaseActivity().applicationContext,this)
-        view.setListeners()
+        view?.getViewContext()?.applicationContext?.apply {
+            GoogleBillingHelper.init(this, this@BillingPresenter)
+        }
+        view?.setListeners()
 
         //TODO: implement logic for checking BillingItemType
-        view.initViewComponents(getBaseActivity().getFragmentContainerType(), BillingItemType.NO_REDEEM)
-        view.customize()
+        view?.initViewComponents(view.getFragmentContainerType(), BillingItemType.NO_REDEEM)
+        view?.customize()
 
         //load entitlements
         camContract.loadEntitlements(object : EntitlementsLoadCallback {
@@ -50,11 +52,11 @@ class BillingPresenter(
         })
     }
 
-    override fun onPurchaseButtonClicked(skuId: String) {
+    override fun onPurchaseButtonClicked(activity: Activity?, skuId: String) {
         skuDetailsList.find { skuDetails ->
             skuDetails.sku == skuId
         }?.also { skuDetails ->
-            GoogleBillingHelper.purchase(getBaseActivity(), skuDetails)
+            if (activity != null) GoogleBillingHelper.purchase(activity, skuDetails)
         }
 
         // mock action
@@ -73,7 +75,7 @@ class BillingPresenter(
     override fun onPurchaseLoaded(purchases: List<Purchase>) {
         // mock action
         if (ContentAccessManager.pluginConfigurator.isShowConfirmationPayment())
-            navigationRouter.showConfirmationDialog(AlertDialogType.BILLING )
+            navigationRouter.showConfirmationDialog(AlertDialogType.BILLING)
     }
 
     override fun onPurchaseLoadingFailed(statusCode: Int, description: String) {
@@ -82,7 +84,7 @@ class BillingPresenter(
 
     override fun onSkuDetailsLoaded(skuDetails: List<SkuDetails>) {
         skuDetailsList.addAll(skuDetails)
-        view.populateBillingContainer(skuDetails.map {
+        view?.populateBillingContainer(skuDetails.map {
             PurchaseItem(
                 it.sku,
                 it.title,
@@ -119,16 +121,15 @@ class BillingPresenter(
                 "5$",
                 ""
             )
-            view.populateBillingContainer(arrayListOf(purchaseItem, purchaseItem, purchaseItem))
+            view?.populateBillingContainer(arrayListOf(purchaseItem, purchaseItem, purchaseItem))
         }
     }
 
     override fun onRestoreClicked() {
-        view.showToastMessage("Restore clicked")
+        //TODO: add restore logic
+        if (ContentAccessManager.pluginConfigurator.isShowConfiramtionRestorePurchases())
+            navigationRouter.showConfirmationDialog(AlertDialogType.RESTORE)
+        else
+            view?.goBack()
     }
-
-    private fun getViewContext(): Context = view.getViewContext() ?: throw RuntimeException("Context should not be null")
-
-    private fun getBaseActivity(): BaseActivity = getViewContext() as BaseActivity
-
 }

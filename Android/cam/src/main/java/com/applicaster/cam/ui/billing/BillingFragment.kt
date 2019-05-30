@@ -1,5 +1,6 @@
 package com.applicaster.cam.ui.billing
 
+import android.app.Activity
 import android.content.res.Resources
 import android.os.Bundle
 import android.support.v7.widget.DefaultItemAnimator
@@ -22,7 +23,6 @@ import com.applicaster.cam.ui.billing.adapter.recycler.RecyclerBillingAdapter
 import kotlinx.android.synthetic.main.fragment_billing.*
 import kotlinx.android.synthetic.main.layout_text_with_action.*
 import kotlinx.android.synthetic.main.layout_toolbar_template.*
-import com.applicaster.cam.ui.billing.adapter.recycler.SpaceItemDecoration
 
 
 class BillingFragment : BaseFragment(), IBillingView {
@@ -37,13 +37,15 @@ class BillingFragment : BaseFragment(), IBillingView {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val navigationManager = if (baseActivity.getNavigationRouter() is CamNavigationRouter)
-            baseActivity.getNavigationRouter() as CamNavigationRouter
-        else
-            CamNavigationRouter(baseActivity)
+        baseActivity?.apply {
+            val navigationManager = if (getNavigationRouter() is CamNavigationRouter)
+                getNavigationRouter() as CamNavigationRouter
+            else
+                CamNavigationRouter(this)
 
-        presenter = BillingPresenter(this, navigationManager)
-        setPresenter(presenter)
+            presenter = BillingPresenter(this@BillingFragment, navigationManager)
+            setPresenter(presenter)
+        }
         return inflater.inflate(R.layout.fragment_billing, container, false)
     }
 
@@ -53,7 +55,7 @@ class BillingFragment : BaseFragment(), IBillingView {
         container_restore.setOnClickListener { presenter?.onRestoreClicked() }
         purchaseListener = object : PurchaseInteractionListener {
             override fun onPurchaseButtonClicked(skuId: String) {
-                presenter?.onPurchaseButtonClicked(skuId)
+                presenter?.onPurchaseButtonClicked(baseActivity as Activity, skuId)
             }
 
             override fun onRedeemClicked() {
@@ -74,6 +76,7 @@ class BillingFragment : BaseFragment(), IBillingView {
                         SpaceItemDecoration(verticalSpaceHeight = resources.getDimensionPixelSize(R.dimen.billing_list_vertical_space))
                     )
                     this.itemAnimator = DefaultItemAnimator()
+                    addItemDecoration(itemDecoration)
                     this.adapter = recyclerBillingAdapter
                 }
             }
