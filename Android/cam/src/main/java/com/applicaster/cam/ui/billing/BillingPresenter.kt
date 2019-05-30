@@ -74,8 +74,7 @@ class BillingPresenter(
 
     override fun onPurchaseLoaded(purchases: List<Purchase>) {
         // mock action
-        if (ContentAccessManager.pluginConfigurator.isShowConfirmationPayment())
-            navigationRouter.showConfirmationDialog(AlertDialogType.BILLING)
+        view?.showToastMessage("purchase loaded")
     }
 
     override fun onPurchaseLoadingFailed(statusCode: Int, description: String) {

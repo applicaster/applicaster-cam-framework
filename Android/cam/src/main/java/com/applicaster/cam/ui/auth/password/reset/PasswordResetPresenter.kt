@@ -35,7 +35,7 @@ class PasswordResetPresenter(
     override fun onSuccess() {
         view?.hideLoadingIndicator()
         if (ContentAccessManager.pluginConfigurator.isShowConfirmationPasswordReset())
-            navigationRouter.showConfirmationDialog(AlertDialogType.BILLING)
+            navigationRouter.showConfirmationDialog(AlertDialogType.RESET_PASSWORD)
         else
             view?.goBack()
     }

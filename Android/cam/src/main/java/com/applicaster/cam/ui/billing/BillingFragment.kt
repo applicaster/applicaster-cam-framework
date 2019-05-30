@@ -20,6 +20,7 @@ import com.applicaster.cam.ui.billing.adapter.PurchaseInteractionListener
 import com.applicaster.cam.ui.billing.adapter.PurchaseItem
 import com.applicaster.cam.ui.billing.adapter.recycler.BillingItemType
 import com.applicaster.cam.ui.billing.adapter.recycler.RecyclerBillingAdapter
+import com.applicaster.cam.ui.billing.adapter.recycler.SpaceItemDecoration
 import kotlinx.android.synthetic.main.fragment_billing.*
 import kotlinx.android.synthetic.main.layout_text_with_action.*
 import kotlinx.android.synthetic.main.layout_toolbar_template.*
@@ -76,7 +77,6 @@ class BillingFragment : BaseFragment(), IBillingView {
                         SpaceItemDecoration(verticalSpaceHeight = resources.getDimensionPixelSize(R.dimen.billing_list_vertical_space))
                     )
                     this.itemAnimator = DefaultItemAnimator()
-                    addItemDecoration(itemDecoration)
                     this.adapter = recyclerBillingAdapter
                 }
             }
