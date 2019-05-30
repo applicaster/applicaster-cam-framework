@@ -20,17 +20,20 @@ class PasswordResetFragment : BaseFragment(), IPasswordResetView {
     private var presenter: IPasswordResetPresenter? = null
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         val rootView = inflater.inflate(R.layout.fragment_password_reset, container, false)
 
-        val navigationManager = if (baseActivity.getNavigationRouter() is CamNavigationRouter)
-            baseActivity.getNavigationRouter() as CamNavigationRouter
-        else
-            CamNavigationRouter(baseActivity)
-        presenter = PasswordResetPresenter(this, navigationManager)
-        setPresenter(presenter)
+        baseActivity?.apply {
+            val navigationManager = if (getNavigationRouter() is CamNavigationRouter)
+                baseActivity?.getNavigationRouter() as CamNavigationRouter
+            else
+                CamNavigationRouter(this)
+
+            presenter = PasswordResetPresenter(this@PasswordResetFragment, navigationManager)
+            setPresenter(presenter)
+        }
 
         return rootView
     }
@@ -66,9 +69,9 @@ class PasswordResetFragment : BaseFragment(), IPasswordResetView {
     override fun populateAuthFieldsViews(authFieldConfig: AuthFieldConfig) {
         context?.apply {
             InputFieldViewCustomizer.populateAuthFields(
-                    this,
-                    linearParent = container_linear_reset_input,
-                    authFieldConfig = authFieldConfig
+                this,
+                linearParent = container_linear_reset_input,
+                authFieldConfig = authFieldConfig
             )
         }
     }

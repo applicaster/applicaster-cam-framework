@@ -24,16 +24,17 @@ abstract class AuthFragment : BaseFragment(), IAuthView {
     private var presenter: IAuthPresenter? = null
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         val rootView = inflater.inflate(R.layout.fragment_auth, container, false)
-
-        val navigationManager = if (baseActivity.getNavigationRouter() is CamNavigationRouter)
-            baseActivity.getNavigationRouter() as CamNavigationRouter
-        else
-            CamNavigationRouter(baseActivity)
-        presenter = initPresenter(navigationManager)
+        baseActivity?.apply {
+            val navigationManager = if (getNavigationRouter() is CamNavigationRouter)
+                getNavigationRouter() as CamNavigationRouter
+            else
+                CamNavigationRouter(this)
+            presenter = initPresenter(navigationManager)
+        }
 
         return rootView
     }
@@ -59,11 +60,11 @@ abstract class AuthFragment : BaseFragment(), IAuthView {
 
         container_additional_auth?.apply {
             visibility =
-                    if (ContentAccessManager.pluginConfigurator.isFacebookLoginRequired()) View.VISIBLE else View.GONE
+                if (ContentAccessManager.pluginConfigurator.isFacebookLoginRequired()) View.VISIBLE else View.GONE
         }
         container_bottom_bar?.apply {
             visibility =
-                    if (ContentAccessManager.pluginConfigurator.isAuthRestoreRequired()) View.VISIBLE else View.GONE
+                if (ContentAccessManager.pluginConfigurator.isAuthRestoreRequired()) View.VISIBLE else View.GONE
         }
 
         UIMapper.apply {
@@ -82,10 +83,10 @@ abstract class AuthFragment : BaseFragment(), IAuthView {
     override fun populateAuthFieldsViews(authFieldConfig: AuthFieldConfig) {
         context?.apply {
             InputFieldViewCustomizer.populateAuthFields(
-                    this,
-                    linearParent = container_linear_input,
-                    scrollableParent = container_scrollable_input,
-                    authFieldConfig = authFieldConfig
+                this,
+                linearParent = container_linear_input,
+                scrollableParent = container_scrollable_input,
+                authFieldConfig = authFieldConfig
             )
         }
     }

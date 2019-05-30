@@ -6,12 +6,12 @@ import com.applicaster.cam.ui.auth.login.LoginFragment
 import com.applicaster.cam.ui.auth.signup.SignUpFragment
 import com.applicaster.cam.ui.base.BaseNavigationRouter
 import com.applicaster.cam.ui.confirmation.AlertDialogType
-import com.applicaster.cam.ui.base.view.BaseActivity
+import com.applicaster.cam.ui.base.view.IBaseActivity
 import com.applicaster.cam.ui.confirmation.ConfirmationDialog
 import com.applicaster.cam.ui.billing.BillingFragment
 import com.applicaster.cam.ui.auth.password.reset.PasswordResetFragment
 
-class CamNavigationRouter(baseActivity: BaseActivity) : BaseNavigationRouter(baseActivity) {
+class CamNavigationRouter(baseActivity: IBaseActivity) : BaseNavigationRouter(baseActivity) {
 
     fun attachSignUpFragment(initialLoad: Boolean = false) {
         val tag = SignUpFragment::class.java.canonicalName

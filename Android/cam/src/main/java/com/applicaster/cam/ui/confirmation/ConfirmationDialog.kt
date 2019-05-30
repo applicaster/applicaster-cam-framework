@@ -2,6 +2,7 @@ package com.applicaster.cam.ui.confirmation
 
 import android.app.Activity
 import android.app.Dialog
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.support.v7.app.AlertDialog
@@ -9,6 +10,7 @@ import android.view.View
 import com.applicaster.cam.R
 import com.applicaster.cam.config.ui.UIKey
 import com.applicaster.cam.config.ui.UIMapper
+import com.applicaster.cam.ui.base.view.IBaseActivity
 import kotlinx.android.synthetic.main.layout_confirmation.view.*
 
 enum class AlertDialogType {
@@ -20,6 +22,7 @@ enum class AlertDialogType {
 
 class ConfirmationDialog : DialogFragment() {
 
+    private var baseActivity: IBaseActivity? = null
     private var dialogView: View? = null
     private lateinit var dialogType: AlertDialogType
 
@@ -42,7 +45,10 @@ class ConfirmationDialog : DialogFragment() {
     }
 
     private fun setUpListeners() {
-        this.dialogView?.btn_confirmation_ok?.setOnClickListener { dismiss() }
+        dialogView?.btn_confirmation_ok?.setOnClickListener {
+            dismiss()
+            baseActivity?.goBack()
+        }
     }
 
     fun customize() {
@@ -74,6 +80,16 @@ class ConfirmationDialog : DialogFragment() {
             AlertDialogType.UNDEFINED -> {
             }
         }
+    }
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        baseActivity = context as? IBaseActivity
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        baseActivity = null
     }
 
     companion object {

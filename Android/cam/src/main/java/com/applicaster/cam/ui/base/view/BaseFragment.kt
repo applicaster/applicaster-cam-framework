@@ -13,7 +13,7 @@ import com.applicaster.cam.ui.base.presenter.IBasePresenter
 
 abstract class BaseFragment : Fragment(), IBaseView {
 
-    protected lateinit var baseActivity: BaseActivity
+    protected var baseActivity: IBaseActivity? = null
     private var basePresenter: IBasePresenter? = null
     private var toast: Toast? = null
     private var dialog: AlertDialog? = null
@@ -24,7 +24,12 @@ abstract class BaseFragment : Fragment(), IBaseView {
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-        baseActivity = context as BaseActivity
+        baseActivity = context as? IBaseActivity
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        baseActivity = null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -57,12 +62,12 @@ abstract class BaseFragment : Fragment(), IBaseView {
     }
 
     @SuppressLint("ShowToast")
-    override fun showToastMessage(message: String) {
+    override fun showToastMessage(msg: String) {
         if (isAdded && context != null && !activity?.isFinishing!!) {
             if (toast == null) {
-                toast = Toast.makeText(context, message, Toast.LENGTH_SHORT)
+                toast = Toast.makeText(context, msg, Toast.LENGTH_SHORT)
             } else {
-                toast?.setText(message)
+                toast?.setText(msg)
                 toast?.duration = Toast.LENGTH_SHORT
             }
             toast?.show()
@@ -88,14 +93,14 @@ abstract class BaseFragment : Fragment(), IBaseView {
         dialog?.dismiss()
     }
 
-    override fun getFragmentContainerType(): ContainerType = baseActivity.getFragmentContainerType()
+    override fun getFragmentContainerType() = baseActivity?.getFragmentContainerType() ?: ContainerType.PHONE
 
     override fun goBack() {
-        activity?.onBackPressed()
+        baseActivity?.goBack()
     }
 
     override fun close() {
-        activity?.finish()
+        baseActivity?.close()
     }
 
     private fun makeFullscreen(rootLayout: View?) {

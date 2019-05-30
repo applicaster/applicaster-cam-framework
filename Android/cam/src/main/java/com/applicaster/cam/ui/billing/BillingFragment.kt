@@ -1,5 +1,6 @@
 package com.applicaster.cam.ui.billing
 
+import android.app.Activity
 import android.os.Bundle
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
@@ -36,13 +37,15 @@ class BillingFragment : BaseFragment(), IBillingView {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val navigationManager = if (baseActivity.getNavigationRouter() is CamNavigationRouter)
-            baseActivity.getNavigationRouter() as CamNavigationRouter
-        else
-            CamNavigationRouter(baseActivity)
+        baseActivity?.apply {
+            val navigationManager = if (getNavigationRouter() is CamNavigationRouter)
+                getNavigationRouter() as CamNavigationRouter
+            else
+                CamNavigationRouter(this)
 
-        presenter = BillingPresenter(this, navigationManager)
-        setPresenter(presenter)
+            presenter = BillingPresenter(this@BillingFragment, navigationManager)
+            setPresenter(presenter)
+        }
         return inflater.inflate(R.layout.fragment_billing, container, false)
     }
 
@@ -52,7 +55,7 @@ class BillingFragment : BaseFragment(), IBillingView {
         container_restore.setOnClickListener { presenter?.onRestoreClicked() }
         purchaseListener = object : PurchaseInteractionListener {
             override fun onPurchaseButtonClicked(skuId: String) {
-                presenter?.onPurchaseButtonClicked(activity, skuId)
+                presenter?.onPurchaseButtonClicked(baseActivity as Activity, skuId)
             }
 
             override fun onRedeemClicked() {
