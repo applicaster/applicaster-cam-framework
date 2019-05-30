@@ -11,15 +11,18 @@ import UIKit
 final class OfferViewModel {
     let title: String
     let description: String
+    let purchaseButtonText: String
     let buyAction: () -> Void
     let redeemAction: () -> Void
     
     init(title: String,
          description: String,
+         purchaseButtonText: String,
          buyAction: @escaping () -> Void,
          redeemAction: @escaping () -> Void) {
         self.title = title
         self.description = description
+        self.purchaseButtonText = purchaseButtonText
         self.buyAction = buyAction
         self.redeemAction = redeemAction
     }
@@ -48,7 +51,8 @@ class EntitlementCollectionViewCell: UICollectionViewCell {
         self.infoLabel.text = viewModel.description
         self.buyAction = viewModel.buyAction
         self.redeemAction = viewModel.redeemAction
-        self.purchaseButton.setZappStyle(backgroundAsset: .purchaseButtonImage, title: "SUBSCRIBE FOR $4.99")
+        self.purchaseButton.setZappStyle(backgroundAsset: .purchaseButtonImage,
+                                         title: viewModel.purchaseButtonText)
     }
 
     @IBAction private func purchaseItem(_ sender: UIButton) {

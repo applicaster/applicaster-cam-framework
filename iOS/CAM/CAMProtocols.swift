@@ -32,15 +32,9 @@ public protocol CAMDelegate: AnyObject {
 }
 
 public struct Product {
-    public let title: String
-    public let description: String
-    public let price: String
     public let skProduct: SKProduct
     
-    public init(title: String, description: String, price: String, skProduct: SKProduct) {
-        self.title = title
-        self.description = description
-        self.price = price
+    public init(skProduct: SKProduct) {
         self.skProduct = skProduct
     }
 }

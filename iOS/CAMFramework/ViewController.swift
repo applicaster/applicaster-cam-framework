@@ -65,15 +65,16 @@ class ViewController: UIViewController, CAMDelegate {
     }
     
     func availableProducts() -> [Product] {
-//        let title = "Monthly Subscription Monthly Subscription Monthly Subscription"
         let title = "Monthly Subscription Subscription"
         let description = "Subscription details go here and might take up to two lines maximum"
         let price = "4.99"
-        let skProduct = SKProduct()
-        let product = Product(title: title,
-                              description: description,
-                              price: price,
-                              skProduct: skProduct)
+        let locale = Locale(identifier: "en_US")
+        let skProduct = SKProduct(identifier: "com.test",
+                                  title: title,
+                                  description: description,
+                                  price: price,
+                                  priceLocale: locale)
+        let product = Product(skProduct: skProduct)
         return Array(repeating: product, count: 3)
     }
     
@@ -114,4 +115,16 @@ class ViewController: UIViewController, CAMDelegate {
         super.viewDidAppear(animated)
     }
 
+}
+
+private extension SKProduct {
+    
+    convenience init(identifier: String, title: String, description: String, price: String, priceLocale: Locale) {
+        self.init()
+        self.setValue(identifier, forKey: "productIdentifier")
+        self.setValue(title, forKey: "localizedTitle")
+        self.setValue(description, forKey: "localizedDescription")
+        self.setValue(NSDecimalNumber(string: price), forKey: "price")
+        self.setValue(priceLocale, forKey: "priceLocale")
+    }
 }

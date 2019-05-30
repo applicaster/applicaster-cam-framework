@@ -65,8 +65,13 @@ class EntitlementPickerPresenter {
                 self?.coordinatorDelegate?.showRedeemCodeScreen()
             }
             
-            return OfferViewModel(title: product.title,
-                                  description: product.description,
+            let configText = camDelegate?.getPluginConfig()[CAMKeys.paymentButtonText.rawValue] ?? ""
+            let price = product.skProduct.localizedPrice ?? ""
+            let purchaseButtonText = configText + " " + price
+            
+            return OfferViewModel(title: product.skProduct.localizedTitle,
+                                  description: product.skProduct.localizedDescription,
+                                  purchaseButtonText: purchaseButtonText,
                                   buyAction: buyAction,
                                   redeemAction: redeemAction)
         })
