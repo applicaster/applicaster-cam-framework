@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.PagerSnapHelper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,7 @@ import com.applicaster.cam.ui.base.view.BaseFragment
 import com.applicaster.cam.ui.base.view.ContainerType
 import com.applicaster.cam.ui.billing.adapter.PurchaseInteractionListener
 import com.applicaster.cam.ui.billing.adapter.PurchaseItem
+import com.applicaster.cam.ui.billing.adapter.recycler.BillingItemType
 import com.applicaster.cam.ui.billing.adapter.recycler.RecyclerBillingAdapter
 import kotlinx.android.synthetic.main.fragment_billing.*
 import kotlinx.android.synthetic.main.layout_text_with_action.*
@@ -52,27 +54,33 @@ class BillingFragment : BaseFragment(), IBillingView {
             override fun onPurchaseButtonClicked(skuId: String) {
                 presenter?.onPurchaseButtonClicked(skuId)
             }
+
+            override fun onRedeemClicked() {
+                Log.e(BillingFragment::class.java.simpleName, "Redeem clicked")
+            }
         }
     }
 
-    override fun initViewComponents(containerType: ContainerType) {
+    override fun initViewComponents(containerType: ContainerType, billingItemType: BillingItemType) {
         // init toolbar here
         when (containerType) {
             ContainerType.PHONE -> {
-                recyclerBillingAdapter = RecyclerBillingAdapter(purchaseListener)
+                recyclerBillingAdapter = RecyclerBillingAdapter(purchaseListener, billingItemType)
                 val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+                val itemDecoration = SpaceItemDecoration(verticalSpaceHeight = resources.getDimensionPixelSize(R.dimen.billing_list_vertical_space))
                 rv_billing_items?.apply {
                     this.layoutManager = layoutManager
                     this.itemAnimator = DefaultItemAnimator()
+                    addItemDecoration(itemDecoration)
                     this.adapter = recyclerBillingAdapter
                 }
             }
 
             ContainerType.TABLET -> {
-                pagerBillingAdapter = RecyclerBillingAdapter(purchaseListener)
+                pagerBillingAdapter = RecyclerBillingAdapter(purchaseListener, billingItemType)
                 val layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                 val snapHelper = PagerSnapHelper()
-                val itemDecoration = SpaceItemDecoration(horizontalSpaceHeight = 20)
+                val itemDecoration = SpaceItemDecoration(horizontalSpaceHeight = resources.getDimensionPixelSize(R.dimen.billing_list_horizontal_space))
                 rv_billing_items?.apply {
                     this.layoutManager = layoutManager
                     snapHelper.attachToRecyclerView(this)

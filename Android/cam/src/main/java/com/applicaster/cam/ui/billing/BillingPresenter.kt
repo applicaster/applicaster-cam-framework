@@ -13,6 +13,7 @@ import com.applicaster.cam.ui.base.presenter.BasePresenter
 import com.applicaster.cam.ui.base.view.AlertDialogType
 import com.applicaster.cam.ui.base.view.BaseActivity
 import com.applicaster.cam.ui.billing.adapter.PurchaseItem
+import com.applicaster.cam.ui.billing.adapter.recycler.BillingItemType
 import com.applicaster.iap.BillingListener
 import com.applicaster.iap.GoogleBillingHelper
 
@@ -33,7 +34,8 @@ class BillingPresenter(
         GoogleBillingHelper.init(getBaseActivity().applicationContext,this)
         view.setListeners()
 
-        view.initViewComponents(getBaseActivity().getFragmentContainerType())
+        //TODO: implement logic for checking BillingItemType
+        view.initViewComponents(getBaseActivity().getFragmentContainerType(), BillingItemType.NO_REDEEM)
         view.customize()
 
         //load entitlements
@@ -54,7 +56,8 @@ class BillingPresenter(
         }?.also { skuDetails ->
             GoogleBillingHelper.purchase(getBaseActivity(), skuDetails)
         }
-        view.showToastMessage("Subscribe button clicked")
+
+        // mock action
         if (ContentAccessManager.pluginConfigurator.isShowConfirmationPayment())
             navigationRouter.showConfirmationDialog(AlertDialogType.BILLING)
     }
@@ -68,6 +71,7 @@ class BillingPresenter(
     }
 
     override fun onPurchaseLoaded(purchases: List<Purchase>) {
+        // mock action
         if (ContentAccessManager.pluginConfigurator.isShowConfirmationPayment())
             navigationRouter.showConfirmationDialog(AlertDialogType.BILLING )
     }

@@ -11,10 +11,12 @@ import com.applicaster.cam.ui.billing.adapter.IBillingAdapter
 import com.applicaster.cam.ui.billing.adapter.PurchaseInteractionListener
 import kotlinx.android.synthetic.main.billing_item.view.*
 import android.support.v4.view.ViewPager
+import com.applicaster.cam.ui.billing.adapter.recycler.BillingItemType
 
 
 class PagerBillingAdapter(
-    private val purchaseListener: PurchaseInteractionListener
+    private val purchaseListener: PurchaseInteractionListener,
+    private val itemType: BillingItemType
 ) : PagerAdapter(),
     IBillingAdapter {
 
@@ -26,7 +28,7 @@ class PagerBillingAdapter(
         val itemView = LayoutInflater.from(container.context).inflate(com.applicaster.cam.R.layout.billing_item, container, false)
         container.addView(itemView)
         bindView(purchaseItemsList[position], itemView)
-        customize(itemView)
+        customize(itemView, itemType)
         return itemView
     }
 
@@ -39,12 +41,10 @@ class PagerBillingAdapter(
     override fun getItemPosition(obj: Any): Int = POSITION_NONE
 
     private fun bindView(purchaseItem: PurchaseItem, view: View) {
-        customize(view)
-
-        setItemListener(purchaseItem, view.btn_billing_item_subscribe)
+        customize(view, itemType)
     }
 
-    override fun customize(itemView: View) {
+    override fun customize(itemView: View, itemType: BillingItemType) {
         UIMapper.apply {
             map(itemView.layout_billing_item, UIKey.BILLING_ITEM_PARENT)
             map(itemView.tv_billing_item_title, UIKey.BILLING_ITEM_TITLE)
@@ -62,9 +62,5 @@ class PagerBillingAdapter(
     override fun removeAllPurchaseItems() {
         purchaseItemsList.clear()
         notifyDataSetChanged()
-    }
-
-    override fun setItemListener(item: PurchaseItem, holderView: View) {
-        holderView.setOnClickListener { purchaseListener.onPurchaseButtonClicked(item.productId) }
     }
 }

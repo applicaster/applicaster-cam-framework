@@ -29,22 +29,28 @@
     <dimen name="billing_title_margin_top">30dp</dimen>
     <dimen name="billing_details_margin_left_right">24dp</dimen>
     <dimen name="billing_details_margin_top">32dp</dimen>
+    <dimen name="billing_no_redeem_details_margin_top">16dp</dimen>
     <dimen name="billing_btn_subscribe_width">229dp</dimen>
     <dimen name="billing_btn_subscribe_height">37dp</dimen>
     <dimen name="billing_btn_subscribe_margin_top">20dp</dimen>
+    <dimen name="billing_no_redeem_btn_subscribe_margin_top">18dp</dimen>
+    <dimen name="billing_no_redeem_btn_subscribe_margin_bottom">25dp</dimen>
     <dimen name="billing_tv_redeem_margin_top">24dp</dimen>
     <dimen name="billing_tv_redeem_margin_bottom">34dp</dimen>
     <dimen name="billing_tv_redeem_text_size">13sp</dimen>
     <dimen name="billing_btn_subscribe_text_size">12sp</dimen>
     <dimen name="billing_tv_details_text_size">15sp</dimen>
     <dimen name="billing_tv_title_text_size">24sp</dimen>
-    <dimen name="billing_layout_margin_top_bottom">16dp</dimen>
+    <dimen name="billing_layout_margin_top">16dp</dimen>
+    <dimen name="billing_layout_margin_bottom">16dp</dimen>
     <dimen name="layout_billing_item_height">278dp</dimen>
     <dimen name="layout_billing_item_width">362dp</dimen>
     <dimen name="billing_tv_title_text_margin_top">8dp</dimen>
     <dimen name="billing_layout_details_margin_top">14dp</dimen>
     <dimen name="billing_rv_items_margin_end">54dp</dimen>
     <dimen name="billing_rv_items_margin_start">54dp</dimen>
+    <dimen name="billing_list_vertical_space">14dp</dimen>
+    <dimen name="billing_list_horizontal_space">20dp</dimen>
     <!-- End region -->
 
     <!--Region default dimens-->
