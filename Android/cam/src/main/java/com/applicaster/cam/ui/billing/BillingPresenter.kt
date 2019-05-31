@@ -120,7 +120,14 @@ class BillingPresenter(
                 "5$",
                 ""
             )
-            view?.populateBillingContainer(arrayListOf(purchaseItem, purchaseItem, purchaseItem))
+            view?.populateBillingContainer(arrayListOf(
+                purchaseItem,
+                purchaseItem,
+                purchaseItem,
+                purchaseItem,
+                purchaseItem,
+                purchaseItem
+            ))
         }
     }
 

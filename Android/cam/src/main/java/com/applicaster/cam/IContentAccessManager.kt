@@ -27,3 +27,4 @@ interface EntitlementsLoadCallback {
 }
 
 interface RestoreCallback : EntitlementsLoadCallback
+interface PurchaseCallback : ActionCallback
