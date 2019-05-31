@@ -16,7 +16,7 @@ abstract class BaseFragment : Fragment(), IBaseView {
     protected var baseActivity: IBaseActivity? = null
     private var basePresenter: IBasePresenter? = null
     private var toast: Toast? = null
-    private var dialog: AlertDialog? = null
+    private var progressDialog: AlertDialog? = null
 
     protected fun setPresenter(presenter: IBasePresenter?) {
         basePresenter = presenter
@@ -61,6 +61,10 @@ abstract class BaseFragment : Fragment(), IBaseView {
         return context
     }
 
+    override fun customize() {
+        makeFullscreen(getParentView())
+    }
+
     @SuppressLint("ShowToast")
     override fun showToastMessage(msg: String) {
         if (isAdded && context != null && !activity?.isFinishing!!) {
@@ -74,23 +78,31 @@ abstract class BaseFragment : Fragment(), IBaseView {
         }
     }
 
-    override fun customize() {
-        makeFullscreen(getParentView())
+    override fun showAlert(msg: String) {
+        context?.apply {
+            val builder = AlertDialog.Builder(this)
+            builder
+                .setMessage(msg)
+                .setPositiveButton(getString(R.string.lbl_okay)) { dialog, _ -> dialog.dismiss() }
+                .create().apply {
+                    show()
+                }
+        }
     }
 
     override fun showLoadingIndicator() {
         context?.apply {
-            if (dialog == null) {
+            if (progressDialog == null) {
                 val builder = AlertDialog.Builder(this)
                 builder.setView(R.layout.layout_progress)
-                dialog = builder.create()
+                progressDialog = builder.create()
             }
-            dialog?.show()
+            progressDialog?.show()
         }
     }
 
     override fun hideLoadingIndicator() {
-        dialog?.dismiss()
+        progressDialog?.dismiss()
     }
 
     override fun getFragmentContainerType() = baseActivity?.getFragmentContainerType() ?: ContainerType.PHONE

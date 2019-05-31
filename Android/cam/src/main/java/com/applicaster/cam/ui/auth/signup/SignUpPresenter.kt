@@ -13,7 +13,7 @@ class SignUpPresenter(
 ) :
     AuthPresenter(view), ISignUpPresenter, SignUpCallback, FacebookAuthCallback {
     override fun onFailure(msg: String) {
-        view?.showToastMessage(msg)
+        view?.showAlert(msg)
     }
 
     override fun onSuccess() {

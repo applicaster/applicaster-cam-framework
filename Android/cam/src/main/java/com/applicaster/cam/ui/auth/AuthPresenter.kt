@@ -1,6 +1,7 @@
 package com.applicaster.cam.ui.auth
 
 import android.app.Activity
+import com.applicaster.cam.ContentAccessManager
 import com.applicaster.cam.params.auth.AuthFieldConfig
 import com.applicaster.cam.ui.base.presenter.BasePresenter
 import com.applicaster.model.APUser
@@ -33,7 +34,7 @@ abstract class AuthPresenter(
 
             override fun handleException(error: Exception) {
                 view?.hideLoadingIndicator()
-                view?.showToastMessage(error.message ?: "Facebook auth failed")
+                view?.showAlert(error.message ?: "Facebook auth failed")
             }
 
             override fun onTaskComplete(result: APUser) {
@@ -57,7 +58,7 @@ abstract class AuthPresenter(
      * [FBAuthoriziationListener] auth error
      */
     override fun onError(error: Exception?) {
-        view?.showToastMessage(error?.message ?: "Facebook auth failed")
+        view?.showAlert(error?.message ?: "Facebook auth failed")
     }
 
     override fun onFacebookButtonClicked(activity: Activity?) {
@@ -68,7 +69,7 @@ abstract class AuthPresenter(
     protected fun isAuthInputFieldsValid(inputValues: HashMap<String, String>): Boolean {
         for (inputValue in inputValues) {
             if (inputValue.value.isEmpty()) {
-                view?.showToastMessage("You must fill all fields")
+                view?.showAlert(ContentAccessManager.pluginConfigurator.getDefaultInputFieldError())
                 return false
             }
         }

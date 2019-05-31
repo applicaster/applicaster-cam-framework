@@ -13,6 +13,8 @@ interface Configurator {
 
     fun getDefaultAuthScreen(): AuthScreenType
 
+    fun getDefaultInputFieldError(): String
+
     fun isAuthRestoreRequired(): Boolean
 
     fun isPasswordResetRequired(): Boolean
@@ -23,5 +25,5 @@ interface Configurator {
 
     fun isShowConfirmationPayment(): Boolean
 
-    fun isShowConfiramtionRestorePurchases(): Boolean
+    fun isShowConfirmationRestorePurchases(): Boolean
 }
