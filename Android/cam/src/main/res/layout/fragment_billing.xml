@@ -41,8 +41,6 @@
             android:layout_marginEnd="@dimen/billing_rv_items_margin_end"
             android:layout_marginStart="@dimen/billing_rv_items_margin_start"
             android:orientation="vertical"
-            android:scrollbarStyle="outsideOverlay"
-            android:scrollbars="vertical"
             android:overScrollMode="never"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

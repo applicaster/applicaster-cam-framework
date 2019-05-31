@@ -27,6 +27,13 @@
     <dimen name="additional_auth_divider_height">3dp</dimen>
     <dimen name="additional_auth_margin">8dp</dimen>
 
+    <!-- Region Password reset-->
+    <dimen name="password_reset_title_margin_top">50dp</dimen>
+    <dimen name="password_reset_desc_margin_top">20dp</dimen>
+    <dimen name="password_reset_desc_width">375dp</dimen>
+    <dimen name="password_reset_input_fields_margin_top">70dp</dimen>
+    <!-- End region -->
+
     <!-- Region Billing view -->
     <dimen name="billing_title_margin_top">30dp</dimen>
     <dimen name="billing_details_margin_left_right">24dp</dimen>

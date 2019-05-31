@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/layout_confirmation_background"
         android:layout_width="@dimen/confirmation_layout_width"
-        android:layout_height="@dimen/confirmation_layout_height">
+        android:layout_height="@dimen/confirmation_layout_height"
+        android:orientation="vertical">
 
     <com.applicaster.util.ui.CustomTextView
             android:id="@+id/tv_confirmation_title"
@@ -13,25 +14,21 @@
             android:layout_height="wrap_content"
             android:text="Dummy text"
             android:layout_marginTop="80dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:textAlignment="center"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            android:layout_gravity="center_horizontal"/>
 
     <com.applicaster.util.ui.CustomTextView
             android:id="@+id/tv_confirmation_desc"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:text="Dummy text"
-            android:layout_marginEnd="22dp"
-            android:layout_marginStart="22dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="42dp"
             android:textAlignment="center"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_confirmation_title"/>
+            android:layout_gravity="center_horizontal"/>
 
     <com.applicaster.util.ui.CustomButton
             android:id="@+id/btn_confirmation_ok"
@@ -42,9 +39,6 @@
             android:layout_marginEnd="10dp"
             android:layout_marginStart="10dp"
             android:layout_marginBottom="12dp"
-            app:layout_constraintTop_toBottomOf="@+id/tv_confirmation_desc"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            android:layout_gravity="center_horizontal"/>
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

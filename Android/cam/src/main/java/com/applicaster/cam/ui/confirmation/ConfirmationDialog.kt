@@ -1,12 +1,11 @@
 package com.applicaster.cam.ui.confirmation
 
-import android.app.Activity
-import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
-import android.support.v7.app.AlertDialog
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import com.applicaster.cam.R
 import com.applicaster.cam.config.ui.UIKey
 import com.applicaster.cam.config.ui.UIMapper
@@ -26,22 +25,25 @@ class ConfirmationDialog : DialogFragment() {
     private var dialogView: View? = null
     private lateinit var dialogType: AlertDialogType
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         dialogType = AlertDialogType.valueOf(arguments?.getString(KEY_TYPE) ?: AlertDialogType.UNDEFINED.name)
-        return activity?.let {
-            setUpDialogView(it)
-            setUpListeners()
-            customize()
-            // Use the Builder class for convenient dialog construction
-            with(AlertDialog.Builder(it)) {
-                setView(dialogView)
-            }.create()
-        } ?: throw IllegalStateException("Activity cannot be null")
     }
 
-    private fun setUpDialogView(activity: Activity) {
-        val view = activity.layoutInflater.inflate(R.layout.layout_confirmation, null)
-        this.dialogView = view
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        dialogView = layoutInflater.inflate(R.layout.layout_confirmation, container, false)
+        setUpListeners()
+        customize()
+        return dialogView
+    }
+
+    override fun onResume() {
+        super.onResume()
+        dialog?.let {
+            val dialogWidth = resources.getDimension(R.dimen.confirmation_layout_width).toInt()
+            val dialogHeight = resources.getDimension(R.dimen.confirmation_layout_height).toInt()
+            it.window?.setLayout(dialogWidth, ViewGroup.LayoutParams.WRAP_CONTENT)
+        }
     }
 
     private fun setUpListeners() {

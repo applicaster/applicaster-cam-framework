@@ -1,5 +1,6 @@
 package com.applicaster.cam.ui
 
+import android.support.v4.app.DialogFragment
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentTransaction
 import com.applicaster.cam.ui.auth.login.LoginFragment
@@ -48,11 +49,18 @@ class CamNavigationRouter(baseActivity: IBaseActivity) : BaseNavigationRouter(ba
         val tag = BillingFragment::class.java.canonicalName
         val fragment: Fragment = fragmentManager.findFragmentByTag(tag) ?: BillingFragment()
         val fragmentTransaction: FragmentTransaction? = fragmentManager.beginTransaction()
+        fragmentTransaction?.addToBackStack(tag)
         fragmentTransaction?.replace(fragmentContainer!!, fragment, tag)
         fragmentTransaction?.commit()
     }
 
     fun showConfirmationDialog(dialogType: AlertDialogType) {
-        ConfirmationDialog.newInstance(dialogType).show(fragmentManager, "ConfirmationDialog-${dialogType.name}")
+        val tag = "ConfirmationDialog-${dialogType.name}"
+        val dialog: DialogFragment? = fragmentManager.findFragmentByTag(tag) as? DialogFragment
+        if (dialog == null) {
+            ConfirmationDialog.newInstance(dialogType).show(fragmentManager, tag)
+        } else {
+            dialog.show(fragmentManager, tag)
+        }
     }
 }
