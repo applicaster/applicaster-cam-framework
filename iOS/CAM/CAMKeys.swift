@@ -24,7 +24,7 @@ public enum CAMKeys: String {
     case backgroundImage = "background_image"
     case separatorText = "separator_text"
     
-    case emptyFieldsMessage = "madatory_field_empty_error"
+    case emptyFieldsMessage = "alert_mandatory_field_empty"
     
     //Login
     
@@ -47,19 +47,18 @@ public enum CAMKeys: String {
     
     //Reset Password
     
-    case passwordResetTitleText = "password_reset_title_text"
-    case passwordResetInfoText = "password_reset_description_text"
-    case passwordResetButtonText = "password_reset_button_text"
+    case passwordResetTitleText = "reset_password_title_text"
+    case passwordResetInfoText = "reset_password_details_text"
+    case passwordResetButtonText = "reset_password_action_button_text"
     case passwordResetButtonImage = "password_reset_button_image"
-    case passwordInputFieldPlaceholder = "password_input_field_placeholder"
     
     //Alert
     
-    case passwordAlertTitleText = "password_alert_title_text"
-    case passwordAlertInfoText = "password_alert_description_text"
-    case passwordAlertButtonText = "password_alert_button_text"
+    case passwordAlertTitleText = "pwd_confirmation_title_text"
+    case passwordAlertInfoText = "pwd_confirmation_description_text"
+    case passwordAlertButtonText = "pwd_confirmation_button_text"
     case alertButtonImage = "alert_button_image"
-    
+   
     // Payment Options
     
     case purchaseButtonText = "payment_option_button_text"

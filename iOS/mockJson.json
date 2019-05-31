@@ -1,7 +1,8 @@
 {
+    "facebook_login_required" : "true",
     "default_auth_screen": "login",
     "separator_text": "Or",
-    "madatory_field_empty_error": "Mandatory field is empty!",
+    "alert_mandatory_field_empty": "Mandatory field is empty!",
     
     "login_screen_title_text": "Login",
     "reset_password_text": "Forgot Password?",
@@ -16,14 +17,13 @@
     "sign_up_promt_text": "Have already an account?",
     "sign_up_promt_action_text": "Log In",
     
-    "password_reset_title_text": "Reset Password",
-    "password_reset_description_text": "Type in you e-mail so we would send you the new password",
-    "password_reset_button_text": "Reset Password",
+    "reset_password_title_text": "Reset Password",
+    "reset_password_details_text": "Type in you e-mail so we would send you the new password",
+    "reset_password_action_button_text": "Reset Password",
     
-    "password_alert_button_text": "Ok",
-    "password_alert_title_text": "Congratulations",
-    "password_alert_description_text": "Success",
-    "password_input_field_placeholder": "Email",
+    "pwd_confirmation_title_text": "Password Reset Delivered",
+    "pwd_confirmation_description_text": "Check your email in order reset your password for this account",
+    "pwd_confirmation_button_text": "OK",
     
     "payment_option_title_text": "Monthly Subscription",
     "payment_option_details_text": "Subscription details go here nad might take up to two lines maximum",
@@ -32,10 +32,10 @@
     "payment_option_promo_text": "1 MONTH FREE",
     "payment_button_text": "SUBSCRIBE FOR",
 
-    "facebook_login_required" : "true",
     "auth_fields": "{ \"signup\": [{\"type\": \"TEXT\",\"key\": \"email\",\"title\": \"Email\",\"hint\": \"Email\",\"mandatory\": true },{\"type\": \"PASSWORD\",\"key\": \"password\",\"title\": \"Password\",\"hint\": \"Password\",\"mandatory\": true },{\"type\": \"NUMBER\",\"key\": \"Phone\",\"title\": \"Phone\",\"hint\": \"Phone\",\"mandatory\": true},{\"type\": \"TEXT\",\"key\": \"gender\",\"title\": \"Gender\",\"hint\": \"Gender\",\"mandatory\": false }],\"login\": [{\"type\": \"TEXT\",\"key\": \"email\",\"title\": \"Email\",\"hint\": \"Email\",\"mandatory\": true},{\"type\": \"PASSWORD\",\"key\": \"password\",\"title\": \"Password\",\"hint\": \"Password\",\"mandatory\": true},{\"type\": \"NUMBER\",\"key\": \"birthdate\",\"title\": \"Birth Date\",\"hint\": \"Birth Date\",\"mandatory\": true},{\"type\": \"NUMBER\",\"key\": \"birthdate\",\"title\": \"Birth Date\",\"hint\": \"Birth Date\",\"mandatory\": true}, {\"type\": \"NUMBER\",\"key\": \"birthdate\",\"title\": \"Birth Date\",\"hint\": \"Birth Date\",\"mandatory\": true}],\"password\": [{\"type\": \"NUMBER\",\"key\": \"birthdate\",\"title\": \"Birth Date\",\"hint\": \"Birth Date\",\"mandatory\": true},{\"type\": \"PASSWORD\",\"key\": \"password\",\"title\": \"Password\",\"hint\": \"Password\",\"mandatory\": true }]}",
 
     "payment_alert_title_text": "Congratulations!",
     "payment_alert_info_text": "You are susccessfully subscribed to SportsMax channels!",
     "payment_alert_button_text": "OK"
+    
 }
