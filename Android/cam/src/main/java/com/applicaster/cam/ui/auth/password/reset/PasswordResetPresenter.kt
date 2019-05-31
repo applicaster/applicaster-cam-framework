@@ -29,7 +29,7 @@ class PasswordResetPresenter(
 
     override fun onFailure(msg: String) {
         view?.hideLoadingIndicator()
-        view?.showToastMessage(msg)
+        view?.showAlert(msg)
     }
 
     override fun onSuccess() {
@@ -43,7 +43,7 @@ class PasswordResetPresenter(
     private fun isAuthInputFieldsValid(inputValues: HashMap<String, String>): Boolean {
         for (inputValue in inputValues) {
             if (inputValue.value.isEmpty()) {
-                view?.showToastMessage("You must fill all fields")
+                view?.showAlert(ContentAccessManager.pluginConfigurator.getDefaultInputFieldError())
                 return false
             }
         }

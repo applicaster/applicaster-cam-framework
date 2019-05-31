@@ -2,5 +2,5 @@
     <string name="app_name">cam</string>
     <string name="tv_billing_item_redeem_code"><u>Redeem Code</u></string>
     <string name="default_text">dummy text</string>
-
+    <string name="lbl_okay">Okay</string>
 </resources>

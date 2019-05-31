@@ -39,6 +39,8 @@
   "pwd_confirmation_description_text": "Check your email in order reset your password for this account",
   "pwd_confirmation_button_text": "OK",
 
+  "alert_mandatory_field_empty": "Mandatory field is empty!",
+
   "default_auth_screen": "signup",
   "pwd_reset_required" : "true",
   "facebook_login_required" : "true",

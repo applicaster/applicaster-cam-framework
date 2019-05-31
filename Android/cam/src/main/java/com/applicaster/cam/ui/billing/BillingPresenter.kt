@@ -126,7 +126,7 @@ class BillingPresenter(
 
     override fun onRestoreClicked() {
         //TODO: add restore logic
-        if (ContentAccessManager.pluginConfigurator.isShowConfiramtionRestorePurchases())
+        if (ContentAccessManager.pluginConfigurator.isShowConfirmationRestorePurchases())
             navigationRouter.showConfirmationDialog(AlertDialogType.RESTORE)
         else
             view?.goBack()
