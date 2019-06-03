@@ -35,15 +35,15 @@
     <!-- End region -->
 
     <!-- Region Billing view -->
-    <dimen name="billing_title_margin_top">30dp</dimen>
+    <dimen name="billing_title_margin_top">40dp</dimen>
     <dimen name="billing_details_margin_left_right">24dp</dimen>
     <dimen name="billing_details_margin_top">32dp</dimen>
-    <dimen name="billing_no_redeem_details_margin_top">16dp</dimen>
+    <dimen name="billing_no_redeem_details_margin_top">20dp</dimen>
     <dimen name="billing_btn_subscribe_width">229dp</dimen>
-    <dimen name="billing_btn_subscribe_height">37dp</dimen>
+    <dimen name="billing_btn_subscribe_height">38dp</dimen>
     <dimen name="billing_btn_subscribe_margin_top">20dp</dimen>
-    <dimen name="billing_no_redeem_btn_subscribe_margin_top">18dp</dimen>
-    <dimen name="billing_no_redeem_btn_subscribe_margin_bottom">25dp</dimen>
+    <dimen name="billing_no_redeem_btn_subscribe_margin_top">20dp</dimen>
+    <dimen name="billing_no_redeem_btn_subscribe_margin_bottom">40dp</dimen>
     <dimen name="billing_tv_redeem_margin_top">24dp</dimen>
     <dimen name="billing_tv_redeem_margin_bottom">34dp</dimen>
     <dimen name="billing_tv_redeem_text_size">13sp</dimen>
