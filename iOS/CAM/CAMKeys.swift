@@ -29,12 +29,12 @@ public enum CAMKeys: String {
     //Login
     
     case loginScreenTitleText = "login_screen_title_text"
-    case loginButtonText = "login_button_text"
+    case loginButtonText = "sign_in_button_text"
     case loginButtonImage = "login_button_image"
-    case loginResetPasswordButtonText = "reset_password_text"
+    case loginResetPasswordButtonText = "reset_password_action_text"
     case alternativeLoginPromtText = "alternative_login_action_prompt_text"
-    case loginSingUpPromtText = "login_promt_text"
-    case loginSingUpActionText = "login_promt_action_text"
+    case loginSingUpPromtText = "login_no_account_text"
+    case loginSingUpActionText = "sign_up_text"
     
     //SignUp
     
@@ -42,8 +42,8 @@ public enum CAMKeys: String {
     case signUpButtonText = "sign_up_button_text"
     case signUpButtonImage = "sign_up_button_image"
     case alternativeSignUpPromtText = "alternative_sign_up_action_promt_text"
-    case singUpLoginPromtText = "sign_up_promt_text"
-    case singUpLoginActionText = "sign_up_promt_action_text"
+    case singUpLoginPromtText = "have_account_text"
+    case singUpLoginActionText = "sign_up_prompt_action_text"
     
     //Reset Password
     
