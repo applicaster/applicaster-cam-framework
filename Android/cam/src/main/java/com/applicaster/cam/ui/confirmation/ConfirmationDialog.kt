@@ -42,7 +42,7 @@ class ConfirmationDialog : DialogFragment() {
         dialog?.let {
             val dialogWidth = resources.getDimension(R.dimen.confirmation_layout_width).toInt()
             val dialogHeight = resources.getDimension(R.dimen.confirmation_layout_height).toInt()
-            it.window?.setLayout(dialogWidth, ViewGroup.LayoutParams.WRAP_CONTENT)
+            it.window?.setLayout(dialogWidth, dialogHeight)
         }
     }
 
