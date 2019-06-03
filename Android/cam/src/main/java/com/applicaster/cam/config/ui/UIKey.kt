@@ -13,16 +13,16 @@ enum class UIKey(
     BACKGROUND_IMAGE(image = UI_KEY_BACKGROUND_IMAGE),
 
     LOGIN_TITLE(text = UI_KEY_LOGIN_TITLE_TEXT, textStyle = UI_KEY_TITLE_TEXT_STYLE),
-    LOGIN_RESET_PWD_TEXT(text = UI_KEY_LOGIN_RESET_PWD_TEXT, textStyle = UI_KEY_LOGIN_RESET_PWD_TEXT),
+    LOGIN_RESET_PWD_TEXT(text = UI_KEY_LOGIN_RESET_PWD_TEXT, textStyle = UI_KEY_LOGIN_RESET_PWD_STYLE),
     LOGIN_ALT_AUTH_TEXT(text = UI_KEY_THIRD_PARTY_LOGIN_TEXT, textStyle = UI_KEY_THIRD_PARTY_LOGIN_TEXT),
     LOGIN_BUTTON(text = UI_KEY_LOGIN_BUTTON_TEXT, image = UI_KEY_LOGIN_BUTTON_IMAGE, textStyle = UI_KEY_ACTION_BUTTON_TEXT_STYLE),
-    LOGIN_PROMPT_TEXT(text = UI_KEY_LOGIN_PROMPT_TEXT, textStyle = UI_KEY_LOGIN_PROMPT_TEXT),
-    LOGIN_PROMPT_ACTION_TEXT(text = UI_KEY_LOGIN_PROMPT_ACTION_TEXT, textStyle = UI_KEY_LOGIN_PROMPT_ACTION_TEXT),
+    LOGIN_PROMPT_TEXT(text = UI_KEY_LOGIN_PROMPT_TEXT, textStyle = UI_KEY_LOGIN_PROMPT_STYLE),
+    LOGIN_PROMPT_ACTION_TEXT(text = UI_KEY_LOGIN_PROMPT_ACTION_TEXT, textStyle = UI_KEY_SIGN_UP_PROMPT_TEXT_STYLE),
     SIGN_UP_TITLE(text = UI_KEY_SIGN_UP_TITLE_TEXT, textStyle = UI_KEY_TITLE_TEXT_STYLE),
     SIGN_UP_ALT_AUTH_TEXT(text = UI_KEY_THIRD_PARTY_SIGN_UP_TEXT, textStyle = UI_KEY_THIRD_PARTY_SIGN_UP_TEXT),
     SIGN_UP_BUTTON(text = UI_KEY_SIGN_UP_BUTTON_TEXT, image = UI_KEY_SIGN_UP_BUTTON_IMAGE, textStyle = UI_KEY_ACTION_BUTTON_TEXT_STYLE),
-    SIGN_UP_PROMPT_TEXT(text = UI_KEY_SIGN_UP_PROMPT_TEXT, textStyle = UI_KEY_SIGN_UP_PROMPT_TEXT),
-    SIGN_UP_PROMPT_ACTION_TEXT(text = UI_KEY_SIGN_UP_PROMPT_ACTION_TEXT, textStyle = UI_KEY_SIGN_UP_PROMPT_ACTION_TEXT),
+    SIGN_UP_PROMPT_TEXT(text = UI_KEY_SIGN_UP_PROMPT_TEXT, textStyle = UI_KEY_SIGN_UP_PROMPT_TEXT_STYLE),
+    SIGN_UP_PROMPT_ACTION_TEXT(text = UI_KEY_SIGN_UP_PROMPT_ACTION_TEXT, textStyle = UI_KEY_SIGN_UP_PROMPT_TEXT_STYLE),
     AUTH_SEPARATOR_TEXT(text = UI_KEY_THIRD_PARTY_SEPARATOR_TEXT, textStyle = UI_KEY_THIRD_PARTY_SEPARATOR_TEXT),
     AUTH_LEFT_DIVIDER_IMAGE(image = UI_KEY_THIRD_PARTY_DIVIDER_LEFT_IMAGE),
     AUTH_RIGHT_DIVIDER_IMAGE(image = UI_KEY_THIRD_PARTY_DIVIDER_RIGHT_IMAGE),
@@ -79,14 +79,17 @@ const val UI_KEY_ALERT_BUTTON_IMAGE = "alert_button_asset"
 const val UI_KEY_SIGN_UP_TITLE_TEXT = "sign_up_screen_title_text"
 const val UI_KEY_SIGN_UP_BUTTON_TEXT = "sign_up_button_text"
 const val UI_KEY_SIGN_UP_BUTTON_IMAGE = "action_button_asset"
-const val UI_KEY_LOGIN_RESET_PWD_TEXT = "reset_password_text"
-const val UI_KEY_SIGN_UP_PROMPT_TEXT = "sign_up_prompt_text"
+const val UI_KEY_LOGIN_RESET_PWD_TEXT = "reset_password_action_text"
+const val UI_KEY_LOGIN_RESET_PWD_STYLE = "Restore_password_text"
+const val UI_KEY_SIGN_UP_PROMPT_TEXT = "have_account_text"
+const val UI_KEY_SIGN_UP_PROMPT_TEXT_STYLE= "Link_text"
 const val UI_KEY_SIGN_UP_PROMPT_ACTION_TEXT = "sign_up_prompt_action_text"
 const val UI_KEY_LOGIN_TITLE_TEXT = "login_screen_title_text"
-const val UI_KEY_LOGIN_BUTTON_TEXT = "login_button_text"
+const val UI_KEY_LOGIN_BUTTON_TEXT = "sign_in_button_text"
 const val UI_KEY_LOGIN_BUTTON_IMAGE = "action_button_asset"
-const val UI_KEY_LOGIN_PROMPT_TEXT = "login_prompt_text"
-const val UI_KEY_LOGIN_PROMPT_ACTION_TEXT = "login_prompt_action_text"
+const val UI_KEY_LOGIN_PROMPT_TEXT = "login_no_account_text"
+const val UI_KEY_LOGIN_PROMPT_STYLE = "Prompt_text"
+const val UI_KEY_LOGIN_PROMPT_ACTION_TEXT = "sign_up_text"
 const val UI_KEY_THIRD_PARTY_SIGN_UP_TEXT = "alternative_sign_up_action_prompt_text"
 const val UI_KEY_THIRD_PARTY_LOGIN_TEXT = "alternative_login_action_prompt_text"
 const val UI_KEY_THIRD_PARTY_SEPARATOR_TEXT = "separator_text"
@@ -104,18 +107,18 @@ const val UI_KEY_PWD_RESET_BUTTON_IMAGE= "action_button_asset"
 // endregion
 
 // region Billing item UI keys
-const val UI_KEY_BILLING_ITEM_SUBS_BUTTON_IMAGE = "payment_option_button_asset"
-const val UI_KEY_BILLING_ITEM_SUBS_BUTTON_TEXT = "payment_option_button_text"
-const val UI_KEY_BILLING_ITEM_IMAGE = "payment_option_component_asset"
-const val UI_KEY_BILLING_ITEM_TITLE_TEXT = "payment_option_title_text"
-const val UI_KEY_BILLING_ITEM_DETAILS_TEXT = "payment_option_details_text"
-const val UI_KEY_BILLING_ITEM_REDEEM_TEXT = "payment_option_redeem_text"
-const val UI_KEY_BILLING_ITEM_LABEL_IMAGE = "payment_option_promo_img"
-const val UI_KEY_BILLING_ITEM_LABEL_TEXT = "payment_option_promo_text"
+const val UI_KEY_BILLING_ITEM_SUBS_BUTTON_IMAGE = "storefront_button_asset"
+const val UI_KEY_BILLING_ITEM_SUBS_BUTTON_TEXT = "storefront_button_text"
+const val UI_KEY_BILLING_ITEM_IMAGE = "storefront_component_asset"
+const val UI_KEY_BILLING_ITEM_TITLE_TEXT = "storefront_title_text"
+const val UI_KEY_BILLING_ITEM_DETAILS_TEXT = "storefront_details_text"
+const val UI_KEY_BILLING_ITEM_REDEEM_TEXT = "storefront_redeem_text"
+const val UI_KEY_BILLING_ITEM_LABEL_IMAGE = "storefront_promo_img"
+const val UI_KEY_BILLING_ITEM_LABEL_TEXT = "storefront_promo_text"
 // region Billing fragments
-const val UI_KEY_BILLING_TITLE_TEXT = "payment_option_screen_title_text"
-const val UI_KEY_BILLING_RESTORE_DESC = "payment_option_screen_hint_desc"
-const val UI_KEY_BILLING_RESTORE_ACTION = "payment_option_screen_hint_action"
+const val UI_KEY_BILLING_TITLE_TEXT = "storefront_screen_title_text"
+const val UI_KEY_BILLING_RESTORE_DESC = "storefront_screen_hint_desc"
+const val UI_KEY_BILLING_RESTORE_ACTION = "storefront_screen_hint_action"
 // endregion
 // endregion
 
