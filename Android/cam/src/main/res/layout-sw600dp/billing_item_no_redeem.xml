@@ -32,7 +32,7 @@
                 android:textSize="@dimen/billing_tv_title_text_size"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/billing_title_margin_top"
-                android:text="Monthly Subscription"/>
+                android:text="@string/tv_billing_default_text"/>
 
         <com.applicaster.util.ui.CustomTextView
                 android:id="@+id/tv_billing_item_details"
@@ -46,7 +46,7 @@
                 android:gravity="center"
                 android:maxLines="2"
                 android:ellipsize="end"
-                android:text="Subscription details go here and might take up to two lines maximum"/>
+                android:text="@string/tv_billing_default_text"/>
 
         <com.applicaster.util.ui.CustomButton
                 android:id="@+id/btn_billing_item_subscribe"
@@ -57,7 +57,7 @@
                 android:layout_marginTop="@dimen/billing_no_redeem_btn_subscribe_margin_top"
                 android:layout_marginBottom="@dimen/billing_no_redeem_btn_subscribe_margin_bottom"
                 android:gravity="center_horizontal"
-                android:text="SUBSCRIBE FOR $4.99"/>
+                android:text="@string/tv_billing_default_text"/>
 
     </LinearLayout>
 

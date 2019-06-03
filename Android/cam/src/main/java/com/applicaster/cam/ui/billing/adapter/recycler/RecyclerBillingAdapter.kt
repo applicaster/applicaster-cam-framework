@@ -46,23 +46,15 @@ class RecyclerBillingAdapter(
             // customize views
             val billingItem = purchaseItemsList[holder.adapterPosition]
             customize(holder.itemView, itemType)
-            // update item price
-            val btnSubscribeText = holder.btnSubscribe.text
-            holder.btnSubscribe.text = updateItemPrice(
-                btnSubscribeText.toString(),
-                purchaseItemsList[holder.adapterPosition].productPrice
-            )
+            // update item title, description and price info that was obtained from store
+            updateStoreInfo(holder)
             // init listeners
             holder.btnSubscribe.setOnClickListener { purchaseListener.onPurchaseButtonClicked(billingItem.productId) }
         } else if (holder is BillingItemRedeemViewHolder) {
             // customize views
             customize(holder.itemView, itemType)
-            // update item price
-            val btnSubscribeText = holder.btnSubscribe.text
-            holder.btnSubscribe.text = updateItemPrice(
-                btnSubscribeText.toString(),
-                purchaseItemsList[holder.adapterPosition].productPrice
-            )
+            // update item title, description and price info that was obtained from store
+            updateStoreInfo(holder)
             // init listeners
             holder.tvRedeem.setOnClickListener { purchaseListener.onRedeemClicked() }
         }
@@ -98,6 +90,26 @@ class RecyclerBillingAdapter(
     override fun removeAllPurchaseItems() {
         purchaseItemsList.clear()
         notifyDataSetChanged()
+    }
+
+    private fun updateStoreInfo(holder: BillingItemViewHolder) {
+        holder.tvTitle.text = purchaseItemsList[holder.adapterPosition].productTitle
+        holder.tvDetails.text = purchaseItemsList[holder.adapterPosition].productDescription
+        val btnSubscribeText = holder.btnSubscribe.text
+        holder.btnSubscribe.text = updateItemPrice(
+            btnSubscribeText.toString(),
+            purchaseItemsList[holder.adapterPosition].productPrice
+        )
+    }
+
+    private fun updateStoreInfo(holder: BillingItemRedeemViewHolder) {
+        holder.tvTitle.text = purchaseItemsList[holder.adapterPosition].productTitle
+        holder.tvDetails.text = purchaseItemsList[holder.adapterPosition].productDescription
+        val btnSubscribeText = holder.btnSubscribe.text
+        holder.btnSubscribe.text = updateItemPrice(
+            btnSubscribeText.toString(),
+            purchaseItemsList[holder.adapterPosition].productPrice
+        )
     }
 
     private fun updateItemPrice(subsBtnText: String, productPrice: String) =
