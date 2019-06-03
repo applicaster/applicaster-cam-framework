@@ -15,8 +15,12 @@ class PluginConfigurator(private val pluginConfig: Map<String, String>) : Config
     override fun isFacebookLoginRequired() =
         pluginConfig.getValue(KEY_FACEBOOK_LOGIN_REQ).toBoolean()
 
+    /**
+     * Check if need to show auth restore UI element on login screen depending on screen configs
+     * If there is no "password reset" config then hide corresponding UI, otherwise show it
+     */
     override fun isPasswordResetRequired() =
-        pluginConfig.getValue(KEY_PASSWORD_RESET_REQ).toBoolean()
+        !getPasswordResetAuthFields().authFields.isNullOrEmpty()
 
     override fun getSignInAuthFields(): AuthFieldConfig {
         val jsonConfig = pluginConfig.getValue(KEY_AUTH_FIELDS)
@@ -35,12 +39,8 @@ class PluginConfigurator(private val pluginConfig: Map<String, String>) : Config
 
     override fun getDefaultInputFieldError() = pluginConfig.getValue(KEY_DEFAULT_EMPTY_INPUT_FIELD_ERROR)
 
-    /**
-     * Check if need to show auth restore UI element on login screen depending on screen configs
-     * If there is no "password reset" config then hide corresponding UI, otherwise show it
-     */
     override fun isAuthRestoreRequired() =
-        !getPasswordResetAuthFields().authFields.isNullOrEmpty()
+        pluginConfig.getValue(KEY_AUTH_RESTORE_REQ).toBoolean()
 
     override fun isShowConfirmationPasswordReset(): Boolean {
         return pluginConfig.filterKeys { key: String ->
@@ -68,7 +68,7 @@ class PluginConfigurator(private val pluginConfig: Map<String, String>) : Config
 }
 
 const val KEY_AUTH_FIELDS = "auth_fields"
-const val KEY_PASSWORD_RESET_REQ = "pwd_reset_required"
+const val KEY_AUTH_RESTORE_REQ = "auth_restore_required"
 const val KEY_DEFAULT_AUTH_SCREEN = "default_auth_screen"
 const val KEY_FACEBOOK_LOGIN_REQ = "facebook_login_required"
 const val KEY_DEFAULT_EMPTY_INPUT_FIELD_ERROR = "alert_mandatory_field_empty"

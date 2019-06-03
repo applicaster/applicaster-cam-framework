@@ -1,15 +1,15 @@
 {
   "login_screen_title_text": "Login To Your Account",
-  "reset_password_text": "Forgot Password?",
+  "reset_password_action_text": "Forgot Password?",
   "alternative_login_action_prompt_text": "Log In with Social Networks",
-  "login_button_text": "LOG IN",
-  "login_prompt_text": "Don't have an account?",
-  "login_prompt_action_text": "Sign Up",
+  "sign_in_button_text": "LOG IN",
+  "login_no_account_text": "Don't have an account?",
+  "sign_up_text": "Sign Up",
 
   "sign_up_screen_title_text": "Create an Account",
   "sign_up_button_text": "SIGN UP",
   "alternative_sign_up_action_prompt_text": "Sign Up with Social Networks",
-  "sign_up_prompt_text": "Have already an account?",
+  "have_account_text": "Have already an account?",
   "sign_up_prompt_action_text": "Log In",
   "separator_text": "OR",
 
@@ -17,13 +17,13 @@
   "reset_password_details_text": "Type in you e-mail so we would send you the new password",
   "reset_password_action_button_text": "RESTORE",
 
-  "payment_option_screen_title_text": "Choose your subscription",
-  "payment_option_screen_hint_desc": "Have already subscribed?",
-  "payment_option_screen_hint_action": "Restore",
+  "storefront_screen_title_text": "Choose your subscription",
+  "storefront_screen_hint_desc": "Have already subscribed?",
+  "storefront_screen_hint_action": "Restore",
 
-  "payment_option_redeem_text": "Redeem Code",
-  "payment_option_button_text": "Subscribe for",
-  "payment_option_promo_text": "1 MONTH FREE",
+  "storefront_redeem_text": "Redeem Code",
+  "storefront_button_text": "Subscribe for",
+  "storefront_promo_text": "1 MONTH FREE",
 
   "restore_confirmation_title_text": "Congratulations!",
   "restore_confirmation_description_text": "Any pre-existing purchases you’ve made have been restored and assigned to your account.",
@@ -39,8 +39,8 @@
 
   "alert_mandatory_field_empty": "Mandatory field is empty!",
 
-  "default_auth_screen": "signup",
-  "pwd_reset_required" : "true",
+  "default_auth_screen": "login",
+  "auth_restore_required": "true",
   "facebook_login_required" : "true",
   "auth_fields": "{\"signup\":[{\"type\":\"TEXT\",\"key\":\"email\",\"title\":\"Email\",\"hint\":\"Email\",\"mandatory\":true},{\"type\":\"PASSWORD\",\"key\":\"password\",\"title\":\"Password\",\"hint\":\"Password\",\"mandatory\":true},{\"type\":\"NUMBER\",\"key\":\"phone\",\"title\":\"Phone\",\"hint\":\"Phone\",\"mandatory\":true},{\"type\":\"TEXT\",\"key\":\"gender\",\"title\":\"Gender\",\"hint\":\"Gender\",\"mandatory\":false}],\"login\":[{\"type\":\"TEXT\",\"key\":\"email\",\"title\":\"Email\",\"hint\":\"Email\",\"mandatory\":true},{\"type\":\"PASSWORD\",\"key\":\"password\",\"title\":\"Password\",\"hint\":\"Password\",\"mandatory\":true}],\"password_reset\":[{\"type\":\"TEXT\",\"key\":\"email\",\"title\":\"Email\",\"hint\":\"Email\",\"mandatory\":true}]}"
 }
