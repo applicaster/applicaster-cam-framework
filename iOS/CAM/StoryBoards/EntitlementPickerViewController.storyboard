@@ -307,6 +307,7 @@ Any unused portion of a free trial period, if offered, will be forfeited when th
                         <outlet property="helpInfoContainer" destination="Ly1-rl-Hp7" id="0cJ-hr-LwW"/>
                         <outlet property="helpInfoTextView" destination="iEt-bg-rhl" id="zkU-Oa-gOu"/>
                         <outlet property="logoImageView" destination="6Qv-70-8Sd" id="Ae9-Qo-B1h"/>
+                        <outlet property="restoreButton" destination="tja-ai-XFe" id="VLz-q1-28A"/>
                         <outlet property="restorePurchaseLabel" destination="shU-JK-jID" id="hsf-69-PBw"/>
                         <outlet property="titleLabel" destination="fwb-4x-wqx" id="ePz-C3-7fj"/>
                     </connections>

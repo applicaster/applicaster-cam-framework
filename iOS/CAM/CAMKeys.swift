@@ -61,16 +61,18 @@ public enum CAMKeys: String {
    
     // Payment Options
     
-    case purchaseButtonText = "payment_option_button_text"
+    case paymentScreenTitle = "storefront_screen_title_text"
+    case purchaseButtonText = "storefront_button_text"
     case purchaseButtonImage = "purchase_button_image"
     case purchaseBackgroundImage = "payment_option_component_asset"
-    case paymentButtonText = "payment_button_text"
+    case restoreHint = "storefront_screen_hint_desc"
+    case restoreButtonText = "storefront_screen_hint_action"
     
     // Payment alert
     
-    case paymentAlertTitle = "payment_alert_title_text"
-    case paymentAlertInfo = "payment_alert_info_text"
-    case paymentAlertButtonText = "payment_alert_button_text"
+    case paymentAlertTitle = "payment_confirmation_title_text"
+    case paymentAlertInfo = "payment_confirmation_description_text"
+    case paymentAlertButtonText = "payment_confirmation_button_text"
 }
 
 public enum CAMStyles: String {

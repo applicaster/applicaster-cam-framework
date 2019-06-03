@@ -8,6 +8,12 @@
 
 import UIKit
 
+struct OffersViewModel {
+    let title: String
+    let restoreHint: String
+    let restoreButtonText: String
+}
+
 class EntitlementPickerViewController: UIViewController {
     @IBOutlet private var backgroundImageView: UIImageView!
     @IBOutlet private var logoImageView: UIImageView!
@@ -18,6 +24,7 @@ class EntitlementPickerViewController: UIViewController {
     @IBOutlet private var entitlementsLoadingIndicator: UIActivityIndicatorView!
     @IBOutlet private var entitlementCollectionView: UICollectionView!
     @IBOutlet private var restorePurchaseLabel: UILabel!
+    @IBOutlet private var restoreButton: UIButton!
     
     @IBOutlet private var helpInfoContainer: UIView!
     @IBOutlet private var helpInfoTextView: UITextView!
@@ -40,6 +47,14 @@ class EntitlementPickerViewController: UIViewController {
     }
     
     private var offerViewModels: [OfferViewModel] = []
+    
+    var viewModel: OffersViewModel? {
+        didSet {
+            titleLabel.text = viewModel?.title
+            restorePurchaseLabel.text = viewModel?.restoreHint
+            restoreButton.setTitle(viewModel?.restoreButtonText, for: .normal)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -21,6 +21,15 @@ class EntitlementPickerPresenter {
         self.availableProducts = camDelegate?.availableProducts() ?? []
         self.showOffers()
         self.view?.hideLoadingIndicator()
+        
+        let screenTitle = camDelegate?.getPluginConfig()[CAMKeys.paymentScreenTitle.rawValue] ?? ""
+        let restoreHint = camDelegate?.getPluginConfig()[CAMKeys.restoreHint.rawValue] ?? ""
+        let restoreButtonText = camDelegate?.getPluginConfig()[CAMKeys.restoreButtonText.rawValue] ?? ""
+        let viewModel = OffersViewModel(title: screenTitle,
+                                        restoreHint: restoreHint,
+                                        restoreButtonText: restoreButtonText)
+        
+        self.view?.viewModel = viewModel
     }
     
     func backToPreviousScreen() {
@@ -65,7 +74,7 @@ class EntitlementPickerPresenter {
                 self?.coordinatorDelegate?.showRedeemCodeScreen()
             }
             
-            let configText = camDelegate?.getPluginConfig()[CAMKeys.paymentButtonText.rawValue] ?? ""
+            let configText = camDelegate?.getPluginConfig()[CAMKeys.purchaseButtonText.rawValue] ?? ""
             let price = product.skProduct.localizedPrice ?? ""
             let purchaseButtonText = configText + " " + price
             
