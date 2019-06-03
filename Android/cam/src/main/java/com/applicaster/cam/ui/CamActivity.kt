@@ -25,12 +25,7 @@ class CamActivity : AppCompatActivity(), IBaseActivity {
         }
 
         navigationRouter = CamNavigationRouter(this)
-
-
-        when (ContentAccessManager.pluginConfigurator.getDefaultAuthScreen()) {
-            AuthScreenType.LOGIN -> navigationRouter.attachLoginFragment(true)
-            AuthScreenType.SIGNUP -> navigationRouter.attachSignUpFragment(true)
-        }
+        navigationRouter.attachLastFragment(ContentAccessManager.pluginConfigurator.getDefaultAuthScreen())
     }
 
     override fun getFragmentContainerType(): ContainerType {

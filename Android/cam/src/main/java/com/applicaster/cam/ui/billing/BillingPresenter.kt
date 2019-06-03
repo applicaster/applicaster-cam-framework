@@ -115,9 +115,9 @@ class BillingPresenter(
 //            GoogleBillingHelper.loadSkuDetails(BillingClient.SkuType.INAPP, inapps)
             val purchaseItem = PurchaseItem(
                 "Test sku",
-                "Test title",
-                "Test description",
-                "5$",
+                "Monthly Subscription",
+                "Subscription details go here nad might take up to two lines maximum",
+                "$4.99",
                 ""
             )
             view?.populateBillingContainer(arrayListOf(

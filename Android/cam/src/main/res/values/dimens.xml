@@ -53,7 +53,7 @@
     <dimen name="billing_tv_title_text_size">20sp</dimen>
     <dimen name="billing_layout_margin_top">16dp</dimen>
     <dimen name="billing_layout_margin_bottom">16dp</dimen>
-    <dimen name="layout_billing_item_height">182dp</dimen>
+    <dimen name="layout_billing_item_height">192dp</dimen>
     <dimen name="layout_billing_no_redeem_item_height">171dp</dimen>
     <dimen name="layout_billing_item_width">302dp</dimen>
     <dimen name="billing_tv_title_text_margin_top">8dp</dimen>
