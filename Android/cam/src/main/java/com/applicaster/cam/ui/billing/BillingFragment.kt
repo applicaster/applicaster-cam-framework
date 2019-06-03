@@ -83,10 +83,12 @@ class BillingFragment : BaseFragment(), IBillingView {
 
             ContainerType.TABLET -> {
                 pagerBillingAdapter = RecyclerBillingAdapter(purchaseListener, billingItemType)
+                // add padding to the recycler view to set child to the center of the root container
                 val rootWidth = Resources.getSystem().displayMetrics.widthPixels
                 val childWidth = resources.getDimension(R.dimen.layout_billing_item_width).toInt()
-                val parentPadding = (rootWidth / 2) - (childWidth / 2)
+                val parentPadding = (rootWidth - childWidth) / 2
                 val layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                // init snap helper
                 val snapHelper = PagerSnapHelper()
                 rv_billing_items?.apply {
                     setPadding(parentPadding, 0, parentPadding, 0)

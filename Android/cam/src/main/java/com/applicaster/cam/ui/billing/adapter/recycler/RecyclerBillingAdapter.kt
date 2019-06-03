@@ -1,7 +1,6 @@
 package com.applicaster.cam.ui.billing.adapter.recycler
 
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -44,12 +43,26 @@ class RecyclerBillingAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is BillingItemViewHolder) {
+            // customize views
             val billingItem = purchaseItemsList[holder.adapterPosition]
             customize(holder.itemView, itemType)
+            // update item price
+            val btnSubscribeText = holder.btnSubscribe.text
+            holder.btnSubscribe.text = updateItemPrice(
+                btnSubscribeText.toString(),
+                purchaseItemsList[holder.adapterPosition].productPrice
+            )
             // init listeners
             holder.btnSubscribe.setOnClickListener { purchaseListener.onPurchaseButtonClicked(billingItem.productId) }
         } else if (holder is BillingItemRedeemViewHolder) {
+            // customize views
             customize(holder.itemView, itemType)
+            // update item price
+            val btnSubscribeText = holder.btnSubscribe.text
+            holder.btnSubscribe.text = updateItemPrice(
+                btnSubscribeText.toString(),
+                purchaseItemsList[holder.adapterPosition].productPrice
+            )
             // init listeners
             holder.tvRedeem.setOnClickListener { purchaseListener.onRedeemClicked() }
         }
@@ -86,4 +99,7 @@ class RecyclerBillingAdapter(
         purchaseItemsList.clear()
         notifyDataSetChanged()
     }
+
+    private fun updateItemPrice(subsBtnText: String, productPrice: String) =
+        "$subsBtnText $productPrice"
 }

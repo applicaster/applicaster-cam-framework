@@ -57,7 +57,7 @@ class ConfirmationDialog : DialogFragment() {
         when (dialogType) {
             AlertDialogType.BILLING -> {
                 UIMapper.apply {
-                    map(dialogView?.layout_confirmation_background!!, UIKey.BILLING_CONFIRMATION_IMAGE)
+                    map(dialogView?.layout_confirmation_background!!, UIKey.CONFIRMATION_DIALOG_IMAGE)
                     map(dialogView?.tv_confirmation_title!!, UIKey.BILLING_CONFIRMATION_TITLE_TEXT)
                     map(dialogView?.tv_confirmation_desc!!, UIKey.BILLING_CONFIRMATION_DESC_TEXT)
                     map(dialogView?.btn_confirmation_ok!!, UIKey.BILLING_CONFIRMATION_BUTTON_TEXT)
@@ -65,7 +65,7 @@ class ConfirmationDialog : DialogFragment() {
             }
             AlertDialogType.RESET_PASSWORD -> {
                 UIMapper.apply {
-                    map(dialogView?.layout_confirmation_background!!, UIKey.BILLING_CONFIRMATION_IMAGE)
+                    map(dialogView?.layout_confirmation_background!!, UIKey.CONFIRMATION_DIALOG_IMAGE)
                     map(dialogView?.tv_confirmation_title!!, UIKey.RESET_PWD_CONFIRMATION_TITLE_TEXT)
                     map(dialogView?.tv_confirmation_desc!!, UIKey.RESET_PWD_CONFIRMATION_DESC_TEXT)
                     map(dialogView?.btn_confirmation_ok!!, UIKey.RESET_PWD_CONFIRMATION_BUTTON_TEXT)
@@ -73,7 +73,7 @@ class ConfirmationDialog : DialogFragment() {
             }
             AlertDialogType.RESTORE -> {
                 UIMapper.apply {
-                    map(dialogView?.layout_confirmation_background!!, UIKey.BILLING_CONFIRMATION_IMAGE)
+                    map(dialogView?.layout_confirmation_background!!, UIKey.CONFIRMATION_DIALOG_IMAGE)
                     map(dialogView?.tv_confirmation_title!!, UIKey.RESTORE_CONFIRMATION_TITLE_TEXT)
                     map(dialogView?.tv_confirmation_desc!!, UIKey.RESTORE_CONFIRMATION_DESC_TEXT)
                     map(dialogView?.btn_confirmation_ok!!, UIKey.RESTORE_CONFIRMATION_BUTTON_TEXT)

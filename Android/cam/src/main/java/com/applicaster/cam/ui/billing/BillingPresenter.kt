@@ -117,7 +117,7 @@ class BillingPresenter(
                 "Test sku",
                 "Test title",
                 "Test description",
-                "5$",
+                "$4.99",
                 ""
             )
             view?.populateBillingContainer(arrayListOf(
