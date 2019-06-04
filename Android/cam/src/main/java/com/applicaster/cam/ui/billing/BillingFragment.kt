@@ -32,6 +32,7 @@ class BillingFragment : BaseFragment(), IBillingView {
     private var pagerBillingAdapter: RecyclerBillingAdapter? = null
     private lateinit var purchaseListener: PurchaseInteractionListener
     private lateinit var itemDecoration: SpaceItemDecoration
+    private var containerType: ContainerType = ContainerType.PHONE
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -66,6 +67,7 @@ class BillingFragment : BaseFragment(), IBillingView {
     }
 
     override fun initViewComponents(containerType: ContainerType, billingItemType: BillingItemType) {
+        this.containerType = containerType
         // init toolbar here
         when (containerType) {
             ContainerType.PHONE -> {
@@ -114,7 +116,7 @@ class BillingFragment : BaseFragment(), IBillingView {
     override fun getParentView() = layout_billing
 
     override fun populateBillingContainer(purchaseItems: List<PurchaseItem>) {
-        calculateContainerPadding(purchaseItems.size)
+        super.populateBillingContainer(purchaseItems)
         recyclerBillingAdapter?.apply { addPurchaseItems(purchaseItems) }
         pagerBillingAdapter?.apply { addPurchaseItems(purchaseItems) }
     }
@@ -124,16 +126,18 @@ class BillingFragment : BaseFragment(), IBillingView {
         pagerBillingAdapter?.apply { removeAllPurchaseItems() }
     }
 
-    private fun calculateContainerPadding(itemsCount: Int = 0) {
-        val rootWidth = Resources.getSystem().displayMetrics.widthPixels
-        val childWidth = resources.getDimension(R.dimen.layout_billing_item_width).toInt()
-        val childrenWidth = (childWidth + (itemDecoration.horizontalSpaceHeight ?: 0)) * itemsCount
-        if (childrenWidth <= rootWidth) {
-            val parentPadding = (rootWidth - childrenWidth) / 2
-            rv_billing_items?.setPadding(parentPadding, 0, parentPadding, 0)
-        } else {
-            val parentPadding = (rootWidth - childWidth + (itemDecoration.horizontalSpaceHeight ?: 0)) / 2
-            rv_billing_items?.setPadding(parentPadding, 0, parentPadding, 0)
+    override fun calculateRecyclerContainerPadding(itemsCount: Int) {
+        if (containerType == ContainerType.TABLET) {
+            val rootWidth = Resources.getSystem().displayMetrics.widthPixels
+            val childWidth = resources.getDimension(R.dimen.layout_billing_item_width).toInt()
+            val childrenWidth = (childWidth + (itemDecoration.horizontalSpaceHeight ?: 0)) * itemsCount
+            if (childrenWidth <= rootWidth) {
+                val parentPadding = (rootWidth - childrenWidth) / 2
+                rv_billing_items?.setPadding(parentPadding, 0, parentPadding, 0)
+            } else {
+                val parentPadding = (rootWidth - childWidth + (itemDecoration.horizontalSpaceHeight ?: 0)) / 2
+                rv_billing_items?.setPadding(parentPadding, 0, parentPadding, 0)
+            }
         }
     }
 }
