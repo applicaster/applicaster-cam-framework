@@ -16,7 +16,7 @@
             android:id="@+id/tv_billing_title_text"
             android:layout_width="0dp"
             android:gravity="center"
-            android:layout_marginTop="@dimen/billing_tv_title_text_margin_top"
+            android:layout_marginTop="50dp"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -43,6 +43,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/container_restore"/>
+            app:layout_constraintTop_toTopOf="@+id/tv_billing_title_text"/>
 
 </android.support.constraint.ConstraintLayout>
