@@ -7,6 +7,7 @@ import com.android.billingclient.api.SkuDetails
 import com.applicaster.cam.ContentAccessManager
 import com.applicaster.cam.EntitlementsLoadCallback
 import com.applicaster.cam.ICamContract
+import com.applicaster.cam.RestoreCallback
 import com.applicaster.cam.params.billing.Offer
 import com.applicaster.cam.params.billing.ProductType
 import com.applicaster.cam.ui.CamNavigationRouter
@@ -22,7 +23,7 @@ class BillingPresenter(
     private val navigationRouter: CamNavigationRouter
 ) : BasePresenter(view),
     IBillingPresenter,
-    BillingListener {
+    BillingListener, RestoreCallback {
 
     private val TAG = BillingPresenter::class.java.canonicalName
 
@@ -123,19 +124,30 @@ class BillingPresenter(
             view?.populateBillingContainer(arrayListOf(
                 purchaseItem,
                 purchaseItem,
+                purchaseItem,
+                purchaseItem,
                 purchaseItem
-//                purchaseItem,
-//                purchaseItem,
 //                purchaseItem
             ))
         }
     }
 
-    override fun onRestoreClicked() {
-        //TODO: add restore logic
+    override fun onFailure(msg: String) {
+        view?.hideLoadingIndicator()
+        view?.showAlert(msg)
+    }
+
+    override fun onSuccess(offers: List<Offer>) {
+        view?.hideLoadingIndicator()
         if (ContentAccessManager.pluginConfigurator.isShowConfirmationRestorePurchases())
             navigationRouter.showConfirmationDialog(AlertDialogType.RESTORE)
         else
             view?.goBack()
+    }
+
+    override fun onRestoreClicked() {
+        //TODO: add restore logic
+        view?.showLoadingIndicator()
+        ContentAccessManager.contract.onPurchasesRestored(this)
     }
 }

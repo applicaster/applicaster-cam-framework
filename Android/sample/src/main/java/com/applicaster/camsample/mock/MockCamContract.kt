@@ -21,7 +21,7 @@ class MockCamContract(private val context: Context) : ICamContract {
     }
 
     override fun activateRedeemCode(redeemCode: String, callback: RedeemCodeActivationCallback) {
-        Handler().postDelayed({ callback.onSuccess() }, 1000)
+        Handler().postDelayed({ callback.onSuccess() }, 1250)
     }
 
     override fun loginWithFacebook(email: String, id: String, callback: FacebookAuthCallback) {
