@@ -123,10 +123,10 @@ class BillingPresenter(
             view?.populateBillingContainer(arrayListOf(
                 purchaseItem,
                 purchaseItem,
-                purchaseItem,
-                purchaseItem,
-                purchaseItem,
                 purchaseItem
+//                purchaseItem,
+//                purchaseItem,
+//                purchaseItem
             ))
         }
     }
