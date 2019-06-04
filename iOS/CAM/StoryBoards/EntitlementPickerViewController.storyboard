@@ -61,7 +61,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qv4-HL-pdx">
-                                <rect key="frame" x="51.333333333333371" y="127" width="311.33333333333326" height="28"/>
+                                <rect key="frame" x="51.333333333333343" y="127" width="311.33333333333326" height="28"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If you have purchased already a subscription?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="shU-JK-jID">
                                         <rect key="frame" x="0.0" y="0.0" width="255.33333333333334" height="28"/>
@@ -254,6 +254,7 @@ Any unused portion of a free trial period, if offered, will be forfeited when th
                             <constraint firstItem="6Qv-70-8Sd" firstAttribute="top" secondItem="0qm-JL-SHB" secondAttribute="top" id="BvI-MD-cAM"/>
                             <constraint firstItem="BZT-8a-6sn" firstAttribute="leading" secondItem="0qm-JL-SHB" secondAttribute="leading" id="CkZ-8C-fb7"/>
                             <constraint firstItem="wYX-hB-tp5" firstAttribute="leading" secondItem="0qm-JL-SHB" secondAttribute="leading" id="DfF-68-9lg"/>
+                            <constraint firstAttribute="bottom" secondItem="Ly1-rl-Hp7" secondAttribute="bottom" id="IgY-FD-mZd"/>
                             <constraint firstItem="wYX-hB-tp5" firstAttribute="trailing" secondItem="0qm-JL-SHB" secondAttribute="trailing" id="Igs-tg-eCZ"/>
                             <constraint firstItem="BZT-8a-6sn" firstAttribute="trailing" secondItem="0qm-JL-SHB" secondAttribute="trailing" id="JhR-tu-WqF"/>
                             <constraint firstItem="gGD-ZL-8ay" firstAttribute="top" secondItem="0qm-JL-SHB" secondAttribute="top" id="LGZ-Z2-N3t"/>
@@ -265,7 +266,6 @@ Any unused portion of a free trial period, if offered, will be forfeited when th
                             <constraint firstItem="wYX-hB-tp5" firstAttribute="top" secondItem="yt7-Jw-v80" secondAttribute="top" id="cpt-x2-EQP"/>
                             <constraint firstItem="BZT-8a-6sn" firstAttribute="centerY" secondItem="yt7-Jw-v80" secondAttribute="centerY" id="dlS-0l-Tj6"/>
                             <constraint firstItem="wYX-hB-tp5" firstAttribute="bottom" secondItem="yt7-Jw-v80" secondAttribute="bottom" id="iWq-ys-DHJ"/>
-                            <constraint firstItem="0qm-JL-SHB" firstAttribute="bottom" secondItem="Ly1-rl-Hp7" secondAttribute="bottom" id="lfk-XU-ebG"/>
                             <constraint firstItem="vzX-Kr-rBb" firstAttribute="centerY" secondItem="yt7-Jw-v80" secondAttribute="centerY" id="tS2-39-kfN"/>
                             <constraint firstItem="6Qv-70-8Sd" firstAttribute="centerX" secondItem="yt7-Jw-v80" secondAttribute="centerX" id="wcu-by-dzy"/>
                             <constraint firstItem="BZT-8a-6sn" firstAttribute="centerX" secondItem="yt7-Jw-v80" secondAttribute="centerX" id="wj0-MQ-fvQ"/>
