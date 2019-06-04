@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="ipad9_7" orientation="portrait">
+    <device id="ipad12_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -13,18 +13,17 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="0Ml-qH-An5" customClass="ConfirmationPopover" customModule="CAM" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+            <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e70-Px-aVd">
-                    <rect key="frame" x="213" y="341" width="342" height="342"/>
+                    <rect key="frame" x="341" y="512" width="342" height="342"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Congratulations!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tNd-eO-N1C">
-                            <rect key="frame" x="50" y="52" width="242" height="30"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password has been delivered!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tNd-eO-N1C">
+                            <rect key="frame" x="10" y="49" width="322" height="70"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="192" id="DwC-qr-fJa"/>
-                                <constraint firstAttribute="width" constant="242" id="nKV-Bs-1Cg"/>
-                                <constraint firstAttribute="height" constant="30" id="q4c-ef-EF0"/>
+                                <constraint firstAttribute="height" constant="70" id="q4c-ef-EF0"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                             <nil key="textColor"/>
@@ -32,17 +31,11 @@
                             <variation key="default">
                                 <mask key="constraints">
                                     <exclude reference="DwC-qr-fJa"/>
-                                    <exclude reference="nKV-Bs-1Cg"/>
                                 </mask>
                             </variation>
                             <variation key="heightClass=compact-widthClass=compact">
                                 <mask key="constraints">
                                     <include reference="DwC-qr-fJa"/>
-                                </mask>
-                            </variation>
-                            <variation key="heightClass=regular-widthClass=regular">
-                                <mask key="constraints">
-                                    <include reference="nKV-Bs-1Cg"/>
                                 </mask>
                             </variation>
                         </label>
@@ -79,7 +72,7 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You are susccessfully subscribed to SportsMax channels!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fbv-7q-htk">
-                            <rect key="frame" x="28" y="134" width="286" height="105"/>
+                            <rect key="frame" x="28" y="140" width="286" height="99"/>
                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -88,6 +81,8 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="fbv-7q-htk" firstAttribute="centerX" secondItem="e70-Px-aVd" secondAttribute="centerX" id="3Q6-HZ-oJN"/>
+                        <constraint firstItem="tNd-eO-N1C" firstAttribute="leading" secondItem="e70-Px-aVd" secondAttribute="leading" constant="10" id="6If-XS-IS1"/>
+                        <constraint firstAttribute="trailing" secondItem="tNd-eO-N1C" secondAttribute="trailing" constant="10" id="AD4-ch-H36"/>
                         <constraint firstAttribute="width" constant="272" id="Aa1-3V-t0C">
                             <variation key="heightClass=regular-widthClass=regular" constant="342"/>
                         </constraint>
@@ -95,19 +90,18 @@
                         <constraint firstItem="ZwF-LA-Cup" firstAttribute="centerX" secondItem="e70-Px-aVd" secondAttribute="centerX" id="EqA-f2-Isg"/>
                         <constraint firstAttribute="trailing" secondItem="fbv-7q-htk" secondAttribute="trailing" constant="28" id="Fkd-dQ-sHx"/>
                         <constraint firstItem="fbv-7q-htk" firstAttribute="leading" secondItem="e70-Px-aVd" secondAttribute="leading" constant="22" id="I9i-HS-LEu"/>
-                        <constraint firstItem="tNd-eO-N1C" firstAttribute="centerX" secondItem="e70-Px-aVd" secondAttribute="centerX" id="MPI-NO-UeM"/>
                         <constraint firstItem="ZwF-LA-Cup" firstAttribute="top" secondItem="fbv-7q-htk" secondAttribute="bottom" constant="20" id="ThB-sK-eA2"/>
                         <constraint firstAttribute="height" constant="373" id="hKy-L3-ETj">
                             <variation key="heightClass=regular-widthClass=regular" constant="342"/>
                         </constraint>
-                        <constraint firstItem="tNd-eO-N1C" firstAttribute="top" secondItem="e70-Px-aVd" secondAttribute="top" constant="80" id="oSD-Qi-EqE">
-                            <variation key="heightClass=regular-widthClass=regular" constant="52"/>
+                        <constraint firstItem="tNd-eO-N1C" firstAttribute="top" secondItem="e70-Px-aVd" secondAttribute="top" constant="57" id="oSD-Qi-EqE">
+                            <variation key="heightClass=regular-widthClass=regular" constant="49"/>
                         </constraint>
                         <constraint firstAttribute="bottom" secondItem="ZwF-LA-Cup" secondAttribute="bottom" constant="11" id="p2B-BJ-FPh">
                             <variation key="heightClass=regular-widthClass=regular" constant="36"/>
                         </constraint>
                         <constraint firstItem="fbv-7q-htk" firstAttribute="leading" secondItem="e70-Px-aVd" secondAttribute="leading" constant="28" id="pr0-vh-qxY"/>
-                        <constraint firstItem="fbv-7q-htk" firstAttribute="top" secondItem="tNd-eO-N1C" secondAttribute="bottom" constant="52" id="sQx-kS-FVs"/>
+                        <constraint firstItem="fbv-7q-htk" firstAttribute="top" secondItem="tNd-eO-N1C" secondAttribute="bottom" constant="21" id="sQx-kS-FVs"/>
                         <constraint firstItem="fbv-7q-htk" firstAttribute="top" secondItem="tNd-eO-N1C" secondAttribute="bottom" constant="41" id="xnC-S3-29I"/>
                     </constraints>
                     <variation key="default">

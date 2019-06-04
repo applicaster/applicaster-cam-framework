@@ -196,6 +196,9 @@ extension UITextField {
             self.keyboardType = .numberPad
         case .password:
             self.keyboardType = .default
+            if #available(iOS 12.0, *) {
+                self.textContentType = UITextContentType(rawValue: "")
+            }
             self.isSecureTextEntry = true
         }
     }
