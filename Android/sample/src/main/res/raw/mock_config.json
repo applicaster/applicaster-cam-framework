@@ -1,25 +1,32 @@
 {
-  "login_screen_title_text": "Login To Your Account",
-  "reset_password_action_text": "Forgot Password?",
-  "alternative_login_action_prompt_text": "Log In with Social Networks",
-  "sign_in_button_text": "LOG IN",
-  "login_no_account_text": "Don't have an account?",
-  "sign_up_text": "Sign Up",
+  "alternative_authentication_prompt_text": "Auth with Social Networks",
+  "alternative_authentication_separator_text": "OR",
 
-  "sign_up_screen_title_text": "Create an Account",
+  "login_title_text": "Login To Your Account",
+  "password_reset_link_text": "Forgot Password?",
+
+  "login_button_text": "LOG IN",
+  "sign_up_prompt_text": "Don't have an account?",
+  "sign_up_link_text": "Sign Up",
+
+  "sign_up_title_text": "Create an Account",
   "sign_up_button_text": "SIGN UP",
-  "alternative_sign_up_action_prompt_text": "Sign Up with Social Networks",
-  "have_account_text": "Have already an account?",
-  "sign_up_prompt_action_text": "Log In",
-  "separator_text": "OR",
 
-  "reset_password_title_text": "Reset Password",
-  "reset_password_details_text": "Type in you e-mail so we would send you the new password",
-  "reset_password_action_button_text": "RESTORE",
+  "login_prompt_text": "Have already an account?",
+  "login_link_text": "Log In",
+
+
+  "password_reset_title_text": "Reset Password",
+  "password_reset_description_text": "Type in you e-mail so we would send you the new password",
+  "password_reset_button_text": "RESTORE",
+
+  "password_reset_confirmation_title_text": "Password Reset Delivered",
+  "password_reset_confirmation_description_text": "Check your email in order reset your password for this account",
+  "password_reset_confirmation_button_text": "OK",
 
   "storefront_screen_title_text": "Choose your subscription",
-  "storefront_screen_hint_desc": "Have already subscribed?",
-  "storefront_screen_hint_action": "Restore",
+  "restore_promt_text": "Have already subscribed?",
+  "restore_link_text": "Restore",
 
   "storefront_redeem_text": "Redeem Code",
   "storefront_button_text": "Subscribe for",
@@ -32,10 +39,6 @@
   "payment_confirmation_title_text": "Congratulations!",
   "payment_confirmation_description_text": "You are successfully subscribed to SportsMax channels!",
   "payment_confirmation_button_text": "OK",
-
-  "pwd_confirmation_title_text": "Password Reset Delivered",
-  "pwd_confirmation_description_text": "Check your email in order reset your password for this account",
-  "pwd_confirmation_button_text": "OK",
 
   "alert_mandatory_field_empty": "Mandatory field is empty!",
 
