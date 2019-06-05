@@ -61,7 +61,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qv4-HL-pdx">
-                                <rect key="frame" x="51.333333333333371" y="127" width="311.33333333333326" height="28"/>
+                                <rect key="frame" x="51.333333333333343" y="127" width="311.33333333333326" height="28"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If you have purchased already a subscription?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="shU-JK-jID">
                                         <rect key="frame" x="0.0" y="0.0" width="255.33333333333334" height="28"/>
@@ -120,19 +120,19 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hGy-N7-TRU">
-                                                    <rect key="frame" x="6" y="9" width="308" height="239"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="248"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Monthly Subscription Subscription" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B90-xo-GgL">
-                                                            <rect key="frame" x="0.0" y="25" width="308" height="48"/>
+                                                            <rect key="frame" x="0.0" y="22" width="320" height="48"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <view contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="egR-Ox-pGu">
-                                                            <rect key="frame" x="17" y="73" width="275" height="108"/>
+                                                            <rect key="frame" x="17" y="70" width="287" height="120"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wvC-r2-igl">
-                                                                    <rect key="frame" x="0.0" y="33" width="275" height="42"/>
+                                                                    <rect key="frame" x="0.0" y="39" width="287" height="42"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="42" id="rpL-Zg-iUa"/>
                                                                     </constraints>
@@ -151,7 +151,7 @@ take up to two lines maximum</string>
                                                             </constraints>
                                                         </view>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f4O-U3-xFW">
-                                                            <rect key="frame" x="60.666666666666686" y="181" width="187" height="33"/>
+                                                            <rect key="frame" x="66.666666666666686" y="190" width="187" height="33"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="33" id="SAG-oM-gEy"/>
                                                                 <constraint firstAttribute="width" constant="187" id="u8L-GO-Frh"/>
@@ -167,7 +167,7 @@ take up to two lines maximum</string>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstItem="B90-xo-GgL" firstAttribute="top" secondItem="hGy-N7-TRU" secondAttribute="top" constant="25" id="8st-Gy-orC"/>
+                                                        <constraint firstItem="B90-xo-GgL" firstAttribute="top" secondItem="hGy-N7-TRU" secondAttribute="top" constant="22" id="8st-Gy-orC"/>
                                                         <constraint firstItem="B90-xo-GgL" firstAttribute="leading" secondItem="hGy-N7-TRU" secondAttribute="leading" id="Bzj-DM-9hg"/>
                                                         <constraint firstAttribute="trailing" secondItem="B90-xo-GgL" secondAttribute="trailing" id="DTF-T2-kX6"/>
                                                         <constraint firstItem="egR-Ox-pGu" firstAttribute="top" secondItem="B90-xo-GgL" secondAttribute="bottom" id="Y6d-DO-ZWH"/>
@@ -182,10 +182,10 @@ take up to two lines maximum</string>
                                         </view>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="hGy-N7-TRU" secondAttribute="trailing" constant="6" id="0xa-o4-MR6"/>
-                                            <constraint firstItem="hGy-N7-TRU" firstAttribute="leading" secondItem="KiS-Ag-85C" secondAttribute="leading" constant="6" id="AjF-0d-Ack"/>
+                                            <constraint firstAttribute="trailing" secondItem="hGy-N7-TRU" secondAttribute="trailing" id="0xa-o4-MR6"/>
+                                            <constraint firstItem="hGy-N7-TRU" firstAttribute="leading" secondItem="KiS-Ag-85C" secondAttribute="leading" id="AjF-0d-Ack"/>
                                             <constraint firstAttribute="bottom" secondItem="hGy-N7-TRU" secondAttribute="bottom" id="jgQ-xb-83q"/>
-                                            <constraint firstItem="hGy-N7-TRU" firstAttribute="top" secondItem="KiS-Ag-85C" secondAttribute="top" constant="9" id="vyx-qL-ekA"/>
+                                            <constraint firstItem="hGy-N7-TRU" firstAttribute="top" secondItem="KiS-Ag-85C" secondAttribute="top" id="vyx-qL-ekA"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="infoLabel" destination="wvC-r2-igl" id="hKq-04-ccG"/>
@@ -218,10 +218,9 @@ take up to two lines maximum</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ly1-rl-Hp7">
                                 <rect key="frame" x="0.0" y="652" width="414" height="84"/>
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="iEt-bg-rhl">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iEt-bg-rhl">
                                         <rect key="frame" x="28" y="8" width="358" height="57"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="57" id="3vL-9D-gLk"/>
                                         </constraints>
@@ -232,10 +231,12 @@ Any unused portion of a free trial period, if offered, will be forfeited when th
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="Ab9-b4-2xb" id="DFg-tR-0V4"/>
+                                        </connections>
                                     </textView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.17254901960784313" blue="0.37254901960784315" alpha="0.83999999999999997" colorSpace="calibratedRGB"/>
-                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="iEt-bg-rhl" firstAttribute="top" secondItem="Ly1-rl-Hp7" secondAttribute="top" constant="8" id="Cp2-6W-HmN"/>
                                     <constraint firstAttribute="height" constant="84" id="HpU-Ew-m9X"/>
@@ -254,6 +255,7 @@ Any unused portion of a free trial period, if offered, will be forfeited when th
                             <constraint firstItem="6Qv-70-8Sd" firstAttribute="top" secondItem="0qm-JL-SHB" secondAttribute="top" id="BvI-MD-cAM"/>
                             <constraint firstItem="BZT-8a-6sn" firstAttribute="leading" secondItem="0qm-JL-SHB" secondAttribute="leading" id="CkZ-8C-fb7"/>
                             <constraint firstItem="wYX-hB-tp5" firstAttribute="leading" secondItem="0qm-JL-SHB" secondAttribute="leading" id="DfF-68-9lg"/>
+                            <constraint firstAttribute="bottom" secondItem="Ly1-rl-Hp7" secondAttribute="bottom" id="IgY-FD-mZd"/>
                             <constraint firstItem="wYX-hB-tp5" firstAttribute="trailing" secondItem="0qm-JL-SHB" secondAttribute="trailing" id="Igs-tg-eCZ"/>
                             <constraint firstItem="BZT-8a-6sn" firstAttribute="trailing" secondItem="0qm-JL-SHB" secondAttribute="trailing" id="JhR-tu-WqF"/>
                             <constraint firstItem="gGD-ZL-8ay" firstAttribute="top" secondItem="0qm-JL-SHB" secondAttribute="top" id="LGZ-Z2-N3t"/>
@@ -265,7 +267,6 @@ Any unused portion of a free trial period, if offered, will be forfeited when th
                             <constraint firstItem="wYX-hB-tp5" firstAttribute="top" secondItem="yt7-Jw-v80" secondAttribute="top" id="cpt-x2-EQP"/>
                             <constraint firstItem="BZT-8a-6sn" firstAttribute="centerY" secondItem="yt7-Jw-v80" secondAttribute="centerY" id="dlS-0l-Tj6"/>
                             <constraint firstItem="wYX-hB-tp5" firstAttribute="bottom" secondItem="yt7-Jw-v80" secondAttribute="bottom" id="iWq-ys-DHJ"/>
-                            <constraint firstItem="0qm-JL-SHB" firstAttribute="bottom" secondItem="Ly1-rl-Hp7" secondAttribute="bottom" id="lfk-XU-ebG"/>
                             <constraint firstItem="vzX-Kr-rBb" firstAttribute="centerY" secondItem="yt7-Jw-v80" secondAttribute="centerY" id="tS2-39-kfN"/>
                             <constraint firstItem="6Qv-70-8Sd" firstAttribute="centerX" secondItem="yt7-Jw-v80" secondAttribute="centerX" id="wcu-by-dzy"/>
                             <constraint firstItem="BZT-8a-6sn" firstAttribute="centerX" secondItem="yt7-Jw-v80" secondAttribute="centerX" id="wj0-MQ-fvQ"/>
