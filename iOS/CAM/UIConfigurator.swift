@@ -197,7 +197,7 @@ extension UITextField {
         case .password:
             self.keyboardType = .default
             if #available(iOS 12.0, *) {
-                self.textContentType = UITextContentType(rawValue: "")
+                self.textContentType = .oneTimeCode
             }
             self.isSecureTextEntry = true
         }

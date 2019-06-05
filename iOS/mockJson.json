@@ -1,29 +1,29 @@
 {
-    "login_screen_title_text": "Login To Your Account",
-    "reset_password_action_text": "Forgot Password?",
-    "alternative_login_action_prompt_text": "Log In with Social Networks",
-    "sign_in_button_text": "LOG IN",
-    "login_no_account_text": "Don't have an account?",
-    "sign_up_text": "Sign Up",
+    "alternative_authentication_prompt_text": "Auth with Social Networks",
+    "alternative_authentication_separator_text": "Or",
     
-    "sign_up_screen_title_text": "Create an account",
+    "login_title_text": "Login To Your Account",
+    "login_button_text": "LOG IN",
+    "password_reset_link_text": "Forgot Password?",
+    "sign_up_prompt_text": "Don't have an account?",
+    "sign_up_link_text": "Sign Up",
+    
+    "sign_up_title_text": "Create an account",
     "sign_up_button_text": "Sign Up",
-    "alternative_sign_up_action_prompt_text": "Sign Up with Social Networks",
-    "have_account_text": "Have already an account?",
-    "sign_up_prompt_action_text": "Log In",
-    "separator_text": "Or",
+    "login_prompt_text": "Have already an account?",
+    "login_link_text": "Log In",
     
-    "reset_password_title_text": "Reset Password",
-    "reset_password_details_text": "Type in you e-mail so we would send you the new password",
-    "reset_password_action_button_text": "Reset Password",
+    "password_reset_title_text": "Reset Password",
+    "password_reset_description_text": "Type in you e-mail so we would send you the new password",
+    "password_reset_button_text": "Reset Password",
     
-    "pwd_confirmation_title_text": "Password Reset Delivered",
-    "pwd_confirmation_description_text": "Check your email in order reset your password for this account",
-    "pwd_confirmation_button_text": "OK",
+    "password_reset_confirmation_title_text": "Password Reset Delivered",
+    "password_reset_confirmation_description_text": "Check your email in order reset your password for this account",
+    "password_reset_confirmation_button_text": "OK",
     
     "storefront_screen_title_text": "Choose your subscription",
-    "storefront_screen_hint_desc": "If you have purchased already a subscription?",
-    "storefront_screen_hint_action": "Restore",
+    "restore_promt_text": "If you have purchased already a subscription?",
+    "restore_link_text": "Restore",
     
     "storefront_redeem_text": "Redeem",
     "storefront_button_text": "SUBSCRIBE FOR",
@@ -33,7 +33,8 @@
     
     "default_auth_screen": "login",
     "facebook_login_required" : "true",
-    "auth_fields": "{ \"signup\": [{\"type\": \"TEXT\",\"key\": \"email\",\"title\": \"Email\",\"hint\": \"Email\",\"mandatory\": true },{\"type\": \"PASSWORD\",\"key\": \"password\",\"title\": \"Password\",\"hint\": \"Password\",\"mandatory\": true },{\"type\": \"NUMBER\",\"key\": \"Phone\",\"title\": \"Phone\",\"hint\": \"Phone\",\"mandatory\": true},{\"type\": \"TEXT\",\"key\": \"gender\",\"title\": \"Gender\",\"hint\": \"Gender\",\"mandatory\": false }],\"login\": [{\"type\": \"TEXT\",\"key\": \"email\",\"title\": \"Email\",\"hint\": \"Email\",\"mandatory\": true},{\"type\": \"PASSWORD\",\"key\": \"password\",\"title\": \"Password\",\"hint\": \"Password\",\"mandatory\": true},{\"type\": \"NUMBER\",\"key\": \"birthdate\",\"title\": \"Birth Date\",\"hint\": \"Birth Date\",\"mandatory\": true},{\"type\": \"NUMBER\",\"key\": \"birthdate\",\"title\": \"Birth Date\",\"hint\": \"Birth Date\",\"mandatory\": true}, {\"type\": \"NUMBER\",\"key\": \"birthdate\",\"title\": \"Birth Date\",\"hint\": \"Birth Date\",\"mandatory\": true}],\"password\": [{\"type\": \"NUMBER\",\"key\": \"birthdate\",\"title\": \"Birth Date\",\"hint\": \"Birth Date\",\"mandatory\": true},{\"type\": \"PASSWORD\",\"key\": \"password\",\"title\": \"Password\",\"hint\": \"Password\",\"mandatory\": true }]}",
+    
+    "authentication_input_fields": "{ \"signup\": [{\"type\": \"TEXT\",\"key\": \"email\",\"title\": \"Email\",\"hint\": \"Email\",\"mandatory\": true },{\"type\": \"PASSWORD\",\"key\": \"password\",\"title\": \"Password\",\"hint\": \"Password\",\"mandatory\": true },{\"type\": \"NUMBER\",\"key\": \"Phone\",\"title\": \"Phone\",\"hint\": \"Phone\",\"mandatory\": true},{\"type\": \"TEXT\",\"key\": \"gender\",\"title\": \"Gender\",\"hint\": \"Gender\",\"mandatory\": false }],\"login\": [{\"type\": \"TEXT\",\"key\": \"email\",\"title\": \"Email\",\"hint\": \"Email\",\"mandatory\": true},{\"type\": \"PASSWORD\",\"key\": \"password\",\"title\": \"Password\",\"hint\": \"Password\",\"mandatory\": true},{\"type\": \"NUMBER\",\"key\": \"birthdate\",\"title\": \"Birth Date\",\"hint\": \"Birth Date\",\"mandatory\": true},{\"type\": \"NUMBER\",\"key\": \"birthdate\",\"title\": \"Birth Date\",\"hint\": \"Birth Date\",\"mandatory\": true}, {\"type\": \"NUMBER\",\"key\": \"birthdate\",\"title\": \"Birth Date\",\"hint\": \"Birth Date\",\"mandatory\": true}],\"password\": [{\"type\": \"PASSWORD\",\"key\": \"password\",\"title\": \"Password\",\"hint\": \"Password\",\"mandatory\": true }]}",
 
     "payment_confirmation_title_text": "Congratulations!",
     "payment_confirmation_description_text": "You are susccessfully subscribed to SportsMax channels!",

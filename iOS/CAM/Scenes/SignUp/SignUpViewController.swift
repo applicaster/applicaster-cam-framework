@@ -146,7 +146,7 @@ class SignUpViewController: UIViewController {
         leftSeparatorView.setZappStyle(withAsset: CAMKeys.leftSeparatorImage)
         rightSeparatorView.setZappStyle(withAsset: CAMKeys.rightSeparatorImage)
         alternateLabel.setZappStyle(text: configDictionary[CAMKeys.separatorText.rawValue], style: .separator)
-        socialNetworksLabel.setZappStyle(text: configDictionary[CAMKeys.alternativeLoginPromtText.rawValue],
+        socialNetworksLabel.setZappStyle(text: configDictionary[CAMKeys.alternativeAuthentification.rawValue],
                                          style: .alternativeLoginText)
         loginButton.setAttributedZappStyle(attributedTitle: [(style: .promtText,
                                                               string: configDictionary[CAMKeys.singUpLoginPromtText.rawValue] ?? "",
