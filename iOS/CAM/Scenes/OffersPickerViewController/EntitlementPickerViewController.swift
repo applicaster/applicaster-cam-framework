@@ -73,7 +73,7 @@ class EntitlementPickerViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        self.gradientLayer.frame = self.helpInfoTextView.frame
+        self.gradientLayer.frame = self.helpInfoTextView.bounds
     }
     
     func setupCollectionView() {
@@ -112,14 +112,22 @@ class EntitlementPickerViewController: UIViewController {
     // MARK: - Private methods
     
     private func setupGradient() {
-        let from = UIColor.clear.cgColor
-        let to = self.helpInfoContainer.backgroundColor!.withAlphaComponent(0.8).cgColor
-        
         self.gradientLayer = CAGradientLayer()
-        self.gradientLayer.colors = [from, to]
-        self.gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.4)
-        self.gradientLayer.endPoint = CGPoint(x: 0.0, y: 1.0)
-        self.helpInfoContainer.layer.addSublayer(self.gradientLayer)
+        self.gradientLayer.colors = [UIColor.black.cgColor,
+                                     UIColor.black.cgColor,
+                                     UIColor.clear.cgColor]
+        self.gradientLayer.locations = [0.0, 0.3, 1.0]
+        
+        self.helpInfoTextView.layer.mask = self.gradientLayer
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView === helpInfoTextView {
+            CATransaction.begin()
+            CATransaction.setValue(kCFBooleanTrue, forKey: kCATransactionDisableActions)
+            self.gradientLayer.frame = self.helpInfoTextView.bounds
+            CATransaction.commit()
+        }
     }
 }
 
