@@ -65,7 +65,7 @@ class EntitlementPickerPresenter {
                 self?.coordinatorDelegate?.showRedeemCodeScreen()
             }
             
-            let configText = camDelegate?.getPluginConfig()[CAMKeys.paymentButtonText.rawValue] ?? ""
+            let configText = camDelegate?.getPluginConfig()[CAMKeys.purchaseButtonText.rawValue] ?? ""
             let price = product.skProduct.localizedPrice ?? ""
             let purchaseButtonText = configText + " " + price
             
