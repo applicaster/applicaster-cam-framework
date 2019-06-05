@@ -14,16 +14,16 @@ enum class UIKey(
 
     LOGIN_TITLE(text = UI_KEY_LOGIN_TITLE_TEXT, textStyle = UI_KEY_TITLE_TEXT_STYLE),
     LOGIN_RESET_PWD_TEXT(text = UI_KEY_LOGIN_RESET_PWD_TEXT, textStyle = UI_KEY_LOGIN_RESET_PWD_STYLE),
-    LOGIN_ALT_AUTH_TEXT(text = UI_KEY_THIRD_PARTY_LOGIN_TEXT, textStyle = UI_KEY_THIRD_PARTY_LOGIN_TEXT),
+    LOGIN_ALT_AUTH_TEXT(text = UI_KEY_THIRD_PARTY_AUTH_TEXT, textStyle = UI_KEY_THIRD_PARTY_AUTH_STYLE),
     LOGIN_BUTTON(text = UI_KEY_LOGIN_BUTTON_TEXT, image = UI_KEY_LOGIN_BUTTON_IMAGE, textStyle = UI_KEY_ACTION_BUTTON_TEXT_STYLE),
-    LOGIN_PROMPT_TEXT(text = UI_KEY_LOGIN_PROMPT_TEXT, textStyle = UI_KEY_LOGIN_PROMPT_STYLE),
-    LOGIN_PROMPT_ACTION_TEXT(text = UI_KEY_LOGIN_PROMPT_ACTION_TEXT, textStyle = UI_KEY_SIGN_UP_PROMPT_TEXT_STYLE),
+    LOGIN_PROMPT_TEXT(text = UI_KEY_LOGIN_PROMPT_TEXT, textStyle = UI_KEY_PROMPT_STYLE),
+    LOGIN_PROMPT_ACTION_TEXT(text = UI_KEY_LOGIN_PROMPT_ACTION_TEXT, textStyle = UI_KEY_LINK_TEXT_STYLE),
     SIGN_UP_TITLE(text = UI_KEY_SIGN_UP_TITLE_TEXT, textStyle = UI_KEY_TITLE_TEXT_STYLE),
-    SIGN_UP_ALT_AUTH_TEXT(text = UI_KEY_THIRD_PARTY_SIGN_UP_TEXT, textStyle = UI_KEY_THIRD_PARTY_SIGN_UP_TEXT),
+    SIGN_UP_ALT_AUTH_TEXT(text = UI_KEY_THIRD_PARTY_AUTH_TEXT, textStyle = UI_KEY_THIRD_PARTY_AUTH_STYLE),
     SIGN_UP_BUTTON(text = UI_KEY_SIGN_UP_BUTTON_TEXT, image = UI_KEY_SIGN_UP_BUTTON_IMAGE, textStyle = UI_KEY_ACTION_BUTTON_TEXT_STYLE),
-    SIGN_UP_PROMPT_TEXT(text = UI_KEY_SIGN_UP_PROMPT_TEXT, textStyle = UI_KEY_SIGN_UP_PROMPT_TEXT_STYLE),
-    SIGN_UP_PROMPT_ACTION_TEXT(text = UI_KEY_SIGN_UP_PROMPT_ACTION_TEXT, textStyle = UI_KEY_SIGN_UP_PROMPT_TEXT_STYLE),
-    AUTH_SEPARATOR_TEXT(text = UI_KEY_THIRD_PARTY_SEPARATOR_TEXT, textStyle = UI_KEY_THIRD_PARTY_SEPARATOR_TEXT),
+    SIGN_UP_PROMPT_TEXT(text = UI_KEY_SIGN_UP_PROMPT_TEXT, textStyle = UI_KEY_PROMPT_STYLE),
+    SIGN_UP_PROMPT_ACTION_TEXT(text = UI_KEY_SIGN_UP_PROMPT_ACTION_TEXT, textStyle = UI_KEY_LINK_TEXT_STYLE),
+    AUTH_SEPARATOR_TEXT(text = UI_KEY_THIRD_PARTY_SEPARATOR_TEXT, textStyle = UI_KEY_THIRD_PARTY_SEPARATOR_STYLE),
     AUTH_LEFT_DIVIDER_IMAGE(image = UI_KEY_THIRD_PARTY_DIVIDER_LEFT_IMAGE),
     AUTH_RIGHT_DIVIDER_IMAGE(image = UI_KEY_THIRD_PARTY_DIVIDER_RIGHT_IMAGE),
     AUTH_INPUT_FIELD(image = UI_KEY_INPUT_FIELD_IMAGE),
@@ -39,9 +39,8 @@ enum class UIKey(
     BILLING_ITEM_DETAILS_TEXT(textStyle = UI_KEY_BILLING_ITEM_DETAILS_TEXT),
     BILLING_ITEM_REDEEM_TEXT(text = UI_KEY_BILLING_ITEM_REDEEM_TEXT, textStyle = UI_KEY_BILLING_ITEM_REDEEM_TEXT),
     BILLING_TITLE(text = UI_KEY_BILLING_TITLE_TEXT, textStyle = UI_KEY_TITLE_TEXT_STYLE),
-    BILLING_PROMPT_TEXT(text = UI_KEY_BILLING_RESTORE_DESC, textStyle = UI_KEY_BILLING_RESTORE_DESC),
-    BILLING_RESTORE_ACTION_TEXT(text = UI_KEY_BILLING_RESTORE_ACTION, textStyle = UI_KEY_BILLING_RESTORE_ACTION),
-    BILLING_RESTORE_HINT_DESC_TEXT(text = UI_KEY_BILLING_RESTORE_DESC, textStyle = UI_KEY_BILLING_RESTORE_DESC),
+    BILLING_RESTORE_ACTION_TEXT(text = UI_KEY_BILLING_RESTORE_ACTION, textStyle = UI_KEY_LINK_TEXT_STYLE),
+    BILLING_RESTORE_HINT_DESC_TEXT(text = UI_KEY_BILLING_RESTORE_DESC, textStyle = UI_KEY_PROMPT_STYLE),
 
     CONFIRMATION_DIALOG_IMAGE(image = UI_KEY_ALERT_COMPONENT_IMAGE),
     BILLING_CONFIRMATION_TITLE_TEXT(text = UI_KEY_PAYMENT_CONFIRMATION_TITLE_TEXT, textStyle = UI_KEY_ALERT_TITLE_TEXT_STYLE),
@@ -76,23 +75,24 @@ const val UI_KEY_ALERT_BUTTON_IMAGE = "alert_button_asset"
 // endregion
 
 // region auth UI keys
-const val UI_KEY_SIGN_UP_TITLE_TEXT = "sign_up_screen_title_text"
+const val UI_KEY_SIGN_UP_TITLE_TEXT = "sign_up_title_text"
 const val UI_KEY_SIGN_UP_BUTTON_TEXT = "sign_up_button_text"
 const val UI_KEY_SIGN_UP_BUTTON_IMAGE = "action_button_asset"
-const val UI_KEY_LOGIN_RESET_PWD_TEXT = "reset_password_action_text"
-const val UI_KEY_LOGIN_RESET_PWD_STYLE = "Restore_password_text"
-const val UI_KEY_SIGN_UP_PROMPT_TEXT = "have_account_text"
-const val UI_KEY_SIGN_UP_PROMPT_TEXT_STYLE= "Link_text"
-const val UI_KEY_SIGN_UP_PROMPT_ACTION_TEXT = "sign_up_prompt_action_text"
-const val UI_KEY_LOGIN_TITLE_TEXT = "login_screen_title_text"
-const val UI_KEY_LOGIN_BUTTON_TEXT = "sign_in_button_text"
+const val UI_KEY_LOGIN_RESET_PWD_TEXT = "password_reset_link_text"
+const val UI_KEY_LOGIN_RESET_PWD_STYLE = "restore_password"
+const val UI_KEY_SIGN_UP_PROMPT_TEXT = "login_prompt_text"
+const val UI_KEY_LINK_TEXT_STYLE= "Link_text"
+const val UI_KEY_SIGN_UP_PROMPT_ACTION_TEXT = "login_link_text"
+const val UI_KEY_LOGIN_TITLE_TEXT = "login_title_text"
+const val UI_KEY_LOGIN_BUTTON_TEXT = "login_button_text"
 const val UI_KEY_LOGIN_BUTTON_IMAGE = "action_button_asset"
-const val UI_KEY_LOGIN_PROMPT_TEXT = "login_no_account_text"
-const val UI_KEY_LOGIN_PROMPT_STYLE = "Prompt_text"
-const val UI_KEY_LOGIN_PROMPT_ACTION_TEXT = "sign_up_text"
-const val UI_KEY_THIRD_PARTY_SIGN_UP_TEXT = "alternative_sign_up_action_prompt_text"
-const val UI_KEY_THIRD_PARTY_LOGIN_TEXT = "alternative_login_action_prompt_text"
-const val UI_KEY_THIRD_PARTY_SEPARATOR_TEXT = "separator_text"
+const val UI_KEY_LOGIN_PROMPT_TEXT = "sign_up_prompt_text"
+const val UI_KEY_PROMPT_STYLE = "Prompt_text"
+const val UI_KEY_LOGIN_PROMPT_ACTION_TEXT = "sign_up_link_text"
+const val UI_KEY_THIRD_PARTY_AUTH_TEXT = "alternative_authentication_prompt_text"
+const val UI_KEY_THIRD_PARTY_AUTH_STYLE = "Alternative_login_prompt_text"
+const val UI_KEY_THIRD_PARTY_SEPARATOR_TEXT = "alternative_authentication_separator_text"
+const val UI_KEY_THIRD_PARTY_SEPARATOR_STYLE = "separator_text"
 const val UI_KEY_THIRD_PARTY_DIVIDER_LEFT_IMAGE = "separator_asset_left"
 const val UI_KEY_THIRD_PARTY_DIVIDER_RIGHT_IMAGE = "separator_asset_right"
 const val UI_KEY_INPUT_FIELD_IMAGE = "input_field_asset"
@@ -100,9 +100,9 @@ const val UI_KEY_FACEBOOK_IMAGE = "icon_1"
 // endregion
 
 // region Password reset UI keys
-const val UI_KEY_PWD_RESET_TITLE_TEXT = "reset_password_title_text"
-const val UI_KEY_PWD_RESET_DESC_TEXT = "reset_password_details_text"
-const val UI_KEY_PWD_RESET_BUTTON_TEXT = "reset_password_action_button_text"
+const val UI_KEY_PWD_RESET_TITLE_TEXT = "password_reset_title_text"
+const val UI_KEY_PWD_RESET_DESC_TEXT = "password_reset_description_text"
+const val UI_KEY_PWD_RESET_BUTTON_TEXT = "password_reset_button_text"
 const val UI_KEY_PWD_RESET_BUTTON_IMAGE= "action_button_asset"
 // endregion
 
@@ -117,8 +117,8 @@ const val UI_KEY_BILLING_ITEM_LABEL_IMAGE = "storefront_promo_img"
 const val UI_KEY_BILLING_ITEM_LABEL_TEXT = "storefront_promo_text"
 // region Billing fragments
 const val UI_KEY_BILLING_TITLE_TEXT = "storefront_screen_title_text"
-const val UI_KEY_BILLING_RESTORE_DESC = "storefront_screen_hint_desc"
-const val UI_KEY_BILLING_RESTORE_ACTION = "storefront_screen_hint_action"
+const val UI_KEY_BILLING_RESTORE_DESC = "restore_promt_text"
+const val UI_KEY_BILLING_RESTORE_ACTION = "restore_link_text"
 // endregion
 // endregion
 
@@ -128,9 +128,9 @@ const val UI_KEY_PAYMENT_CONFIRMATION_TITLE_TEXT = "payment_confirmation_title_t
 const val UI_KEY_PAYMENT_CONFIRMATION_DESC_TEXT = "payment_confirmation_description_text"
 const val UI_KEY_PAYMENT_CONFIRMATION_BUTTON_TEXT = "payment_confirmation_button_text"
 // reset password
-const val UI_KEY_PWD_CONFIRMATION_TITLE_TEXT = "pwd_confirmation_title_text"
-const val UI_KEY_PWD_CONFIRMATION_DESC_TEXT = "pwd_confirmation_description_text"
-const val UI_KEY_PWD_CONFIRMATION_BUTTON_TEXT = "pwd_confirmation_button_text"
+const val UI_KEY_PWD_CONFIRMATION_TITLE_TEXT = "password_reset_confirmation_title_text"
+const val UI_KEY_PWD_CONFIRMATION_DESC_TEXT = "password_reset_confirmation_description_text"
+const val UI_KEY_PWD_CONFIRMATION_BUTTON_TEXT = "password_reset_confirmation_button_text"
 // restore purchases
 const val UI_KEY_RESTORE_CONFIRMATION_TITLE_TEXT = "restore_confirmation_title_text"
 const val UI_KEY_RESTORE_CONFIRMATION_DESC_TEXT = "restore_confirmation_description_text"
