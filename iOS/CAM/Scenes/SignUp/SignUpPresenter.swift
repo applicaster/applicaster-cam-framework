@@ -65,8 +65,8 @@ class SignUpPresenter {
         }
     }
     
-    func validate(data: [AuthField]) -> [String: String?]? {
-        var result = [String: String?]()
+    func validate(data: [AuthField]) -> [String: String]? {
+        var result = [String: String]()
         for obj in data {
             if obj.mandatory && (obj.text ?? "").isEmpty {
                 let message = camDelegate?.getPluginConfig()[CAMKeys.emptyFieldsMessage.rawValue]
