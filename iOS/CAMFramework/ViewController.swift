@@ -21,7 +21,7 @@ class ViewController: UIViewController, CAMDelegate {
         completion(.failure(description: "Test"))
     }
     
-    func resetPassword(data: [(key: String, value: String?)], completion: @escaping (CAMResult) -> Void) {
+    func resetPassword(data: [String: String?], completion: @escaping (CAMResult) -> Void) {
         completion(.success)
     }
     
@@ -31,13 +31,13 @@ class ViewController: UIViewController, CAMDelegate {
     let myConnector = MyConnector()
     
     
-    func login(authData: [(key: String, value: String?)], completion: @escaping (CAMResult) -> Void) {
+    func login(authData: [String: String?], completion: @escaping (CAMResult) -> Void) {
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
             completion(.success)
         })
     }
     
-    func signUp(authData: [(key: String, value: String?)], completion: @escaping (CAMResult) -> Void) {
+    func signUp(authData: [String: String?], completion: @escaping (CAMResult) -> Void) {
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
             completion(.success)
         })
