@@ -53,8 +53,8 @@ class ResetPasswordPresenter {
         }
     }
     
-    func validate(data: [AuthField]) -> [(key: String, value: String?)]? {
-        var result = [(key: String, value: String?)]()
+    func validate(data: [AuthField]) -> [String: String?]? {
+        var result = [String: String?]()
         for obj in data {
             if obj.mandatory && (obj.text ?? "").isEmpty {
                 let message = camDelegate?.getPluginConfig()[CAMKeys.emptyFieldsMessage.rawValue]
@@ -62,7 +62,9 @@ class ResetPasswordPresenter {
                 view?.showError(description: message)
                 return nil
             }
-            result.append((key: (obj.key ?? ""), value: obj.text))
+            if let key = obj.key {
+                result[key] = obj.text
+            }
         }
         return result
     }
