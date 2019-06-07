@@ -32,7 +32,10 @@ class LoginPresenter(
 
     override fun onSuccess() {
         view?.hideLoadingIndicator()
-        navigationRouter.attachBillingFragment()
+        if (ContentAccessManager.contract.isPurchaseRequired(emptyList()))
+            navigationRouter.attachBillingFragment()
+        else
+            view?.close()
     }
 
     override fun onAuthHintClicked() {

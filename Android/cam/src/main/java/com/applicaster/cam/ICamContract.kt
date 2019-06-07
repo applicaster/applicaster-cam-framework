@@ -22,5 +22,7 @@ interface ICamContract {
 
     fun isUserLogged(): Boolean
 
+    fun isPurchaseRequired(entitlements: List<String>): Boolean
+
     fun getPluginConfig(): Map<String, String>
 }
