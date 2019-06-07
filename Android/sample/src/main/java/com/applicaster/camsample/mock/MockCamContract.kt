@@ -50,5 +50,7 @@ class MockCamContract(private val context: Context) : ICamContract {
 
     override fun isUserLogged() = false
 
+    override fun isPurchaseRequired(entitlements: List<String>) = false
+
     override fun getPluginConfig() = MockPluginConfiguration.getPluginConfiguration(context)
 }
