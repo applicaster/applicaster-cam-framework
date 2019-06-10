@@ -22,7 +22,7 @@ public enum CAMResult {
 public protocol CAMDelegate: AnyObject {
     func getPluginConfig() -> [String: String]
     func isUserLogged() -> Bool
-    func isEntitlementsValid() -> Bool
+    func isPurchaseNeeded() -> Bool
     func facebookLogin(userData: (email: String, userId: String), completion: @escaping (CAMResult) -> Void)
     func facebookSignUp(userData: (email: String, userId: String), completion: @escaping (CAMResult) -> Void)
     func login(authData: [String: String], completion: @escaping (CAMResult) -> Void)

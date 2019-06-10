@@ -110,7 +110,7 @@ class ViewController: UIViewController, CAMDelegate {
         
     }
     
-    func isEntitlementsValid() -> Bool {
+    func isPurchaseNeeded() -> Bool {
         return false
     }
 

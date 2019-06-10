@@ -62,7 +62,7 @@ open class ContentAccessManager {
     }
     
     private func checkUserAccess() {
-        if delegate.isEntitlementsValid() {
+        if delegate.isPurchaseNeeded() {
             finishFlow(true)
         } else {
             if navigationController.presentingViewController == nil {

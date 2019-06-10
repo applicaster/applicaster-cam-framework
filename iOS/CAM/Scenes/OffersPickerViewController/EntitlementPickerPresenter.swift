@@ -45,7 +45,7 @@ class EntitlementPickerPresenter {
             switch result {
             case .success(let response):
                 self.camDelegate?.itemsRestored(items: response)
-                if self.camDelegate?.isEntitlementsValid() == true {
+                if self.camDelegate?.isPurchaseNeeded() == true {
                     self.showConfirmationScreen()
                 }
             case .failure(let error):
