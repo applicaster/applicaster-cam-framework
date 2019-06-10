@@ -20,7 +20,18 @@ class CustomFlowLayout: UICollectionViewFlowLayout {
             return
         }
         if UIDevice.current.userInterfaceIdiom == .pad {
-            let inset = (collectionView.bounds.size.width - itemSize.width) / 2
+            var itemsAmount = collectionView.dataSource!.collectionView(collectionView,
+                                                                        numberOfItemsInSection: 0)
+            
+            if itemsAmount > 3 {
+                itemsAmount = 3
+            }
+            
+            let cellSpacingAmount = itemsAmount - 1
+            let cellSpacingTotalWidth = CGFloat(cellSpacingAmount) * minimumLineSpacing
+            let cellsTotalWidth = itemSize.width * CGFloat(itemsAmount)
+            let inset = (collectionView.bounds.size.width - cellSpacingTotalWidth - cellsTotalWidth) / 2
+            
             self.sectionInset.left = inset
             self.sectionInset.right = inset
         } else {
