@@ -35,13 +35,6 @@ class LoginPresenter {
         coordinatorDelegate?.showResetPasswordScreen()
     }
     
-    func backToPreviousScreen() {
-        coordinatorDelegate?.popCurrentScreen()
-        if isRoot {
-            coordinatorDelegate?.finishAuthorizationFlow(isUserLogged: false)
-        }
-    }
-    
     func showSignUpScreen() {
         if isRoot {
             coordinatorDelegate?.showSingUpScreen(isCoordinatorRootController: false)

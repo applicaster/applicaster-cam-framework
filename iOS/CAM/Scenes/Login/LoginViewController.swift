@@ -13,7 +13,6 @@ class LoginViewController: UIViewController {
     var loadingPopover = LoadingPopover.nibInstance()
     var authFields = [AuthField]()
     @IBOutlet var backgroundImageView: UIImageView!
-    @IBOutlet var backButton: UIButton!
     @IBOutlet var closeButton: UIButton!
     @IBOutlet var logoImageView: UIImageView!
     
@@ -89,9 +88,6 @@ class LoginViewController: UIViewController {
     
     func setupUI() {
         self.navigationController?.isNavigationBarHidden = true
-        if let isHidden = presenter?.isRoot {
-            backButton.isHidden = isHidden
-        }
         signUpButton.titleLabel?.numberOfLines = 0
         signUpButton.titleLabel?.textAlignment = .center
         restoreContainer.isHidden = true
@@ -132,7 +128,6 @@ class LoginViewController: UIViewController {
     
     func configureElements() {
         backgroundImageView.setZappStyle(withAsset: .backgroundImage)
-        backButton.setZappStyle(withIconAsset: .backButtonImage)
         closeButton.setZappStyle(withIconAsset: .closeButtonImage)
         logoImageView.setZappStyle(withAsset: .headerLogo)
         titleLabel.setZappStyle(text: configDictionary[CAMKeys.loginScreenTitleText.rawValue], style: .screenTitle)
@@ -201,10 +196,6 @@ class LoginViewController: UIViewController {
     
     @IBAction func close(_ sender: UIButton) {
         presenter?.close()
-    }
-    
-    @IBAction func backToPreviousScreen(_ sender: UIButton) {
-        presenter?.backToPreviousScreen()
     }
     
     @IBAction func resetPassword(_ sender: Any) {

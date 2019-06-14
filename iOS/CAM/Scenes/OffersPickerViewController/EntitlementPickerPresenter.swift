@@ -32,10 +32,6 @@ class EntitlementPickerPresenter {
         self.view?.viewModel = viewModel
     }
     
-    func backToPreviousScreen() {
-        coordinatorDelegate?.finishBillingFlow(isUserHasAccess: false)
-    }
-    
     func close() {
        coordinatorDelegate?.finishBillingFlow(isUserHasAccess: false)
     }

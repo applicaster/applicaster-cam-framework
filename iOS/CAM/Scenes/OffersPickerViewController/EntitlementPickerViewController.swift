@@ -18,7 +18,6 @@ class EntitlementPickerViewController: UIViewController {
     @IBOutlet private var backgroundImageView: UIImageView!
     @IBOutlet private var logoImageView: UIImageView!
     @IBOutlet private var closeButton: UIButton!
-    @IBOutlet private var backButton: UIButton!
     @IBOutlet private var titleLabel: UILabel!
     
     @IBOutlet private var entitlementsLoadingIndicator: UIActivityIndicatorView!
@@ -62,7 +61,6 @@ class EntitlementPickerViewController: UIViewController {
         presenter?.viewDidLoad()
         
         backgroundImageView.setZappStyle(withAsset: .backgroundImage)
-        backButton.setZappStyle(withIconAsset: .backButtonImage)
         closeButton.setZappStyle(withIconAsset: .closeButtonImage)
         logoImageView.setZappStyle(withAsset: .headerLogo)
         helpInfoContainer.setZappStyle(withBackgroundColor: .alternateActionBannerColor)
@@ -82,10 +80,6 @@ class EntitlementPickerViewController: UIViewController {
         customLayout.minimumLineSpacing = 20
         customLayout.scrollDirection = UIDevice.current.userInterfaceIdiom == .pad ? .horizontal : .vertical
         entitlementCollectionView.collectionViewLayout = customLayout
-    }
-    
-    @IBAction func backToPreviousScreen(_ sender: Any) {
-        presenter?.backToPreviousScreen()
     }
     
     @IBAction func close(_ sender: Any) {
