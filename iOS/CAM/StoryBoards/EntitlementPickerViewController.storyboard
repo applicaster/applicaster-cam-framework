@@ -32,17 +32,6 @@
                                     <action selector="close:" destination="Ab9-b4-2xb" eventType="touchUpInside" id="Jg8-db-Kdh"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ofW-uD-S0R" userLabel="backButton">
-                                <rect key="frame" x="0.0" y="24" width="38" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="38" id="KbV-9I-ekH"/>
-                                    <constraint firstAttribute="height" constant="44" id="aYt-ch-Lvg"/>
-                                </constraints>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="backToPreviousScreen:" destination="Ab9-b4-2xb" eventType="touchUpInside" id="Smh-Tq-z8t"/>
-                                </connections>
-                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6Qv-70-8Sd" userLabel="logoImageView">
                                 <rect key="frame" x="583" y="24" width="200" height="44"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -256,7 +245,6 @@ Any unused portion of a free trial period, if offered, will be forfeited when th
                             <constraint firstItem="0qm-JL-SHB" firstAttribute="trailing" secondItem="fwb-4x-wqx" secondAttribute="trailing" id="Pi6-Kq-0ca"/>
                             <constraint firstItem="Ly1-rl-Hp7" firstAttribute="leading" secondItem="yt7-Jw-v80" secondAttribute="leading" id="SPW-hb-lxA"/>
                             <constraint firstItem="vzX-Kr-rBb" firstAttribute="centerX" secondItem="yt7-Jw-v80" secondAttribute="centerX" id="TMz-cU-UcY"/>
-                            <constraint firstItem="ofW-uD-S0R" firstAttribute="top" secondItem="0qm-JL-SHB" secondAttribute="top" id="XOn-fz-8NJ"/>
                             <constraint firstItem="BZT-8a-6sn" firstAttribute="leading" secondItem="0qm-JL-SHB" secondAttribute="leading" id="cnf-F7-YnX"/>
                             <constraint firstItem="wYX-hB-tp5" firstAttribute="top" secondItem="yt7-Jw-v80" secondAttribute="top" id="cpt-x2-EQP"/>
                             <constraint firstItem="BZT-8a-6sn" firstAttribute="centerY" secondItem="yt7-Jw-v80" secondAttribute="centerY" id="dlS-0l-Tj6"/>
@@ -267,7 +255,6 @@ Any unused portion of a free trial period, if offered, will be forfeited when th
                             <constraint firstItem="BZT-8a-6sn" firstAttribute="centerX" secondItem="yt7-Jw-v80" secondAttribute="centerX" id="wj0-MQ-fvQ"/>
                             <constraint firstAttribute="trailing" secondItem="Ly1-rl-Hp7" secondAttribute="trailing" id="yXv-TX-0aa"/>
                             <constraint firstItem="fwb-4x-wqx" firstAttribute="top" secondItem="6Qv-70-8Sd" secondAttribute="bottom" constant="20" id="zK5-z7-I0s"/>
-                            <constraint firstItem="ofW-uD-S0R" firstAttribute="leading" secondItem="0qm-JL-SHB" secondAttribute="leading" id="zsG-9F-3ZZ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="0qm-JL-SHB"/>
                         <variation key="default">
@@ -294,7 +281,6 @@ Any unused portion of a free trial period, if offered, will be forfeited when th
                         </variation>
                     </view>
                     <connections>
-                        <outlet property="backButton" destination="ofW-uD-S0R" id="Gpi-9W-RRC"/>
                         <outlet property="backgroundImageView" destination="wYX-hB-tp5" id="hjC-eU-fB4"/>
                         <outlet property="closeButton" destination="gGD-ZL-8ay" id="9nI-dL-05Z"/>
                         <outlet property="entitlementCollectionView" destination="BZT-8a-6sn" id="id9-Bt-s9g"/>

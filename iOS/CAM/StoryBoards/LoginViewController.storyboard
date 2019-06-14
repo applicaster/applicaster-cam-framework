@@ -33,19 +33,6 @@
                                     <action selector="close:" destination="OpA-kT-jU3" eventType="touchUpInside" id="urQ-M7-Gyq"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kdc-pz-Jsm" userLabel="backButton">
-                                <rect key="frame" x="0.0" y="20" width="38" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="38" id="Uh1-ix-xtv"/>
-                                    <constraint firstAttribute="height" constant="44" id="ljF-EW-YFn"/>
-                                </constraints>
-                                <state key="normal" title="Button">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="backToPreviousScreen:" destination="OpA-kT-jU3" eventType="touchUpInside" id="Lpg-jC-QMK"/>
-                                </connections>
-                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Qt9-xh-807" userLabel="logoImageView">
                                 <rect key="frame" x="60" y="20" width="200" height="44"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -267,7 +254,6 @@
                             <constraint firstItem="Ua5-cN-U8d" firstAttribute="centerX" secondItem="ffi-pc-jcB" secondAttribute="centerX" id="5u1-eA-hlD"/>
                             <constraint firstItem="rPw-cz-xFd" firstAttribute="centerX" secondItem="ffi-pc-jcB" secondAttribute="centerX" id="63A-xx-qv3"/>
                             <constraint firstItem="Ua5-cN-U8d" firstAttribute="centerY" secondItem="ffi-pc-jcB" secondAttribute="centerY" constant="-50" id="B6f-Tg-82U"/>
-                            <constraint firstItem="kdc-pz-Jsm" firstAttribute="leading" secondItem="CaI-6u-xm9" secondAttribute="leading" id="CrX-ZX-Rx5"/>
                             <constraint firstItem="CaI-6u-xm9" firstAttribute="trailing" secondItem="yqR-eQ-1AS" secondAttribute="trailing" constant="10" id="EXx-hM-0QH"/>
                             <constraint firstItem="xq3-cc-mdm" firstAttribute="width" secondItem="Ua5-cN-U8d" secondAttribute="width" id="HUO-eK-koB"/>
                             <constraint firstItem="uuM-0v-2FY" firstAttribute="top" secondItem="CaI-6u-xm9" secondAttribute="bottom" constant="-64" id="QUT-rv-Ghg"/>
@@ -282,7 +268,6 @@
                             <constraint firstItem="8YH-d8-P5Z" firstAttribute="top" secondItem="CaI-6u-xm9" secondAttribute="top" id="cBG-cU-dlJ"/>
                             <constraint firstItem="yqR-eQ-1AS" firstAttribute="top" secondItem="Qt9-xh-807" secondAttribute="bottom" id="dLY-GA-QYG"/>
                             <constraint firstItem="Qt9-xh-807" firstAttribute="top" secondItem="CaI-6u-xm9" secondAttribute="top" id="dP7-yQ-Ctk"/>
-                            <constraint firstItem="kdc-pz-Jsm" firstAttribute="top" secondItem="CaI-6u-xm9" secondAttribute="top" id="hSz-y9-dIH"/>
                             <constraint firstItem="5I9-bH-qGg" firstAttribute="leading" secondItem="CaI-6u-xm9" secondAttribute="leading" id="hqw-PR-jLG"/>
                             <constraint firstItem="5I9-bH-qGg" firstAttribute="top" secondItem="ffi-pc-jcB" secondAttribute="top" id="kjd-s6-exS"/>
                             <constraint firstAttribute="bottom" secondItem="uuM-0v-2FY" secondAttribute="bottom" id="uJT-6w-Djm"/>
@@ -297,7 +282,6 @@
                         <outlet property="alternateLabel" destination="ZcR-FD-3dY" id="HRC-1p-GP1"/>
                         <outlet property="authFieldsTable" destination="Zxd-ps-wDH" id="49o-oe-bX9"/>
                         <outlet property="authFieldsTableHeightConstraint" destination="a6J-HC-uBj" id="e8V-XW-HoH"/>
-                        <outlet property="backButton" destination="kdc-pz-Jsm" id="GQf-pY-nwS"/>
                         <outlet property="backgroundImageView" destination="5I9-bH-qGg" id="Pfa-HE-f1s"/>
                         <outlet property="closeButton" destination="8YH-d8-P5Z" id="GC2-K4-HDt"/>
                         <outlet property="inputContainerHeightConstraint" destination="f96-cR-pkM" id="waS-aj-hlg"/>
