@@ -16,12 +16,24 @@ struct AuthFields: Codable {
 
 enum AuthFieldInputType: String, Codable {
     case text = "TEXT"
+    case email = "EMAIL"
     case password = "PASSWORD"
     case number = "NUMBER"
     case unknown
     
     public init(from decoder: Decoder) throws {
         self = try AuthFieldInputType(rawValue: decoder.singleValueContainer().decode(RawValue.self)) ?? .unknown
+    }
+}
+
+enum AuthFieldState: String, Codable {
+    case none = "none"
+    case error = "error"
+    case success = "success"
+    case unknown
+    
+    public init(from decoder: Decoder) throws {
+        self = try AuthFieldState(rawValue: decoder.singleValueContainer().decode(RawValue.self)) ?? .unknown
     }
 }
 
@@ -32,4 +44,15 @@ struct AuthField: Codable {
     let type: AuthFieldInputType
     let mandatory: Bool
     var text: String?
+    
+    private enum CodingKeys: String, CodingKey {
+        case key
+        case title
+        case hint
+        case type
+        case mandatory
+    }
+    
+    var state: AuthFieldState = .none
+    var errorDescription: String = ""
 }

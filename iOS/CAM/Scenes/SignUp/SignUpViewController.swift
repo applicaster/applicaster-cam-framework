@@ -227,13 +227,29 @@ extension SignUpViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "AuthCell",
                                                        for: indexPath) as? AuthTableCell else {
-            return UITableViewCell()
+                                                        return UITableViewCell()
         }
         cell.textField.setZappStyle(backgroundAsset: .authFieldImage,
                                     textStyle: .inputField,
                                     placeholder: authFields[indexPath.row].hint)
-        cell.textField.configureInputField(data: authFields[indexPath.row])
+        cell.configureInputField(data: authFields[indexPath.row])
+        cell.backgroundColor = .clear
+        
+        let delta: CGFloat = indexPath.row == authFields.count - 1 ? 0 : 7
+        let rectOfCell = authFieldsTable.rectForRow(at: indexPath)
+        let rectOfCellInSuperview = authFieldsTable.convert(rectOfCell, to: self.view)
+        let popoverSourceRect = CGRect(x: (self.view.bounds.width - 390) / 2,
+                                       y: rectOfCellInSuperview.maxY - delta,
+                                       width: 390,
+                                       height: 0)
+        cell.showPopover = { [weak self] in
+            self?.showErrorPopover(message: self?.authFields[indexPath.row].errorDescription,
+                                   sourceRect: popoverSourceRect)
+        }
+        
         cell.textChanged = { [weak self] text in
+            self?.authFields[indexPath.row].state = .none
+            self?.authFields[indexPath.row].errorDescription = ""
             self?.authFields[indexPath.row].text = text
         }
         return cell

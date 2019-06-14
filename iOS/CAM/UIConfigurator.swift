@@ -186,20 +186,4 @@ extension UITextField {
             self.placeholder = nil
         }
     }
-    
-    func configureInputField(data: AuthField) {
-        self.text = data.text
-        switch data.type {
-        case .text, .unknown:
-            self.keyboardType = .default
-        case .number:
-            self.keyboardType = .numberPad
-        case .password:
-            self.keyboardType = .default
-            if #available(iOS 12.0, *) {
-                self.textContentType = .oneTimeCode
-            }
-            self.isSecureTextEntry = true
-        }
-    }
 }
