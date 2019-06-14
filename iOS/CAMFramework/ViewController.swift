@@ -106,10 +106,6 @@ class ViewController: UIViewController, CAMDelegate {
         return false
     }
     
-    func getEntitlementsData(completion: @escaping ([CAMEntitlementItem]) -> Void) {
-        
-    }
-    
     func isPurchaseNeeded() -> Bool {
         return false
     }
