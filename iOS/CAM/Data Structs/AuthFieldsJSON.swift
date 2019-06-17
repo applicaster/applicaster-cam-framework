@@ -29,7 +29,6 @@ enum AuthFieldInputType: String, Codable {
 enum AuthFieldState: String, Codable {
     case none = "none"
     case error = "error"
-    case success = "success"
     case unknown
     
     public init(from decoder: Decoder) throws {

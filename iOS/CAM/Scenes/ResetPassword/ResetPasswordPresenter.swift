@@ -75,7 +75,6 @@ class ResetPasswordPresenter {
             if let key = data[index].key {
                 result[key] = data[index].text
             }
-            data[index].state = .success
         }
         if isSucceed {
             return result

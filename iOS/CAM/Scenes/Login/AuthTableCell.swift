@@ -24,12 +24,6 @@ class AuthTableCell: UITableViewCell, UITextFieldDelegate {
         textField.text = data.text
         
         switch data.state {
-        case .success:
-            let rightViewButton = UIButton()
-            rightViewButton.isEnabled = false
-            rightViewButton.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
-            rightViewButton.setZappStyle(withIconAsset: .validationSuccessImage)
-            textField.rightView = rightViewButton
         case .error:
             let rightViewButton = UIButton()
             rightViewButton.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
