@@ -25,4 +25,6 @@ interface ICamContract {
     fun isPurchaseRequired(entitlements: List<String>): Boolean
 
     fun getPluginConfig(): Map<String, String>
+
+    fun isRedeemActivated(): Boolean
 }

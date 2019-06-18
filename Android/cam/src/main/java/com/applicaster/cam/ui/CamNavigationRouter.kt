@@ -20,9 +20,14 @@ class CamNavigationRouter(baseActivity: IBaseActivity) : BaseNavigationRouter(ba
 
     fun attachSignUpFragment(initialLoad: Boolean = false) {
         val tag = SignUpFragment::class.java.canonicalName
+        val isAddedToBackStack: Boolean = fragmentManager.findFragmentByTag(tag) != null
         val fragment: Fragment = fragmentManager.findFragmentByTag(tag) ?: SignUpFragment()
         val fragmentTransaction: FragmentTransaction? = fragmentManager.beginTransaction()
-        if (!initialLoad) {
+        if (fragmentManager.backStackEntryCount == 1) {
+            fragmentManager.popBackStackImmediate()
+            fragmentManager.executePendingTransactions()
+        }
+        if (!initialLoad && !isAddedToBackStack) {
             fragmentTransaction?.addToBackStack(tag)
         }
         fragmentTransaction?.replace(fragmentContainer!!, fragment, tag)
@@ -31,9 +36,14 @@ class CamNavigationRouter(baseActivity: IBaseActivity) : BaseNavigationRouter(ba
 
     fun attachLoginFragment(initialLoad: Boolean = false) {
         val tag = LoginFragment::class.java.canonicalName
+        val isAddedToBackStack: Boolean = fragmentManager.findFragmentByTag(tag) != null
         val fragment: Fragment = fragmentManager.findFragmentByTag(tag) ?: LoginFragment()
         val fragmentTransaction: FragmentTransaction? = fragmentManager.beginTransaction()
-        if (!initialLoad) {
+        if (fragmentManager.backStackEntryCount == 1) {
+            fragmentManager.popBackStackImmediate()
+            fragmentManager.executePendingTransactions()
+        }
+        if (!initialLoad && !isAddedToBackStack) {
             fragmentTransaction?.addToBackStack(tag)
         }
         fragmentTransaction?.replace(fragmentContainer!!, fragment, tag)

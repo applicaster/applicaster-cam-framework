@@ -46,7 +46,6 @@ class PasswordResetFragment : BaseFragment(), IPasswordResetView {
     override fun setListeners() {
         btn_reset.setOnClickListener { presenter?.onResetButtonClicked(getInputFieldsValues()) }
         toolbar_back_button.setOnClickListener { presenter?.onToolbarBackClicked() }
-        toolbar_close_button.setOnClickListener { presenter?.onToolbarCloseClicked() }
     }
 
     override fun customize() {
@@ -54,7 +53,6 @@ class PasswordResetFragment : BaseFragment(), IPasswordResetView {
 
         UIMapper.apply {
             map(toolbar_back_button, UIKey.TOOLBAR_BACK_BUTTON)
-            map(toolbar_close_button, UIKey.TOOLBAR_CLOSE_BUTTON)
             map(app_logo, UIKey.TOOLBAR_HEADER_LOGO_IMAGE)
             map(container_reset_password, UIKey.BACKGROUND_IMAGE)
 

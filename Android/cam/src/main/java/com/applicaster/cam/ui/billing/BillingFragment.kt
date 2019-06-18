@@ -53,7 +53,6 @@ class BillingFragment : BaseFragment(), IBillingView {
 
     override fun setListeners() {
         toolbar_back_button.setOnClickListener { presenter?.onToolbarBackClicked() }
-        toolbar_close_button.setOnClickListener { presenter?.onToolbarCloseClicked() }
         container_restore.setOnClickListener { presenter?.onRestoreClicked() }
         purchaseListener = object : PurchaseInteractionListener {
             override fun onPurchaseButtonClicked(skuId: String) {
@@ -104,7 +103,6 @@ class BillingFragment : BaseFragment(), IBillingView {
         super.customize()
         UIMapper.apply {
             map(toolbar_back_button, UIKey.TOOLBAR_BACK_BUTTON)
-            map(toolbar_close_button, UIKey.TOOLBAR_CLOSE_BUTTON)
             map(app_logo, UIKey.TOOLBAR_HEADER_LOGO_IMAGE)
             map(layout_billing, UIKey.BACKGROUND_IMAGE)
             map(tv_billing_title_text, UIKey.BILLING_TITLE)

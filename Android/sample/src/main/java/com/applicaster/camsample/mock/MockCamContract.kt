@@ -53,4 +53,6 @@ class MockCamContract(private val context: Context) : ICamContract {
     override fun isPurchaseRequired(entitlements: List<String>) = false
 
     override fun getPluginConfig() = MockPluginConfiguration.getPluginConfiguration(context)
+
+    override fun isRedeemActivated(): Boolean = false
 }

@@ -8,8 +8,7 @@
     <include
         android:id="@+id/container_toolbar"
         layout="@layout/layout_toolbar_template"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/toolbar_height" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <com.applicaster.util.ui.CustomTextView
         android:id="@+id/tv_auth_title"
