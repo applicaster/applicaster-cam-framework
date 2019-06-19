@@ -35,6 +35,7 @@ object UIMapper {
             is ImageView -> view.background = uiProvider.getDrawable(key)
             is Button -> view.background = uiProvider.getDrawable(key)
             is EditText -> view.background = uiProvider.getDrawable(key)
+            is TextView -> view.background = uiProvider.getDrawable(key)
             is ViewGroup -> view.background = uiProvider.getDrawable(key)
         }
     }

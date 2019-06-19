@@ -8,9 +8,12 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.EditText
 import android.widget.LinearLayout
+import com.applicaster.cam.ContentAccessManager
 import com.applicaster.cam.R
+import com.applicaster.cam.config.ui.PluginUIProvider
 import com.applicaster.cam.config.ui.UIKey
 import com.applicaster.cam.config.ui.UIMapper
+import com.applicaster.cam.config.ui.UI_KEY_INPUT_ERROR_IMAGE
 import com.applicaster.cam.params.auth.AuthField
 
 class AuthInputFieldView(context: Context, var authField: AuthField, listener: InputFieldViewListener) :
@@ -40,10 +43,11 @@ class AuthInputFieldView(context: Context, var authField: AuthField, listener: I
 
     fun showError(errorMsg: String) {
         this.errorMsg = errorMsg
+
         setCompoundDrawablesRelativeWithIntrinsicBounds(
             null,
             null,
-            context.resources.getDrawable(R.drawable.input_alert_indicator),
+            ContentAccessManager.pluginUIProvider.getDrawable(UI_KEY_INPUT_ERROR_IMAGE),
             null
         )
     }
