@@ -12,7 +12,6 @@ class ErrorPopoverViewController: UIViewController {
     @IBOutlet var bubbleWidthConstraint: NSLayoutConstraint!
     @IBOutlet var shadowImageView: UIImageView!
     @IBOutlet var bubbleImageView: UIImageView!
-    @IBOutlet var arrowImageView: UIImageView!
     @IBOutlet var messageLabel: UILabel!
     
     override func viewDidLoad() {
@@ -21,11 +20,9 @@ class ErrorPopoverViewController: UIViewController {
     }
     
     func configureElements() {
-        bubbleWidthConstraint.constant = UIDevice.current.userInterfaceIdiom == .pad ? 304 : 250
         shadowImageView.setZappStyle(withAsset: .errorPopoverShadowImage)
         bubbleImageView.setZappStyle(withAsset: .errorPopoverBubble)
-        arrowImageView.setZappStyle(withAsset: .errorPopoverArrow)
-        messageLabel.setZappStyle(text: nil, style: .alertTitle)
+        messageLabel.setZappStyle(text: nil, style: .promtText)
         view.layoutIfNeeded()
     }
 

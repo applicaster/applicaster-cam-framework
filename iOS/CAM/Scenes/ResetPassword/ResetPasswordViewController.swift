@@ -186,8 +186,9 @@ extension ResetPasswordViewController: UITableViewDelegate, UITableViewDataSourc
                                        width: 390,
                                        height: 0)
         cell.showPopover = { [weak self] in
+            let bubbleWidth: CGFloat = 320
             self?.showErrorPopover(message: self?.resetPasswordFields[indexPath.row].errorDescription,
-                                   sourceRect: popoverSourceRect)
+                                   sourceRect: popoverSourceRect, bubbleWidth: bubbleWidth)
         }
         
         cell.textChanged = { [weak self] text in
@@ -196,5 +197,11 @@ extension ResetPasswordViewController: UITableViewDelegate, UITableViewDataSourc
             self?.resetPasswordFields[indexPath.row].text = text
         }
         return cell
+    }
+}
+
+extension ResetPasswordViewController: UIPopoverPresentationControllerDelegate {
+    func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
+        return .none
     }
 }

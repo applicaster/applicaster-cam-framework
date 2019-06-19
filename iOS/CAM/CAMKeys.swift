@@ -30,9 +30,8 @@ public enum CAMKeys: String {
     case validationSuccessImage = "success_validation_image"
     case validationFailedImage = "failed_validation_image"
     
-    case errorPopoverShadowImage = "error_popover_shadow"
-    case errorPopoverBubble = "error_popover_bubble"
-    case errorPopoverArrow = "error_popover_arrow"
+    case errorPopoverShadowImage = "field_alert_bubble_shadow"
+    case errorPopoverBubble = "field_alert_bubble"
     
     //Login
     
@@ -96,4 +95,5 @@ public enum CAMStyles: String {
     case alternateActionBannerColor = "alternate_action_banner_bg_color"
     case alertTitle = "alert_title_text"
     case alertDescription = "alert_description_text"
+    case bubbleText = "bubble_text"
 }
