@@ -87,13 +87,15 @@ abstract class AuthPresenter(
         performAuthAction(input)
     }
 
-    protected fun validateAuthInputFields(inputValues: HashMap<AuthField, String>): HashMap<AuthField, String> {
+    private fun validateAuthInputFields(inputValues: HashMap<AuthField, String>): HashMap<AuthField, String> {
         val inputErrors = HashMap<AuthField, String>()
         for (inputValue in inputValues) {
-            if (inputValue.value.isEmpty()) {
-                inputErrors[inputValue.key] = ContentAccessManager.pluginConfigurator.getEmptyInputFieldError()
-            } else if (inputValue.key.type == AuthField.Type.EMAIL && !(isEmailValid(inputValue.value))) {
-                inputErrors[inputValue.key] = ContentAccessManager.pluginConfigurator.getNotValidEmailInputFieldError()
+            if (inputValue.key.mandatory!!) {
+                if (inputValue.value.isEmpty()) {
+                    inputErrors[inputValue.key] = ContentAccessManager.pluginConfigurator.getEmptyInputFieldError()
+                } else if (inputValue.key.type == AuthField.Type.EMAIL && !(isEmailValid(inputValue.value))) {
+                    inputErrors[inputValue.key] = ContentAccessManager.pluginConfigurator.getNotValidEmailInputFieldError()
+                }
             }
         }
         return inputErrors

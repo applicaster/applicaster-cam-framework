@@ -10,14 +10,13 @@ import android.widget.EditText
 import android.widget.LinearLayout
 import com.applicaster.cam.ContentAccessManager
 import com.applicaster.cam.R
-import com.applicaster.cam.config.ui.PluginUIProvider
 import com.applicaster.cam.config.ui.UIKey
 import com.applicaster.cam.config.ui.UIMapper
 import com.applicaster.cam.config.ui.UI_KEY_INPUT_ERROR_IMAGE
 import com.applicaster.cam.params.auth.AuthField
 
 class AuthInputFieldView(context: Context, var authField: AuthField, listener: InputFieldViewListener) :
-    EditText(context) {
+        EditText(context) {
 
     private var errorMsg: String? = null
 
@@ -45,10 +44,10 @@ class AuthInputFieldView(context: Context, var authField: AuthField, listener: I
         this.errorMsg = errorMsg
 
         setCompoundDrawablesRelativeWithIntrinsicBounds(
-            null,
-            null,
-            ContentAccessManager.pluginUIProvider.getDrawable(UI_KEY_INPUT_ERROR_IMAGE),
-            null
+                null,
+                null,
+                ContentAccessManager.pluginUIProvider.getDrawable(UI_KEY_INPUT_ERROR_IMAGE),
+                null
         )
     }
 
@@ -56,23 +55,23 @@ class AuthInputFieldView(context: Context, var authField: AuthField, listener: I
         if (errorMsg != null) {
             errorMsg = null
             setCompoundDrawablesRelativeWithIntrinsicBounds(
-                null,
-                null,
-                null,
-                null
+                    null,
+                    null,
+                    null,
+                    null
             )
         }
     }
 
     fun applyCustomizations(
-        etWidth: Int,
-        etHeight: Int,
-        etMarginTop: Int,
-        field: AuthField
+            etWidth: Int,
+            etHeight: Int,
+            etMarginTop: Int,
+            field: AuthField
     ) {
         layoutParams = LinearLayout.LayoutParams(
-            etWidth,
-            etHeight
+                etWidth,
+                etHeight
         ).apply {
             topMargin = etMarginTop
 
