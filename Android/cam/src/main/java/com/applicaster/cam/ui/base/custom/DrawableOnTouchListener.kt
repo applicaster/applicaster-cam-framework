@@ -7,7 +7,7 @@ import android.view.View.OnTouchListener
 import android.widget.EditText
 
 abstract class DrawableOnTouchListener : OnTouchListener {
-    private val extendedClickableArea = 10
+    private val extendedClickableArea = 30
 
     override fun onTouch(v: View, event: MotionEvent): Boolean {
         val drawable = getDrawable(v as EditText)

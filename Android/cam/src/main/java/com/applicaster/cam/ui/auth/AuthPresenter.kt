@@ -1,9 +1,11 @@
 package com.applicaster.cam.ui.auth
 
 import android.app.Activity
+import android.view.View
 import com.applicaster.cam.ContentAccessManager
 import com.applicaster.cam.params.auth.AuthField
 import com.applicaster.cam.params.auth.AuthFieldConfig
+import com.applicaster.cam.ui.base.custom.InputFieldViewListener
 import com.applicaster.cam.ui.base.presenter.BasePresenter
 import com.applicaster.model.APUser
 import com.applicaster.util.FacebookUtil
@@ -65,6 +67,10 @@ abstract class AuthPresenter(
     override fun onFacebookButtonClicked(activity: Activity?) {
         if (activity != null && !activity.isFinishing)
             FacebookUtil.updateTokenIfNeeded(activity, APPermissionsType.Custom, this)
+    }
+
+    override fun onErrorIconClicked(rootView: View, errorMsg: String) {
+        view?.showErrorPopup(rootView, errorMsg)
     }
 
     override fun onAuthActionButtonClicked(inputValues: HashMap<AuthField, String>) {

@@ -15,6 +15,7 @@ import com.applicaster.cam.params.auth.AuthField
 import com.applicaster.cam.params.auth.AuthFieldConfig
 import com.applicaster.cam.ui.CamNavigationRouter
 import com.applicaster.cam.ui.base.custom.AuthInputFieldView
+import com.applicaster.cam.ui.base.custom.ErrorPopupViewBuilder
 import com.applicaster.cam.ui.base.custom.InputFieldViewListener
 import com.applicaster.cam.ui.base.view.BaseFragment
 import kotlinx.android.synthetic.main.fragment_auth.*
@@ -24,7 +25,7 @@ import kotlinx.android.synthetic.main.layout_bottom_bar.*
 import kotlinx.android.synthetic.main.layout_text_with_action.*
 import kotlinx.android.synthetic.main.layout_toolbar_template.*
 
-abstract class AuthFragment : BaseFragment(), IAuthView, InputFieldViewListener {
+abstract class AuthFragment : BaseFragment(), IAuthView {
     private var presenter: IAuthPresenter? = null
 
     override fun onCreateView(
@@ -90,29 +91,9 @@ abstract class AuthFragment : BaseFragment(), IAuthView, InputFieldViewListener 
                 linearParent = container_linear_input,
                 scrollableParent = container_scrollable_input,
                 authFieldConfig = authFieldConfig,
-                listener = this@AuthFragment
+                listener = presenter!!
             )
         }
-    }
-
-    fun showPopupMenu(anchorView: View, msg: String) {
-        val popupView = layoutInflater.inflate(R.layout.layout_input_validation_popup, null)
-        val tvValidationMessage = popupView.findViewById<TextView>(R.id.tv_validation_msg)
-        tvValidationMessage.text = msg
-        val popupWindow = PopupWindow(
-            popupView,
-            resources.getDimensionPixelSize(R.dimen.auth_error_popup_width),
-            resources.getDimensionPixelSize(R.dimen.auth_error_popup_height)
-        )
-        popupWindow.isFocusable = true
-        val location = IntArray(2)
-        anchorView.getLocationOnScreen(location)
-        popupWindow.showAtLocation(
-            anchorView, Gravity.NO_GRAVITY, location[0] -
-                    (resources.getDimensionPixelSize(R.dimen.auth_error_popup_width)
-                            - resources.getDimensionPixelSize(R.dimen.auth_error_text_width)) / 2,
-            location[1] + anchorView.height
-        )
     }
 
     private fun getInputFieldsValues(): HashMap<AuthField, String> {
@@ -137,8 +118,8 @@ abstract class AuthFragment : BaseFragment(), IAuthView, InputFieldViewListener 
         }
     }
 
-    override fun onErrorIconClicked(rootView: View, errorMsg: String) {
-        showPopupMenu(rootView, errorMsg)
+    override fun showErrorPopup(rootView: View, errorMsg: String) {
+        ErrorPopupViewBuilder(context, layoutInflater).build(rootView, errorMsg)
     }
 
     abstract fun initPresenter(navigationManager: CamNavigationRouter): IAuthPresenter

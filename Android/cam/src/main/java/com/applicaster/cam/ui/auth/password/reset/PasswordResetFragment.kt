@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import com.applicaster.cam.R
 import com.applicaster.cam.config.ui.UIKey
 import com.applicaster.cam.config.ui.UIMapper
@@ -12,9 +11,11 @@ import com.applicaster.cam.params.auth.AuthField
 import com.applicaster.cam.params.auth.AuthFieldConfig
 import com.applicaster.cam.ui.CamNavigationRouter
 import com.applicaster.cam.ui.auth.InputFieldViewCustomizer
-import com.applicaster.cam.ui.base.custom.InputFieldViewListener
+import com.applicaster.cam.ui.base.custom.AuthInputFieldView
+import com.applicaster.cam.ui.base.custom.ErrorPopupViewBuilder
 import com.applicaster.cam.ui.base.view.BaseFragment
 import kotlinx.android.synthetic.main.fragment_password_reset.*
+import kotlinx.android.synthetic.main.layout_auth_input.*
 import kotlinx.android.synthetic.main.layout_toolbar_template.*
 
 class PasswordResetFragment : BaseFragment(), IPasswordResetView {
@@ -71,23 +72,36 @@ class PasswordResetFragment : BaseFragment(), IPasswordResetView {
                 this,
                 linearParent = container_linear_reset_input,
                 authFieldConfig = authFieldConfig,
-                listener = object : InputFieldViewListener {
-                    override fun onErrorIconClicked(rootView: View) {
-                        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-                    }
-                }
+                listener = presenter!!
             )
         }
     }
 
-    private fun getInputFieldsValues(): HashMap<String, String> {
-        val inputValues = HashMap<String, String>()
+    private fun getInputFieldsValues(): HashMap<AuthField, String> {
+        val inputValues = HashMap<AuthField, String>()
         for (i in 0 until container_linear_reset_input.childCount) {
-            val child = container_linear_reset_input.getChildAt(i) as? EditText
+            val child = container_linear_reset_input.getChildAt(i) as? AuthInputFieldView
             if (child != null)
-                inputValues[(child.tag as AuthField).key!!] = child.text.toString()
+                inputValues[child.authField] = child.text.toString()
         }
         return inputValues
+    }
+
+
+    override fun showAuthInputFieldErrorIcons(inputFieldValidationErrors: HashMap<AuthField, String>) {
+        for (i in 0 until container_linear_reset_input.childCount) {
+            val child = container_linear_reset_input.getChildAt(i) as? AuthInputFieldView
+            for (error in inputFieldValidationErrors) {
+                if (child != null && child.authField.key == error.key.key) {
+                    child.showError(errorMsg = error.value)
+                    break
+                }
+            }
+        }
+    }
+
+    override fun showErrorPopup(rootView: View, errorMsg: String) {
+        ErrorPopupViewBuilder(context, layoutInflater).build(rootView, errorMsg)
     }
 }
 
