@@ -12,6 +12,7 @@ import com.applicaster.cam.params.auth.AuthField
 import com.applicaster.cam.params.auth.AuthFieldConfig
 import com.applicaster.cam.ui.CamNavigationRouter
 import com.applicaster.cam.ui.auth.InputFieldViewCustomizer
+import com.applicaster.cam.ui.base.custom.InputFieldViewListener
 import com.applicaster.cam.ui.base.view.BaseFragment
 import kotlinx.android.synthetic.main.fragment_password_reset.*
 import kotlinx.android.synthetic.main.layout_toolbar_template.*
@@ -46,7 +47,6 @@ class PasswordResetFragment : BaseFragment(), IPasswordResetView {
     override fun setListeners() {
         btn_reset.setOnClickListener { presenter?.onResetButtonClicked(getInputFieldsValues()) }
         toolbar_back_button.setOnClickListener { presenter?.onToolbarBackClicked() }
-        toolbar_close_button.setOnClickListener { presenter?.onToolbarCloseClicked() }
     }
 
     override fun customize() {
@@ -54,7 +54,6 @@ class PasswordResetFragment : BaseFragment(), IPasswordResetView {
 
         UIMapper.apply {
             map(toolbar_back_button, UIKey.TOOLBAR_BACK_BUTTON)
-            map(toolbar_close_button, UIKey.TOOLBAR_CLOSE_BUTTON)
             map(app_logo, UIKey.TOOLBAR_HEADER_LOGO_IMAGE)
             map(container_reset_password, UIKey.BACKGROUND_IMAGE)
 
@@ -71,7 +70,12 @@ class PasswordResetFragment : BaseFragment(), IPasswordResetView {
             InputFieldViewCustomizer.populateAuthFields(
                 this,
                 linearParent = container_linear_reset_input,
-                authFieldConfig = authFieldConfig
+                authFieldConfig = authFieldConfig,
+                listener = object : InputFieldViewListener {
+                    override fun onErrorIconClicked(rootView: View) {
+                        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                    }
+                }
             )
         }
     }

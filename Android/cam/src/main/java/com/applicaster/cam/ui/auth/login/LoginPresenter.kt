@@ -20,10 +20,8 @@ class LoginPresenter(
         navigationRouter.attachPasswordResetFragment()
     }
 
-    override fun onAuthActionButtonClicked(inputValues: HashMap<String, String>) {
-        if (!isAuthInputFieldsValid(inputValues)) return
-        view?.showLoadingIndicator()
-        ContentAccessManager.contract.login(inputValues, this)
+    override fun performAuthAction(input: HashMap<String, String>) {
+        ContentAccessManager.contract.login(input, this)
     }
 
     override fun onFailure(msg: String) {

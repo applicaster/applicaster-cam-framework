@@ -13,7 +13,9 @@ interface Configurator {
 
     fun getDefaultAuthScreen(): AuthScreenType
 
-    fun getDefaultInputFieldError(): String
+    fun getEmptyInputFieldError(): String
+
+    fun getNotValidEmailInputFieldError(): String
 
     fun isAuthRestoreRequired(): Boolean
 

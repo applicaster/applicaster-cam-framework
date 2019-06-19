@@ -1,10 +1,12 @@
 package com.applicaster.cam.ui.auth
 
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
+import android.widget.PopupWindow
+import android.widget.TextView
 import com.applicaster.cam.ContentAccessManager
 import com.applicaster.cam.R
 import com.applicaster.cam.config.ui.UIKey
@@ -12,6 +14,8 @@ import com.applicaster.cam.config.ui.UIMapper
 import com.applicaster.cam.params.auth.AuthField
 import com.applicaster.cam.params.auth.AuthFieldConfig
 import com.applicaster.cam.ui.CamNavigationRouter
+import com.applicaster.cam.ui.base.custom.AuthInputFieldView
+import com.applicaster.cam.ui.base.custom.InputFieldViewListener
 import com.applicaster.cam.ui.base.view.BaseFragment
 import kotlinx.android.synthetic.main.fragment_auth.*
 import kotlinx.android.synthetic.main.layout_additional_auth.*
@@ -20,7 +24,7 @@ import kotlinx.android.synthetic.main.layout_bottom_bar.*
 import kotlinx.android.synthetic.main.layout_text_with_action.*
 import kotlinx.android.synthetic.main.layout_toolbar_template.*
 
-abstract class AuthFragment : BaseFragment(), IAuthView {
+abstract class AuthFragment : BaseFragment(), IAuthView, InputFieldViewListener {
     private var presenter: IAuthPresenter? = null
 
     override fun onCreateView(
@@ -69,7 +73,6 @@ abstract class AuthFragment : BaseFragment(), IAuthView {
 
         UIMapper.apply {
             map(toolbar_back_button, UIKey.TOOLBAR_BACK_BUTTON)
-            map(toolbar_close_button, UIKey.TOOLBAR_CLOSE_BUTTON)
             map(app_logo, UIKey.TOOLBAR_HEADER_LOGO_IMAGE)
             map(container_parent_auth, UIKey.BACKGROUND_IMAGE)
             map(iv_facebook_auth, UIKey.AUTH_FACEBOOK_IMAGE)
@@ -86,19 +89,56 @@ abstract class AuthFragment : BaseFragment(), IAuthView {
                 this,
                 linearParent = container_linear_input,
                 scrollableParent = container_scrollable_input,
-                authFieldConfig = authFieldConfig
+                authFieldConfig = authFieldConfig,
+                listener = this@AuthFragment
             )
         }
     }
 
-    private fun getInputFieldsValues(): HashMap<String, String> {
-        val inputValues = HashMap<String, String>()
+    fun showPopupMenu(anchorView: View, msg: String) {
+        val popupView = layoutInflater.inflate(R.layout.layout_input_validation_popup, null)
+        val tvValidationMessage = popupView.findViewById<TextView>(R.id.tv_validation_msg)
+        tvValidationMessage.text = msg
+        val popupWindow = PopupWindow(
+            popupView,
+            resources.getDimensionPixelSize(R.dimen.auth_error_popup_width),
+            resources.getDimensionPixelSize(R.dimen.auth_error_popup_height)
+        )
+        popupWindow.isFocusable = true
+        val location = IntArray(2)
+        anchorView.getLocationOnScreen(location)
+        popupWindow.showAtLocation(
+            anchorView, Gravity.NO_GRAVITY, location[0] -
+                    (resources.getDimensionPixelSize(R.dimen.auth_error_popup_width)
+                            - resources.getDimensionPixelSize(R.dimen.auth_error_text_width)) / 2,
+            location[1] + anchorView.height
+        )
+    }
+
+    private fun getInputFieldsValues(): HashMap<AuthField, String> {
+        val inputValues = HashMap<AuthField, String>()
         for (i in 0 until container_linear_input.childCount) {
-            val child = container_linear_input.getChildAt(i) as? EditText
+            val child = container_linear_input.getChildAt(i) as? AuthInputFieldView
             if (child != null)
-                inputValues[(child.tag as AuthField).key!!] = child.text.toString()
+                inputValues[child.authField] = child.text.toString()
         }
         return inputValues
+    }
+
+    override fun showAuthInputFieldErrorIcons(inputFieldValidationErrors: HashMap<AuthField, String>) {
+        for (i in 0 until container_linear_input.childCount) {
+            val child = container_linear_input.getChildAt(i) as? AuthInputFieldView
+            for (error in inputFieldValidationErrors) {
+                if (child != null && child.authField.key == error.key.key) {
+                    child.showError(errorMsg = error.value)
+                    break
+                }
+            }
+        }
+    }
+
+    override fun onErrorIconClicked(rootView: View, errorMsg: String) {
+        showPopupMenu(rootView, errorMsg)
     }
 
     abstract fun initPresenter(navigationManager: CamNavigationRouter): IAuthPresenter

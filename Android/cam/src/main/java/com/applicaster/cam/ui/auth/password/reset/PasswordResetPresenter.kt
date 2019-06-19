@@ -43,7 +43,7 @@ class PasswordResetPresenter(
     private fun isAuthInputFieldsValid(inputValues: HashMap<String, String>): Boolean {
         for (inputValue in inputValues) {
             if (inputValue.value.isEmpty()) {
-                view?.showAlert(ContentAccessManager.pluginConfigurator.getDefaultInputFieldError())
+                view?.showAlert(ContentAccessManager.pluginConfigurator.getEmptyInputFieldError())
                 return false
             }
         }

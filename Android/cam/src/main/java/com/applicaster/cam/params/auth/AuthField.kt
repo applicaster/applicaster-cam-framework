@@ -9,6 +9,7 @@ class AuthField {
     var mandatory: Boolean? = null
 
     enum class Type{
+        EMAIL,
         TEXT,
         PASSWORD,
         NUMBER,

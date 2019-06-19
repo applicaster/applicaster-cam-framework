@@ -1,10 +1,11 @@
 package com.applicaster.cam.ui.auth
 
 import android.app.Activity
+import com.applicaster.cam.params.auth.AuthField
 import com.applicaster.cam.ui.base.presenter.IBasePresenter
 
 interface IAuthPresenter : IBasePresenter {
-    fun onAuthActionButtonClicked(inputValues: HashMap<String, String>)
+    fun onAuthActionButtonClicked(inputValues: HashMap<AuthField, String>)
     fun onAuthHintClicked()
     fun onRestoreClicked()
     fun onFacebookButtonClicked(activity: Activity?)
