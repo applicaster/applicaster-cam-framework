@@ -23,7 +23,6 @@ abstract class UserAuthFragment : BaseInputFragment() {
         tv_bottom_bar_desc.setOnClickListener { presenter?.onRestoreClicked() }
         tv_bottom_bar_action.setOnClickListener { presenter?.onRestoreClicked() }
         toolbar_back_button.setOnClickListener { presenter?.onToolbarBackClicked() }
-        toolbar_close_button.setOnClickListener { presenter?.onToolbarCloseClicked() }
         iv_facebook_auth.setOnClickListener { presenter?.onFacebookButtonClicked(activity) }
     }
 

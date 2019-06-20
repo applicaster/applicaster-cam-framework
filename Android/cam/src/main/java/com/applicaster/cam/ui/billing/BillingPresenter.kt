@@ -37,8 +37,15 @@ class BillingPresenter(
         }
         view?.setListeners()
 
-        //TODO: implement logic for checking BillingItemType
-        view?.initViewComponents(view.getFragmentContainerType(), BillingItemType.NO_REDEEM)
+        // obtain redeem code and set billing item type which depends on redeem code availability
+        val billingItemType: BillingItemType = {
+            if (camContract.isRedeemActivated())
+                BillingItemType.REDEEM
+            else
+                BillingItemType.NO_REDEEM
+        }.invoke()
+
+        view?.initViewComponents(view.getFragmentContainerType(), billingItemType)
         view?.customize()
 
         //load entitlements
@@ -123,10 +130,10 @@ class BillingPresenter(
             )
             view?.populateBillingContainer(arrayListOf(
                 purchaseItem,
-                purchaseItem,
-                purchaseItem,
-                purchaseItem,
                 purchaseItem
+//                purchaseItem,
+//                purchaseItem,
+//                purchaseItem
 //                purchaseItem
             ))
         }
