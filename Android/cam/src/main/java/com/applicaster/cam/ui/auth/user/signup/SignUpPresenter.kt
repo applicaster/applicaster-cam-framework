@@ -1,17 +1,17 @@
-package com.applicaster.cam.ui.auth.signup
+package com.applicaster.cam.ui.auth.user.signup
 
 import com.applicaster.cam.ContentAccessManager
 import com.applicaster.cam.FacebookAuthCallback
 import com.applicaster.cam.SignUpCallback
 import com.applicaster.cam.params.auth.AuthFieldConfig
 import com.applicaster.cam.ui.CamNavigationRouter
-import com.applicaster.cam.ui.auth.AuthPresenter
+import com.applicaster.cam.ui.auth.user.UserAuthPresenter
 
 class SignUpPresenter(
     private val view: ISignUpView?,
     private val navigationRouter: CamNavigationRouter
 ) :
-    AuthPresenter(view), ISignUpPresenter, SignUpCallback, FacebookAuthCallback {
+    UserAuthPresenter(view), ISignUpPresenter, SignUpCallback, FacebookAuthCallback {
     override fun onFailure(msg: String) {
         view?.showAlert(msg)
     }
@@ -27,10 +27,8 @@ class SignUpPresenter(
     override fun getAuthFieldConfig(): AuthFieldConfig =
         ContentAccessManager.pluginConfigurator.getSignInAuthFields()
 
-    override fun onAuthActionButtonClicked(inputValues: HashMap<String, String>) {
-        if (!isAuthInputFieldsValid(inputValues)) return
-        view?.showLoadingIndicator()
-        ContentAccessManager.contract.signUp(inputValues, this)
+    override fun performAuthAction(input: HashMap<String, String>) {
+        ContentAccessManager.contract.signUp(input, this)
     }
 
     override fun onAuthHintClicked() {

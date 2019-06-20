@@ -40,7 +40,7 @@ object MockPluginConfiguration {
     {
     "signup": [
     {
-    "type": "TEXT",
+    "type": "EMAIL",
     "key": "email",
     "title": "Email",
     "hint": "Email",
@@ -70,7 +70,7 @@ object MockPluginConfiguration {
     ],
     "login": [
     {
-    "type": "TEXT",
+    "type": "EMAIL",
     "key": "email",
     "title": "Email",
     "hint": "Email",
@@ -86,7 +86,7 @@ object MockPluginConfiguration {
     ],
     "password_reset": [
     {
-    "type": "TEXT",
+    "type": "EMAIL",
     "key": "email",
     "title": "Email",
     "hint": "Email",

@@ -1,26 +1,16 @@
-package com.applicaster.cam.ui.auth
+package com.applicaster.cam.ui.auth.user
 
 import android.app.Activity
-import com.applicaster.cam.ContentAccessManager
-import com.applicaster.cam.params.auth.AuthFieldConfig
-import com.applicaster.cam.ui.base.presenter.BasePresenter
+import com.applicaster.cam.ui.auth.base.BaseInputPresenter
+import com.applicaster.cam.ui.auth.base.IBaseInputView
 import com.applicaster.model.APUser
 import com.applicaster.util.FacebookUtil
 import com.applicaster.util.asynctask.AsyncTaskListener
 import com.applicaster.util.facebook.listeners.FBAuthoriziationListener
 import com.applicaster.util.facebook.permissions.APPermissionsType
 
-abstract class AuthPresenter(
-    private val view: IAuthView?
-) :
-    BasePresenter(view), IAuthPresenter, FBAuthoriziationListener {
-
-    override fun onViewCreated() {
-        super.onViewCreated()
-
-        view?.populateAuthFieldsViews(getAuthFieldConfig())
-        view?.customize()
-    }
+abstract class UserAuthPresenter(private val view: IBaseInputView?) : BaseInputPresenter(view),
+    IUserAuthPresenter {
 
     override fun onRestoreClicked() {
         view?.showToastMessage("restore action")
@@ -66,18 +56,5 @@ abstract class AuthPresenter(
             FacebookUtil.updateTokenIfNeeded(activity, APPermissionsType.Custom, this)
     }
 
-    protected fun isAuthInputFieldsValid(inputValues: HashMap<String, String>): Boolean {
-        for (inputValue in inputValues) {
-            if (inputValue.value.isEmpty()) {
-                view?.showAlert(ContentAccessManager.pluginConfigurator.getDefaultInputFieldError())
-                return false
-            }
-        }
-        return true
-    }
-
-    abstract override fun onAuthActionButtonClicked(inputValues: HashMap<String, String>)
-    abstract override fun onAuthHintClicked()
     abstract fun onFacebookAuthActionCompleted(email: String, id: String)
-    abstract fun getAuthFieldConfig(): AuthFieldConfig
 }

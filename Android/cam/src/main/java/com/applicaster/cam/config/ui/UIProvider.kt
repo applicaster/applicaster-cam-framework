@@ -1,6 +1,5 @@
 package com.applicaster.cam.config.ui
 
-import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.support.annotation.ColorInt
 

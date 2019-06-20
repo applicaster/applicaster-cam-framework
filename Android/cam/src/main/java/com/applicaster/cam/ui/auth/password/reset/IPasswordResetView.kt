@@ -1,8 +1,5 @@
 package com.applicaster.cam.ui.auth.password.reset
 
-import com.applicaster.cam.params.auth.AuthFieldConfig
-import com.applicaster.cam.ui.base.view.IBaseView
+import com.applicaster.cam.ui.auth.base.IBaseInputView
 
-interface IPasswordResetView : IBaseView {
-    fun populateAuthFieldsViews(authFieldConfig: AuthFieldConfig)
-}
+interface IPasswordResetView : IBaseInputView

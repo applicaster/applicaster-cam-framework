@@ -37,7 +37,9 @@ class PluginConfigurator(private val pluginConfig: Map<String, String>) : Config
         return AuthFieldsConverter.getFromJsonString(jsonConfig, AuthScreenType.PASSWORD_RESET)
     }
 
-    override fun getDefaultInputFieldError() = pluginConfig.getValue(KEY_DEFAULT_EMPTY_INPUT_FIELD_ERROR)
+    override fun getEmptyInputFieldError() = pluginConfig.getValue(KEY_EMPTY_INPUT_FIELD_ERROR)
+
+    override fun getNotValidEmailInputFieldError() = pluginConfig.getValue(KEY_NOT_VALID_EMAIL_INPUT_FIELD_ERROR)
 
     override fun isAuthRestoreRequired() =
         pluginConfig.getValue(KEY_AUTH_RESTORE_REQ).toBoolean()
@@ -71,4 +73,5 @@ const val KEY_AUTH_FIELDS = "auth_fields"
 const val KEY_AUTH_RESTORE_REQ = "auth_restore_required"
 const val KEY_DEFAULT_AUTH_SCREEN = "default_auth_screen"
 const val KEY_FACEBOOK_LOGIN_REQ = "facebook_login_required"
-const val KEY_DEFAULT_EMPTY_INPUT_FIELD_ERROR = "alert_mandatory_field_empty"
+const val KEY_EMPTY_INPUT_FIELD_ERROR = "alert_mandatory_field_empty"
+const val KEY_NOT_VALID_EMAIL_INPUT_FIELD_ERROR = "alert_incorrect_email"

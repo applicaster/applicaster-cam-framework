@@ -27,6 +27,8 @@ enum class UIKey(
     AUTH_LEFT_DIVIDER_IMAGE(image = UI_KEY_THIRD_PARTY_DIVIDER_LEFT_IMAGE),
     AUTH_RIGHT_DIVIDER_IMAGE(image = UI_KEY_THIRD_PARTY_DIVIDER_RIGHT_IMAGE),
     AUTH_INPUT_FIELD(image = UI_KEY_INPUT_FIELD_IMAGE),
+    AUTH_VALIDATION_POPUP(image = UI_KEY_VALIDATION_PARENT_IMAGE),
+    AUTH_VALIDATION_TEXT(image = UI_KEY_VALIDATION_BUBBLE_IMAGE),
     AUTH_FACEBOOK_IMAGE(image = UI_KEY_FACEBOOK_IMAGE),
 
     PASSWORD_RESET_TITLE_TEXT(text = UI_KEY_PWD_RESET_TITLE_TEXT, textStyle = UI_KEY_TITLE_TEXT_STYLE),
@@ -96,6 +98,9 @@ const val UI_KEY_THIRD_PARTY_SEPARATOR_STYLE = "separator_text"
 const val UI_KEY_THIRD_PARTY_DIVIDER_LEFT_IMAGE = "separator_asset_left"
 const val UI_KEY_THIRD_PARTY_DIVIDER_RIGHT_IMAGE = "separator_asset_right"
 const val UI_KEY_INPUT_FIELD_IMAGE = "input_field_asset"
+const val UI_KEY_INPUT_ERROR_IMAGE = "input_alert_indicator"
+const val UI_KEY_VALIDATION_PARENT_IMAGE = "field_alert_bubble_shadow"
+const val UI_KEY_VALIDATION_BUBBLE_IMAGE = "field_alert_bubble"
 const val UI_KEY_FACEBOOK_IMAGE = "icon_1"
 // endregion
 

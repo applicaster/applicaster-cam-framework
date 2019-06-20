@@ -1,18 +1,11 @@
-package com.applicaster.cam.ui.auth
+package com.applicaster.cam.ui.auth.user
 
-import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.EditText
 import com.applicaster.cam.ContentAccessManager
 import com.applicaster.cam.R
 import com.applicaster.cam.config.ui.UIKey
 import com.applicaster.cam.config.ui.UIMapper
-import com.applicaster.cam.params.auth.AuthField
-import com.applicaster.cam.params.auth.AuthFieldConfig
-import com.applicaster.cam.ui.CamNavigationRouter
-import com.applicaster.cam.ui.base.view.BaseFragment
+import com.applicaster.cam.ui.auth.base.BaseInputFragment
 import kotlinx.android.synthetic.main.fragment_auth.*
 import kotlinx.android.synthetic.main.layout_additional_auth.*
 import kotlinx.android.synthetic.main.layout_auth_input.*
@@ -20,31 +13,10 @@ import kotlinx.android.synthetic.main.layout_bottom_bar.*
 import kotlinx.android.synthetic.main.layout_text_with_action.*
 import kotlinx.android.synthetic.main.layout_toolbar_template.*
 
-abstract class AuthFragment : BaseFragment(), IAuthView {
-    private var presenter: IAuthPresenter? = null
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val rootView = inflater.inflate(R.layout.fragment_auth, container, false)
-        baseActivity?.apply {
-            val navigationManager = if (getNavigationRouter() is CamNavigationRouter)
-                getNavigationRouter() as CamNavigationRouter
-            else
-                CamNavigationRouter(this)
-            presenter = initPresenter(navigationManager)
-        }
-
-        return rootView
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setListeners()
-    }
+abstract class UserAuthFragment : BaseInputFragment() {
 
     override fun setListeners() {
+        val presenter = presenter as? IUserAuthPresenter
         btn_input_action.setOnClickListener { presenter?.onAuthActionButtonClicked(getInputFieldsValues()) }
         tv_hint_desc.setOnClickListener { presenter?.onAuthHintClicked() }
         tv_hint_action.setOnClickListener { presenter?.onAuthHintClicked() }
@@ -76,28 +48,8 @@ abstract class AuthFragment : BaseFragment(), IAuthView {
         }
     }
 
+    override fun getLayoutId() = R.layout.fragment_auth
+    override fun getAuthInputLinearParent() = container_linear_input
+    override fun getAuthInputScrollableParent() = container_scrollable_input
     override fun getParentView() = container_parent_auth
-
-    override fun populateAuthFieldsViews(authFieldConfig: AuthFieldConfig) {
-        context?.apply {
-            InputFieldViewCustomizer.populateAuthFields(
-                this,
-                linearParent = container_linear_input,
-                scrollableParent = container_scrollable_input,
-                authFieldConfig = authFieldConfig
-            )
-        }
-    }
-
-    private fun getInputFieldsValues(): HashMap<String, String> {
-        val inputValues = HashMap<String, String>()
-        for (i in 0 until container_linear_input.childCount) {
-            val child = container_linear_input.getChildAt(i) as? EditText
-            if (child != null)
-                inputValues[(child.tag as AuthField).key!!] = child.text.toString()
-        }
-        return inputValues
-    }
-
-    abstract fun initPresenter(navigationManager: CamNavigationRouter): IAuthPresenter
 }

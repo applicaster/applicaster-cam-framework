@@ -5,8 +5,8 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
 import com.applicaster.cam.params.auth.AuthScreenType
-import com.applicaster.cam.ui.auth.login.LoginFragment
-import com.applicaster.cam.ui.auth.signup.SignUpFragment
+import com.applicaster.cam.ui.auth.user.login.LoginFragment
+import com.applicaster.cam.ui.auth.user.signup.SignUpFragment
 import com.applicaster.cam.ui.base.BaseNavigationRouter
 import com.applicaster.cam.ui.confirmation.AlertDialogType
 import com.applicaster.cam.ui.base.view.IBaseActivity
