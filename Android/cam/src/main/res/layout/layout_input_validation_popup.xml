@@ -8,6 +8,8 @@
         android:id="@+id/tv_validation_msg"
         android:layout_width="@dimen/auth_error_text_width"
         android:layout_height="@dimen/auth_error_text_height"
+        android:paddingStart="@dimen/auth_error_text_margin_horizontal"
+        android:paddingEnd="@dimen/auth_error_text_margin_horizontal"
         android:gravity="center"
         android:layout_centerInParent="true"
         android:singleLine="true" />
