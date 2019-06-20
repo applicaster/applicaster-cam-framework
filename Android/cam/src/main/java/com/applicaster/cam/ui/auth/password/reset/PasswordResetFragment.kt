@@ -1,52 +1,26 @@
 package com.applicaster.cam.ui.auth.password.reset
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import com.applicaster.cam.R
 import com.applicaster.cam.config.ui.UIKey
 import com.applicaster.cam.config.ui.UIMapper
-import com.applicaster.cam.params.auth.AuthField
-import com.applicaster.cam.params.auth.AuthFieldConfig
 import com.applicaster.cam.ui.CamNavigationRouter
-import com.applicaster.cam.ui.auth.InputFieldViewCustomizer
-import com.applicaster.cam.ui.base.custom.AuthInputFieldView
-import com.applicaster.cam.ui.base.custom.ErrorPopupViewBuilder
-import com.applicaster.cam.ui.base.view.BaseFragment
+import com.applicaster.cam.ui.auth.base.BaseInputFragment
+import com.applicaster.cam.ui.auth.base.IBaseInputPresenter
 import kotlinx.android.synthetic.main.fragment_password_reset.*
-import kotlinx.android.synthetic.main.layout_auth_input.*
 import kotlinx.android.synthetic.main.layout_toolbar_template.*
 
-class PasswordResetFragment : BaseFragment(), IPasswordResetView {
-    private var presenter: IPasswordResetPresenter? = null
+class PasswordResetFragment : BaseInputFragment(), IPasswordResetView {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val rootView = inflater.inflate(R.layout.fragment_password_reset, container, false)
-
-        baseActivity?.apply {
-            val navigationManager = if (getNavigationRouter() is CamNavigationRouter)
-                baseActivity?.getNavigationRouter() as CamNavigationRouter
-            else
-                CamNavigationRouter(this)
-
-            presenter = PasswordResetPresenter(this@PasswordResetFragment, navigationManager)
-            setPresenter(presenter)
-        }
-
-        return rootView
+    override fun initPresenter(navigationManager: CamNavigationRouter): IBaseInputPresenter {
+        presenter = PasswordResetPresenter(this, navigationManager)
+        setPresenter(presenter)
+        return presenter as PasswordResetPresenter
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setListeners()
-    }
+    override fun getLayoutId() = R.layout.fragment_password_reset
 
     override fun setListeners() {
-        btn_reset.setOnClickListener { presenter?.onResetButtonClicked(getInputFieldsValues()) }
+        btn_reset.setOnClickListener { presenter?.onAuthActionButtonClicked(getInputFieldsValues()) }
         toolbar_back_button.setOnClickListener { presenter?.onToolbarBackClicked() }
     }
 
@@ -66,42 +40,8 @@ class PasswordResetFragment : BaseFragment(), IPasswordResetView {
 
     override fun getParentView() = container_reset_password
 
-    override fun populateAuthFieldsViews(authFieldConfig: AuthFieldConfig) {
-        context?.apply {
-            InputFieldViewCustomizer.populateAuthFields(
-                this,
-                linearParent = container_linear_reset_input,
-                authFieldConfig = authFieldConfig,
-                listener = presenter!!
-            )
-        }
-    }
+    override fun getAuthInputLinearParent() = container_linear_reset_input
 
-    private fun getInputFieldsValues(): HashMap<AuthField, String> {
-        val inputValues = HashMap<AuthField, String>()
-        for (i in 0 until container_linear_reset_input.childCount) {
-            val child = container_linear_reset_input.getChildAt(i) as? AuthInputFieldView
-            if (child != null)
-                inputValues[child.authField] = child.text.toString()
-        }
-        return inputValues
-    }
-
-
-    override fun showAuthInputFieldErrorIcons(inputFieldValidationErrors: HashMap<AuthField, String>) {
-        for (i in 0 until container_linear_reset_input.childCount) {
-            val child = container_linear_reset_input.getChildAt(i) as? AuthInputFieldView
-            for (error in inputFieldValidationErrors) {
-                if (child != null && child.authField.key == error.key.key) {
-                    child.showError(errorMsg = error.value)
-                    break
-                }
-            }
-        }
-    }
-
-    override fun showErrorPopup(rootView: View, errorMsg: String) {
-        ErrorPopupViewBuilder(context, layoutInflater).build(rootView, errorMsg)
-    }
+    override fun getAuthInputScrollableParent() = container_scrollable_reset_input
 }
 

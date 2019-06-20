@@ -1,4 +1,4 @@
-package com.applicaster.cam.ui.auth
+package com.applicaster.cam.ui.auth.base
 
 import android.content.Context
 import android.widget.LinearLayout
