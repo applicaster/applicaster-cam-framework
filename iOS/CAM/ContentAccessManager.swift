@@ -23,12 +23,15 @@ open class ContentAccessManager {
     private weak var delegate: CAMDelegate!
     private weak var rootViewController: UIViewController!
     private var childCoordinator: Coordinator?
+    private var camFlow: CAMFlow
     
     public init(rootViewController: UIViewController,
                 camDelegate: CAMDelegate,
+                camFlow: CAMFlow,
                 completion: @escaping (Bool) -> Void) {
         self.rootViewController = rootViewController
         self.delegate = camDelegate
+        self.camFlow = camFlow
         self.completion = completion
         self.navigationController = UINavigationController()
         self.navigationController.isNavigationBarHidden = true
