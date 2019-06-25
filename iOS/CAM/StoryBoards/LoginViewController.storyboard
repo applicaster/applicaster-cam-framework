@@ -215,47 +215,16 @@
                                     <constraint firstAttribute="trailing" secondItem="szx-wQ-fAQ" secondAttribute="trailing" id="khb-0s-uHw"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xq3-cc-mdm" userLabel="restoreContainer">
-                                <rect key="frame" x="35" y="325.5" width="250" height="60"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oM0-fs-W89" customClass="UICheckBox" customModule="CAM" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="18.5" width="23" height="23"/>
-                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="deviceRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="23" id="ccY-JT-sgA"/>
-                                            <constraint firstAttribute="width" constant="23" id="yQP-q8-0HZ"/>
-                                        </constraints>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Already have a purchase? Select checkbox to restore your purchases when you login" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EhJ-15-tfn">
-                                        <rect key="frame" x="31" y="8" width="211" height="44"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="deviceRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="EhJ-15-tfn" firstAttribute="leading" secondItem="oM0-fs-W89" secondAttribute="trailing" constant="8" id="UmO-lb-WHF"/>
-                                    <constraint firstItem="EhJ-15-tfn" firstAttribute="top" secondItem="xq3-cc-mdm" secondAttribute="top" constant="8" id="VhG-uS-P8n"/>
-                                    <constraint firstAttribute="bottom" secondItem="EhJ-15-tfn" secondAttribute="bottom" constant="8" id="XKq-Td-RLv"/>
-                                    <constraint firstItem="oM0-fs-W89" firstAttribute="leading" secondItem="xq3-cc-mdm" secondAttribute="leading" id="dZt-Nd-BkR"/>
-                                    <constraint firstItem="oM0-fs-W89" firstAttribute="top" secondItem="xq3-cc-mdm" secondAttribute="top" constant="18.5" id="fB6-yM-lYQ"/>
-                                    <constraint firstAttribute="height" constant="60" id="mci-EG-owV"/>
-                                    <constraint firstAttribute="trailing" secondItem="EhJ-15-tfn" secondAttribute="trailing" constant="8" id="wln-6w-nno"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.23921568630000001" green="0.28235294119999998" blue="0.3294117647" alpha="1" colorSpace="calibratedRGB"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="xq3-cc-mdm" firstAttribute="top" secondItem="Ua5-cN-U8d" secondAttribute="bottom" id="0ZJ-b3-fLv"/>
                             <constraint firstItem="rPw-cz-xFd" firstAttribute="width" secondItem="Ua5-cN-U8d" secondAttribute="width" id="0aV-yy-b4T"/>
                             <constraint firstItem="uuM-0v-2FY" firstAttribute="leading" secondItem="CaI-6u-xm9" secondAttribute="leading" id="4Ip-ab-lYg"/>
                             <constraint firstItem="Ua5-cN-U8d" firstAttribute="centerX" secondItem="ffi-pc-jcB" secondAttribute="centerX" id="5u1-eA-hlD"/>
                             <constraint firstItem="rPw-cz-xFd" firstAttribute="centerX" secondItem="ffi-pc-jcB" secondAttribute="centerX" id="63A-xx-qv3"/>
                             <constraint firstItem="Ua5-cN-U8d" firstAttribute="centerY" secondItem="ffi-pc-jcB" secondAttribute="centerY" constant="-50" id="B6f-Tg-82U"/>
                             <constraint firstItem="CaI-6u-xm9" firstAttribute="trailing" secondItem="yqR-eQ-1AS" secondAttribute="trailing" constant="10" id="EXx-hM-0QH"/>
-                            <constraint firstItem="xq3-cc-mdm" firstAttribute="width" secondItem="Ua5-cN-U8d" secondAttribute="width" id="HUO-eK-koB"/>
                             <constraint firstItem="uuM-0v-2FY" firstAttribute="top" secondItem="CaI-6u-xm9" secondAttribute="bottom" constant="-64" id="QUT-rv-Ghg"/>
                             <constraint firstItem="rPw-cz-xFd" firstAttribute="top" secondItem="Ua5-cN-U8d" secondAttribute="bottom" constant="80" id="Qdh-Hz-xjw"/>
                             <constraint firstItem="8YH-d8-P5Z" firstAttribute="trailing" secondItem="CaI-6u-xm9" secondAttribute="trailing" id="Syz-9r-btr"/>
@@ -263,7 +232,6 @@
                             <constraint firstItem="5I9-bH-qGg" firstAttribute="trailing" secondItem="CaI-6u-xm9" secondAttribute="trailing" id="Tun-YQ-mLD"/>
                             <constraint firstItem="Ua5-cN-U8d" firstAttribute="top" secondItem="yqR-eQ-1AS" secondAttribute="bottom" id="V5m-d9-uIr"/>
                             <constraint firstItem="uuM-0v-2FY" firstAttribute="trailing" secondItem="CaI-6u-xm9" secondAttribute="trailing" id="Vl0-GL-i4s"/>
-                            <constraint firstItem="xq3-cc-mdm" firstAttribute="centerX" secondItem="ffi-pc-jcB" secondAttribute="centerX" id="WmY-YQ-rIv"/>
                             <constraint firstItem="yqR-eQ-1AS" firstAttribute="leading" secondItem="CaI-6u-xm9" secondAttribute="leading" constant="10" id="aL3-ij-5sr"/>
                             <constraint firstItem="8YH-d8-P5Z" firstAttribute="top" secondItem="CaI-6u-xm9" secondAttribute="top" id="cBG-cU-dlJ"/>
                             <constraint firstItem="yqR-eQ-1AS" firstAttribute="top" secondItem="Qt9-xh-807" secondAttribute="bottom" id="dLY-GA-QYG"/>
@@ -290,9 +258,6 @@
                         <outlet property="loginButton" destination="g7t-dz-Krv" id="vrg-rP-ZtI"/>
                         <outlet property="logoImageView" destination="Qt9-xh-807" id="zwZ-UU-HOP"/>
                         <outlet property="resetPasswordButton" destination="C3Q-q8-bf3" id="3bV-cX-m5G"/>
-                        <outlet property="restoreCheckBox" destination="oM0-fs-W89" id="De5-L8-GGP"/>
-                        <outlet property="restoreContainer" destination="xq3-cc-mdm" id="Y9N-Wp-hii"/>
-                        <outlet property="restoreInfoLabel" destination="EhJ-15-tfn" id="exc-mU-Crx"/>
                         <outlet property="rightSeparatorView" destination="tMe-xl-QJE" id="VFq-Cr-yOC"/>
                         <outlet property="signUpButton" destination="szx-wQ-fAQ" id="c6F-Xb-d8r"/>
                         <outlet property="signUpContainer" destination="uuM-0v-2FY" id="BMm-ZP-253"/>

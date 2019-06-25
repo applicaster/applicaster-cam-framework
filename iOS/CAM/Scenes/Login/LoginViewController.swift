@@ -22,10 +22,6 @@ class LoginViewController: UIViewController {
     @IBOutlet var loginButton: UIButton!
     @IBOutlet var resetPasswordButton: UIButton!
     
-    @IBOutlet var restoreContainer: UIView!
-    @IBOutlet var restoreCheckBox: UICheckBox!
-    @IBOutlet var restoreInfoLabel: UILabel!
-    
     @IBOutlet var socialNetworksContainer: UIView!
     
     @IBOutlet var rightSeparatorView: UIImageView!
@@ -50,8 +46,7 @@ class LoginViewController: UIViewController {
     var visibleAuthFieldsCount: Int {
         let centerFreeSpace = signUpContainer.frame.minY - logoImageView.frame.maxY
         let topSpace: CGFloat = 50.0
-        var bottomSpace = restoreContainer.isHidden ? 0 : restoreContainer.frame.height
-        bottomSpace += socialNetworksContainer.isHidden ? 0 : socialNetworksContainer.frame.height + 20 // 20 - min spacing
+        var bottomSpace = socialNetworksContainer.isHidden ? 0 : socialNetworksContainer.frame.height + 20 // 20 - min spacing
         bottomSpace = bottomSpace == 0 ? 50 : bottomSpace
         let inputComponentMaxHeight = centerFreeSpace - topSpace - bottomSpace
         let tableMaxHeight = inputComponentMaxHeight - 33 - 46
@@ -90,7 +85,6 @@ class LoginViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = true
         signUpButton.titleLabel?.numberOfLines = 0
         signUpButton.titleLabel?.textAlignment = .center
-        restoreContainer.isHidden = true
         socialNetworksContainer.isHidden = !(configDictionary[CAMKeys.facebookLoginEnabled.rawValue] ?? "false").bool
         resetPasswordButton.isHidden = !(configDictionary[CAMKeys.authFields.rawValue] ?? "false").bool
         authFieldsTable.backgroundView = UIView()
@@ -157,12 +151,9 @@ class LoginViewController: UIViewController {
         let inputContainerMinY = (self.view.frame.height - inputContainerHeight) / 2 - 50 // 50 - space from center
         let inputContainerMaxY = inputContainerMinY + inputContainerHeight
         if !socialNetworksContainer.isHidden {
-            let restoreContainerHeight = restoreContainer.isHidden ? 0 : restoreContainer.frame.height
-            socialNetworksContainerTopConstraint.constant = (signUpContainer.frame.minY - inputContainerMaxY + restoreContainerHeight - 100) / 2
+            socialNetworksContainerTopConstraint.constant = (signUpContainer.frame.minY - inputContainerMaxY - 100) / 2
         } else {
-            if restoreContainer.isHidden {
-                self.inputContainerYConstraint.constant = 0
-            }
+            self.inputContainerYConstraint.constant = 0
         }
         self.view.layoutIfNeeded()
     }
@@ -224,7 +215,7 @@ class LoginViewController: UIViewController {
 
 // MARK: - Table Delegate
 extension LoginViewController: UITableViewDelegate, UITableViewDataSource {
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return authFields.count
     }
@@ -244,18 +235,33 @@ extension LoginViewController: UITableViewDelegate, UITableViewDataSource {
         cell.textField.setZappStyle(backgroundAsset: .authFieldImage,
                                     textStyle: .inputField,
                                     placeholder: authFields[indexPath.row].hint)
-        cell.textField.configureInputField(data: authFields[indexPath.row])
+        cell.configureInputField(data: authFields[indexPath.row])
         cell.backgroundColor = .clear
+        
+        let delta: CGFloat = indexPath.row == authFields.count - 1 ? 0 : 7
+        let rectOfCell = authFieldsTable.rectForRow(at: indexPath)
+        let rectOfCellInSuperview = authFieldsTable.convert(rectOfCell, to: self.view)
+        let popoverSourceRect = CGRect(x: (self.view.bounds.width - 390) / 2,
+                                       y: rectOfCellInSuperview.maxY - delta,
+                                       width: 390,
+                                       height: 0)
+        cell.showPopover = { [weak self] in
+            let bubbleWidth: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 390 : 320
+            self?.showErrorPopover(message: self?.authFields[indexPath.row].errorDescription,
+                                   sourceRect: popoverSourceRect, bubbleWidth: bubbleWidth)
+        }
+        
         cell.textChanged = { [weak self] text in
+            self?.authFields[indexPath.row].state = .none
+            self?.authFields[indexPath.row].errorDescription = ""
             self?.authFields[indexPath.row].text = text
         }
         return cell
     }
 }
 
+// MARK: - Login View Protocol
 extension LoginViewController: LoginViewProtocol {
-    
-    // MARK: - Login View Protocol
     
     func updateTable(fields: [AuthField]) {
         authFields = fields
@@ -272,5 +278,11 @@ extension LoginViewController: LoginViewProtocol {
     
     func showError(description: String?) {
         self.showAlert(description: description)
+    }
+}
+
+extension LoginViewController: UIPopoverPresentationControllerDelegate {
+    func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
+        return .none
     }
 }

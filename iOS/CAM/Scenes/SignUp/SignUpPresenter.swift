@@ -62,23 +62,39 @@ class SignUpPresenter {
                     self.view?.showError(description: description)
                 }
             })
+        } else {
+            view?.showLoadingScreen(false)
         }
     }
     
     func validate(data: [AuthField]) -> [String: String]? {
+        var data = data
+        var isSucceed = true
         var result = [String: String]()
-        for obj in data {
-            if obj.mandatory && (obj.text ?? "").isEmpty {
-                let message = camDelegate?.getPluginConfig()[CAMKeys.emptyFieldsMessage.rawValue]
-                self.view?.showLoadingScreen(false)
-                view?.showError(description: message)
-                return nil
+        for index in 0..<data.count {
+            if data[index].mandatory && (data[index].text ?? "").isEmpty {
+                isSucceed = false
+                data[index].state = .error
+                data[index].errorDescription = camDelegate?.getPluginConfig()[CAMKeys.emptyFieldsMessage.rawValue] ?? ""
+                continue
             }
-            if let key = obj.key {
-                result[key] = obj.text
+            if data[index].type == .email && !(data[index].text ?? "").isEmailValid() {
+                isSucceed = false
+                data[index].state = .error
+                data[index].errorDescription = camDelegate?.getPluginConfig()[CAMKeys.wrongEmailMessage.rawValue] ?? ""
+                continue
+            }
+            if let key = data[index].key {
+                result[key] = data[index].text
             }
         }
-        return result
+        if isSucceed {
+            return result
+        } else {
+            view?.showLoadingScreen(false)
+            view?.updateTable(fields: data)
+        }
+        return nil
     }
     
     func showFacebookAuthScreen() {

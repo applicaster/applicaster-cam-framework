@@ -23,4 +23,7 @@ class PaddingTextField: UITextField {
         return bounds.inset(by: padding)
     }
 
+    override func rightViewRect(forBounds bounds: CGRect) -> CGRect {
+        return CGRect(x: bounds.maxX - 34, y: (bounds.height - 20) / 2, width: 20, height: 20)
+    }
 }

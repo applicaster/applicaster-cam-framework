@@ -24,7 +24,14 @@ public enum CAMKeys: String {
     case backgroundImage = "background_image"
     case separatorText = "alternative_authentication_separator_text"
     case alternativeAuthentification = "alternative_authentication_prompt_text"
+    
     case emptyFieldsMessage = "alert_mandatory_field_empty"
+    case wrongEmailMessage = "alert_incorrect_email"
+    case validationSuccessImage = "success_validation_image"
+    case validationFailedImage = "failed_validation_image"
+    
+    case errorPopoverShadowImage = "field_alert_bubble_shadow"
+    case errorPopoverBubble = "field_alert_bubble"
     
     //Login
     
@@ -71,6 +78,8 @@ public enum CAMKeys: String {
     case paymentAlertTitle = "payment_confirmation_title_text"
     case paymentAlertInfo = "payment_confirmation_description_text"
     case paymentAlertButtonText = "payment_confirmation_button_text"
+    
+    
 }
 
 public enum CAMStyles: String {
@@ -86,4 +95,5 @@ public enum CAMStyles: String {
     case alternateActionBannerColor = "alternate_action_banner_bg_color"
     case alertTitle = "alert_title_text"
     case alertDescription = "alert_description_text"
+    case bubbleText = "bubble_text"
 }

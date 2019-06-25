@@ -34,4 +34,24 @@ public extension UIViewController {
         confirmationPopover.actionButton.setZappStyle(backgroundAsset: .alertButtonImage, title: buttonText, style: .actionButton)
         self.view.addSubview(confirmationPopover)
     }
+    
+    func showErrorPopover(message: String?, sourceRect: CGRect, bubbleWidth: CGFloat) {
+        let controller = ErrorPopoverViewController.instantiateVC()
+        controller.modalPresentationStyle = .popover
+        controller.preferredContentSize = CGSize(width: bubbleWidth, height: 90)
+        if let popoverPresentationController = controller.popoverPresentationController {
+            if let delegate = self as? UIPopoverPresentationControllerDelegate {
+                popoverPresentationController.delegate = delegate
+            }
+            popoverPresentationController.sourceView = self.view
+            popoverPresentationController.permittedArrowDirections = .up
+            popoverPresentationController.popoverBackgroundViewClass = ErrorPopoverBackgroundView.self
+            popoverPresentationController.sourceRect = sourceRect
+            present(controller, animated: true, completion: {
+                controller.messageLabel.text = message
+                controller.bubbleWidthConstraint.constant = bubbleWidth
+                controller.view.layoutIfNeeded()
+            })
+        }
+    }
 }

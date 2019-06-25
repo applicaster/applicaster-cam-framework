@@ -18,4 +18,14 @@ extension String {
             return false
         }
     }
+    
+    func isEmailValid() -> Bool {
+        let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let predicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+        guard predicate.evaluate(with: self) else {
+            return false
+        }
+        
+        return true
+    }
 }

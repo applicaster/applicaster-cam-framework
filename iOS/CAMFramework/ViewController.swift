@@ -58,7 +58,7 @@ class ViewController: UIViewController, CAMDelegate {
     }
 
     @IBAction func start(_ sender: Any) {
-        self.cam = ContentAccessManager(rootViewController: self, camDelegate: self) { (r) in
+        self.cam = ContentAccessManager(rootViewController: self, camDelegate: self, camFlow: .authAndStorefront ) { (r) in
             print(r)
         }
         self.cam?.startFlow()
@@ -104,10 +104,6 @@ class ViewController: UIViewController, CAMDelegate {
     
     func isPasswordResetRequired() -> Bool {
         return false
-    }
-    
-    func getEntitlementsData(completion: @escaping ([CAMEntitlementItem]) -> Void) {
-        
     }
     
     func isPurchaseNeeded() -> Bool {

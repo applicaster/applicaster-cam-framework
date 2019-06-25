@@ -23,10 +23,6 @@ class SignUpViewController: UIViewController {
     @IBOutlet var authFieldsTable: UITableView!
     @IBOutlet var signUpButton: UIButton!
     
-    @IBOutlet var restoreContainer: UIView!
-    @IBOutlet var restoreCheckBox: UICheckBox!
-    @IBOutlet var restoreInfoLabel: UILabel!
-    
     @IBOutlet var socialNetworksContainer: UIView!
     
     @IBOutlet var leftSeparatorView: UIImageView!
@@ -51,8 +47,7 @@ class SignUpViewController: UIViewController {
     var visibleAuthFieldsCount: Int {
         let centerFreeSpace = loginContainer.frame.minY - logoImageView.frame.maxY
         let topSpace: CGFloat = 50.0
-        var bottomSpace = restoreContainer.isHidden ? 0 : restoreContainer.frame.height
-        bottomSpace += socialNetworksContainer.isHidden ? 0 : socialNetworksContainer.frame.height + 20 // 20 - min spacing
+        var bottomSpace = socialNetworksContainer.isHidden ? 0 : socialNetworksContainer.frame.height + 20 // 20 - min spacing
         bottomSpace = bottomSpace == 0 ? 50 : bottomSpace
         let inputComponentMaxHeight = centerFreeSpace - topSpace - bottomSpace
         let tableMaxHeight = inputComponentMaxHeight - 13 - 46
@@ -94,7 +89,6 @@ class SignUpViewController: UIViewController {
         }
         loginButton.titleLabel?.numberOfLines = 0
         loginButton.titleLabel?.textAlignment = .center
-        restoreContainer.isHidden = true
         socialNetworksContainer.isHidden = !(configDictionary[CAMKeys.facebookLoginEnabled.rawValue] ?? "false").bool
         authFieldsTable.backgroundView = UIView()
         authFieldsTable.allowsSelection = false
@@ -124,12 +118,9 @@ class SignUpViewController: UIViewController {
         let inputContainerMinY = (self.view.frame.height - inputContainerHeight) / 2 - 50 // 50 - space from center
         let inputContainerMaxY = inputContainerMinY + inputContainerHeight
         if !socialNetworksContainer.isHidden {
-            let restoreContainerHeight = restoreContainer.isHidden ? 0 : restoreContainer.frame.height
-            socialNetworksContainerTopConstraint.constant = (loginContainer.frame.minY - inputContainerMaxY + restoreContainerHeight - 100) / 2
+            socialNetworksContainerTopConstraint.constant = (loginContainer.frame.minY - inputContainerMaxY - 100) / 2
         } else {
-            if restoreContainer.isHidden {
-                self.inputContainerYConstraint.constant = 0
-            }
+            self.inputContainerYConstraint.constant = 0
         }
         self.view.layoutIfNeeded()
     }
@@ -227,13 +218,30 @@ extension SignUpViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "AuthCell",
                                                        for: indexPath) as? AuthTableCell else {
-            return UITableViewCell()
+                                                        return UITableViewCell()
         }
         cell.textField.setZappStyle(backgroundAsset: .authFieldImage,
                                     textStyle: .inputField,
                                     placeholder: authFields[indexPath.row].hint)
-        cell.textField.configureInputField(data: authFields[indexPath.row])
+        cell.configureInputField(data: authFields[indexPath.row])
+        cell.backgroundColor = .clear
+        
+        let delta: CGFloat = indexPath.row == authFields.count - 1 ? 0 : 7
+        let rectOfCell = authFieldsTable.rectForRow(at: indexPath)
+        let rectOfCellInSuperview = authFieldsTable.convert(rectOfCell, to: self.view)
+        let popoverSourceRect = CGRect(x: (self.view.bounds.width - 390) / 2,
+                                       y: rectOfCellInSuperview.maxY - delta,
+                                       width: 390,
+                                       height: 0)
+        cell.showPopover = { [weak self] in
+            let bubbleWidth: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 390 : 320
+            self?.showErrorPopover(message: self?.authFields[indexPath.row].errorDescription,
+                                   sourceRect: popoverSourceRect, bubbleWidth: bubbleWidth)
+        }
+        
         cell.textChanged = { [weak self] text in
+            self?.authFields[indexPath.row].state = .none
+            self?.authFields[indexPath.row].errorDescription = ""
             self?.authFields[indexPath.row].text = text
         }
         return cell
@@ -259,5 +267,11 @@ extension SignUpViewController: SignUpViewProtocol {
     
     func showError(description: String?) {
         self.showAlert(description: description)
+    }
+}
+
+extension SignUpViewController: UIPopoverPresentationControllerDelegate {
+    func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
+        return .none
     }
 }
