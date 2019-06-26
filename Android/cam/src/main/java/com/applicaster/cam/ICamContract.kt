@@ -27,4 +27,6 @@ interface ICamContract {
     fun getPluginConfig(): Map<String, String>
 
     fun isRedeemActivated(): Boolean
+
+    fun getCamFlow(): CamFlow
 }

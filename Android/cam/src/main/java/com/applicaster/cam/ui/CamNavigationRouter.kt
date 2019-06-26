@@ -4,6 +4,7 @@ import android.support.v4.app.DialogFragment
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
+import com.applicaster.cam.CamFlow
 import com.applicaster.cam.params.auth.AuthScreenType
 import com.applicaster.cam.ui.auth.user.login.LoginFragment
 import com.applicaster.cam.ui.auth.user.signup.SignUpFragment
@@ -14,7 +15,7 @@ import com.applicaster.cam.ui.confirmation.ConfirmationDialog
 import com.applicaster.cam.ui.billing.BillingFragment
 import com.applicaster.cam.ui.auth.password.reset.PasswordResetFragment
 
-class CamNavigationRouter(baseActivity: IBaseActivity) : BaseNavigationRouter(baseActivity) {
+class CamNavigationRouter(private val baseActivity: IBaseActivity) : BaseNavigationRouter(baseActivity) {
 
     private val confirmationDialogPrefix: String = "ConfirmationDialog-"
 
@@ -81,7 +82,7 @@ class CamNavigationRouter(baseActivity: IBaseActivity) : BaseNavigationRouter(ba
         }
     }
 
-    fun attachLastFragment(authScreenType: AuthScreenType) {
+    fun attachLastFragment(authScreenType: AuthScreenType, camFlow: CamFlow) {
         val fragmentTransaction: FragmentTransaction? = fragmentManager.beginTransaction()
         val fragmentList = fragmentManager.fragments
         if (fragmentList.size != 0) {
@@ -104,10 +105,19 @@ class CamNavigationRouter(baseActivity: IBaseActivity) : BaseNavigationRouter(ba
                 }
             }
         } else {
-            when (authScreenType) {
-                AuthScreenType.LOGIN -> attachLoginFragment(true)
-                AuthScreenType.SIGNUP -> attachSignUpFragment(true)
+            when (camFlow) {
+                CamFlow.AUTHENTICATION -> attachByScreenType(authScreenType)
+                CamFlow.AUTH_AND_STOREFRONT -> attachByScreenType(authScreenType)
+                CamFlow.STOREFRONT -> attachBillingFragment()
+                else -> baseActivity.close()
             }
+        }
+    }
+
+    private fun attachByScreenType(authScreenType: AuthScreenType) {
+        when (authScreenType) {
+            AuthScreenType.LOGIN -> attachLoginFragment(true)
+            AuthScreenType.SIGNUP -> attachSignUpFragment(true)
         }
     }
 }
