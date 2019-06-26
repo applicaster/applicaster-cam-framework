@@ -13,6 +13,7 @@ object ContentAccessManager : IContentAccessManager {
     var contract: ICamContract by Delegates.notNull()
     var pluginConfigurator: Configurator  by Delegates.notNull()
     var pluginUIProvider: UIProvider by Delegates.notNull()
+    var camFlow: CamFlow by Delegates.notNull()
 
     override fun onProcessStarted(contract: ICamContract, context: Context) {
         this.contract = contract
@@ -21,6 +22,7 @@ object ContentAccessManager : IContentAccessManager {
             contract.getPluginConfig(),
             context.applicationContext
         )
+        camFlow = contract.getCamFlow()
         startCamActivity(context)
     }
 

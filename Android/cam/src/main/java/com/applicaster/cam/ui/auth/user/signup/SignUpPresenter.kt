@@ -1,5 +1,6 @@
 package com.applicaster.cam.ui.auth.user.signup
 
+import com.applicaster.cam.CamFlow
 import com.applicaster.cam.ContentAccessManager
 import com.applicaster.cam.FacebookAuthCallback
 import com.applicaster.cam.SignUpCallback
@@ -18,10 +19,10 @@ class SignUpPresenter(
 
     override fun onSuccess() {
         view?.hideLoadingIndicator()
-        if (ContentAccessManager.contract.isPurchaseRequired(emptyList()))
-            navigationRouter.attachBillingFragment()
-        else
-            view?.close()
+        when (ContentAccessManager.contract.getCamFlow()) {
+            CamFlow.AUTH_AND_STOREFRONT -> navigationRouter.attachBillingFragment()
+            else -> view?.close()
+        }
     }
 
     override fun getAuthFieldConfig(): AuthFieldConfig =
