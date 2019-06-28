@@ -29,11 +29,8 @@ abstract class BaseInputPresenter(
             return
         }
         view?.showLoadingIndicator()
-        val input = HashMap<String, String>()
-        for (inputEntry in inputValues) {
-            inputEntry.key.key?.let { input[it] = inputEntry.value }
-        }
-        performAuthAction(input)
+        val input = inputValues.entries.associate { entry -> entry.key.key!! to entry.value }
+        performAuthAction(input.toMutableMap() as HashMap<String, String>)
     }
 
     private fun validateAuthInputFields(inputValues: HashMap<AuthField, String>): HashMap<AuthField, String> {
