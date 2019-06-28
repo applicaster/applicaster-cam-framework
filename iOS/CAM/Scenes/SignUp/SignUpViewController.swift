@@ -129,7 +129,7 @@ class SignUpViewController: UIViewController {
         backgroundImageView.setZappStyle(withAsset: .backgroundImage)
         backButton.setZappStyle(withIconAsset: .backButtonImage)
         closeButton.setZappStyle(withIconAsset: .closeButtonImage)
-        logoImageView.setZappStyle(withAsset: .headerLogo)
+        logoImageView.setZappStyle(withAsset: .headerLogoImage)
         titleLabel.setZappStyle(text: configDictionary[CAMKeys.signUpScreenTitleText.rawValue], style: .screenTitle)
         signUpButton.setZappStyle(backgroundAsset: .signUpButtonImage,
                                  title: configDictionary[CAMKeys.signUpButtonText.rawValue],

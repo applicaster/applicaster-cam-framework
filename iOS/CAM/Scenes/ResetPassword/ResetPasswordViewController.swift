@@ -54,7 +54,7 @@ class ResetPasswordViewController: UIViewController {
         backgroundImageView.setZappStyle(withAsset: .backgroundImage)
         backButton.setZappStyle(withIconAsset: .backButtonImage)
         closeButton.setZappStyle(withIconAsset: .closeButtonImage)
-        logoImageView.setZappStyle(withAsset: .headerLogo)
+        logoImageView.setZappStyle(withAsset: .headerLogoImage)
         titleLabel.setZappStyle(text: configDictionary[CAMKeys.passwordResetTitleText.rawValue],
                                 style: .screenTitle)
         infoLabel.setZappStyle(text: configDictionary[CAMKeys.passwordResetInfoText.rawValue],

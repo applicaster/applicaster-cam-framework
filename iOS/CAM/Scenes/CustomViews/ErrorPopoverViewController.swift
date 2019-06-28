@@ -21,7 +21,7 @@ class ErrorPopoverViewController: UIViewController {
     
     func configureElements() {
         shadowImageView.setZappStyle(withAsset: .errorPopoverShadowImage)
-        bubbleImageView.setZappStyle(withAsset: .errorPopoverBubble)
+        bubbleImageView.setZappStyle(withAsset: .errorPopoverBubbleImage)
         messageLabel.setZappStyle(text: nil, style: .bubbleText)
         view.layoutIfNeeded()
     }

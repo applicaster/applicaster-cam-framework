@@ -86,7 +86,6 @@ class LoginViewController: UIViewController {
         signUpButton.titleLabel?.numberOfLines = 0
         signUpButton.titleLabel?.textAlignment = .center
         socialNetworksContainer.isHidden = !(configDictionary[CAMKeys.facebookLoginEnabled.rawValue] ?? "false").bool
-        resetPasswordButton.isHidden = !(configDictionary[CAMKeys.authFields.rawValue] ?? "false").bool
         authFieldsTable.backgroundView = UIView()
         authFieldsTable.allowsSelection = false
         setupResetPasswordButton()
@@ -123,7 +122,7 @@ class LoginViewController: UIViewController {
     func configureElements() {
         backgroundImageView.setZappStyle(withAsset: .backgroundImage)
         closeButton.setZappStyle(withIconAsset: .closeButtonImage)
-        logoImageView.setZappStyle(withAsset: .headerLogo)
+        logoImageView.setZappStyle(withAsset: .headerLogoImage)
         titleLabel.setZappStyle(text: configDictionary[CAMKeys.loginScreenTitleText.rawValue], style: .screenTitle)
         loginButton.setZappStyle(backgroundAsset: .loginButtonImage,
                                  title: configDictionary[CAMKeys.loginButtonText.rawValue],
