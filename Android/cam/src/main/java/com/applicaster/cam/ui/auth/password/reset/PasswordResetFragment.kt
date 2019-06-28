@@ -1,8 +1,10 @@
 package com.applicaster.cam.ui.auth.password.reset
 
+import android.widget.LinearLayout
 import com.applicaster.cam.R
 import com.applicaster.cam.config.ui.UIKey
 import com.applicaster.cam.config.ui.UIMapper
+import com.applicaster.cam.params.auth.AuthFieldConfig
 import com.applicaster.cam.ui.CamNavigationRouter
 import com.applicaster.cam.ui.auth.base.BaseInputFragment
 import com.applicaster.cam.ui.auth.base.IBaseInputPresenter
@@ -36,6 +38,13 @@ class PasswordResetFragment : BaseInputFragment(), IPasswordResetView {
             map(tv_reset_title_desc, UIKey.PASSWORD_RESET_DESC_TEXT)
             map(btn_reset, UIKey.PASSWORD_RESET_ACTION_BUTTON)
         }
+    }
+
+    override fun populateAuthFieldsViews(authFieldConfig: AuthFieldConfig) {
+        super.populateAuthFieldsViews(authFieldConfig)
+        val scrollableParent = getAuthInputScrollableParent()
+        scrollableParent.layoutParams =
+            LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT)
     }
 
     override fun getParentView() = container_reset_password

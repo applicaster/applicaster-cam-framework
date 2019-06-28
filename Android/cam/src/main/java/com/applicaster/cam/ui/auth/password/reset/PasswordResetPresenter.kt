@@ -16,7 +16,6 @@ class PasswordResetPresenter(
     override fun onViewCreated() {
         super.onViewCreated()
 
-        view?.populateAuthFieldsViews(getAuthFieldConfig())
         view?.customize()
     }
 
