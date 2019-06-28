@@ -8,6 +8,7 @@ import com.applicaster.cam.params.billing.ProductType
 
 class MockCamContract(private val context: Context) : ICamContract {
 
+
     override fun login(authFieldsInput: HashMap<String, String>, callback: LoginCallback) {
         Handler().postDelayed({ callback.onSuccess() }, 1250)
     }
@@ -55,4 +56,6 @@ class MockCamContract(private val context: Context) : ICamContract {
     override fun getPluginConfig() = MockPluginConfiguration.getPluginConfiguration(context)
 
     override fun isRedeemActivated(): Boolean = false
+
+    override fun getCamFlow() = CamFlow.AUTH_AND_STOREFRONT
 }

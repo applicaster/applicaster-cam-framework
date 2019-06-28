@@ -19,7 +19,9 @@ enum class AuthScreenType {
         fun fromKey(key: String): AuthScreenType {
             return when (key) {
                 "login" -> LOGIN
+                "Login" -> LOGIN
                 "signup" -> SIGNUP
+                "Sign-up" -> SIGNUP
                 "password_reset" -> PASSWORD_RESET
                 else -> UNDEFINED
             }
