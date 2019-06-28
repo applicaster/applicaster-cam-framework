@@ -6,7 +6,7 @@
     "default_alert_text":"An error occurred trying to process your request. Please go back and try again.",
     "dessign_assets":"",
     
-    "authentication_input_fields":"{ \"signup\": [{\"type\": \"EMAIL\",\"key\": \"email\",\"title\": \"Email\",\"hint\": \"Email\",\"mandatory\": true },{\"type\": \"PASSWORD\",\"key\": \"password\",\"title\": \"Password\",\"hint\": \"Password\",\"mandatory\": true },{\"type\": \"NUMBER\",\"key\": \"Phone\",\"title\": \"Phone\",\"hint\": \"Phone\",\"mandatory\": true},{\"type\": \"TEXT\",\"key\": \"gender\",\"title\": \"Gender\",\"hint\": \"Gender\",\"mandatory\": false }],\"login\": [],\"password\": [{\"type\": \"PASSWORD\",\"key\": \"password\",\"title\": \"Password\",\"hint\": \"Password\",\"mandatory\": true }]}",
+    "authentication_input_fields":"{ \"signup\": [{\"type\": \"EMAIL\",\"key\": \"email\",\"title\": \"Email\",\"hint\": \"Email\",\"mandatory\": true },{\"type\": \"PASSWORD\",\"key\": \"password\",\"title\": \"Password\",\"hint\": \"Password\",\"mandatory\": true },{\"type\": \"NUMBER\",\"key\": \"Phone\",\"title\": \"Phone\",\"hint\": \"Phone\",\"mandatory\": true},{\"type\": \"TEXT\",\"key\": \"gender\",\"title\": \"Gender\",\"hint\": \"Gender\",\"mandatory\": false }],\"login\": [],\"password_reset\": [{\"type\": \"PASSWORD\",\"key\": \"password\",\"title\": \"Password\",\"hint\": \"Password\",\"mandatory\": true }]}",
     
     "alternative_authentication_priority":"false",
     "alternative_authentication_separator_text":"Or",
@@ -29,13 +29,15 @@
     "login_prompt_text":"Already have an account?",
     "login_link_text":"Log In",
     "existing_user_alert_text":"This user already exists. Try logging in.",
+    
     "payment_options_screen_title_text":"Choose a Subscription",
     "payment_options_screen_description_text":"",
-    "restore_prompt_text":"",
+    "restore_prompt_text":"If you have purchased already a subscription?",
     "restore_link_text":"Restore Your Account",
     
     "payment_option_button_text":"Subscribe for",
     "legal_details_text":"Payment will be charged to iTunes Account at confirmation of purchase. Subscription automatically renews unless auto-renew is turned off at least 24-hours before the end of the current period.Account will be charged for renewal within 24-hours prior to the end of the current period, and identify the cost of the renewal. Subscriptions may be managed by the user and auto-renewal may be turned off by going to the user's Account Settings after purchase.Any unused portion of a free trial period, if offered, will be forfeited when the user purchases a subscription to that publication, where applicable.",
+    
     "password_reset_title_text":"Reset Your Password",
     "password_reset_description_text":"Enter your email to reset your password:",
     "password_reset_button_text":"Reset Password",

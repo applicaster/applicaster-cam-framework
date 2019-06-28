@@ -12,6 +12,7 @@ struct OffersViewModel {
     let title: String
     let restoreHint: String
     let restoreButtonText: String
+    let legalDetails: String
 }
 
 class EntitlementPickerViewController: UIViewController {
@@ -52,6 +53,7 @@ class EntitlementPickerViewController: UIViewController {
             titleLabel.text = viewModel?.title
             restorePurchaseLabel.text = viewModel?.restoreHint
             restoreButton.setTitle(viewModel?.restoreButtonText, for: .normal)
+            helpInfoTextView.text = viewModel?.legalDetails
         }
     }
     

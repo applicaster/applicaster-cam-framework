@@ -29,8 +29,8 @@ public enum CAMKeys: String {
     case purchaseBackgroundImage = "payment_option_component_asset"
     
     case facebookLoginEnabled = "facebook_login_required"
-    case authFields = "authentication_input_fields"
     case defaultAuthScreen = "default_login_screen"
+    case authFields = "authentication_input_fields"
     case separatorText = "alternative_authentication_separator_text"
     case alternativeAuthentification = "alternative_authentication_prompt_text"
     
@@ -60,37 +60,55 @@ public enum CAMKeys: String {
     
     //Alert
     
+    case alertButtonText = "confirmation_button_text"
     case passwordAlertTitleText = "password_reset_confirmation_title_text"
     case passwordAlertInfoText = "password_reset_confirmation_description_text"
-    case passwordAlertButtonText = "password_reset_confirmation_button_text"
    
-    // Payment Options
-    
-    case paymentScreenTitle = "storefront_screen_title_text"
-    case purchaseButtonText = "storefront_button_text"
-    case restoreHint = "restore_promt_text"
-    case restoreButtonText = "restore_link_text"
-    
     // Payment alert
     
     case paymentAlertTitle = "payment_confirmation_title_text"
     case paymentAlertInfo = "payment_confirmation_description_text"
-    case paymentAlertButtonText = "payment_confirmation_button_text"
     
+    // Payment Options
+    
+    case paymentScreenTitle = "payment_options_screen_title_text"
+    case purchaseButtonText = "payment_option_button_text"
+    case restoreHint = "restore_prompt_text"
+    case restoreButtonText = "restore_link_text"
+    case legalDetailsText = "legal_details_text"
 }
 
 public enum CAMStyles: String {
-    case screenTitle = "screen_title_text"
-    case screenDescription = "screen_description_text"
-    case inputField = "input_label_text"
-    case actionButton = "action_button_text"
-    case resetPassword = "restore_password_text"
-    case promtText = "promt_text"
-    case promtAction = "promt_action_text"
-    case separator = "separator_text"
-    case alternativeLoginText = "alternative_login_promt_text"
-    case alternateActionBannerColor = "alternate_action_banner_bg_color"
-    case alertTitle = "alert_title_text"
-    case alertDescription = "alert_description_text"
-    case bubbleText = "bubble_text"
+    
+    case inputFieldFont = "input_field_label"
+    
+    case actionButtonFont = "action_button"
+    
+    case promptFont = "prompt"
+    
+    case linkFont = "link"
+    
+    case screenTitleFont = "screen_title"
+    
+    case screenDescriptionFont = "screen_description"
+    
+    case separatorFont = "alternative_authentication_separator"
+   
+    case alternativeAuthenticationFont = "alternative_authentication_prompt"
+    
+    case resetPasswordFont = "reset_password"
+    
+    case paymentOptionTitleFont = "payment_option_title"
+    
+    case paymentOptionDescriptionFont = "payment_option_description"
+    
+    case legalDetailsFont = "legal_details"
+    
+    case legalDetailsBackgroundColor = "legal_details_background"
+    
+    case confirmationTitleFont = "confirmation_title"
+    
+    case confirmationDescriptionFont = "confirmation_description"
+    
+    case confirmationButtonFont = "confirmation_button"
 }

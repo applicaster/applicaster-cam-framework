@@ -142,7 +142,7 @@ extension ResetPasswordViewController: ResetPasswordViewProtocol {
     func showConfirmationScreenIfNeeded() {
         if let title = configDictionary[CAMKeys.passwordAlertTitleText.rawValue],
            let description = configDictionary[CAMKeys.passwordAlertInfoText.rawValue],
-           let buttonText = configDictionary[CAMKeys.passwordAlertButtonText.rawValue] {
+           let buttonText = configDictionary[CAMKeys.alertButtonText.rawValue] {
             self.showConfirmationScreen(title: title, description: description, buttonText: buttonText, action: { [weak self] in
                 self?.presenter?.backToPreviousScreen()
             })

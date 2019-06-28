@@ -25,9 +25,11 @@ class EntitlementPickerPresenter {
         let screenTitle = camDelegate?.getPluginConfig()[CAMKeys.paymentScreenTitle.rawValue] ?? ""
         let restoreHint = camDelegate?.getPluginConfig()[CAMKeys.restoreHint.rawValue] ?? ""
         let restoreButtonText = camDelegate?.getPluginConfig()[CAMKeys.restoreButtonText.rawValue] ?? ""
+        let legalDetailsText = camDelegate?.getPluginConfig()[CAMKeys.legalDetailsText.rawValue] ?? ""
         let viewModel = OffersViewModel(title: screenTitle,
                                         restoreHint: restoreHint,
-                                        restoreButtonText: restoreButtonText)
+                                        restoreButtonText: restoreButtonText,
+                                        legalDetails: legalDetailsText)
         
         self.view?.viewModel = viewModel
     }
@@ -88,7 +90,7 @@ class EntitlementPickerPresenter {
         guard let configDictionary = camDelegate?.getPluginConfig(),
             let title = configDictionary[CAMKeys.paymentAlertTitle.rawValue],
             let info = configDictionary[CAMKeys.paymentAlertInfo.rawValue],
-            let buttonText = configDictionary[CAMKeys.paymentAlertButtonText.rawValue] else {
+            let buttonText = configDictionary[CAMKeys.alertButtonText.rawValue] else {
             return
         }
         
