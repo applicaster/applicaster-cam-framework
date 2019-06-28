@@ -116,13 +116,13 @@ const val UI_KEY_PWD_RESET_BUTTON_IMAGE= "action_button_asset"
 const val UI_KEY_BILLING_ITEM_SUBS_BUTTON_IMAGE = "storefront_button_asset"
 const val UI_KEY_BILLING_ITEM_SUBS_BUTTON_TEXT = "payment_option_button_text"
 const val UI_KEY_BILLING_ITEM_IMAGE = "storefront_component_asset"
-const val UI_KEY_BILLING_ITEM_TITLE_TEXT = "payment_options_screen_title_text"
-const val UI_KEY_BILLING_ITEM_DETAILS_TEXT = "storefront_details_text"
-const val UI_KEY_BILLING_ITEM_REDEEM_TEXT = "storefront_redeem_text"
+const val UI_KEY_BILLING_ITEM_TITLE_TEXT = "payment_option_title_text"
+const val UI_KEY_BILLING_ITEM_DETAILS_TEXT = "payment_option_details_text"
+const val UI_KEY_BILLING_ITEM_REDEEM_TEXT = "payment_option_redeem_text"
 const val UI_KEY_BILLING_ITEM_LABEL_IMAGE = "storefront_promo_img"
 const val UI_KEY_BILLING_ITEM_LABEL_TEXT = "storefront_promo_text"
 // region Billing fragments
-const val UI_KEY_BILLING_TITLE_TEXT = "storefront_screen_title_text"
+const val UI_KEY_BILLING_TITLE_TEXT = "payment_options_screen_title_text"
 const val UI_KEY_BILLING_RESTORE_DESC = "restore_promt_text"
 const val UI_KEY_BILLING_RESTORE_ACTION = "restore_link_text"
 // endregion
@@ -132,15 +132,15 @@ const val UI_KEY_BILLING_RESTORE_ACTION = "restore_link_text"
 // payments
 const val UI_KEY_PAYMENT_CONFIRMATION_TITLE_TEXT = "payment_confirmation_title_text"
 const val UI_KEY_PAYMENT_CONFIRMATION_DESC_TEXT = "payment_confirmation_description_text"
-const val UI_KEY_PAYMENT_CONFIRMATION_BUTTON_TEXT = "payment_confirmation_button_text"
+const val UI_KEY_PAYMENT_CONFIRMATION_BUTTON_TEXT = "confirmation_button_text"
 // reset password
 const val UI_KEY_PWD_CONFIRMATION_TITLE_TEXT = "password_reset_confirmation_title_text"
 const val UI_KEY_PWD_CONFIRMATION_DESC_TEXT = "password_reset_confirmation_description_text"
-const val UI_KEY_PWD_CONFIRMATION_BUTTON_TEXT = "password_reset_confirmation_button_text"
+const val UI_KEY_PWD_CONFIRMATION_BUTTON_TEXT = "confirmation_button_text"
 // restore purchases
-const val UI_KEY_RESTORE_CONFIRMATION_TITLE_TEXT = "restore_confirmation_title_text"
-const val UI_KEY_RESTORE_CONFIRMATION_DESC_TEXT = "restore_confirmation_description_text"
-const val UI_KEY_RESTORE_CONFIRMATION_BUTTON_TEXT = "restore_confirmation_button_text"
+const val UI_KEY_RESTORE_CONFIRMATION_TITLE_TEXT = "restore_purchase_confirmation_title_text"
+const val UI_KEY_RESTORE_CONFIRMATION_DESC_TEXT = "restore_purchase_confirmation_description_text"
+const val UI_KEY_RESTORE_CONFIRMATION_BUTTON_TEXT = "confirmation_button_text"
 // endregion
 
 // region Other

@@ -47,7 +47,6 @@ abstract class BaseInputFragment : BaseFragment(), IBaseInputView {
                 authFieldConfig = authFieldConfig,
                 listener = presenter!!
             )
-
         }
     }
 
