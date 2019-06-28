@@ -8,7 +8,7 @@ import com.applicaster.cam.ContentAccessManager
 import com.applicaster.cam.EntitlementsLoadCallback
 import com.applicaster.cam.ICamContract
 import com.applicaster.cam.RestoreCallback
-import com.applicaster.cam.params.billing.Offer
+import com.applicaster.cam.params.billing.BillingOffer
 import com.applicaster.cam.params.billing.ProductType
 import com.applicaster.cam.ui.CamNavigationRouter
 import com.applicaster.cam.ui.base.presenter.BasePresenter
@@ -54,8 +54,8 @@ class BillingPresenter(
                 Log.e(TAG, msg)
             }
 
-            override fun onSuccess(offers: List<Offer>) {
-                fetchSkuDetailsByType(offers)
+            override fun onSuccess(billingOffers: List<BillingOffer>) {
+                fetchSkuDetailsByType(billingOffers)
             }
         })
     }
@@ -106,19 +106,19 @@ class BillingPresenter(
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    private fun fetchSkuDetailsByType(offers: List<Offer>) {
-        offers.apply {
-            //filter offers by SkuType.SUBS and map result to list of products IDs
-            val subs: List<String> = filter { offer: Offer ->
-                offer.productType == ProductType.SUBS
-            }.map { offer: Offer -> offer.productId }
+    private fun fetchSkuDetailsByType(billingOffers: List<BillingOffer>) {
+        billingOffers.apply {
+            //filter billingOffers by SkuType.SUBS and map result to list of products IDs
+            val subs: List<String> = filter { billingOffer: BillingOffer ->
+                billingOffer.productType == ProductType.SUBS
+            }.map { billingOffer: BillingOffer -> billingOffer.productId }
             // TODO: needs to implement this line later
 //            GoogleBillingHelper.loadSkuDetails(BillingClient.SkuType.SUBS, subs)
 
-            //filter offers by SkuType.INAPP and map result to list of products IDs
-            val inapps: List<String> = filter { offer: Offer ->
-                offer.productType == ProductType.INAPP
-            }.map { offer: Offer -> offer.productId }
+            //filter billingOffers by SkuType.INAPP and map result to list of products IDs
+            val inapps: List<String> = filter { billingOffer: BillingOffer ->
+                billingOffer.productType == ProductType.INAPP
+            }.map { billingOffer: BillingOffer -> billingOffer.productId }
             // TODO: needs to implement this line later
 //            GoogleBillingHelper.loadSkuDetails(BillingClient.SkuType.INAPP, inapps)
             val purchaseItem = PurchaseItem(
@@ -144,7 +144,7 @@ class BillingPresenter(
         view?.showAlert(msg)
     }
 
-    override fun onSuccess(offers: List<Offer>) {
+    override fun onSuccess(billingOffers: List<BillingOffer>) {
         view?.hideLoadingIndicator()
         if (ContentAccessManager.pluginConfigurator.isShowConfirmationRestorePurchases())
             navigationRouter.showConfirmationDialog(AlertDialogType.RESTORE)
