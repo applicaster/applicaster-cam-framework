@@ -83,6 +83,7 @@
   "screen_title_size_phone":"19",
   "screen_title_size_pad":"19",
   "screen_title_color":"#ffffff",
+
   "screen_description_font_ios":"",
   "screen_description_font_android":"",
   "screen_description_size_phone":"13",
@@ -112,17 +113,13 @@
   "payment_option_title_size_phone":"20",
   "payment_option_title_size_pad":"20",
   "payment_option_title_color":"#1f2021",
+
   "payment_option_description_font_ios":"",
   "payment_option_description_font_android":"",
   "payment_option_description_size_phone":"14",
   "payment_option_description_size_pad":"14",
   "payment_option_description_color":"#1f2021",
 
-  "legal_details_font_ios":"",
-  "legal_details_font_android":"",
-  "legal_details_size_phone":"10",
-  "legal_details_size_pad":"10",
-  "legal_details_color":"#ffffff",
   "legal_details_background":"#122040",
 
   "confirmation_title_font_ios":"",
@@ -130,6 +127,7 @@
   "confirmation_title_size_phone":"25",
   "confirmation_title_size_pad":"25",
   "confirmation_title_color":"#000000",
+
   "confirmation_description_font_ios":"",
   "confirmation_description_font_android":"",
   "confirmation_description_size_phone":"20",
