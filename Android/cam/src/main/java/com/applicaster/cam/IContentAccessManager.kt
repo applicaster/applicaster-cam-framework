@@ -1,7 +1,7 @@
 package com.applicaster.cam
 
 import android.content.Context
-import com.applicaster.cam.params.billing.Offer
+import com.applicaster.cam.params.billing.BillingOffer
 
 interface IContentAccessManager {
     fun onProcessStarted(contract: ICamContract, context: Context)
@@ -23,7 +23,7 @@ interface ActionCallback {
 
 interface EntitlementsLoadCallback {
     fun onFailure(msg: String)
-    fun onSuccess(offers: List<Offer>)
+    fun onSuccess(billingOffers: List<BillingOffer>)
 }
 
 interface RestoreCallback : EntitlementsLoadCallback
