@@ -71,7 +71,7 @@ public enum CAMKeys: String {
     
     // Payment Options
     
-    case paymentScreenTitle = "payment_options_screen_title_text"
+    case paymentScreenTitle = "storefront_screen_title_text"
     case purchaseButtonText = "payment_option_button_text"
     case restoreHint = "restore_prompt_text"
     case restoreButtonText = "restore_link_text"

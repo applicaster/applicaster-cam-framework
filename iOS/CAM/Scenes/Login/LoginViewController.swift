@@ -14,6 +14,7 @@ class LoginViewController: UIViewController {
     var authFields = [AuthField]()
     @IBOutlet var backgroundImageView: UIImageView!
     @IBOutlet var closeButton: UIButton!
+    @IBOutlet var backButton: UIButton!
     @IBOutlet var logoImageView: UIImageView!
     
     @IBOutlet var titleLabel: UILabel!
@@ -83,6 +84,9 @@ class LoginViewController: UIViewController {
     
     func setupUI() {
         self.navigationController?.isNavigationBarHidden = true
+        if let isHidden = presenter?.isRoot {
+            backButton.isHidden = isHidden
+        }
         signUpButton.titleLabel?.numberOfLines = 0
         signUpButton.titleLabel?.textAlignment = .center
         socialNetworksContainer.isHidden = !(configDictionary[CAMKeys.facebookLoginEnabled.rawValue] ?? "false").bool
@@ -106,7 +110,7 @@ class LoginViewController: UIViewController {
     
     func setupSocialNetworksContainer() {
         let facebookButton = UIButton()
-        facebookButton.setZappStyle(withIconAsset: CAMKeys.facebookImage)
+        facebookButton.setStyle(iconAsset: CAMKeys.facebookImage)
         facebookButton.translatesAutoresizingMaskIntoConstraints = false
         facebookButton.heightAnchor.constraint(equalToConstant: 36).isActive = true
         facebookButton.widthAnchor.constraint(equalToConstant: 36).isActive = true
@@ -120,27 +124,23 @@ class LoginViewController: UIViewController {
     }
     
     func configureElements() {
-        backgroundImageView.setZappStyle(withAsset: .backgroundImage)
-        closeButton.setZappStyle(withIconAsset: .closeButtonImage)
-        logoImageView.setZappStyle(withAsset: .headerLogoImage)
-        titleLabel.setZappStyle(text: configDictionary[CAMKeys.loginScreenTitleText.rawValue], style: .screenTitle)
-        loginButton.setZappStyle(backgroundAsset: .loginButtonImage,
-                                 title: configDictionary[CAMKeys.loginButtonText.rawValue],
-                                 style: .actionButton)
-        resetPasswordButton.setZappStyle(title: configDictionary[CAMKeys.loginResetPasswordButtonText.rawValue],
-                                         style: .resetPassword)
-        leftSeparatorView.setZappStyle(withAsset: CAMKeys.leftSeparatorImage)
-        rightSeparatorView.setZappStyle(withAsset: CAMKeys.rightSeparatorImage)
-        alternateLabel.setZappStyle(text: configDictionary[CAMKeys.separatorText.rawValue], style: .separator)
-        socialNetworksLabel.setZappStyle(text: configDictionary[CAMKeys.alternativeAuthentification.rawValue],
-                                         style: .alternativeLoginText)
-        signUpButton.setAttributedZappStyle(attributedTitle: [(style: .promtText,
-                                                               string: configDictionary[CAMKeys.loginSingUpPromtText.rawValue] ?? "",
-                                                               additionalAttributes: nil),
-                                                              (style: .promtAction,
-                                                               string: "\n\(configDictionary[CAMKeys.loginSingUpActionText.rawValue] ?? "")",
-                                                               additionalAttributes: nil)])
-        signUpContainer.setZappStyle(withBackgroundColor: .alternateActionBannerColor)
+        backgroundImageView.setStyle(asset: .backgroundImage)
+        closeButton.setStyle(iconAsset: .closeButtonImage)
+        backButton.setStyle(iconAsset: .backButtonImage)
+        logoImageView.setStyle(asset: .headerLogoImage)
+        titleLabel.setStyle(config: configDictionary, camTextKey: .loginScreenTitleText, style: .screenTitleFont)
+        loginButton.setStyle(config: configDictionary, backgroundAsset: .loginButtonImage, camTitleKey: .loginButtonText, style: CAMStyles.actionButtonFont)
+        resetPasswordButton.setStyle(config: configDictionary, camTitleKey: .loginResetPasswordButtonText, style: CAMStyles.resetPasswordFont)
+        leftSeparatorView.setStyle(asset: .leftSeparatorImage)
+        rightSeparatorView.setStyle(asset: .rightSeparatorImage)
+        alternateLabel.setStyle(config: configDictionary, camTextKey: .separatorText, style: .separatorFont)
+        socialNetworksLabel.setStyle(config: configDictionary, camTextKey: .alternativeAuthentification, style: .alternativeAuthenticationFont)
+        signUpButton.setAttributedStyle(config: configDictionary, attributedTitle: [(style: CAMStyles.promptFont,
+                                                                                     string: configDictionary[CAMKeys.loginSingUpPromtText.rawValue] ?? "",
+                                                                                     additionalAttributes: nil),
+                                                                                    (style: CAMStyles.linkFont,
+                                                                                     string: "\n\(configDictionary[CAMKeys.loginSingUpActionText.rawValue] ?? "")",
+                                                                                        additionalAttributes: nil)])
     }
     
     func setupConstraints() {
@@ -188,6 +188,10 @@ class LoginViewController: UIViewController {
         presenter?.close()
     }
     
+    @IBAction func backToPreviousScreen(_ sender: UIButton) {
+        presenter?.backToPreviousScreen()
+    }
+    
     @IBAction func resetPassword(_ sender: Any) {
         hideKeyboard()
         presenter?.showResetPasswordScreen()
@@ -231,9 +235,7 @@ extension LoginViewController: UITableViewDelegate, UITableViewDataSource {
                                                        for: indexPath) as? AuthTableCell else {
             return UITableViewCell()
         }
-        cell.textField.setZappStyle(backgroundAsset: .authFieldImage,
-                                    textStyle: .inputField,
-                                    placeholder: authFields[indexPath.row].hint)
+        cell.textField.setStyle(config: configDictionary, backgroundAsset: .authFieldImage, style: .inputFieldFont, placeholder: authFields[indexPath.row].hint) 
         cell.configureInputField(data: authFields[indexPath.row])
         cell.backgroundColor = .clear
         
@@ -246,7 +248,7 @@ extension LoginViewController: UITableViewDelegate, UITableViewDataSource {
                                        height: 0)
         cell.showPopover = { [weak self] in
             let bubbleWidth: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 390 : 320
-            self?.showErrorPopover(message: self?.authFields[indexPath.row].errorDescription,
+            self?.showErrorPopover(config: self?.configDictionary ?? [String: String](), message: self?.authFields[indexPath.row].errorDescription,
                                    sourceRect: popoverSourceRect, bubbleWidth: bubbleWidth)
         }
         

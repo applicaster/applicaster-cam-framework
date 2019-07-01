@@ -98,7 +98,7 @@ class SignUpViewController: UIViewController {
     
     func setupSocialNetworksContainer() {
         let facebookButton = UIButton()
-        facebookButton.setZappStyle(withIconAsset: CAMKeys.facebookImage)
+        facebookButton.setStyle(iconAsset: CAMKeys.facebookImage)
         facebookButton.translatesAutoresizingMaskIntoConstraints = false
         facebookButton.heightAnchor.constraint(equalToConstant: 36).isActive = true
         facebookButton.widthAnchor.constraint(equalToConstant: 36).isActive = true
@@ -126,26 +126,25 @@ class SignUpViewController: UIViewController {
     }
     
     func configureElements() {
-        backgroundImageView.setZappStyle(withAsset: .backgroundImage)
-        backButton.setZappStyle(withIconAsset: .backButtonImage)
-        closeButton.setZappStyle(withIconAsset: .closeButtonImage)
-        logoImageView.setZappStyle(withAsset: .headerLogoImage)
-        titleLabel.setZappStyle(text: configDictionary[CAMKeys.signUpScreenTitleText.rawValue], style: .screenTitle)
-        signUpButton.setZappStyle(backgroundAsset: .signUpButtonImage,
-                                 title: configDictionary[CAMKeys.signUpButtonText.rawValue],
-                                 style: .actionButton)
-        leftSeparatorView.setZappStyle(withAsset: CAMKeys.leftSeparatorImage)
-        rightSeparatorView.setZappStyle(withAsset: CAMKeys.rightSeparatorImage)
-        alternateLabel.setZappStyle(text: configDictionary[CAMKeys.separatorText.rawValue], style: .separator)
-        socialNetworksLabel.setZappStyle(text: configDictionary[CAMKeys.alternativeAuthentification.rawValue],
-                                         style: .alternativeLoginText)
-        loginButton.setAttributedZappStyle(attributedTitle: [(style: .promtText,
-                                                              string: configDictionary[CAMKeys.singUpLoginPromtText.rawValue] ?? "",
-                                                              additionalAttributes: nil),
-                                                              (style: .promtAction,
-                                                               string: "\n\(configDictionary[CAMKeys.singUpLoginActionText.rawValue] ?? "")",
-                                                                additionalAttributes: nil)])
-        loginContainer.setZappStyle(withBackgroundColor: .alternateActionBannerColor)
+        backgroundImageView.setStyle(asset: .backgroundImage)
+        backButton.setStyle(iconAsset: .backButtonImage)
+        closeButton.setStyle(iconAsset: .closeButtonImage)
+        logoImageView.setStyle(asset: .headerLogoImage)
+        titleLabel.setStyle(config: configDictionary, camTextKey: .signUpScreenTitleText, style: .screenTitleFont)
+        signUpButton.setStyle(config: configDictionary,
+                              backgroundAsset: .signUpButtonImage,
+                              camTitleKey: .signUpButtonText,
+                              style: .actionButtonFont)
+        leftSeparatorView.setStyle(asset: CAMKeys.leftSeparatorImage)
+        rightSeparatorView.setStyle(asset: CAMKeys.rightSeparatorImage)
+        alternateLabel.setStyle(config: configDictionary, camTextKey: .separatorText, style: .separatorFont)
+        socialNetworksLabel.setStyle(config: configDictionary, camTextKey: .alternativeAuthentification, style: .alternativeAuthenticationFont)
+        loginButton.setAttributedStyle(config: configDictionary, attributedTitle: [(style: .promptFont,
+                                                                                    string: configDictionary[CAMKeys.singUpLoginPromtText.rawValue] ?? "",
+                                                                                    additionalAttributes: nil),
+                                                                                   (style: .linkFont,
+                                                                                    string: "\n\(configDictionary[CAMKeys.singUpLoginActionText.rawValue] ?? "")",
+                                                                                    additionalAttributes: nil)])
     }
     
     // MARK: - Keyboard
@@ -220,9 +219,7 @@ extension SignUpViewController: UITableViewDelegate, UITableViewDataSource {
                                                        for: indexPath) as? AuthTableCell else {
                                                         return UITableViewCell()
         }
-        cell.textField.setZappStyle(backgroundAsset: .authFieldImage,
-                                    textStyle: .inputField,
-                                    placeholder: authFields[indexPath.row].hint)
+        cell.textField.setStyle(config: configDictionary, backgroundAsset: .authFieldImage, style: .inputFieldFont, placeholder: authFields[indexPath.row].hint) 
         cell.configureInputField(data: authFields[indexPath.row])
         cell.backgroundColor = .clear
         
@@ -235,7 +232,7 @@ extension SignUpViewController: UITableViewDelegate, UITableViewDataSource {
                                        height: 0)
         cell.showPopover = { [weak self] in
             let bubbleWidth: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 390 : 320
-            self?.showErrorPopover(message: self?.authFields[indexPath.row].errorDescription,
+            self?.showErrorPopover(config: self?.configDictionary ?? [String: String](), message: self?.authFields[indexPath.row].errorDescription,
                                    sourceRect: popoverSourceRect, bubbleWidth: bubbleWidth)
         }
         
