@@ -1,5 +1,7 @@
 package com.applicaster.cam
 
+import com.android.billingclient.api.Purchase
+
 interface ICamContract {
 
     fun login(authFieldsInput: HashMap<String, String>, callback: LoginCallback)
@@ -14,7 +16,7 @@ interface ICamContract {
 
     fun signupWithFacebook(email: String, id: String, callback: FacebookAuthCallback)
 
-    fun onItemPurchased(/*item*/)
+    fun onItemPurchased(purchase: Purchase)
 
     fun onPurchasesRestored(callback: RestoreCallback)
 
