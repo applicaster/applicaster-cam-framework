@@ -1,7 +1,7 @@
 package com.applicaster.cam.config.ui
 
-enum class Style(
-    val key: String? = null
+enum class StyleKey(
+    private val key: String? = null
 ) {
     // @formatter:off
     INPUT_FIELD_LABEL(STYLE_KEY_INPUT_FIELD_LABEL),
@@ -20,10 +20,10 @@ enum class Style(
     CONFIRMATION_BUTTON(STYLE_KEY_CONFIRMATION_BUTTON);
     // @formatter:on
 
-    fun getFont() = key + KEY_FONT
+    fun getFontName() = key + KEY_FONT
     fun getTextSizePhone() = key + KEY_SIZE_PHONE
     fun getTextSizeTablet() = key + KEY_SIZE_TABLET
-    fun getColor() = key + KEY_COLOR
+    fun getHexColor() = key + KEY_COLOR
 }
 
 const val STYLE_KEY_INPUT_FIELD_LABEL = "input_field_label"

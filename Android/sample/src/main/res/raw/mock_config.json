@@ -30,8 +30,8 @@
   "login_prompt_text":"Already have an account?",
   "login_link_text":"Log In",
   "existing_user_alert_text":"This user already exists. Try logging in.",
-  "payment_options_screen_title_text":"Choose a Subscription",
-  "payment_options_screen_description_text":"",
+  "storefront_screen_title_text":"Choose a Subscription",
+  "storefront_screen_description_text":"",
   "restore_prompt_text":"If you already purchased an account -",
   "restore_link_text":"Restore Your Account",
 
@@ -98,7 +98,7 @@
 
   "alternative_authentication_prompt_font_ios":"",
   "alternative_authentication_prompt_font_android":"",
-  "alternative_authentication_prompt_size_phone":"12",
+  "alternative_auth_prompt_size_phone":"12",
   "alternative_authentication_prompt_size_pad":"12",
   "alternative_authentication_prompt_color":"#ffffff",
 
