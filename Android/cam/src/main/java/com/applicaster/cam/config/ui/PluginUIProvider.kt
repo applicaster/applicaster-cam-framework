@@ -2,14 +2,11 @@ package com.applicaster.cam.config.ui
 
 import android.content.Context
 import android.graphics.Color
-import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.os.Build
-import android.util.Log
 import com.applicaster.app.CustomApplication
 import com.applicaster.cam.R
 import com.applicaster.util.OSUtil
-import com.applicaster.util.StringUtil
 
 class PluginUIProvider(
     private val pluginConfig: Map<String, String>,
@@ -27,10 +24,43 @@ class PluginUIProvider(
     }
 
     override fun getColor(key: String): Int {
-        /**
-         *  TODO: get values from [OSUtil] or pluginConfig
-         */
-        return Color.BLACK
+        return let {
+            if (pluginConfig.containsKey(key)) {
+                Color.parseColor(pluginConfig[key])
+            } else {
+                Color.BLACK
+            }
+        }
+    }
+
+    override fun getTextSize(key: String): Float {
+        return let {
+            if (pluginConfig.containsKey(key)) {
+                pluginConfig[key]?.toFloat() ?: context.resources.getDimension(R.dimen.default_text_size)
+            } else {
+                context.resources.getDimension(R.dimen.default_text_size)
+            }
+        }
+    }
+
+    override fun getFontName(key: String): String {
+        return let {
+            if (pluginConfig.containsKey(key)) {
+                getFontFromAttrs(pluginConfig[key] ?: "")
+            } else {
+                ""
+            }
+        }
+    }
+
+    private fun getFontFromAttrs(key: String): String {
+        val attributes: IntArray = intArrayOf(OSUtil.getAttributeResourceIdentifier("customtypeface"))
+        val styles =
+            CustomApplication.getAppContext().obtainStyledAttributes(OSUtil.getStyleResourceIdentifier(key), attributes)
+
+        val font = styles.getString(0)
+        styles.recycle()
+        return font ?: ""
     }
 
     override fun getDrawable(key: String): Drawable {
@@ -38,7 +68,7 @@ class PluginUIProvider(
         return if (drawableId != 0) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
                 context.resources.getDrawable(drawableId, context.theme)
-             else
+            else
                 context.resources.getDrawable(drawableId)
         } else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)

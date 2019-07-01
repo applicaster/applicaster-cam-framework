@@ -11,4 +11,8 @@ interface UIProvider {
     fun getDrawable(key: String): Drawable
 
     fun getStyleResId(key: String): Int
+
+    fun getTextSize(key: String): Float
+
+    fun getFontName(key: String): String
 }
