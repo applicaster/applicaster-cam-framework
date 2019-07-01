@@ -9,17 +9,20 @@
 import UIKit
 
 final class OfferViewModel {
+    let config: [String: String]
     let title: String
     let description: String
     let purchaseButtonText: String
     let buyAction: () -> Void
     let redeemAction: () -> Void
     
-    init(title: String,
+    init(config: [String: String],
+         title: String,
          description: String,
          purchaseButtonText: String,
          buyAction: @escaping () -> Void,
          redeemAction: @escaping () -> Void) {
+        self.config = config
         self.title = title
         self.description = description
         self.purchaseButtonText = purchaseButtonText
@@ -40,7 +43,7 @@ class EntitlementCollectionViewCell: UICollectionViewCell {
         super.init(coder: aDecoder)
         
         let backgroundImageView = UIImageView(frame: .zero)
-        backgroundImageView.setZappStyle(withAsset: .purchaseBackgroundImage)
+        backgroundImageView.setStyle(asset: .purchaseBackgroundImage)
         backgroundImageView.frame = self.frame
         
         self.backgroundView = backgroundImageView
@@ -51,8 +54,10 @@ class EntitlementCollectionViewCell: UICollectionViewCell {
         self.infoLabel.text = viewModel.description
         self.buyAction = viewModel.buyAction
         self.redeemAction = viewModel.redeemAction
-        self.purchaseButton.setZappStyle(backgroundAsset: .purchaseButtonImage,
-                                         title: viewModel.purchaseButtonText)
+        
+        self.purchaseButton.setStyle(config: viewModel.config, backgroundAsset: .purchaseButtonImage, title: viewModel.purchaseButtonText, style: CAMStyles.actionButtonFont)
+        self.titleLabel.setStyle(config: viewModel.config, style: .paymentOptionTitleFont)
+        self.infoLabel.setStyle(config: viewModel.config, style: .paymentOptionDescriptionFont)
     }
 
     @IBAction private func purchaseItem(_ sender: UIButton) {

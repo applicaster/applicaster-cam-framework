@@ -12,6 +12,7 @@ struct OffersViewModel {
     let title: String
     let restoreHint: String
     let restoreButtonText: String
+    let legalDetails: String
 }
 
 class EntitlementPickerViewController: UIViewController {
@@ -33,6 +34,10 @@ class EntitlementPickerViewController: UIViewController {
     var currentItemIndex = 0 // Used for store center cell for ipad
     var itemSpacing: CGFloat = 20
     
+    var configDictionary: [String: String] {
+        return presenter?.camDelegate?.getPluginConfig() ?? [String: String]()
+    }
+    
     var itemSize: CGSize {
         if UIDevice.current.userInterfaceIdiom == .pad {
             return CGSize(width: 320, height: 248)
@@ -50,8 +55,12 @@ class EntitlementPickerViewController: UIViewController {
     var viewModel: OffersViewModel? {
         didSet {
             titleLabel.text = viewModel?.title
+            restorePurchaseLabel.setStyle(config: configDictionary, style: .promptFont)
             restorePurchaseLabel.text = viewModel?.restoreHint
+            restoreButton.setStyle(config: configDictionary, style: .linkFont)
             restoreButton.setTitle(viewModel?.restoreButtonText, for: .normal)
+            helpInfoTextView.setStyle(config: configDictionary, style: .legalDetailsFont)
+            helpInfoTextView.text = viewModel?.legalDetails
         }
     }
     
@@ -60,11 +69,12 @@ class EntitlementPickerViewController: UIViewController {
         setupCollectionView()
         presenter?.viewDidLoad()
         
-        backgroundImageView.setZappStyle(withAsset: .backgroundImage)
-        closeButton.setZappStyle(withIconAsset: .closeButtonImage)
-        logoImageView.setZappStyle(withAsset: .headerLogo)
-        helpInfoContainer.setZappStyle(withBackgroundColor: .alternateActionBannerColor)
-        
+        backgroundImageView.setStyle(asset: .backgroundImage)
+        closeButton.setStyle(iconAsset: .closeButtonImage)
+        logoImageView.setStyle(asset: .headerLogoImage)
+        helpInfoContainer.setStyle(config: configDictionary, backgroundColor: .legalDetailsBackgroundColor)
+        titleLabel.setStyle(config: configDictionary, style: CAMStyles.paymentOptionTitleFont)
+
         setupGradient()
     }
     

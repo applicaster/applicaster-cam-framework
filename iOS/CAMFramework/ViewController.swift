@@ -44,7 +44,7 @@ class ViewController: UIViewController, CAMDelegate {
     }
     
     func getPluginConfig() -> Dictionary<String, String> {
-        if let path = Bundle.main.path(forResource: "mockJson", ofType: "json") {
+        if let path = Bundle.main.path(forResource: "mock", ofType: "json") {
             do {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
                 let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
@@ -58,7 +58,7 @@ class ViewController: UIViewController, CAMDelegate {
     }
 
     @IBAction func start(_ sender: Any) {
-        self.cam = ContentAccessManager(rootViewController: self, camDelegate: self, camFlow: .authAndStorefront ) { (r) in
+        self.cam = ContentAccessManager(rootViewController: self, camDelegate: self, camFlow: .authAndStorefront) { (r) in
             print(r)
         }
         self.cam?.startFlow()

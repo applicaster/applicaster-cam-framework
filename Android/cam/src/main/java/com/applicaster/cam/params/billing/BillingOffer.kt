@@ -5,7 +5,7 @@ enum class ProductType {
     INAPP
 }
 
-data class Offer(
+data class BillingOffer(
     var productId: String,
     var productType: ProductType
 )

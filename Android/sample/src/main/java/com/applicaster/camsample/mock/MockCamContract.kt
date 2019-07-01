@@ -2,12 +2,12 @@ package com.applicaster.camsample.mock
 
 import android.content.Context
 import android.os.Handler
+import com.android.billingclient.api.Purchase
 import com.applicaster.cam.*
-import com.applicaster.cam.params.billing.Offer
+import com.applicaster.cam.params.billing.BillingOffer
 import com.applicaster.cam.params.billing.ProductType
 
 class MockCamContract(private val context: Context) : ICamContract {
-
 
     override fun login(authFieldsInput: HashMap<String, String>, callback: LoginCallback) {
         Handler().postDelayed({ callback.onSuccess() }, 1250)
@@ -33,8 +33,8 @@ class MockCamContract(private val context: Context) : ICamContract {
         Handler().postDelayed({ callback.onSuccess() }, 1250)
     }
 
-    override fun onItemPurchased() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun onItemPurchased(purchase: Purchase) {
+
     }
 
     override fun onPurchasesRestored(callback: RestoreCallback) {
@@ -42,7 +42,7 @@ class MockCamContract(private val context: Context) : ICamContract {
     }
 
     override fun loadEntitlements(callback: EntitlementsLoadCallback) {
-        val offer = Offer(
+        val offer = BillingOffer(
             "Test product id",
             ProductType.INAPP
         )
@@ -57,5 +57,5 @@ class MockCamContract(private val context: Context) : ICamContract {
 
     override fun isRedeemActivated(): Boolean = false
 
-    override fun getCamFlow() = CamFlow.AUTH_AND_STOREFRONT
+    override fun getCamFlow(): CamFlow = CamFlow.AUTH_AND_STOREFRONT
 }

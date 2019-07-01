@@ -91,7 +91,7 @@ open class ContentAccessManager {
     }
     
     private func purchase(with completion: @escaping (Bool) -> Void) {
-        if navigationController.isBeingPresented == false {
+        if navigationController.presentingViewController == nil {
             rootViewController.present(navigationController, animated: true, completion: nil)
         }
         

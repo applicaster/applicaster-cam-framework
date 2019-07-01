@@ -47,6 +47,13 @@ class LoginPresenter {
         coordinatorDelegate?.finishAuthorizationFlow(isUserLogged: false)
     }
     
+    func backToPreviousScreen() {
+        coordinatorDelegate?.popCurrentScreen()
+        if isRoot {
+            coordinatorDelegate?.finishAuthorizationFlow(isUserLogged: false)
+        }
+    }
+    
     func login(data: [AuthField]) {
         view?.showLoadingScreen(true)
         if let data = validate(data: data) {

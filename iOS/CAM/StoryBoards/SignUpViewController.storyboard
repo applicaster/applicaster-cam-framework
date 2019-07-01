@@ -204,7 +204,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.078431372550000003" green="0.23137254900000001" blue="0.40784313729999999" alpha="0.50382598460000005" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="0TR-Um-XAB" firstAttribute="leading" secondItem="35d-kS-uOU" secondAttribute="leading" id="KdH-fP-tK6"/>
                                     <constraint firstItem="0TR-Um-XAB" firstAttribute="top" secondItem="35d-kS-uOU" secondAttribute="top" id="Pop-7l-LYO"/>

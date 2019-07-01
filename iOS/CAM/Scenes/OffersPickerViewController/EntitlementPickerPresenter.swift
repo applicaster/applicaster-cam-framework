@@ -25,9 +25,11 @@ class EntitlementPickerPresenter {
         let screenTitle = camDelegate?.getPluginConfig()[CAMKeys.paymentScreenTitle.rawValue] ?? ""
         let restoreHint = camDelegate?.getPluginConfig()[CAMKeys.restoreHint.rawValue] ?? ""
         let restoreButtonText = camDelegate?.getPluginConfig()[CAMKeys.restoreButtonText.rawValue] ?? ""
+        let legalDetailsText = camDelegate?.getPluginConfig()[CAMKeys.legalDetailsText.rawValue] ?? ""
         let viewModel = OffersViewModel(title: screenTitle,
                                         restoreHint: restoreHint,
-                                        restoreButtonText: restoreButtonText)
+                                        restoreButtonText: restoreButtonText,
+                                        legalDetails: legalDetailsText)
         
         self.view?.viewModel = viewModel
     }
@@ -74,7 +76,8 @@ class EntitlementPickerPresenter {
             let price = product.skProduct.localizedPrice ?? ""
             let purchaseButtonText = configText + " " + price
             
-            return OfferViewModel(title: product.skProduct.localizedTitle,
+            return OfferViewModel(config: camDelegate?.getPluginConfig() ?? [String: String](),
+                                  title: product.skProduct.localizedTitle,
                                   description: product.skProduct.localizedDescription,
                                   purchaseButtonText: purchaseButtonText,
                                   buyAction: buyAction,
@@ -86,16 +89,17 @@ class EntitlementPickerPresenter {
     
     private func showConfirmationScreen() {
         guard let configDictionary = camDelegate?.getPluginConfig(),
-            let title = configDictionary[CAMKeys.paymentAlertTitle.rawValue],
-            let info = configDictionary[CAMKeys.paymentAlertInfo.rawValue],
-            let buttonText = configDictionary[CAMKeys.paymentAlertButtonText.rawValue] else {
+            let _ = configDictionary[CAMKeys.paymentAlertTitle.rawValue],
+            let _ = configDictionary[CAMKeys.paymentAlertInfo.rawValue],
+            let _ = configDictionary[CAMKeys.alertButtonText.rawValue] else {
+            self.coordinatorDelegate?.finishBillingFlow(isUserHasAccess: true)
             return
         }
         
-        self.view?.showConfirmationScreen(title: title,
-                                          description: info,
-                                          buttonText: buttonText,
-                                          action: {
+        self.view?.showConfirmationScreen(config: configDictionary,
+                                          titleKey: .paymentAlertTitle,
+                                          descriptionKey: .paymentAlertInfo,
+                                          buttonKey: .alertButtonText, action: {
             self.coordinatorDelegate?.finishBillingFlow(isUserHasAccess: true)
         })
     }
