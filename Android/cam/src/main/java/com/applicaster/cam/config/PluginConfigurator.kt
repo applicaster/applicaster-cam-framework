@@ -7,8 +7,6 @@ import com.applicaster.cam.params.auth.AuthScreenType
 
 class PluginConfigurator(private val pluginConfig: Map<String, String>) : Configurator {
 
-    private val confirmationKeysAmount = 3
-
     override fun getDefaultAuthScreen() =
         AuthScreenType.fromKey(pluginConfig.getValue(KEY_DEFAULT_AUTH_SCREEN))
 
@@ -45,27 +43,22 @@ class PluginConfigurator(private val pluginConfig: Map<String, String>) : Config
         false
 
     override fun isShowConfirmationPasswordReset(): Boolean {
-        return pluginConfig.filterKeys { key: String ->
-            key == UI_KEY_PWD_CONFIRMATION_TITLE_TEXT
-                    || key == UI_KEY_PWD_CONFIRMATION_DESC_TEXT
-                    || key == UI_KEY_PWD_CONFIRMATION_BUTTON_TEXT
-        }.size == confirmationKeysAmount
+        return UI_KEY_PWD_CONFIRMATION_TITLE_TEXT in pluginConfig
+                && UI_KEY_PWD_CONFIRMATION_DESC_TEXT in pluginConfig
+                && UI_KEY_PWD_CONFIRMATION_BUTTON_TEXT in pluginConfig
     }
 
     override fun isShowConfirmationPayment(): Boolean {
-        return pluginConfig.filterKeys { key: String ->
-            key == UI_KEY_PAYMENT_CONFIRMATION_TITLE_TEXT
-                    || key == UI_KEY_PAYMENT_CONFIRMATION_DESC_TEXT
-                    || key == UI_KEY_PAYMENT_CONFIRMATION_BUTTON_TEXT
-        }.size == confirmationKeysAmount
+        return UI_KEY_PAYMENT_CONFIRMATION_TITLE_TEXT in pluginConfig
+                && UI_KEY_PAYMENT_CONFIRMATION_DESC_TEXT in pluginConfig
+                && UI_KEY_PAYMENT_CONFIRMATION_BUTTON_TEXT in pluginConfig
     }
 
+
     override fun isShowConfirmationRestorePurchases(): Boolean {
-        return pluginConfig.filterKeys { key: String ->
-            key == UI_KEY_RESTORE_CONFIRMATION_TITLE_TEXT
-                    || key == UI_KEY_RESTORE_CONFIRMATION_DESC_TEXT
-                    || key == UI_KEY_RESTORE_CONFIRMATION_BUTTON_TEXT
-        }.size == confirmationKeysAmount
+        return UI_KEY_RESTORE_CONFIRMATION_TITLE_TEXT in pluginConfig
+                && UI_KEY_RESTORE_CONFIRMATION_DESC_TEXT in pluginConfig
+                && UI_KEY_RESTORE_CONFIRMATION_BUTTON_TEXT in pluginConfig
     }
 }
 
