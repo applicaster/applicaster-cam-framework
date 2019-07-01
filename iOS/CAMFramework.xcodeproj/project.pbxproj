@@ -3,13 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		6EEF5ACF06E3FB491D82C93A /* Pods_CAMFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3572E4C3A1141D2999966DAB /* Pods_CAMFramework.framework */; };
-		B66551B82286F7F000670F62 /* mockJson.json in Sources */ = {isa = PBXBuildFile; fileRef = B66551B72286F7F000670F62 /* mockJson.json */; };
-		B66551B92286F96700670F62 /* mockJson.json in Resources */ = {isa = PBXBuildFile; fileRef = B66551B72286F7F000670F62 /* mockJson.json */; };
+		B633C12722C5108B0083E7A3 /* mock.json in Resources */ = {isa = PBXBuildFile; fileRef = B633C12622C5108B0083E7A3 /* mock.json */; };
 		B699867E2270615B0093FBEC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B699867D2270615B0093FBEC /* AppDelegate.swift */; };
 		B69986802270615B0093FBEC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B699867F2270615B0093FBEC /* ViewController.swift */; };
 		B69986832270615B0093FBEC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B69986812270615B0093FBEC /* Main.storyboard */; };
@@ -22,7 +21,7 @@
 /* Begin PBXFileReference section */
 		2019714B1FF05014F52C141D /* Pods-CAMFramework.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CAMFramework.debug.xcconfig"; path = "Target Support Files/Pods-CAMFramework/Pods-CAMFramework.debug.xcconfig"; sourceTree = "<group>"; };
 		3572E4C3A1141D2999966DAB /* Pods_CAMFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CAMFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B66551B72286F7F000670F62 /* mockJson.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mockJson.json; sourceTree = "<group>"; };
+		B633C12622C5108B0083E7A3 /* mock.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mock.json; sourceTree = "<group>"; };
 		B699867A2270615B0093FBEC /* CAMFramework.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CAMFramework.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B699867D2270615B0093FBEC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B699867F2270615B0093FBEC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -59,7 +58,7 @@
 		B69986712270615B0093FBEC = {
 			isa = PBXGroup;
 			children = (
-				B66551B72286F7F000670F62 /* mockJson.json */,
+				B633C12622C5108B0083E7A3 /* mock.json */,
 				B699867C2270615B0093FBEC /* CAMFramework */,
 				B699867B2270615B0093FBEC /* Products */,
 				A953CFB7121720086840BFC3 /* Pods */,
@@ -160,10 +159,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B66551B92286F96700670F62 /* mockJson.json in Resources */,
 				B69986882270615C0093FBEC /* LaunchScreen.storyboard in Resources */,
 				B69986852270615C0093FBEC /* Assets.xcassets in Resources */,
 				B69986832270615B0093FBEC /* Main.storyboard in Resources */,
+				B633C12722C5108B0083E7A3 /* mock.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,7 +252,6 @@
 			files = (
 				B69986802270615B0093FBEC /* ViewController.swift in Sources */,
 				B6CE74B3229582A2002A5FEB /* ZAAppConnector+Local.swift in Sources */,
-				B66551B82286F7F000670F62 /* mockJson.json in Sources */,
 				B6998690227061750093FBEC /* MockDataClass.swift in Sources */,
 				B699867E2270615B0093FBEC /* AppDelegate.swift in Sources */,
 			);

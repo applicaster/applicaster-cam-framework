@@ -50,65 +50,7 @@ class MyConnector: NSObject, ZAAppDelegateConnectorLayoutsStylesProtocol, ZAAppD
     
     func styleParams(byStyleName styleName: String!) -> [AnyHashable: Any]! {
         if let key = styleName, let style = CAMStyles(rawValue: key) {
-            switch style {
-            case .actionButton: return [
-                "font": UIFont(name: "HelveticaNeue", size: 15)!,
-                "color": UIColor.white
-                ]
-            case .alternativeLoginText: return [
-                "font": UIFont(name: "HelveticaNeue", size: 15)!,
-                "color": UIColor.white
-                ]
-            case .inputField: return [
-                "font": UIFont(name: "HelveticaNeue", size: 14)!,
-                "color": UIColor.black
-                ]
-            case .promtAction: return [
-                "font": UIFont(name: "HelveticaNeue-Light", size: 14)!,
-                "color": UIColor.white
-                ]
-            case .promtText: return [
-                "font": UIFont(name: "HelveticaNeue-Bold", size: 14)!,
-                "color": UIColor.white
-                ]
-            case .screenDescription: return [
-                "font": UIFont(name: "HelveticaNeue-Medium", size: 16)!,
-                "color": UIColor.white
-                ]
-            case .screenTitle: return [
-                "font": UIFont(name: "HelveticaNeue", size: 26)!,
-                "color": UIColor.white
-                ]
-            case .resetPassword: return [
-                "font": UIFont(name: "HelveticaNeue-Light", size: 14)!,
-                "color": UIColor.white
-                ]
-            case .separator: return [
-                "font": UIFont(name: "HelveticaNeue-Light", size: 12)!,
-                "color": UIColor.white
-                ]
-            case .alternateActionBannerColor: return ["color": UIColor(hex: "#FFFFFF50")]
-            case .bubbleText: return [
-                "font": UIFont(name: "HelveticaNeue-Light", size: 12)!,
-                "color": UIColor.black
-                ]
-            case .alertTitle:
-                return [
-                    "font": UIFont.boldSystemFont(ofSize: 25),
-                    "color": UIColor.black
-                ]
-            case .alertDescription:
-                return [
-                    "font": UIFont.systemFont(ofSize: 20,
-                                              weight: .light),
-                    "color": UIColor.black
-                ]
-            default:
-                return [
-                    "font" : UIFont(name: "HelveticaNeue-Light", size: 12)!,
-                    "color" : UIColor.black
-                ]
-            }
+            return defaultStylesDelegate?.styleParams?(byStyleName: styleName)
         } else {
             return defaultStylesDelegate?.styleParams?(byStyleName: styleName)
         }

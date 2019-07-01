@@ -25,17 +25,17 @@ public extension UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
-    func showConfirmationScreen(title: String, description: String, buttonText: String, action: @escaping () -> Void) {
+    func showConfirmationScreen(config: [String: String], titleKey: CAMKeys, descriptionKey: CAMKeys, buttonKey: CAMKeys, action: @escaping () -> Void) {
         let confirmationPopover = ConfirmationPopover.nibInstance()
         confirmationPopover.frame = self.view.frame
         confirmationPopover.buttonPressedAction = action
-        confirmationPopover.titleLabel.setZappStyle(text: title, style: .alertTitle)
-        confirmationPopover.descriptionLabel.setZappStyle(text: description, style: .alertDescription)
-        confirmationPopover.actionButton.setZappStyle(backgroundAsset: .alertButtonImage, title: buttonText, style: .actionButton)
+        confirmationPopover.titleLabel.setStyle(config: config, camTextKey: titleKey, style: .confirmationTitleFont)
+        confirmationPopover.descriptionLabel.setStyle(config: config, camTextKey: descriptionKey, style: .confirmationDescriptionFont)
+        confirmationPopover.actionButton.setStyle(config: config, backgroundAsset: .alertButtonImage, camTitleKey: buttonKey, style: .actionButtonFont)
         self.view.addSubview(confirmationPopover)
     }
     
-    func showErrorPopover(message: String?, sourceRect: CGRect, bubbleWidth: CGFloat) {
+    func showErrorPopover(config: [String: String], message: String?, sourceRect: CGRect, bubbleWidth: CGFloat) {
         let controller = ErrorPopoverViewController.instantiateVC()
         controller.modalPresentationStyle = .popover
         controller.preferredContentSize = CGSize(width: bubbleWidth, height: 90)
@@ -48,6 +48,7 @@ public extension UIViewController {
             popoverPresentationController.popoverBackgroundViewClass = ErrorPopoverBackgroundView.self
             popoverPresentationController.sourceRect = sourceRect
             present(controller, animated: true, completion: {
+                controller.messageLabel.setStyle(config: config, style: .inputFieldFont)
                 controller.messageLabel.text = message
                 controller.bubbleWidthConstraint.constant = bubbleWidth
                 controller.view.layoutIfNeeded()

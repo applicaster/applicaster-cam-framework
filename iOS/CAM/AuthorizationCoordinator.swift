@@ -33,9 +33,9 @@ class AuthorizationCoordinator: AuthorizationCoordinatorProtocol, Coordinator {
     func start() {
         let dictionary = self.parentCoordinator.getCamDelegate().getPluginConfig()
         switch dictionary[CAMKeys.defaultAuthScreen.rawValue] {
-        case "login":
+        case "Login":
             showLoginScreen(isCoordinatorRootController: true)
-        case "registration":
+        case "Registration":
             showSingUpScreen(isCoordinatorRootController: true)
         default:
             return

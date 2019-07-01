@@ -8,14 +8,14 @@
 import UIKit
 import ZappPlugins
 
-extension ZAAppConnector {
-    func image(forAsset asset: String) -> UIImage? {
-        
+extension UIImage {
+    static func image(forAsset asset: String) -> UIImage? {
+        let connector = ZAAppConnector.sharedInstance()
         if let image = UIImage(named: asset) {
             return image
-        } else if let image = UIImage(named: asset, in: self.layoutsStylesDelegate.zappLayoutsStylesBundle(), compatibleWith: nil) {
+        } else if let image = UIImage(named: asset, in: connector.layoutsStylesDelegate.zappLayoutsStylesBundle(), compatibleWith: nil) {
             return image
-        } else if let url = self.urlDelegate.fileUrl(withName: asset, extension: "png") {
+        } else if let url = connector.urlDelegate.fileUrl(withName: asset, extension: "png") {
             if let image = UIImage(contentsOfFile: url.path) ?? UIImage(contentsOfFile: url.absoluteString) {
                 return image
             } else if let data = try? Data(contentsOf: url), let image = UIImage(data: data, scale: 0) {
@@ -28,162 +28,162 @@ extension ZAAppConnector {
 }
 
 extension UIView {
-    func setZappStyle(withBackgroundColor color: CAMStyles) {
-        ZAAppConnector.sharedInstance().layoutsStylesDelegate.setViewStyle?(self,
-                                                                            withKeys: [kZappLayoutStylesBackgroundColorKey: color.rawValue])
+    
+    func getColorAndFontByStyle(config: [String: String], style: CAMStyles?) -> (color: UIColor, font: UIFont) {
+        guard let style = style else {
+            return (color: UIColor.black, font: UIFont.systemFont(ofSize: 12.0))
+        }
+        let baseKey = style.rawValue
+        var size: CGFloat = 12.0
+        let sizeKey =  baseKey + (UIDevice.current.userInterfaceIdiom == .pad ? "_size_pad" : "_size_phone")
+        if let value = config[sizeKey], let configSize = CGFloat(value) {
+            size = configSize
+        }
+        
+        var font = UIFont.systemFont(ofSize: size)
+        let fontKey = baseKey + "_font_ios"
+        if let value = config[fontKey], let configFont = UIFont(name: value, size: size) {
+            font = configFont
+        }
+        
+        var color = UIColor.black
+        let colorKey = baseKey + "_color"
+        if let value = config[colorKey], let configColor = UIColor(argbHexString: value) {
+            color = configColor
+        }
+        
+        return (color: color, font: font)
+    }
+    
+    func setStyle(config: [String: String], backgroundColor: CAMStyles) {
+        if let value = config[backgroundColor.rawValue], let color = UIColor(argbHexString: value) {
+            self.backgroundColor = color
+        }
     }
 }
 
 extension UIImageView {
-    func setZappStyle(withAsset asset: CAMKeys,
-                      stretchableImage: Bool = false) {
-        ZAAppConnector.sharedInstance().layoutsStylesDelegate.setViewStyle?(self,
-                                                                            withKeys: [kZappLayoutStylesBackgroundImageKey: asset.rawValue])
-        if stretchableImage, let image = self.image {
-            let halfSize = CGSize(width: (image.size.width * 0.5) - 0.5, height: (image.size.height * 0.5) - 0.5)
-            self.image = image.resizableImage(withCapInsets: UIEdgeInsets(top: halfSize.height,
-                                                                          left: halfSize.width,
-                                                                          bottom: halfSize.height,
-                                                                          right: halfSize.width))
-        }
+    func setStyle(asset: CAMKeys) {
+        self.image = UIImage.image(forAsset: asset.rawValue)
     }
 }
 
 extension UIButton {
-    func setZappStyle(withIconAsset iconAsset: CAMKeys? = nil,
-                      backgroundAsset: CAMKeys? = nil,
-                      title: String? = nil,
-                      style: CAMStyles? = nil,
-                      forState state: UIControl.State = .normal) {
+    func setStyle(config: [String: String] = [String: String](),
+                  iconAsset: CAMKeys? = nil,
+                  backgroundAsset: CAMKeys? = nil,
+                  title: String? = nil,
+                  camTitleKey: CAMKeys? = nil,
+                  style: CAMStyles? = nil,
+                  forState state: UIControl.State = .normal) {
         
-        if let iconAsset = iconAsset?.rawValue,
-            let imageIcon = ZAAppConnector.sharedInstance().image(forAsset: iconAsset) {
-            self.setImage(imageIcon, for: state)
+        if let name = iconAsset?.rawValue {
+            self.setImage(UIImage.image(forAsset: name), for: state)
         }
         
-        if let style = style?.rawValue,
-            let dict = ZAAppConnector.sharedInstance().layoutsStylesDelegate.styleParams?(byStyleName: style) as? [String: Any] {
-            if state == .normal, let font = dict["font"] as? UIFont {
-                self.titleLabel?.font = font
-            }
-            
-            if let color = dict["color"] as? UIColor {
-                self.setTitleColor(color, for: state)
-            }
+        let configStyle = self.getColorAndFontByStyle(config: config, style: style)
+        self.titleLabel?.font = configStyle.font
+        self.setTitleColor(configStyle.color, for: state)
+        if let key = camTitleKey?.rawValue, let title = config[key] {
+            self.setTitle(title, for: state)
+        } else {
+            self.setTitle(title, for: state)
         }
-        
-        self.setTitle(title, for: state)
-        
-        if let backgroundAsset = backgroundAsset?.rawValue,
-            var image = ZAAppConnector.sharedInstance().image(forAsset: backgroundAsset) {
-            let halfSize = CGSize(width: (image.size.width * 0.5) - 0.5, height: (image.size.height * 0.5) - 0.5)
-            image = image.resizableImage(withCapInsets: UIEdgeInsets(top: halfSize.height,
-                                                                     left: halfSize.width,
-                                                                     bottom: halfSize.height,
-                                                                     right: halfSize.width))
-            self.setBackgroundImage(image, for: state)
+        if let name = backgroundAsset?.rawValue {
+            self.setBackgroundImage(UIImage.image(forAsset: name), for: state)
         }
     }
     
-    func setAttributedZappStyle(withIconAsset iconAsset: CAMKeys? = nil,
-                                backgroundAsset: CAMKeys? = nil,
-                                attributedTitle: [(style: CAMStyles?, string: String, additionalAttributes: [NSAttributedString.Key: Any]?)]? = nil,
-                                forState state: UIControl.State = .normal) {
+    func setAttributedStyle(config: [String: String] = [String: String](),
+                            iconAsset: CAMKeys? = nil,
+                            backgroundAsset: CAMKeys? = nil,
+                            attributedTitle: [(style: CAMStyles?, string: String, additionalAttributes: [NSAttributedString.Key: Any]?)]? = nil,
+                            forState state: UIControl.State = .normal) {
         
-        if let iconAsset = iconAsset?.rawValue, let imageIcon = ZAAppConnector.sharedInstance().image(forAsset: iconAsset) {
-            self.setImage(imageIcon, for: state)
+        if let name = iconAsset?.rawValue {
+            self.setImage(UIImage.image(forAsset: name), for: state)
         }
-        
+        if let name = backgroundAsset?.rawValue {
+            self.setBackgroundImage(UIImage.image(forAsset: name), for: state)
+        }
         let str = NSMutableAttributedString(string: "")
         if let attributedTitle = attributedTitle {
             for index in 0..<attributedTitle.count {
                 let subTitle = attributedTitle[index]
                 
                 var attrs: [NSAttributedString.Key: Any] = subTitle.additionalAttributes ?? [:]
-                if let style = subTitle.style?.rawValue,
-                    let dict = ZAAppConnector.sharedInstance().layoutsStylesDelegate.styleParams?(byStyleName: style) as? [String: Any] {
-                    if let font = dict["font"] as? UIFont { attrs[.font] = font }
-                    if let color = dict["color"] as? UIColor { attrs[.foregroundColor] = color }
-                }
-                
+                let configStyle = self.getColorAndFontByStyle(config: config, style: attributedTitle[index].style)
+                attrs[.font] = configStyle.font
+                attrs[.foregroundColor] = configStyle.color
                 let space = (index + 1 < attributedTitle.count ? " " : "")
                 str.append(NSAttributedString(string: "\(subTitle.string)\(space)", attributes: attrs))
             }
         }
-        
         setAttributedTitle(str, for: state)
     }
 }
 
 extension UILabel {
-    func setZappStyle(text: String? = nil,
-                      style: CAMStyles? = nil) {
-        
-        var keys: [String: String] = [:]
-        if let style = style {
-            keys[kZappLayoutStylesFontKey] = style.rawValue
+    func setStyle(config: [String: String] = [String: String](),
+                  camTextKey: CAMKeys? = nil,
+                  style: CAMStyles? = nil) {
+        let configStyle = self.getColorAndFontByStyle(config: config, style: style)
+        self.font = configStyle.font
+        self.textColor = configStyle.color
+        if let key = camTextKey?.rawValue, let text = config[key] {
+            self.text = text
         }
-        
-        ZAAppConnector.sharedInstance().layoutsStylesDelegate.setLabelStyle?(self, withKeys: keys)
-        self.text = text
     }
     
-    func setAttributedZappStyle(attributedText: [(style: CAMStyles?, string: String,
-                                additionalAttributes: [NSAttributedString.Key: Any]?)]) {
+    func setAttributedStyle(config: [String: String] = [String: String](),
+                            attributedText: [(style: CAMStyles?, string: String,
+                            additionalAttributes: [NSAttributedString.Key: Any]?)]) {
         let str = NSMutableAttributedString(string: "")
         for index in 0..<attributedText.count {
             let subText = attributedText[index]
-            
             var attrs: [NSAttributedString.Key: Any] = subText.additionalAttributes ?? [:]
-            if let style = subText.style?.rawValue,
-                let dict = ZAAppConnector.sharedInstance().layoutsStylesDelegate.styleParams?(byStyleName: style) as? [String: Any] {
-                if let font = dict["font"] as? UIFont { attrs[.font] = font }
-                if let color = dict["color"] as? UIColor { attrs[.foregroundColor] = color }
-            }
-            
+            let configStyle = self.getColorAndFontByStyle(config: config, style: attributedText[index].style)
+            attrs[.font] = configStyle.font
+            attrs[.foregroundColor] = configStyle.color
             let space = (index + 1 < attributedText.count ? " " : "")
             str.append(NSAttributedString(string: "\(subText.string)\(space)", attributes: attrs))
         }
-        
         self.attributedText = str
     }
 }
 
 extension UITextField {
     
-    func setZappStyle(backgroundAsset: CAMKeys? = nil,
-                      textStyle: CAMStyles? = nil,
-                      placeholder: String? = nil) {
+    func setStyle(config: [String: String] = [String: String](),
+                  backgroundAsset: CAMKeys? = nil,
+                  style: CAMStyles? = nil,
+                  placeholder: String? = nil) {
         
-        if let backgroundAsset = backgroundAsset?.rawValue,
-            let imageIcon = ZAAppConnector.sharedInstance().image(forAsset: backgroundAsset) {
-            self.background = imageIcon
+        if let name = backgroundAsset?.rawValue {
+            self.background = UIImage.image(forAsset: name)
             self.borderStyle = .none
         }
         
-        var placeholderStyle: [String: Any]?
-        if let style = textStyle?.rawValue,
-            let dict = ZAAppConnector.sharedInstance().layoutsStylesDelegate.styleParams?(byStyleName: style) as? [String: Any] {
-            placeholderStyle = dict
-            self.font = dict["font"] as? UIFont
-            self.textColor = dict["color"] as? UIColor
-        }
+        let configStyle = self.getColorAndFontByStyle(config: config, style: style)
+        self.font = configStyle.font
+        self.textColor = configStyle.color
         
         if let placeholder = placeholder {
-            if let placeholderStyle = placeholderStyle {
-                var attrs: [NSAttributedString.Key: Any] = [:]
-                if let font = placeholderStyle["font"] as? UIFont {
-                    attrs[.font] = font
-                }
-                if let color = placeholderStyle["color"] as? UIColor {
-                    attrs[.foregroundColor] = color.withAlphaComponent(0.6)
-                }
-                attributedPlaceholder = NSAttributedString(string: placeholder, attributes: attrs)
-            } else {
-                self.placeholder = placeholder
-            }
+            var attrs: [NSAttributedString.Key: Any] = [:]
+            attrs[.font] = configStyle.font
+            attrs[.foregroundColor] = configStyle.color.withAlphaComponent(0.6)
+            attributedPlaceholder = NSAttributedString(string: placeholder, attributes: attrs)
         } else {
             self.placeholder = nil
         }
+    }
+}
+
+extension UITextView {
+    func setStyle(config: [String: String] = [String: String](),
+                  style: CAMStyles? = nil) {
+        let configStyle = self.getColorAndFontByStyle(config: config, style: style)
+        self.font = configStyle.font
+        self.textColor = configStyle.color
     }
 }

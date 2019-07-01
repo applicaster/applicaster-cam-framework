@@ -51,17 +51,17 @@ class ResetPasswordViewController: UIViewController {
     }
     
     func configureElements() {
-        backgroundImageView.setZappStyle(withAsset: .backgroundImage)
-        backButton.setZappStyle(withIconAsset: .backButtonImage)
-        closeButton.setZappStyle(withIconAsset: .closeButtonImage)
-        logoImageView.setZappStyle(withAsset: .headerLogo)
-        titleLabel.setZappStyle(text: configDictionary[CAMKeys.passwordResetTitleText.rawValue],
-                                style: .screenTitle)
-        infoLabel.setZappStyle(text: configDictionary[CAMKeys.passwordResetInfoText.rawValue],
-                               style: .screenDescription)
-        resetButton.setZappStyle(backgroundAsset: .passwordResetButtonImage,
-                                 title: configDictionary[CAMKeys.passwordResetButtonText.rawValue],
-                                 style: .actionButton)
+        backgroundImageView.setStyle(asset: .backgroundImage)
+        backButton.setStyle(iconAsset: .backButtonImage)
+        closeButton.setStyle(iconAsset: .closeButtonImage)
+        logoImageView.setStyle(asset: .headerLogoImage)
+        titleLabel.setStyle(config: configDictionary, camTextKey: .passwordResetTitleText, style: .screenTitleFont)
+        infoLabel.setStyle(config: configDictionary, camTextKey: .passwordResetInfoText,
+                               style: .screenDescriptionFont)
+        resetButton.setStyle(config: configDictionary,
+                             backgroundAsset: .passwordResetButtonImage,
+                             camTitleKey: .passwordResetButtonText,
+                             style: .actionButtonFont)
     }
     
     func setupConstraints() {
@@ -140,10 +140,11 @@ extension ResetPasswordViewController: ResetPasswordViewProtocol {
     }
     
     func showConfirmationScreenIfNeeded() {
-        if let title = configDictionary[CAMKeys.passwordAlertTitleText.rawValue],
-           let description = configDictionary[CAMKeys.passwordAlertInfoText.rawValue],
-           let buttonText = configDictionary[CAMKeys.passwordAlertButtonText.rawValue] {
-            self.showConfirmationScreen(title: title, description: description, buttonText: buttonText, action: { [weak self] in
+        if let _ = configDictionary[CAMKeys.passwordAlertTitleText.rawValue],
+           let _ = configDictionary[CAMKeys.passwordAlertInfoText.rawValue],
+           let _ = configDictionary[CAMKeys.alertButtonText.rawValue] {
+            self.showConfirmationScreen(config: configDictionary, titleKey: .passwordAlertTitleText, descriptionKey: .passwordAlertInfoText,
+                                        buttonKey: .alertButtonText, action: { [weak self] in
                 self?.presenter?.backToPreviousScreen()
             })
         } else {
@@ -172,9 +173,7 @@ extension ResetPasswordViewController: UITableViewDelegate, UITableViewDataSourc
                                                        for: indexPath) as? AuthTableCell else {
                                                         return UITableViewCell()
         }
-        cell.textField.setZappStyle(backgroundAsset: .authFieldImage,
-                                    textStyle: .inputField,
-                                    placeholder: resetPasswordFields[indexPath.row].hint)
+        cell.textField.setStyle(config: configDictionary, backgroundAsset: .authFieldImage, style: .inputFieldFont, placeholder: resetPasswordFields[indexPath.row].hint) 
         cell.configureInputField(data: resetPasswordFields[indexPath.row])
         cell.backgroundColor = .clear
         
@@ -187,7 +186,7 @@ extension ResetPasswordViewController: UITableViewDelegate, UITableViewDataSourc
                                        height: 0)
         cell.showPopover = { [weak self] in
             let bubbleWidth: CGFloat = 320
-            self?.showErrorPopover(message: self?.resetPasswordFields[indexPath.row].errorDescription,
+            self?.showErrorPopover(config: self?.configDictionary ?? [String: String](), message: self?.resetPasswordFields[indexPath.row].errorDescription,
                                    sourceRect: popoverSourceRect, bubbleWidth: bubbleWidth)
         }
         
