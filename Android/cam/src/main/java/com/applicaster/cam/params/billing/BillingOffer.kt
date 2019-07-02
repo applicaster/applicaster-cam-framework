@@ -6,6 +6,7 @@ enum class ProductType {
 }
 
 data class BillingOffer(
+    var authId: String,
     var productId: String,
     var productType: ProductType
 )

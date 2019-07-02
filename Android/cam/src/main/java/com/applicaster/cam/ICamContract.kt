@@ -16,7 +16,7 @@ interface ICamContract {
 
     fun signupWithFacebook(email: String, id: String, callback: FacebookAuthCallback)
 
-    fun onItemPurchased(purchase: Purchase)
+    fun onItemPurchased(purchase: Purchase, authId: String)
 
     fun onPurchasesRestored(callback: RestoreCallback)
 
