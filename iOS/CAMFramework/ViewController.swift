@@ -13,6 +13,18 @@ import CAM
 // swiftlint:disable all
 
 class ViewController: UIViewController, CAMDelegate {
+    func availableProducts(completion: @escaping (AvailableProductsResult) -> Void) {
+        
+    }
+    
+    func itemPurchased(purchasedItem: PurchasedProduct, completion: @escaping (ProductPurchaseResult) -> Void) {
+        
+    }
+    
+    func itemsRestored(purchasedItem: [PurchasedProduct], completion: @escaping (ProductPurchaseResult) -> Void) {
+        
+    }
+    
     func facebookSignUp(userData: (email: String, userId: String), completion: @escaping (CAMResult) -> Void) {
         completion(.success)
     }
@@ -70,20 +82,6 @@ class ViewController: UIViewController, CAMDelegate {
     
     func itemsRestored(items: [SKPaymentTransaction]) {
         
-    }
-    
-    func availableProducts() -> [Product] {
-        let title = "Monthly Subscription Subscription"
-        let description = "Subscription details go here and might take up to two lines maximum"
-        let price = "4.99"
-        let locale = Locale(identifier: "en_US")
-        let skProduct = SKProduct(identifier: "com.test",
-                                  title: title,
-                                  description: description,
-                                  price: price,
-                                  priceLocale: locale)
-        let product = Product(skProduct: skProduct)
-        return Array(repeating: product, count: 3)
     }
     
     func isTriggerOnAppLaunch() -> Bool {
