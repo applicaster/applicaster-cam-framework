@@ -19,6 +19,16 @@ public enum CAMResult {
     case failure(description: String?)
 }
 
+public enum AvailableProductsResult {
+    case success(products: [AvailableProduct])
+    case failure(description: String?)
+}
+
+public enum ProductPurchaseResult {
+    case success
+    case failure(description: String?)
+}
+
 public protocol CAMDelegate: AnyObject {
     func getPluginConfig() -> [String: String]
     func isUserLogged() -> Bool
@@ -28,15 +38,38 @@ public protocol CAMDelegate: AnyObject {
     func login(authData: [String: String], completion: @escaping (CAMResult) -> Void)
     func signUp(authData: [String: String], completion: @escaping (CAMResult) -> Void)
     func resetPassword(data: [String: String], completion: @escaping (CAMResult) -> Void)
-    func itemPurchased(item: SKProduct)
-    func itemsRestored(items: [SKPaymentTransaction])
-    func availableProducts() -> [Product]
+    
+    func availableProducts(completion: @escaping (AvailableProductsResult) -> Void)
+    func itemPurchased(purchasedItem: PurchasedProduct, completion: @escaping (ProductPurchaseResult) -> Void)
+    func itemsRestored(purchasedItem: [PurchasedProduct], completion: @escaping (ProductPurchaseResult) -> Void)
+    
 }
 
-public struct Product {
-    public let skProduct: SKProduct
+public struct AvailableProduct {
+    let offerID: String
+    let appleStoreID: String
+    let entitlementID: String //auth id in case of sportsmax
     
-    public init(skProduct: SKProduct) {
-        self.skProduct = skProduct
+    public init(offerID: String, appleStoreID: String, entitlementID: String) {
+        self.offerID = offerID
+        self.appleStoreID = appleStoreID
+        self.entitlementID = entitlementID
     }
 }
+
+public enum ItemState {
+    case purchased
+    case restored
+    case redeemed
+}
+
+public struct PurchasedProduct {
+    let offerID: String
+    let entitlementID: String //auth id in case of sportsmax
+    let transactionID: String?
+    let receipt: String?
+    let productID: String?
+    let redeemCode: String?
+    let state: ItemState
+}
+
