@@ -20,7 +20,7 @@ public enum CAMResult {
 }
 
 public enum AvailableProductsResult {
-    case success(products: [AvailableProduct])
+    case success(products: [AvailableOffer])
     case failure(description: String?)
 }
 
@@ -45,18 +45,6 @@ public protocol CAMDelegate: AnyObject {
     
 }
 
-public struct AvailableProduct {
-    let offerID: String
-    let appleStoreID: String
-    let entitlementID: String //auth id in case of sportsmax
-    
-    public init(offerID: String, appleStoreID: String, entitlementID: String) {
-        self.offerID = offerID
-        self.appleStoreID = appleStoreID
-        self.entitlementID = entitlementID
-    }
-}
-
 public enum ItemState {
     case purchased
     case restored
@@ -64,12 +52,19 @@ public enum ItemState {
 }
 
 public struct PurchasedProduct {
-    let offerID: String
-    let entitlementID: String //auth id in case of sportsmax
+    let itemID: String
     let transactionID: String?
     let receipt: String?
-    let productID: String?
     let redeemCode: String?
     let state: ItemState
 }
 
+public struct AvailableOffer {
+    let entitlementID: String
+    let appleStoreID: String
+    
+    public init(entitlementID: String, appleStoreID: String) {
+        self.entitlementID = entitlementID
+        self.appleStoreID = appleStoreID
+    }
+}
