@@ -101,7 +101,8 @@ class SignUpPresenter {
         view?.showLoadingScreen(true)
         let facebookID = Bundle.main.object(forInfoDictionaryKey: "FacebookAppID") as? String
         let facebookDisplayName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String
-        let facebookClient =  APFacebookSDKClient.facebookSDK(withFacebookAppID: facebookID, andAppDisplayName: facebookDisplayName)
+        let facebookClient = APFacebookSDKClient.facebookSDK(withFacebookAppID: facebookID,
+                                                             andAppDisplayName: facebookDisplayName)
         facebookClient.authorizeFacebook(true, completion: { (isUserLogged, error) in
             if isUserLogged {
                 self.getFacebookUser()

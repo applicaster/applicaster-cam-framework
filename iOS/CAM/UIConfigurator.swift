@@ -13,7 +13,9 @@ extension UIImage {
         let connector = ZAAppConnector.sharedInstance()
         if let image = UIImage(named: asset) {
             return image
-        } else if let image = UIImage(named: asset, in: connector.layoutsStylesDelegate.zappLayoutsStylesBundle(), compatibleWith: nil) {
+        } else if let image = UIImage(named: asset,
+                                      in: connector.layoutsStylesDelegate.zappLayoutsStylesBundle(),
+                                      compatibleWith: nil) {
             return image
         } else if let url = connector.urlDelegate.fileUrl(withName: asset, extension: "png") {
             if let image = UIImage(contentsOfFile: url.path) ?? UIImage(contentsOfFile: url.absoluteString) {

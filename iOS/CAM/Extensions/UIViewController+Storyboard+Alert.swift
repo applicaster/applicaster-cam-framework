@@ -7,16 +7,16 @@
 
 import UIKit
 
-// swiftlint:disable all
-
 public extension UIViewController {
     class func instantiateVC() -> Self {
         return initFromStoryboard()
     }
     
     private class func initFromStoryboard<T>() -> T {
-        let bundle = Bundle(for: T.self as! AnyClass)
-        return UIStoryboard.init(name: String(describing: T.self), bundle: bundle).instantiateViewController(withIdentifier: String(describing: T.self)) as! T
+        let bundle = Bundle(for: T.self as! AnyClass) // swiftlint:disable:this force_cast
+        let storyboard = UIStoryboard(name: String(describing: T.self), bundle: bundle)
+        return storyboard.instantiateViewController(withIdentifier: String(describing: T.self)) as! T
+        // swiftlint:disable:previous force_cast
     }
     
     func showAlert(description: String?) {
@@ -25,13 +25,22 @@ public extension UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
-    func showConfirmationScreen(config: [String: String], titleKey: CAMKeys, descriptionKey: CAMKeys, buttonKey: CAMKeys, action: @escaping () -> Void) {
+    func showConfirmationScreen(config: [String: String],
+                                titleKey: CAMKeys,
+                                descriptionKey: CAMKeys,
+                                buttonKey: CAMKeys,
+                                action: @escaping () -> Void) {
         let confirmationPopover = ConfirmationPopover.nibInstance()
         confirmationPopover.frame = self.view.frame
         confirmationPopover.buttonPressedAction = action
         confirmationPopover.titleLabel.setStyle(config: config, camTextKey: titleKey, style: .confirmationTitleFont)
-        confirmationPopover.descriptionLabel.setStyle(config: config, camTextKey: descriptionKey, style: .confirmationDescriptionFont)
-        confirmationPopover.actionButton.setStyle(config: config, backgroundAsset: .alertButtonImage, camTitleKey: buttonKey, style: .actionButtonFont)
+        confirmationPopover.descriptionLabel.setStyle(config: config,
+                                                      camTextKey: descriptionKey,
+                                                      style: .confirmationDescriptionFont)
+        confirmationPopover.actionButton.setStyle(config: config,
+                                                  backgroundAsset: .alertButtonImage,
+                                                  camTitleKey: buttonKey,
+                                                  style: .actionButtonFont)
         self.view.addSubview(confirmationPopover)
     }
     

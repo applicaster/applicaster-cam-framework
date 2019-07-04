@@ -138,13 +138,16 @@ class SignUpViewController: UIViewController {
         leftSeparatorView.setStyle(asset: CAMKeys.leftSeparatorImage)
         rightSeparatorView.setStyle(asset: CAMKeys.rightSeparatorImage)
         alternateLabel.setStyle(config: configDictionary, camTextKey: .separatorText, style: .separatorFont)
-        socialNetworksLabel.setStyle(config: configDictionary, camTextKey: .alternativeAuthentification, style: .alternativeAuthenticationFont)
-        loginButton.setAttributedStyle(config: configDictionary, attributedTitle: [(style: .promptFont,
-                                                                                    string: configDictionary[CAMKeys.singUpLoginPromtText.rawValue] ?? "",
-                                                                                    additionalAttributes: nil),
-                                                                                   (style: .linkFont,
-                                                                                    string: "\n\(configDictionary[CAMKeys.singUpLoginActionText.rawValue] ?? "")",
-                                                                                    additionalAttributes: nil)])
+        socialNetworksLabel.setStyle(config: configDictionary,
+                                     camTextKey: .alternativeAuthentification,
+                                     style: .alternativeAuthenticationFont)
+        loginButton.setAttributedStyle(config: configDictionary,
+                                       attributedTitle: [(style: .promptFont,
+                                                          string: configDictionary[CAMKeys.singUpLoginPromtText.rawValue] ?? "",
+                                                          additionalAttributes: nil),
+                                                         (style: .linkFont,
+                                                          string: "\n\(configDictionary[CAMKeys.singUpLoginActionText.rawValue] ?? "")",
+                                                            additionalAttributes: nil)])
     }
     
     // MARK: - Keyboard
@@ -154,8 +157,14 @@ class SignUpViewController: UIViewController {
     }
     
     func subscribeKeyboardNotifications() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardNotification(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardNotification(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardNotification(_:)),
+                                               name: UIResponder.keyboardWillShowNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardNotification(_:)),
+                                               name: UIResponder.keyboardWillHideNotification,
+                                               object: nil)
     }
     
     @objc func keyboardNotification(_ notification: NSNotification) {
@@ -219,7 +228,10 @@ extension SignUpViewController: UITableViewDelegate, UITableViewDataSource {
                                                        for: indexPath) as? AuthTableCell else {
                                                         return UITableViewCell()
         }
-        cell.textField.setStyle(config: configDictionary, backgroundAsset: .authFieldImage, style: .inputFieldFont, placeholder: authFields[indexPath.row].hint) 
+        cell.textField.setStyle(config: configDictionary,
+                                backgroundAsset: .authFieldImage,
+                                style: .inputFieldFont,
+                                placeholder: authFields[indexPath.row].hint)
         cell.configureInputField(data: authFields[indexPath.row])
         cell.backgroundColor = .clear
         
@@ -232,7 +244,8 @@ extension SignUpViewController: UITableViewDelegate, UITableViewDataSource {
                                        height: 0)
         cell.showPopover = { [weak self] in
             let bubbleWidth: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 390 : 320
-            self?.showErrorPopover(config: self?.configDictionary ?? [String: String](), message: self?.authFields[indexPath.row].errorDescription,
+            self?.showErrorPopover(config: self?.configDictionary ?? [:],
+                                   message: self?.authFields[indexPath.row].errorDescription,
                                    sourceRect: popoverSourceRect, bubbleWidth: bubbleWidth)
         }
         
@@ -268,7 +281,8 @@ extension SignUpViewController: SignUpViewProtocol {
 }
 
 extension SignUpViewController: UIPopoverPresentationControllerDelegate {
-    func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
+    func adaptivePresentationStyle(for controller: UIPresentationController,
+                                   traitCollection: UITraitCollection) -> UIModalPresentationStyle {
         return .none
     }
 }
