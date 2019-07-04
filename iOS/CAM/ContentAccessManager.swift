@@ -53,12 +53,8 @@ open class ContentAccessManager {
     // MARK: - Private methods
     
     private func startAuthenticationFlow() {
-        if delegate.isUserLogged() == true {
-            finishFlow(true)
-        } else {
-            authenticate { (isUserLogged) in
-                self.finishFlow(isUserLogged)
-            }
+        authenticate { (isUserLogged) in
+            self.finishFlow(isUserLogged)
         }
     }
     
@@ -69,15 +65,15 @@ open class ContentAccessManager {
     }
     
     private func startAuthAndStorefrontFlow() {
-        if delegate.isUserLogged() == true {
-            startStorefrontFlow()
-        } else {
-            authenticate { (isUserLogged) in
-                if isUserLogged == true {
+        authenticate { (isUserLogged) in
+            if isUserLogged == true {
+                if self.delegate.isPurchaseNeeded() {
                     self.startStorefrontFlow()
                 } else {
-                    self.finishFlow(false)
+                    self.finishFlow(true)
                 }
+            } else {
+                self.finishFlow(false)
             }
         }
     }

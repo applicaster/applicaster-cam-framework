@@ -31,7 +31,6 @@ public enum ProductPurchaseResult {
 
 public protocol CAMDelegate: AnyObject {
     func getPluginConfig() -> [String: String]
-    func isUserLogged() -> Bool
     func isPurchaseNeeded() -> Bool
     func facebookLogin(userData: (email: String, userId: String), completion: @escaping (CAMResult) -> Void)
     func facebookSignUp(userData: (email: String, userId: String), completion: @escaping (CAMResult) -> Void)
@@ -51,10 +50,10 @@ public enum ItemState {
     case redeemed
 }
 
-public class PurchasedProduct {
-    var transaction: SKPaymentTransaction?
-    var product: SKProduct?
-    var receipt: String?
-    var redeemCode: String?
-    var state: ItemState = .purchased
+open class PurchasedProduct {
+    public var transaction: SKPaymentTransaction?
+    public var product: SKProduct?
+    public var receipt: String?
+    public var redeemCode: String?
+    public var state: ItemState = .purchased
 }
