@@ -21,7 +21,7 @@ class ViewController: UIViewController, CAMDelegate {
         
     }
     
-    func itemsRestored(purchasedItem: [PurchasedProduct], completion: @escaping (ProductPurchaseResult) -> Void) {
+    func itemsRestored(restoredItems: [PurchasedProduct], completion: @escaping (ProductPurchaseResult) -> Void) {
         
     }
     

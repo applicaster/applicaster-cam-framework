@@ -14,7 +14,7 @@ class EntitlementPickerPresenter {
     weak var coordinatorDelegate: BillingCoordinatorProtocol?
     weak var camDelegate: CAMDelegate?
     weak var view: EntitlementPickerViewController?
-    var availableProducts: [(offer: AvailableOffer, skProduct: SKProduct)] = []
+    var availableProducts: [SKProduct] = []
     
     // MARK: - Public methods
     
@@ -30,45 +30,22 @@ class EntitlementPickerPresenter {
         
         self.view?.viewModel = viewModel
         
-        
         camDelegate?.availableProducts(completion: { [weak self] (result) in
             switch result {
-            case .success(let product):
-                let dictionary = product.reduce([String: AvailableOffer]()) { (dict, item) ->
-                    [String: AvailableOffer] in
-                    var dict = dict
-                    dict[item.appleStoreID] = item
-                    return dict
-                }
-                self?.retrieveStoreProductsFor(products: dictionary, completion: { (availableProducts) in
-                    self?.availableProducts = availableProducts
-                    self?.showOffers()
+            case .success(let productStoreIDs):
+                BillingHelper.sharedInstance.products(Set<String>(productStoreIDs), completion: { (result) in
                     self?.view?.hideLoadingIndicator()
+                    switch result {
+                    case .success(let result):
+                        self?.availableProducts = result.products
+                        self?.showOffers()
+                    case .failure:
+                        self?.showOffers()
+                    }
                 })
             case .failure(let description):
                 self?.view?.showAlert(description: description)
                 self?.view?.hideLoadingIndicator()
-            }
-        })
-    }
-    
-    func retrieveStoreProductsFor(products: [String: AvailableOffer], completion: @escaping ([(offer: AvailableOffer, skProduct: SKProduct)]) -> Void) {
-        let appleIDs = Set<String>(products.keys)
-        BillingHelper.sharedInstance.products(appleIDs, completion: { (result) in
-            switch result {
-            case .success(let data):
-                let result = data.products.reduce([(offer: AvailableOffer, skProduct: SKProduct)]()) { (array, item) ->
-                    [(offer: AvailableOffer, skProduct: SKProduct)] in
-                    var array = array
-                    guard let offer = products[item.productIdentifier] else {
-                        return array
-                    }
-                    array.append((offer: offer, skProduct: item))
-                    return array
-                }
-                completion(result)
-            case .failure:
-                completion([])
             }
         })
     }
@@ -81,10 +58,24 @@ class EntitlementPickerPresenter {
         BillingHelper.sharedInstance.restore { (result) in
             switch result {
             case .success(let response):
-                //self.camDelegate?.itemsRestored(items: response)
-                if self.camDelegate?.isPurchaseNeeded() == true {
-                    self.showConfirmationScreen()
+                let resultArray = response.map {(transaction) -> PurchasedProduct in
+                    let receipt = (BillingHelper.sharedInstance.localReceiptData() ?? Data()).base64EncodedString(options: [])
+                    let item = PurchasedProduct()
+                    item.state = .restored
+                    item.receipt = receipt
+                    item.transaction = transaction
+                    return item
                 }
+                self.camDelegate?.itemsRestored(restoredItems: resultArray, completion: { [weak self] (result) in
+                    switch result {
+                    case .success:
+                        if self?.camDelegate?.isPurchaseNeeded() == true {
+                            self?.showConfirmationScreen()
+                        }
+                    case .failure(let description):
+                        self?.view?.showAlert(description: description)
+                    }
+                })
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -94,12 +85,12 @@ class EntitlementPickerPresenter {
     // MARK: - Private methods
     
     private func showOffers() {
-        let viewModels = availableProducts.map({ (offer, skProduct) -> OfferViewModel in
+        let viewModels = availableProducts.map({ (skProduct) -> OfferViewModel in
             let buyAction = {
                 BillingHelper.sharedInstance.purchase(skProduct, completion: { [weak self] (result) in
                     switch result {
                     case .success(let purchase):
-                        self?.purchaseAction(itemID: offer.entitlementID, item: skProduct, purchase: purchase)
+                        self?.purchaseAction(purchase: purchase)
                     case .failure(let error):
                         print(error.localizedDescription)
                     }
@@ -107,7 +98,6 @@ class EntitlementPickerPresenter {
             }
             
             let redeemAction: () -> Void = { [weak self] in
-                let itemID = offer.entitlementID //used for redeem in cleeng
                 self?.coordinatorDelegate?.showRedeemCodeScreen()
             }
             
@@ -126,14 +116,13 @@ class EntitlementPickerPresenter {
         self.view?.showOffers(viewModels)
     }
     
-    private func purchaseAction(itemID: String, item: SKProduct, purchase: Purchase) {
-        let transactionID = purchase.transaction?.transactionIdentifier
+    private func purchaseAction(purchase: Purchase) {
         let receipt = (BillingHelper.sharedInstance.localReceiptData() ?? Data()).base64EncodedString(options: [])
-        let purchasedItem = PurchasedProduct.init(itemID: itemID,
-                                                  transactionID: transactionID,
-                                                  receipt: receipt,
-                                                  redeemCode: nil,
-                                                  state: .purchased)
+        let purchasedItem = PurchasedProduct()
+        purchasedItem.transaction = purchase.transaction
+        purchasedItem.product = purchase.item
+        purchasedItem.receipt = receipt
+        purchasedItem.state = .purchased
         self.camDelegate?.itemPurchased(purchasedItem: purchasedItem, completion: { [weak self] (result) in
             switch result {
             case .success:
@@ -161,3 +150,4 @@ class EntitlementPickerPresenter {
         })
     }
 }
+

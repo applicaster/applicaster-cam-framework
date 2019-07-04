@@ -20,7 +20,7 @@ public enum CAMResult {
 }
 
 public enum AvailableProductsResult {
-    case success(products: [AvailableOffer])
+    case success(products: [String])
     case failure(description: String?)
 }
 
@@ -41,7 +41,7 @@ public protocol CAMDelegate: AnyObject {
     
     func availableProducts(completion: @escaping (AvailableProductsResult) -> Void)
     func itemPurchased(purchasedItem: PurchasedProduct, completion: @escaping (ProductPurchaseResult) -> Void)
-    func itemsRestored(purchasedItem: [PurchasedProduct], completion: @escaping (ProductPurchaseResult) -> Void)
+    func itemsRestored(restoredItems: [PurchasedProduct], completion: @escaping (ProductPurchaseResult) -> Void)
     
 }
 
@@ -51,20 +51,10 @@ public enum ItemState {
     case redeemed
 }
 
-public struct PurchasedProduct {
-    let itemID: String
-    let transactionID: String?
-    let receipt: String?
-    let redeemCode: String?
-    let state: ItemState
-}
-
-public struct AvailableOffer {
-    let entitlementID: String
-    let appleStoreID: String
-    
-    public init(entitlementID: String, appleStoreID: String) {
-        self.entitlementID = entitlementID
-        self.appleStoreID = appleStoreID
-    }
+public class PurchasedProduct {
+    var transaction: SKPaymentTransaction?
+    var product: SKProduct?
+    var receipt: String?
+    var redeemCode: String?
+    var state: ItemState = .purchased
 }
