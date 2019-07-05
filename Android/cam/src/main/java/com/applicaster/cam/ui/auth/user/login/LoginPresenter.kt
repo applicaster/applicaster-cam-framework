@@ -26,6 +26,7 @@ class LoginPresenter(
     }
 
     override fun onFailure(msg: String) {
+        view?.hideLoadingIndicator()
         view?.showAlert(msg)
     }
 

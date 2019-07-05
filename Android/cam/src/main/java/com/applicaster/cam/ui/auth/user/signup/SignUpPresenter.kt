@@ -14,6 +14,7 @@ class SignUpPresenter(
 ) :
     UserAuthPresenter(view), ISignUpPresenter, SignUpCallback, FacebookAuthCallback {
     override fun onFailure(msg: String) {
+        view?.hideLoadingIndicator()
         view?.showAlert(msg)
     }
 
