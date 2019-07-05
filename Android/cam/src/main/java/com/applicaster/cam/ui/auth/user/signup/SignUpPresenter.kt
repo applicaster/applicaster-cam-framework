@@ -19,9 +19,12 @@ class SignUpPresenter(
 
     override fun onSuccess() {
         view?.hideLoadingIndicator()
-        when (ContentAccessManager.contract.getCamFlow()) {
-            CamFlow.AUTH_AND_STOREFRONT -> navigationRouter.attachBillingFragment()
-            else -> view?.close()
+        if (ContentAccessManager.contract.isPurchaseRequired()) {
+            when (ContentAccessManager.contract.getCamFlow()) {
+                CamFlow.AUTH_AND_STOREFRONT -> navigationRouter.attachBillingFragment()
+                CamFlow.STOREFRONT -> navigationRouter.attachBillingFragment()
+                else -> view?.close()
+            }
         }
     }
 

@@ -8,8 +8,7 @@ interface IContentAccessManager {
 }
 
 /**
- *  Dummy action callbacks
- *  TODO: review during implementation
+ * Actions callbacks
  */
 interface LoginCallback : ActionCallback
 interface SignUpCallback : ActionCallback
@@ -26,5 +25,5 @@ interface EntitlementsLoadCallback {
     fun onSuccess(billingOffers: List<BillingOffer>)
 }
 
-interface RestoreCallback : EntitlementsLoadCallback
+interface RestoreCallback : ActionCallback
 interface PurchaseCallback : ActionCallback
