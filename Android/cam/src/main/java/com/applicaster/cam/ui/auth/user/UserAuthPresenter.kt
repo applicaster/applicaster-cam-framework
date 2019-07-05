@@ -48,6 +48,7 @@ abstract class UserAuthPresenter(private val view: IBaseInputView?) : BaseInputP
      * [FBAuthoriziationListener] auth error
      */
     override fun onError(error: Exception?) {
+        view?.hideLoadingIndicator()
         view?.showAlert(error?.message ?: "Facebook auth failed")
     }
 
