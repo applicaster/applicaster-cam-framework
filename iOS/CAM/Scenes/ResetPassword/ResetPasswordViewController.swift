@@ -176,18 +176,12 @@ extension ResetPasswordViewController: UITableViewDelegate, UITableViewDataSourc
         cell.textField.setStyle(config: configDictionary, backgroundAsset: .authFieldImage, style: .inputFieldFont, placeholder: resetPasswordFields[indexPath.row].hint) 
         cell.configureInputField(data: resetPasswordFields[indexPath.row])
         cell.backgroundColor = .clear
-        
-        let delta: CGFloat = indexPath.row == resetPasswordFields.count - 1 ? 0 : 7
-        let rectOfCell = resetPasswordFieldsTable.rectForRow(at: indexPath)
-        let rectOfCellInSuperview = resetPasswordFieldsTable.convert(rectOfCell, to: self.view)
-        let popoverSourceRect = CGRect(x: (self.view.bounds.width - 390) / 2,
-                                       y: rectOfCellInSuperview.maxY - delta,
-                                       width: 390,
-                                       height: 0)
         cell.showPopover = { [weak self] in
             let bubbleWidth: CGFloat = 320
-            self?.showErrorPopover(config: self?.configDictionary ?? [String: String](), message: self?.resetPasswordFields[indexPath.row].errorDescription,
-                                   sourceRect: popoverSourceRect, bubbleWidth: bubbleWidth)
+            self?.showErrorPopover(config: self?.configDictionary ?? [String: String](),
+                                   message: self?.resetPasswordFields[indexPath.row].errorDescription,
+                                   bubbleWidth: bubbleWidth,
+                                   sourceView: cell)
         }
         
         cell.textChanged = { [weak self] text in

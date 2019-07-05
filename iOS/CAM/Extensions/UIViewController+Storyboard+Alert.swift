@@ -35,18 +35,18 @@ public extension UIViewController {
         self.view.addSubview(confirmationPopover)
     }
     
-    func showErrorPopover(config: [String: String], message: String?, sourceRect: CGRect, bubbleWidth: CGFloat) {
+    func showErrorPopover(config: [String: String], message: String?, bubbleWidth: CGFloat, sourceView: UITableViewCell) {
         let controller = ErrorPopoverViewController.instantiateVC()
         controller.modalPresentationStyle = .popover
-        controller.preferredContentSize = CGSize(width: bubbleWidth, height: 90)
+        controller.preferredContentSize = CGSize(width: bubbleWidth + 86, height: 90)
         if let popoverPresentationController = controller.popoverPresentationController {
             if let delegate = self as? UIPopoverPresentationControllerDelegate {
                 popoverPresentationController.delegate = delegate
             }
-            popoverPresentationController.sourceView = self.view
+            popoverPresentationController.sourceView = sourceView
             popoverPresentationController.permittedArrowDirections = .up
             popoverPresentationController.popoverBackgroundViewClass = ErrorPopoverBackgroundView.self
-            popoverPresentationController.sourceRect = sourceRect
+            popoverPresentationController.sourceRect = CGRect(x: sourceView.bounds.width / 2, y: 40, width: 0, height: 0)
             present(controller, animated: true, completion: {
                 controller.messageLabel.setStyle(config: config, style: .inputFieldFont)
                 controller.messageLabel.text = message
