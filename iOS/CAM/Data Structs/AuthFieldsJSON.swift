@@ -33,8 +33,8 @@ enum AuthFieldInputType: String, Codable {
 }
 
 enum AuthFieldState: String, Codable {
-    case none = "none"
-    case error = "error"
+    case none
+    case error
     case unknown
     
     public init(from decoder: Decoder) throws {

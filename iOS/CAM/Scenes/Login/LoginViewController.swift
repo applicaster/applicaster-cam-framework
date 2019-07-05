@@ -238,18 +238,12 @@ extension LoginViewController: UITableViewDelegate, UITableViewDataSource {
         cell.textField.setStyle(config: configDictionary, backgroundAsset: .authFieldImage, style: .inputFieldFont, placeholder: authFields[indexPath.row].hint) 
         cell.configureInputField(data: authFields[indexPath.row])
         cell.backgroundColor = .clear
-        
-        let delta: CGFloat = indexPath.row == authFields.count - 1 ? 0 : 7
-        let rectOfCell = authFieldsTable.rectForRow(at: indexPath)
-        let rectOfCellInSuperview = authFieldsTable.convert(rectOfCell, to: self.view)
-        let popoverSourceRect = CGRect(x: (self.view.bounds.width - 390) / 2,
-                                       y: rectOfCellInSuperview.maxY - delta,
-                                       width: 390,
-                                       height: 0)
         cell.showPopover = { [weak self] in
             let bubbleWidth: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 390 : 320
-            self?.showErrorPopover(config: self?.configDictionary ?? [String: String](), message: self?.authFields[indexPath.row].errorDescription,
-                                   sourceRect: popoverSourceRect, bubbleWidth: bubbleWidth)
+            self?.showErrorPopover(config: self?.configDictionary ?? [String: String](),
+                                   message: self?.authFields[indexPath.row].errorDescription,
+                                   bubbleWidth: bubbleWidth,
+                                   sourceView: cell)
         }
         
         cell.textChanged = { [weak self] text in
