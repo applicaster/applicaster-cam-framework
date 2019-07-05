@@ -82,7 +82,6 @@ abstract class BaseFragment : Fragment(), IBaseView {
         context?.apply {
             val builder = AlertDialog.Builder(this)
             builder
-                .setTitle("Sample error title")
                 .setMessage(msg)
                 .setPositiveButton(getString(R.string.lbl_okay)) { dialog, _ -> dialog.dismiss() }
                 .create().apply {
