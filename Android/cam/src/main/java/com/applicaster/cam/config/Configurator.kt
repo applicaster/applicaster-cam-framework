@@ -17,6 +17,8 @@ interface Configurator {
 
     fun getNotValidEmailInputFieldError(): String
 
+    fun getDefaultAlertText(): String
+
     fun isAuthRestoreRequired(): Boolean
 
     fun isPasswordResetRequired(): Boolean

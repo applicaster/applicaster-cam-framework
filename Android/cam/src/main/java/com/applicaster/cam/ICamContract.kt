@@ -16,15 +16,15 @@ interface ICamContract {
 
     fun signupWithFacebook(email: String, id: String, callback: FacebookAuthCallback)
 
-    fun onItemPurchased(purchase: Purchase, authId: String)
+    fun onItemPurchased(purchase: List<Purchase>, callback: PurchaseCallback)
 
-    fun onPurchasesRestored(callback: RestoreCallback)
+    fun onPurchasesRestored(purchases: List<Purchase>, callback: RestoreCallback)
 
     fun loadEntitlements(callback: EntitlementsLoadCallback) //get purchase id (and corresponding data)
 
     fun isUserLogged(): Boolean
 
-    fun isPurchaseRequired(entitlements: List<String>): Boolean
+    fun isPurchaseRequired(): Boolean
 
     fun getPluginConfig(): Map<String, String>
 

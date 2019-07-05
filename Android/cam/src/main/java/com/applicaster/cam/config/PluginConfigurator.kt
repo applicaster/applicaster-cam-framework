@@ -39,6 +39,8 @@ class PluginConfigurator(private val pluginConfig: Map<String, String>) : Config
 
     override fun getNotValidEmailInputFieldError() = pluginConfig.getValue(KEY_NOT_VALID_EMAIL_INPUT_FIELD_ERROR)
 
+    override fun getDefaultAlertText(): String = pluginConfig.getValue(KEY_DEFAULT_ALERT_TEXT)
+
     override fun isAuthRestoreRequired() =
         false
 
@@ -67,3 +69,4 @@ const val KEY_DEFAULT_AUTH_SCREEN = "default_login_screen"
 const val KEY_FACEBOOK_LOGIN_REQ = "facebook_login_required"
 const val KEY_EMPTY_INPUT_FIELD_ERROR = "required_field_alert_text"
 const val KEY_NOT_VALID_EMAIL_INPUT_FIELD_ERROR = "invalid_email_alert_text"
+const val KEY_DEFAULT_ALERT_TEXT = "default_alert_text"
