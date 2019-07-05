@@ -26,6 +26,8 @@ class SignUpPresenter(
                 CamFlow.STOREFRONT -> navigationRouter.attachBillingFragment()
                 else -> view?.close()
             }
+        } else {
+            view?.close()
         }
     }
 
