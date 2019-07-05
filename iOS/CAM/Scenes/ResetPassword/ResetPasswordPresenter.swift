@@ -45,9 +45,9 @@ class ResetPasswordPresenter {
                 switch result {
                 case .success:
                     self.view?.showConfirmationScreenIfNeeded()
-                case .failure(let description):
+                case .failure(let error):
                     self.view?.showLoadingScreen(false)
-                    self.view?.showError(description: description)
+                    self.view?.showError(description: error.localizedDescription)
                 }
             })
         } else {

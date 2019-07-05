@@ -14,34 +14,19 @@ public enum CAMDefaultAuthScreen {
     case registration
 }
 
-public enum CAMResult {
-    case success
-    case failure(description: String?)
-}
-
-public enum AvailableProductsResult {
-    case success(products: [String])
-    case failure(description: String?)
-}
-
-public enum ProductPurchaseResult {
-    case success
-    case failure(description: String?)
-}
-
 public protocol CAMDelegate: AnyObject {
     func getPluginConfig() -> [String: String]
     func isUserLogged() -> Bool
     func isPurchaseNeeded() -> Bool
-    func facebookLogin(userData: (email: String, userId: String), completion: @escaping (CAMResult) -> Void)
-    func facebookSignUp(userData: (email: String, userId: String), completion: @escaping (CAMResult) -> Void)
-    func login(authData: [String: String], completion: @escaping (CAMResult) -> Void)
-    func signUp(authData: [String: String], completion: @escaping (CAMResult) -> Void)
-    func resetPassword(data: [String: String], completion: @escaping (CAMResult) -> Void)
+    func facebookLogin(userData: (email: String, userId: String), completion: @escaping (LoginResult) -> Void)
+    func facebookSignUp(userData: (email: String, userId: String), completion: @escaping (SignupResult) -> Void)
+    func login(authData: [String: String], completion: @escaping (LoginResult) -> Void)
+    func signUp(authData: [String: String], completion: @escaping (SignupResult) -> Void)
+    func resetPassword(data: [String: String], completion: @escaping (Result<Void>) -> Void)
     
     func availableProducts(completion: @escaping (AvailableProductsResult) -> Void)
-    func itemPurchased(purchasedItem: PurchasedProduct, completion: @escaping (ProductPurchaseResult) -> Void)
-    func itemsRestored(restoredItems: [PurchasedProduct], completion: @escaping (ProductPurchaseResult) -> Void)
+    func itemPurchased(purchasedItem: PurchasedProduct, completion: @escaping (PurchaseResult) -> Void)
+    func itemsRestored(restoredItems: [PurchasedProduct], completion: @escaping (PurchaseResult) -> Void)
     
 }
 
