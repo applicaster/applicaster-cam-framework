@@ -72,9 +72,9 @@ class PluginUIProvider(
                 context.resources.getDrawable(drawableId)
         } else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-                context.resources.getDrawable(R.drawable.btn_dummy, context.theme)
+                context.resources.getDrawable(R.drawable.dummy_drawable, context.theme)
             else
-                context.resources.getDrawable(R.drawable.btn_dummy)
+                context.resources.getDrawable(R.drawable.dummy_drawable)
         }
     }
 
