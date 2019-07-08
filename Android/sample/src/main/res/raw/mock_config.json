@@ -3,8 +3,6 @@
   "app_level_entitlements":"",
   "default_login_screen":"Login",
 
-  "facebook_login_required": "true",
-
   "default_alert_text":"An error occurred trying to process your request. Please go back and try again.",
   "design_assets":"",
 

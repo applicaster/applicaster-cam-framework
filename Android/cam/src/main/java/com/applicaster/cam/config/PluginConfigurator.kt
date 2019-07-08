@@ -11,7 +11,8 @@ class PluginConfigurator(private val pluginConfig: Map<String, String>) : Config
         AuthScreenType.fromKey(pluginConfig.getValue(KEY_DEFAULT_AUTH_SCREEN))
 
     override fun isFacebookLoginRequired() =
-        pluginConfig.getValue(KEY_FACEBOOK_LOGIN_REQ).toBoolean()
+        KEY_ALT_AUTH_PROMPT in pluginConfig
+                && KEY_ALT_AUTH_SEPARATOR in pluginConfig
 
     /**
      * Check if need to show auth restore UI element on login screen depending on screen configs
@@ -66,7 +67,8 @@ class PluginConfigurator(private val pluginConfig: Map<String, String>) : Config
 
 const val KEY_AUTH_FIELDS = "authentication_input_fields"
 const val KEY_DEFAULT_AUTH_SCREEN = "default_login_screen"
-const val KEY_FACEBOOK_LOGIN_REQ = "facebook_login_required"
+const val KEY_ALT_AUTH_PROMPT = "alternative_authentication_prompt_text"
+const val KEY_ALT_AUTH_SEPARATOR = "alternative_authentication_separator_text"
 const val KEY_EMPTY_INPUT_FIELD_ERROR = "required_field_alert_text"
 const val KEY_NOT_VALID_EMAIL_INPUT_FIELD_ERROR = "invalid_email_alert_text"
 const val KEY_DEFAULT_ALERT_TEXT = "default_alert_text"
