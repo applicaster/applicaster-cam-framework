@@ -13,7 +13,7 @@ public enum Result<Success> {
 }
 
 extension Result where Success == Void {
-    static var success: Result {
+    public static var success: Result {
         return .success(())
     }
 }
