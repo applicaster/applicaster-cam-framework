@@ -57,9 +57,9 @@ class SignUpPresenter {
                 switch result {
                 case .success:
                     self.coordinatorDelegate?.finishAuthorizationFlow(isUserLogged: true)
-                case .failure(let description):
+                case .failure(let error):
                     self.view?.showLoadingScreen(false)
-                    self.view?.showError(description: description)
+                    self.view?.showError(description: error.localizedDescription)
                 }
             })
         } else {
@@ -101,7 +101,8 @@ class SignUpPresenter {
         view?.showLoadingScreen(true)
         let facebookID = Bundle.main.object(forInfoDictionaryKey: "FacebookAppID") as? String
         let facebookDisplayName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String
-        let facebookClient =  APFacebookSDKClient.facebookSDK(withFacebookAppID: facebookID, andAppDisplayName: facebookDisplayName)
+        let facebookClient = APFacebookSDKClient.facebookSDK(withFacebookAppID: facebookID,
+                                                             andAppDisplayName: facebookDisplayName)
         facebookClient.authorizeFacebook(true, completion: { (isUserLogged, error) in
             if isUserLogged {
                 self.getFacebookUser()
@@ -132,8 +133,8 @@ class SignUpPresenter {
             switch result {
             case .success:
                 self.coordinatorDelegate?.finishAuthorizationFlow(isUserLogged: true)
-            case .failure(description: let description):
-                self.view?.showError(description: description)
+            case .failure(let error):
+                self.view?.showError(description: error.localizedDescription)
             }
         })
     }

@@ -61,9 +61,9 @@ class LoginPresenter {
                 switch result {
                 case .success:
                     self.coordinatorDelegate?.finishAuthorizationFlow(isUserLogged: true)
-                case .failure(let description):
+                case .failure(let error):
                     self.view?.showLoadingScreen(false)
-                    self.view?.showError(description: description)
+                    self.view?.showError(description: error.localizedDescription)
                 }
             })
         } else {
@@ -136,8 +136,8 @@ class LoginPresenter {
             switch result {
             case .success:
                 self.coordinatorDelegate?.finishAuthorizationFlow(isUserLogged: true)
-            case .failure(description: let description):
-                self.view?.showError(description: description)
+            case .failure(let error):
+                self.view?.showError(description: error.localizedDescription)
             }
         })
     }

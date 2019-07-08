@@ -43,8 +43,8 @@ class EntitlementPickerPresenter {
                         self?.showOffers()
                     }
                 })
-            case .failure(let description):
-                self?.view?.showAlert(description: description)
+            case .failure(let error):
+                self?.view?.showAlert(description: error.localizedDescription)
                 self?.view?.hideLoadingIndicator()
             }
         })
@@ -72,8 +72,8 @@ class EntitlementPickerPresenter {
                         if self?.camDelegate?.isPurchaseNeeded() == true {
                             self?.showConfirmationScreen()
                         }
-                    case .failure(let description):
-                        self?.view?.showAlert(description: description)
+                    case .failure(let error):
+                        self?.view?.showAlert(description: error.localizedDescription)
                     }
                 })
             case .failure(let error):
@@ -127,8 +127,8 @@ class EntitlementPickerPresenter {
             switch result {
             case .success:
                 self?.showConfirmationScreen()
-            case .failure(let description):
-                self?.view?.showAlert(description: description)
+            case .failure(let error):
+                self?.view?.showAlert(description: error.localizedDescription)
             }
         })
     }

@@ -8,8 +8,6 @@
 
 import UIKit
 
-// swiftlint:disable all
-
 extension UIView {
     
     class func nibInstance() -> Self {
@@ -17,9 +15,9 @@ extension UIView {
     }
     
     private class func initFromNib<T>() -> T {
-        let bundle = Bundle(for: T.self as! AnyClass)
+        let bundle = Bundle(for: T.self as! AnyClass) // swiftlint:disable:this force_cast
         return bundle.loadNibNamed(String(describing: self),
                                    owner: nil,
-                                   options: nil)?[0] as! T
+                                   options: nil)?[0] as! T // swiftlint:disable:this force_cast
     }
 }
