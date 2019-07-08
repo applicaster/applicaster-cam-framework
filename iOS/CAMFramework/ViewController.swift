@@ -17,23 +17,23 @@ class ViewController: UIViewController, CAMDelegate {
         
     }
     
-    func itemPurchased(purchasedItem: PurchasedProduct, completion: @escaping (ProductPurchaseResult) -> Void) {
+    func itemPurchased(purchasedItem: PurchasedProduct, completion: @escaping (PurchaseResult) -> Void) {
         
     }
     
-    func itemsRestored(restoredItems: [PurchasedProduct], completion: @escaping (ProductPurchaseResult) -> Void) {
+    func itemsRestored(restoredItems: [PurchasedProduct], completion: @escaping (PurchaseResult) -> Void) {
         
     }
     
-    func facebookSignUp(userData: (email: String, userId: String), completion: @escaping (CAMResult) -> Void) {
+    func facebookSignUp(userData: (email: String, userId: String), completion: @escaping (SignupResult) -> Void) {
         completion(.success)
     }
     
-    func facebookLogin(userData: (email: String, userId: String), completion: @escaping (CAMResult) -> Void) {
-        completion(.failure(description: "Test"))
+    func facebookLogin(userData: (email: String, userId: String), completion: @escaping (LoginResult) -> Void) {
+//        completion(.failure(description: "Test"))
     }
     
-    func resetPassword(data: [String: String], completion: @escaping (CAMResult) -> Void) {
+    func resetPassword(data: [String: String], completion: @escaping (Result<Void>) -> Void) {
         completion(.success)
     }
     
@@ -43,13 +43,13 @@ class ViewController: UIViewController, CAMDelegate {
     let myConnector = MyConnector()
     
     
-    func login(authData: [String: String], completion: @escaping (CAMResult) -> Void) {
+    func login(authData: [String: String], completion: @escaping (LoginResult) -> Void) {
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
             completion(.success)
         })
     }
     
-    func signUp(authData: [String: String], completion: @escaping (CAMResult) -> Void) {
+    func signUp(authData: [String: String], completion: @escaping (SignupResult) -> Void) {
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
             completion(.success)
         })
