@@ -16,9 +16,9 @@ class PluginUIProvider(
     override fun getText(key: String): String {
         return let {
             if (pluginConfig.containsKey(key)) {
-                pluginConfig[key] ?: context.getString(R.string.default_text)
+                pluginConfig[key].orEmpty()
             } else {
-                context.getString(R.string.default_text)
+                ""
             }
         }
     }
