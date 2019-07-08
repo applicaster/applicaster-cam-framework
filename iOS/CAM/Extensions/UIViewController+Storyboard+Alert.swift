@@ -29,6 +29,7 @@ public extension UIViewController {
         let confirmationPopover = ConfirmationPopover.nibInstance()
         confirmationPopover.frame = self.view.frame
         confirmationPopover.buttonPressedAction = action
+        confirmationPopover.confirmationPopoverBackground.setStyle(asset: .alertBackgroundImage)
         confirmationPopover.titleLabel.setStyle(config: config, camTextKey: titleKey, style: .confirmationTitleFont)
         confirmationPopover.descriptionLabel.setStyle(config: config, camTextKey: descriptionKey, style: .confirmationDescriptionFont)
         confirmationPopover.actionButton.setStyle(config: config, backgroundAsset: .alertButtonImage, camTitleKey: buttonKey, style: .actionButtonFont)

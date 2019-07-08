@@ -132,7 +132,7 @@ class SignUpViewController: UIViewController {
         logoImageView.setStyle(asset: .headerLogoImage)
         titleLabel.setStyle(config: configDictionary, camTextKey: .signUpScreenTitleText, style: .screenTitleFont)
         signUpButton.setStyle(config: configDictionary,
-                              backgroundAsset: .signUpButtonImage,
+                              backgroundAsset: .actionButtonImage,
                               camTitleKey: .signUpButtonText,
                               style: .actionButtonFont)
         leftSeparatorView.setStyle(asset: CAMKeys.leftSeparatorImage)

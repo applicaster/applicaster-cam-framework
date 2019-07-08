@@ -59,7 +59,7 @@ class ResetPasswordViewController: UIViewController {
         infoLabel.setStyle(config: configDictionary, camTextKey: .passwordResetInfoText,
                                style: .screenDescriptionFont)
         resetButton.setStyle(config: configDictionary,
-                             backgroundAsset: .passwordResetButtonImage,
+                             backgroundAsset: .actionButtonImage,
                              camTitleKey: .passwordResetButtonText,
                              style: .actionButtonFont)
     }

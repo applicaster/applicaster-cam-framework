@@ -10,6 +10,7 @@ import UIKit
 
 class ConfirmationPopover: UIView {
 
+    @IBOutlet weak var confirmationPopoverBackground: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var actionButton: UIButton!

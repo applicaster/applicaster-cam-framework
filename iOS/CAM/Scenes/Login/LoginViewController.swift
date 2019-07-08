@@ -129,7 +129,7 @@ class LoginViewController: UIViewController {
         backButton.setStyle(iconAsset: .backButtonImage)
         logoImageView.setStyle(asset: .headerLogoImage)
         titleLabel.setStyle(config: configDictionary, camTextKey: .loginScreenTitleText, style: .screenTitleFont)
-        loginButton.setStyle(config: configDictionary, backgroundAsset: .loginButtonImage, camTitleKey: .loginButtonText, style: CAMStyles.actionButtonFont)
+        loginButton.setStyle(config: configDictionary, backgroundAsset: .actionButtonImage, camTitleKey: .loginButtonText, style: CAMStyles.actionButtonFont)
         resetPasswordButton.setStyle(config: configDictionary, camTitleKey: .loginResetPasswordButtonText, style: CAMStyles.resetPasswordFont)
         leftSeparatorView.setStyle(asset: .leftSeparatorImage)
         rightSeparatorView.setStyle(asset: .rightSeparatorImage)
