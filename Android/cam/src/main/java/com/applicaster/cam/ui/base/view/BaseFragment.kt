@@ -2,6 +2,8 @@ package com.applicaster.cam.ui.base.view
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AlertDialog
@@ -96,6 +98,7 @@ abstract class BaseFragment : Fragment(), IBaseView {
                 val builder = AlertDialog.Builder(this)
                 builder.setView(R.layout.layout_progress)
                 progressDialog = builder.create()
+                progressDialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             }
             progressDialog?.show()
         }
