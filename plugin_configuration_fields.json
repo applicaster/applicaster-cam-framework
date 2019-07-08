@@ -688,34 +688,34 @@
         "tooltip": "The font used in the description of confirmation screens (below the title and above the button)",
         "folded": true,
         "fields": [
-      {
-        "key": "confirmation_description_font_ios",
-        "type": "ios_font_selector",
-        "label_tooltip": "The font used in the description of confirmation screens (below the title and above the button)"
-      },
-      {
-        "key": "confirmation_description_font_android",
-        "type": "android_font_selector",
-        "label_tooltip": "The font used in the description of confirmation screens (below the title and above the button)"
-      },
-      {
-        "key": "confirmation_description_size_phone",
-        "type": "number_input",
-        "label_tooltip": "The font-size used in the description of confirmation screens (below the title and above the button)",
-        "initial_value": "20"
-      },
-      {
-        "key": "confirmation_description_size_pad",
-        "type": "number_input",
-        "label_tooltip": "The font-size used in the description of confirmation screens (below the title and above the button)",
-        "initial_value": "20"
-      },
-      {
-        "key": "confirmation_description_color",
-        "type": "color_picker",
-        "label_tooltip": "The font-color used in the description of confirmation screens (below the title and above the button)",
-        "initial_value": "#000000"
-      }
+          {
+            "key": "confirmation_description_font_ios",
+            "type": "ios_font_selector",
+            "label_tooltip": "The font used in the description of confirmation screens (below the title and above the button)"
+          },
+          {
+            "key": "confirmation_description_font_android",
+            "type": "android_font_selector",
+            "label_tooltip": "The font used in the description of confirmation screens (below the title and above the button)"
+          },
+          {
+            "key": "confirmation_description_size_phone",
+            "type": "number_input",
+            "label_tooltip": "The font-size used in the description of confirmation screens (below the title and above the button)",
+            "initial_value": "20"
+          },
+          {
+            "key": "confirmation_description_size_pad",
+            "type": "number_input",
+            "label_tooltip": "The font-size used in the description of confirmation screens (below the title and above the button)",
+            "initial_value": "20"
+          },
+          {
+            "key": "confirmation_description_color",
+            "type": "color_picker",
+            "label_tooltip": "The font-color used in the description of confirmation screens (below the title and above the button)",
+            "initial_value": "#000000"
+          }
         ]
       },
       {
@@ -730,34 +730,34 @@
         "tooltip": "The font for the Confirmation Button Text",
         "folded": true,
         "fields": [
-      {
-        "key": "confirmation_button_font_ios",
-        "type": "ios_font_selector",
-        "label_tooltip": "The font for the Confirmation Button Text"
-      },
-      {
-        "key": "confirmation_button_font_android",
-        "type": "android_font_selector",
-        "label_tooltip": "The font for the Confirmation Button Text"
-      },
-      {
-        "key": "confirmation_button_size_phone",
-        "type": "number_input",
-        "label_tooltip": "The font-size for the Confirmation Button Text",
-        "initial_value": "14"
-      },
-      {
-        "key": "confirmation_button_size_pad",
-        "type": "number_input",
-        "label_tooltip": "The font-size for the Confirmation Button Text",
-        "initial_value": "14"
-      },
-      {
-        "key": "confirmation_button_color",
-        "type": "color_picker",
-        "label_tooltip": "The font-color for the Confirmation Button Text",
-        "initial_value": "#ffffff"
-      }
+          {
+            "key": "confirmation_button_font_ios",
+            "type": "ios_font_selector",
+            "label_tooltip": "The font for the Confirmation Button Text"
+          },
+          {
+            "key": "confirmation_button_font_android",
+            "type": "android_font_selector",
+            "label_tooltip": "The font for the Confirmation Button Text"
+          },
+          {
+            "key": "confirmation_button_size_phone",
+            "type": "number_input",
+            "label_tooltip": "The font-size for the Confirmation Button Text",
+            "initial_value": "14"
+          },
+          {
+            "key": "confirmation_button_size_pad",
+            "type": "number_input",
+            "label_tooltip": "The font-size for the Confirmation Button Text",
+            "initial_value": "14"
+          },
+          {
+            "key": "confirmation_button_color",
+            "type": "color_picker",
+            "label_tooltip": "The font-color for the Confirmation Button Text",
+            "initial_value": "#ffffff"
+          }
         ]
       },
       {
