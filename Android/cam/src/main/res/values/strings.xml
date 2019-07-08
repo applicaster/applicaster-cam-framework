@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">cam</string>
     <string name="tv_billing_default_text">Dummy text</string>
-    <string name="default_text">dummy text</string>
     <string name="lbl_okay">Okay</string>
 </resources>
