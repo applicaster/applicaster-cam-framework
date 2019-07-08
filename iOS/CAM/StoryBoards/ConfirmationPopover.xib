@@ -19,6 +19,9 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e70-Px-aVd">
                     <rect key="frame" x="341" y="512" width="342" height="342"/>
                     <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YfF-9v-0k4">
+                            <rect key="frame" x="0.0" y="0.0" width="342" height="342"/>
+                        </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password has been delivered!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tNd-eO-N1C">
                             <rect key="frame" x="10" y="49" width="322" height="70"/>
                             <constraints>
@@ -78,8 +81,9 @@
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
+                        <constraint firstAttribute="trailing" secondItem="YfF-9v-0k4" secondAttribute="trailing" id="19E-Ml-2rO"/>
                         <constraint firstItem="fbv-7q-htk" firstAttribute="centerX" secondItem="e70-Px-aVd" secondAttribute="centerX" id="3Q6-HZ-oJN"/>
                         <constraint firstItem="tNd-eO-N1C" firstAttribute="leading" secondItem="e70-Px-aVd" secondAttribute="leading" constant="10" id="6If-XS-IS1"/>
                         <constraint firstAttribute="trailing" secondItem="tNd-eO-N1C" secondAttribute="trailing" constant="10" id="AD4-ch-H36"/>
@@ -90,7 +94,10 @@
                         <constraint firstItem="ZwF-LA-Cup" firstAttribute="centerX" secondItem="e70-Px-aVd" secondAttribute="centerX" id="EqA-f2-Isg"/>
                         <constraint firstAttribute="trailing" secondItem="fbv-7q-htk" secondAttribute="trailing" constant="28" id="Fkd-dQ-sHx"/>
                         <constraint firstItem="fbv-7q-htk" firstAttribute="leading" secondItem="e70-Px-aVd" secondAttribute="leading" constant="22" id="I9i-HS-LEu"/>
+                        <constraint firstAttribute="bottom" secondItem="YfF-9v-0k4" secondAttribute="bottom" id="SnI-7S-N5d"/>
                         <constraint firstItem="ZwF-LA-Cup" firstAttribute="top" secondItem="fbv-7q-htk" secondAttribute="bottom" constant="20" id="ThB-sK-eA2"/>
+                        <constraint firstItem="YfF-9v-0k4" firstAttribute="top" secondItem="e70-Px-aVd" secondAttribute="top" id="UrY-Aa-Vwb"/>
+                        <constraint firstItem="YfF-9v-0k4" firstAttribute="leading" secondItem="e70-Px-aVd" secondAttribute="leading" id="gGH-5Z-aac"/>
                         <constraint firstAttribute="height" constant="373" id="hKy-L3-ETj">
                             <variation key="heightClass=regular-widthClass=regular" constant="342"/>
                         </constraint>
@@ -139,6 +146,7 @@
             <viewLayoutGuide key="safeArea" id="clo-BB-NU4"/>
             <connections>
                 <outlet property="actionButton" destination="ZwF-LA-Cup" id="xlF-de-o7B"/>
+                <outlet property="confirmationPopoverBackground" destination="YfF-9v-0k4" id="uEL-Z6-ugA"/>
                 <outlet property="descriptionLabel" destination="fbv-7q-htk" id="148-GL-CHW"/>
                 <outlet property="titleLabel" destination="tNd-eO-N1C" id="Vch-yg-2A1"/>
             </connections>
