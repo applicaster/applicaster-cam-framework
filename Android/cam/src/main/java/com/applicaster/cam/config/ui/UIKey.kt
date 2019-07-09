@@ -2,7 +2,6 @@ package com.applicaster.cam.config.ui
 
 enum class UIKey(
     val text: String? = null,
-    val hint: String? = null,
     val textStyle: StyleKey? = null,
     val image: String? = null
 ) {
@@ -33,7 +32,7 @@ enum class UIKey(
 
     PASSWORD_RESET_TITLE_TEXT(text = UI_KEY_PWD_RESET_TITLE_TEXT, textStyle = StyleKey.SCREEN_TITLE),
     PASSWORD_RESET_DESC_TEXT(text = UI_KEY_PWD_RESET_DESC_TEXT, textStyle = StyleKey.SCREEN_DESC),
-    PASSWORD_RESET_ACTION_BUTTON(text = UI_KEY_PWD_RESET_BUTTON_TEXT, image = UI_KEY_PWD_RESET_BUTTON_IMAGE, textStyle = StyleKey.ACTION_BUTTON),
+    PASSWORD_RESET_ACTION_BUTTON(text = UI_KEY_PWD_RESET_BUTTON_TEXT, textStyle = StyleKey.ACTION_BUTTON, image = UI_KEY_PWD_RESET_BUTTON_IMAGE),
     BILLING_ITEM_SUBS_BUTTON(text = UI_KEY_BILLING_ITEM_SUBS_BUTTON_TEXT, textStyle = StyleKey.ACTION_BUTTON, image = UI_KEY_BILLING_ITEM_SUBS_BUTTON_IMAGE),
 
     BILLING_ITEM_PARENT(image = UI_KEY_BILLING_ITEM_IMAGE),
@@ -46,7 +45,7 @@ enum class UIKey(
 
     CONFIRMATION_DIALOG_IMAGE(image = UI_KEY_ALERT_COMPONENT_IMAGE),
     BILLING_CONFIRMATION_TITLE_TEXT(text = UI_KEY_PAYMENT_CONFIRMATION_TITLE_TEXT, textStyle = StyleKey.CONFIRMATION_TITLE),
-    BILLING_CONFIRMATION_DESC_TEXT(text = UI_KEY_PAYMENT_CONFIRMATION_DESC_TEXT, textStyle =StyleKey.CONFIRMATION_DESC),
+    BILLING_CONFIRMATION_DESC_TEXT(text = UI_KEY_PAYMENT_CONFIRMATION_DESC_TEXT, textStyle = StyleKey.CONFIRMATION_DESC),
     BILLING_CONFIRMATION_BUTTON_TEXT(text = UI_KEY_PAYMENT_CONFIRMATION_BUTTON_TEXT, textStyle = StyleKey.ACTION_BUTTON, image = UI_KEY_ALERT_BUTTON_IMAGE),
 
     RESET_PWD_CONFIRMATION_IMAGE(image = UI_KEY_ALERT_COMPONENT_IMAGE),
@@ -90,7 +89,6 @@ const val UI_KEY_INPUT_FIELD_IMAGE = "input_field_asset"
 const val UI_KEY_INPUT_ERROR_IMAGE = "input_alert_indicator"
 const val UI_KEY_VALIDATION_PARENT_IMAGE = "field_alert_bubble_shadow"
 const val UI_KEY_VALIDATION_BUBBLE_IMAGE = "field_alert_bubble"
-const val UI_KEY_VALIDATION_BUBBLE_TEXT_STYLE = "invalid_input_text"
 const val UI_KEY_FACEBOOK_IMAGE = "icon_1"
 // endregion
 
