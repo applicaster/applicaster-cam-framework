@@ -8,10 +8,6 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="AppTheme.WhiteAccent" parent="AppTheme">
-        <item name="colorAccent">@color/white</item>
-    </style>
-
     <!-- Default style for text -->
     <style name="DefaultTextStyle">
         <item name="android:textSize">12sp</item>
