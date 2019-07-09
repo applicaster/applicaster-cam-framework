@@ -8,6 +8,7 @@
     <dimen name="toolbar_logo_height">44dp</dimen>
     <dimen name="confirmation_layout_width">342dp</dimen>
     <dimen name="confirmation_layout_height">342dp</dimen>
+    <dimen name="loading_indicator_size">70dp</dimen>
 
     <!--Auth-->
     <dimen name="auth_et_width">250dp</dimen>
