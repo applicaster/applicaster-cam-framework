@@ -9,17 +9,17 @@ import UIKit
 
 class ViewControllerFactory {
     
-    static func createLoginScreen(pluginDataProvider: PluginDataProviderProtocol?,
+    static func createLoginScreen(pluginDataProvider: PluginDataProviderProtocol,
                                   isRoot: Bool,
                                   authCoordinator: AuthorizationCoordinatorProtocol) -> LoginViewController {
         let loginVC = LoginViewController.instantiateVC()
-        let presenter = LoginPresenter()
+        let presenter = LoginPresenter(view: loginVC,
+                                       coordinatorDelegate: authCoordinator,
+                                       camDelegate: pluginDataProvider.getCamDelegate())
+        presenter.isRoot = isRoot
+        
         loginVC.presenter = presenter
         
-        presenter.view = loginVC
-        presenter.coordinatorDelegate = authCoordinator
-        presenter.camDelegate = pluginDataProvider?.getCamDelegate()
-        presenter.isRoot = isRoot
         return loginVC
     }
     
