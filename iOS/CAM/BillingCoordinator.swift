@@ -8,14 +8,14 @@
 
 import Foundation
 
-protocol BillingCoordinatorProtocol: AnyObject {
+protocol BillingCoordinatorProtocol: Coordinator {
+    func showEntitlementPicker()
     func showRedeemCodeScreen()
     func popCurrentScreen()
     func finishBillingFlow(isUserHasAccess: Bool)
-    func showEntitlementPicker()
 }
 
-class BillingCoordinator: BillingCoordinatorProtocol, Coordinator {
+class BillingCoordinator: BillingCoordinatorProtocol {
     
     unowned var navigationController: UINavigationController
     unowned var parentCoordinator: PluginDataProviderProtocol
@@ -28,6 +28,8 @@ class BillingCoordinator: BillingCoordinatorProtocol, Coordinator {
         self.parentCoordinator = parentCoordinator
         self.completionHandler = completion
     }
+    
+    // MARK: - BillingCoordinatorProtocol
     
     func start() {
         showEntitlementPicker()

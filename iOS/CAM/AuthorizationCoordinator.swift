@@ -9,7 +9,7 @@
 import UIKit
 import ZappPlugins
 
-protocol AuthorizationCoordinatorProtocol: AnyObject {
+protocol AuthorizationCoordinatorProtocol: Coordinator {
     func showLoginScreen(isCoordinatorRootController: Bool)
     func showSingUpScreen(isCoordinatorRootController: Bool)
     func showResetPasswordScreen()
@@ -17,7 +17,7 @@ protocol AuthorizationCoordinatorProtocol: AnyObject {
     func finishAuthorizationFlow(isUserLogged: Bool)
 }
 
-class AuthorizationCoordinator: AuthorizationCoordinatorProtocol, Coordinator {
+class AuthorizationCoordinator: AuthorizationCoordinatorProtocol {
 
     weak var navigationController: UINavigationController?
     unowned var parentCoordinator: PluginDataProviderProtocol
@@ -30,6 +30,8 @@ class AuthorizationCoordinator: AuthorizationCoordinatorProtocol, Coordinator {
         self.parentCoordinator = parentCoordinator
         self.completionHandler = completion
     }
+    
+    // MARK: - AuthorizationCoordinatorProtocol
     
     func start() {
         let dictionary = self.parentCoordinator.getCamDelegate().getPluginConfig()

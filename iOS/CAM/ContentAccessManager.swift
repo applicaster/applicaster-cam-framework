@@ -12,7 +12,7 @@ protocol PluginDataProviderProtocol: AnyObject {
     func getCamDelegate() -> CAMDelegate
 }
 
-protocol Coordinator {
+protocol Coordinator: AnyObject {
     func start()
 }
 
