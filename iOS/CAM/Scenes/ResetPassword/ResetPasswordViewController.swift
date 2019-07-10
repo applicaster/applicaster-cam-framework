@@ -25,7 +25,7 @@ class ResetPasswordViewController: UIViewController {
     @IBOutlet var tableHeightConstraint: NSLayoutConstraint!
     
     var configDictionary: [String: String] {
-        return presenter?.camDelegate?.getPluginConfig() ?? [String: String]()
+        return presenter?.camDelegate.getPluginConfig() ?? [String: String]()
     }
     
     var presenter: ResetPasswordPresenter?

@@ -12,52 +12,64 @@ import StoreKit
 import ZappPlugins
 
 class EntitlementPickerPresenter {
-    weak var coordinatorDelegate: BillingCoordinatorProtocol?
-    weak var camDelegate: CAMDelegate?
-    weak var view: EntitlementPickerViewController?
+    
+    unowned var view: EntitlementPickerViewController
+    unowned var coordinatorDelegate: BillingCoordinatorProtocol
+    unowned var camDelegate: CAMDelegate
+    
     var availableProducts: [SKProduct] = []
+    
+    init(view: EntitlementPickerViewController,
+         coordinatorDelegate: BillingCoordinatorProtocol,
+         camDelegate: CAMDelegate) {
+        self.view = view
+        self.coordinatorDelegate = coordinatorDelegate
+        self.camDelegate = camDelegate
+    }
     
     // MARK: - Public methods
     
     func viewDidLoad() {
-        let screenTitle = camDelegate?.getPluginConfig()[CAMKeys.paymentScreenTitle.rawValue] ?? ""
-        let restoreHint = camDelegate?.getPluginConfig()[CAMKeys.restoreHint.rawValue] ?? ""
-        let restoreButtonText = camDelegate?.getPluginConfig()[CAMKeys.restoreButtonText.rawValue] ?? ""
-        let legalDetailsText = camDelegate?.getPluginConfig()[CAMKeys.legalDetailsText.rawValue] ?? ""
+        let screenTitle = camDelegate.getPluginConfig()[CAMKeys.paymentScreenTitle.rawValue] ?? ""
+        let restoreHint = camDelegate.getPluginConfig()[CAMKeys.restoreHint.rawValue] ?? ""
+        let restoreButtonText = camDelegate.getPluginConfig()[CAMKeys.restoreButtonText.rawValue] ?? ""
+        let legalDetailsText = camDelegate.getPluginConfig()[CAMKeys.legalDetailsText.rawValue] ?? ""
         let viewModel = OffersViewModel(title: screenTitle,
                                         restoreHint: restoreHint,
                                         restoreButtonText: restoreButtonText,
                                         legalDetails: legalDetailsText)
         
-        self.view?.viewModel = viewModel
+        self.view.viewModel = viewModel
         
-        camDelegate?.availableProducts(completion: { [weak self] (result) in
+        camDelegate.availableProducts(completion: { [weak self] (result) in
+            guard let self = self else { return }
+            
             switch result {
             case .success(let productStoreIDs):
                 BillingHelper.sharedInstance.products(Set<String>(productStoreIDs), completion: { (result) in
-                    self?.view?.hideLoadingIndicator()
+                    self.view.hideLoadingIndicator()
                     switch result {
                     case .success(let result):
-                        self?.availableProducts = result.products
-                        self?.showOffers()
+                        self.availableProducts = result.products
+                        self.showOffers()
                     case .failure:
-                        self?.showOffers()
+                        self.showOffers()
                     }
                 })
             case .failure(let error):
-                self?.view?.showAlert(description: error.localizedDescription)
-                self?.view?.hideLoadingIndicator()
+                self.view.showAlert(description: error.localizedDescription)
+                self.view.hideLoadingIndicator()
             }
         })
     }
     
     func close() {
-        coordinatorDelegate?.finishBillingFlow(isUserHasAccess: false)
+        coordinatorDelegate.finishBillingFlow(isUserHasAccess: false)
     }
     
     func restore() {
-        let playableInfo = PlayableItemInfo(name: camDelegate?.itemName() ?? "",
-                                            type: camDelegate?.itemType() ?? "")
+        let playableInfo = PlayableItemInfo(name: camDelegate.itemName(),
+                                            type: camDelegate.itemType())
         let tapRestoreEvent = AnalyticsEvents.tapRestorePurchaseLink(playableInfo)
         ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: tapRestoreEvent.key,
                                                                      parameters: tapRestoreEvent.metadata)
@@ -73,14 +85,14 @@ class EntitlementPickerPresenter {
                     item.transaction = transaction
                     return item
                 }
-                self.camDelegate?.itemsRestored(restoredItems: resultArray, completion: { [weak self] (result) in
+                self.camDelegate.itemsRestored(restoredItems: resultArray, completion: { [weak self] (result) in
                     switch result {
                     case .success:
-                        if self?.camDelegate?.isPurchaseNeeded() == true {
+                        if self?.camDelegate.isPurchaseNeeded() == true {
                             self?.showConfirmationScreen()
                         }
                     case .failure(let error):
-                        self?.view?.showAlert(description: error.localizedDescription)
+                        self?.view.showAlert(description: error.localizedDescription)
                     }
                 })
             case .failure(let error):
@@ -105,14 +117,14 @@ class EntitlementPickerPresenter {
             }
             
             let redeemAction: () -> Void = { [weak self] in
-                self?.coordinatorDelegate?.showRedeemCodeScreen()
+                self?.coordinatorDelegate.showRedeemCodeScreen()
             }
             
-            let configText = camDelegate?.getPluginConfig()[CAMKeys.purchaseButtonText.rawValue] ?? ""
+            let configText = camDelegate.getPluginConfig()[CAMKeys.purchaseButtonText.rawValue] ?? ""
             let price = skProduct.localizedPrice ?? ""
             let purchaseButtonText = configText + " " + price
             
-            return OfferViewModel(config: camDelegate?.getPluginConfig() ?? [String: String](),
+            return OfferViewModel(config: camDelegate.getPluginConfig(),
                                   title: skProduct.localizedTitle,
                                   description: skProduct.localizedDescription,
                                   purchaseButtonText: purchaseButtonText,
@@ -120,7 +132,7 @@ class EntitlementPickerPresenter {
                                   redeemAction: redeemAction)
         })
         
-        self.view?.showOffers(viewModels)
+        self.view.showOffers(viewModels)
     }
     
     private func purchaseAction(purchase: Purchase) {
@@ -130,30 +142,30 @@ class EntitlementPickerPresenter {
         purchasedItem.product = purchase.item
         purchasedItem.receipt = receipt
         purchasedItem.state = .purchased
-        self.camDelegate?.itemPurchased(purchasedItem: purchasedItem, completion: { [weak self] (result) in
+        self.camDelegate.itemPurchased(purchasedItem: purchasedItem, completion: { [weak self] (result) in
             switch result {
             case .success:
                 self?.showConfirmationScreen()
             case .failure(let error):
-                self?.view?.showAlert(description: error.localizedDescription)
+                self?.view.showAlert(description: error.localizedDescription)
             }
         })
     }
     
     private func showConfirmationScreen() {
-        guard let configDictionary = camDelegate?.getPluginConfig(),
-            let _ = configDictionary[CAMKeys.paymentAlertTitle.rawValue],
+        let configDictionary = camDelegate.getPluginConfig()
+        guard let _ = configDictionary[CAMKeys.paymentAlertTitle.rawValue],
             let _ = configDictionary[CAMKeys.paymentAlertInfo.rawValue],
             let _ = configDictionary[CAMKeys.alertButtonText.rawValue] else {
-                self.coordinatorDelegate?.finishBillingFlow(isUserHasAccess: true)
+                self.coordinatorDelegate.finishBillingFlow(isUserHasAccess: true)
                 return
         }
         
-        self.view?.showConfirmationScreen(config: configDictionary,
+        self.view.showConfirmationScreen(config: configDictionary,
                                           titleKey: .paymentAlertTitle,
                                           descriptionKey: .paymentAlertInfo,
                                           buttonKey: .alertButtonText, action: {
-                                            self.coordinatorDelegate?.finishBillingFlow(isUserHasAccess: true)
+                                            self.coordinatorDelegate.finishBillingFlow(isUserHasAccess: true)
         })
     }
 }

@@ -35,7 +35,7 @@ class EntitlementPickerViewController: UIViewController {
     var itemSpacing: CGFloat = 20
     
     var configDictionary: [String: String] {
-        return presenter?.camDelegate?.getPluginConfig() ?? [String: String]()
+        return presenter?.camDelegate.getPluginConfig() ?? [String: String]()
     }
     
     var itemSize: CGSize {

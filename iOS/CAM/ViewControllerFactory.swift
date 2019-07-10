@@ -23,41 +23,38 @@ class ViewControllerFactory {
         return loginVC
     }
     
-    static func createSignUpScreen(pluginDataProvider: PluginDataProviderProtocol?,
+    static func createSignUpScreen(pluginDataProvider: PluginDataProviderProtocol,
                                    isRoot: Bool,
                                    authCoordinator: AuthorizationCoordinatorProtocol) -> SignUpViewController {
         let signUpVC = SignUpViewController.instantiateVC()
-        let presenter = SignUpPresenter()
+        let presenter = SignUpPresenter(view: signUpVC,
+                                        coordinatorDelegate: authCoordinator,
+                                        camDelegate: pluginDataProvider.getCamDelegate())
+        presenter.isRoot = isRoot
         signUpVC.presenter = presenter
         
-        presenter.view = signUpVC
-        presenter.coordinatorDelegate = authCoordinator
-        presenter.camDelegate = pluginDataProvider?.getCamDelegate()
-        presenter.isRoot = isRoot
         return signUpVC
     }
     
-    static func createResetPasswordScreen(pluginDataProvider: PluginDataProviderProtocol?,
+    static func createResetPasswordScreen(pluginDataProvider: PluginDataProviderProtocol,
                                           authCoordinator: AuthorizationCoordinatorProtocol) -> ResetPasswordViewController {
         let resetPasswordVC = ResetPasswordViewController.instantiateVC()
-        let presenter = ResetPasswordPresenter()
+        let presenter = ResetPasswordPresenter(view: resetPasswordVC,
+                                               coordinatorDelegate: authCoordinator,
+                                               camDelegate: pluginDataProvider.getCamDelegate())
         resetPasswordVC.presenter = presenter
         
-        presenter.view = resetPasswordVC
-        presenter.coordinatorDelegate = authCoordinator
-        presenter.camDelegate = pluginDataProvider?.getCamDelegate()
         return resetPasswordVC
     }
     
-    static func createEntitlementPicker(pluginDataProvider: PluginDataProviderProtocol?,
+    static func createEntitlementPicker(pluginDataProvider: PluginDataProviderProtocol,
                                         billingCoordinator: BillingCoordinatorProtocol) -> EntitlementPickerViewController {
         let pickerVC = EntitlementPickerViewController.instantiateVC()
-        let presenter = EntitlementPickerPresenter()
+        let presenter = EntitlementPickerPresenter(view: pickerVC,
+                                                   coordinatorDelegate: billingCoordinator,
+                                                   camDelegate: pluginDataProvider.getCamDelegate())
         pickerVC.presenter = presenter
-    
-        presenter.coordinatorDelegate = billingCoordinator
-        presenter.camDelegate = pluginDataProvider?.getCamDelegate()
-        presenter.view = pickerVC
+
         return pickerVC
     }
 }
