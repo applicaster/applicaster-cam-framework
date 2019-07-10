@@ -18,9 +18,6 @@ object UIMapper {
         if (!key.text.isNullOrEmpty()) {
             setText(view, key.text)
         }
-        if (!key.hint.isNullOrEmpty()) {
-            setHint(view, key.hint)
-        }
         if (key.textStyle != null) {
             setTextStyle(view, key.textStyle)
         }
@@ -43,12 +40,6 @@ object UIMapper {
         when (view) {
             is TextView -> view.text = uiProvider.getText(key)
             is EditText -> view.text = SpannableStringBuilder(uiProvider.getText(key))
-        }
-    }
-
-    private fun setHint(view: View, key: String) {
-        when (view) {
-            is EditText -> view.hint = uiProvider.getText(key)
         }
     }
 

@@ -12,6 +12,10 @@
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
     </style>
 
+    <style name="AppTheme.WhiteAccent" parent="AppTheme">
+        <item name="colorAccent">@color/white</item>
+    </style>
+
     <style name="ImageAdditionalAuth">
         <item name="android:layout_width">@dimen/additional_auth_iv_size</item>
         <item name="android:layout_height">@dimen/additional_auth_iv_size</item>
