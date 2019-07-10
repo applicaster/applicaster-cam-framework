@@ -51,13 +51,25 @@ class SignUpPresenter {
     }
     
     func signUp(data: [AuthField]) {
+        let playableInfo = PlayableItemInfo(name: camDelegate?.itemName() ?? "",
+                                            type: camDelegate?.itemType() ?? "")
+        let signupEvent = AnalyticsEvents.tapStandardSignUpButton(playableInfo)
+        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: signupEvent.key,
+                                                                     parameters: signupEvent.metadata)
+        
         view?.showLoadingScreen(true)
         if let data = validate(data: data) {
             camDelegate?.signUp(authData: data, completion: { (result) in
                 switch result {
                 case .success:
+                    let signupSuccessEvent = AnalyticsEvents.standardSignUpSuccess(playableInfo)
+                    ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: signupSuccessEvent.key,
+                                                                                 parameters: signupSuccessEvent.metadata)
                     self.coordinatorDelegate?.finishAuthorizationFlow(isUserLogged: true)
                 case .failure(let error):
+                    let signupFailureEvent = AnalyticsEvents.standardSignUpFailure(playableInfo)
+                    ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: signupFailureEvent.key,
+                                                                                 parameters: signupFailureEvent.metadata)
                     self.view?.showLoadingScreen(false)
                     self.view?.showError(description: error.localizedDescription)
                 }
@@ -98,6 +110,10 @@ class SignUpPresenter {
     }
     
     func showFacebookAuthScreen() {
+        let alternativeSignUpEvent = AnalyticsEvents.tapAlternativeSignUp(PlayableItemInfo(name: camDelegate?.itemName() ?? "",
+                                                                                           type: camDelegate?.itemType() ?? ""))
+        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: alternativeSignUpEvent.key,
+                                                                     parameters: alternativeSignUpEvent.metadata)
         view?.showLoadingScreen(true)
         let facebookID = Bundle.main.object(forInfoDictionaryKey: "FacebookAppID") as? String
         let facebookDisplayName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String
@@ -129,11 +145,20 @@ class SignUpPresenter {
     }
     
     func facebookSignUp(email: String, userId: String) {
+        let playableInfo = PlayableItemInfo(name: camDelegate?.itemName() ?? "",
+                                            type: camDelegate?.itemType() ?? "")
+        
         self.camDelegate?.facebookSignUp(userData: (email: email, userId: userId), completion: { (result) in
             switch result {
             case .success:
+                let successEvent = AnalyticsEvents.alternativeSignUpSuccess(playableInfo)
+                ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: successEvent.key,
+                                                                             parameters: successEvent.metadata)
                 self.coordinatorDelegate?.finishAuthorizationFlow(isUserLogged: true)
             case .failure(let error):
+                let failureEvent = AnalyticsEvents.alternativeSignUpFailure(playableInfo)
+                ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: failureEvent.key,
+                                                                             parameters: failureEvent.metadata)
                 self.view?.showError(description: error.localizedDescription)
             }
         })

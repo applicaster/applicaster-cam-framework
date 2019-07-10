@@ -27,6 +27,8 @@ public protocol CAMDelegate: AnyObject {
     func itemPurchased(purchasedItem: PurchasedProduct, completion: @escaping (PurchaseResult) -> Void)
     func itemsRestored(restoredItems: [PurchasedProduct], completion: @escaping (PurchaseResult) -> Void)
     
+    func itemName() -> String
+    func itemType() -> String
 }
 
 public enum ItemState {

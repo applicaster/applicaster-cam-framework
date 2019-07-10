@@ -65,6 +65,12 @@ class LoginPresenter {
     }
     
     func login(data: [AuthField]) {
+        let playableInfo = PlayableItemInfo(name: camDelegate.itemName(),
+                                            type: camDelegate.itemType())
+        let tapLoginEvent = AnalyticsEvents.tapStandardLoginButton(playableInfo)
+        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: tapLoginEvent.key,
+                                                                     parameters: tapLoginEvent.metadata)
+        
         view.showLoadingScreen(true)
         if let data = validate(data: data) {
             camDelegate.login(authData: data, completion: { [weak self] (result) in
@@ -72,8 +78,14 @@ class LoginPresenter {
                 
                 switch result {
                 case .success:
+                    let successLoginEvent = AnalyticsEvents.standardLoginSuccess(playableInfo)
+                    ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: successLoginEvent.key,
+                                                                                 parameters: successLoginEvent.metadata)
                     self.coordinatorDelegate.finishAuthorizationFlow(isUserLogged: true)
                 case .failure(let error):
+                    let failureLoginEvent = AnalyticsEvents.standardLoginFailure(playableInfo)
+                    ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: failureLoginEvent.key,
+                                                                                 parameters: failureLoginEvent.metadata)
                     self.view.showLoadingScreen(false)
                     self.view.showError(description: error.localizedDescription)
                 }
@@ -146,13 +158,24 @@ class LoginPresenter {
     }
     
     func facebookLogin(email: String, userId: String) {
+        let playableInfo = PlayableItemInfo(name: camDelegate.itemName(),
+                                            type: camDelegate.itemType())
+        let tapLoginEvent = AnalyticsEvents.tapAlternativeLogin(playableInfo)
+        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: tapLoginEvent.key,
+                                                                     parameters: tapLoginEvent.metadata)
         self.camDelegate.facebookLogin(userData: (email: email, userId: userId), completion: { [weak self] (result) in
             guard let self = self else { return }
             
             switch result {
             case .success:
+                let successLoginEvent = AnalyticsEvents.alternativaLoginSucess(playableInfo)
+                ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: successLoginEvent.key,
+                                                                             parameters: successLoginEvent.metadata)
                 self.coordinatorDelegate.finishAuthorizationFlow(isUserLogged: true)
             case .failure(let error):
+                let failureLoginEvent = AnalyticsEvents.alternativaLoginFailure(playableInfo)
+                ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: failureLoginEvent.key,
+                                                                             parameters: failureLoginEvent.metadata)
                 self.view.showError(description: error.localizedDescription)
             }
         })

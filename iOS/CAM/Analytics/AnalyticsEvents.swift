@@ -15,8 +15,8 @@ private enum PlayableItemInfoKeys: String {
 }
 
 struct PlayableItemInfo {
-    private let name: String
-    private let type: String
+    let name: String
+    let type: String
     
     var metadata: [String: String] {
         return [PlayableItemInfoKeys.name.rawValue: self.name,
