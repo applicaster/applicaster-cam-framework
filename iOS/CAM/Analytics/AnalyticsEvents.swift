@@ -7,6 +7,7 @@
 
 import Foundation
 import StoreKit
+import ZappPlugins
 
 private enum PlayableItemInfoKeys: String {
     case name = "Content Entity Name"
@@ -134,7 +135,7 @@ enum AnalyticsEvents {
     }
     
     var metadata: [String: String] {
-        var metadata: [String: String] = ["Plugin Provider": ""]
+        var metadata: [String: String] = ["Plugin Provider": loginPluginName]
         switch self {
         case .tapStandardLoginButton(let info),
              .standardLoginSuccess(let info),
@@ -197,5 +198,9 @@ enum AnalyticsEvents {
         }
         
         return metadata
+    }
+    
+    private var loginPluginName: String {
+        return ZPPluginManager.pluginModel(.Login)?.pluginName ?? ""
     }
 }
