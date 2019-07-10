@@ -110,7 +110,6 @@
 				B69986782270615B0093FBEC /* Resources */,
 				7B999DDE69EFD93693476FCF /* [CP] Embed Pods Frameworks */,
 				B69A9FD62292E9280073D988 /* Swift lint */,
-				E975A005EE1E96AA2BD41A9E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -225,23 +224,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
-		};
-		E975A005EE1E96AA2BD41A9E /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CAMFramework/Pods-CAMFramework-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CAMFramework/Pods-CAMFramework-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CAMFramework/Pods-CAMFramework-resources.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
