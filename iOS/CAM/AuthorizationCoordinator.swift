@@ -35,7 +35,7 @@ class AuthorizationCoordinator: AuthorizationCoordinatorProtocol, Coordinator {
         switch dictionary[CAMKeys.defaultAuthScreen.rawValue] {
         case "Login":
             showLoginScreen(isCoordinatorRootController: true)
-        case "Registration":
+        case "Sign-up":
             showSingUpScreen(isCoordinatorRootController: true)
         default:
             return
