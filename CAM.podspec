@@ -14,5 +14,4 @@ Pod::Spec.new do |s|
 
   s.dependency 'ZappPlugins'  
   s.dependency 'ApplicasterIAP'
-  s.dependency 'ApplicasterSDK', '~> 9.4.5'
 end

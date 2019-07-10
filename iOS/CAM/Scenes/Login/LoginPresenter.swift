@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import ApplicasterSDK
+import ZappPlugins
 
 protocol LoginViewProtocol: AnyObject {
     func showError(description: String?)
@@ -103,12 +103,14 @@ class LoginPresenter {
     
     func showFacebookAuthScreen() {
         view?.showLoadingScreen(true)
-        let facebookID = Bundle.main.object(forInfoDictionaryKey: "FacebookAppID") as? String
-        let facebookDisplayName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String
-        let facebookClient =  APFacebookSDKClient.facebookSDK(withFacebookAppID: facebookID, andAppDisplayName: facebookDisplayName)
-        facebookClient.authorizeFacebook(true, completion: { (isUserLogged, error) in
+        guard let facebookClient = ZAAppConnector.sharedInstance().facebookAccountKitDelegate else {
+            self.view?.showLoadingScreen(false)
+            return
+        }
+        facebookClient.authorizeFacebook(true, readPermissions: ["public_profile", "email"],
+                                         completion: { (isUserLogged, error) in
             if isUserLogged {
-                self.getFacebookUser()
+                self.getFacebookUser(client: facebookClient)
             } else {
                 self.view?.showLoadingScreen(false)
                 if let error = error {
@@ -118,14 +120,17 @@ class LoginPresenter {
         })
     }
     
-    func getFacebookUser() {
-        APFacebookSDKClient.sharedInstance()?.getCurrentUser(completionHandler: { (user, error) in
-            self.view?.showLoadingScreen(false)
+    func getFacebookUser(client: ZAAppDelegateConnectorFacebookAccountKitProtocol) {
+        client.clientRequest(withGraphPath: "me", withParams: ["fields": "id, email"], withHTTPMethod: "GET",
+                             withCompletionHandler: { (_, result, error) in
             if let error = error {
+                self.view?.showLoadingScreen(false)
                 self.view?.showError(description: error.localizedDescription)
                 return
             }
-            if let user = user, let email = user.email, let userId = APFacebookSDKClient.sharedInstance()?.userID() {
+            if let fields = result as? [String: Any],
+               let userId = fields["id"] as? String,
+               let email = fields["email"] as? String {
                 self.facebookLogin(email: email, userId: userId)
             }
         })
