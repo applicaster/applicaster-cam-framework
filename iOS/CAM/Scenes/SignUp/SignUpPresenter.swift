@@ -39,6 +39,9 @@ class SignUpPresenter {
     }
     
     func showLoginScreen() {
+        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: AnalyticsEvents.switchToLoginScreen.key,
+                                                                     parameters: AnalyticsEvents.switchToLoginScreen.metadata)
+        
         if isRoot {
             coordinatorDelegate?.showLoginScreen(isCoordinatorRootController: false)
         } else {

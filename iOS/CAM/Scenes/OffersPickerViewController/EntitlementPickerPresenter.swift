@@ -9,6 +9,7 @@
 import Foundation
 import ApplicasterIAP
 import StoreKit
+import ZappPlugins
 
 class EntitlementPickerPresenter {
     weak var coordinatorDelegate: BillingCoordinatorProtocol?
@@ -55,6 +56,12 @@ class EntitlementPickerPresenter {
     }
     
     func restore() {
+        let playableInfo = PlayableItemInfo(name: camDelegate?.itemName() ?? "",
+                                            type: camDelegate?.itemType() ?? "")
+        let tapRestoreEvent = AnalyticsEvents.tapRestorePurchaseLink(playableInfo)
+        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: tapRestoreEvent.key,
+                                                                     parameters: tapRestoreEvent.metadata)
+        
         BillingHelper.sharedInstance.restore { (result) in
             switch result {
             case .success(let response):
