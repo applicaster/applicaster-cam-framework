@@ -58,68 +58,47 @@ struct AlertInfo {
     }
 }
 
-//enum AnalyticsEvents: String {
-//    case tapStandardLoginButton = "Tap Standard Login Button"
-//    case standardLoginSuccess = "Standard Login Success"
-//    case standardLoginFailure = "Standard Login Failure"
-//    case tapAlternativeLogin = "Tap Alternative Login"
-//    case alternativaLoginSucess = "Alternative Login Success"
-//    case alternativaLoginFailure = "Alternative Login Failure"
-//    case tapStandardSignUpButton = "Tap Standard Sign-Up Button"
-//    case standardSignUpSuccess = "Standard Sign-Up Success"
-//    case standardSignUpFailure = "Standard Sign-Up Failure"
-//    case tapAlternativeSignUp = "Tap Alternative Sign-Up"
-//    case alternativeSignUpSuccess = "Alternative Sign-Up Success"
-//    case alternativeSignUpFailure = "Alternative Sign-Up Failure"
-//    case launchContentGatewayPlugin = "Launch Content Gateway Plugin"
-//    case contentGatewaySession = "Content Gateway Session"
-//    case switchToLoginScreen = "Switch to Login Screen"
-//    case switchToSignUpScreen = "Switch to Sign-Up Screen"
-//    case launchPasswordResetScreen = "Launch Password Reset Screen"
-//    case resetPassword = "Reset Password"
-//    case viewAlert = "View Alert"
-//    case tapPurchaseButton = "Tap Purchase Button"
-//    case startPurchase = "Start Purchase"
-//    case completePurchase = "Complete Purchase"
-//    case cancelPurchase = "Cancel Purchase"
-//    case storePurchaseError = "Store Purchase Error"
-//    case tapRestorePurchaseLink = "Tap Restore Purchase Link"
-//    case startRestorePurchase = "Start Restore Purchase"
-//    case completeRestorePurchase = "Complete Restore Purchase"
-//    case cancelRestorePurchase = "Cancel Restore Purchase"
-//    case storeRestorePurchaseError = "Store Restore Purchase Error"
-//}
+private enum TriggerKeys: String {
+    case trigger = "Trigger"
+}
+
+struct Trigger {
+    private let trigger: String
+    
+    var metadata: [String: String] {
+        return [TriggerKeys.trigger.rawValue: trigger]
+    }
+}
 
 enum AnalyticsEvents {
-    case tapStandardLoginButton(PlayableItemInfo, pluginProvider: String)
-    case standardLoginSuccess(PlayableItemInfo, pluginProvider: String)
-    case standardLoginFailure(PlayableItemInfo, pluginProvider: String)
-    case tapAlternativeLogin(PlayableItemInfo, pluginProvider: String)
-    case alternativaLoginSucess(PlayableItemInfo, pluginProvider: String)
-    case alternativaLoginFailure(PlayableItemInfo, pluginProvider: String)
-    case tapStandardSignUpButton(PlayableItemInfo, pluginProvider: String)
-    case standardSignUpSuccess(PlayableItemInfo, pluginProvider: String)
-    case standardSignUpFailure(PlayableItemInfo, pluginProvider: String)
-    case tapAlternativeSignUp(PlayableItemInfo, pluginProvider: String)
-    case alternativeSignUpSuccess(PlayableItemInfo, pluginProvider: String)
-    case alternativeSignUpFailure(PlayableItemInfo, pluginProvider: String)
-    case launchContentGatewayPlugin(trigger: String, firstScreen: String, PlayableItemInfo, pluginProvider: String)
-    case contentGatewaySession(trigger: String, action: String, pluginProvider: String)
-    case switchToLoginScreen(pluginProvider: String)
-    case switchToSignUpScreen(pluginProvider: String)
-    case launchPasswordResetScreen(pluginProvider: String)
-    case resetPassword(pluginProvider: String)
-    case viewAlert(PlayableItemInfo, pluginProvider: String, AlertInfo, apiError: String)
-    case tapPurchaseButton(PlayableItemInfo, pluginProvider: String, VoucherProperties)
-    case startPurchase(PlayableItemInfo, pluginProvider: String, VoucherProperties)
-    case completePurchase(PlayableItemInfo, pluginProvider: String, VoucherProperties)
-    case cancelPurchase(PlayableItemInfo, pluginProvider: String, VoucherProperties)
-    case storePurchaseError(SKError, PlayableItemInfo, pluginProvider: String, VoucherProperties)
-    case tapRestorePurchaseLink(PlayableItemInfo, pluginProvider: String)
-    case startRestorePurchase(PlayableItemInfo, pluginProvider: String)
-    case completeRestorePurchase(PlayableItemInfo, pluginProvider: String, VoucherProperties)
-    case cancelRestorePurchase(PlayableItemInfo, pluginProvider: String, VoucherProperties)
-    case storeRestorePurchaseError(SKError, PlayableItemInfo, pluginProvider: String, VoucherProperties)
+    case tapStandardLoginButton(PlayableItemInfo)
+    case standardLoginSuccess(PlayableItemInfo)
+    case standardLoginFailure(PlayableItemInfo)
+    case tapAlternativeLogin(PlayableItemInfo)
+    case alternativaLoginSucess(PlayableItemInfo)
+    case alternativaLoginFailure(PlayableItemInfo)
+    case tapStandardSignUpButton(PlayableItemInfo)
+    case standardSignUpSuccess(PlayableItemInfo)
+    case standardSignUpFailure(PlayableItemInfo)
+    case tapAlternativeSignUp(PlayableItemInfo)
+    case alternativeSignUpSuccess(PlayableItemInfo)
+    case alternativeSignUpFailure(PlayableItemInfo)
+    case launchContentGatewayPlugin(Trigger, firstScreen: String, PlayableItemInfo)
+    case contentGatewaySession(Trigger, action: String)
+    case switchToLoginScreen
+    case switchToSignUpScreen
+    case launchPasswordResetScreen
+    case resetPassword
+    case viewAlert(PlayableItemInfo, AlertInfo, apiError: String)
+    case tapPurchaseButton(PlayableItemInfo, VoucherProperties)
+    case startPurchase(PlayableItemInfo, VoucherProperties)
+    case completePurchase(PlayableItemInfo, VoucherProperties)
+    case cancelPurchase(PlayableItemInfo, VoucherProperties)
+    case storePurchaseError(SKError, PlayableItemInfo, VoucherProperties)
+    case tapRestorePurchaseLink(PlayableItemInfo)
+    case startRestorePurchase(PlayableItemInfo)
+    case completeRestorePurchase(PlayableItemInfo, VoucherProperties)
+    case storeRestorePurchaseError(SKError, PlayableItemInfo, VoucherProperties)
     
     var key: String {
         switch self {
@@ -150,8 +129,73 @@ enum AnalyticsEvents {
         case .tapRestorePurchaseLink: return "Tap Restore Purchase Link"
         case .startRestorePurchase: return "Start Restore Purchase"
         case .completeRestorePurchase: return "Complete Restore Purchase"
-        case .cancelRestorePurchase: return "Cancel Restore Purchase"
         case .storeRestorePurchaseError: return "Store Restore Purchase Error"
         }
+    }
+    
+    var metadata: [String: String] {
+        var metadata: [String: String] = ["Plugin Provider": ""]
+        switch self {
+        case .tapStandardLoginButton(let info),
+             .standardLoginSuccess(let info),
+             .standardLoginFailure(let info),
+             .tapAlternativeLogin(let info),
+             .alternativaLoginSucess(let info),
+             .alternativaLoginFailure(let info),
+             .tapStandardSignUpButton(let info),
+             .standardSignUpSuccess(let info),
+             .standardSignUpFailure(let info),
+             .tapAlternativeSignUp(let info),
+             .alternativeSignUpSuccess(let info),
+             .alternativeSignUpFailure(let info):
+            metadata = metadata.merge(info.metadata)
+        case .launchContentGatewayPlugin(let trigger, let firstScreen, let info):
+            metadata = metadata
+                .merge(trigger.metadata)
+                .merge(["First Screen": firstScreen])
+                .merge(info.metadata)
+        case .contentGatewaySession(let trigger, let action):
+            metadata = metadata
+                .merge(trigger.metadata)
+                .merge(["Action": action])
+        case .switchToLoginScreen,
+             .switchToSignUpScreen,
+             .launchPasswordResetScreen,
+             .resetPassword:
+            break
+        case .viewAlert(let info, let alert, let apiError):
+            metadata = metadata
+                .merge(info.metadata)
+                .merge(alert.metadata)
+                .merge(["API Error Message": apiError])
+        case .tapPurchaseButton(let info, let voucher),
+             .startPurchase(let info, let voucher),
+             .completePurchase(let info, let voucher),
+             .cancelPurchase(let info, let voucher):
+            metadata = metadata
+                .merge(info.metadata)
+                .merge(voucher.metadata)
+        case .storePurchaseError(let skError, let info, let voucher):
+            metadata = metadata
+                .merge(["Error Code ID": "\(skError.errorCode)",
+                        "Error Message": skError.localizedDescription])
+                .merge(info.metadata)
+                .merge(voucher.metadata)
+        case .tapRestorePurchaseLink(let info),
+             .startRestorePurchase(let info):
+            metadata = metadata.merge(info.metadata)
+        case .completeRestorePurchase(let info, let voucher):
+            metadata = metadata
+                .merge(info.metadata)
+                .merge(voucher.metadata)
+        case .storeRestorePurchaseError(let skError, let info, let voucher):
+            metadata = metadata
+                .merge(["Error Code ID": "\(skError.errorCode)",
+                        "Error Message": skError.localizedDescription])
+                .merge(info.metadata)
+                .merge(voucher.metadata)
+        }
+        
+        return metadata
     }
 }
