@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import ZappPlugins
 
 protocol ResetPasswordViewProtocol: AnyObject {
     func showError(description: String?)
@@ -39,6 +40,8 @@ class ResetPasswordPresenter {
     }
     
     func resetPassword(data: [AuthField]) {
+        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: AnalyticsEvents.resetPassword.key,
+                                                                     parameters: AnalyticsEvents.resetPassword.metadata)
         self.view?.showLoadingScreen(true)
         if let data = validate(data: data) {
             camDelegate?.resetPassword(data: data, completion: { (result) in

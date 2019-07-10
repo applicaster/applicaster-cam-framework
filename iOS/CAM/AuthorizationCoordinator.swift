@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ZappPlugins
 
 protocol AuthorizationCoordinatorProtocol: AnyObject {
     func showLoginScreen(isCoordinatorRootController: Bool)
@@ -57,6 +58,8 @@ class AuthorizationCoordinator: AuthorizationCoordinatorProtocol, Coordinator {
     }
     
     func showResetPasswordScreen() {
+        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: AnalyticsEvents.launchPasswordResetScreen.key,
+                                                                     parameters: AnalyticsEvents.launchPasswordResetScreen.metadata)
         let controller = ViewControllerFactory.createResetPasswordScreen(pluginDataProvider: parentCoordinator,
                                                                          authCoordinator: self)
         navigationController?.pushViewController(controller, animated: true)
