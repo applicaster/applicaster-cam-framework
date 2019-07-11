@@ -16,13 +16,13 @@ object UIMapper {
 
     fun map(view: View, key: UIKey) {
         if (!key.text.isNullOrEmpty()) {
-            setText(view, key.text)
+            setText(view, key.text!!)
         }
         if (key.textStyle != null) {
             setTextStyle(view, key.textStyle)
         }
         if (!key.image.isNullOrEmpty()) {
-            setImage(view, key.image)
+            setImage(view, key.image!!)
         }
     }
 
