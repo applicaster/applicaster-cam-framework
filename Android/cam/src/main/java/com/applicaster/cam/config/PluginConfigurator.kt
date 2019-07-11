@@ -19,7 +19,7 @@ class PluginConfigurator(private val pluginConfig: Map<String, String>) : Config
      * If there is no "password reset" config then hide corresponding UI, otherwise show it
      */
     override fun isPasswordResetRequired() =
-        !getPasswordResetAuthFields().authFields.isNullOrEmpty()
+        getPasswordResetAuthFields().authFields.isNotEmpty()
 
     override fun getSignInAuthFields(): AuthFieldConfig {
         val jsonConfig = pluginConfig.getValue(KEY_AUTH_FIELDS)
@@ -38,7 +38,8 @@ class PluginConfigurator(private val pluginConfig: Map<String, String>) : Config
 
     override fun getEmptyInputFieldError() = pluginConfig.getValue(KEY_EMPTY_INPUT_FIELD_ERROR)
 
-    override fun getNotValidEmailInputFieldError() = pluginConfig.getValue(KEY_NOT_VALID_EMAIL_INPUT_FIELD_ERROR)
+    override fun getNotValidEmailInputFieldError() =
+        pluginConfig.getValue(KEY_NOT_VALID_EMAIL_INPUT_FIELD_ERROR)
 
     override fun getDefaultAlertText(): String = pluginConfig.getValue(KEY_DEFAULT_ALERT_TEXT)
 
