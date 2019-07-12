@@ -100,14 +100,26 @@ class EntitlementPickerPresenter {
                     return item
                 }
                 self.camDelegate.itemsRestored(restoredItems: resultArray, completion: { [weak self] (result) in
+                    guard let self = self else { return }
                     switch result {
                     case .success:
-                        if self?.camDelegate.isPurchaseNeeded() == true {
-                            self?.showConfirmationScreen(for: .restore)
+                        if self.camDelegate.isPurchaseNeeded() == true {
+                            self.showConfirmationScreen(for: .restore)
                         }
+                        let productsProperties = resultArray.compactMap({ (purchasedProduct) -> PurchaseProperties? in
+                            guard let productIdentifier = purchasedProduct.transaction?.payment.productIdentifier else {
+                                return nil
+                            }
+                            
+                            return self.camDelegate.purchaseProperties(for: productIdentifier)
+                        })
+                        let successfulRestoreEvent = AnalyticsEvents.completeRestorePurchase(playableInfo,
+                                                                                             productsProperties)
+                        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: successfulRestoreEvent.key,
+                                                                                     parameters: successfulRestoreEvent.metadata)
                     case .failure(let error):
-                        self?.view.showAlert(description: error.localizedDescription)
-                        self?.sendAnalyticsEvent(for: error)
+                        self.view.showAlert(description: error.localizedDescription)
+                        self.sendAnalyticsEvent(for: error)
                     }
                 })
             case .failure(let error):
@@ -122,11 +134,12 @@ class EntitlementPickerPresenter {
         let viewModels = availableProducts.map({ (skProduct) -> OfferViewModel in
             let itemName = camDelegate.itemName()
             let itemType = camDelegate.itemType()
+            var voucherProperties = camDelegate.purchaseProperties(for: skProduct.productIdentifier)
             
             let buyAction = {
                 let playableInfo = PlayableItemInfo(name: itemName,
                                                     type: itemType)
-                var voucherProperties = VoucherProperties(skProduct: skProduct)
+                
                 let buyEvent = AnalyticsEvents.tapPurchaseButton(playableInfo,
                                                                  voucherProperties)
                 ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: buyEvent.key,
@@ -143,9 +156,15 @@ class EntitlementPickerPresenter {
                                                                                voucherProperties)
                         self?.purchaseAction(purchase: purchase)
                     case .failure(let error):
-                        purchaseResultEvent = AnalyticsEvents.storePurchaseError(error,
-                                                                                 playableInfo,
+                        if let skError = error as? SKError, skError.code == .paymentCancelled {
+                            purchaseResultEvent = AnalyticsEvents.cancelPurchase(playableInfo,
                                                                                  voucherProperties)
+                        } else {
+                            purchaseResultEvent = AnalyticsEvents.storePurchaseError(error,
+                                                                                     playableInfo,
+                                                                                     voucherProperties)
+                        }
+                        
                     }
                     
                     ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: purchaseResultEvent.key,

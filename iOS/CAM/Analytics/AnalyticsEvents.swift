@@ -24,7 +24,7 @@ struct PlayableItemInfo {
     }
 }
 
-private enum VoucherPropertiesKeys: String {
+private enum ProductPropertiesKeys: String {
     case subscriber = "Subscriber"
     case productName = "Product Name"
     case price = "Price"
@@ -35,32 +35,41 @@ private enum VoucherPropertiesKeys: String {
     case trialPeriod = "Trial Period"
     case purchaseEntityType = "Purchase Entity Type"
     case gracePeriod = "Grace Period"
+    
+    static var key: String {
+        return "Purchase Product Properties"
+    }
 }
 
-struct VoucherProperties {
+public struct PurchaseProperties {
     
+    let isSubscriber: Bool
     let productName: String
     let price: String
     var transactionID: String?
     let productID: String
+    let purchaseType: String
+    let subscriptionDuration: String
+    let trialPeriod: String
+    let purchaseEntityType: String
     
     var metadata: [String: String] {
-        var base = [VoucherPropertiesKeys.productName.rawValue: self.productName,
-                    VoucherPropertiesKeys.price.rawValue: self.price,
-                    VoucherPropertiesKeys.productID.rawValue: self.productID]
+        var base = [ProductPropertiesKeys.productName.rawValue: self.productName,
+                    ProductPropertiesKeys.price.rawValue: self.price,
+                    ProductPropertiesKeys.productID.rawValue: self.productID]
         
         if let transactionID = self.transactionID {
-            base = base.merge([VoucherPropertiesKeys.transactionID.rawValue: transactionID])
+            base = base.merge([ProductPropertiesKeys.transactionID.rawValue: transactionID])
         }
         
         return base
     }
     
-    init(skProduct: SKProduct) {
-        self.productName = skProduct.localizedTitle
-        self.price = skProduct.localizedPrice
-        self.productID = skProduct.productIdentifier
-    }
+//    init(skProduct: SKProduct) {
+//        self.productName = skProduct.localizedTitle
+//        self.price = skProduct.localizedPrice
+//        self.productID = skProduct.productIdentifier
+//    }
 }
 
 private enum AlertInfoKeys: String {
@@ -140,15 +149,15 @@ enum AnalyticsEvents {
     case launchPasswordResetScreen
     case resetPassword
     case viewAlert(AlertInfo, apiError: String?)
-    case tapPurchaseButton(PlayableItemInfo, VoucherProperties)
-    case startPurchase(PlayableItemInfo, VoucherProperties)
-    case completePurchase(PlayableItemInfo, VoucherProperties)
-    case cancelPurchase(PlayableItemInfo, VoucherProperties)
-    case storePurchaseError(Error, PlayableItemInfo, VoucherProperties)
+    case tapPurchaseButton(PlayableItemInfo, PurchaseProperties)
+    case startPurchase(PlayableItemInfo, PurchaseProperties)
+    case completePurchase(PlayableItemInfo, PurchaseProperties)
+    case cancelPurchase(PlayableItemInfo, PurchaseProperties)
+    case storePurchaseError(Error, PlayableItemInfo, PurchaseProperties)
     case tapRestorePurchaseLink(PlayableItemInfo)
     case startRestorePurchase(PlayableItemInfo)
-    case completeRestorePurchase(PlayableItemInfo, VoucherProperties)
-    case storeRestorePurchaseError(Error, PlayableItemInfo, VoucherProperties)
+    case completeRestorePurchase(PlayableItemInfo, [PurchaseProperties])
+    case storeRestorePurchaseError(Error, PlayableItemInfo, PurchaseProperties)
     
     var key: String {
         switch self {
@@ -183,8 +192,8 @@ enum AnalyticsEvents {
         }
     }
     
-    var metadata: [String: String] {
-        var metadata: [String: String] = ["Plugin Provider": loginPluginName]
+    var metadata: [String: Any] {
+        var metadata: [String: Any] = ["Plugin Provider": loginPluginName]
         switch self {
         case .tapStandardLoginButton(let info),
              .standardLoginSuccess(let info),
@@ -244,10 +253,10 @@ enum AnalyticsEvents {
         case .tapRestorePurchaseLink(let info),
              .startRestorePurchase(let info):
             metadata = metadata.merge(info.metadata)
-        case .completeRestorePurchase(let info, let voucher):
+        case .completeRestorePurchase(let info, let purchaseProperties):
             metadata = metadata
                 .merge(info.metadata)
-                .merge(voucher.metadata)
+                .merge([ProductPropertiesKeys.key: purchaseProperties.map({ $0.metadata })])
         }
         
         return metadata

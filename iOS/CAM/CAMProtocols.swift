@@ -29,6 +29,7 @@ public protocol CAMDelegate: AnyObject {
     
     func itemName() -> String
     func itemType() -> String
+    func purchaseProperties(for productIdentifier: String) -> PurchaseProperties
 }
 
 public enum ItemState {
