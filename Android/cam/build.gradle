@@ -124,7 +124,7 @@ publishing {
 
                 artifactId ARTIFACT_ID
                 artifact ("build/outputs/aar/${project.getName()}-release.aar") {
-                    builtBy assembleRelease
+                    builtBy assemble
                 }
                 artifact androidJavadocsJar
                 artifact androidSourcesJar
