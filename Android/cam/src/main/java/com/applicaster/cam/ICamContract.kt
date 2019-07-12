@@ -31,4 +31,9 @@ interface ICamContract {
     fun isRedeemActivated(): Boolean
 
     fun getCamFlow(): CamFlow
+
+    //========= Analytics ============//
+    fun getEntityType(): String
+
+    fun getEntityName(): String
 }
