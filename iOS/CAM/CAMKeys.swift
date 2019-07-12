@@ -74,6 +74,11 @@ public enum CAMKeys: String {
     case restoreHint = "restore_prompt_text"
     case restoreButtonText = "restore_link_text"
     case legalDetailsText = "legal_details_text"
+    
+    // Restore
+    
+    case restoreAlertTitle = "restore_purchase_confirmation_title_text"
+    case restoreAlertDescription = "restore_purchase_confirmation_description_text"
 }
 
 public enum CAMStyles: String {

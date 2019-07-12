@@ -53,13 +53,18 @@ class ResetPasswordPresenter {
                                                                      parameters: AnalyticsEvents.resetPassword.metadata)
         self.view.showLoadingScreen(true)
         if let data = validate(data: data) {
-            camDelegate.resetPassword(data: data, completion: { (result) in
+            camDelegate.resetPassword(data: data, completion: { [weak self] (result) in
+                guard let self = self else { return }
                 switch result {
                 case .success:
                     self.view.showConfirmationScreenIfNeeded()
                 case .failure(let error):
                     self.view.showLoadingScreen(false)
                     self.view.showError(description: error.localizedDescription)
+                    
+                    let viewAlertEvent = AnalyticsEvents.makeViewAlert(from: error)
+                    ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: viewAlertEvent.key,
+                                                                                 parameters: viewAlertEvent.metadata)
                 }
             })
         } else {

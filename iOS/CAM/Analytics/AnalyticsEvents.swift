@@ -24,9 +24,9 @@ struct PlayableItemInfo {
     }
 }
 
-enum VoucherPropertiesKeys: String {
+private enum VoucherPropertiesKeys: String {
     case subscriber = "Subscriber"
-    case voucherName = "Voucher Name"
+    case productName = "Product Name"
     case price = "Price"
     case transactionID = "Transaction ID"
     case productID = "Product ID"
@@ -39,8 +39,27 @@ enum VoucherPropertiesKeys: String {
 
 struct VoucherProperties {
     
+    let productName: String
+    let price: String
+    var transactionID: String?
+    let productID: String
+    
     var metadata: [String: String] {
-        return [:]
+        var base = [VoucherPropertiesKeys.productName.rawValue: self.productName,
+                    VoucherPropertiesKeys.price.rawValue: self.price,
+                    VoucherPropertiesKeys.productID.rawValue: self.productID]
+        
+        if let transactionID = self.transactionID {
+            base = base.merge([VoucherPropertiesKeys.transactionID.rawValue: transactionID])
+        }
+        
+        return base
+    }
+    
+    init(skProduct: SKProduct) {
+        self.productName = skProduct.localizedTitle
+        self.price = skProduct.localizedPrice
+        self.productID = skProduct.productIdentifier
     }
 }
 
@@ -50,12 +69,13 @@ private enum AlertInfoKeys: String {
 }
 
 struct AlertInfo {
-    private let title: String
-    private let description: String
+    let title: String
+    let description: String
+    let isConfirmation: IsConfirmationAlert
     
     var metadata: [String: String] {
-        return [AlertInfoKeys.title.rawValue: self.title,
-                AlertInfoKeys.description.rawValue: self.description]
+        return isConfirmation.metadata.merge([AlertInfoKeys.title.rawValue: self.title,
+                                              AlertInfoKeys.description.rawValue: self.description])
     }
 }
 
@@ -68,6 +88,35 @@ struct Trigger {
     
     var metadata: [String: String] {
         return [TriggerKeys.trigger.rawValue: trigger]
+    }
+}
+
+enum ConfirmationAlertTypes: String {
+    case purchase = "Purchase"
+    case restorePurchase = "Restore Purchase"
+    case passwordReset = "Password Reset"
+    
+    var key: String {
+        return "Confirmation Cause"
+    }
+}
+
+enum IsConfirmationAlert {
+    case yes(type: ConfirmationAlertTypes)
+    case no
+    
+    var key: String {
+        return "Confirmation Alert"
+    }
+    
+    var metadata: [String: String] {
+        switch self {
+        case .yes(let type):
+            return [key: "Yes",
+                    type.key: type.rawValue]
+        case .no:
+            return [key: "No"]
+        }
     }
 }
 
@@ -90,16 +139,16 @@ enum AnalyticsEvents {
     case switchToSignUpScreen
     case launchPasswordResetScreen
     case resetPassword
-    case viewAlert(PlayableItemInfo, AlertInfo, apiError: String)
+    case viewAlert(AlertInfo, apiError: String?)
     case tapPurchaseButton(PlayableItemInfo, VoucherProperties)
     case startPurchase(PlayableItemInfo, VoucherProperties)
     case completePurchase(PlayableItemInfo, VoucherProperties)
     case cancelPurchase(PlayableItemInfo, VoucherProperties)
-    case storePurchaseError(SKError, PlayableItemInfo, VoucherProperties)
+    case storePurchaseError(Error, PlayableItemInfo, VoucherProperties)
     case tapRestorePurchaseLink(PlayableItemInfo)
     case startRestorePurchase(PlayableItemInfo)
     case completeRestorePurchase(PlayableItemInfo, VoucherProperties)
-    case storeRestorePurchaseError(SKError, PlayableItemInfo, VoucherProperties)
+    case storeRestorePurchaseError(Error, PlayableItemInfo, VoucherProperties)
     
     var key: String {
         switch self {
@@ -164,11 +213,13 @@ enum AnalyticsEvents {
              .launchPasswordResetScreen,
              .resetPassword:
             break
-        case .viewAlert(let info, let alert, let apiError):
+        case .viewAlert(let alert, let apiError):
             metadata = metadata
-                .merge(info.metadata)
                 .merge(alert.metadata)
-                .merge(["API Error Message": apiError])
+                
+            if let error = apiError {
+                metadata = metadata.merge(["API Error Message": error])
+            }
         case .tapPurchaseButton(let info, let voucher),
              .startPurchase(let info, let voucher),
              .completePurchase(let info, let voucher),
@@ -176,23 +227,25 @@ enum AnalyticsEvents {
             metadata = metadata
                 .merge(info.metadata)
                 .merge(voucher.metadata)
-        case .storePurchaseError(let skError, let info, let voucher):
+        case .storePurchaseError(let error, let info, let voucher),
+             .storeRestorePurchaseError(let error, let info, let voucher):
             metadata = metadata
-                .merge(["Error Code ID": "\(skError.errorCode)",
-                        "Error Message": skError.localizedDescription])
+                .merge(["Error Message": error.localizedDescription])
                 .merge(info.metadata)
                 .merge(voucher.metadata)
+            switch error {
+            case let skError as SKError:
+                metadata = metadata.merge(["Error Code ID": "\(skError.errorCode)"])
+            case let nsError as NSError:
+                metadata = metadata.merge(["Error Code ID": "\(nsError.code)"])
+            default:
+                break
+            }
         case .tapRestorePurchaseLink(let info),
              .startRestorePurchase(let info):
             metadata = metadata.merge(info.metadata)
         case .completeRestorePurchase(let info, let voucher):
             metadata = metadata
-                .merge(info.metadata)
-                .merge(voucher.metadata)
-        case .storeRestorePurchaseError(let skError, let info, let voucher):
-            metadata = metadata
-                .merge(["Error Code ID": "\(skError.errorCode)",
-                        "Error Message": skError.localizedDescription])
                 .merge(info.metadata)
                 .merge(voucher.metadata)
         }
@@ -202,5 +255,12 @@ enum AnalyticsEvents {
     
     private var loginPluginName: String {
         return ZPPluginManager.pluginModel(.Login)?.pluginName ?? ""
+    }
+    
+    static public func makeViewAlert(from error: Error) -> AnalyticsEvents {
+        return AnalyticsEvents.viewAlert(AlertInfo(title: "",
+                                                   description: error.localizedDescription,
+                                                   isConfirmation: IsConfirmationAlert.no),
+                                         apiError: error.localizedDescription)
     }
 }
