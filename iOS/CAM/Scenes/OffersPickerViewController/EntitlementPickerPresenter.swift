@@ -91,12 +91,14 @@ class EntitlementPickerPresenter {
         BillingHelper.sharedInstance.restore { (result) in
             switch result {
             case .success(let response):
-                let resultArray = response.map {(transaction) -> PurchasedProduct in
-                    let receipt = (BillingHelper.sharedInstance.localReceiptData() ?? Data()).base64EncodedString(options: [])
-                    let item = PurchasedProduct()
-                    item.state = .restored
-                    item.receipt = receipt
-                    item.transaction = transaction
+                guard let receipt = BillingHelper.sharedInstance.localReceiptData() else {
+                    return
+                }
+                
+                let resultArray = response.compactMap {(transaction) -> PurchasedProduct in
+                    let item = PurchasedProduct(transaction: transaction,
+                                                receipt: receipt,
+                                                state: .restored)
                     return item
                 }
                 self.camDelegate.itemsRestored(restoredItems: resultArray, completion: { [weak self] (result) in
@@ -106,11 +108,8 @@ class EntitlementPickerPresenter {
                         if self.camDelegate.isPurchaseNeeded() == true {
                             self.showConfirmationScreen(for: .restore)
                         }
-                        let productsProperties = resultArray.compactMap({ (purchasedProduct) -> PurchaseProperties? in
-                            guard let productIdentifier = purchasedProduct.transaction?.payment.productIdentifier else {
-                                return nil
-                            }
-                            
+                        let productsProperties = resultArray.map({ (purchasedProduct) -> PurchaseProperties in
+                            let productIdentifier = purchasedProduct.transaction.payment.productIdentifier
                             return self.camDelegate.purchaseProperties(for: productIdentifier)
                         })
                         let successfulRestoreEvent = AnalyticsEvents.completeRestorePurchase(playableInfo,
@@ -192,12 +191,13 @@ class EntitlementPickerPresenter {
     }
     
     private func purchaseAction(purchase: Purchase) {
-        let receipt = (BillingHelper.sharedInstance.localReceiptData() ?? Data()).base64EncodedString(options: [])
-        let purchasedItem = PurchasedProduct()
-        purchasedItem.transaction = purchase.transaction
-        purchasedItem.product = purchase.item
-        purchasedItem.receipt = receipt
-        purchasedItem.state = .purchased
+        guard let receipt = BillingHelper.sharedInstance.localReceiptData(),
+            let transaction = purchase.transaction else {
+            return
+        }
+        let purchasedItem = PurchasedProduct(transaction: transaction,
+                                             receipt: receipt,
+                                             state: .purchased)
         self.camDelegate.itemPurchased(purchasedItem: purchasedItem, completion: { [weak self] (result) in
             switch result {
             case .success:
