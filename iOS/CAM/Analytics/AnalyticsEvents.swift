@@ -43,26 +43,30 @@ private enum ProductPropertiesKeys: String {
 
 public struct PurchaseProperties {
     
-    let isSubscriber: Bool
-    let productName: String
-    let price: String
+    var isSubscriber: Bool?
+    var productName: String?
+    var price: String?
     var transactionID: String?
-    let productID: String
-    let purchaseType: String
-    let subscriptionDuration: String
-    let trialPeriod: String
-    let purchaseEntityType: String
+    var productID: String?
+    var purchaseType: String?
+    var subscriptionDuration: String?
+    var trialPeriod: String?
+    var purchaseEntityType: String?
     
     var metadata: [String: String] {
-        var base = [ProductPropertiesKeys.productName.rawValue: self.productName,
-                    ProductPropertiesKeys.price.rawValue: self.price,
-                    ProductPropertiesKeys.productID.rawValue: self.productID]
+        var base = [ProductPropertiesKeys.productName.rawValue: self.productName ?? "",
+                    ProductPropertiesKeys.price.rawValue: self.price ?? "",
+                    ProductPropertiesKeys.productID.rawValue: self.productID ?? ""]
         
         if let transactionID = self.transactionID {
             base = base.merge([ProductPropertiesKeys.transactionID.rawValue: transactionID])
         }
         
         return base
+    }
+    
+    public init() {
+        
     }
     
 //    init(skProduct: SKProduct) {
