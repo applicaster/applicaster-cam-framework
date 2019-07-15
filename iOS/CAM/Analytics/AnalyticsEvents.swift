@@ -33,47 +33,93 @@ private enum ProductPropertiesKeys: String {
     case subscriptionDuration = "Subscription Duration"
     case purchaseType = "Purchase Type"
     case trialPeriod = "Trial Period"
-    case purchaseEntityType = "Purchase Entity Type"
-    case gracePeriod = "Grace Period"
     
     static var key: String {
         return "Purchase Product Properties"
     }
 }
 
+public enum PurchaseEntityType: String {
+    case vod = "VOD Item"
+    case category = "Category"
+    
+    var key: String {
+        return "Purchase Entity Type"
+    }
+}
+
+private enum PurchaseType: String {
+    case subscription = "Subscription"
+    case consumable = "Consumable"
+    
+    var key: String {
+        return "Purchase Type"
+    }
+}
+
 public struct PurchaseProperties {
     
-    var isSubscriber: Bool?
-    var productName: String?
-    var price: String?
-    var transactionID: String?
-    var productID: String?
-    var purchaseType: String?
-    var subscriptionDuration: String?
-    var trialPeriod: String?
-    var purchaseEntityType: String?
+    private var isSubscriber: Bool
+    public var productName: String?
+    public var price: String?
+    public var transactionID: String?
+    private var productID: String
+    public var isSubscription: Bool?
+    public var subscriptionDuration: String?
+    public var trialPeriod: String?
+    public var purchaseEntityType: PurchaseEntityType?
     
     var metadata: [String: String] {
-        var base = [ProductPropertiesKeys.productName.rawValue: self.productName ?? "",
-                    ProductPropertiesKeys.price.rawValue: self.price ?? "",
-                    ProductPropertiesKeys.productID.rawValue: self.productID ?? ""]
+        var result: [String: String] = [ProductPropertiesKeys.productID.rawValue: productID]
         
-        if let transactionID = self.transactionID {
-            base = base.merge([ProductPropertiesKeys.transactionID.rawValue: transactionID])
+        result[ProductPropertiesKeys.subscriber.rawValue] = isSubscriber ? "Yes" : "No"
+        
+        if let name = productName {
+            result[ProductPropertiesKeys.productName.rawValue] = name
         }
         
-        return base
-    }
-    
-    public init() {
+        if let price = self.price {
+            result[ProductPropertiesKeys.price.rawValue] = price
+        }
         
+        if let transactionID = self.transactionID {
+            result[ProductPropertiesKeys.transactionID.rawValue] = transactionID
+        }
+        
+        var purchaseType: PurchaseType
+        
+        if let duration = subscriptionDuration {
+            purchaseType = .subscription
+            result[ProductPropertiesKeys.subscriptionDuration.rawValue] = duration.capitalized
+        } else {
+            purchaseType = .consumable
+        }
+        
+        result[purchaseType.key] = purchaseType.rawValue
+        
+        if let type = purchaseEntityType {
+            result[type.key] = type.rawValue
+        }
+        
+        if let trial = trialPeriod {
+            result[ProductPropertiesKeys.trialPeriod.rawValue] = trial + " Days"
+        }
+        
+        return result
     }
     
-//    init(skProduct: SKProduct) {
-//        self.productName = skProduct.localizedTitle
-//        self.price = skProduct.localizedPrice
-//        self.productID = skProduct.productIdentifier
-//    }
+    public init(productIdentifier: String, isSubscriber: Bool) {
+        self.productID = productIdentifier
+        self.isSubscriber = isSubscriber
+    }
+    
+    mutating func update(with skProduct: SKProduct) {
+                self.productName = skProduct.localizedTitle
+                self.price = skProduct.localizedPrice
+                self.productID = skProduct.productIdentifier
+    }
+    
+
 }
 
 private enum AlertInfoKeys: String {

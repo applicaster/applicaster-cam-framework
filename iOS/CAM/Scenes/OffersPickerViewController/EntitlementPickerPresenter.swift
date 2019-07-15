@@ -108,10 +108,8 @@ class EntitlementPickerPresenter {
                         if self.camDelegate.isPurchaseNeeded() == true {
                             self.showConfirmationScreen(for: .restore)
                         }
-                        let productsProperties = resultArray.map({ (purchasedProduct) -> PurchaseProperties in
-                            let productIdentifier = purchasedProduct.transaction.payment.productIdentifier
-                            return self.camDelegate.purchaseProperties(for: productIdentifier)
-                        })
+                        
+                        let productsProperties = resultArray.map({ self.createProductProperties(for: $0.productIdentifier) })
                         let successfulRestoreEvent = AnalyticsEvents.completeRestorePurchase(playableInfo,
                                                                                              productsProperties)
                         ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: successfulRestoreEvent.key,
@@ -134,6 +132,7 @@ class EntitlementPickerPresenter {
             let itemName = camDelegate.itemName()
             let itemType = camDelegate.itemType()
             var voucherProperties = camDelegate.purchaseProperties(for: skProduct.productIdentifier)
+            voucherProperties.update(with: skProduct)
             
             let buyAction = {
                 let playableInfo = PlayableItemInfo(name: itemName,
@@ -258,6 +257,16 @@ class EntitlementPickerPresenter {
         let viewAlertEvent = AnalyticsEvents.makeViewAlert(from: error)
         ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: viewAlertEvent.key,
                                                                      parameters: viewAlertEvent.metadata)
+    }
+    
+    private func createProductProperties(for productIdentifier: String) -> PurchaseProperties {
+        var purchaseProperties = self.camDelegate.purchaseProperties(for: productIdentifier)
+        
+        if let skProduct = self.availableProducts.first(where: { $0.productIdentifier == productIdentifier }) {
+            purchaseProperties.update(with: skProduct)
+        }
+        
+        return purchaseProperties
     }
 }
 
