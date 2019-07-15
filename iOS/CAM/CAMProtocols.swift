@@ -44,6 +44,10 @@ open class PurchasedProduct {
     private(set) var redeemCode: String?
     private(set) var state: ItemState = .purchased
     
+    public var productIdentifier: String {
+        return transaction.payment.productIdentifier
+    }
+    
     init(transaction: SKPaymentTransaction,
          receipt: Data,
          redeemCode: String? = nil,
