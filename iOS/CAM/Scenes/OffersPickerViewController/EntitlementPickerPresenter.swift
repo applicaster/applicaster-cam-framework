@@ -117,6 +117,12 @@ class EntitlementPickerPresenter {
                     case .failure(let error):
                         self.view.showAlert(description: error.localizedDescription)
                         self.sendAnalyticsEvent(for: error)
+                        let restoreFailureEvent = AnalyticsEvents.storeRestorePurchaseError(error,
+                                                                                            PlayableItemInfo(name: self.camDelegate.itemName(),
+                                                                                                             type: self.camDelegate.itemType()),
+                                                                                            nil)
+                        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: restoreFailureEvent.key,
+                                                                                     parameters: restoreFailureEvent.metadata)
                     }
                 })
             case .failure(let error):

@@ -142,11 +142,16 @@ private enum TriggerKeys: String {
     case trigger = "Trigger"
 }
 
-struct Trigger {
-    private let trigger: String
+public enum Trigger: String {
+    case tapCell = "Tap Cell"
+    case appLaunch = "App Launch"
+    
+    var key: String {
+        return "Trigger"
+    }
     
     var metadata: [String: String] {
-        return [TriggerKeys.trigger.rawValue: trigger]
+        return [key: rawValue]
     }
 }
 
@@ -179,6 +184,21 @@ enum IsConfirmationAlert {
     }
 }
 
+extension CAMFlow {
+    var firstScreen: String {
+        switch self  {
+        case .authentication:
+            return "Login"
+        case .storefront:
+            return "Storefront"
+        case .authAndStorefront:
+            return "Login"
+        case .no:
+            return "No"
+        }
+    }
+}
+
 enum AnalyticsEvents {
     case tapStandardLoginButton(PlayableItemInfo)
     case standardLoginSuccess(PlayableItemInfo)
@@ -193,7 +213,7 @@ enum AnalyticsEvents {
     case alternativeSignUpSuccess(PlayableItemInfo)
     case alternativeSignUpFailure(PlayableItemInfo)
     case launchContentGatewayPlugin(Trigger, firstScreen: String, PlayableItemInfo)
-    case contentGatewaySession(Trigger, action: String)
+    case contentGatewaySession(Trigger)
     case switchToLoginScreen
     case switchToSignUpScreen
     case launchPasswordResetScreen
@@ -207,7 +227,7 @@ enum AnalyticsEvents {
     case tapRestorePurchaseLink(PlayableItemInfo)
     case startRestorePurchase(PlayableItemInfo)
     case completeRestorePurchase(PlayableItemInfo, [PurchaseProperties])
-    case storeRestorePurchaseError(Error, PlayableItemInfo, PurchaseProperties)
+    case storeRestorePurchaseError(Error, PlayableItemInfo, PurchaseProperties?)
     
     var key: String {
         switch self {
@@ -263,10 +283,9 @@ enum AnalyticsEvents {
                 .merge(trigger.metadata)
                 .merge(["First Screen": firstScreen])
                 .merge(info.metadata)
-        case .contentGatewaySession(let trigger, let action):
+        case .contentGatewaySession(let trigger):
             metadata = metadata
                 .merge(trigger.metadata)
-                .merge(["Action": action])
         case .switchToLoginScreen,
              .switchToSignUpScreen,
              .launchPasswordResetScreen,
@@ -286,8 +305,7 @@ enum AnalyticsEvents {
             metadata = metadata
                 .merge(info.metadata)
                 .merge(voucher.metadata)
-        case .storePurchaseError(let error, let info, let voucher),
-             .storeRestorePurchaseError(let error, let info, let voucher):
+        case .storePurchaseError(let error, let info, let voucher):
             metadata = metadata
                 .merge(["Error Message": error.localizedDescription])
                 .merge(info.metadata)
@@ -307,6 +325,10 @@ enum AnalyticsEvents {
             metadata = metadata
                 .merge(info.metadata)
                 .merge([ProductPropertiesKeys.key: purchaseProperties.map({ $0.metadata })])
+        case .storeRestorePurchaseError(let error, let info, _):
+            metadata = metadata
+                .merge(["Error Message": error.localizedDescription])
+                .merge(info.metadata)
         }
         
         return metadata

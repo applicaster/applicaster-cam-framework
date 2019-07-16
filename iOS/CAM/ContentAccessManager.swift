@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ZappPlugins
 
 protocol PluginDataProviderProtocol: AnyObject {
     func getCamDelegate() -> CAMDelegate
@@ -35,9 +36,22 @@ open class ContentAccessManager {
         self.completion = completion
         self.navigationController = UINavigationController()
         self.navigationController.isNavigationBarHidden = true
+        
+        let launchEvent = AnalyticsEvents.launchContentGatewayPlugin(delegate.trigger(),
+                                                                     firstScreen: camFlow.firstScreen,
+                                                                     PlayableItemInfo(name: delegate.itemName(),
+                                                                                      type: delegate.itemType()))
+        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: launchEvent.key,
+                                                                     parameters: launchEvent.metadata,
+                                                                     timed: true)
     }
     
     public func startFlow() {
+        let event = AnalyticsEvents.contentGatewaySession(delegate.trigger())
+        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: event.key,
+                                                                     parameters: event.metadata,
+                                                                     timed: true)
+        
         switch camFlow {
         case .authentication:
             startAuthenticationFlow()
