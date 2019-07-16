@@ -15,7 +15,7 @@ private enum IAPEvent {
     case purchase
     case restore
     
-    var analyticsEvent: ConfirmationAlertTypes {
+    var analyticsEvent: ConfirmationAlertType {
         switch self {
         case .purchase:
             return .purchase

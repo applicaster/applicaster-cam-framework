@@ -9,139 +9,6 @@ import Foundation
 import StoreKit
 import ZappPlugins
 
-private enum PlayableItemInfoKeys: String {
-    case name = "Content Entity Name"
-    case type = "Content Entity Type"
-}
-
-struct PlayableItemInfo {
-    let name: String
-    let type: String
-    
-    var metadata: [String: String] {
-        return [PlayableItemInfoKeys.name.rawValue: self.name,
-                PlayableItemInfoKeys.type.rawValue: self.type]
-    }
-}
-
-private enum ProductPropertiesKeys: String {
-    case subscriber = "Subscriber"
-    case productName = "Product Name"
-    case price = "Price"
-    case transactionID = "Transaction ID"
-    case productID = "Product ID"
-    case subscriptionDuration = "Subscription Duration"
-    case purchaseType = "Purchase Type"
-    case trialPeriod = "Trial Period"
-    
-    static var key: String {
-        return "Purchase Product Properties"
-    }
-}
-
-public enum PurchaseEntityType: String {
-    case vod = "VOD Item"
-    case category = "Category"
-    
-    var key: String {
-        return "Purchase Entity Type"
-    }
-}
-
-private enum PurchaseType: String {
-    case subscription = "Subscription"
-    case consumable = "Consumable"
-    
-    var key: String {
-        return "Purchase Type"
-    }
-}
-
-public struct PurchaseProperties {
-    
-    private var isSubscriber: Bool
-    public var productName: String?
-    public var price: String?
-    public var transactionID: String?
-    private var productID: String
-    public var isSubscription: Bool?
-    public var subscriptionDuration: String?
-    public var trialPeriod: String?
-    public var purchaseEntityType: PurchaseEntityType?
-    
-    var metadata: [String: String] {
-        var result: [String: String] = [ProductPropertiesKeys.productID.rawValue: productID]
-        
-        result[ProductPropertiesKeys.subscriber.rawValue] = isSubscriber ? "Yes" : "No"
-        
-        if let name = productName {
-            result[ProductPropertiesKeys.productName.rawValue] = name
-        }
-        
-        if let price = self.price {
-            result[ProductPropertiesKeys.price.rawValue] = price
-        }
-        
-        if let transactionID = self.transactionID {
-            result[ProductPropertiesKeys.transactionID.rawValue] = transactionID
-        }
-        
-        var purchaseType: PurchaseType
-        
-        if let duration = subscriptionDuration {
-            purchaseType = .subscription
-            result[ProductPropertiesKeys.subscriptionDuration.rawValue] = duration.capitalized
-        } else {
-            purchaseType = .consumable
-        }
-        
-        result[purchaseType.key] = purchaseType.rawValue
-        
-        if let type = purchaseEntityType {
-            result[type.key] = type.rawValue
-        }
-        
-        if let trial = trialPeriod {
-            result[ProductPropertiesKeys.trialPeriod.rawValue] = trial + " Days"
-        }
-        
-        return result
-    }
-    
-    public init(productIdentifier: String, isSubscriber: Bool) {
-        self.productID = productIdentifier
-        self.isSubscriber = isSubscriber
-    }
-    
-    mutating func update(with skProduct: SKProduct) {
-                self.productName = skProduct.localizedTitle
-                self.price = skProduct.localizedPrice
-                self.productID = skProduct.productIdentifier
-    }
-    
-
-}
-
-private enum AlertInfoKeys: String {
-    case title = "Alert Title"
-    case description = "Alert Description"
-}
-
-struct AlertInfo {
-    let title: String
-    let description: String
-    let isConfirmation: IsConfirmationAlert
-    
-    var metadata: [String: String] {
-        return isConfirmation.metadata.merge([AlertInfoKeys.title.rawValue: self.title,
-                                              AlertInfoKeys.description.rawValue: self.description])
-    }
-}
-
-private enum TriggerKeys: String {
-    case trigger = "Trigger"
-}
-
 public enum Trigger: String {
     case tapCell = "Tap Cell"
     case appLaunch = "App Launch"
@@ -152,35 +19,6 @@ public enum Trigger: String {
     
     var metadata: [String: String] {
         return [key: rawValue]
-    }
-}
-
-enum ConfirmationAlertTypes: String {
-    case purchase = "Purchase"
-    case restorePurchase = "Restore Purchase"
-    case passwordReset = "Password Reset"
-    
-    var key: String {
-        return "Confirmation Cause"
-    }
-}
-
-enum IsConfirmationAlert {
-    case yes(type: ConfirmationAlertTypes)
-    case no
-    
-    var key: String {
-        return "Confirmation Alert"
-    }
-    
-    var metadata: [String: String] {
-        switch self {
-        case .yes(let type):
-            return [key: "Yes",
-                    type.key: type.rawValue]
-        case .no:
-            return [key: "No"]
-        }
     }
 }
 
@@ -324,7 +162,7 @@ enum AnalyticsEvents {
         case .completeRestorePurchase(let info, let purchaseProperties):
             metadata = metadata
                 .merge(info.metadata)
-                .merge([ProductPropertiesKeys.key: purchaseProperties.map({ $0.metadata })])
+                .merge([PurchaseProperties.key: purchaseProperties.map({ $0.metadata })])
         case .storeRestorePurchaseError(let error, let info, _):
             metadata = metadata
                 .merge(["Error Message": error.localizedDescription])
