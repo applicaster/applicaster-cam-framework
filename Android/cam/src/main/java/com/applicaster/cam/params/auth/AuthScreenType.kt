@@ -8,9 +8,9 @@ enum class AuthScreenType {
 
     fun getKey(): String {
         return when (this) {
-            LOGIN -> "login"
-            SIGNUP -> "signup"
-            PASSWORD_RESET -> "password_reset"
+            LOGIN -> "Login"
+            SIGNUP -> "Sign-up"
+            PASSWORD_RESET -> "Password-reset"
             else -> "undefined"
         }
     }
@@ -22,7 +22,7 @@ enum class AuthScreenType {
                 "Login" -> LOGIN
                 "signup" -> SIGNUP
                 "Sign-up" -> SIGNUP
-                "password_reset" -> PASSWORD_RESET
+                "Password-reset" -> PASSWORD_RESET
                 else -> UNDEFINED
             }
         }
