@@ -38,7 +38,7 @@ object MockPluginConfiguration {
      *
      *
     {
-    "signup": [
+    "Sign-up": [
     {
     "type": "EMAIL",
     "key": "email",
@@ -68,7 +68,7 @@ object MockPluginConfiguration {
     "mandatory": false
     }
     ],
-    "login": [
+    "Login": [
     {
     "type": "EMAIL",
     "key": "email",
@@ -84,7 +84,7 @@ object MockPluginConfiguration {
     "mandatory": true
     }
     ],
-    "password_reset": [
+    "Password-reset": [
     {
     "type": "EMAIL",
     "key": "email",
