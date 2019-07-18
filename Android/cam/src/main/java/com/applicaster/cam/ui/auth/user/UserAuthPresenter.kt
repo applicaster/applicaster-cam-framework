@@ -1,6 +1,7 @@
 package com.applicaster.cam.ui.auth.user
 
 import android.app.Activity
+import com.applicaster.cam.analytics.AnalyticsUtil
 import com.applicaster.cam.ui.auth.base.BaseInputPresenter
 import com.applicaster.cam.ui.auth.base.IBaseInputView
 import com.applicaster.model.APUser
@@ -50,6 +51,7 @@ abstract class UserAuthPresenter(private val view: IBaseInputView?) : BaseInputP
     override fun onError(error: Exception?) {
         view?.hideLoadingIndicator()
         view?.showAlert(error?.message ?: "Facebook auth failed")
+        AnalyticsUtil.logAlternativeLoginFailure()
     }
 
     override fun onFacebookButtonClicked(activity: Activity?) {

@@ -64,6 +64,10 @@ class PluginConfigurator(private val pluginConfig: Map<String, String>) : Config
                 && UI_KEY_RESTORE_CONFIRMATION_DESC_TEXT in pluginConfig
                 && UI_KEY_RESTORE_CONFIRMATION_BUTTON_TEXT in pluginConfig
     }
+
+    override fun getPaymentConfirmationTitle(): String = pluginConfig.getValue(KEY_PAYMENT_CONFIRMATION_TITLE_TEXT)
+
+    override fun getPaymentConfirmationDescription(): String = pluginConfig.getValue(KEY_PAYMENT_CONFIRMATION_DESC_TEXT)
 }
 
 const val KEY_AUTH_FIELDS = "authentication_input_fields"
@@ -73,3 +77,5 @@ const val KEY_ALT_AUTH_SEPARATOR = "alternative_authentication_separator_text"
 const val KEY_EMPTY_INPUT_FIELD_ERROR = "required_field_alert_text"
 const val KEY_NOT_VALID_EMAIL_INPUT_FIELD_ERROR = "invalid_email_alert_text"
 const val KEY_DEFAULT_ALERT_TEXT = "default_alert_text"
+const val KEY_PAYMENT_CONFIRMATION_TITLE_TEXT = "payment_confirmation_title_text"
+const val KEY_PAYMENT_CONFIRMATION_DESC_TEXT = "payment_confirmation_description_text"

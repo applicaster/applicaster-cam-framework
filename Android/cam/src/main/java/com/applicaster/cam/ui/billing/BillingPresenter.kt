@@ -6,6 +6,9 @@ import com.android.billingclient.api.BillingClient
 import com.android.billingclient.api.Purchase
 import com.android.billingclient.api.SkuDetails
 import com.applicaster.cam.*
+import com.applicaster.cam.analytics.AnalyticsUtil
+import com.applicaster.cam.analytics.ConfirmationAlertData
+import com.applicaster.cam.analytics.ConfirmationCause
 import com.applicaster.cam.params.billing.BillingOffer
 import com.applicaster.cam.params.billing.ProductType
 import com.applicaster.cam.ui.CamNavigationRouter
@@ -68,7 +71,7 @@ class BillingPresenter(
     }
 
     override fun onPurchaseConsumed(purchaseToken: String) {
-        Log.e(TAG, "PurchaseConsumed")
+        Log.i(TAG, "PurchaseConsumed")
     }
 
     override fun onPurchaseConsumptionFailed(statusCode: Int, description: String) {
@@ -80,17 +83,47 @@ class BillingPresenter(
             override fun onFailure(msg: String) {
                 view?.hideLoadingIndicator()
                 handleErrorMessage(msg)
+
+                AnalyticsUtil.logViewAlert(ConfirmationAlertData(
+                    false,
+                    ConfirmationCause.PURCHASE,
+                    ContentAccessManager.pluginConfigurator.getPaymentConfirmationTitle(),
+                    ContentAccessManager.pluginConfigurator.getPaymentConfirmationDescription(),
+                    if (msg.isEmpty()) ContentAccessManager.pluginConfigurator.getDefaultAlertText() else msg
+                ))
             }
 
             override fun onSuccess() {
-                if (ContentAccessManager.pluginConfigurator.isShowConfirmationPayment())
+                if (ContentAccessManager.pluginConfigurator.isShowConfirmationPayment()) {
                     navigationRouter.showConfirmationDialog(AlertDialogType.BILLING)
+
+                    AnalyticsUtil.logViewAlert(ConfirmationAlertData(
+                        true,
+                        ConfirmationCause.PURCHASE,
+                        ContentAccessManager.pluginConfigurator.getPaymentConfirmationTitle(),
+                        ContentAccessManager.pluginConfigurator.getPaymentConfirmationDescription(),
+                        ""
+                    ))
+                }
             }
         })
     }
 
     override fun onPurchasesRestored(purchases: List<Purchase>) {
         ContentAccessManager.contract.onPurchasesRestored(purchases, this)
+        if (ContentAccessManager.pluginConfigurator.isShowConfirmationRestorePurchases()) {
+            navigationRouter.showConfirmationDialog(AlertDialogType.RESTORE)
+
+            AnalyticsUtil.logViewAlert(ConfirmationAlertData(
+                true,
+                ConfirmationCause.RESTORE_PURCHASE,
+                ContentAccessManager.pluginConfigurator.getPaymentConfirmationTitle(),
+                ContentAccessManager.pluginConfigurator.getPaymentConfirmationDescription(),
+                ""
+            ))
+        } else {
+            view?.goBack()
+        }
     }
 
     override fun onPurchaseLoadingFailed(statusCode: Int, description: String) {
@@ -144,10 +177,6 @@ class BillingPresenter(
 
     override fun onSuccess() {
         view?.hideLoadingIndicator()
-        if (ContentAccessManager.pluginConfigurator.isShowConfirmationRestorePurchases())
-            navigationRouter.showConfirmationDialog(AlertDialogType.RESTORE)
-        else
-            view?.goBack()
     }
 
     override fun onRestoreClicked() {

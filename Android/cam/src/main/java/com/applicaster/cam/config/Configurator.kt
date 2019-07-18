@@ -30,4 +30,8 @@ interface Configurator {
     fun isShowConfirmationPayment(): Boolean
 
     fun isShowConfirmationRestorePurchases(): Boolean
+
+    fun getPaymentConfirmationTitle(): String
+
+    fun getPaymentConfirmationDescription(): String
 }

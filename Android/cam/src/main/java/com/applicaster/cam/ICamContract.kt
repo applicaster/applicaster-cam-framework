@@ -33,7 +33,6 @@ interface ICamContract {
     fun getCamFlow(): CamFlow
 
     //========= Analytics ============//
-    fun getEntityType(): String
 
-    fun getEntityName(): String
+    fun getAnalyticsDataProvider(): AnalyticsDataProvider
 }
