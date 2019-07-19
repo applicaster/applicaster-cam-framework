@@ -2,6 +2,7 @@ package com.applicaster.cam
 
 import android.content.Context
 import android.content.Intent
+import com.applicaster.cam.analytics.AnalyticsUtil
 import com.applicaster.cam.config.Configurator
 import com.applicaster.cam.config.PluginConfigurator
 import com.applicaster.cam.config.ui.PluginUIProvider
@@ -24,6 +25,8 @@ object ContentAccessManager : IContentAccessManager {
         )
         camFlow = contract.getCamFlow()
         startCamActivity(context)
+
+        AnalyticsUtil.logLaunchContentGatwayPlugin(this.contract.getAnalyticsDataProvider().getTrigger().value)
     }
 
     private fun startCamActivity(context: Context) {

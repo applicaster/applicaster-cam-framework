@@ -15,8 +15,8 @@ class AnalyticsUtil {
 
         private fun getFirstScreen() =
             Properties.TRIGGER.value to when (ContentAccessManager.pluginConfigurator.getDefaultAuthScreen()) {
-                AuthScreenType.LOGIN -> "Login"
-                AuthScreenType.SIGNUP -> "Sign-Up"
+                AuthScreenType.LOGIN -> AuthScreenType.LOGIN.getKey()
+                AuthScreenType.SIGNUP -> AuthScreenType.SIGNUP.getKey()
                 else -> ""
             }
 
@@ -42,8 +42,7 @@ class AnalyticsUtil {
                 Properties.SUBSCRIPTION_DURATION.value to productPropertiesData.subscriptionDuration,
                 Properties.PURCHASE_TYPE.value to productPropertiesData.purchaseType.value,
                 Properties.TRIAL_PERIOD.value to productPropertiesData.trialPeriod,
-                Properties.PURCHASE_ENTITY_TYPE.value to productPropertiesData.purchaseEntityType,
-                Properties.GRACE_PERIOD.value to productPropertiesData.gracePeriod
+                Properties.PURCHASE_ENTITY_TYPE.value to productPropertiesData.purchaseEntityType
             )
 
         //
@@ -223,13 +222,15 @@ class AnalyticsUtil {
             AnalyticsAgentUtil.logEvent(AnalyticsEvent.VIEW_ALERT.value, params)
         }
 
-        fun logTapPurchaseButton(purchaseProductPropertiesData: PurchaseProductPropertiesData) {
-            val params = mapOf(
-                Properties.PLUGIN_PROVIDER.value to getPluginProvider(),
-                Properties.CONTENT_ENTITY_NAME.value to getContentEntityName(),
-                Properties.CONTENT_ENTITY_TYPE.value to getContentEntityType()
-            ) + generateProductPropertiesMap(purchaseProductPropertiesData)
-            AnalyticsAgentUtil.logEvent(AnalyticsEvent.TAP_PURCHASE_BUTTON.value, params)
+        fun logTapPurchaseButton(purchaseProductPropertiesData: PurchaseProductPropertiesData?) {
+            purchaseProductPropertiesData?.let {
+                val params = mapOf(
+                    Properties.PLUGIN_PROVIDER.value to getPluginProvider(),
+                    Properties.CONTENT_ENTITY_NAME.value to getContentEntityName(),
+                    Properties.CONTENT_ENTITY_TYPE.value to getContentEntityType()
+                ) + generateProductPropertiesMap(it)
+                AnalyticsAgentUtil.logEvent(AnalyticsEvent.TAP_PURCHASE_BUTTON.value, params)
+            }
         }
 
         fun logCompletePurchase(purchaseProductPropertiesData: PurchaseProductPropertiesData) {
@@ -283,29 +284,29 @@ class AnalyticsUtil {
             AnalyticsAgentUtil.logEvent(AnalyticsEvent.COMPLETE_RESTORE_PURCHASE.value, params)
         }
 
-        fun logCancelRestorePurchase(purchaseProductPropertiesData: PurchaseProductPropertiesData) {
-            val params = mapOf(
-                Properties.PLUGIN_PROVIDER.value to getPluginProvider(),
-                Properties.CONTENT_ENTITY_NAME.value to getContentEntityName(),
-                Properties.CONTENT_ENTITY_TYPE.value to getContentEntityType()
-            ) + generateProductPropertiesMap(purchaseProductPropertiesData)
-            AnalyticsAgentUtil.logEvent(AnalyticsEvent.CANCEL_RESTORE_PURCHASE.value, params)
-        }
-
-        fun logStoreRestorePurchaseError(
-            errorCode: String,
-            errorMessage: String,
-            purchaseProductPropertiesData: PurchaseProductPropertiesData
-        ) {
-            val params = mapOf(
-                Properties.ERROR_CODE_ID.value to errorCode,
-                Properties.ERROR_MESSAGE.value to errorMessage,
-                Properties.PLUGIN_PROVIDER.value to getPluginProvider(),
-                Properties.CONTENT_ENTITY_NAME.value to getContentEntityName(),
-                Properties.CONTENT_ENTITY_TYPE.value to getContentEntityType()
-            ) + generateProductPropertiesMap(purchaseProductPropertiesData)
-            AnalyticsAgentUtil.logEvent(AnalyticsEvent.STORE_RESTORE_PURCHASE_ERROR.value, params)
-        }
+//        fun logCancelRestorePurchase(purchaseProductPropertiesData: PurchaseProductPropertiesData) {
+//            val params = mapOf(
+//                Properties.PLUGIN_PROVIDER.value to getPluginProvider(),
+//                Properties.CONTENT_ENTITY_NAME.value to getContentEntityName(),
+//                Properties.CONTENT_ENTITY_TYPE.value to getContentEntityType()
+//            ) + generateProductPropertiesMap(purchaseProductPropertiesData)
+//            AnalyticsAgentUtil.logEvent(AnalyticsEvent.CANCEL_RESTORE_PURCHASE.value, params)
+//        }
+//
+//        fun logStoreRestorePurchaseError(
+//            errorCode: String,
+//            errorMessage: String,
+//            purchaseProductPropertiesData: PurchaseProductPropertiesData
+//        ) {
+//            val params = mapOf(
+//                Properties.ERROR_CODE_ID.value to errorCode,
+//                Properties.ERROR_MESSAGE.value to errorMessage,
+//                Properties.PLUGIN_PROVIDER.value to getPluginProvider(),
+//                Properties.CONTENT_ENTITY_NAME.value to getContentEntityName(),
+//                Properties.CONTENT_ENTITY_TYPE.value to getContentEntityType()
+//            ) + generateProductPropertiesMap(purchaseProductPropertiesData)
+//            AnalyticsAgentUtil.logEvent(AnalyticsEvent.STORE_RESTORE_PURCHASE_ERROR.value, params)
+//        }
      }
 }
 
@@ -382,7 +383,8 @@ enum class Action(val value: String) {
 enum class ConfirmationCause(val value: String) {
     PURCHASE        ("Purchase"),
     RESTORE_PURCHASE("Restore Purchase"),
-    PASSWORD_RESET  ("Password Reset")
+    PASSWORD_RESET  ("Password Reset"),
+    NONE("")
 }
 
 enum class PurchaseType(val value: String) {
@@ -412,7 +414,6 @@ data class PurchaseProductPropertiesData(
     val purchaseType: PurchaseType,
     val subscriptionDuration: String,
     val trialPeriod: String,
-    val purchaseEntityType: String,
-    val gracePeriod: String
+    val purchaseEntityType: String
 )
 
