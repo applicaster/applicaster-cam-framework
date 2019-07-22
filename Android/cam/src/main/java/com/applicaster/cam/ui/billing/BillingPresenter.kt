@@ -72,6 +72,7 @@ class BillingPresenter(
             skuDetails.sku == skuId
         }?.also { skuDetails ->
             if (activity != null) GoogleBillingHelper.purchase(activity, skuDetails)
+            // Analytics events
             collectPurchaseData(camContract.getAnalyticsDataProvider().getPurchaseData()).forEach {
                 AnalyticsUtil.logTapPurchaseButton(it)
             }
@@ -84,6 +85,7 @@ class BillingPresenter(
 
     override fun onPurchaseConsumptionFailed(statusCode: Int, description: String) {
         Log.e(TAG, "PurchaseConsumptionFailed: $description")
+        // Analytics events
         AnalyticsUtil.logViewAlert(
             ConfirmationAlertData(
                 false,
@@ -101,6 +103,7 @@ class BillingPresenter(
                 view?.hideLoadingIndicator()
                 handleErrorMessage(msg)
 
+                // Analytics events
                 AnalyticsUtil.logViewAlert(
                     ConfirmationAlertData(
                         false,
@@ -116,6 +119,7 @@ class BillingPresenter(
                 if (ContentAccessManager.pluginConfigurator.isShowConfirmationPayment()) {
                     navigationRouter.showConfirmationDialog(AlertDialogType.BILLING)
 
+                    // Analytics events
                     AnalyticsUtil.logViewAlert(
                         ConfirmationAlertData(
                             true,
@@ -138,6 +142,7 @@ class BillingPresenter(
         if (ContentAccessManager.pluginConfigurator.isShowConfirmationRestorePurchases()) {
             navigationRouter.showConfirmationDialog(AlertDialogType.RESTORE)
 
+            // Analytics events
             AnalyticsUtil.logViewAlert(
                 ConfirmationAlertData(
                     true,
@@ -151,13 +156,25 @@ class BillingPresenter(
             view?.goBack()
         }
 
-        collectPurchaseData(camContract.getAnalyticsDataProvider().getPurchaseData(), purchases).forEach {
-            AnalyticsUtil.logCompleteRestorePurchase(it)
+        // Analytics events
+        if (purchases.isEmpty()) {
+            collectPurchaseData(camContract.getAnalyticsDataProvider().getPurchaseData(), purchases).forEach {
+                AnalyticsUtil.logStoreRestorePurchaseError("Restore purchases error", it)
+            }
+        } else {
+            collectPurchaseData(
+                camContract.getAnalyticsDataProvider().getPurchaseData(),
+                purchases
+            ).forEach {
+                AnalyticsUtil.logCompleteRestorePurchase(it)
+            }
         }
     }
 
     override fun onPurchaseLoadingFailed(statusCode: Int, description: String) {
         view?.showAlert(ContentAccessManager.pluginConfigurator.getDefaultAlertText())
+
+        // Analytics events
         AnalyticsUtil.logViewAlert(
             ConfirmationAlertData(
                 false,
@@ -215,6 +232,7 @@ class BillingPresenter(
         if (msg.isEmpty()) {
             view?.showAlert(ContentAccessManager.pluginConfigurator.getDefaultAlertText())
 
+            // Analytics events
             AnalyticsUtil.logViewAlert(
                 ConfirmationAlertData(
                     false,
@@ -227,6 +245,7 @@ class BillingPresenter(
         } else {
             view?.showAlert(msg)
 
+            // Analytics events
             AnalyticsUtil.logViewAlert(
                 ConfirmationAlertData(
                     false,

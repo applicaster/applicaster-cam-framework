@@ -45,8 +45,7 @@ class AnalyticsUtil {
                 Properties.PURCHASE_ENTITY_TYPE.value to productPropertiesData.purchaseEntityType
             )
 
-        //
-
+        // Analytics logger functions
         fun logTapStandardLoginButton() {
             val params = mapOf(
                 Properties.CONTENT_ENTITY_NAME.value to getContentEntityName(),
@@ -284,29 +283,18 @@ class AnalyticsUtil {
             AnalyticsAgentUtil.logEvent(AnalyticsEvent.COMPLETE_RESTORE_PURCHASE.value, params)
         }
 
-//        fun logCancelRestorePurchase(purchaseProductPropertiesData: PurchaseProductPropertiesData) {
-//            val params = mapOf(
-//                Properties.PLUGIN_PROVIDER.value to getPluginProvider(),
-//                Properties.CONTENT_ENTITY_NAME.value to getContentEntityName(),
-//                Properties.CONTENT_ENTITY_TYPE.value to getContentEntityType()
-//            ) + generateProductPropertiesMap(purchaseProductPropertiesData)
-//            AnalyticsAgentUtil.logEvent(AnalyticsEvent.CANCEL_RESTORE_PURCHASE.value, params)
-//        }
-//
-//        fun logStoreRestorePurchaseError(
-//            errorCode: String,
-//            errorMessage: String,
-//            purchaseProductPropertiesData: PurchaseProductPropertiesData
-//        ) {
-//            val params = mapOf(
-//                Properties.ERROR_CODE_ID.value to errorCode,
-//                Properties.ERROR_MESSAGE.value to errorMessage,
-//                Properties.PLUGIN_PROVIDER.value to getPluginProvider(),
-//                Properties.CONTENT_ENTITY_NAME.value to getContentEntityName(),
-//                Properties.CONTENT_ENTITY_TYPE.value to getContentEntityType()
-//            ) + generateProductPropertiesMap(purchaseProductPropertiesData)
-//            AnalyticsAgentUtil.logEvent(AnalyticsEvent.STORE_RESTORE_PURCHASE_ERROR.value, params)
-//        }
+        fun logStoreRestorePurchaseError(
+            errorMessage: String,
+            purchaseProductPropertiesData: PurchaseProductPropertiesData
+        ) {
+            val params = mapOf(
+                Properties.ERROR_MESSAGE.value to errorMessage,
+                Properties.PLUGIN_PROVIDER.value to getPluginProvider(),
+                Properties.CONTENT_ENTITY_NAME.value to getContentEntityName(),
+                Properties.CONTENT_ENTITY_TYPE.value to getContentEntityType()
+            ) + generateProductPropertiesMap(purchaseProductPropertiesData)
+            AnalyticsAgentUtil.logEvent(AnalyticsEvent.STORE_RESTORE_PURCHASE_ERROR.value, params)
+        }
      }
 }
 
