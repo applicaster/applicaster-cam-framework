@@ -67,7 +67,7 @@ class PluginConfigurator(private val pluginConfig: Map<String, String>) : Config
 }
 
 const val KEY_AUTH_FIELDS = "authentication_input_fields"
-const val KEY_DEFAULT_AUTH_SCREEN = "default_login_screen"
+const val KEY_DEFAULT_AUTH_SCREEN = "default_authentication_screen"
 const val KEY_ALT_AUTH_PROMPT = "alternative_authentication_prompt_text"
 const val KEY_ALT_AUTH_SEPARATOR = "alternative_authentication_separator_text"
 const val KEY_EMPTY_INPUT_FIELD_ERROR = "required_field_alert_text"
