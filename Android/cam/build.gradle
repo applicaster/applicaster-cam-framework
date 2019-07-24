@@ -185,11 +185,11 @@ publishing {
 }
 
 static def getBintrayUserProperty() {
-    return  "drazumeev-sc@applicaster-ltd"
+    return System.getenv("BINTRAY_USER")
 }
 
 static def getBintrayApiKeyProperty() {
-    return "cad9fab6cc174e4a38b9342fff9e0a0cf26fe9dd"
+    return System.getenv("BINTRAY_API_KEY")
 }
 
 bintray {

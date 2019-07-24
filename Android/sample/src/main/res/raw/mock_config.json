@@ -1,7 +1,7 @@
 {
   "trigger_on_app_launch":"false",
   "app_level_entitlements":"",
-  "default_login_screen":"Login",
+  "default_authentication_screen":"Login",
 
   "default_alert_text":"An error occurred trying to process your request. Please go back and try again.",
   "design_assets":"",
