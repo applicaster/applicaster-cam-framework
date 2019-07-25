@@ -51,4 +51,6 @@ class MockCamContract(private val context: Context) : ICamContract {
     override fun isRedeemActivated(): Boolean = false
 
     override fun getCamFlow(): CamFlow = CamFlow.AUTH_AND_STOREFRONT
+
+    override fun onCamFinished() {}
 }
