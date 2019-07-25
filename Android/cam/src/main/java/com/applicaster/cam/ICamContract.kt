@@ -31,4 +31,6 @@ interface ICamContract {
     fun isRedeemActivated(): Boolean
 
     fun getCamFlow(): CamFlow
+
+    fun onCamFinished()
 }

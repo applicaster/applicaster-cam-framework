@@ -47,6 +47,7 @@ class CamActivity : AppCompatActivity(), IBaseActivity {
     }
 
     override fun close() {
+        ContentAccessManager.contract.onCamFinished()
         finish()
     }
 }
