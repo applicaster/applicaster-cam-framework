@@ -802,6 +802,24 @@
         "type": "text_input",
         "label_tooltip": "<p>The descriptive text below the title in the password reset confirmation notice. We recommend changing from the default value to better match your brand and the circumstances of the flow for accessing content in your app. </p><p>This field is required in order for a confirmation alert to be displayed.</p>",
         "initial_value": "Check your email in order reset your password for this account"
+      },
+      {
+        "key": "require_payment",
+        "type": "switch",
+        "label_tooltip": "<p>When this field is on, the plugin will check if content requires payment (an entitlement or purchasable product) when given content is triggered.</p><p>This field also influences what configuration fields are available for the plugin.</p>",
+        "initial_value": "true"
+      },
+      {
+        "key": "authentication_requirement",
+        "type": "select",
+        "options": [
+          {"text": "Never require","value": "Never require"},
+          {"text": "Always require", "value": "Always require"},
+          {"text": "Require on all purchasable items", "value": "Require on all purchasable items"},
+          {"text": "Require when specified on the data source", "value": "Require when specified on the data source"}
+        ],
+        "label_tooltip": "<p>This field determines if/when authentication would be required to access content and also influences what configuration fields are available for the plugin.</p><p>If “Require when specified on the data source” is selected, then the feeds delivered by the data source provider must identify relevant content as requiring authentication.</p>",
+        "initial_value": "Always require"
       }
     ]
   }
