@@ -16,58 +16,84 @@ protocol LoginViewProtocol: AnyObject {
 }
 
 class LoginPresenter {
-    weak var view: LoginViewProtocol?
-    weak var coordinatorDelegate: AuthorizationCoordinatorProtocol?
-    weak var camDelegate: CAMDelegate?
+    
+    unowned var view: LoginViewProtocol
+    unowned var coordinatorDelegate: AuthorizationCoordinatorProtocol
+    unowned var camDelegate: CAMDelegate
+    
     var isRoot: Bool = false
     
+    init(view: LoginViewProtocol,
+         coordinatorDelegate: AuthorizationCoordinatorProtocol,
+         camDelegate: CAMDelegate) {
+        self.view = view
+        self.coordinatorDelegate = coordinatorDelegate
+        self.camDelegate = camDelegate
+    }
+    
     func viewDidLoad() {
-        if let json = camDelegate?.getPluginConfig()[CAMKeys.authFields.rawValue],
+        if let json = camDelegate.getPluginConfig()[CAMKeys.authFields.rawValue],
            let data = json.data(using: .utf8) {
             if let jsonAuthFields = try? JSONDecoder().decode(AuthFields.self, from: data),
                let loginFields = jsonAuthFields.login {
-                view?.updateTable(fields: loginFields)
+                view.updateTable(fields: loginFields)
             }
         }
     }
     
     func showResetPasswordScreen() {
-        coordinatorDelegate?.showResetPasswordScreen()
+        coordinatorDelegate.showResetPasswordScreen()
     }
     
     func showSignUpScreen() {
+        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: AnalyticsEvents.switchToSignUpScreen.key,
+                                                                     parameters: AnalyticsEvents.switchToSignUpScreen.metadata)
         if isRoot {
-            coordinatorDelegate?.showSingUpScreen(isCoordinatorRootController: false)
+            coordinatorDelegate.showSingUpScreen(isCoordinatorRootController: false)
         } else {
-            coordinatorDelegate?.popCurrentScreen()
+            coordinatorDelegate.popCurrentScreen()
         }
     }
     
     func close() {
-        coordinatorDelegate?.finishAuthorizationFlow(isUserLogged: false)
+        coordinatorDelegate.finishAuthorizationFlow(isUserLogged: false)
     }
     
     func backToPreviousScreen() {
-        coordinatorDelegate?.popCurrentScreen()
+        coordinatorDelegate.popCurrentScreen()
         if isRoot {
-            coordinatorDelegate?.finishAuthorizationFlow(isUserLogged: false)
+            coordinatorDelegate.finishAuthorizationFlow(isUserLogged: false)
         }
     }
     
     func login(data: [AuthField]) {
-        view?.showLoadingScreen(true)
+        let playableInfo = PlayableItemInfo(name: camDelegate.itemName(),
+                                            type: camDelegate.itemType())
+        let tapLoginEvent = AnalyticsEvents.tapStandardLoginButton(playableInfo)
+        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: tapLoginEvent.key,
+                                                                     parameters: tapLoginEvent.metadata)
+        
+        view.showLoadingScreen(true)
         if let data = validate(data: data) {
-            camDelegate?.login(authData: data, completion: { (result) in
+            camDelegate.login(authData: data, completion: { [weak self] (result) in
+                guard let self = self else { return }
+                
                 switch result {
                 case .success:
-                    self.coordinatorDelegate?.finishAuthorizationFlow(isUserLogged: true)
+                    let successLoginEvent = AnalyticsEvents.standardLoginSuccess(playableInfo)
+                    ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: successLoginEvent.key,
+                                                                                 parameters: successLoginEvent.metadata)
+                    self.coordinatorDelegate.finishAuthorizationFlow(isUserLogged: true)
                 case .failure(let error):
-                    self.view?.showLoadingScreen(false)
-                    self.view?.showError(description: error.localizedDescription)
+                    let failureLoginEvent = AnalyticsEvents.standardLoginFailure(playableInfo)
+                    ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: failureLoginEvent.key,
+                                                                                 parameters: failureLoginEvent.metadata)
+                    self.view.showLoadingScreen(false)
+                    self.view.showError(description: error.localizedDescription)
                 }
             })
         } else {
-            view?.showLoadingScreen(false)
+            view.showLoadingScreen(false)
         }
     }
     
@@ -79,13 +105,13 @@ class LoginPresenter {
             if data[index].mandatory && (data[index].text ?? "").isEmpty {
                 isSucceed = false
                 data[index].state = .error
-                data[index].errorDescription = camDelegate?.getPluginConfig()[CAMKeys.emptyFieldsMessage.rawValue] ?? ""
+                data[index].errorDescription = camDelegate.getPluginConfig()[CAMKeys.emptyFieldsMessage.rawValue] ?? ""
                 continue
             }
             if data[index].type == .email && !(data[index].text ?? "").isEmailValid() {
                 isSucceed = false
                 data[index].state = .error
-                data[index].errorDescription = camDelegate?.getPluginConfig()[CAMKeys.wrongEmailMessage.rawValue] ?? ""
+                data[index].errorDescription = camDelegate.getPluginConfig()[CAMKeys.wrongEmailMessage.rawValue] ?? ""
                 continue
             }
             if let key = data[index].key {
@@ -95,16 +121,16 @@ class LoginPresenter {
         if isSucceed {
             return result
         } else {
-            view?.showLoadingScreen(false)
-            view?.updateTable(fields: data)
+            view.showLoadingScreen(false)
+            view.updateTable(fields: data)
         }
         return nil
     }
     
     func showFacebookAuthScreen() {
-        view?.showLoadingScreen(true)
+        view.showLoadingScreen(true)
         guard let facebookClient = ZAAppConnector.sharedInstance().facebookAccountKitDelegate else {
-            self.view?.showLoadingScreen(false)
+            self.view.showLoadingScreen(false)
             return
         }
         facebookClient.authorizeFacebook(true, readPermissions: ["public_profile", "email"],
@@ -112,9 +138,9 @@ class LoginPresenter {
             if isUserLogged {
                 self.getFacebookUser(client: facebookClient)
             } else {
-                self.view?.showLoadingScreen(false)
+                self.view.showLoadingScreen(false)
                 if let error = error {
-                    self.view?.showError(description: error.localizedDescription)
+                    self.view.showError(description: error.localizedDescription)
                 }
             }
         })
@@ -124,8 +150,8 @@ class LoginPresenter {
         client.clientRequest(withGraphPath: "me", withParams: ["fields": "id, email"], withHTTPMethod: "GET",
                              withCompletionHandler: { (_, result, error) in
             if let error = error {
-                self.view?.showLoadingScreen(false)
-                self.view?.showError(description: error.localizedDescription)
+                self.view.showLoadingScreen(false)
+                self.view.showError(description: error.localizedDescription)
                 return
             }
             if let fields = result as? [String: Any],
@@ -137,12 +163,25 @@ class LoginPresenter {
     }
     
     func facebookLogin(email: String, userId: String) {
-        self.camDelegate?.facebookLogin(userData: (email: email, userId: userId), completion: { (result) in
+        let playableInfo = PlayableItemInfo(name: camDelegate.itemName(),
+                                            type: camDelegate.itemType())
+        let tapLoginEvent = AnalyticsEvents.tapAlternativeLogin(playableInfo)
+        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: tapLoginEvent.key,
+                                                                     parameters: tapLoginEvent.metadata)
+        self.camDelegate.facebookLogin(userData: (email: email, userId: userId), completion: { [weak self] (result) in
+            guard let self = self else { return }
+            
             switch result {
             case .success:
-                self.coordinatorDelegate?.finishAuthorizationFlow(isUserLogged: true)
+                let successLoginEvent = AnalyticsEvents.alternativaLoginSucess(playableInfo)
+                ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: successLoginEvent.key,
+                                                                             parameters: successLoginEvent.metadata)
+                self.coordinatorDelegate.finishAuthorizationFlow(isUserLogged: true)
             case .failure(let error):
-                self.view?.showError(description: error.localizedDescription)
+                let failureLoginEvent = AnalyticsEvents.alternativaLoginFailure(playableInfo)
+                ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: failureLoginEvent.key,
+                                                                             parameters: failureLoginEvent.metadata)
+                self.view.showError(description: error.localizedDescription)
             }
         })
     }

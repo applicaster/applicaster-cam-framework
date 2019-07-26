@@ -40,7 +40,7 @@ class LoginViewController: UIViewController {
     @IBOutlet var authFieldsTableHeightConstraint: NSLayoutConstraint!
 
     var configDictionary: [String: String] {
-        return presenter?.camDelegate?.getPluginConfig() ?? [String: String]()
+        return presenter?.camDelegate.getPluginConfig() ?? [String: String]()
     }
     var presenter: LoginPresenter?
     

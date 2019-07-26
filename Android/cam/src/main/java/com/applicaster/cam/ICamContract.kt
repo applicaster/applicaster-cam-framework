@@ -32,6 +32,8 @@ interface ICamContract {
 
     fun getCamFlow(): CamFlow
 
+    fun onCamFinished()
+
     //========= Analytics ============//
 
     fun getAnalyticsDataProvider(): AnalyticsDataProvider

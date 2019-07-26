@@ -9,71 +9,120 @@
 import Foundation
 import ApplicasterIAP
 import StoreKit
+import ZappPlugins
+
+private enum IAPEvent {
+    case purchase
+    case restore
+    
+    var analyticsEvent: ConfirmationAlertType {
+        switch self {
+        case .purchase:
+            return .purchase
+        case .restore:
+            return .restorePurchase
+        }
+    }
+}
 
 class EntitlementPickerPresenter {
-    weak var coordinatorDelegate: BillingCoordinatorProtocol?
-    weak var camDelegate: CAMDelegate?
-    weak var view: EntitlementPickerViewController?
+    
+    unowned var view: EntitlementPickerViewController
+    unowned var coordinatorDelegate: BillingCoordinatorProtocol
+    unowned var camDelegate: CAMDelegate
+    
     var availableProducts: [SKProduct] = []
+    
+    init(view: EntitlementPickerViewController,
+         coordinatorDelegate: BillingCoordinatorProtocol,
+         camDelegate: CAMDelegate) {
+        self.view = view
+        self.coordinatorDelegate = coordinatorDelegate
+        self.camDelegate = camDelegate
+    }
     
     // MARK: - Public methods
     
     func viewDidLoad() {
-        let screenTitle = camDelegate?.getPluginConfig()[CAMKeys.paymentScreenTitle.rawValue] ?? ""
-        let restoreHint = camDelegate?.getPluginConfig()[CAMKeys.restoreHint.rawValue] ?? ""
-        let restoreButtonText = camDelegate?.getPluginConfig()[CAMKeys.restoreButtonText.rawValue] ?? ""
-        let legalDetailsText = camDelegate?.getPluginConfig()[CAMKeys.legalDetailsText.rawValue] ?? ""
+        let screenTitle = camDelegate.getPluginConfig()[CAMKeys.paymentScreenTitle.rawValue] ?? ""
+        let restoreHint = camDelegate.getPluginConfig()[CAMKeys.restoreHint.rawValue] ?? ""
+        let restoreButtonText = camDelegate.getPluginConfig()[CAMKeys.restoreButtonText.rawValue] ?? ""
+        let legalDetailsText = camDelegate.getPluginConfig()[CAMKeys.legalDetailsText.rawValue] ?? ""
         let viewModel = OffersViewModel(title: screenTitle,
                                         restoreHint: restoreHint,
                                         restoreButtonText: restoreButtonText,
                                         legalDetails: legalDetailsText)
         
-        self.view?.viewModel = viewModel
+        self.view.viewModel = viewModel
         
-        camDelegate?.availableProducts(completion: { [weak self] (result) in
+        camDelegate.availableProducts(completion: { [weak self] (result) in
+            guard let self = self else { return }
+            
             switch result {
             case .success(let productStoreIDs):
                 BillingHelper.sharedInstance.products(Set<String>(productStoreIDs), completion: { (result) in
-                    self?.view?.hideLoadingIndicator()
+                    self.view.hideLoadingIndicator()
                     switch result {
                     case .success(let result):
-                        self?.availableProducts = result.products
-                        self?.showOffers()
+                        self.availableProducts = result.products
+                        self.showOffers()
                     case .failure:
-                        self?.showOffers()
+                        self.showOffers()
                     }
                 })
             case .failure(let error):
-                self?.view?.showAlert(description: error.localizedDescription)
-                self?.view?.hideLoadingIndicator()
+                self.view.showAlert(description: error.localizedDescription)
+                self.view.hideLoadingIndicator()
             }
         })
     }
     
     func close() {
-        coordinatorDelegate?.finishBillingFlow(isUserHasAccess: false)
+        coordinatorDelegate.finishBillingFlow(isUserHasAccess: false)
     }
     
     func restore() {
+        let playableInfo = PlayableItemInfo(name: camDelegate.itemName(),
+                                            type: camDelegate.itemType())
+        let tapRestoreEvent = AnalyticsEvents.tapRestorePurchaseLink(playableInfo)
+        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: tapRestoreEvent.key,
+                                                                     parameters: tapRestoreEvent.metadata)
+        
         BillingHelper.sharedInstance.restore { (result) in
             switch result {
             case .success(let response):
-                let resultArray = response.map {(transaction) -> PurchasedProduct in
-                    let receipt = (BillingHelper.sharedInstance.localReceiptData() ?? Data()).base64EncodedString(options: [])
-                    let item = PurchasedProduct()
-                    item.state = .restored
-                    item.receipt = receipt
-                    item.transaction = transaction
+                guard let receipt = BillingHelper.sharedInstance.localReceiptData() else {
+                    return
+                }
+                
+                let resultArray = response.compactMap {(transaction) -> PurchasedProduct in
+                    let item = PurchasedProduct(transaction: transaction,
+                                                receipt: receipt,
+                                                state: .restored)
                     return item
                 }
-                self.camDelegate?.itemsRestored(restoredItems: resultArray, completion: { [weak self] (result) in
+                self.camDelegate.itemsRestored(restoredItems: resultArray, completion: { [weak self] (result) in
+                    guard let self = self else { return }
                     switch result {
                     case .success:
-                        if self?.camDelegate?.isPurchaseNeeded() == true {
-                            self?.showConfirmationScreen()
+                        if self.camDelegate.isPurchaseNeeded() == true {
+                            self.showConfirmationScreen(for: .restore)
                         }
+                        
+                        let productsProperties = resultArray.map({ self.createProductProperties(for: $0.productIdentifier) })
+                        let successfulRestoreEvent = AnalyticsEvents.completeRestorePurchase(playableInfo,
+                                                                                             productsProperties)
+                        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: successfulRestoreEvent.key,
+                                                                                     parameters: successfulRestoreEvent.metadata)
                     case .failure(let error):
-                        self?.view?.showAlert(description: error.localizedDescription)
+                        self.view.showAlert(description: error.localizedDescription)
+                        self.sendAnalyticsEvent(for: error)
+                        let restoreFailureEvent = AnalyticsEvents.storeRestorePurchaseError(error,
+                                                                                            PlayableItemInfo(name: self.camDelegate.itemName(),
+                                                                                                             type: self.camDelegate.itemType()),
+                                                                                            nil)
+                        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: restoreFailureEvent.key,
+                                                                                     parameters: restoreFailureEvent.metadata)
                     }
                 })
             case .failure(let error):
@@ -86,26 +135,56 @@ class EntitlementPickerPresenter {
     
     private func showOffers() {
         let viewModels = availableProducts.map({ (skProduct) -> OfferViewModel in
+            let itemName = camDelegate.itemName()
+            let itemType = camDelegate.itemType()
+            var voucherProperties = camDelegate.purchaseProperties(for: skProduct.productIdentifier)
+            voucherProperties.update(with: skProduct)
+            
             let buyAction = {
+                let playableInfo = PlayableItemInfo(name: itemName,
+                                                    type: itemType)
+                
+                let buyEvent = AnalyticsEvents.tapPurchaseButton(playableInfo,
+                                                                 voucherProperties)
+                ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: buyEvent.key,
+                                                                             parameters: buyEvent.metadata)
+                
+                    
                 BillingHelper.sharedInstance.purchase(skProduct, completion: { [weak self] (result) in
+                    let purchaseResultEvent: AnalyticsEvents
+                    
                     switch result {
                     case .success(let purchase):
+                        voucherProperties.transactionID = purchase.transaction?.transactionIdentifier
+                        purchaseResultEvent = AnalyticsEvents.completePurchase(playableInfo,
+                                                                               voucherProperties)
                         self?.purchaseAction(purchase: purchase)
                     case .failure(let error):
-                        print(error.localizedDescription)
+                        if let skError = error as? SKError, skError.code == .paymentCancelled {
+                            purchaseResultEvent = AnalyticsEvents.cancelPurchase(playableInfo,
+                                                                                 voucherProperties)
+                        } else {
+                            purchaseResultEvent = AnalyticsEvents.storePurchaseError(error,
+                                                                                     playableInfo,
+                                                                                     voucherProperties)
+                        }
+                        
                     }
+                    
+                    ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: purchaseResultEvent.key,
+                                                                                 parameters: purchaseResultEvent.metadata)
                 })
             }
             
             let redeemAction: () -> Void = { [weak self] in
-                self?.coordinatorDelegate?.showRedeemCodeScreen()
+                self?.coordinatorDelegate.showRedeemCodeScreen()
             }
             
-            let configText = camDelegate?.getPluginConfig()[CAMKeys.purchaseButtonText.rawValue] ?? ""
+            let configText = camDelegate.getPluginConfig()[CAMKeys.purchaseButtonText.rawValue] ?? ""
             let price = skProduct.localizedPrice ?? ""
             let purchaseButtonText = configText + " " + price
             
-            return OfferViewModel(config: camDelegate?.getPluginConfig() ?? [String: String](),
+            return OfferViewModel(config: camDelegate.getPluginConfig(),
                                   title: skProduct.localizedTitle,
                                   description: skProduct.localizedDescription,
                                   purchaseButtonText: purchaseButtonText,
@@ -113,41 +192,87 @@ class EntitlementPickerPresenter {
                                   redeemAction: redeemAction)
         })
         
-        self.view?.showOffers(viewModels)
+        self.view.showOffers(viewModels)
     }
     
     private func purchaseAction(purchase: Purchase) {
-        let receipt = (BillingHelper.sharedInstance.localReceiptData() ?? Data()).base64EncodedString(options: [])
-        let purchasedItem = PurchasedProduct()
-        purchasedItem.transaction = purchase.transaction
-        purchasedItem.product = purchase.item
-        purchasedItem.receipt = receipt
-        purchasedItem.state = .purchased
-        self.camDelegate?.itemPurchased(purchasedItem: purchasedItem, completion: { [weak self] (result) in
+        guard let receipt = BillingHelper.sharedInstance.localReceiptData(),
+            let transaction = purchase.transaction else {
+            return
+        }
+        let purchasedItem = PurchasedProduct(transaction: transaction,
+                                             receipt: receipt,
+                                             state: .purchased)
+        self.camDelegate.itemPurchased(purchasedItem: purchasedItem, completion: { [weak self] (result) in
             switch result {
             case .success:
-                self?.showConfirmationScreen()
+                self?.showConfirmationScreen(for: .purchase)
             case .failure(let error):
-                self?.view?.showAlert(description: error.localizedDescription)
+                self?.view.showAlert(description: error.localizedDescription)
+                self?.sendAnalyticsEvent(for: error)
             }
         })
     }
     
-    private func showConfirmationScreen() {
-        guard let configDictionary = camDelegate?.getPluginConfig(),
-            let _ = configDictionary[CAMKeys.paymentAlertTitle.rawValue],
-            let _ = configDictionary[CAMKeys.paymentAlertInfo.rawValue],
+    private func showConfirmationScreen(for event: IAPEvent) {
+        let configDictionary = camDelegate.getPluginConfig()
+        let alertTitleKey = self.alertTitleKey(for: event)
+        let alertDescriptionKey = self.alertDescriptionKey(for: event)
+        
+        guard let alertTitle = configDictionary[alertTitleKey.rawValue],
+            let alertDescription = configDictionary[alertDescriptionKey.rawValue],
             let _ = configDictionary[CAMKeys.alertButtonText.rawValue] else {
-                self.coordinatorDelegate?.finishBillingFlow(isUserHasAccess: true)
+                self.coordinatorDelegate.finishBillingFlow(isUserHasAccess: true)
                 return
         }
         
-        self.view?.showConfirmationScreen(config: configDictionary,
-                                          titleKey: .paymentAlertTitle,
-                                          descriptionKey: .paymentAlertInfo,
+        let viewAlertEvent = AnalyticsEvents.viewAlert(AlertInfo(title: alertTitle,
+                                                                 description: alertDescription,
+                                                                 isConfirmation: IsConfirmationAlert.yes(type: event.analyticsEvent)),
+                                                       apiError: nil)
+        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: viewAlertEvent.key,
+                                                                     parameters: viewAlertEvent.metadata)
+        
+        self.view.showConfirmationScreen(config: configDictionary,
+                                          titleKey: alertTitleKey,
+                                          descriptionKey: alertDescriptionKey,
                                           buttonKey: .alertButtonText, action: {
-                                            self.coordinatorDelegate?.finishBillingFlow(isUserHasAccess: true)
+                                            self.coordinatorDelegate.finishBillingFlow(isUserHasAccess: true)
         })
+    }
+    
+    private func alertTitleKey(for event: IAPEvent) -> CAMKeys {
+        switch event {
+        case .purchase:
+            return CAMKeys.paymentAlertTitle
+        case .restore:
+            return CAMKeys.restoreAlertTitle
+        }
+    }
+    
+    private func alertDescriptionKey(for event: IAPEvent) -> CAMKeys {
+        switch event {
+        case .purchase:
+            return CAMKeys.paymentAlertInfo
+        case .restore:
+            return CAMKeys.restoreAlertDescription
+        }
+    }
+    
+    private func sendAnalyticsEvent(for error: Error) {
+        let viewAlertEvent = AnalyticsEvents.makeViewAlert(from: error)
+        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: viewAlertEvent.key,
+                                                                     parameters: viewAlertEvent.metadata)
+    }
+    
+    private func createProductProperties(for productIdentifier: String) -> PurchaseProperties {
+        var purchaseProperties = self.camDelegate.purchaseProperties(for: productIdentifier)
+        
+        if let skProduct = self.availableProducts.first(where: { $0.productIdentifier == productIdentifier }) {
+            purchaseProperties.update(with: skProduct)
+        }
+        
+        return purchaseProperties
     }
 }
 

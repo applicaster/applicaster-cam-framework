@@ -27,6 +27,10 @@ public protocol CAMDelegate: AnyObject {
     func itemPurchased(purchasedItem: PurchasedProduct, completion: @escaping (PurchaseResult) -> Void)
     func itemsRestored(restoredItems: [PurchasedProduct], completion: @escaping (PurchaseResult) -> Void)
     
+    func itemName() -> String
+    func itemType() -> String
+    func purchaseProperties(for productIdentifier: String) -> PurchaseProperties
+    func trigger() -> Trigger
 }
 
 public enum ItemState {
@@ -36,9 +40,22 @@ public enum ItemState {
 }
 
 open class PurchasedProduct {
-    public var transaction: SKPaymentTransaction?
-    public var product: SKProduct?
-    public var receipt: String?
-    public var redeemCode: String?
-    public var state: ItemState = .purchased
+    public private(set) var transaction: SKPaymentTransaction
+    public private(set) var receipt: Data
+    private(set) var redeemCode: String?
+    private(set) var state: ItemState = .purchased
+    
+    public var productIdentifier: String {
+        return transaction.payment.productIdentifier
+    }
+    
+    init(transaction: SKPaymentTransaction,
+         receipt: Data,
+         redeemCode: String? = nil,
+         state: ItemState) {
+        self.transaction = transaction
+        self.receipt = receipt
+        self.redeemCode = redeemCode
+        self.state = state
+    }
 }

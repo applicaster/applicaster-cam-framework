@@ -8,17 +8,17 @@
 
 import Foundation
 
-protocol BillingCoordinatorProtocol: AnyObject {
+protocol BillingCoordinatorProtocol: Coordinator {
+    func showEntitlementPicker()
     func showRedeemCodeScreen()
     func popCurrentScreen()
     func finishBillingFlow(isUserHasAccess: Bool)
-    func showEntitlementPicker()
 }
 
-class BillingCoordinator: BillingCoordinatorProtocol, Coordinator {
+class BillingCoordinator: BillingCoordinatorProtocol {
     
-    weak var navigationController: UINavigationController?
-    weak var parentCoordinator: PluginDataProviderProtocol?
+    unowned var navigationController: UINavigationController
+    unowned var parentCoordinator: PluginDataProviderProtocol
     var completionHandler: (Bool) -> Void
     
     public init(navigationController: UINavigationController,
@@ -29,6 +29,8 @@ class BillingCoordinator: BillingCoordinatorProtocol, Coordinator {
         self.completionHandler = completion
     }
     
+    // MARK: - BillingCoordinatorProtocol
+    
     func start() {
         showEntitlementPicker()
     }
@@ -36,7 +38,7 @@ class BillingCoordinator: BillingCoordinatorProtocol, Coordinator {
     func showEntitlementPicker() {
         let controller = ViewControllerFactory.createEntitlementPicker(pluginDataProvider: parentCoordinator,
                                                                        billingCoordinator: self)
-        navigationController?.pushViewController(controller, animated: true)
+        navigationController.pushViewController(controller, animated: true)
     }
     
     func showRedeemCodeScreen() {
@@ -44,7 +46,7 @@ class BillingCoordinator: BillingCoordinatorProtocol, Coordinator {
     }
     
     func popCurrentScreen() {
-        navigationController?.popViewController(animated: true)
+        navigationController.popViewController(animated: true)
     }
     
     func finishBillingFlow(isUserHasAccess: Bool) {

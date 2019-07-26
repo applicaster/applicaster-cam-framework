@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ZappPlugins
 
 class ResetPasswordViewController: UIViewController {
 
@@ -25,7 +26,7 @@ class ResetPasswordViewController: UIViewController {
     @IBOutlet var tableHeightConstraint: NSLayoutConstraint!
     
     var configDictionary: [String: String] {
-        return presenter?.camDelegate?.getPluginConfig() ?? [String: String]()
+        return presenter?.camDelegate.getPluginConfig() ?? [String: String]()
     }
     
     var presenter: ResetPasswordPresenter?
@@ -140,13 +141,20 @@ extension ResetPasswordViewController: ResetPasswordViewProtocol {
     }
     
     func showConfirmationScreenIfNeeded() {
-        if let _ = configDictionary[CAMKeys.passwordAlertTitleText.rawValue],
-           let _ = configDictionary[CAMKeys.passwordAlertInfoText.rawValue],
+        if let alertTitle = configDictionary[CAMKeys.passwordAlertTitleText.rawValue],
+           let alertDescription = configDictionary[CAMKeys.passwordAlertInfoText.rawValue],
            let _ = configDictionary[CAMKeys.alertButtonText.rawValue] {
             self.showConfirmationScreen(config: configDictionary, titleKey: .passwordAlertTitleText, descriptionKey: .passwordAlertInfoText,
                                         buttonKey: .alertButtonText, action: { [weak self] in
                 self?.presenter?.backToPreviousScreen()
             })
+            
+            let viewAlertEvent = AnalyticsEvents.viewAlert(AlertInfo(title: alertTitle,
+                                                                     description: alertDescription,
+                                                                     isConfirmation: IsConfirmationAlert.yes(type: .passwordReset)),
+                                                           apiError: nil)
+            ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: viewAlertEvent.key,
+                                                                         parameters: viewAlertEvent.metadata)
         } else {
             presenter?.backToPreviousScreen()
         }

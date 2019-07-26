@@ -52,6 +52,8 @@ class MockCamContract(private val context: Context) : ICamContract {
 
     override fun getCamFlow(): CamFlow = CamFlow.AUTH_AND_STOREFRONT
 
+    override fun onCamFinished() {}
+
     override fun getAnalyticsDataProvider(): AnalyticsDataProvider {
         return AnalyticsDataProviderMock()
     }

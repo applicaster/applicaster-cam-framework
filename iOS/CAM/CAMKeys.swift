@@ -27,7 +27,7 @@ public enum CAMKeys: String {
     case actionButtonImage = "action_button_asset"
    
     case facebookLoginEnabled = "facebook_login_required"
-    case defaultAuthScreen = "default_login_screen"
+    case defaultAuthScreen = "default_authentication_screen"
     case authFields = "authentication_input_fields"
     case separatorText = "alternative_authentication_separator_text"
     case alternativeAuthentification = "alternative_authentication_prompt_text"
@@ -74,6 +74,11 @@ public enum CAMKeys: String {
     case restoreHint = "restore_prompt_text"
     case restoreButtonText = "restore_link_text"
     case legalDetailsText = "legal_details_text"
+    
+    // Restore
+    
+    case restoreAlertTitle = "restore_purchase_confirmation_title_text"
+    case restoreAlertDescription = "restore_purchase_confirmation_description_text"
 }
 
 public enum CAMStyles: String {

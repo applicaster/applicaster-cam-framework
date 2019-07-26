@@ -206,13 +206,16 @@ class BillingPresenter(
                 ""
             )
         })
+        view?.hideLoadingIndicator()
     }
 
     override fun onSkuDetailsLoadingFailed(statusCode: Int, description: String) {
+        view?.hideLoadingIndicator()
         view?.showAlert(ContentAccessManager.pluginConfigurator.getDefaultAlertText())
     }
 
     private fun fetchSkuDetailsByType(billingOffers: List<BillingOffer>) {
+        view?.showLoadingIndicator()
         billingOffers.apply {
             //filter billingOffers by SkuType.SUBS and map result to list of products IDs
             val subs: List<String> = filter { billingOffer: BillingOffer ->
