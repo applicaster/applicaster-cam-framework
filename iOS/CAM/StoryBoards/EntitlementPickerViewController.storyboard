@@ -80,13 +80,6 @@
                                     <constraint firstItem="tja-ai-XFe" firstAttribute="top" secondItem="qv4-HL-pdx" secondAttribute="top" id="wqJ-h6-Z48"/>
                                 </constraints>
                             </view>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="vzX-Kr-rBb">
-                                <rect key="frame" x="668" y="497" width="30" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="30" id="714-UE-wFJ"/>
-                                    <constraint firstAttribute="height" constant="30" id="DIb-Ko-iqA"/>
-                                </constraints>
-                            </activityIndicatorView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="BZT-8a-6sn">
                                 <rect key="frame" x="0.0" y="388" width="1366" height="248"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -244,13 +237,11 @@ Any unused portion of a free trial period, if offered, will be forfeited when th
                             <constraint firstItem="qv4-HL-pdx" firstAttribute="top" secondItem="fwb-4x-wqx" secondAttribute="bottom" constant="20" id="NCQ-II-NBT"/>
                             <constraint firstItem="0qm-JL-SHB" firstAttribute="trailing" secondItem="fwb-4x-wqx" secondAttribute="trailing" id="Pi6-Kq-0ca"/>
                             <constraint firstItem="Ly1-rl-Hp7" firstAttribute="leading" secondItem="yt7-Jw-v80" secondAttribute="leading" id="SPW-hb-lxA"/>
-                            <constraint firstItem="vzX-Kr-rBb" firstAttribute="centerX" secondItem="yt7-Jw-v80" secondAttribute="centerX" id="TMz-cU-UcY"/>
                             <constraint firstItem="BZT-8a-6sn" firstAttribute="leading" secondItem="0qm-JL-SHB" secondAttribute="leading" id="cnf-F7-YnX"/>
                             <constraint firstItem="wYX-hB-tp5" firstAttribute="top" secondItem="yt7-Jw-v80" secondAttribute="top" id="cpt-x2-EQP"/>
                             <constraint firstItem="BZT-8a-6sn" firstAttribute="centerY" secondItem="yt7-Jw-v80" secondAttribute="centerY" id="dlS-0l-Tj6"/>
                             <constraint firstItem="0qm-JL-SHB" firstAttribute="trailing" secondItem="BZT-8a-6sn" secondAttribute="trailing" id="gFs-Yk-zLA"/>
                             <constraint firstItem="wYX-hB-tp5" firstAttribute="bottom" secondItem="yt7-Jw-v80" secondAttribute="bottom" id="iWq-ys-DHJ"/>
-                            <constraint firstItem="vzX-Kr-rBb" firstAttribute="centerY" secondItem="yt7-Jw-v80" secondAttribute="centerY" id="tS2-39-kfN"/>
                             <constraint firstItem="6Qv-70-8Sd" firstAttribute="centerX" secondItem="yt7-Jw-v80" secondAttribute="centerX" id="wcu-by-dzy"/>
                             <constraint firstItem="BZT-8a-6sn" firstAttribute="centerX" secondItem="yt7-Jw-v80" secondAttribute="centerX" id="wj0-MQ-fvQ"/>
                             <constraint firstAttribute="trailing" secondItem="Ly1-rl-Hp7" secondAttribute="trailing" id="yXv-TX-0aa"/>
@@ -284,7 +275,6 @@ Any unused portion of a free trial period, if offered, will be forfeited when th
                         <outlet property="backgroundImageView" destination="wYX-hB-tp5" id="hjC-eU-fB4"/>
                         <outlet property="closeButton" destination="gGD-ZL-8ay" id="9nI-dL-05Z"/>
                         <outlet property="entitlementCollectionView" destination="BZT-8a-6sn" id="id9-Bt-s9g"/>
-                        <outlet property="entitlementsLoadingIndicator" destination="vzX-Kr-rBb" id="j45-z2-sDf"/>
                         <outlet property="helpInfoContainer" destination="Ly1-rl-Hp7" id="0cJ-hr-LwW"/>
                         <outlet property="helpInfoTextView" destination="iEt-bg-rhl" id="zkU-Oa-gOu"/>
                         <outlet property="logoImageView" destination="6Qv-70-8Sd" id="Ae9-Qo-B1h"/>

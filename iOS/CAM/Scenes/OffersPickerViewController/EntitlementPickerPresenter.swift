@@ -52,9 +52,8 @@ class EntitlementPickerPresenter {
                                         restoreHint: restoreHint,
                                         restoreButtonText: restoreButtonText,
                                         legalDetails: legalDetailsText)
-        
+        self.view.showLoadingIndicator()
         self.view.viewModel = viewModel
-        
         camDelegate.availableProducts(completion: { [weak self] (result) in
             guard let self = self else { return }
             
