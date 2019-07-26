@@ -16,12 +16,12 @@ struct OffersViewModel {
 }
 
 class EntitlementPickerViewController: UIViewController {
+    var loadingPopover = LoadingPopover.nibInstance()
     @IBOutlet private var backgroundImageView: UIImageView!
     @IBOutlet private var logoImageView: UIImageView!
     @IBOutlet private var closeButton: UIButton!
     @IBOutlet private var titleLabel: UILabel!
     
-    @IBOutlet private var entitlementsLoadingIndicator: UIActivityIndicatorView!
     @IBOutlet private var entitlementCollectionView: UICollectionView!
     @IBOutlet private var restorePurchaseLabel: UILabel!
     @IBOutlet private var restoreButton: UIButton!
@@ -80,7 +80,7 @@ class EntitlementPickerViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
+        loadingPopover.frame = self.view.bounds
         self.gradientLayer.frame = self.helpInfoTextView.bounds
     }
     
@@ -106,11 +106,11 @@ class EntitlementPickerViewController: UIViewController {
     }
     
     public func showLoadingIndicator() {
-        entitlementsLoadingIndicator.startAnimating()
+        self.view.addSubview(loadingPopover)
     }
     
     public func hideLoadingIndicator() {
-        entitlementsLoadingIndicator.stopAnimating()
+        loadingPopover.removeFromSuperview()
     }
     
     // MARK: - Private methods
