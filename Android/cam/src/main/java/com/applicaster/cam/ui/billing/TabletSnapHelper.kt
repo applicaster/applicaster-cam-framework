@@ -2,6 +2,8 @@ package com.applicaster.cam.ui.billing
 
 import android.support.v7.widget.LinearSnapHelper
 import android.support.v7.widget.RecyclerView
+import kotlin.math.max
+import kotlin.math.min
 
 class TabletSnapHelper : LinearSnapHelper() {
 
@@ -32,7 +34,7 @@ class TabletSnapHelper : LinearSnapHelper() {
 
         val firstItem = 0
         val lastItem = layoutManager.itemCount - 1
-        targetPosition = Math.min(lastItem, Math.max(targetPosition, firstItem))
+        targetPosition = min(lastItem, max(targetPosition, firstItem))
         return targetPosition
     }
 }
