@@ -68,7 +68,7 @@ class BillingPresenter(
     }
 
     override fun onPurchaseConsumed(purchaseToken: String) {
-        Log.e(TAG, "PurchaseConsumed")
+        Log.i(TAG, "PurchaseConsumed")
     }
 
     override fun onPurchaseConsumptionFailed(statusCode: Int, description: String) {
