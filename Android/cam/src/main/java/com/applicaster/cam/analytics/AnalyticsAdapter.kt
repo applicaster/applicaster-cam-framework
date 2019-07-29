@@ -172,9 +172,15 @@ class AnalyticsUtil {
                 Properties.PLUGIN_PROVIDER.value to getPluginProvider()
             )
             if (timedEvent == TimedEvent.START)
-                AnalyticsAgentUtil.logTimedEvent(AnalyticsEvent.CONTENT_GATEWAY_SESSION.value, params)
+                AnalyticsAgentUtil.logTimedEvent(
+                    AnalyticsEvent.CONTENT_GATEWAY_SESSION.value,
+                    params
+                )
             else
-                AnalyticsAgentUtil.endTimedEvent(AnalyticsEvent.CONTENT_GATEWAY_SESSION.value, params)
+                AnalyticsAgentUtil.endTimedEvent(
+                    AnalyticsEvent.CONTENT_GATEWAY_SESSION.value,
+                    params
+                )
         }
 
         fun logSwitchToLoginScreen() {
@@ -295,10 +301,11 @@ class AnalyticsUtil {
             ) + generateProductPropertiesMap(purchaseProductPropertiesData)
             AnalyticsAgentUtil.logEvent(AnalyticsEvent.STORE_RESTORE_PURCHASE_ERROR.value, params)
         }
-     }
+    }
 }
 
 enum class AnalyticsEvent(val value: String) {
+    // @formatter:off
     TAP_STANDARD_LOGIN_BUTTON    ("Tap Standard Login Button"),
     STANDARD_LOGIN_SUCCESS       ("Standard Login Success"),
     STANDARD_LOGIN_FAILURE       ("Standard Login Failure"),
@@ -324,11 +331,12 @@ enum class AnalyticsEvent(val value: String) {
     STORE_PURCHASE_ERROR         ("Store Purchase Error"),
     TAP_RESTORE_PURCHASE_LINK    ("Tap Restore Purchase Link"),
     COMPLETE_RESTORE_PURCHASE    ("Complete Restore Purchase"),
-    CANCEL_RESTORE_PURCHASE      ("Cancel Restore Purchase"),
     STORE_RESTORE_PURCHASE_ERROR ("Store Restore Purchase Error")
+    // @formatter:on
 }
 
 enum class Properties(val value: String) {
+    // @formatter:off
     //General properties
     CONTENT_ENTITY_NAME  ("Content Entity Name"),
     CONTENT_ENTITY_TYPE  ("Content Entity Type"),
@@ -343,7 +351,6 @@ enum class Properties(val value: String) {
     API_ERROR_MESSAGE    ("API Error Message"),
     ERROR_CODE_ID        ("Error Code ID"),
     ERROR_MESSAGE        ("Error message"),
-
     //Purchase product properties
     SUBSCRIBER           ("Subscriber"),
     PRODUCT_NAME         ("Product Name"),
@@ -353,11 +360,12 @@ enum class Properties(val value: String) {
     SUBSCRIPTION_DURATION("Subscription Duration"),
     PURCHASE_TYPE        ("Purchase Type"),
     TRIAL_PERIOD         ("Trial Period"),
-    PURCHASE_ENTITY_TYPE ("Purchase Entity Type"),
-    GRACE_PERIOD         ("Grace Period")
+    PURCHASE_ENTITY_TYPE ("Purchase Entity Type")
+    // @formatter:on
 }
 
 enum class Action(val value: String) {
+    // @formatter:off
     PURCHASE              ("Purchase"),
     LOGIN                 ("Login"),
     SIGNUP                ("Sign Up"),
@@ -366,19 +374,24 @@ enum class Action(val value: String) {
     CANCEL                ("Cancel"),
     FAILED_ATTEMPT        ("Failed Attempt"),
     SEND_APP_TO_BACKGROUND("Send App To Background")
+    // @formatter:on
 }
 
 enum class ConfirmationCause(val value: String) {
+    // @formatter:off
     PURCHASE        ("Purchase"),
     RESTORE_PURCHASE("Restore Purchase"),
     PASSWORD_RESET  ("Password Reset"),
-    NONE("")
+    NONE            ("")
+    // @formatter:on
 }
 
 enum class PurchaseType(val value: String) {
+    // @formatter:off
     SUBSCRIPTION("Subscription"),
     CONSUMABLE  ("Consumable"),
     UNSPECIFIED ("Unspecified")
+    // @formatter:on
 }
 
 enum class TimedEvent {

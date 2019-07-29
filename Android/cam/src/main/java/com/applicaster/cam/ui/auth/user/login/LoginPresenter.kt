@@ -5,9 +5,7 @@ import com.applicaster.cam.CamFlow
 import com.applicaster.cam.ContentAccessManager
 import com.applicaster.cam.FacebookAuthCallback
 import com.applicaster.cam.LoginCallback
-import com.applicaster.cam.analytics.AnalyticsUtil
-import com.applicaster.cam.analytics.ConfirmationAlertData
-import com.applicaster.cam.analytics.ConfirmationCause
+import com.applicaster.cam.analytics.*
 import com.applicaster.cam.params.auth.AuthFieldConfig
 import com.applicaster.cam.ui.CamNavigationRouter
 import com.applicaster.cam.ui.auth.user.UserAuthPresenter
@@ -17,6 +15,16 @@ class LoginPresenter(
     private val navigationRouter: CamNavigationRouter
 ) :
     UserAuthPresenter(view), ILoginPresenter, LoginCallback, FacebookAuthCallback {
+
+    override fun onViewCreated() {
+        super.onViewCreated()
+        //Analytics event
+        AnalyticsUtil.logContentGatewaySession(
+            TimedEvent.START,
+            ContentAccessManager.contract.getAnalyticsDataProvider().getTrigger().value,
+            Action.LOGIN
+        )
+    }
 
     override fun getAuthFieldConfig(): AuthFieldConfig =
         ContentAccessManager.pluginConfigurator.getLoginAuthFields()

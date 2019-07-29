@@ -3,9 +3,11 @@ package com.applicaster.cam
 import com.applicaster.cam.analytics.PurchaseType
 
 enum class Trigger(val value: String) {
-    TAP_SELL("Tap Cell"),
+    // @formatter:off
+    TAP_SELL  ("Tap Cell"),
     APP_LAUNCH("App Launch"),
-    OTHER("Other")
+    OTHER     ("Other")
+    // @formatter:on
 }
 
 interface AnalyticsDataProvider {
@@ -15,6 +17,7 @@ interface AnalyticsDataProvider {
     fun isUserSubscribed(): Boolean
     fun getPurchaseData(): List<PurchaseData>
 }
+
 data class PurchaseData(
     val title: String,
     val price: String,
