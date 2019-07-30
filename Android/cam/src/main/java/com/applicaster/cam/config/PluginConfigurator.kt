@@ -43,6 +43,13 @@ class PluginConfigurator(private val pluginConfig: Map<String, String>) : Config
 
     override fun getDefaultAlertText(): String = pluginConfig.getValue(KEY_DEFAULT_ALERT_TEXT)
 
+    override fun getNoPurchasesToRestoreText(): String = pluginConfig.getValue(
+        KEY_NO_PURCHASES_TO_RESTORE_TEXT
+    )
+
+    override fun getNonMatchingRestoredPurchasesText(): String =
+        pluginConfig.getValue(KEY_NON_MATCHING_RESTORED_PURCHASES_TEXT)
+
     override fun isAuthRestoreRequired() =
         false
 
@@ -73,3 +80,5 @@ const val KEY_ALT_AUTH_SEPARATOR = "alternative_authentication_separator_text"
 const val KEY_EMPTY_INPUT_FIELD_ERROR = "required_field_alert_text"
 const val KEY_NOT_VALID_EMAIL_INPUT_FIELD_ERROR = "invalid_email_alert_text"
 const val KEY_DEFAULT_ALERT_TEXT = "default_alert_text"
+const val KEY_NO_PURCHASES_TO_RESTORE_TEXT = "no_purchases_to_restore_alert_text"
+const val KEY_NON_MATCHING_RESTORED_PURCHASES_TEXT = "non_matching_restored_purchases_alert_text"

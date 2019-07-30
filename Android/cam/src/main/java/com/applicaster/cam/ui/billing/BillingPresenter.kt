@@ -57,6 +57,7 @@ class BillingPresenter(
                 fetchSkuDetailsByType(billingOffers)
             }
         })
+        view?.showLoadingIndicator()
     }
 
     override fun onPurchaseButtonClicked(activity: Activity?, skuId: String) {
@@ -91,6 +92,11 @@ class BillingPresenter(
 
     override fun onPurchasesRestored(purchases: List<Purchase>) {
         ContentAccessManager.contract.onPurchasesRestored(purchases, this)
+        if (ContentAccessManager.pluginConfigurator.isShowConfirmationRestorePurchases()) {
+            navigationRouter.showConfirmationDialog(AlertDialogType.RESTORE)
+        } else {
+            view?.goBack()
+        }
     }
 
     override fun onPurchaseLoadingFailed(statusCode: Int, description: String) {
@@ -117,7 +123,6 @@ class BillingPresenter(
     }
 
     private fun fetchSkuDetailsByType(billingOffers: List<BillingOffer>) {
-        view?.showLoadingIndicator()
         billingOffers.apply {
             //filter billingOffers by SkuType.SUBS and map result to list of products IDs
             val subs: List<String> = filter { billingOffer: BillingOffer ->
@@ -140,9 +145,13 @@ class BillingPresenter(
             view?.showAlert(msg)
     }
 
-    override fun onFailure(msg: String) {
-        view?.hideLoadingIndicator()
-        handleErrorMessage(msg)
+    // restore purchases callback
+    override fun onNoPurchasesRestored() {
+        view?.showAlert(ContentAccessManager.pluginConfigurator.getNoPurchasesToRestoreText())
+    }
+
+    override fun onNonMatchingPurchasesRestored() {
+        view?.showAlert(ContentAccessManager.pluginConfigurator.getNonMatchingRestoredPurchasesText())
     }
 
     override fun onSuccess() {
@@ -152,6 +161,7 @@ class BillingPresenter(
         else
             view?.goBack()
     }
+    //
 
     override fun onRestoreClicked() {
         GoogleBillingHelper.apply {
