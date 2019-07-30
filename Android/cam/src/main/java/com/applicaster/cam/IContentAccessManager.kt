@@ -25,9 +25,9 @@ interface EntitlementsLoadCallback {
     fun onSuccess(billingOffers: List<BillingOffer>)
 }
 
-interface RestoreCallback {
+interface RestoreCallback : ActionCallback {
     fun onNoPurchasesRestored()
     fun onNonMatchingPurchasesRestored()
-    fun onSuccess()
+    override fun onFailure(msg: String) = Unit
 }
 interface PurchaseCallback : ActionCallback
