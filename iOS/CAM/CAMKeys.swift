@@ -84,10 +84,10 @@ public enum CAMKeys: String {
 }
 
 enum AuthRequirement: String {
-    case never = "Never requiere"
-    case always = "Always require"
-    case purchasableItems = "Require on all purchasable items"
-    case dataSourceBased = "Require when specified on the data source"
+    case never = "never_requiere"
+    case always = "always_require"
+    case purchasableItems = "require_on_ all_purchasable_items"
+    case dataSourceBased = "require_when_specified_on_the_data_source"
     
     static var key: String {
         return "authentication_requirement"
