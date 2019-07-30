@@ -97,6 +97,20 @@ class BillingPresenter(
         } else {
             view?.goBack()
         }
+        handleRestoringPurchasesError(purchases)
+    }
+
+    private fun handleRestoringPurchasesError(purchases: List<Purchase>) {
+        if (purchases.isEmpty()) {
+            handleErrorMessage(ContentAccessManager.pluginConfigurator.getNoPurchasesToRestoreText())
+        } else {
+            val isNonMatchingRestoredPurchasesExists = skuDetailsList.none { details ->
+                purchases.find { purchase -> details.sku == purchase.sku } != null
+            }
+            if (isNonMatchingRestoredPurchasesExists) {
+                handleErrorMessage(ContentAccessManager.pluginConfigurator.getNonMatchingRestoredPurchasesText())
+            }
+        }
     }
 
     override fun onPurchaseLoadingFailed(statusCode: Int, description: String) {
@@ -145,13 +159,8 @@ class BillingPresenter(
             view?.showAlert(msg)
     }
 
-    // restore purchases callback
-    override fun onNoPurchasesRestored() {
-        view?.showAlert(ContentAccessManager.pluginConfigurator.getNoPurchasesToRestoreText())
-    }
-
-    override fun onNonMatchingPurchasesRestored() {
-        view?.showAlert(ContentAccessManager.pluginConfigurator.getNonMatchingRestoredPurchasesText())
+    override fun onFailure(msg: String) {
+        view?.hideLoadingIndicator()
     }
 
     override fun onSuccess() {
