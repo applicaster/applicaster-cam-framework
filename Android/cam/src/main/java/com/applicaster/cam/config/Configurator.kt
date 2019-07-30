@@ -19,6 +19,10 @@ interface Configurator {
 
     fun getDefaultAlertText(): String
 
+    fun getNoPurchasesToRestoreText(): String
+
+    fun getNonMatchingRestoredPurchasesText(): String
+
     fun isAuthRestoreRequired(): Boolean
 
     fun isPasswordResetRequired(): Boolean
