@@ -21,7 +21,16 @@
       {
         "key": "default_authentication_screen",
         "type": "select",
-        "options": [{"text": "Login","value": "Login"},{"text": "Sign-Up", "value": "Sign-Up"}],
+        "options": [
+          {
+            "text": "Login",
+            "value": "Login"
+          },
+          {
+            "text": "Sign-Up",
+            "value": "Sign-Up"
+          }
+        ],
         "label_tooltip": "<p>When the authentication process begins, this field determines what to present first.</p><p>By selecting “Login”, the plugin will prompt login first, with an option to switch to the sign-up screen in case the user does not have an account.</p><p>By selecting “Sign-Up”, the plugin will present the user with the sign-up (aka registration) screen first, with an option to switch to login in case the user already has an account.</p>",
         "initial_value": "Login"
       },
@@ -813,13 +822,37 @@
         "key": "authentication_requirement",
         "type": "select",
         "options": [
-          {"text": "Never require","value": "Never require"},
-          {"text": "Always require", "value": "Always require"},
-          {"text": "Require on all purchasable items", "value": "Require on all purchasable items"},
-          {"text": "Require when specified on the data source", "value": "Require when specified on the data source"}
+          {
+            "text": "Never require",
+            "value": "never_require"
+          },
+          {
+            "text": "Always require",
+            "value": "always_require"
+          },
+          {
+            "text": "Require on all purchasable items",
+            "value": "require_on_ all_purchasable_items"
+          },
+          {
+            "text": "Require when specified on the data source",
+            "value": "require_when_specified_on_the_data_source"
+          }
         ],
         "label_tooltip": "<p>This field determines if/when authentication would be required to access content and also influences what configuration fields are available for the plugin.</p><p>If “Require when specified on the data source” is selected, then the feeds delivered by the data source provider must identify relevant content as requiring authentication.</p>",
         "initial_value": "Always require"
+      },
+      {
+        "key": "no_purchases_to_restore_alert_text",
+        "type": "text_input",
+        "label_tooltip": "The text presented to the user when they’ve tried to restore a purchase, but the store returns that there are no valid purchases to restore",
+        "initial_value": "The store did not return any valid purchases that can be restored"
+      },
+      {
+        "key": "non_matching_restored_purchases_alert_text",
+        "type": "text_input",
+        "label_tooltip": "The text presented to the user when they’ve successfully restored one or more purchases, but none of them provide access to the requested content",
+        "initial_value": "You’ve successfully restored any valid previously made purchases, however, none of them provide access to the requested content"
       }
     ]
   }
