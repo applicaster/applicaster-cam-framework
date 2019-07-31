@@ -1,5 +1,6 @@
 package com.applicaster.cam.config
 
+import com.applicaster.cam.config.flow.AuthenticationRequirement
 import com.applicaster.cam.config.ui.*
 import com.applicaster.cam.params.auth.AuthFieldConfig
 import com.applicaster.cam.params.auth.AuthFieldsConverter
@@ -71,6 +72,22 @@ class PluginConfigurator(private val pluginConfig: Map<String, String>) : Config
                 && UI_KEY_RESTORE_CONFIRMATION_DESC_TEXT in pluginConfig
                 && UI_KEY_RESTORE_CONFIRMATION_BUTTON_TEXT in pluginConfig
     }
+
+    override fun getAuthRequirement(): AuthenticationRequirement =
+        AuthenticationRequirement.fromKey(getOrDefault(KEY_AUTH_REQUIREMENT))
+
+    override fun isPaymentRequired(): Boolean {
+        return getOrEmpty(KEY_REQUIRE_PAYMENT)?.toBoolean() ?: false
+    }
+
+    private fun getOrDefault(key: String) = getOrEmpty(key).orEmpty()
+
+    private fun getOrEmpty(key: String): String? {
+        return if (key in pluginConfig)
+            pluginConfig[key]
+        else
+            null
+    }
 }
 
 const val KEY_AUTH_FIELDS = "authentication_input_fields"
@@ -82,3 +99,5 @@ const val KEY_NOT_VALID_EMAIL_INPUT_FIELD_ERROR = "invalid_email_alert_text"
 const val KEY_DEFAULT_ALERT_TEXT = "default_alert_text"
 const val KEY_NO_PURCHASES_TO_RESTORE_TEXT = "no_purchases_to_restore_alert_text"
 const val KEY_NON_MATCHING_RESTORED_PURCHASES_TEXT = "non_matching_restored_purchases_alert_text"
+const val KEY_AUTH_REQUIREMENT = "require_authentication"
+const val KEY_REQUIRE_PAYMENT = "require_payment"

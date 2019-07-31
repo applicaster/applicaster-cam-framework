@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import com.applicaster.cam.config.Configurator
 import com.applicaster.cam.config.PluginConfigurator
+import com.applicaster.cam.config.flow.CamFlowResolver
 import com.applicaster.cam.config.ui.PluginUIProvider
 import com.applicaster.cam.config.ui.UIProvider
 import com.applicaster.cam.ui.CamActivity
@@ -22,8 +23,13 @@ object ContentAccessManager : IContentAccessManager {
             contract.getPluginConfig(),
             context.applicationContext
         )
-        camFlow = contract.getCamFlow()
+        setCamFlow(contract)
         startCamActivity(context)
+    }
+
+    private fun setCamFlow(contract: ICamContract) {
+        val originalCamFlow = contract.getCamFlow()
+        camFlow = CamFlowResolver.updateFlowByConfig(originalCamFlow, pluginConfigurator)
     }
 
     private fun startCamActivity(context: Context) {
