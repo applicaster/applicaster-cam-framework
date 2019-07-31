@@ -1,5 +1,6 @@
 package com.applicaster.cam.config
 
+import com.applicaster.cam.config.flow.AuthenticationRequirement
 import com.applicaster.cam.params.auth.AuthFieldConfig
 import com.applicaster.cam.params.auth.AuthScreenType
 
@@ -34,4 +35,8 @@ interface Configurator {
     fun isShowConfirmationPayment(): Boolean
 
     fun isShowConfirmationRestorePurchases(): Boolean
+
+    fun getAuthRequirement(): AuthenticationRequirement
+
+    fun isPaymentRequired(): Boolean
 }
