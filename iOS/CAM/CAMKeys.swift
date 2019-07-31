@@ -79,6 +79,8 @@ public enum CAMKeys: String {
     
     case restoreAlertTitle = "restore_purchase_confirmation_title_text"
     case restoreAlertDescription = "restore_purchase_confirmation_description_text"
+    case restoreNonMatchingAlertText = "non_matching_restored_purchases_alert_text"
+    case restoreNoPurchaseAlertText = "no_purchases_to_restore_alert_text"
     
     case paymentRequirement = "require_payment"
 }
