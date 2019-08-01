@@ -53,7 +53,7 @@ dependencies {
     implementation ('com.github.LiquidPlayer:LiquidCore:0.4.6'){
         exclude group: 'com.android.support', module:'appcompat-v7'
     }
-    api 'com.applicaster:applicaster-iap-framework:0.0.2'
+    api 'com.applicaster:applicaster-iap-framework:0.0.3'
     implementation "com.android.support:appcompat-v7:$support_version"
     implementation "com.android.support:support-v4:$support_version"
     testImplementation 'junit:junit:4.12'
