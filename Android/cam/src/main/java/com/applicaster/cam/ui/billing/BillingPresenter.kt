@@ -91,26 +91,32 @@ class BillingPresenter(
     }
 
     override fun onPurchasesRestored(purchases: List<Purchase>) {
+        view?.hideLoadingIndicator()
         ContentAccessManager.contract.onPurchasesRestored(purchases, this)
-        if (ContentAccessManager.pluginConfigurator.isShowConfirmationRestorePurchases()) {
-            navigationRouter.showConfirmationDialog(AlertDialogType.RESTORE)
-        } else {
-            view?.goBack()
+        if (!handleRestoringPurchasesError(purchases)) {
+            if (ContentAccessManager.pluginConfigurator.isShowConfirmationRestorePurchases()) {
+                navigationRouter.showConfirmationDialog(AlertDialogType.RESTORE)
+            } else {
+                view?.goBack()
+            }
         }
-        handleRestoringPurchasesError(purchases)
     }
 
-    private fun handleRestoringPurchasesError(purchases: List<Purchase>) {
+    private fun handleRestoringPurchasesError(purchases: List<Purchase>): Boolean {
+        var result = false
         if (purchases.isEmpty()) {
             handleErrorMessage(ContentAccessManager.pluginConfigurator.getNoPurchasesToRestoreText())
+            result = true
         } else {
             val isNonMatchingRestoredPurchasesExists = skuDetailsList.none { details ->
                 purchases.find { purchase -> details.sku == purchase.sku } != null
             }
             if (isNonMatchingRestoredPurchasesExists) {
                 handleErrorMessage(ContentAccessManager.pluginConfigurator.getNonMatchingRestoredPurchasesText())
+                result = true
             }
         }
+        return result
     }
 
     override fun onPurchaseLoadingFailed(statusCode: Int, description: String) {
@@ -137,19 +143,17 @@ class BillingPresenter(
     }
 
     private fun fetchSkuDetailsByType(billingOffers: List<BillingOffer>) {
-        billingOffers.apply {
-            //filter billingOffers by SkuType.SUBS and map result to list of products IDs
-            val subs: List<String> = filter { billingOffer: BillingOffer ->
-                billingOffer.productType == ProductType.SUBS
-            }.map { billingOffer: BillingOffer -> billingOffer.productId }
-            GoogleBillingHelper.loadSkuDetails(BillingClient.SkuType.SUBS, subs)
+            //add billingOffers to skus map and call function for obtaining SkuDetails for these offers
+            val skusMap = hashMapOf<String, String>()
+            billingOffers.forEach {
+                skusMap[it.productId] =
+                    if (it.productType == ProductType.INAPP)
+                        BillingClient.SkuType.INAPP
+                    else
+                        BillingClient.SkuType.SUBS
+            }
 
-            //filter billingOffers by SkuType.INAPP and map result to list of products IDs
-            val inapps: List<String> = filter { billingOffer: BillingOffer ->
-                billingOffer.productType == ProductType.INAPP
-            }.map { billingOffer: BillingOffer -> billingOffer.productId }
-            GoogleBillingHelper.loadSkuDetails(BillingClient.SkuType.INAPP, inapps)
-        }
+            GoogleBillingHelper.loadSkuDetailsForAllTypes(skusMap)
     }
 
     private fun handleErrorMessage(msg: String) {
@@ -173,10 +177,7 @@ class BillingPresenter(
     //
 
     override fun onRestoreClicked() {
-        GoogleBillingHelper.apply {
-            loadPurchases(BillingClient.SkuType.SUBS)
-            loadPurchases(BillingClient.SkuType.INAPP)
-        }
         view?.showLoadingIndicator()
+        GoogleBillingHelper.restorePurchasesForAllTypes()
     }
 }
