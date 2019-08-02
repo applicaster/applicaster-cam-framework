@@ -3,14 +3,14 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
 
 
     defaultConfig {
-        minSdkVersion 17
-        targetSdkVersion 27
-        versionCode 3
-        versionName "1.0.3"
+        minSdkVersion 19
+        targetSdkVersion 28
+        versionCode 4
+        versionName "1.0.6"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -40,9 +40,10 @@ repositories {
 }
 
 dependencies {
+    def support_version = '28.0.0'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     // Applicaster SDK
-    def applicasterSDKPath = 'com.applicaster:applicaster-android-sdk:2.37.4'
+    def applicasterSDKPath = 'com.applicaster:applicaster-android-sdk:4.0.0'
     // Check if an open SDK is defined - if not use the closed one.
     def devSDK = findProject(':applicaster-android-sdk')
     if (devSDK != null) {
@@ -50,7 +51,7 @@ dependencies {
     } else {
         api(applicasterSDKPath)
     }
-    implementation ('com.github.LiquidPlayer:LiquidCore:0.4.6'){
+    implementation ('com.github.LiquidPlayer:LiquidCore:0.6.2'){
         exclude group: 'com.android.support', module:'appcompat-v7'
     }
     api 'com.applicaster:applicaster-iap-framework:0.0.3'
@@ -67,6 +68,7 @@ dependencies {
 //---------------------------------- Bintray ----------------------------------//
 apply plugin: 'maven-publish'
 apply plugin: 'com.jfrog.bintray'
+apply plugin: 'org.jetbrains.dokka-android'
 
 buildscript {
     repositories {
@@ -76,7 +78,8 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.1'
-        classpath 'com.github.dcendents:android-maven-plugin:1.2'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
+        classpath "org.jetbrains.dokka:dokka-android-gradle-plugin:0.9.17"
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
     }
 }
@@ -216,15 +219,15 @@ bintray {
     }
 }
 
-task androidJavadocs(type: Javadoc) {
-    source = android.sourceSets.main.java.srcDirs
-//    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-    failOnError false
+dokka {
+    outputFormat = 'javadoc'
+    outputDirectory = "$buildDir/javadoc"
+    reportUndocumented = false
 }
 
-task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
+task androidJavadocsJar(type: Jar, dependsOn: dokka) {
     classifier = 'javadoc'
-    from androidJavadocs.destinationDir
+    from "$buildDir/javadoc"
 }
 
 task androidSourcesJar(type: Jar) {
