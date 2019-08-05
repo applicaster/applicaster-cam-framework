@@ -78,7 +78,9 @@ class CamNavigationRouter(private val baseActivity: IBaseActivity) : BaseNavigat
         if (dialog == null) {
             ConfirmationDialog.newInstance(dialogType).show(fragmentManager, tag)
         } else {
-            dialog.show(fragmentManager, tag)
+            if (!dialog.isAdded) {
+                dialog.show(fragmentManager, tag)
+            }
         }
     }
 
