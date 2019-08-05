@@ -15,6 +15,7 @@ class CamActivity : AppCompatActivity(), IBaseActivity {
     private lateinit var fragmentsContainer: View
     private lateinit var navigationRouter: CamNavigationRouter
 
+    @Suppress("PLUGIN_WARNING")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cam)

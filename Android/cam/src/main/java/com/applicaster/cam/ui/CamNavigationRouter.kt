@@ -120,6 +120,7 @@ class CamNavigationRouter(private val baseActivity: IBaseActivity) : BaseNavigat
         when (authScreenType) {
             AuthScreenType.LOGIN -> attachLoginFragment(true)
             AuthScreenType.SIGNUP -> attachSignUpFragment(true)
+            else -> { /*empty*/ }
         }
     }
 }
