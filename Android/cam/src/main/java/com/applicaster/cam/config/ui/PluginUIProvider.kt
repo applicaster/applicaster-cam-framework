@@ -53,6 +53,7 @@ class PluginUIProvider(
         }
     }
 
+    @Suppress("DEPRECATION")
     override fun getDrawable(key: String): Drawable {
         val drawableId = OSUtil.getDrawableResourceIdentifier(key)
         return if (drawableId != 0) {
