@@ -88,6 +88,10 @@ class PluginConfigurator(private val pluginConfig: Map<String, String>) : Config
         else
             null
     }
+
+    override fun getPaymentConfirmationTitle(): String = pluginConfig.getValue(KEY_PAYMENT_CONFIRMATION_TITLE_TEXT)
+
+    override fun getPaymentConfirmationDescription(): String = pluginConfig.getValue(KEY_PAYMENT_CONFIRMATION_DESC_TEXT)
 }
 
 const val KEY_AUTH_FIELDS = "authentication_input_fields"
@@ -101,3 +105,5 @@ const val KEY_NO_PURCHASES_TO_RESTORE_TEXT = "no_purchases_to_restore_alert_text
 const val KEY_NON_MATCHING_RESTORED_PURCHASES_TEXT = "non_matching_restored_purchases_alert_text"
 const val KEY_AUTH_REQUIREMENT = "require_authentication"
 const val KEY_REQUIRE_PAYMENT = "require_payment"
+const val KEY_PAYMENT_CONFIRMATION_TITLE_TEXT = "payment_confirmation_title_text"
+const val KEY_PAYMENT_CONFIRMATION_DESC_TEXT = "payment_confirmation_description_text"

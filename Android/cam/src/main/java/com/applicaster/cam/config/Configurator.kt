@@ -39,4 +39,8 @@ interface Configurator {
     fun getAuthRequirement(): AuthenticationRequirement
 
     fun isPaymentRequired(): Boolean
+
+    fun getPaymentConfirmationTitle(): String
+
+    fun getPaymentConfirmationDescription(): String
 }

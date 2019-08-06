@@ -1,9 +1,11 @@
 package com.applicaster.cam.ui.auth.user.signup
 
+import android.app.Activity
 import com.applicaster.cam.CamFlow
 import com.applicaster.cam.ContentAccessManager
 import com.applicaster.cam.FacebookAuthCallback
 import com.applicaster.cam.SignUpCallback
+import com.applicaster.cam.analytics.*
 import com.applicaster.cam.params.auth.AuthFieldConfig
 import com.applicaster.cam.ui.CamNavigationRouter
 import com.applicaster.cam.ui.auth.user.UserAuthPresenter
@@ -13,13 +15,35 @@ class SignUpPresenter(
     private val navigationRouter: CamNavigationRouter
 ) :
     UserAuthPresenter(view), ISignUpPresenter, SignUpCallback, FacebookAuthCallback {
+
+    override fun onViewCreated() {
+        super.onViewCreated()
+        //Analytics event
+        AnalyticsUtil.logContentGatewaySession(
+            TimedEvent.START,
+            ContentAccessManager.contract.getAnalyticsDataProvider().getTrigger().value,
+            Action.SIGNUP
+        )
+    }
+
     override fun onFailure(msg: String) {
         view?.hideLoadingIndicator()
         view?.showAlert(msg)
+        AnalyticsUtil.logStandardSignUpFailure()
+        AnalyticsUtil.logViewAlert(
+            ConfirmationAlertData(
+                false,
+                ConfirmationCause.NONE,
+                "",
+                msg,
+                msg
+            )
+        )
     }
 
     override fun onSuccess() {
         view?.hideLoadingIndicator()
+        AnalyticsUtil.logStandardSignUpSuccess()
         if (ContentAccessManager.contract.isPurchaseRequired()) {
             when (ContentAccessManager.contract.getCamFlow()) {
                 CamFlow.AUTH_AND_STOREFRONT -> navigationRouter.attachBillingFragment()
@@ -36,14 +60,36 @@ class SignUpPresenter(
 
     override fun performAuthAction(input: HashMap<String, String>) {
         ContentAccessManager.contract.signUp(input, this)
+        AnalyticsUtil.logTapStandardSignUpButton()
     }
 
     override fun onAuthHintClicked() {
         navigationRouter.attachLoginFragment()
+        AnalyticsUtil.logSwitchToLoginScreen()
     }
 
     override fun onFacebookAuthActionCompleted(email: String, id: String) {
         view?.showLoadingIndicator()
         ContentAccessManager.contract.signupWithFacebook(email, id, this)
+        AnalyticsUtil.logAlternativeSignUpSuccess()
+    }
+
+    override fun onError(error: Exception?) {
+        super.onError(error)
+        AnalyticsUtil.logAlternativeSignUpFailure()
+        AnalyticsUtil.logViewAlert(
+            ConfirmationAlertData(
+                false,
+                ConfirmationCause.NONE,
+                "",
+                error?.message.orEmpty(),
+                error?.message.orEmpty()
+            )
+        )
+    }
+
+    override fun onFacebookButtonClicked(activity: Activity?) {
+        super.onFacebookButtonClicked(activity)
+        AnalyticsUtil.logTapAlternativeSignUp()
     }
 }
