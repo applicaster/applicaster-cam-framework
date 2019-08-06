@@ -132,8 +132,7 @@ class BillingPresenter(
                         )
                     )
                 }
-            }
-        })
+            })
         collectPurchaseData(camContract.getAnalyticsDataProvider().getPurchaseData(), purchases).forEach {
             AnalyticsUtil.logCompletePurchase(it)
         }
