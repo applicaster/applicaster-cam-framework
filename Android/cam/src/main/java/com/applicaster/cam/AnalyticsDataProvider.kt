@@ -10,7 +10,7 @@ enum class Trigger(val value: String) {
     // @formatter:on
 }
 
-interface AnalyticsDataProvider {
+interface IAnalyticsDataProvider {
     fun getEntityType(): String
     fun getEntityName(): String
     fun getTrigger(): Trigger

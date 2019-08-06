@@ -1,10 +1,10 @@
 package com.applicaster.camsample.mock
 
-import com.applicaster.cam.AnalyticsDataProvider
+import com.applicaster.cam.IAnalyticsDataProvider
 import com.applicaster.cam.PurchaseData
 import com.applicaster.cam.Trigger
 
-class AnalyticsDataProviderMock : AnalyticsDataProvider {
+class AnalyticsDataProviderMock : IAnalyticsDataProvider {
     override fun getEntityType(): String {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }

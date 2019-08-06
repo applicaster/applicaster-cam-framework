@@ -36,5 +36,5 @@ interface ICamContract {
 
     //========= Analytics ============//
 
-    fun getAnalyticsDataProvider(): AnalyticsDataProvider
+    fun getAnalyticsDataProvider(): IAnalyticsDataProvider
 }

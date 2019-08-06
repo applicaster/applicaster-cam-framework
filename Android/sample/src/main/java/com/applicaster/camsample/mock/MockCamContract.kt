@@ -54,7 +54,7 @@ class MockCamContract(private val context: Context) : ICamContract {
 
     override fun onCamFinished() {}
 
-    override fun getAnalyticsDataProvider(): AnalyticsDataProvider {
+    override fun getAnalyticsDataProvider(): IAnalyticsDataProvider {
         return AnalyticsDataProviderMock()
     }
 }
