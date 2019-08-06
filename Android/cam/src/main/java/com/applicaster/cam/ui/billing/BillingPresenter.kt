@@ -30,14 +30,15 @@ class BillingPresenter(
     private val camContract: ICamContract = ContentAccessManager.contract
 
     override fun onViewCreated() {
+        super.onViewCreated()
+
         // Analytics event
         AnalyticsUtil.logContentGatewaySession(
             TimedEvent.START,
             camContract.getAnalyticsDataProvider().getTrigger().value,
             Action.PURCHASE
         )
-
-        super.onViewCreated()
+        
         view?.getViewContext()?.applicationContext?.apply {
             GoogleBillingHelper.init(this, this@BillingPresenter)
         }
@@ -65,6 +66,7 @@ class BillingPresenter(
                 fetchSkuDetailsByType(billingOffers)
             }
         })
+        view?.showLoadingIndicator()
     }
 
     override fun onPurchaseButtonClicked(activity: Activity?, skuId: String) {
@@ -116,7 +118,7 @@ class BillingPresenter(
             }
 
             override fun onSuccess() {
-                if (ContentAccessManager.pluginConfigurator.isShowConfirmationPayment()) {
+                if (ContentAccessManager.pluginConfigurator.isShowConfirmationPayment())
                     navigationRouter.showConfirmationDialog(AlertDialogType.BILLING)
 
                     // Analytics events
@@ -138,22 +140,24 @@ class BillingPresenter(
     }
 
     override fun onPurchasesRestored(purchases: List<Purchase>) {
+        view?.hideLoadingIndicator()
         ContentAccessManager.contract.onPurchasesRestored(purchases, this)
-        if (ContentAccessManager.pluginConfigurator.isShowConfirmationRestorePurchases()) {
-            navigationRouter.showConfirmationDialog(AlertDialogType.RESTORE)
-
-            // Analytics events
-            AnalyticsUtil.logViewAlert(
-                ConfirmationAlertData(
-                    true,
-                    ConfirmationCause.RESTORE_PURCHASE,
-                    ContentAccessManager.pluginConfigurator.getPaymentConfirmationTitle(),
-                    ContentAccessManager.pluginConfigurator.getPaymentConfirmationDescription(),
-                    ""
+        if (!handleRestoringPurchasesError(purchases)) {
+            if (ContentAccessManager.pluginConfigurator.isShowConfirmationRestorePurchases()) {
+                navigationRouter.showConfirmationDialog(AlertDialogType.RESTORE)
+                // Analytics events
+                AnalyticsUtil.logViewAlert(
+                    ConfirmationAlertData(
+                        true,
+                        ConfirmationCause.RESTORE_PURCHASE,
+                        ContentAccessManager.pluginConfigurator.getPaymentConfirmationTitle(),
+                        ContentAccessManager.pluginConfigurator.getPaymentConfirmationDescription(),
+                        ""
+                    )
                 )
-            )
-        } else {
-            view?.goBack()
+            } else {
+                view?.goBack()
+            }
         }
 
         // Analytics events
@@ -169,6 +173,23 @@ class BillingPresenter(
                 AnalyticsUtil.logCompleteRestorePurchase(it)
             }
         }
+    }
+
+    private fun handleRestoringPurchasesError(purchases: List<Purchase>): Boolean {
+        var result = false
+        if (purchases.isEmpty()) {
+            handleErrorMessage(ContentAccessManager.pluginConfigurator.getNoPurchasesToRestoreText())
+            result = true
+        } else {
+            val isNonMatchingRestoredPurchasesExists = skuDetailsList.none { details ->
+                purchases.find { purchase -> details.sku == purchase.sku } != null
+            }
+            if (isNonMatchingRestoredPurchasesExists) {
+                handleErrorMessage(ContentAccessManager.pluginConfigurator.getNonMatchingRestoredPurchasesText())
+                result = true
+            }
+        }
+        return result
     }
 
     override fun onPurchaseLoadingFailed(statusCode: Int, description: String) {
@@ -215,20 +236,17 @@ class BillingPresenter(
     }
 
     private fun fetchSkuDetailsByType(billingOffers: List<BillingOffer>) {
-        view?.showLoadingIndicator()
-        billingOffers.apply {
-            //filter billingOffers by SkuType.SUBS and map result to list of products IDs
-            val subs: List<String> = filter { billingOffer: BillingOffer ->
-                billingOffer.productType == ProductType.SUBS
-            }.map { billingOffer: BillingOffer -> billingOffer.productId }
-            GoogleBillingHelper.loadSkuDetails(BillingClient.SkuType.SUBS, subs)
+            //add billingOffers to skus map and call function for obtaining SkuDetails for these offers
+            val skusMap = hashMapOf<String, String>()
+            billingOffers.forEach {
+                skusMap[it.productId] =
+                    if (it.productType == ProductType.INAPP)
+                        BillingClient.SkuType.INAPP
+                    else
+                        BillingClient.SkuType.SUBS
+            }
 
-            //filter billingOffers by SkuType.INAPP and map result to list of products IDs
-            val inapps: List<String> = filter { billingOffer: BillingOffer ->
-                billingOffer.productType == ProductType.INAPP
-            }.map { billingOffer: BillingOffer -> billingOffer.productId }
-            GoogleBillingHelper.loadSkuDetails(BillingClient.SkuType.INAPP, inapps)
-        }
+            GoogleBillingHelper.loadSkuDetailsForAllTypes(skusMap)
     }
 
     private fun handleErrorMessage(msg: String) {
@@ -263,42 +281,39 @@ class BillingPresenter(
 
     override fun onFailure(msg: String) {
         view?.hideLoadingIndicator()
-        handleErrorMessage(msg)
     }
 
     override fun onSuccess() {
         view?.hideLoadingIndicator()
     }
+    //
 
     override fun onRestoreClicked() {
-        GoogleBillingHelper.apply {
-            loadPurchases(BillingClient.SkuType.SUBS)
-            loadPurchases(BillingClient.SkuType.INAPP)
-        }
         view?.showLoadingIndicator()
         AnalyticsUtil.logTapRestorePurchaseLink()
+        GoogleBillingHelper.restorePurchasesForAllTypes()
     }
 
-    // Analytics related function
-    private fun collectPurchaseData(
-        purchasesData: List<PurchaseData>,
-        purchases: List<Purchase> = arrayListOf()
-    ): List<PurchaseProductPropertiesData> {
-        val result: ArrayList<PurchaseProductPropertiesData> = arrayListOf()
-        purchasesData.forEach { data ->
-            val productData = PurchaseProductPropertiesData(
-                camContract.getAnalyticsDataProvider().isUserSubscribed(),
-                data.title,
-                data.price,
-                purchases.find { it.sku == data.androidProductId}?.orderId.orEmpty(),
-                data.androidProductId,
-                data.purchaseType,
-                data.subscriptionDuration,
-                data.trialPeriod,
-                data.purchaseEntityType
-            )
-            result.add(productData)
-        }
-        return result
+// Analytics related function
+private fun collectPurchaseData(
+    purchasesData: List<PurchaseData>,
+    purchases: List<Purchase> = arrayListOf()
+): List<PurchaseProductPropertiesData> {
+    val result: ArrayList<PurchaseProductPropertiesData> = arrayListOf()
+    purchasesData.forEach { data ->
+        val productData = PurchaseProductPropertiesData(
+            camContract.getAnalyticsDataProvider().isUserSubscribed(),
+            data.title,
+            data.price,
+            purchases.find { it.sku == data.androidProductId}?.orderId.orEmpty(),
+            data.androidProductId,
+            data.purchaseType,
+            data.subscriptionDuration,
+            data.trialPeriod,
+            data.purchaseEntityType
+        )
+        result.add(productData)
     }
+    return result
+}
 }

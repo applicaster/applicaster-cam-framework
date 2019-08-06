@@ -33,6 +33,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/billing_tv_title_text_size"
                 android:layout_gravity="center_horizontal"
+                android:gravity="center"
                 android:layout_marginTop="@dimen/billing_title_margin_top"
                 android:text="@string/tv_billing_default_text"/>
 

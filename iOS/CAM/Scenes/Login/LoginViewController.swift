@@ -89,7 +89,8 @@ class LoginViewController: UIViewController {
         }
         signUpButton.titleLabel?.numberOfLines = 0
         signUpButton.titleLabel?.textAlignment = .center
-        socialNetworksContainer.isHidden = !(configDictionary[CAMKeys.facebookLoginEnabled.rawValue] ?? "false").bool
+        socialNetworksContainer.isHidden = (configDictionary[CAMKeys.alternativeAuthentification.rawValue]?.isEmpty ?? true) ||
+                                           (configDictionary[CAMKeys.separatorText.rawValue]?.isEmpty ?? true)
         authFieldsTable.backgroundView = UIView()
         authFieldsTable.allowsSelection = false
         setupResetPasswordButton()

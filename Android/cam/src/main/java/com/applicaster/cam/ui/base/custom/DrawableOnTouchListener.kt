@@ -14,7 +14,7 @@ abstract class DrawableOnTouchListener : OnTouchListener {
         if (event.action == MotionEvent.ACTION_DOWN && drawable != null) {
             val x = event.x.toInt()
             val y = event.y.toInt()
-            val bounds = drawable!!.bounds
+            val bounds = drawable.bounds
             if (x >= v.getRight() - bounds.width() - extendedClickableArea && x <= v.getRight() - v.getPaddingRight() + extendedClickableArea
                 && y >= v.getPaddingTop() - extendedClickableArea && y <= v.getHeight() - v.getPaddingBottom() + extendedClickableArea
             ) {

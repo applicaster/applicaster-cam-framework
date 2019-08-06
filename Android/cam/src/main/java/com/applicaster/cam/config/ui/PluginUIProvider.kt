@@ -46,23 +46,14 @@ class PluginUIProvider(
     override fun getFontName(key: String): String {
         return let {
             if (pluginConfig.containsKey(key)) {
-                getFontFromAttrs(pluginConfig[key] ?: "")
+               pluginConfig[key].orEmpty()
             } else {
                 ""
             }
         }
     }
 
-    private fun getFontFromAttrs(key: String): String {
-        val attributes: IntArray = intArrayOf(OSUtil.getAttributeResourceIdentifier("customtypeface"))
-        val styles =
-            CustomApplication.getAppContext().obtainStyledAttributes(OSUtil.getStyleResourceIdentifier(key), attributes)
-
-        val font = styles.getString(0)
-        styles.recycle()
-        return font ?: ""
-    }
-
+    @Suppress("DEPRECATION")
     override fun getDrawable(key: String): Drawable {
         val drawableId = OSUtil.getDrawableResourceIdentifier(key)
         return if (drawableId != 0) {

@@ -79,6 +79,21 @@ public enum CAMKeys: String {
     
     case restoreAlertTitle = "restore_purchase_confirmation_title_text"
     case restoreAlertDescription = "restore_purchase_confirmation_description_text"
+    case restoreNonMatchingAlertText = "non_matching_restored_purchases_alert_text"
+    case restoreNoPurchaseAlertText = "no_purchases_to_restore_alert_text"
+    
+    case paymentRequirement = "require_payment"
+}
+
+enum AuthRequirement: String {
+    case never = "never_requiere"
+    case always = "always_require"
+    case purchasableItems = "require_on_all_purchasable_items"
+    case dataSourceBased = "require_when_specified_on_the_data_source"
+    
+    static var key: String {
+        return "authentication_requirement"
+    }
 }
 
 public enum CAMStyles: String {

@@ -52,6 +52,8 @@ open class ContentAccessManager {
                                                                      parameters: event.metadata,
                                                                      timed: true)
         
+        camFlow.update(with: delegate.getPluginConfig())
+        
         switch camFlow {
         case .authentication:
             startAuthenticationFlow()

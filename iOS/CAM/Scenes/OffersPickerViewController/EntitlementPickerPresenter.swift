@@ -52,9 +52,8 @@ class EntitlementPickerPresenter {
                                         restoreHint: restoreHint,
                                         restoreButtonText: restoreButtonText,
                                         legalDetails: legalDetailsText)
-        
+        self.view.showLoadingIndicator()
         self.view.viewModel = viewModel
-        
         camDelegate.availableProducts(completion: { [weak self] (result) in
             guard let self = self else { return }
             
@@ -101,12 +100,21 @@ class EntitlementPickerPresenter {
                                                 state: .restored)
                     return item
                 }
+                
+                if resultArray.isEmpty == true {
+                    let alertDescription = self.camDelegate.getPluginConfig()[CAMKeys.restoreNoPurchaseAlertText.rawValue]
+                    self.view.showAlert(description: alertDescription)
+                }
+                
                 self.camDelegate.itemsRestored(restoredItems: resultArray, completion: { [weak self] (result) in
                     guard let self = self else { return }
                     switch result {
                     case .success:
                         if self.camDelegate.isPurchaseNeeded() == true {
                             self.showConfirmationScreen(for: .restore)
+                        } else {
+                            let alertDescription = self.camDelegate.getPluginConfig()[CAMKeys.restoreNonMatchingAlertText.rawValue]
+                            self.view.showAlert(description: alertDescription)
                         }
                         
                         let productsProperties = resultArray.map({ self.createProductProperties(for: $0.productIdentifier) })

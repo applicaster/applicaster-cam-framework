@@ -4,6 +4,7 @@ import android.support.v4.app.DialogFragment
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
+import android.util.Log
 import com.applicaster.cam.CamFlow
 import com.applicaster.cam.params.auth.AuthScreenType
 import com.applicaster.cam.ui.auth.user.login.LoginFragment
@@ -17,6 +18,7 @@ import com.applicaster.cam.ui.auth.password.reset.PasswordResetFragment
 
 class CamNavigationRouter(private val baseActivity: IBaseActivity) : BaseNavigationRouter(baseActivity) {
 
+    private val TAG = CamNavigationRouter::class.java.canonicalName
     private val confirmationDialogPrefix: String = "ConfirmationDialog-"
 
     fun attachSignUpFragment(initialLoad: Boolean = false) {
@@ -78,7 +80,9 @@ class CamNavigationRouter(private val baseActivity: IBaseActivity) : BaseNavigat
         if (dialog == null) {
             ConfirmationDialog.newInstance(dialogType).show(fragmentManager, tag)
         } else {
-            dialog.show(fragmentManager, tag)
+            if (!dialog.isAdded) {
+                dialog.show(fragmentManager, tag)
+            }
         }
     }
 
@@ -118,6 +122,10 @@ class CamNavigationRouter(private val baseActivity: IBaseActivity) : BaseNavigat
         when (authScreenType) {
             AuthScreenType.LOGIN -> attachLoginFragment(true)
             AuthScreenType.SIGNUP -> attachSignUpFragment(true)
+            else -> {
+                Log.e(TAG, "Illegal AuthScreenType value: [${authScreenType.name}] was set as function parameter!")
+                throw IllegalArgumentException("Illegal AuthScreenType value: [${authScreenType.name}] was set as function parameter!")
+            }
         }
     }
 }
