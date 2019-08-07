@@ -4,7 +4,7 @@
       {
         "key": "trigger_on_app_launch",
         "type": "switch",
-        "label_tooltip": "If checked, the plugin UI will be launched when the user launches the app, unless the device is already authorized to access the app.",
+        "label_tooltip": "If switched on, the plugin UI will be launched when the user launches the app, unless the device is already authorized to access the app.",
         "initial_value": "true"
       },
       {
@@ -275,13 +275,13 @@
       {
         "key": "alternative_authentication_priority",
         "type": "switch",
-        "label_tooltip": "<p>The login and signup screens can enable third party options (e.g. Facebook) for user authentication, if the relevant assets and fields are configured.</p><p>Checking this field sets the alternative authentication as highest priority and will display it above the custom form. Which option to take depends on your priorities - having the alternative logins at the top of the screen may make conversion more likely but will also lead to the collection of the data the third party uses rather than the data specified by your custom form.</p><p>For design purposes, we recommend checking this field if the custom form includes more than three fields.</p>",
-        "initial_value": "false"
+        "label_tooltip": "<p>Checking this field sets alternative authentication as higher priority than the custom form and will present these options above the custom form.</p><p>Which option to take depends on your priorities - having the alternative logins at the top of the screen may make conversion more likely but will also lead to the collection of the data the third party uses rather than the data specified by your custom form.</p><p>For design purposes, we recommend switching this field on if the custom form includes more than three fields.</p>",
+	    "initial_value": "false"
       },
       {
         "key": "alternative_authentication_separator_text",
         "type": "text_input",
-        "label_tooltip": "<p>If assets are provided in the Design Assets file (field above) for any alternative methods of user authentication (e.g. Facebook), then below the input fields for standard login/sign-up, there is a design separating the standard login/sign-up form from alternative options, with text in the middle of the design.</p><p>Depending on the main language of the app, we recommend putting a version of the word “Or” here to distinguish between the two modes of authentication.</p>",
+        "label_tooltip": "<p>There is a design separating the standard login/sign-up form from alternative options, with text in the middle of the design.</p><p>Depending on the main language of the app, we recommend putting a version of the word “Or” here to distinguish between the two modes of authentication.</p>",
         "initial_value": "Or"
       },
       {
@@ -323,7 +323,7 @@
       {
         "key": "alternative_authentication_prompt_text",
         "type": "text_input",
-        "label_tooltip": "The optional text presented above the options for alternative methods of login/sign-up via third party providers (Facebook, Google, or Twitter)",
+        "label_tooltip": "The optional text presented above the options for alternative methods of login/sign-up via third party providers (e.g. Facebook)",
         "initial_value": "Login with:"
       },
       {
@@ -365,7 +365,7 @@
       {
         "key": "restore_help_message_text",
         "type": "text_input",
-        "label_tooltip": "<p>If you supported in-app purchases before SSO/login, you may want to notify users that they can restore old purchases on the storefront screen once they authenticate. This field provides a message for users to understand this.</p><p>This field is left blank by default, but an example message would be “If you’ve already made a purchase, you will be able to restore that purchase at no cost once you’ve logged in.</p>",
+        "label_tooltip": "<p>If you supported in-app purchases before SSO/login, you may want to notify users that they can restore old purchases on the storefront screen once they authenticate. This field provides a message for users to understand this.</p><p>This field is left blank by default, but an example message would be “If you’ve already made a purchase, you will be able to restore that purchase at no cost once you’ve logged in.”</p><p>If left blank, no such message will be presented. If this is not a relevant use-case for you, it would be better to keep blank to keep the design and UX as clean as possible.</p>",
         "initial_value": ""
       },
       {
@@ -509,13 +509,13 @@
       {
         "key": "restore_prompt_text",
         "type": "text_input",
-        "label_tooltip": "If you already purchased an account -",
+        "label_tooltip": "The prompt text just before the link which triggers the restore purchase process",
         "initial_value": "If you already purchased an account -"
       },
       {
         "key": "restore_link_text",
         "type": "text_input",
-        "label_tooltip": "The link which leads to the restore screen, following the Restore Prompt Text",
+        "label_tooltip": "The text for the link which triggers the restore purchase process, following the Restore Prompt Text",
         "initial_value": "Restore Your Account"
       },
       {
