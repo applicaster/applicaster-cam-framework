@@ -29,6 +29,10 @@ allprojects {
             }
             url 'https://dl.bintray.com/applicaster-ltd/maven'
         }
+        maven {
+            url "https://dl.bintray.com/applicaster-ltd/maven_plugins/"
+
+        }
     }
 }
 

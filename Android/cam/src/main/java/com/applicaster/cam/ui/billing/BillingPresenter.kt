@@ -69,6 +69,11 @@ class BillingPresenter(
         view?.showLoadingIndicator()
     }
 
+    override fun onBillingClientError(statusCode: Int, description: String) {
+        view?.hideLoadingIndicator()
+        view?.showAlert(ContentAccessManager.pluginConfigurator.getDefaultAlertText())
+    }
+
     override fun onPurchaseButtonClicked(activity: Activity?, skuId: String) {
         skuDetailsList.find { skuDetails ->
             skuDetails.sku == skuId
