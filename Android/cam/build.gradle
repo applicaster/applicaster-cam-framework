@@ -37,6 +37,10 @@ repositories {
         }
         url 'https://dl.bintray.com/applicaster-ltd/maven'
     }
+    maven {
+        url "https://dl.bintray.com/applicaster-ltd/maven_plugins/"
+
+    }
 }
 
 dependencies {
@@ -54,7 +58,7 @@ dependencies {
     implementation ('com.github.LiquidPlayer:LiquidCore:0.6.2'){
         exclude group: 'com.android.support', module:'appcompat-v7'
     }
-    api 'com.applicaster:applicaster-iap-framework:0.0.4'
+    api 'com.applicaster:applicaster-iap-framework:0.0.5'
     implementation "com.android.support:appcompat-v7:$support_version"
     implementation "com.android.support:support-v4:$support_version"
     testImplementation 'junit:junit:4.12'
