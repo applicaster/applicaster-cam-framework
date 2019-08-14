@@ -5,23 +5,13 @@ import com.applicaster.cam.PurchaseData
 import com.applicaster.cam.Trigger
 
 class AnalyticsDataProviderMock : IAnalyticsDataProvider {
-    override fun getEntityType(): String {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun getEntityType(): String = ""
 
-    override fun getEntityName(): String {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun getEntityName(): String = ""
 
-    override fun getTrigger(): Trigger {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun getTrigger(): Trigger = Trigger.OTHER
 
-    override fun isUserSubscribed(): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun isUserSubscribed(): Boolean = false
 
-    override fun getPurchaseData(): List<PurchaseData> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun getPurchaseData(): List<PurchaseData> = listOf()
 }
