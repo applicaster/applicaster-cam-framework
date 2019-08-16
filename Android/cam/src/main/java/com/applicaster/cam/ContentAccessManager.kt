@@ -27,7 +27,7 @@ object ContentAccessManager : IContentAccessManager {
         setCamFlow(contract)
         startCamActivity(context)
 
-        AnalyticsUtil.logLaunchContentGatwayPlugin(this.contract.getAnalyticsDataProvider().getTrigger().value)
+        AnalyticsUtil.logLaunchContentGatwayPlugin(this.contract.getAnalyticsDataProvider().trigger.value)
     }
 
     private fun setCamFlow(contract: ICamContract) {

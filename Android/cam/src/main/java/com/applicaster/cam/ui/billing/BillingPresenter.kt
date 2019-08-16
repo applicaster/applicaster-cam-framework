@@ -18,11 +18,11 @@ import com.applicaster.iap.BillingListener
 import com.applicaster.iap.GoogleBillingHelper
 
 class BillingPresenter(
-    private val view: IBillingView?,
-    private val navigationRouter: CamNavigationRouter
+        private val view: IBillingView?,
+        private val navigationRouter: CamNavigationRouter
 ) : BasePresenter(view),
-    IBillingPresenter,
-    BillingListener, RestoreCallback {
+        IBillingPresenter,
+        BillingListener, RestoreCallback {
 
     private val TAG = BillingPresenter::class.java.canonicalName
 
@@ -34,11 +34,11 @@ class BillingPresenter(
 
         // Analytics event
         AnalyticsUtil.logContentGatewaySession(
-            TimedEvent.START,
-            camContract.getAnalyticsDataProvider().getTrigger().value,
-            Action.PURCHASE
+                TimedEvent.START,
+                camContract.getAnalyticsDataProvider().trigger.value,
+                Action.PURCHASE
         )
-        
+
         view?.getViewContext()?.applicationContext?.apply {
             GoogleBillingHelper.init(this, this@BillingPresenter)
         }
@@ -80,7 +80,7 @@ class BillingPresenter(
         }?.also { skuDetails ->
             if (activity != null) GoogleBillingHelper.purchase(activity, skuDetails)
             // Analytics events
-            collectPurchaseData(camContract.getAnalyticsDataProvider().getPurchaseData()).forEach {
+            collectPurchaseData(camContract.getAnalyticsDataProvider().purchaseData).forEach {
                 AnalyticsUtil.logTapPurchaseButton(it)
             }
         }
@@ -94,13 +94,13 @@ class BillingPresenter(
         Log.e(TAG, "PurchaseConsumptionFailed: $description")
         // Analytics events
         AnalyticsUtil.logViewAlert(
-            ConfirmationAlertData(
-                false,
-                ConfirmationCause.NONE,
-                "",
-                ContentAccessManager.pluginConfigurator.getDefaultAlertText(),
-                description
-            )
+                ConfirmationAlertData(
+                        false,
+                        ConfirmationCause.NONE,
+                        "",
+                        ContentAccessManager.pluginConfigurator.getDefaultAlertText(),
+                        description
+                )
         )
     }
 
@@ -112,13 +112,13 @@ class BillingPresenter(
 
                 // Analytics events
                 AnalyticsUtil.logViewAlert(
-                    ConfirmationAlertData(
-                        false,
-                        ConfirmationCause.PURCHASE,
-                        ContentAccessManager.pluginConfigurator.getPaymentConfirmationTitle(),
-                        ContentAccessManager.pluginConfigurator.getPaymentConfirmationDescription(),
-                        if (msg.isEmpty()) ContentAccessManager.pluginConfigurator.getDefaultAlertText() else msg
-                    )
+                        ConfirmationAlertData(
+                                false,
+                                ConfirmationCause.PURCHASE,
+                                ContentAccessManager.pluginConfigurator.getPaymentConfirmationTitle(),
+                                ContentAccessManager.pluginConfigurator.getPaymentConfirmationDescription(),
+                                if (msg.isEmpty()) ContentAccessManager.pluginConfigurator.getDefaultAlertText() else msg
+                        )
                 )
             }
 
@@ -126,19 +126,19 @@ class BillingPresenter(
                 if (ContentAccessManager.pluginConfigurator.isShowConfirmationPayment())
                     navigationRouter.showConfirmationDialog(AlertDialogType.BILLING)
 
-                    // Analytics events
-                    AnalyticsUtil.logViewAlert(
+                // Analytics events
+                AnalyticsUtil.logViewAlert(
                         ConfirmationAlertData(
-                            true,
-                            ConfirmationCause.PURCHASE,
-                            ContentAccessManager.pluginConfigurator.getPaymentConfirmationTitle(),
-                            ContentAccessManager.pluginConfigurator.getPaymentConfirmationDescription(),
-                            ""
+                                true,
+                                ConfirmationCause.PURCHASE,
+                                ContentAccessManager.pluginConfigurator.getPaymentConfirmationTitle(),
+                                ContentAccessManager.pluginConfigurator.getPaymentConfirmationDescription(),
+                                ""
                         )
-                    )
-                }
-            })
-        collectPurchaseData(camContract.getAnalyticsDataProvider().getPurchaseData(), purchases).forEach {
+                )
+            }
+        })
+        collectPurchaseData(camContract.getAnalyticsDataProvider().purchaseData, purchases).forEach {
             AnalyticsUtil.logCompletePurchase(it)
         }
     }
@@ -151,13 +151,13 @@ class BillingPresenter(
                 navigationRouter.showConfirmationDialog(AlertDialogType.RESTORE)
                 // Analytics events
                 AnalyticsUtil.logViewAlert(
-                    ConfirmationAlertData(
-                        true,
-                        ConfirmationCause.RESTORE_PURCHASE,
-                        ContentAccessManager.pluginConfigurator.getPaymentConfirmationTitle(),
-                        ContentAccessManager.pluginConfigurator.getPaymentConfirmationDescription(),
-                        ""
-                    )
+                        ConfirmationAlertData(
+                                true,
+                                ConfirmationCause.RESTORE_PURCHASE,
+                                ContentAccessManager.pluginConfigurator.getPaymentConfirmationTitle(),
+                                ContentAccessManager.pluginConfigurator.getPaymentConfirmationDescription(),
+                                ""
+                        )
                 )
             } else {
                 view?.goBack()
@@ -166,13 +166,13 @@ class BillingPresenter(
 
         // Analytics events
         if (purchases.isEmpty()) {
-            collectPurchaseData(camContract.getAnalyticsDataProvider().getPurchaseData(), purchases).forEach {
+            collectPurchaseData(camContract.getAnalyticsDataProvider().purchaseData, purchases).forEach {
                 AnalyticsUtil.logStoreRestorePurchaseError("Restore purchases error", it)
             }
         } else {
             collectPurchaseData(
-                camContract.getAnalyticsDataProvider().getPurchaseData(),
-                purchases
+                    camContract.getAnalyticsDataProvider().purchaseData,
+                    purchases
             ).forEach {
                 AnalyticsUtil.logCompleteRestorePurchase(it)
             }
@@ -201,20 +201,20 @@ class BillingPresenter(
 
         // Analytics events
         AnalyticsUtil.logViewAlert(
-            ConfirmationAlertData(
-                false,
-                ConfirmationCause.NONE,
-                "",
-                ContentAccessManager.pluginConfigurator.getDefaultAlertText(),
-                description
-            )
+                ConfirmationAlertData(
+                        false,
+                        ConfirmationCause.NONE,
+                        "",
+                        ContentAccessManager.pluginConfigurator.getDefaultAlertText(),
+                        description
+                )
         )
         if (statusCode == BillingClient.BillingResponse.USER_CANCELED) {
-            collectPurchaseData(camContract.getAnalyticsDataProvider().getPurchaseData()).forEach {
+            collectPurchaseData(camContract.getAnalyticsDataProvider().purchaseData).forEach {
                 AnalyticsUtil.logCancelPurchase(it)
             }
         } else {
-            collectPurchaseData(camContract.getAnalyticsDataProvider().getPurchaseData()).forEach {
+            collectPurchaseData(camContract.getAnalyticsDataProvider().purchaseData).forEach {
                 AnalyticsUtil.logStorePurchaseError(statusCode.toString(), description, it)
             }
         }
@@ -224,11 +224,11 @@ class BillingPresenter(
         skuDetailsList.addAll(skuDetails)
         view?.populateBillingContainer(skuDetails.map {
             PurchaseItem(
-                it.sku,
-                it.title,
-                it.description,
-                it.price,
-                ""
+                    it.sku,
+                    it.title,
+                    it.description,
+                    it.price,
+                    ""
             )
         })
         view?.hideLoadingIndicator()
@@ -240,17 +240,17 @@ class BillingPresenter(
     }
 
     private fun fetchSkuDetailsByType(billingOffers: List<BillingOffer>) {
-            //add billingOffers to skus map and call function for obtaining SkuDetails for these offers
-            val skusMap = hashMapOf<String, String>()
-            billingOffers.forEach {
-                skusMap[it.productId] =
+        //add billingOffers to skus map and call function for obtaining SkuDetails for these offers
+        val skusMap = hashMapOf<String, String>()
+        billingOffers.forEach {
+            skusMap[it.productId] =
                     if (it.productType == ProductType.INAPP)
                         BillingClient.SkuType.INAPP
                     else
                         BillingClient.SkuType.SUBS
-            }
+        }
 
-            GoogleBillingHelper.loadSkuDetailsForAllTypes(skusMap)
+        GoogleBillingHelper.loadSkuDetailsForAllTypes(skusMap)
     }
 
     private fun handleErrorMessage(msg: String) {
@@ -259,26 +259,26 @@ class BillingPresenter(
 
             // Analytics events
             AnalyticsUtil.logViewAlert(
-                ConfirmationAlertData(
-                    false,
-                    ConfirmationCause.NONE,
-                    "",
-                    ContentAccessManager.pluginConfigurator.getDefaultAlertText(),
-                    msg
-                )
+                    ConfirmationAlertData(
+                            false,
+                            ConfirmationCause.NONE,
+                            "",
+                            ContentAccessManager.pluginConfigurator.getDefaultAlertText(),
+                            msg
+                    )
             )
         } else {
             view?.showAlert(msg)
 
             // Analytics events
             AnalyticsUtil.logViewAlert(
-                ConfirmationAlertData(
-                    false,
-                    ConfirmationCause.NONE,
-                    "",
-                    msg,
-                    msg
-                )
+                    ConfirmationAlertData(
+                            false,
+                            ConfirmationCause.NONE,
+                            "",
+                            msg,
+                            msg
+                    )
             )
         }
     }
@@ -298,26 +298,26 @@ class BillingPresenter(
         GoogleBillingHelper.restorePurchasesForAllTypes()
     }
 
-// Analytics related function
-private fun collectPurchaseData(
-    purchasesData: List<PurchaseData>,
-    purchases: List<Purchase> = arrayListOf()
-): List<PurchaseProductPropertiesData> {
-    val result: ArrayList<PurchaseProductPropertiesData> = arrayListOf()
-    purchasesData.forEach { data ->
-        val productData = PurchaseProductPropertiesData(
-            camContract.getAnalyticsDataProvider().isUserSubscribed(),
-            data.title,
-            data.price,
-            purchases.find { it.sku == data.androidProductId}?.orderId.orEmpty(),
-            data.androidProductId,
-            data.purchaseType,
-            data.subscriptionDuration,
-            data.trialPeriod,
-            data.purchaseEntityType
-        )
-        result.add(productData)
+    // Analytics related function
+    private fun collectPurchaseData(
+            purchasesData: List<PurchaseData>,
+            purchases: List<Purchase> = arrayListOf()
+    ): List<PurchaseProductPropertiesData> {
+        val result: ArrayList<PurchaseProductPropertiesData> = arrayListOf()
+        purchasesData.forEach { data ->
+            val productData = PurchaseProductPropertiesData(
+                    camContract.getAnalyticsDataProvider().isUserSubscribed,
+                    data.title,
+                    data.price,
+                    purchases.find { it.sku == data.androidProductId }?.orderId.orEmpty(),
+                    data.androidProductId,
+                    data.purchaseType,
+                    data.subscriptionDuration,
+                    data.trialPeriod,
+                    data.purchaseEntityType
+            )
+            result.add(productData)
+        }
+        return result
     }
-    return result
-}
 }
