@@ -35,7 +35,7 @@ class BillingPresenter(
         // Analytics event
         AnalyticsUtil.logContentGatewaySession(
                 TimedEvent.START,
-                camContract.getAnalyticsDataProvider().getTrigger().value,
+                camContract.getAnalyticsDataProvider().trigger.value,
                 Action.PURCHASE
         )
 
@@ -80,7 +80,7 @@ class BillingPresenter(
         }?.also { skuDetails ->
             if (activity != null) GoogleBillingHelper.purchase(activity, skuDetails)
             // Analytics events
-            collectPurchaseData(camContract.getAnalyticsDataProvider().getPurchaseData()).forEach {
+            collectPurchaseData(camContract.getAnalyticsDataProvider().purchaseData).forEach {
                 AnalyticsUtil.logTapPurchaseButton(it)
             }
         }
@@ -143,7 +143,7 @@ class BillingPresenter(
                 }
             }
         })
-        collectPurchaseData(camContract.getAnalyticsDataProvider().getPurchaseData(), purchases).forEach {
+        collectPurchaseData(camContract.getAnalyticsDataProvider().purchaseData, purchases).forEach {
             AnalyticsUtil.logCompletePurchase(it)
         }
     }
@@ -202,11 +202,11 @@ class BillingPresenter(
                 )
         )
         if (statusCode == BillingClient.BillingResponse.USER_CANCELED) {
-            collectPurchaseData(camContract.getAnalyticsDataProvider().getPurchaseData()).forEach {
+            collectPurchaseData(camContract.getAnalyticsDataProvider().purchaseData).forEach {
                 AnalyticsUtil.logCancelPurchase(it)
             }
         } else {
-            collectPurchaseData(camContract.getAnalyticsDataProvider().getPurchaseData()).forEach {
+            collectPurchaseData(camContract.getAnalyticsDataProvider().purchaseData).forEach {
                 AnalyticsUtil.logStorePurchaseError(statusCode.toString(), description, it)
             }
         }

@@ -11,11 +11,11 @@ enum class Trigger(val value: String) {
 }
 
 interface IAnalyticsDataProvider {
-    fun getEntityType(): String
-    fun getEntityName(): String
-    fun getTrigger(): Trigger
-    fun isUserSubscribed(): Boolean
-    fun getPurchaseData(): List<PurchaseData>
+    var entityType: String
+    var entityName: String
+    var trigger: Trigger
+    val isUserSubscribed: Boolean
+    var purchaseData: MutableList<PurchaseData>
 }
 
 data class PurchaseData(

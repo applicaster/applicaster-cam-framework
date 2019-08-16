@@ -21,7 +21,7 @@ class SignUpPresenter(
         //Analytics event
         AnalyticsUtil.logContentGatewaySession(
             TimedEvent.START,
-            ContentAccessManager.contract.getAnalyticsDataProvider().getTrigger().value,
+            ContentAccessManager.contract.getAnalyticsDataProvider().trigger.value,
             Action.SIGNUP
         )
     }

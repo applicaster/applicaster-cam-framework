@@ -27,10 +27,10 @@ class AnalyticsUtil {
             }
 
         private fun getContentEntityName() =
-            ContentAccessManager.contract.getAnalyticsDataProvider().getEntityName()
+            ContentAccessManager.contract.getAnalyticsDataProvider().entityName
 
         private fun getContentEntityType() =
-            ContentAccessManager.contract.getAnalyticsDataProvider().getEntityName()
+            ContentAccessManager.contract.getAnalyticsDataProvider().entityName
 
         private fun generateProductPropertiesMap(productPropertiesData: PurchaseProductPropertiesData) =
             mapOf(
@@ -300,6 +300,18 @@ class AnalyticsUtil {
                 Properties.CONTENT_ENTITY_TYPE.value to getContentEntityType()
             ) + generateProductPropertiesMap(purchaseProductPropertiesData)
             AnalyticsAgentUtil.logEvent(AnalyticsEvent.STORE_RESTORE_PURCHASE_ERROR.value, params)
+        }
+
+
+        // user analytics
+        fun logIsUserLogged(purchaseProductPropertiesData: List<PurchaseProductPropertiesData>) {
+            val pluginProvider: String = PluginManager.getInstance().getInitiatedPlugin(Plugin.Type.LOGIN)?.plugin?.name.orEmpty()
+            val productNames = arrayListOf<String>()
+            purchaseProductPropertiesData.forEach {
+                val isUserSubscribed: Boolean = it.isUserSubscribed
+                productNames.add(it.productName)
+            }
+            val productName: String = productNames.joinToString(separator = "; ")
         }
     }
 }

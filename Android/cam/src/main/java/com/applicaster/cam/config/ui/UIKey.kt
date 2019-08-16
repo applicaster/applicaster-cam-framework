@@ -61,48 +61,48 @@ enum class UIKey(
 }
 
 // region Common UI keys
-const val UI_KEY_TOOLBAR_BACK_IMAGE = "back_button"
-const val UI_KEY_TOOLBAR_CLOSE_IMAGE = "close_button"
-const val UI_KEY_TOOLBAR_LOGO_IMAGE = "header_logo"
-const val UI_KEY_BACKGROUND_IMAGE = "background_image"
-const val UI_KEY_ALERT_COMPONENT_IMAGE = "alert_component"
-const val UI_KEY_ALERT_BUTTON_IMAGE = "alert_button_asset"
+const val UI_KEY_TOOLBAR_BACK_IMAGE = "cam_back_button"
+const val UI_KEY_TOOLBAR_CLOSE_IMAGE = "cam_close_button"
+const val UI_KEY_TOOLBAR_LOGO_IMAGE = "cam_header_logo"
+const val UI_KEY_BACKGROUND_IMAGE = "cam_background_image"
+const val UI_KEY_ALERT_COMPONENT_IMAGE = "cam_alert_component"
+const val UI_KEY_ALERT_BUTTON_IMAGE = "cam_alert_button_asset"
 // endregion
 
 // region auth UI keys
 const val UI_KEY_SIGN_UP_TITLE_TEXT = "sign_up_title_text"
 const val UI_KEY_SIGN_UP_BUTTON_TEXT = "sign_up_button_text"
-const val UI_KEY_SIGN_UP_BUTTON_IMAGE = "action_button_asset"
+const val UI_KEY_SIGN_UP_BUTTON_IMAGE = "cam_action_button_asset"
 const val UI_KEY_LOGIN_RESET_PWD_TEXT = "password_reset_link_text"
 const val UI_KEY_SIGN_UP_PROMPT_TEXT = "login_prompt_text"
 const val UI_KEY_SIGN_UP_PROMPT_ACTION_TEXT = "login_link_text"
 const val UI_KEY_LOGIN_TITLE_TEXT = "login_title_text"
 const val UI_KEY_LOGIN_BUTTON_TEXT = "login_button_text"
-const val UI_KEY_LOGIN_BUTTON_IMAGE = "action_button_asset"
+const val UI_KEY_LOGIN_BUTTON_IMAGE = "cam_action_button_asset"
 const val UI_KEY_LOGIN_PROMPT_TEXT = "sign_up_prompt_text"
 const val UI_KEY_LOGIN_PROMPT_ACTION_TEXT = "sign_up_link_text"
 const val UI_KEY_THIRD_PARTY_AUTH_TEXT = "alternative_authentication_prompt_text"
 const val UI_KEY_THIRD_PARTY_SEPARATOR_TEXT = "alternative_authentication_separator_text"
-const val UI_KEY_THIRD_PARTY_DIVIDER_LEFT_IMAGE = "separator_asset_left"
-const val UI_KEY_THIRD_PARTY_DIVIDER_RIGHT_IMAGE = "separator_asset_right"
-const val UI_KEY_INPUT_FIELD_IMAGE = "input_field_asset"
-const val UI_KEY_INPUT_ERROR_IMAGE = "input_alert_indicator"
-const val UI_KEY_VALIDATION_PARENT_IMAGE = "field_alert_bubble_shadow"
-const val UI_KEY_VALIDATION_BUBBLE_IMAGE = "field_alert_bubble"
-const val UI_KEY_FACEBOOK_IMAGE = "icon_1"
+const val UI_KEY_THIRD_PARTY_DIVIDER_LEFT_IMAGE = "cam_separator_asset_left"
+const val UI_KEY_THIRD_PARTY_DIVIDER_RIGHT_IMAGE = "cam_separator_asset_right"
+const val UI_KEY_INPUT_FIELD_IMAGE = "cam_input_field_asset"
+const val UI_KEY_INPUT_ERROR_IMAGE = "cam_input_alert_indicator"
+const val UI_KEY_VALIDATION_PARENT_IMAGE = "cam_field_alert_bubble_shadow"
+const val UI_KEY_VALIDATION_BUBBLE_IMAGE = "cam_field_alert_bubble"
+const val UI_KEY_FACEBOOK_IMAGE = "cam_icon_1"
 // endregion
 
 // region Password reset UI keys
 const val UI_KEY_PWD_RESET_TITLE_TEXT = "password_reset_title_text"
 const val UI_KEY_PWD_RESET_DESC_TEXT = "password_reset_description_text"
 const val UI_KEY_PWD_RESET_BUTTON_TEXT = "password_reset_button_text"
-const val UI_KEY_PWD_RESET_BUTTON_IMAGE= "action_button_asset"
+const val UI_KEY_PWD_RESET_BUTTON_IMAGE= "cam_action_button_asset"
 // endregion
 
 // region Billing item UI keys
-const val UI_KEY_BILLING_ITEM_SUBS_BUTTON_IMAGE = "storefront_button_asset"
+const val UI_KEY_BILLING_ITEM_SUBS_BUTTON_IMAGE = "cam_storefront_button_asset"
 const val UI_KEY_BILLING_ITEM_SUBS_BUTTON_TEXT = "payment_option_button_text"
-const val UI_KEY_BILLING_ITEM_IMAGE = "storefront_component_asset"
+const val UI_KEY_BILLING_ITEM_IMAGE = "cam_storefront_component_asset"
 const val UI_KEY_BILLING_ITEM_REDEEM_TEXT = "payment_option_redeem_text"
 // region Billing fragments
 const val UI_KEY_BILLING_TITLE_TEXT = "storefront_screen_title_text"
