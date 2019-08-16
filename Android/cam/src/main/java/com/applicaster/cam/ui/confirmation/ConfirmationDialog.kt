@@ -27,7 +27,8 @@ class ConfirmationDialog : DialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        dialogType = AlertDialogType.valueOf(arguments?.getString(KEY_TYPE) ?: AlertDialogType.UNDEFINED.name)
+        dialogType = AlertDialogType.valueOf(arguments?.getString(KEY_TYPE)
+                ?: AlertDialogType.UNDEFINED.name)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -49,7 +50,11 @@ class ConfirmationDialog : DialogFragment() {
     private fun setUpListeners() {
         dialogView?.btn_confirmation_ok?.setOnClickListener {
             dismiss()
-            baseActivity?.goBack()
+            when (dialogType) {
+                AlertDialogType.BILLING, AlertDialogType.RESTORE -> baseActivity?.close()
+                AlertDialogType.RESET_PASSWORD -> baseActivity?.goBack()
+                else -> baseActivity?.goBack()
+            }
         }
     }
 
