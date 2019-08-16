@@ -5,13 +5,23 @@ import com.applicaster.cam.PurchaseData
 import com.applicaster.cam.Trigger
 
 class AnalyticsDataProviderMock : IAnalyticsDataProvider {
-    override fun getEntityType(): String = ""
 
-    override fun getEntityName(): String = ""
+    override var entityType: String = ""
+        get() = field
+        set(value) { field = value }
 
-    override fun getTrigger(): Trigger = Trigger.OTHER
+    override var entityName: String = ""
+        get() = field
+        set(value) { field = value }
 
-    override fun isUserSubscribed(): Boolean = false
+    override var trigger: Trigger = Trigger.OTHER
+        get() = field
+        set(value) { field = value }
 
-    override fun getPurchaseData(): List<PurchaseData> = listOf()
+    override val isUserSubscribed: Boolean
+        get() = false
+
+    override var purchaseData: MutableList<PurchaseData> = arrayListOf()
+        get() = field
+        set(value) { field = value }
 }
