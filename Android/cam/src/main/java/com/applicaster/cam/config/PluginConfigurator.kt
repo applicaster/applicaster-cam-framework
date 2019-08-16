@@ -11,10 +11,6 @@ class PluginConfigurator(private val pluginConfig: Map<String, String>) : Config
     override fun getDefaultAuthScreen() =
         AuthScreenType.fromKey(pluginConfig.getValue(KEY_DEFAULT_AUTH_SCREEN))
 
-    override fun isFacebookLoginRequired() =
-        KEY_ALT_AUTH_PROMPT in pluginConfig
-                && KEY_ALT_AUTH_SEPARATOR in pluginConfig
-
     /**
      * Check if need to show auth restore UI element on login screen depending on screen configs
      * If there is no "password reset" config then hide corresponding UI, otherwise show it
@@ -76,6 +72,11 @@ class PluginConfigurator(private val pluginConfig: Map<String, String>) : Config
     override fun getAuthRequirement(): AuthenticationRequirement =
         AuthenticationRequirement.fromKey(getOrDefault(KEY_AUTH_REQUIREMENT))
 
+
+    override fun isFacebookLoginRequired() : Boolean {
+        return getOrEmpty(KEY_OFFER_ALT_AUTH)?.toBoolean() ?: false
+    }
+
     override fun isPaymentRequired(): Boolean {
         return getOrEmpty(KEY_REQUIRE_PAYMENT)?.toBoolean() ?: false
     }
@@ -89,15 +90,16 @@ class PluginConfigurator(private val pluginConfig: Map<String, String>) : Config
             null
     }
 
-    override fun getPaymentConfirmationTitle(): String = pluginConfig.getValue(KEY_PAYMENT_CONFIRMATION_TITLE_TEXT)
+    override fun getPaymentConfirmationTitle(): String =
+        pluginConfig.getValue(KEY_PAYMENT_CONFIRMATION_TITLE_TEXT)
 
-    override fun getPaymentConfirmationDescription(): String = pluginConfig.getValue(KEY_PAYMENT_CONFIRMATION_DESC_TEXT)
+    override fun getPaymentConfirmationDescription(): String =
+        pluginConfig.getValue(KEY_PAYMENT_CONFIRMATION_DESC_TEXT)
 }
 
 const val KEY_AUTH_FIELDS = "authentication_input_fields"
 const val KEY_DEFAULT_AUTH_SCREEN = "default_authentication_screen"
-const val KEY_ALT_AUTH_PROMPT = "alternative_authentication_prompt_text"
-const val KEY_ALT_AUTH_SEPARATOR = "alternative_authentication_separator_text"
+const val KEY_OFFER_ALT_AUTH = "offer_alternative_authentication"
 const val KEY_EMPTY_INPUT_FIELD_ERROR = "required_field_alert_text"
 const val KEY_NOT_VALID_EMAIL_INPUT_FIELD_ERROR = "invalid_email_alert_text"
 const val KEY_DEFAULT_ALERT_TEXT = "default_alert_text"
