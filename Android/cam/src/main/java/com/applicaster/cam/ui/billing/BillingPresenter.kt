@@ -158,12 +158,12 @@ class BillingPresenter(
 
         // Analytics events
         if (purchases.isEmpty()) {
-            collectPurchaseData(camContract.getAnalyticsDataProvider().getPurchaseData(), purchases).forEach {
+            collectPurchaseData(camContract.getAnalyticsDataProvider().purchaseData, purchases).forEach {
                 AnalyticsUtil.logStoreRestorePurchaseError("Restore purchases error", it)
             }
         } else {
             collectPurchaseData(
-                    camContract.getAnalyticsDataProvider().getPurchaseData(),
+                    camContract.getAnalyticsDataProvider().purchaseData,
                     purchases
             ).forEach {
                 AnalyticsUtil.logCompleteRestorePurchase(it)
@@ -320,7 +320,7 @@ class BillingPresenter(
         val result: ArrayList<PurchaseProductPropertiesData> = arrayListOf()
         purchasesData.forEach { data ->
             val productData = PurchaseProductPropertiesData(
-                    camContract.getAnalyticsDataProvider().isUserSubscribed(),
+                    camContract.getAnalyticsDataProvider().isUserSubscribed,
                     data.title,
                     data.price,
                     purchases.find { it.sku == data.androidProductId }?.orderId.orEmpty(),
