@@ -27,7 +27,7 @@ class AuthTableCell: UITableViewCell, UITextFieldDelegate {
         case .error:
             let rightViewButton = UIButton()
             rightViewButton.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
-            rightViewButton.setStyle(iconAsset: .validationFailedImage)
+            rightViewButton.setStyle(iconAsset: .validationFailed)
             rightViewButton.addTarget(self, action: #selector(showPopoverOnTable), for: .touchUpInside)
             textField.rightView = rightViewButton
         default:

@@ -8,23 +8,25 @@
 import Foundation
 
 public enum CAMKeys: String {
-
-    case backButtonImage = "back_button"
-    case closeButtonImage = "close_button"
-    case validationFailedImage = "input_alert_indicator"
-    case leftSeparatorImage = "separator_asset_left"
-    case rightSeparatorImage = "separator_asset_right"
-    case headerLogoImage = "header_logo"
-    case authFieldImage = "input_field_asset"
-    case errorPopoverShadowImage = "field_alert_bubble_shadow"
-    case errorPopoverBubbleImage = "field_alert_bubble"
-    case purchaseButtonImage = "payment_option_button_asset"
-    case purchaseBackgroundImage = "payment_option_component_asset"
-    case alertButtonImage = "alert_button_asset"
-    case alertBackgroundImage = "alert_component"
-    case facebookImage = "icon_1"
-    case backgroundImage = "background_image"
-    case actionButtonImage = "action_button_asset"
+    
+    enum Images: String {
+        case actionButton = "cam_action_button_asset"
+        case alertButton = "cam_alert_button_asset"
+        case alertBackground = "cam_alert_component"
+        case authField = "cam_input_field_asset"
+        case backButton = "cam_back_button"
+        case background = "cam_background_image"
+        case closeButton = "cam_close_button"
+        case errorPopoverShadow = "cam_field_alert_bubble_shadow"
+        case errorPopoverBubble = "cam_field_alert_bubble"
+        case facebook = "cam_icon_1"
+        case headerLogo = "cam_header_logo"
+        case leftSeparator = "cam_separator_asset_left"
+        case rightSeparator = "cam_separator_asset_right"
+        case purchaseButton = "cam_payment_option_button_asset"
+        case purchaseBackground = "cam_payment_option_component_asset"
+        case validationFailed = "cam_input_alert_indicator"
+    }
    
     case facebookLoginEnabled = "facebook_login_required"
     case defaultAuthScreen = "default_authentication_screen"

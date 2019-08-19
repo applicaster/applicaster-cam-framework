@@ -43,7 +43,7 @@ class EntitlementCollectionViewCell: UICollectionViewCell {
         super.init(coder: aDecoder)
         
         let backgroundImageView = UIImageView(frame: .zero)
-        backgroundImageView.setStyle(asset: .purchaseBackgroundImage)
+        backgroundImageView.setStyle(asset: .purchaseBackground)
         backgroundImageView.frame = self.frame
         
         self.backgroundView = backgroundImageView
@@ -55,7 +55,10 @@ class EntitlementCollectionViewCell: UICollectionViewCell {
         self.buyAction = viewModel.buyAction
         self.redeemAction = viewModel.redeemAction
         
-        self.purchaseButton.setStyle(config: viewModel.config, backgroundAsset: .purchaseButtonImage, title: viewModel.purchaseButtonText, style: CAMStyles.actionButtonFont)
+        self.purchaseButton.setStyle(config: viewModel.config,
+                                     backgroundAsset: .purchaseButton,
+                                     title: viewModel.purchaseButtonText,
+                                     style: CAMStyles.actionButtonFont)
         self.titleLabel.setStyle(config: viewModel.config, style: .paymentOptionTitleFont)
         self.infoLabel.setStyle(config: viewModel.config, style: .paymentOptionDescriptionFont)
     }

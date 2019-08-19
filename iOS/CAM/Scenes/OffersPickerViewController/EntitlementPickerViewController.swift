@@ -69,9 +69,9 @@ class EntitlementPickerViewController: UIViewController {
         setupCollectionView()
         presenter?.viewDidLoad()
         
-        backgroundImageView.setStyle(asset: .backgroundImage)
-        closeButton.setStyle(iconAsset: .closeButtonImage)
-        logoImageView.setStyle(asset: .headerLogoImage)
+        backgroundImageView.setStyle(asset: .background)
+        closeButton.setStyle(iconAsset: .closeButton)
+        logoImageView.setStyle(asset: .headerLogo)
         helpInfoContainer.setStyle(config: configDictionary, backgroundColor: .legalDetailsBackgroundColor)
         titleLabel.setStyle(config: configDictionary, style: CAMStyles.paymentOptionTitleFont)
 

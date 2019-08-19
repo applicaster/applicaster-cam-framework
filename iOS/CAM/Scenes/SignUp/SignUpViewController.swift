@@ -98,7 +98,7 @@ class SignUpViewController: UIViewController {
     
     func setupSocialNetworksContainer() {
         let facebookButton = UIButton()
-        facebookButton.setStyle(iconAsset: CAMKeys.facebookImage)
+        facebookButton.setStyle(iconAsset: .facebook)
         facebookButton.translatesAutoresizingMaskIntoConstraints = false
         facebookButton.heightAnchor.constraint(equalToConstant: 36).isActive = true
         facebookButton.widthAnchor.constraint(equalToConstant: 36).isActive = true
@@ -126,17 +126,17 @@ class SignUpViewController: UIViewController {
     }
     
     func configureElements() {
-        backgroundImageView.setStyle(asset: .backgroundImage)
-        backButton.setStyle(iconAsset: .backButtonImage)
-        closeButton.setStyle(iconAsset: .closeButtonImage)
-        logoImageView.setStyle(asset: .headerLogoImage)
+        backgroundImageView.setStyle(asset: .background)
+        backButton.setStyle(iconAsset: .backButton)
+        closeButton.setStyle(iconAsset: .closeButton)
+        logoImageView.setStyle(asset: .headerLogo)
         titleLabel.setStyle(config: configDictionary, camTextKey: .signUpScreenTitleText, style: .screenTitleFont)
         signUpButton.setStyle(config: configDictionary,
-                              backgroundAsset: .actionButtonImage,
+                              backgroundAsset: .actionButton,
                               camTitleKey: .signUpButtonText,
                               style: .actionButtonFont)
-        leftSeparatorView.setStyle(asset: CAMKeys.leftSeparatorImage)
-        rightSeparatorView.setStyle(asset: CAMKeys.rightSeparatorImage)
+        leftSeparatorView.setStyle(asset: .leftSeparator)
+        rightSeparatorView.setStyle(asset: .rightSeparator)
         alternateLabel.setStyle(config: configDictionary, camTextKey: .separatorText, style: .separatorFont)
         socialNetworksLabel.setStyle(config: configDictionary, camTextKey: .alternativeAuthenticationPromtText, style: .alternativeAuthenticationFont)
         loginButton.setAttributedStyle(config: configDictionary, attributedTitle: [(style: .promptFont,
@@ -219,7 +219,7 @@ extension SignUpViewController: UITableViewDelegate, UITableViewDataSource {
                                                        for: indexPath) as? AuthTableCell else {
                                                         return UITableViewCell()
         }
-        cell.textField.setStyle(config: configDictionary, backgroundAsset: .authFieldImage, style: .inputFieldFont, placeholder: authFields[indexPath.row].hint) 
+        cell.textField.setStyle(config: configDictionary, backgroundAsset: .authField, style: .inputFieldFont, placeholder: authFields[indexPath.row].hint) 
         cell.configureInputField(data: authFields[indexPath.row])
         cell.backgroundColor = .clear
         cell.showPopover = { [weak self] in

@@ -65,15 +65,15 @@ extension UIView {
 }
 
 extension UIImageView {
-    func setStyle(asset: CAMKeys) {
+    func setStyle(asset: CAMKeys.Images) {
         self.image = UIImage.image(forAsset: asset.rawValue)
     }
 }
 
 extension UIButton {
     func setStyle(config: [String: String] = [String: String](),
-                  iconAsset: CAMKeys? = nil,
-                  backgroundAsset: CAMKeys? = nil,
+                  iconAsset: CAMKeys.Images? = nil,
+                  backgroundAsset: CAMKeys.Images? = nil,
                   title: String? = nil,
                   camTitleKey: CAMKeys? = nil,
                   style: CAMStyles? = nil,
@@ -157,7 +157,7 @@ extension UILabel {
 extension UITextField {
     
     func setStyle(config: [String: String] = [String: String](),
-                  backgroundAsset: CAMKeys? = nil,
+                  backgroundAsset: CAMKeys.Images? = nil,
                   style: CAMStyles? = nil,
                   placeholder: String? = nil) {
         

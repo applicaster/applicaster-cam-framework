@@ -110,7 +110,7 @@ class LoginViewController: UIViewController {
     
     func setupSocialNetworksContainer() {
         let facebookButton = UIButton()
-        facebookButton.setStyle(iconAsset: CAMKeys.facebookImage)
+        facebookButton.setStyle(iconAsset: .facebook)
         facebookButton.translatesAutoresizingMaskIntoConstraints = false
         facebookButton.heightAnchor.constraint(equalToConstant: 36).isActive = true
         facebookButton.widthAnchor.constraint(equalToConstant: 36).isActive = true
@@ -124,15 +124,15 @@ class LoginViewController: UIViewController {
     }
     
     func configureElements() {
-        backgroundImageView.setStyle(asset: .backgroundImage)
-        closeButton.setStyle(iconAsset: .closeButtonImage)
-        backButton.setStyle(iconAsset: .backButtonImage)
-        logoImageView.setStyle(asset: .headerLogoImage)
+        backgroundImageView.setStyle(asset: .background)
+        closeButton.setStyle(iconAsset: .closeButton)
+        backButton.setStyle(iconAsset: .backButton)
+        logoImageView.setStyle(asset: .headerLogo)
         titleLabel.setStyle(config: configDictionary, camTextKey: .loginScreenTitleText, style: .screenTitleFont)
-        loginButton.setStyle(config: configDictionary, backgroundAsset: .actionButtonImage, camTitleKey: .loginButtonText, style: CAMStyles.actionButtonFont)
+        loginButton.setStyle(config: configDictionary, backgroundAsset: .actionButton, camTitleKey: .loginButtonText, style: CAMStyles.actionButtonFont)
         resetPasswordButton.setStyle(config: configDictionary, camTitleKey: .loginResetPasswordButtonText, style: CAMStyles.resetPasswordFont)
-        leftSeparatorView.setStyle(asset: .leftSeparatorImage)
-        rightSeparatorView.setStyle(asset: .rightSeparatorImage)
+        leftSeparatorView.setStyle(asset: .leftSeparator)
+        rightSeparatorView.setStyle(asset: .rightSeparator)
         alternateLabel.setStyle(config: configDictionary, camTextKey: .separatorText, style: .separatorFont)
         socialNetworksLabel.setStyle(config: configDictionary, camTextKey: .alternativeAuthenticationPromtText, style: .alternativeAuthenticationFont)
         signUpButton.setAttributedStyle(config: configDictionary, attributedTitle: [(style: CAMStyles.promptFont,
@@ -235,7 +235,7 @@ extension LoginViewController: UITableViewDelegate, UITableViewDataSource {
                                                        for: indexPath) as? AuthTableCell else {
             return UITableViewCell()
         }
-        cell.textField.setStyle(config: configDictionary, backgroundAsset: .authFieldImage, style: .inputFieldFont, placeholder: authFields[indexPath.row].hint) 
+        cell.textField.setStyle(config: configDictionary, backgroundAsset: .authField, style: .inputFieldFont, placeholder: authFields[indexPath.row].hint)
         cell.configureInputField(data: authFields[indexPath.row])
         cell.backgroundColor = .clear
         cell.showPopover = { [weak self] in

@@ -52,15 +52,15 @@ class ResetPasswordViewController: UIViewController {
     }
     
     func configureElements() {
-        backgroundImageView.setStyle(asset: .backgroundImage)
-        backButton.setStyle(iconAsset: .backButtonImage)
-        closeButton.setStyle(iconAsset: .closeButtonImage)
-        logoImageView.setStyle(asset: .headerLogoImage)
+        backgroundImageView.setStyle(asset: .background)
+        backButton.setStyle(iconAsset: .backButton)
+        closeButton.setStyle(iconAsset: .closeButton)
+        logoImageView.setStyle(asset: .headerLogo)
         titleLabel.setStyle(config: configDictionary, camTextKey: .passwordResetTitleText, style: .screenTitleFont)
         infoLabel.setStyle(config: configDictionary, camTextKey: .passwordResetInfoText,
                                style: .screenDescriptionFont)
         resetButton.setStyle(config: configDictionary,
-                             backgroundAsset: .actionButtonImage,
+                             backgroundAsset: .actionButton,
                              camTitleKey: .passwordResetButtonText,
                              style: .actionButtonFont)
     }
@@ -181,7 +181,7 @@ extension ResetPasswordViewController: UITableViewDelegate, UITableViewDataSourc
                                                        for: indexPath) as? AuthTableCell else {
                                                         return UITableViewCell()
         }
-        cell.textField.setStyle(config: configDictionary, backgroundAsset: .authFieldImage, style: .inputFieldFont, placeholder: resetPasswordFields[indexPath.row].hint) 
+        cell.textField.setStyle(config: configDictionary, backgroundAsset: .authField, style: .inputFieldFont, placeholder: resetPasswordFields[indexPath.row].hint)
         cell.configureInputField(data: resetPasswordFields[indexPath.row])
         cell.backgroundColor = .clear
         cell.showPopover = { [weak self] in

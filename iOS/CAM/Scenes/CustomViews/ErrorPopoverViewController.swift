@@ -20,8 +20,8 @@ class ErrorPopoverViewController: UIViewController {
     }
     
     func configureImages() {
-        shadowImageView.setStyle(asset: .errorPopoverShadowImage)
-        bubbleImageView.setStyle(asset: .errorPopoverBubbleImage)
+        shadowImageView.setStyle(asset: .errorPopoverShadow)
+        bubbleImageView.setStyle(asset: .errorPopoverBubble)
         view.layoutIfNeeded()
     }
 
