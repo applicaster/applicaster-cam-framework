@@ -89,8 +89,7 @@ class LoginViewController: UIViewController {
         }
         signUpButton.titleLabel?.numberOfLines = 0
         signUpButton.titleLabel?.textAlignment = .center
-        socialNetworksContainer.isHidden = (configDictionary[CAMKeys.alternativeAuthentification.rawValue]?.isEmpty ?? true) ||
-                                           (configDictionary[CAMKeys.separatorText.rawValue]?.isEmpty ?? true)
+        socialNetworksContainer.isHidden = !(configDictionary[CAMKeys.isAlternativeAuthenticationEnabled.rawValue]?.bool ?? false)
         authFieldsTable.backgroundView = UIView()
         authFieldsTable.allowsSelection = false
         setupResetPasswordButton()
@@ -135,7 +134,7 @@ class LoginViewController: UIViewController {
         leftSeparatorView.setStyle(asset: .leftSeparatorImage)
         rightSeparatorView.setStyle(asset: .rightSeparatorImage)
         alternateLabel.setStyle(config: configDictionary, camTextKey: .separatorText, style: .separatorFont)
-        socialNetworksLabel.setStyle(config: configDictionary, camTextKey: .alternativeAuthentification, style: .alternativeAuthenticationFont)
+        socialNetworksLabel.setStyle(config: configDictionary, camTextKey: .alternativeAuthenticationPromtText, style: .alternativeAuthenticationFont)
         signUpButton.setAttributedStyle(config: configDictionary, attributedTitle: [(style: CAMStyles.promptFont,
                                                                                      string: configDictionary[CAMKeys.loginSingUpPromtText.rawValue] ?? "",
                                                                                      additionalAttributes: nil),

@@ -89,8 +89,7 @@ class SignUpViewController: UIViewController {
         }
         loginButton.titleLabel?.numberOfLines = 0
         loginButton.titleLabel?.textAlignment = .center
-        socialNetworksContainer.isHidden = (configDictionary[CAMKeys.alternativeAuthentification.rawValue]?.isEmpty ?? true) ||
-                                           (configDictionary[CAMKeys.separatorText.rawValue]?.isEmpty ?? true)
+        socialNetworksContainer.isHidden = !(configDictionary[CAMKeys.isAlternativeAuthenticationEnabled.rawValue]?.bool ?? false)
         authFieldsTable.backgroundView = UIView()
         authFieldsTable.allowsSelection = false
         setupSocialNetworksContainer()
@@ -139,7 +138,7 @@ class SignUpViewController: UIViewController {
         leftSeparatorView.setStyle(asset: CAMKeys.leftSeparatorImage)
         rightSeparatorView.setStyle(asset: CAMKeys.rightSeparatorImage)
         alternateLabel.setStyle(config: configDictionary, camTextKey: .separatorText, style: .separatorFont)
-        socialNetworksLabel.setStyle(config: configDictionary, camTextKey: .alternativeAuthentification, style: .alternativeAuthenticationFont)
+        socialNetworksLabel.setStyle(config: configDictionary, camTextKey: .alternativeAuthenticationPromtText, style: .alternativeAuthenticationFont)
         loginButton.setAttributedStyle(config: configDictionary, attributedTitle: [(style: .promptFont,
                                                                                     string: configDictionary[CAMKeys.singUpLoginPromtText.rawValue] ?? "",
                                                                                     additionalAttributes: nil),

@@ -29,8 +29,9 @@ public enum CAMKeys: String {
     case facebookLoginEnabled = "facebook_login_required"
     case defaultAuthScreen = "default_authentication_screen"
     case authFields = "authentication_input_fields"
+    case isAlternativeAuthenticationEnabled = "offer_alternative_authentication"
     case separatorText = "alternative_authentication_separator_text"
-    case alternativeAuthentification = "alternative_authentication_prompt_text"
+    case alternativeAuthenticationPromtText = "alternative_authentication_prompt_text"
     
     case emptyFieldsMessage = "required_field_alert_text"
     case wrongEmailMessage = "invalid_email_alert_text"
