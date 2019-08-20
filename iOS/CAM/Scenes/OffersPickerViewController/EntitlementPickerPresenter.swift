@@ -170,7 +170,7 @@ class EntitlementPickerPresenter {
                         
                         let storage = APAnalyticsStorage.sharedInstance()
                         let pluginName = ZPPluginManager.pluginModel(.Login)?.pluginName ?? ""
-                        let properties = ["Authentication Provider"] = pluginName
+                        var properties = ["Authentication Provider": pluginName]
                         if storage?.userGenericProperties()["Logged in"] == nil {
                             properties["Logged In"] = "No"
                         }
