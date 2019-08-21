@@ -21,7 +21,7 @@ open class ContentAccessManager {
     
     private var navigationController: UINavigationController
     private var completion: (Bool) -> Void
-    private weak var delegate: CAMDelegate!
+    private var delegate: CAMDelegate
     private weak var rootViewController: UIViewController!
     private var childCoordinator: Coordinator?
     private var camFlow: CAMFlow
