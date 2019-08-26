@@ -46,7 +46,9 @@ extension CAMFlow {
             switch self {
             case .authentication, .no:
                 break
-            case .storefront, .authAndStorefront:
+            case .storefront:
+                self = paymentRequirement == true ? .storefront : .no
+            case .authAndStorefront:
                 self = paymentRequirement == true ? .authAndStorefront : .authentication
             }
         case .purchasableItems:
