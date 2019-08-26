@@ -334,4 +334,8 @@ class BillingPresenter(
         }
         return result
     }
+
+    override fun onBackPressed() {
+        ContentAccessManager.contract.onCamFinished()
+    }
 }
