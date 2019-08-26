@@ -1,6 +1,7 @@
 package com.applicaster.cam.config.flow
 
 import com.applicaster.cam.CamFlow
+import com.applicaster.cam.ContentAccessManager
 import com.applicaster.cam.config.Configurator
 
 class CamFlowResolver {
@@ -26,8 +27,14 @@ class CamFlowResolver {
                 AuthenticationRequirement.ALWAYS -> {
                     when (originalFlow) {
                         CamFlow.AUTHENTICATION, CamFlow.EMPTY -> originalFlow
-                        CamFlow.STOREFRONT, CamFlow.AUTH_AND_STOREFRONT ->
-                            if (paymentRequired) CamFlow.AUTH_AND_STOREFRONT else CamFlow.EMPTY
+                        CamFlow.STOREFRONT, CamFlow.AUTH_AND_STOREFRONT -> {
+                            return if (paymentRequired && !ContentAccessManager.contract.isUserLogged())
+                                CamFlow.AUTH_AND_STOREFRONT
+                            else if (paymentRequired && ContentAccessManager.contract.isUserLogged())
+                                CamFlow.STOREFRONT
+                            else
+                                CamFlow.EMPTY
+                        }
                     }
                 }
                 AuthenticationRequirement.REQUIRE_ON_PURCHASABLE_ITEMS -> {

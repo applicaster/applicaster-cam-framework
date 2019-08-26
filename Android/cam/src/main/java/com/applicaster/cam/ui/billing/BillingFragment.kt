@@ -138,4 +138,8 @@ class BillingFragment : BaseFragment(), IBillingView {
             }
         }
     }
+
+    override fun goBack() {
+       presenter?.onBackPressed()
+    }
 }
