@@ -27,14 +27,8 @@ class CamFlowResolver {
                 AuthenticationRequirement.ALWAYS -> {
                     when (originalFlow) {
                         CamFlow.AUTHENTICATION, CamFlow.EMPTY -> originalFlow
-                        CamFlow.STOREFRONT, CamFlow.AUTH_AND_STOREFRONT -> {
-                            return if (paymentRequired && !ContentAccessManager.contract.isUserLogged())
-                                CamFlow.AUTH_AND_STOREFRONT
-                            else if (paymentRequired && ContentAccessManager.contract.isUserLogged())
-                                CamFlow.STOREFRONT
-                            else
-                                CamFlow.EMPTY
-                        }
+                        CamFlow.STOREFRONT -> if (paymentRequired) CamFlow.STOREFRONT else CamFlow.EMPTY
+                        CamFlow.AUTH_AND_STOREFRONT -> if (paymentRequired) CamFlow.AUTH_AND_STOREFRONT else CamFlow.AUTHENTICATION
                     }
                 }
                 AuthenticationRequirement.REQUIRE_ON_PURCHASABLE_ITEMS -> {

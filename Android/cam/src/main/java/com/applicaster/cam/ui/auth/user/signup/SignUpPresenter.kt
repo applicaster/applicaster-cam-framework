@@ -41,7 +41,7 @@ class SignUpPresenter(
         )
     }
 
-    override fun onSuccess() {
+    override fun onActionSuccess() {
         view?.hideLoadingIndicator()
         AnalyticsUtil.logStandardSignUpSuccess()
         if (ContentAccessManager.contract.isPurchaseRequired()) {

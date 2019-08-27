@@ -28,14 +28,16 @@ abstract class UserAuthPresenter(private val view: IBaseInputView?) : BaseInputP
 
             override fun handleException(error: Exception) {
                 view?.hideLoadingIndicator()
-                view?.showAlert(error.message ?: "Facebook auth failed")
+                val errorMessage: String =
+                        if (error.message.isNullOrEmpty()) "Facebook auth failed" else error.message.orEmpty()
+                view?.showAlert(errorMessage)
                 AnalyticsUtil.logViewAlert(
                     ConfirmationAlertData(
                         false,
                         ConfirmationCause.NONE,
                         "",
-                        error.message ?: "Facebook auth failed",
-                        error.message ?: "Facebook auth failed"
+                            errorMessage,
+                            errorMessage
                     )
                 )
             }
@@ -62,7 +64,10 @@ abstract class UserAuthPresenter(private val view: IBaseInputView?) : BaseInputP
      */
     override fun onError(error: Exception?) {
         view?.hideLoadingIndicator()
-        view?.showAlert(error?.message ?: "Facebook auth failed")
+        error?.printStackTrace()
+        val errorMessage: String = 
+                if (error?.message.isNullOrEmpty()) "Facebook auth failed" else error?.message.orEmpty()
+        view?.showAlert(errorMessage)
 
         AnalyticsUtil.logAlternativeLoginFailure()
         AnalyticsUtil.logViewAlert(
@@ -70,8 +75,8 @@ abstract class UserAuthPresenter(private val view: IBaseInputView?) : BaseInputP
                 false,
                 ConfirmationCause.NONE,
                 "",
-                error?.message ?: "Facebook auth failed",
-                error?.message ?: "Facebook auth failed"
+                    errorMessage,
+                    errorMessage
             )
         )
     }
