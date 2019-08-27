@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.applicaster.cam.ContentAccessManager
 import com.applicaster.cam.R
-import com.applicaster.cam.params.auth.AuthScreenType
 import com.applicaster.cam.ui.base.view.ContainerType
 import com.applicaster.cam.ui.base.view.IBaseActivity
 import kotlinx.android.synthetic.main.activity_cam.*
@@ -45,6 +44,11 @@ class CamActivity : AppCompatActivity(), IBaseActivity {
 
     override fun goBack() {
         onBackPressed()
+    }
+
+    override fun onBackPressed() {
+        navigationRouter.onBackPressed()
+        super.onBackPressed()
     }
 
     override fun close() {

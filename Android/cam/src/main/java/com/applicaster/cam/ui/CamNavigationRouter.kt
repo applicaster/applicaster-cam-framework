@@ -128,4 +128,8 @@ class CamNavigationRouter(private val baseActivity: IBaseActivity) : BaseNavigat
             }
         }
     }
+
+    fun onBackPressed() {
+        fragmentManager.fragments.forEach { if (it != null && it is BillingFragment) { it.goBack() } }
+    }
 }

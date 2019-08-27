@@ -123,7 +123,7 @@ class BillingPresenter(
                 )
             }
 
-            override fun onSuccess() {
+            override fun onActionSuccess() {
                 view?.hideLoadingIndicator()
                 if (ContentAccessManager.pluginConfigurator.isShowConfirmationPayment()) {
                     navigationRouter.showConfirmationDialog(AlertDialogType.BILLING)
@@ -286,7 +286,7 @@ class BillingPresenter(
     /**
      * Purchase verification succeed on Cleeng side
      */
-    override fun onSuccess() {
+    override fun onActionSuccess() {
         view?.hideLoadingIndicator()
         if (ContentAccessManager.pluginConfigurator.isShowConfirmationRestorePurchases()) {
             navigationRouter.showConfirmationDialog(AlertDialogType.RESTORE)

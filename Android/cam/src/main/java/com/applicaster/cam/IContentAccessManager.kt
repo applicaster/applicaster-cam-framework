@@ -17,7 +17,7 @@ interface RedeemCodeActivationCallback: ActionCallback
 interface FacebookAuthCallback: ActionCallback
 interface ActionCallback {
     fun onFailure(msg: String)
-    fun onSuccess()
+    fun onActionSuccess()
 }
 
 interface EntitlementsLoadCallback {

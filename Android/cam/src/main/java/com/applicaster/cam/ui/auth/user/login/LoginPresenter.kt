@@ -55,7 +55,7 @@ class LoginPresenter(
         )
     }
 
-    override fun onSuccess() {
+    override fun onActionSuccess() {
         view?.hideLoadingIndicator()
         AnalyticsUtil.logStandardLoginSuccess()
         if (ContentAccessManager.contract.isPurchaseRequired()) {
