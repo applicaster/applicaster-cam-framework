@@ -170,7 +170,7 @@ class LoginPresenter {
                                                                      parameters: tapLoginEvent.metadata)
         self.camDelegate.facebookLogin(userData: (email: email, userId: userId), completion: { [weak self] (result) in
             guard let self = self else { return }
-            
+            self.view.showLoadingScreen(false)
             switch result {
             case .success:
                 let successLoginEvent = AnalyticsEvents.alternativaLoginSucess(playableInfo)
