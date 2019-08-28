@@ -73,6 +73,7 @@ class ResetPasswordViewController: UIViewController {
     func setupUI() {
         resetPasswordFieldsTable.backgroundView = UIView()
         resetPasswordFieldsTable.allowsSelection = false
+        closeButton.isHidden = presenter?.camDelegate.trigger() == .appLaunch
     }
     
     // MARK: - Keyboard
