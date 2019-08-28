@@ -76,6 +76,8 @@ class EntitlementPickerViewController: UIViewController {
         titleLabel.setStyle(config: configDictionary, style: CAMStyles.paymentOptionTitleFont)
 
         setupGradient()
+        
+        closeButton.isHidden = presenter?.camDelegate.trigger() == .appLaunch
     }
     
     override func viewDidLayoutSubviews() {
