@@ -53,7 +53,7 @@ class EntitlementPickerPresenter {
                                         restoreHint: restoreHint,
                                         restoreButtonText: restoreButtonText,
                                         legalDetails: legalDetailsText)
-        self.view.showLoadingIndicator()
+        self.view.showLoadingScreen(true)
         self.view.viewModel = viewModel
         camDelegate.availableProducts(completion: { [weak self] (result) in
             guard let self = self else { return }
@@ -61,7 +61,7 @@ class EntitlementPickerPresenter {
             switch result {
             case .success(let productStoreIDs):
                 BillingHelper.sharedInstance.products(Set<String>(productStoreIDs), completion: { (result) in
-                    self.view.hideLoadingIndicator()
+                    self.view.showLoadingScreen(false)
                     switch result {
                     case .success(let result):
                         self.availableProducts = result.products
@@ -72,7 +72,7 @@ class EntitlementPickerPresenter {
                 })
             case .failure(let error):
                 self.view.showAlert(description: error.localizedDescription)
-                self.view.hideLoadingIndicator()
+                self.view.showLoadingScreen(false)
             }
         })
     }
@@ -87,7 +87,7 @@ class EntitlementPickerPresenter {
         let tapRestoreEvent = AnalyticsEvents.tapRestorePurchaseLink(playableInfo)
         ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: tapRestoreEvent.key,
                                                                      parameters: tapRestoreEvent.metadata)
-        
+        self.view.showLoadingScreen(true)
         BillingHelper.sharedInstance.restore { (result) in
             switch result {
             case .success(let response):
@@ -105,10 +105,11 @@ class EntitlementPickerPresenter {
                 if resultArray.isEmpty == true {
                     let alertDescription = self.camDelegate.getPluginConfig()[CAMKeys.restoreNoPurchaseAlertText.rawValue]
                     self.view.showAlert(description: alertDescription)
+                    self.view.showLoadingScreen(false)
                 }
-                
                 self.camDelegate.itemsRestored(restoredItems: resultArray, completion: { [weak self] (result) in
                     guard let self = self else { return }
+                    self.view.showLoadingScreen(false)
                     switch result {
                     case .success:
                         if self.camDelegate.isPurchaseNeeded() == true {
@@ -135,6 +136,7 @@ class EntitlementPickerPresenter {
                     }
                 })
             case .failure(let error):
+                self.view.showLoadingScreen(false)
                 print(error.localizedDescription)
             }
         }
@@ -158,10 +160,8 @@ class EntitlementPickerPresenter {
                 ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: buyEvent.key,
                                                                              parameters: buyEvent.metadata)
                 
-                    
                 BillingHelper.sharedInstance.purchase(skProduct, completion: { [weak self] (result) in
                     let purchaseResultEvent: AnalyticsEvents
-                    
                     switch result {
                     case .success(let purchase):
                         voucherProperties.transactionID = purchase.transaction?.transactionIdentifier
@@ -224,7 +224,9 @@ class EntitlementPickerPresenter {
         let purchasedItem = PurchasedProduct(transaction: transaction,
                                              receipt: receipt,
                                              state: .purchased)
+        self.view.showLoadingScreen(true)
         self.camDelegate.itemPurchased(purchasedItem: purchasedItem, completion: { [weak self] (result) in
+            self?.view.showLoadingScreen(false)
             switch result {
             case .success:
                 self?.showConfirmationScreen(for: .purchase)

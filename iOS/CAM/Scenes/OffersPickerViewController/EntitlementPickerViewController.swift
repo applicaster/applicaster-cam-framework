@@ -107,12 +107,12 @@ class EntitlementPickerViewController: UIViewController {
         self.entitlementCollectionView.reloadData()
     }
     
-    public func showLoadingIndicator() {
-        self.view.addSubview(loadingPopover)
-    }
-    
-    public func hideLoadingIndicator() {
-        loadingPopover.removeFromSuperview()
+    func showLoadingScreen(_ show: Bool) {
+        if show {
+            self.view.addSubview(loadingPopover)
+        } else {
+            loadingPopover.removeFromSuperview()
+        }
     }
     
     // MARK: - Private methods
