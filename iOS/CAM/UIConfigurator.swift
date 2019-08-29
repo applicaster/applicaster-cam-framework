@@ -66,7 +66,15 @@ extension UIView {
 
 extension UIImageView {
     func setStyle(asset: CAMKeys.Images) {
-        self.image = UIImage.image(forAsset: asset.rawValue)
+        var image = UIImage.image(forAsset: asset.rawValue)
+        
+        if asset == .background, image != nil {
+            let height = UIScreen.main.bounds.height
+            image = image?.scaled(to: height)
+            self.contentMode = .top
+        }
+        
+        self.image = image
     }
 }
 
