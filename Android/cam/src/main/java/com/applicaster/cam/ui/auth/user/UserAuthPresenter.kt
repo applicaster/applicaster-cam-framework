@@ -12,6 +12,7 @@ import com.applicaster.util.FacebookUtil
 import com.applicaster.util.asynctask.AsyncTaskListener
 import com.applicaster.util.facebook.listeners.FBAuthoriziationListener
 import com.applicaster.util.facebook.permissions.APPermissionsType
+import com.applicaster.util.facebook.permissions.CustomFBPermissions
 
 abstract class UserAuthPresenter(private val view: IBaseInputView?) : BaseInputPresenter(view),
     IUserAuthPresenter {
@@ -82,8 +83,10 @@ abstract class UserAuthPresenter(private val view: IBaseInputView?) : BaseInputP
     }
 
     override fun onFacebookButtonClicked(activity: Activity?) {
-        if (activity != null && !activity.isFinishing)
+        if (activity != null && !activity.isFinishing) {
+            CustomFBPermissions.getInstance().basicPermissions = listOf("public_profile", "email")
             FacebookUtil.updateTokenIfNeeded(activity, APPermissionsType.Custom, this)
+        }
     }
 
     abstract fun onFacebookAuthActionCompleted(email: String, id: String)
