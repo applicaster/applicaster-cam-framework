@@ -10,6 +10,7 @@ import kotlinx.android.synthetic.main.fragment_auth.*
 import kotlinx.android.synthetic.main.layout_additional_auth.*
 import kotlinx.android.synthetic.main.layout_auth_input.*
 import kotlinx.android.synthetic.main.layout_text_with_action.*
+import kotlinx.android.synthetic.main.layout_toolbar_template.*
 
 class SignUpFragment : UserAuthFragment(), ISignUpView {
 
@@ -29,6 +30,14 @@ class SignUpFragment : UserAuthFragment(), ISignUpView {
             map(tv_add_auth_desc, UIKey.SIGN_UP_ALT_AUTH_TEXT)
             map(tv_hint_desc, UIKey.SIGN_UP_PROMPT_TEXT)
             map(tv_hint_action, UIKey.SIGN_UP_PROMPT_ACTION_TEXT)
+        }
+    }
+
+    override fun initBackButton(enable: Boolean) {
+        if (enable) {
+            toolbar_back_button.setOnClickListener { presenter?.onToolbarBackClicked() }
+        } else {
+            toolbar_back_button.visibility = View.GONE
         }
     }
 }

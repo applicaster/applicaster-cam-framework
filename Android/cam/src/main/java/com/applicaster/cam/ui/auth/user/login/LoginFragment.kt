@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.fragment_auth.*
 import kotlinx.android.synthetic.main.layout_additional_auth.*
 import kotlinx.android.synthetic.main.layout_auth_input.*
 import kotlinx.android.synthetic.main.layout_text_with_action.*
+import kotlinx.android.synthetic.main.layout_toolbar_template.*
 
 class LoginFragment : UserAuthFragment(), ILoginView {
 
@@ -23,6 +24,14 @@ class LoginFragment : UserAuthFragment(), ILoginView {
     override fun setListeners() {
         tv_forgot_pwd.setOnClickListener { (presenter as? ILoginPresenter)?.onForgotPasswordClicked() }
         super.setListeners()
+    }
+
+    override fun initBackButton(enable: Boolean) {
+        if (enable) {
+            toolbar_back_button.setOnClickListener { presenter?.onToolbarBackClicked() }
+        } else {
+            toolbar_back_button.visibility = View.GONE
+        }
     }
 
     override fun customize() {

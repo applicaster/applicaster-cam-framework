@@ -95,6 +95,10 @@ class PluginConfigurator(private val pluginConfig: Map<String, String>) : Config
 
     override fun getPaymentConfirmationDescription(): String =
         pluginConfig.getValue(KEY_PAYMENT_CONFIRMATION_DESC_TEXT)
+
+    override fun isTriggerOnAppLaunch(): Boolean =
+        pluginConfig.getValue(KEY_TRIGGER_NO_APP_LAUNCH).toBoolean()
+
 }
 
 const val KEY_AUTH_FIELDS = "authentication_input_fields"
@@ -109,3 +113,4 @@ const val KEY_AUTH_REQUIREMENT = "authentication_requirement"
 const val KEY_REQUIRE_PAYMENT = "require_payment"
 const val KEY_PAYMENT_CONFIRMATION_TITLE_TEXT = "payment_confirmation_title_text"
 const val KEY_PAYMENT_CONFIRMATION_DESC_TEXT = "payment_confirmation_description_text"
+const val KEY_TRIGGER_NO_APP_LAUNCH = "trigger_on_app_launch"

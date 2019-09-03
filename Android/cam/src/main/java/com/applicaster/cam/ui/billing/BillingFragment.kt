@@ -52,7 +52,6 @@ class BillingFragment : BaseFragment(), IBillingView {
     }
 
     override fun setListeners() {
-        toolbar_back_button.setOnClickListener { presenter?.onToolbarBackClicked() }
         container_restore.setOnClickListener { presenter?.onRestoreClicked() }
         purchaseListener = object : PurchaseInteractionListener {
             override fun onPurchaseButtonClicked(skuId: String) {
@@ -62,6 +61,14 @@ class BillingFragment : BaseFragment(), IBillingView {
             override fun onRedeemClicked() {
                 Log.e(BillingFragment::class.java.simpleName, "Redeem clicked")
             }
+        }
+    }
+
+    override fun initBackButton(enable: Boolean) {
+        if (enable) {
+            toolbar_back_button.setOnClickListener { presenter?.onToolbarBackClicked() }
+        } else {
+            toolbar_back_button.visibility = View.GONE
         }
     }
 
@@ -137,9 +144,5 @@ class BillingFragment : BaseFragment(), IBillingView {
                 rv_billing_items?.setPadding(parentPadding, 0, parentPadding, 0)
             }
         }
-    }
-
-    override fun goBack() {
-        baseActivity?.close()
     }
 }

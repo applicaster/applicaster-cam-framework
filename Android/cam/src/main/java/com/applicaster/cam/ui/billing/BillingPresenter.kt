@@ -43,6 +43,7 @@ class BillingPresenter(
             GoogleBillingHelper.init(this, this@BillingPresenter)
         }
         view?.setListeners()
+        view?.initBackButton(!ContentAccessManager.pluginConfigurator.isTriggerOnAppLaunch())
 
         // obtain redeem code and set billing item type which depends on redeem code availability
         val billingItemType: BillingItemType = {
