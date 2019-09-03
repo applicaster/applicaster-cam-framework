@@ -7,6 +7,7 @@ import com.applicaster.cam.FacebookAuthCallback
 import com.applicaster.cam.LoginCallback
 import com.applicaster.cam.analytics.*
 import com.applicaster.cam.params.auth.AuthFieldConfig
+import com.applicaster.cam.params.auth.AuthScreenType
 import com.applicaster.cam.ui.CamNavigationRouter
 import com.applicaster.cam.ui.auth.user.UserAuthPresenter
 
@@ -18,6 +19,10 @@ class LoginPresenter(
 
     override fun onViewCreated() {
         super.onViewCreated()
+        when (ContentAccessManager.pluginConfigurator.getDefaultAuthScreen()) {
+            AuthScreenType.LOGIN -> view?.initBackButton(!ContentAccessManager.pluginConfigurator.isTriggerOnAppLaunch())
+            else -> view?.initBackButton(enable = true)
+        }
         //Analytics event
         AnalyticsUtil.logContentGatewaySession(
             TimedEvent.START,

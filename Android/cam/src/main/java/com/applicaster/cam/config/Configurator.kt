@@ -43,4 +43,6 @@ interface Configurator {
     fun getPaymentConfirmationTitle(): String
 
     fun getPaymentConfirmationDescription(): String
+
+    fun isTriggerOnAppLaunch(): Boolean
 }

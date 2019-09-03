@@ -46,11 +46,6 @@ class CamActivity : AppCompatActivity(), IBaseActivity {
         onBackPressed()
     }
 
-    override fun onBackPressed() {
-        navigationRouter.onBackPressed()
-        super.onBackPressed()
-    }
-
     override fun close() {
         ContentAccessManager.contract.onCamFinished()
         finish()

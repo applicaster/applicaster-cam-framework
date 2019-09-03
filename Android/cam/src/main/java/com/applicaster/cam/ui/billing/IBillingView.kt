@@ -13,4 +13,5 @@ interface IBillingView : IBaseView {
     }
     fun clearBillingContainer()
     fun calculateRecyclerContainerPadding(itemsCount: Int) {}
+    fun initBackButton(enable: Boolean)
 }
