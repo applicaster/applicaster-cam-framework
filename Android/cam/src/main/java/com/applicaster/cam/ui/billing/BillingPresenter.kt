@@ -68,6 +68,10 @@ class BillingPresenter(
             }
         })
         view?.showLoadingIndicator()
+        AnalyticsUtil.logUserProperties(
+            collectPurchaseData(
+                ContentAccessManager.contract.getAnalyticsDataProvider().purchaseData
+            ))
     }
 
     override fun onBillingClientError(statusCode: Int, description: String) {
