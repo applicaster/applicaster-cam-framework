@@ -5,6 +5,7 @@ import com.applicaster.cam.ContentAccessManager
 import com.applicaster.cam.params.auth.AuthScreenType
 import com.applicaster.plugin_manager.Plugin
 import com.applicaster.plugin_manager.PluginManager
+import org.json.JSONObject
 
 class AnalyticsUtil {
     companion object {
@@ -304,14 +305,22 @@ class AnalyticsUtil {
 
 
         // user analytics
-        fun logIsUserLogged(purchaseProductPropertiesData: List<PurchaseProductPropertiesData>) {
+        fun logUserProperties(purchaseProductPropertiesData: List<PurchaseProductPropertiesData>) {
             val pluginProvider: String = PluginManager.getInstance().getInitiatedPlugin(Plugin.Type.LOGIN)?.plugin?.name.orEmpty()
+            val isUserLoggedIn = ContentAccessManager.contract.isUserLogged()
             val productNames = arrayListOf<String>()
+            var isUserSubscribed: Boolean = false
             purchaseProductPropertiesData.forEach {
-                val isUserSubscribed: Boolean = it.isUserSubscribed
+                isUserSubscribed = it.isUserSubscribed
                 productNames.add(it.productName)
             }
             val productName: String = productNames.joinToString(separator = "; ")
+            val userProps = JSONObject()
+            userProps.put(UserProperties.LOGGED_IN.value, isUserLoggedIn)
+            userProps.put(UserProperties.AUTH_PROVIDER.value, pluginProvider)
+            userProps.put(UserProperties.PURCHASE_PRODUCT_NAME.value, productName)
+            userProps.put(UserProperties.SUBSCRIBER.value, isUserSubscribed)
+            AnalyticsAgentUtil.sendUserProperties(userProps)
         }
     }
 }
@@ -408,6 +417,13 @@ enum class PurchaseType(val value: String) {
 
 enum class TimedEvent {
     START, END
+}
+
+enum class UserProperties(val value: String) {
+    LOGGED_IN("Logged In"),
+    AUTH_PROVIDER("Authentication Provider"),
+    SUBSCRIBER("Subscriber"),
+    PURCHASE_PRODUCT_NAME("Purchase Product Name")
 }
 
 data class ConfirmationAlertData(
