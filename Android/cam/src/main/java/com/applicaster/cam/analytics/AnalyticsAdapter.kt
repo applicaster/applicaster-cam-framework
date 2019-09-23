@@ -10,6 +10,10 @@ import org.json.JSONObject
 class AnalyticsUtil {
     companion object {
 
+        const val KEY_YES = "Yes"
+        const val KEY_NO = "No"
+        const val KEY_NON_PROVIDED = "Non provided"
+
         private fun getPluginProvider(): String =
             PluginManager.getInstance().getInitiatedPlugin(Plugin.Type.LOGIN)?.plugin?.name.orEmpty()
 
@@ -18,13 +22,13 @@ class AnalyticsUtil {
             Properties.TRIGGER.value to when (ContentAccessManager.pluginConfigurator.getDefaultAuthScreen()) {
                 AuthScreenType.LOGIN -> AuthScreenType.LOGIN.getKey()
                 AuthScreenType.SIGNUP -> AuthScreenType.SIGNUP.getKey()
-                else -> ""
+                else -> KEY_NON_PROVIDED
             }
 
         private fun matchIsUserSubscribed(isUserSubscribed: Boolean): String =
             when (isUserSubscribed) {
-                true -> "Yes"
-                else -> "No"
+                true -> KEY_YES
+                else -> KEY_NO
             }
 
         private fun getContentEntityName() =
@@ -214,8 +218,8 @@ class AnalyticsUtil {
 
         fun logViewAlert(confirmationAlertData: ConfirmationAlertData) {
             val confirmationAlert = when (confirmationAlertData.isConfirmationAlert) {
-                true -> "true"
-                else -> "false"
+                true -> KEY_YES
+                else -> KEY_NO
             }
             val params = mapOf(
                 Properties.PLUGIN_PROVIDER.value to getPluginProvider(),
@@ -403,7 +407,7 @@ enum class ConfirmationCause(val value: String) {
     PURCHASE        ("Purchase"),
     RESTORE_PURCHASE("Restore Purchase"),
     PASSWORD_RESET  ("Password Reset"),
-    NONE            ("")
+    NONE            ("None Provided")
     // @formatter:on
 }
 

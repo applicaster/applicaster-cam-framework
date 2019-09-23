@@ -102,7 +102,7 @@ class BillingPresenter(
                 ConfirmationAlertData(
                         false,
                         ConfirmationCause.NONE,
-                        "",
+                        AnalyticsUtil.KEY_NON_PROVIDED,
                         ContentAccessManager.pluginConfigurator.getDefaultAlertText(),
                         description
                 )
@@ -115,34 +115,12 @@ class BillingPresenter(
             override fun onFailure(msg: String) {
                 view?.hideLoadingIndicator()
                 showHandledError(msg)
-
-                // Analytics events
-                AnalyticsUtil.logViewAlert(
-                        ConfirmationAlertData(
-                                false,
-                                ConfirmationCause.PURCHASE,
-                                ContentAccessManager.pluginConfigurator.getPaymentConfirmationTitle(),
-                                ContentAccessManager.pluginConfigurator.getPaymentConfirmationDescription(),
-                                if (msg.isEmpty()) ContentAccessManager.pluginConfigurator.getDefaultAlertText() else msg
-                        )
-                )
             }
 
             override fun onActionSuccess() {
                 view?.hideLoadingIndicator()
                 if (ContentAccessManager.pluginConfigurator.isShowConfirmationPayment()) {
                     navigationRouter.showConfirmationDialog(AlertDialogType.BILLING)
-
-                    // Analytics events
-                    AnalyticsUtil.logViewAlert(
-                            ConfirmationAlertData(
-                                    true,
-                                    ConfirmationCause.PURCHASE,
-                                    ContentAccessManager.pluginConfigurator.getPaymentConfirmationTitle(),
-                                    ContentAccessManager.pluginConfigurator.getPaymentConfirmationDescription(),
-                                    ""
-                            )
-                    )
                 } else {
                     view?.close()
                 }
@@ -201,7 +179,7 @@ class BillingPresenter(
                 ConfirmationAlertData(
                         false,
                         ConfirmationCause.NONE,
-                        "",
+                        AnalyticsUtil.KEY_NON_PROVIDED,
                         ContentAccessManager.pluginConfigurator.getDefaultAlertText(),
                         description
                 )
@@ -259,7 +237,7 @@ class BillingPresenter(
                     ConfirmationAlertData(
                             false,
                             ConfirmationCause.NONE,
-                            "",
+                            AnalyticsUtil.KEY_NON_PROVIDED,
                             ContentAccessManager.pluginConfigurator.getDefaultAlertText(),
                             msg
                     )
@@ -272,8 +250,8 @@ class BillingPresenter(
                     ConfirmationAlertData(
                             false,
                             ConfirmationCause.NONE,
-                            "",
-                            msg,
+                            AnalyticsUtil.KEY_NO,
+                            AnalyticsUtil.KEY_NON_PROVIDED,
                             msg
                     )
             )
@@ -302,7 +280,7 @@ class BillingPresenter(
                             ConfirmationCause.RESTORE_PURCHASE,
                             ContentAccessManager.pluginConfigurator.getPaymentConfirmationTitle(),
                             ContentAccessManager.pluginConfigurator.getPaymentConfirmationDescription(),
-                            ""
+                            AnalyticsUtil.KEY_NON_PROVIDED
                     )
             )
         } else {

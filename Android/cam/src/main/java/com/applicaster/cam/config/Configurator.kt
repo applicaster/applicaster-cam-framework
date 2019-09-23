@@ -45,4 +45,6 @@ interface Configurator {
     fun getPaymentConfirmationDescription(): String
 
     fun isTriggerOnAppLaunch(): Boolean
+
+    fun getAlertDialogFields(): AlertFieldsText
 }

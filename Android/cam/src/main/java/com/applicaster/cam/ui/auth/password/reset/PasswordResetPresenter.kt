@@ -5,6 +5,7 @@ import com.applicaster.cam.PasswordResetCallback
 import com.applicaster.cam.analytics.AnalyticsUtil
 import com.applicaster.cam.analytics.ConfirmationAlertData
 import com.applicaster.cam.analytics.ConfirmationCause
+import com.applicaster.cam.params.auth.AuthField
 import com.applicaster.cam.params.auth.AuthFieldConfig
 import com.applicaster.cam.ui.CamNavigationRouter
 import com.applicaster.cam.ui.auth.base.BaseInputPresenter
@@ -24,28 +25,32 @@ class PasswordResetPresenter(
 
     override fun performAuthAction(input: HashMap<String, String>) {
         ContentAccessManager.contract.resetPassword(input, this)
+    }
+
+    override fun onAuthActionButtonClicked(inputValues: HashMap<AuthField, String>) {
         AnalyticsUtil.logResetPassword()
+        super.onAuthActionButtonClicked(inputValues)
     }
 
     override fun onFailure(msg: String) {
         view?.hideLoadingIndicator()
         view?.showAlert(msg)
+
+        AnalyticsUtil.logViewAlert(
+            ConfirmationAlertData(
+                false,
+                ConfirmationCause.NONE,
+                AnalyticsUtil.KEY_NON_PROVIDED,
+                AnalyticsUtil.KEY_NON_PROVIDED,
+                msg
+            )
+        )
     }
 
     override fun onActionSuccess() {
         view?.hideLoadingIndicator()
         if (ContentAccessManager.pluginConfigurator.isShowConfirmationPasswordReset()) {
             navigationRouter.showConfirmationDialog(AlertDialogType.RESET_PASSWORD)
-            // Analytics event
-            AnalyticsUtil.logViewAlert(
-                ConfirmationAlertData(
-                    true,
-                    ConfirmationCause.PASSWORD_RESET,
-                    ContentAccessManager.pluginConfigurator.getPaymentConfirmationTitle(),
-                    ContentAccessManager.pluginConfigurator.getPaymentConfirmationDescription(),
-                    ""
-                )
-            )
         } else {
             view?.goBack()
         }

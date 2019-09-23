@@ -6,6 +6,7 @@ import com.applicaster.cam.ContentAccessManager
 import com.applicaster.cam.FacebookAuthCallback
 import com.applicaster.cam.LoginCallback
 import com.applicaster.cam.analytics.*
+import com.applicaster.cam.params.auth.AuthField
 import com.applicaster.cam.params.auth.AuthFieldConfig
 import com.applicaster.cam.params.auth.AuthScreenType
 import com.applicaster.cam.ui.CamNavigationRouter
@@ -23,12 +24,6 @@ class LoginPresenter(
             AuthScreenType.LOGIN -> view?.initBackButton(!ContentAccessManager.pluginConfigurator.isTriggerOnAppLaunch())
             else -> view?.initBackButton(enable = true)
         }
-        //Analytics event
-        AnalyticsUtil.logContentGatewaySession(
-            TimedEvent.START,
-            ContentAccessManager.contract.getAnalyticsDataProvider().trigger.value,
-            Action.LOGIN
-        )
     }
 
     override fun getAuthFieldConfig(): AuthFieldConfig =
@@ -41,7 +36,11 @@ class LoginPresenter(
 
     override fun performAuthAction(input: HashMap<String, String>) {
         ContentAccessManager.contract.login(input, this)
+    }
+
+    override fun onAuthActionButtonClicked(inputValues: HashMap<AuthField, String>) {
         AnalyticsUtil.logTapStandardLoginButton()
+        super.onAuthActionButtonClicked(inputValues)
     }
 
     override fun onFailure(msg: String) {
@@ -53,8 +52,8 @@ class LoginPresenter(
             ConfirmationAlertData(
                 false,
                 ConfirmationCause.NONE,
-                "",
-                msg,
+                AnalyticsUtil.KEY_NON_PROVIDED,
+                AnalyticsUtil.KEY_NON_PROVIDED,
                 msg
             )
         )
@@ -92,9 +91,9 @@ class LoginPresenter(
             ConfirmationAlertData(
                 false,
                 ConfirmationCause.NONE,
-                "",
-                error?.message.orEmpty(),
-                error?.message.orEmpty()
+                AnalyticsUtil.KEY_NON_PROVIDED,
+                AnalyticsUtil.KEY_NON_PROVIDED,
+                error?.message ?: AnalyticsUtil.KEY_NON_PROVIDED
             )
         )
     }
