@@ -40,9 +40,9 @@ class EntitlementPickerViewController: UIViewController {
     
     var itemSize: CGSize {
         if UIDevice.current.userInterfaceIdiom == .pad {
-            return CGSize(width: 320, height: 248)
+            return CGSize(width: 300, height: 238)
         } else {
-            return CGSize(width: 320, height: 192)
+            return CGSize(width: 300, height: 182)
         }
     }
     
