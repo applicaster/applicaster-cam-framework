@@ -84,6 +84,8 @@ class EntitlementPickerViewController: UIViewController {
         super.viewDidLayoutSubviews()
         loadingPopover.frame = self.view.bounds
         self.gradientLayer.frame = self.helpInfoTextView.bounds
+        
+        helpInfoTextView.contentOffset = .zero
     }
     
     func setupCollectionView() {
