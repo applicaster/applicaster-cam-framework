@@ -128,7 +128,14 @@ class LoginPresenter {
     }
     
     func showFacebookAuthScreen() {
+        let playableInfo = PlayableItemInfo(name: camDelegate.itemName(),
+                                            type: camDelegate.itemType())
+        let tapLoginEvent = AnalyticsEvents.tapAlternativeLogin(playableInfo)
+        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: tapLoginEvent.key,
+                                                                     parameters: tapLoginEvent.metadata)
+        
         view.showLoadingScreen(true)
+
         guard let facebookClient = ZAAppConnector.sharedInstance().facebookAccountKitDelegate else {
             self.view.showLoadingScreen(false)
             return
@@ -138,6 +145,9 @@ class LoginPresenter {
             if isUserLogged {
                 self.getFacebookUser(client: facebookClient)
             } else {
+                let failureLoginEvent = AnalyticsEvents.alternativaLoginFailure(playableInfo)
+                ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: failureLoginEvent.key,
+                                                                             parameters: failureLoginEvent.metadata)
                 self.view.showLoadingScreen(false)
                 if let error = error {
                     self.view.showError(description: error.localizedDescription)
@@ -165,9 +175,7 @@ class LoginPresenter {
     func facebookLogin(email: String, userId: String) {
         let playableInfo = PlayableItemInfo(name: camDelegate.itemName(),
                                             type: camDelegate.itemType())
-        let tapLoginEvent = AnalyticsEvents.tapAlternativeLogin(playableInfo)
-        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: tapLoginEvent.key,
-                                                                     parameters: tapLoginEvent.metadata)
+
         self.camDelegate.facebookLogin(userData: (email: email, userId: userId), completion: { [weak self] (result) in
             guard let self = self else { return }
             self.view.showLoadingScreen(false)

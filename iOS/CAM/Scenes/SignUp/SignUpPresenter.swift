@@ -124,8 +124,9 @@ class SignUpPresenter {
     }
     
     func showFacebookAuthScreen() {
-        let alternativeSignUpEvent = AnalyticsEvents.tapAlternativeSignUp(PlayableItemInfo(name: camDelegate.itemName(),
-                                                                                           type: camDelegate.itemType()))
+        let playableInfo = PlayableItemInfo(name: camDelegate.itemName(),
+                                            type: camDelegate.itemType())
+        let alternativeSignUpEvent = AnalyticsEvents.tapAlternativeSignUp(playableInfo)
         ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: alternativeSignUpEvent.key,
                                                                      parameters: alternativeSignUpEvent.metadata)
         view.showLoadingScreen(true)
@@ -140,6 +141,9 @@ class SignUpPresenter {
                 self.getFacebookUser(client: facebookClient)
             } else {
                 self.view.showLoadingScreen(false)
+                let failureEvent = AnalyticsEvents.alternativeSignUpFailure(playableInfo)
+                ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: failureEvent.key,
+                                                                             parameters: failureEvent.metadata)
                 if let error = error {
                     self.view.showError(description: error.localizedDescription)
                 }
