@@ -35,7 +35,7 @@ class AnalyticsUtil {
             ContentAccessManager.contract.getAnalyticsDataProvider().entityName
 
         private fun getContentEntityType() =
-            ContentAccessManager.contract.getAnalyticsDataProvider().entityName
+            ContentAccessManager.contract.getAnalyticsDataProvider().entityType
 
         private fun generateProductPropertiesMap(productPropertiesData: PurchaseProductPropertiesData) =
             mapOf(
@@ -309,6 +309,13 @@ class AnalyticsUtil {
 
 
         // user analytics
+        private fun matchBooleanValue(value: Boolean): String {
+            return when (value) {
+                true -> KEY_YES
+                else -> KEY_NO
+            }
+        }
+
         fun logUserProperties(purchaseProductPropertiesData: List<PurchaseProductPropertiesData>) {
             val pluginProvider: String = PluginManager.getInstance().getInitiatedPlugin(Plugin.Type.LOGIN)?.plugin?.name.orEmpty()
             val isUserLoggedIn = ContentAccessManager.contract.isUserLogged()
@@ -320,10 +327,10 @@ class AnalyticsUtil {
             }
             val productName: String = productNames.joinToString(separator = "; ")
             val userProps = JSONObject()
-            userProps.put(UserProperties.LOGGED_IN.value, isUserLoggedIn)
+            userProps.put(UserProperties.LOGGED_IN.value, matchBooleanValue(isUserLoggedIn))
             userProps.put(UserProperties.AUTH_PROVIDER.value, pluginProvider)
             userProps.put(UserProperties.PURCHASE_PRODUCT_NAME.value, productName)
-            userProps.put(UserProperties.SUBSCRIBER.value, isUserSubscribed)
+            userProps.put(UserProperties.SUBSCRIBER.value, matchBooleanValue(isUserSubscribed))
             AnalyticsAgentUtil.sendUserProperties(userProps)
         }
     }

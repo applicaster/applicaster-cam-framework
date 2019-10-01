@@ -1,6 +1,7 @@
 package com.applicaster.cam.ui.auth.user.login
 
 import android.app.Activity
+import android.util.Log
 import com.applicaster.cam.CamFlow
 import com.applicaster.cam.ContentAccessManager
 import com.applicaster.cam.FacebookAuthCallback
@@ -101,5 +102,13 @@ class LoginPresenter(
     override fun onFacebookButtonClicked(activity: Activity?) {
         super.onFacebookButtonClicked(activity)
         AnalyticsUtil.logTapAlternativeLogin()
+    }
+
+    override fun onLastFragmentClosed() {
+        AnalyticsUtil.logContentGatewaySession(
+            TimedEvent.END,
+            ContentAccessManager.contract.getAnalyticsDataProvider().trigger.value,
+            Action.LOGIN
+        )
     }
 }

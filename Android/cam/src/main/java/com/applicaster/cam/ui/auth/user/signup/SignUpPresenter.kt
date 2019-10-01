@@ -96,4 +96,12 @@ class SignUpPresenter(
         super.onFacebookButtonClicked(activity)
         AnalyticsUtil.logTapAlternativeSignUp()
     }
+
+    override fun onLastFragmentClosed() {
+        AnalyticsUtil.logContentGatewaySession(
+            TimedEvent.END,
+            ContentAccessManager.contract.getAnalyticsDataProvider().trigger.value,
+            Action.SIGNUP
+        )
+    }
 }

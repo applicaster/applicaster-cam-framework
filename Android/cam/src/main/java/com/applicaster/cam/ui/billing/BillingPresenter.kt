@@ -32,13 +32,6 @@ class BillingPresenter(
     override fun onViewCreated() {
         super.onViewCreated()
 
-        // Analytics event
-        AnalyticsUtil.logContentGatewaySession(
-                TimedEvent.START,
-                camContract.getAnalyticsDataProvider().trigger.value,
-                Action.PURCHASE
-        )
-
         view?.getViewContext()?.applicationContext?.apply {
             GoogleBillingHelper.init(this, this@BillingPresenter)
         }
@@ -250,7 +243,7 @@ class BillingPresenter(
                     ConfirmationAlertData(
                             false,
                             ConfirmationCause.NONE,
-                            AnalyticsUtil.KEY_NO,
+                            AnalyticsUtil.KEY_NON_PROVIDED,
                             AnalyticsUtil.KEY_NON_PROVIDED,
                             msg
                     )
@@ -267,7 +260,7 @@ class BillingPresenter(
     }
 
     /**
-     * Purchase verification succeed on Cleeng side
+     * Purchase verification succeeded on Cleeng side
      */
     override fun onActionSuccess() {
         view?.hideLoadingIndicator()
@@ -292,6 +285,11 @@ class BillingPresenter(
     override fun onRestoreClicked() {
         view?.showLoadingIndicator()
         AnalyticsUtil.logTapRestorePurchaseLink()
+        AnalyticsUtil.logContentGatewaySession(
+            TimedEvent.START,
+            Trigger.OTHER.value,
+            Action.RESTORE_PURCHASE
+        )
         GoogleBillingHelper.restorePurchasesForAllTypes()
     }
 
@@ -306,7 +304,7 @@ class BillingPresenter(
                     camContract.getAnalyticsDataProvider().isUserSubscribed,
                     data.title,
                     data.price,
-                    purchases.find { it.sku == data.androidProductId }?.orderId.orEmpty(),
+                    purchases.find { it.sku == data.androidProductId }?.orderId ?: AnalyticsUtil.KEY_NON_PROVIDED,
                     data.androidProductId,
                     data.purchaseType,
                     data.subscriptionDuration,
@@ -318,7 +316,23 @@ class BillingPresenter(
         return result
     }
 
-    override fun onBackPressed() {
-        ContentAccessManager.contract.onCamFinished()
+    override fun onLastFragmentClosed() {
+        when (ContentAccessManager.contract.getCamFlow()) {
+            CamFlow.STOREFRONT -> {
+                AnalyticsUtil.logContentGatewaySession(
+                    TimedEvent.END,
+                    ContentAccessManager.contract.getAnalyticsDataProvider().trigger.value,
+                    Action.PURCHASE
+                )
+            }
+            CamFlow.AUTH_AND_STOREFRONT -> {
+                AnalyticsUtil.logContentGatewaySession(
+                    TimedEvent.END,
+                    ContentAccessManager.contract.getAnalyticsDataProvider().trigger.value,
+                    Action.SIGNUP_AND_PURCHASE
+                )
+            }
+            else -> {}
+        }
     }
 }

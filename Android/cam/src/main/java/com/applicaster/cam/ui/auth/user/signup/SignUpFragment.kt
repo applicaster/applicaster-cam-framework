@@ -40,4 +40,8 @@ class SignUpFragment : UserAuthFragment(), ISignUpView {
             toolbar_back_button.visibility = View.GONE
         }
     }
+
+    override fun onLastFragmentClosed() {
+
+    }
 }

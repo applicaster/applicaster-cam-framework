@@ -6,6 +6,7 @@ interface IBaseView {
     fun customize()
     fun getViewContext(): Context?
     fun goBack()
+    fun onLastFragmentClosed()
     fun close()
     fun showToastMessage(msg: String)
     fun showLoadingIndicator()

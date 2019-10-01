@@ -52,7 +52,8 @@ class BillingFragment : BaseFragment(), IBillingView {
     }
 
     override fun setListeners() {
-        container_restore.setOnClickListener { presenter?.onRestoreClicked() }
+        tv_hint_desc.setOnClickListener { presenter?.onRestoreClicked() }
+        tv_hint_action.setOnClickListener { presenter?.onRestoreClicked() }
         purchaseListener = object : PurchaseInteractionListener {
             override fun onPurchaseButtonClicked(skuId: String) {
                 presenter?.onPurchaseButtonClicked(baseActivity as Activity, skuId)
@@ -144,5 +145,9 @@ class BillingFragment : BaseFragment(), IBillingView {
                 rv_billing_items?.setPadding(parentPadding, 0, parentPadding, 0)
             }
         }
+    }
+
+    override fun onLastFragmentClosed() {
+        presenter?.onLastFragmentClosed()
     }
 }
