@@ -160,6 +160,7 @@ class EntitlementPickerPresenter {
                 ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: buyEvent.key,
                                                                              parameters: buyEvent.metadata)
                 
+                self.view.showLoadingScreen(true)
                 BillingHelper.sharedInstance.purchase(skProduct, completion: { [weak self] (result) in
                     let purchaseResultEvent: AnalyticsEvents
                     switch result {
@@ -224,7 +225,6 @@ class EntitlementPickerPresenter {
         let purchasedItem = PurchasedProduct(transaction: transaction,
                                              receipt: receipt,
                                              state: .purchased)
-        self.view.showLoadingScreen(true)
         self.camDelegate.itemPurchased(purchasedItem: purchasedItem, completion: { [weak self] (result) in
             self?.view.showLoadingScreen(false)
             switch result {
