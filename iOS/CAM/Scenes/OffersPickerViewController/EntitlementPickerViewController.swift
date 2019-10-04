@@ -23,8 +23,7 @@ class EntitlementPickerViewController: UIViewController {
     @IBOutlet private var titleLabel: UILabel!
     
     @IBOutlet private var entitlementCollectionView: UICollectionView!
-    @IBOutlet private var restorePurchaseLabel: UILabel!
-    @IBOutlet private var restoreButton: UIButton!
+    @IBOutlet private var restoreText: UITextView!
     
     @IBOutlet private var helpInfoContainer: UIView!
     @IBOutlet private var helpInfoTextView: UITextView!
@@ -40,9 +39,9 @@ class EntitlementPickerViewController: UIViewController {
     
     var itemSize: CGSize {
         if UIDevice.current.userInterfaceIdiom == .pad {
-            return CGSize(width: 320, height: 248)
+            return CGSize(width: 300, height: 238)
         } else {
-            return CGSize(width: 320, height: 192)
+            return CGSize(width: 300, height: 182)
         }
     }
     
@@ -55,10 +54,7 @@ class EntitlementPickerViewController: UIViewController {
     var viewModel: OffersViewModel? {
         didSet {
             titleLabel.text = viewModel?.title
-            restorePurchaseLabel.setStyle(config: configDictionary, style: .promptFont)
-            restorePurchaseLabel.text = viewModel?.restoreHint
-            restoreButton.setStyle(config: configDictionary, style: .linkFont)
-            restoreButton.setTitle(viewModel?.restoreButtonText, for: .normal)
+            setupRestoreText()
             helpInfoTextView.setStyle(config: configDictionary, style: .legalDetailsFont)
             helpInfoTextView.text = viewModel?.legalDetails
         }
@@ -84,6 +80,8 @@ class EntitlementPickerViewController: UIViewController {
         super.viewDidLayoutSubviews()
         loadingPopover.frame = self.view.bounds
         self.gradientLayer.frame = self.helpInfoTextView.bounds
+        
+        helpInfoTextView.contentOffset = .zero
     }
     
     func setupCollectionView() {
@@ -125,6 +123,50 @@ class EntitlementPickerViewController: UIViewController {
         self.gradientLayer.locations = [0.0, 0.3, 1.0]
         
         self.helpInfoTextView.layer.mask = self.gradientLayer
+    }
+    
+    private func setupRestoreText() {
+        let config = configDictionary
+        
+        let restoreMessageText = NSAttributedString(string: viewModel!.restoreHint,
+                                                    attributes: [.font: UIConfigurator.font(from: config,
+                                                                                            for: .promptFont),
+                                                                 .foregroundColor: UIConfigurator.color(from: config,
+                                                                                                        for: .promptFont)])
+        
+        let restoreLink = NSAttributedString(string: viewModel!.restoreButtonText,
+                                             attributes: [.font: UIConfigurator.font(from: config,
+                                                                                     for: .linkFont),
+                                                          .foregroundColor: UIConfigurator.color(from: config,
+                                                                                                 for: .linkFont)])
+        let paragraph = NSMutableParagraphStyle()
+        paragraph.alignment = .center
+        
+        let restoreText = NSMutableAttributedString()
+        restoreText.append(restoreMessageText)
+        restoreText.append(restoreLink)
+        restoreText.addAttribute(.paragraphStyle,
+                                 value: paragraph,
+                                 range: NSRange(location: 0, length: restoreText.length))
+        
+        self.restoreText.attributedText = restoreText
+    }
+    
+    @IBAction private func restoreTextTapped(_ sender: UITapGestureRecognizer) {
+        if let textView = sender.view as? UITextView {
+            var location = sender.location(in: textView)
+            location.x -= textView.textContainerInset.left
+            location.y -= textView.textContainerInset.top
+            
+            let tappedCharacterIndex = textView.layoutManager.characterIndex(for: location,
+                                                                             in: textView.textContainer,
+                                                                             fractionOfDistanceBetweenInsertionPoints: nil)
+            
+            let linkRange = (textView.text as NSString).range(of: viewModel!.restoreButtonText)
+            if linkRange.contains(tappedCharacterIndex) {
+                presenter?.restore()
+            }
+        }
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
