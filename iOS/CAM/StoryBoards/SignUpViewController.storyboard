@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -190,11 +190,11 @@
                                     <constraint firstItem="UOj-KQ-353" firstAttribute="top" secondItem="fUH-ug-4EB" secondAttribute="top" constant="4" id="zQY-bc-jub"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="35d-kS-uOU" userLabel="bottonInfoView">
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="35d-kS-uOU" userLabel="bottonInfoView">
                                 <rect key="frame" x="0.0" y="603" width="375" height="64"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0TR-Um-XAB" userLabel="loginButton">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                        <rect key="frame" x="160.5" y="0.0" width="54" height="64"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="64" id="Met-h9-wc3"/>
                                         </constraints>
@@ -206,9 +206,11 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="0TR-Um-XAB" firstAttribute="leading" secondItem="35d-kS-uOU" secondAttribute="leading" id="KdH-fP-tK6"/>
+                                    <constraint firstAttribute="height" constant="64" id="ATy-DN-C2J"/>
+                                    <constraint firstItem="0TR-Um-XAB" firstAttribute="centerX" secondItem="35d-kS-uOU" secondAttribute="centerX" id="E8J-hg-DUg"/>
                                     <constraint firstItem="0TR-Um-XAB" firstAttribute="top" secondItem="35d-kS-uOU" secondAttribute="top" id="Pop-7l-LYO"/>
-                                    <constraint firstAttribute="trailing" secondItem="0TR-Um-XAB" secondAttribute="trailing" id="jmG-ly-6g0"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="0TR-Um-XAB" secondAttribute="trailing" constant="32" id="flE-Qg-DfC"/>
+                                    <constraint firstItem="0TR-Um-XAB" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="35d-kS-uOU" secondAttribute="leading" constant="32" id="rdr-8R-aPa"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -230,7 +232,6 @@
                             <constraint firstItem="5RK-MM-w7P" firstAttribute="leading" secondItem="50m-OE-UOc" secondAttribute="leading" id="cfW-5e-HVi"/>
                             <constraint firstItem="9L2-y3-bnH" firstAttribute="top" secondItem="5Ge-wn-yW9" secondAttribute="bottom" id="cjm-OV-amP"/>
                             <constraint firstItem="fUH-ug-4EB" firstAttribute="centerX" secondItem="8nE-V8-aaX" secondAttribute="centerX" id="dde-Rg-fGL"/>
-                            <constraint firstItem="35d-kS-uOU" firstAttribute="top" secondItem="50m-OE-UOc" secondAttribute="bottom" constant="-64" id="ghh-gZ-aa8"/>
                             <constraint firstItem="35d-kS-uOU" firstAttribute="trailing" secondItem="50m-OE-UOc" secondAttribute="trailing" id="jYt-pY-vGH"/>
                             <constraint firstItem="35d-kS-uOU" firstAttribute="leading" secondItem="50m-OE-UOc" secondAttribute="leading" id="oQo-9I-vAp"/>
                             <constraint firstItem="5Ge-wn-yW9" firstAttribute="leading" secondItem="50m-OE-UOc" secondAttribute="leading" constant="10" id="ofl-Ic-JYz"/>
