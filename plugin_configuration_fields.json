@@ -4,6 +4,8 @@
       {
         "key": "authentication_requirement",
         "type": "select",
+        "label_tooltip": "<p>This field determines if/when authentication would be required to access content and also influences what configuration fields are available for the plugin.</p><p>If “Require when specified on the data source” is selected, then the feeds delivered by the data source provider must identify relevant content as requiring authentication.</p>",
+        "initial_value": "Always require",
         "options": [
           {
             "text": "Never require",
@@ -21,9 +23,7 @@
             "text": "Require when specified on the data source",
             "value": "require_when_specified_on_the_data_source"
           }
-        ],
-        "label_tooltip": "<p>This field determines if/when authentication would be required to access content and also influences what configuration fields are available for the plugin.</p><p>If “Require when specified on the data source” is selected, then the feeds delivered by the data source provider must identify relevant content as requiring authentication.</p>",
-        "initial_value": "Always require"
+        ]
       },
       {
         "key": "require_payment",
@@ -54,7 +54,6 @@
               true
             ],
             "key": "general/require_payment"
-
           }
         ],
         "rules": "all_conditions"
@@ -88,6 +87,7 @@
       {
         "key": "default_authentication_screen",
         "type": "select",
+        "label_tooltip": "<p>When the authentication process begins, this field determines what to present first.</p><p>By selecting “Login”, the plugin will prompt login first, with an option to switch to the sign-up screen in case the user does not have an account.</p><p>By selecting “Sign-Up”, the plugin will present the user with the sign-up (aka registration) screen first, with an option to switch to login in case the user already has an account.</p>",
         "options": [
           {
             "text": "Login",
@@ -98,7 +98,6 @@
             "value": "Sign-up"
           }
         ],
-        "label_tooltip": "<p>When the authentication process begins, this field determines what to present first.</p><p>By selecting “Login”, the plugin will prompt login first, with an option to switch to the sign-up screen in case the user does not have an account.</p><p>By selecting “Sign-Up”, the plugin will present the user with the sign-up (aka registration) screen first, with an option to switch to login in case the user already has an account.</p>",
         "initial_value": "Login",
         "conditional_fields": [
           {
@@ -149,56 +148,48 @@
         ]
       },
       {
-        "group": true,
-        "label": "Input Field Label Text",
-        "tooltip": "The font for the labels (aka “hints”) displayed within text input fields prior to the user starting to input a value.",
-        "folded": true,
-        "fields": [
+        "key": "input_field_label_font_ios",
+        "type": "ios_font_selector",
+        "label_tooltip": "The font for the labels (aka “hints”) displayed within text input fields prior to the user starting to input a value.",
+        "conditional_fields": [
           {
-            "key": "input_field_label_font_ios",
-            "type": "ios_font_selector",
-            "label_tooltip": "The font for the labels (aka “hints”) displayed within text input fields prior to the user starting to input a value.",
-            "conditional_fields": [
-              {
-                "condition_value": [
-                  "always_require",
-                  "require_on_all_purchasable_items",
-                  "require_when_specified_on_the_data_source"
-                ],
-                "key": "general/authentication_requirement"
-              }
-            ]
-          },
+            "condition_value": [
+              "always_require",
+              "require_on_all_purchasable_items",
+              "require_when_specified_on_the_data_source"
+            ],
+            "key": "general/authentication_requirement"
+          }
+        ]
+      },
+      {
+        "key": "input_field_label_font_android",
+        "type": "android_font_selector",
+        "label_tooltip": "The font for the labels (aka “hints”) displayed within text input fields prior to the user starting to input a value.",
+        "conditional_fields": [
           {
-            "key": "input_field_label_font_android",
-            "type": "android_font_selector",
-            "label_tooltip": "The font for the labels (aka “hints”) displayed within text input fields prior to the user starting to input a value.",
-            "conditional_fields": [
-              {
-                "condition_value": [
-                  "always_require",
-                  "require_on_all_purchasable_items",
-                  "require_when_specified_on_the_data_source"
-                ],
-                "key": "general/authentication_requirement"
-              }
-            ]
-          },
+            "condition_value": [
+              "always_require",
+              "require_on_all_purchasable_items",
+              "require_when_specified_on_the_data_source"
+            ],
+            "key": "general/authentication_requirement"
+          }
+        ]
+      },
+      {
+        "key": "input_field_label_size_phone",
+        "type": "number_input",
+        "label_tooltip": "The font-size for the labels (aka “hints”) displayed within text input fields prior to the user starting to input a value.",
+        "initial_value": "13",
+        "conditional_fields": [
           {
-            "key": "input_field_label_size_phone",
-            "type": "number_input",
-            "label_tooltip": "The font-size for the labels (aka “hints”) displayed within text input fields prior to the user starting to input a value.",
-            "initial_value": "13",
-            "conditional_fields": [
-              {
-                "condition_value": [
-                  "always_require",
-                  "require_on_all_purchasable_items",
-                  "require_when_specified_on_the_data_source"
-                ],
-                "key": "general/authentication_requirement"
-              }
-            ]
+            "condition_value": [
+              "always_require",
+              "require_on_all_purchasable_items",
+              "require_when_specified_on_the_data_source"
+            ],
+            "key": "general/authentication_requirement"
           },
           {
             "key": "input_field_label_size_pad",
@@ -235,184 +226,144 @@
         ]
       },
       {
-        "group": true,
-        "label": "Screen Title Text",
-        "tooltip": "The font that will be used for the text at the top of each screen in the gateway process",
-        "folded": true,
-        "fields": [
-          {
-            "key": "screen_title_font_ios",
-            "type": "ios_font_selector",
-            "label_tooltip": "The font that will be used for the text at the top of each screen in the gateway process"
-          },
-          {
-            "key": "screen_title_font_android",
-            "type": "android_font_selector",
-            "label_tooltip": "The font that will be used for the text at the top of each screen in the gateway process"
-          },
-          {
-            "key": "screen_title_size_phone",
-            "type": "number_input",
-            "label_tooltip": "The font-size that will be used for the text at the top of each screen in the gateway process",
-            "initial_value": "19"
-          },
-          {
-            "key": "screen_title_size_pad",
-            "type": "number_input",
-            "label_tooltip": "The font-size that will be used for the text at the top of each screen in the gateway process",
-            "initial_value": "19"
-          },
-          {
-            "key": "screen_title_color",
-            "type": "color_picker",
-            "label_tooltip": "The font-color that will be used for the text at the top of each screen in the gateway process",
-            "initial_value": "#ffffff"
-          }
-        ]
+        "key": "screen_title_font_ios",
+        "type": "ios_font_selector",
+        "label_tooltip": "The font that will be used for the text at the top of each screen in the gateway process"
       },
       {
-        "group": true,
-        "label": "Screen Description Text",
-        "tooltip": "The font that will be used for the text describing the purpose of the given screen in the gateway process (below the title text). Note: Not all screens include description text.",
-        "folded": true,
-        "fields": [
-          {
-            "key": "screen_description_font_ios",
-            "type": "ios_font_selector",
-            "label_tooltip": "The font that will be used for the text describing the purpose of the given screen in the gateway process (below the title text). Note: Not all screens include description text."
-          },
-          {
-            "key": "screen_description_font_android",
-            "type": "android_font_selector",
-            "label_tooltip": "The font that will be used for the text describing the purpose of the given screen in the gateway process (below the title text). Note: Not all screens include description text."
-          },
-          {
-            "key": "screen_description_size_phone",
-            "type": "number_input",
-            "label_tooltip": "The font-size that will be used for the text describing the purpose of the given screen in the gateway process (below the title text). Note: Not all screens include description text.",
-            "initial_value": "13"
-          },
-          {
-            "key": "screen_description_size_pad",
-            "type": "number_input",
-            "label_tooltip": "The font-size that will be used for the text describing the purpose of the given screen in the gateway process (below the title text). Note: Not all screens include description text.",
-            "initial_value": "13"
-          },
-          {
-            "key": "screen_description_color",
-            "type": "color_picker",
-            "label_tooltip": "The font-color that will be used for the text describing the purpose of the given screen in the gateway process (below the title text). Note: Not all screens include description text.",
-            "initial_value": "#ffffff"
-          }
-        ]
+        "key": "screen_title_font_android",
+        "type": "android_font_selector",
+        "label_tooltip": "The font that will be used for the text at the top of each screen in the gateway process"
       },
       {
-        "group": true,
-        "label": "Action Button Text",
-        "tooltip": "The font for the button in any screen of the gateway process which has one primary call-to-action button (e.g. login, sign-up, restore password)",
-        "folded": true,
-        "fields": [
-          {
-            "key": "action_button_font_ios",
-            "type": "ios_font_selector",
-            "label_tooltip": "The font for the button in any screen of the gateway process which has one primary call-to-action button (e.g. login, sign-up, restore password)"
-          },
-          {
-            "key": "action_button_font_android",
-            "type": "android_font_selector",
-            "label_tooltip": "The font for the button in any screen of the gateway process which has one primary call-to-action button (e.g. login, sign-up, restore password)"
-          },
-          {
-            "key": "action_button_size_phone",
-            "type": "number_input",
-            "label_tooltip": "The font-size for the button in any screen of the gateway process which has one primary call-to-action button (e.g. login, sign-up, restore password)",
-            "initial_value": "14"
-          },
-          {
-            "key": "action_button_size_pad",
-            "type": "number_input",
-            "label_tooltip": "The font-size for the button in any screen of the gateway process which has one primary call-to-action button (e.g. login, sign-up, restore password)",
-            "initial_value": "14"
-          },
-          {
-            "key": "action_button_color",
-            "type": "color_picker",
-            "label_tooltip": "The font-color for the button in any screen of the gateway process which has one primary call-to-action button (e.g. login, sign-up, restore password)",
-            "initial_value": "#ffffff"
-          }
-        ]
+        "key": "screen_title_size_phone",
+        "type": "number_input",
+        "label_tooltip": "The font-size that will be used for the text at the top of each screen in the gateway process",
+        "initial_value": "19"
       },
       {
-        "group": true,
-        "label": "Prompt Text",
-        "tooltip": "These fields will determine the font used in the prompt prior to the link in various scenarios",
-        "folded": true,
-        "fields": [
-          {
-            "key": "prompt_font_ios",
-            "type": "ios_font_selector",
-            "label_tooltip": "<p>One screen may present an option to lead to another screen or action. For example, on the login screen, the text “Don’t have an account?” may appear before a link which leads to the sign-up screen.</p><p>This field will determine the font used in the prompt prior to the link for such scenarios.</p>"
-          },
-          {
-            "key": "prompt_font_android",
-            "type": "android_font_selector",
-            "label_tooltip": "<p>One screen may present an option to lead to another screen or action. For example, on the login screen, the text “Don’t have an account?” may appear before a link which leads to the sign-up screen.</p><p>This field will determine the font used in the prompt prior to the link for such scenarios.</p>"
-          },
-          {
-            "key": "prompt_size_phone",
-            "type": "number_input",
-            "label_tooltip": "<p>One screen may present an option to lead to another screen or action. For example, on the login screen, the text “Don’t have an account?” may appear before a link which leads to the sign-up screen.</p><p>This field will determine the font-size used in the prompt prior to the link for such scenarios.</p>",
-            "initial_value": "13"
-          },
-          {
-            "key": "prompt_size_pad",
-            "type": "number_input",
-            "label_tooltip": "<p>One screen may present an option to lead to another screen or action. For example, on the login screen, the text “Don’t have an account?” may appear before a link which leads to the sign-up screen.</p><p>This field will determine the font-size used in the prompt prior to the link for such scenarios.</p>",
-            "initial_value": "13"
-          },
-          {
-            "key": "prompt_color",
-            "type": "color_picker",
-            "label_tooltip": "<p>One screen may present an option to lead to another screen or action. For example, on the login screen, the text “Don’t have an account?” may appear before a link which leads to the sign-up screen.</p><p>This field will determine the font-color used in the prompt prior to the link for such scenarios.</p>",
-            "initial_value": "#ffffff"
-          }
-        ]
+        "key": "screen_title_size_pad",
+        "type": "number_input",
+        "label_tooltip": "The font-size that will be used for the text at the top of each screen in the gateway process",
+        "initial_value": "19"
       },
       {
-        "group": true,
-        "label": "Link Text",
-        "tooltip": "These fields will determine the font used for linkable text in various scenarios",
-        "folded": true,
-        "fields": [
-          {
-            "key": "link_font_ios",
-            "type": "ios_font_selector",
-            "label_tooltip": "One screen may present an option to lead to another screen or action. For example, on the login screen, the text “Sign Up” may be lead to the sign-up screen when tapped. This field will determine the font used for such linkable text in the gateway screens."
-          },
-          {
-            "key": "link_font_android",
-            "type": "android_font_selector",
-            "label_tooltip": "One screen may present an option to lead to another screen or action. For example, on the login screen, the text “Sign Up” may be lead to the sign-up screen when tapped. This field will determine the font used for such linkable text in the gateway screens."
-          },
-          {
-            "key": "link_size_phone",
-            "type": "number_input",
-            "label_tooltip": "One screen may present an option to lead to another screen or action. For example, on the login screen, the text “Sign Up” may be lead to the sign-up screen when tapped. This field will determine the font-size used for such linkable text in the gateway screens.",
-            "initial_value": "13"
-          },
-          {
-            "key": "link_size_pad",
-            "type": "number_input",
-            "label_tooltip": "One screen may present an option to lead to another screen or action. For example, on the login screen, the text “Sign Up” may be lead to the sign-up screen when tapped. This field will determine the font-size used for such linkable text in the gateway screens.",
-            "initial_value": "13"
-          },
-          {
-            "key": "link_color",
-            "type": "color_picker",
-            "label_tooltip": "One screen may present an option to lead to another screen or action. For example, on the login screen, the text “Sign Up” may be lead to the sign-up screen when tapped. This field will determine the font-size used for such linkable text in the gateway screens.",
-            "initial_value": "#ffffff"
-          }
-        ]
+        "key": "screen_title_color",
+        "type": "color_picker",
+        "label_tooltip": "The font-color that will be used for the text at the top of each screen in the gateway process",
+        "initial_value": "#ffffff"
+      },
+      {
+        "key": "screen_description_font_ios",
+        "type": "ios_font_selector",
+        "label_tooltip": "The font that will be used for the text describing the purpose of the given screen in the gateway process (below the title text). Note: Not all screens include description text."
+      },
+      {
+        "key": "screen_description_font_android",
+        "type": "android_font_selector",
+        "label_tooltip": "The font that will be used for the text describing the purpose of the given screen in the gateway process (below the title text). Note: Not all screens include description text."
+      },
+      {
+        "key": "screen_description_size_phone",
+        "type": "number_input",
+        "label_tooltip": "The font-size that will be used for the text describing the purpose of the given screen in the gateway process (below the title text). Note: Not all screens include description text.",
+        "initial_value": "13"
+      },
+      {
+        "key": "screen_description_size_pad",
+        "type": "number_input",
+        "label_tooltip": "The font-size that will be used for the text describing the purpose of the given screen in the gateway process (below the title text). Note: Not all screens include description text.",
+        "initial_value": "13"
+      },
+      {
+        "key": "screen_description_color",
+        "type": "color_picker",
+        "label_tooltip": "The font-color that will be used for the text describing the purpose of the given screen in the gateway process (below the title text). Note: Not all screens include description text.",
+        "initial_value": "#ffffff"
+      },
+      {
+        "key": "action_button_font_ios",
+        "type": "ios_font_selector",
+        "label_tooltip": "The font for the button in any screen of the gateway process which has one primary call-to-action button (e.g. login, sign-up, restore password)"
+      },
+      {
+        "key": "action_button_font_android",
+        "type": "android_font_selector",
+        "label_tooltip": "The font for the button in any screen of the gateway process which has one primary call-to-action button (e.g. login, sign-up, restore password)"
+      },
+      {
+        "key": "action_button_size_phone",
+        "type": "number_input",
+        "label_tooltip": "The font-size for the button in any screen of the gateway process which has one primary call-to-action button (e.g. login, sign-up, restore password)",
+        "initial_value": "14"
+      },
+      {
+        "key": "action_button_size_pad",
+        "type": "number_input",
+        "label_tooltip": "The font-size for the button in any screen of the gateway process which has one primary call-to-action button (e.g. login, sign-up, restore password)",
+        "initial_value": "14"
+      },
+      {
+        "key": "action_button_color",
+        "type": "color_picker",
+        "label_tooltip": "The font-color for the button in any screen of the gateway process which has one primary call-to-action button (e.g. login, sign-up, restore password)",
+        "initial_value": "#ffffff"
+      },
+      {
+        "key": "prompt_font_ios",
+        "type": "ios_font_selector",
+        "label_tooltip": "<p>One screen may present an option to lead to another screen or action. For example, on the login screen, the text “Don’t have an account?” may appear before a link which leads to the sign-up screen.</p><p>This field will determine the font used in the prompt prior to the link for such scenarios.</p>"
+      },
+      {
+        "key": "prompt_font_android",
+        "type": "android_font_selector",
+        "label_tooltip": "<p>One screen may present an option to lead to another screen or action. For example, on the login screen, the text “Don’t have an account?” may appear before a link which leads to the sign-up screen.</p><p>This field will determine the font used in the prompt prior to the link for such scenarios.</p>"
+      },
+      {
+        "key": "prompt_size_phone",
+        "type": "number_input",
+        "label_tooltip": "<p>One screen may present an option to lead to another screen or action. For example, on the login screen, the text “Don’t have an account?” may appear before a link which leads to the sign-up screen.</p><p>This field will determine the font-size used in the prompt prior to the link for such scenarios.</p>",
+        "initial_value": "13"
+      },
+      {
+        "key": "prompt_size_pad",
+        "type": "number_input",
+        "label_tooltip": "<p>One screen may present an option to lead to another screen or action. For example, on the login screen, the text “Don’t have an account?” may appear before a link which leads to the sign-up screen.</p><p>This field will determine the font-size used in the prompt prior to the link for such scenarios.</p>",
+        "initial_value": "13"
+      },
+      {
+        "key": "prompt_color",
+        "type": "color_picker",
+        "label_tooltip": "<p>One screen may present an option to lead to another screen or action. For example, on the login screen, the text “Don’t have an account?” may appear before a link which leads to the sign-up screen.</p><p>This field will determine the font-color used in the prompt prior to the link for such scenarios.</p>",
+        "initial_value": "#ffffff"
+      },
+      {
+        "key": "link_font_ios",
+        "type": "ios_font_selector",
+        "label_tooltip": "One screen may present an option to lead to another screen or action. For example, on the login screen, the text “Sign Up” may be lead to the sign-up screen when tapped. This field will determine the font used for such linkable text in the gateway screens."
+      },
+      {
+        "key": "link_font_android",
+        "type": "android_font_selector",
+        "label_tooltip": "One screen may present an option to lead to another screen or action. For example, on the login screen, the text “Sign Up” may be lead to the sign-up screen when tapped. This field will determine the font used for such linkable text in the gateway screens."
+      },
+      {
+        "key": "link_size_phone",
+        "type": "number_input",
+        "label_tooltip": "One screen may present an option to lead to another screen or action. For example, on the login screen, the text “Sign Up” may be lead to the sign-up screen when tapped. This field will determine the font-size used for such linkable text in the gateway screens.",
+        "initial_value": "13"
+      },
+      {
+        "key": "link_size_pad",
+        "type": "number_input",
+        "label_tooltip": "One screen may present an option to lead to another screen or action. For example, on the login screen, the text “Sign Up” may be lead to the sign-up screen when tapped. This field will determine the font-size used for such linkable text in the gateway screens.",
+        "initial_value": "13"
+      },
+      {
+        "key": "link_color",
+        "type": "color_picker",
+        "label_tooltip": "One screen may present an option to lead to another screen or action. For example, on the login screen, the text “Sign Up” may be lead to the sign-up screen when tapped. This field will determine the font-size used for such linkable text in the gateway screens.",
+        "initial_value": "#ffffff"
       },
       {
         "key": "offer_alternative_authentication",
@@ -459,78 +410,70 @@
         ]
       },
       {
-        "group": true,
-        "label": "Alternative Authentication Separator Text",
-        "tooltip": "The font for the alternative authorization separator text",
-        "folded": true,
-        "fields": [
+        "key": "alternative_authentication_separator_font_ios",
+        "type": "ios_font_selector",
+        "label_tooltip": "The font for the alternative authorization separator text.",
+        "conditional_fields": [
           {
-            "key": "alternative_authentication_separator_font_ios",
-            "type": "ios_font_selector",
-            "label_tooltip": "The font for the alternative authorization separator text.",
-            "conditional_fields": [
-              {
-                "condition_value": [
-                  true
-                ],
-                "key": "general/offer_alternative_authentication"
-              }
-            ]
-          },
+            "condition_value": [
+              true
+            ],
+            "key": "general/offer_alternative_authentication"
+          }
+        ]
+      },
+      {
+        "key": "alternative_authentication_separator_font_android",
+        "type": "android_font_selector",
+        "label_tooltip": "The font for the alternative authorization separator text.",
+        "conditional_fields": [
           {
-            "key": "alternative_authentication_separator_font_android",
-            "type": "android_font_selector",
-            "label_tooltip": "The font for the alternative authorization separator text.",
-            "conditional_fields": [
-              {
-                "condition_value": [
-                  true
-                ],
-                "key": "general/offer_alternative_authentication"
-              }
-            ]
-          },
+            "condition_value": [
+              true
+            ],
+            "key": "general/offer_alternative_authentication"
+          }
+        ]
+      },
+      {
+        "key": "alternative_authentication_separator_size_phone",
+        "type": "number_input",
+        "label_tooltip": "The font-size for the alternative authorization separator text.",
+        "initial_value": "12",
+        "conditional_fields": [
           {
-            "key": "alternative_authentication_separator_size_phone",
-            "type": "number_input",
-            "label_tooltip": "The font-size for the alternative authorization separator text.",
-            "initial_value": "12",
-            "conditional_fields": [
-              {
-                "condition_value": [
-                  true
-                ],
-                "key": "general/offer_alternative_authentication"
-              }
-            ]
-          },
+            "condition_value": [
+              true
+            ],
+            "key": "general/offer_alternative_authentication"
+          }
+        ]
+      },
+      {
+        "key": "alternative_authentication_separator_size_pad",
+        "type": "number_input",
+        "label_tooltip": "The font-size for the alternative authorization separator text.",
+        "initial_value": "12",
+        "conditional_fields": [
           {
-            "key": "alternative_authentication_separator_size_pad",
-            "type": "number_input",
-            "label_tooltip": "The font-size for the alternative authorization separator text.",
-            "initial_value": "12",
-            "conditional_fields": [
-              {
-                "condition_value": [
-                  true
-                ],
-                "key": "general/offer_alternative_authentication"
-              }
-            ]
-          },
+            "condition_value": [
+              true
+            ],
+            "key": "general/offer_alternative_authentication"
+          }
+        ]
+      },
+      {
+        "key": "alternative_authentication_separator_color",
+        "type": "color_picker",
+        "label_tooltip": "The font-color for the alternative authorization separator text.",
+        "initial_value": "#ffffff",
+        "conditional_fields": [
           {
-            "key": "alternative_authentication_separator_color",
-            "type": "color_picker",
-            "label_tooltip": "The font-color for the alternative authorization separator text.",
-            "initial_value": "#ffffff",
-            "conditional_fields": [
-              {
-                "condition_value": [
-                  true
-                ],
-                "key": "general/offer_alternative_authentication"
-              }
-            ]
+            "condition_value": [
+              true
+            ],
+            "key": "general/offer_alternative_authentication"
           }
         ]
       },
@@ -549,78 +492,70 @@
         ]
       },
       {
-        "group": true,
-        "label": "Alternative Authentication Prompt Text",
-        "tooltip": "The font prompting the user to use a third party option (e.g. Facebook) to login or sign-up.",
-        "folded": true,
-        "fields": [
+        "key": "alternative_authentication_prompt_font_ios",
+        "type": "ios_font_selector",
+        "label_tooltip": "The font prompting the user to use a third party option (e.g. Facebook) to login or sign-up.",
+        "conditional_fields": [
           {
-            "key": "alternative_authentication_prompt_font_ios",
-            "type": "ios_font_selector",
-            "label_tooltip": "The font prompting the user to use a third party option (e.g. Facebook) to login or sign-up.",
-            "conditional_fields": [
-              {
-                "condition_value": [
-                  true
-                ],
-                "key": "general/offer_alternative_authentication"
-              }
-            ]
-          },
+            "condition_value": [
+              true
+            ],
+            "key": "general/offer_alternative_authentication"
+          }
+        ]
+      },
+      {
+        "key": "alternative_authentication_prompt_font_android",
+        "type": "android_font_selector",
+        "label_tooltip": "The font prompting the user to use a third party option (e.g. Facebook) to login or sign-up.",
+        "conditional_fields": [
           {
-            "key": "alternative_authentication_prompt_font_android",
-            "type": "android_font_selector",
-            "label_tooltip": "The font prompting the user to use a third party option (e.g. Facebook) to login or sign-up.",
-            "conditional_fields": [
-              {
-                "condition_value": [
-                  true
-                ],
-                "key": "general/offer_alternative_authentication"
-              }
-            ]
-          },
+            "condition_value": [
+              true
+            ],
+            "key": "general/offer_alternative_authentication"
+          }
+        ]
+      },
+      {
+        "key": "alternative_authentication_prompt_size_phone",
+        "type": "number_input",
+        "label_tooltip": "The font-size prompting the user to use a third party option (e.g. Facebook) to login or sign-up.",
+        "initial_value": "12",
+        "conditional_fields": [
           {
-            "key": "alternative_authentication_prompt_size_phone",
-            "type": "number_input",
-            "label_tooltip": "The font-size prompting the user to use a third party option (e.g. Facebook) to login or sign-up.",
-            "initial_value": "12",
-            "conditional_fields": [
-              {
-                "condition_value": [
-                  true
-                ],
-                "key": "general/offer_alternative_authentication"
-              }
-            ]
-          },
+            "condition_value": [
+              true
+            ],
+            "key": "general/offer_alternative_authentication"
+          }
+        ]
+      },
+      {
+        "key": "alternative_authentication_prompt_size_pad",
+        "type": "number_input",
+        "label_tooltip": "The font-size prompting the user to use a third party option (e.g. Facebook) to login or sign-up.",
+        "initial_value": "12",
+        "conditional_fields": [
           {
-            "key": "alternative_authentication_prompt_size_pad",
-            "type": "number_input",
-            "label_tooltip": "The font-size prompting the user to use a third party option (e.g. Facebook) to login or sign-up.",
-            "initial_value": "12",
-            "conditional_fields": [
-              {
-                "condition_value": [
-                  true
-                ],
-                "key": "general/offer_alternative_authentication"
-              }
-            ]
-          },
+            "condition_value": [
+              true
+            ],
+            "key": "general/offer_alternative_authentication"
+          }
+        ]
+      },
+      {
+        "key": "alternative_authentication_prompt_color",
+        "type": "color_picker",
+        "label_tooltip": "The font-color prompting the user to use a third party option (e.g. Facebook) to login or sign-up.",
+        "initial_value": "#ffffff",
+        "conditional_fields": [
           {
-            "key": "alternative_authentication_prompt_color",
-            "type": "color_picker",
-            "label_tooltip": "The font-color prompting the user to use a third party option (e.g. Facebook) to login or sign-up.",
-            "initial_value": "#ffffff",
-            "conditional_fields": [
-              {
-                "condition_value": [
-                  true
-                ],
-                "key": "general/offer_alternative_authentication"
-              }
-            ]
+            "condition_value": [
+              true
+            ],
+            "key": "general/offer_alternative_authentication"
           }
         ]
       },
@@ -767,88 +702,80 @@
         ]
       },
       {
-        "group": true,
-        "label": "Reset Password Text",
-        "tooltip": "The font for the text that will be displayed to prompt the user to restore their password",
-        "folded": true,
-        "fields": [
+        "key": "reset_password_font_ios",
+        "type": "ios_font_selector",
+        "label_tooltip": "The font for the text that will be displayed to prompt the user to restore their password",
+        "conditional_fields": [
           {
-            "key": "reset_password_font_ios",
-            "type": "ios_font_selector",
-            "label_tooltip": "The font for the text that will be displayed to prompt the user to restore their password",
-            "conditional_fields": [
-              {
-                "condition_value": [
-                  "always_require",
-                  "require_on_all_purchasable_items",
-                  "require_when_specified_on_the_data_source"
-                ],
-                "key": "general/authentication_requirement"
-              }
-            ]
-          },
+            "condition_value": [
+              "always_require",
+              "require_on_all_purchasable_items",
+              "require_when_specified_on_the_data_source"
+            ],
+            "key": "general/authentication_requirement"
+          }
+        ]
+      },
+      {
+        "key": "reset_password_font_android",
+        "type": "android_font_selector",
+        "label_tooltip": "The font for the text that will be displayed to prompt the user to restore their password",
+        "conditional_fields": [
           {
-            "key": "reset_password_font_android",
-            "type": "android_font_selector",
-            "label_tooltip": "The font for the text that will be displayed to prompt the user to restore their password",
-            "conditional_fields": [
-              {
-                "condition_value": [
-                  "always_require",
-                  "require_on_all_purchasable_items",
-                  "require_when_specified_on_the_data_source"
-                ],
-                "key": "general/authentication_requirement"
-              }
-            ]
-          },
+            "condition_value": [
+              "always_require",
+              "require_on_all_purchasable_items",
+              "require_when_specified_on_the_data_source"
+            ],
+            "key": "general/authentication_requirement"
+          }
+        ]
+      },
+      {
+        "key": "reset_password_size_phone",
+        "type": "number_input",
+        "label_tooltip": "The font-size for the text that will be displayed to prompt the user to restore their password",
+        "initial_value": "11",
+        "conditional_fields": [
           {
-            "key": "reset_password_size_phone",
-            "type": "number_input",
-            "label_tooltip": "The font-size for the text that will be displayed to prompt the user to restore their password",
-            "initial_value": "11",
-            "conditional_fields": [
-              {
-                "condition_value": [
-                  "always_require",
-                  "require_on_all_purchasable_items",
-                  "require_when_specified_on_the_data_source"
-                ],
-                "key": "general/authentication_requirement"
-              }
-            ]
-          },
+            "condition_value": [
+              "always_require",
+              "require_on_all_purchasable_items",
+              "require_when_specified_on_the_data_source"
+            ],
+            "key": "general/authentication_requirement"
+          }
+        ]
+      },
+      {
+        "key": "reset_password_size_pad",
+        "type": "number_input",
+        "label_tooltip": "The font-size for the text that will be displayed to prompt the user to restore their password",
+        "initial_value": "11",
+        "conditional_fields": [
           {
-            "key": "reset_password_size_pad",
-            "type": "number_input",
-            "label_tooltip": "The font-size for the text that will be displayed to prompt the user to restore their password",
-            "initial_value": "11",
-            "conditional_fields": [
-              {
-                "condition_value": [
-                  "always_require",
-                  "require_on_all_purchasable_items",
-                  "require_when_specified_on_the_data_source"
-                ],
-                "key": "general/authentication_requirement"
-              }
-            ]
-          },
+            "condition_value": [
+              "always_require",
+              "require_on_all_purchasable_items",
+              "require_when_specified_on_the_data_source"
+            ],
+            "key": "general/authentication_requirement"
+          }
+        ]
+      },
+      {
+        "key": "reset_password_color",
+        "type": "color_picker",
+        "label_tooltip": "The font-color for the text that will be displayed to prompt the user to restore their password",
+        "initial_value": "#ffffff",
+        "conditional_fields": [
           {
-            "key": "reset_password_color",
-            "type": "color_picker",
-            "label_tooltip": "The font-color for the text that will be displayed to prompt the user to restore their password",
-            "initial_value": "#ffffff",
-            "conditional_fields": [
-              {
-                "condition_value": [
-                  "always_require",
-                  "require_on_all_purchasable_items",
-                  "require_when_specified_on_the_data_source"
-                ],
-                "key": "general/authentication_requirement"
-              }
-            ]
+            "condition_value": [
+              "always_require",
+              "require_on_all_purchasable_items",
+              "require_when_specified_on_the_data_source"
+            ],
+            "key": "general/authentication_requirement"
           }
         ]
       },
@@ -1021,154 +948,138 @@
         ]
       },
       {
-        "group": true,
-        "label": "Payment Option Title Text",
-        "tooltip": "The font used in the title of each payment option",
-        "folded": true,
-        "fields": [
+        "key": "payment_option_title_font_ios",
+        "type": "ios_font_selector",
+        "label_tooltip": "The font used in the title of each payment option",
+        "conditional_fields": [
           {
-            "key": "payment_option_title_font_ios",
-            "type": "ios_font_selector",
-            "label_tooltip": "The font used in the title of each payment option",
-            "conditional_fields": [
-              {
-                "condition_value": [
-                  true
-                ],
-                "key": "general/require_payment"
-              }
-            ]
-          },
-          {
-            "key": "payment_option_title_font_android",
-            "type": "android_font_selector",
-            "label_tooltip": "The font used in the title of each payment option",
-            "conditional_fields": [
-              {
-                "condition_value": [
-                  true
-                ],
-                "key": "general/require_payment"
-              }
-            ]
-          },
-          {
-            "key": "payment_option_title_size_phone",
-            "type": "number_input",
-            "label_tooltip": "The font-size used in the title of each payment option",
-            "initial_value": "20",
-            "conditional_fields": [
-              {
-                "condition_value": [
-                  true
-                ],
-                "key": "general/require_payment"
-              }
-            ]
-          },
-          {
-            "key": "payment_option_title_size_pad",
-            "type": "number_input",
-            "label_tooltip": "The font-size used in the title of each payment option",
-            "initial_value": "20",
-            "conditional_fields": [
-              {
-                "condition_value": [
-                  true
-                ],
-                "key": "general/require_payment"
-              }
-            ]
-          },
-          {
-            "key": "payment_option_title_color",
-            "type": "color_picker",
-            "label_tooltip": "The font-color used in the title of each payment option",
-            "initial_value": "#1f2021",
-            "conditional_fields": [
-              {
-                "condition_value": [
-                  true
-                ],
-                "key": "general/require_payment"
-              }
-            ]
+            "condition_value": [
+              true
+            ],
+            "key": "general/require_payment"
           }
         ]
       },
       {
-        "group": true,
-        "label": "Payment Option Description Text",
-        "tooltip": "The font used in the description of each payment option (below the title and above the button for selecting the given payment option)",
-        "folded": true,
-        "fields": [
+        "key": "payment_option_title_font_android",
+        "type": "android_font_selector",
+        "label_tooltip": "The font used in the title of each payment option",
+        "conditional_fields": [
           {
-            "key": "payment_option_description_font_ios",
-            "type": "ios_font_selector",
-            "label_tooltip": "The font used in the description of each payment option (below the title and above the button for selecting the given payment option)",
-            "conditional_fields": [
-              {
-                "condition_value": [
-                  true
-                ],
-                "key": "general/require_payment"
-              }
-            ]
-          },
+            "condition_value": [
+              true
+            ],
+            "key": "general/require_payment"
+          }
+        ]
+      },
+      {
+        "key": "payment_option_title_size_phone",
+        "type": "number_input",
+        "label_tooltip": "The font-size used in the title of each payment option",
+        "initial_value": "20",
+        "conditional_fields": [
           {
-            "key": "payment_option_description_font_android",
-            "type": "android_font_selector",
-            "label_tooltip": "The font used in the description of each payment option (below the title and above the button for selecting the given payment option)",
-            "conditional_fields": [
-              {
-                "condition_value": [
-                  true
-                ],
-                "key": "general/require_payment"
-              }
-            ]
-          },
+            "condition_value": [
+              true
+            ],
+            "key": "general/require_payment"
+          }
+        ]
+      },
+      {
+        "key": "payment_option_title_size_pad",
+        "type": "number_input",
+        "label_tooltip": "The font-size used in the title of each payment option",
+        "initial_value": "20",
+        "conditional_fields": [
           {
-            "key": "payment_option_description_size_phone",
-            "type": "number_input",
-            "label_tooltip": "The font-size used in the description of each payment option (below the title and above the button for selecting the given payment option)",
-            "initial_value": "14",
-            "conditional_fields": [
-              {
-                "condition_value": [
-                  true
-                ],
-                "key": "general/require_payment"
-              }
-            ]
-          },
+            "condition_value": [
+              true
+            ],
+            "key": "general/require_payment"
+          }
+        ]
+      },
+      {
+        "key": "payment_option_title_color",
+        "type": "color_picker",
+        "label_tooltip": "The font-color used in the title of each payment option",
+        "initial_value": "#1f2021",
+        "conditional_fields": [
           {
-            "key": "payment_option_description_size_pad",
-            "type": "number_input",
-            "label_tooltip": "The font-size used in the description of each payment option (below the title and above the button for selecting the given payment option)",
-            "initial_value": "14",
-            "conditional_fields": [
-              {
-                "condition_value": [
-                  true
-                ],
-                "key": "general/require_payment"
-              }
-            ]
-          },
+            "condition_value": [
+              true
+            ],
+            "key": "general/require_payment"
+          }
+        ]
+      },
+      {
+        "key": "payment_option_description_font_ios",
+        "type": "ios_font_selector",
+        "label_tooltip": "The font used in the description of each payment option (below the title and above the button for selecting the given payment option)",
+        "conditional_fields": [
           {
-            "key": "payment_option_description_color",
-            "type": "color_picker",
-            "label_tooltip": "The font-color used in the description of each payment option (below the title and above the button for selecting the given payment option)",
-            "initial_value": "#1f2021",
-            "conditional_fields": [
-              {
-                "condition_value": [
-                  true
-                ],
-                "key": "general/require_payment"
-              }
-            ]
+            "condition_value": [
+              true
+            ],
+            "key": "general/require_payment"
+          }
+        ]
+      },
+      {
+        "key": "payment_option_description_font_android",
+        "type": "android_font_selector",
+        "label_tooltip": "The font used in the description of each payment option (below the title and above the button for selecting the given payment option)",
+        "conditional_fields": [
+          {
+            "condition_value": [
+              true
+            ],
+            "key": "general/require_payment"
+          }
+        ]
+      },
+      {
+        "key": "payment_option_description_size_phone",
+        "type": "number_input",
+        "label_tooltip": "The font-size used in the description of each payment option (below the title and above the button for selecting the given payment option)",
+        "initial_value": "14",
+        "conditional_fields": [
+          {
+            "condition_value": [
+              true
+            ],
+            "key": "general/require_payment"
+          }
+        ]
+      },
+      {
+        "key": "payment_option_description_size_pad",
+        "type": "number_input",
+        "label_tooltip": "The font-size used in the description of each payment option (below the title and above the button for selecting the given payment option)",
+        "initial_value": "14",
+        "conditional_fields": [
+          {
+            "condition_value": [
+              true
+            ],
+            "key": "general/require_payment"
+          }
+        ]
+      },
+      {
+        "key": "payment_option_description_color",
+        "type": "color_picker",
+        "label_tooltip": "The font-color used in the description of each payment option (below the title and above the button for selecting the given payment option)",
+        "initial_value": "#1f2021",
+        "conditional_fields": [
+          {
+            "condition_value": [
+              true
+            ],
+            "key": "general/require_payment"
           }
         ]
       },
@@ -1201,78 +1112,70 @@
         ]
       },
       {
-        "group": true,
-        "label": "Legal Details Text",
-        "tooltip": "The font used for the payment options screen legal text",
-        "folded": true,
-        "fields": [
+        "key": "legal_details_font_ios",
+        "type": "ios_font_selector",
+        "label_tooltip": "The font used for the payment options screen legal text",
+        "conditional_fields": [
           {
-            "key": "legal_details_font_ios",
-            "type": "ios_font_selector",
-            "label_tooltip": "The font used for the payment options screen legal text",
-            "conditional_fields": [
-              {
-                "condition_value": [
-                  true
-                ],
-                "key": "general/require_payment"
-              }
-            ]
-          },
+            "condition_value": [
+              true
+            ],
+            "key": "general/require_payment"
+          }
+        ]
+      },
+      {
+        "key": "legal_details_font_android",
+        "type": "android_font_selector",
+        "label_tooltip": "The font used for the payment options screen legal text",
+        "conditional_fields": [
           {
-            "key": "legal_details_font_android",
-            "type": "android_font_selector",
-            "label_tooltip": "The font used for the payment options screen legal text",
-            "conditional_fields": [
-              {
-                "condition_value": [
-                  true
-                ],
-                "key": "general/require_payment"
-              }
-            ]
-          },
+            "condition_value": [
+              true
+            ],
+            "key": "general/require_payment"
+          }
+        ]
+      },
+      {
+        "key": "legal_details_size_phone",
+        "type": "number_input",
+        "label_tooltip": "The font-size used for the payment options screen legal text",
+        "initial_value": "10",
+        "conditional_fields": [
           {
-            "key": "legal_details_size_phone",
-            "type": "number_input",
-            "label_tooltip": "The font-size used for the payment options screen legal text",
-            "initial_value": "10",
-            "conditional_fields": [
-              {
-                "condition_value": [
-                  true
-                ],
-                "key": "general/require_payment"
-              }
-            ]
-          },
+            "condition_value": [
+              true
+            ],
+            "key": "general/require_payment"
+          }
+        ]
+      },
+      {
+        "key": "legal_details_size_pad",
+        "type": "number_input",
+        "label_tooltip": "The font-size used for the payment options screen legal text",
+        "initial_value": "10",
+        "conditional_fields": [
           {
-            "key": "legal_details_size_pad",
-            "type": "number_input",
-            "label_tooltip": "The font-size used for the payment options screen legal text",
-            "initial_value": "10",
-            "conditional_fields": [
-              {
-                "condition_value": [
-                  true
-                ],
-                "key": "general/require_payment"
-              }
-            ]
-          },
+            "condition_value": [
+              true
+            ],
+            "key": "general/require_payment"
+          }
+        ]
+      },
+      {
+        "key": "legal_details_color",
+        "type": "color_picker",
+        "label_tooltip": "The font-color used for the payment options screen legal text",
+        "initial_value": "#ffffff",
+        "conditional_fields": [
           {
-            "key": "legal_details_color",
-            "type": "color_picker",
-            "label_tooltip": "The font-color used for the payment options screen legal text",
-            "initial_value": "#ffffff",
-            "conditional_fields": [
-              {
-                "condition_value": [
-                  true
-                ],
-                "key": "general/require_payment"
-              }
-            ]
+            "condition_value": [
+              true
+            ],
+            "key": "general/require_payment"
           }
         ]
       },
@@ -1339,76 +1242,60 @@
         ]
       },
       {
-        "group": true,
-        "label": "Confirmation Title Text",
-        "tooltip": "The font used as the title of confirmation screens",
-        "folded": true,
-        "fields": [
-          {
-            "key": "confirmation_title_font_ios",
-            "type": "ios_font_selector",
-            "label_tooltip": "The font used as the title of confirmation screens"
-          },
-          {
-            "key": "confirmation_title_font_android",
-            "type": "android_font_selector",
-            "label_tooltip": "The font used as the title of confirmation screens"
-          },
-          {
-            "key": "confirmation_title_size_phone",
-            "type": "number_input",
-            "label_tooltip": "The font-size used as the title of confirmation screens",
-            "initial_value": "25"
-          },
-          {
-            "key": "confirmation_title_size_pad",
-            "type": "number_input",
-            "label_tooltip": "The font-size used as the title of confirmation screens",
-            "initial_value": "25"
-          },
-          {
-            "key": "confirmation_title_color",
-            "type": "color_picker",
-            "label_tooltip": "The font-color used as the title of confirmation screens",
-            "initial_value": "#000000"
-          }
-        ]
+        "key": "confirmation_title_font_ios",
+        "type": "ios_font_selector",
+        "label_tooltip": "The font used as the title of confirmation screens"
       },
       {
-        "group": true,
-        "label": "Confirmation Description Text",
-        "tooltip": "The font used in the description of confirmation screens (below the title and above the button)",
-        "folded": true,
-        "fields": [
-          {
-            "key": "confirmation_description_font_ios",
-            "type": "ios_font_selector",
-            "label_tooltip": "The font used in the description of confirmation screens (below the title and above the button)"
-          },
-          {
-            "key": "confirmation_description_font_android",
-            "type": "android_font_selector",
-            "label_tooltip": "The font used in the description of confirmation screens (below the title and above the button)"
-          },
-          {
-            "key": "confirmation_description_size_phone",
-            "type": "number_input",
-            "label_tooltip": "The font-size used in the description of confirmation screens (below the title and above the button)",
-            "initial_value": "20"
-          },
-          {
-            "key": "confirmation_description_size_pad",
-            "type": "number_input",
-            "label_tooltip": "The font-size used in the description of confirmation screens (below the title and above the button)",
-            "initial_value": "20"
-          },
-          {
-            "key": "confirmation_description_color",
-            "type": "color_picker",
-            "label_tooltip": "The font-color used in the description of confirmation screens (below the title and above the button)",
-            "initial_value": "#000000"
-          }
-        ]
+        "key": "confirmation_title_font_android",
+        "type": "android_font_selector",
+        "label_tooltip": "The font used as the title of confirmation screens"
+      },
+      {
+        "key": "confirmation_title_size_phone",
+        "type": "number_input",
+        "label_tooltip": "The font-size used as the title of confirmation screens",
+        "initial_value": "25"
+      },
+      {
+        "key": "confirmation_title_size_pad",
+        "type": "number_input",
+        "label_tooltip": "The font-size used as the title of confirmation screens",
+        "initial_value": "25"
+      },
+      {
+        "key": "confirmation_title_color",
+        "type": "color_picker",
+        "label_tooltip": "The font-color used as the title of confirmation screens",
+        "initial_value": "#000000"
+      },
+      {
+        "key": "confirmation_description_font_ios",
+        "type": "ios_font_selector",
+        "label_tooltip": "The font used in the description of confirmation screens (below the title and above the button)"
+      },
+      {
+        "key": "confirmation_description_font_android",
+        "type": "android_font_selector",
+        "label_tooltip": "The font used in the description of confirmation screens (below the title and above the button)"
+      },
+      {
+        "key": "confirmation_description_size_phone",
+        "type": "number_input",
+        "label_tooltip": "The font-size used in the description of confirmation screens (below the title and above the button)",
+        "initial_value": "20"
+      },
+      {
+        "key": "confirmation_description_size_pad",
+        "type": "number_input",
+        "label_tooltip": "The font-size used in the description of confirmation screens (below the title and above the button)",
+        "initial_value": "20"
+      },
+      {
+        "key": "confirmation_description_color",
+        "type": "color_picker",
+        "label_tooltip": "The font-color used in the description of confirmation screens (below the title and above the button)",
+        "initial_value": "#000000"
       },
       {
         "key": "confirmation_button_text",
@@ -1417,40 +1304,32 @@
         "initial_value": "OK"
       },
       {
-        "group": true,
-        "label": "Confirmation Button Text",
-        "tooltip": "The font for the Confirmation Button Text",
-        "folded": true,
-        "fields": [
-          {
-            "key": "confirmation_button_font_ios",
-            "type": "ios_font_selector",
-            "label_tooltip": "The font for the Confirmation Button Text"
-          },
-          {
-            "key": "confirmation_button_font_android",
-            "type": "android_font_selector",
-            "label_tooltip": "The font for the Confirmation Button Text"
-          },
-          {
-            "key": "confirmation_button_size_phone",
-            "type": "number_input",
-            "label_tooltip": "The font-size for the Confirmation Button Text",
-            "initial_value": "14"
-          },
-          {
-            "key": "confirmation_button_size_pad",
-            "type": "number_input",
-            "label_tooltip": "The font-size for the Confirmation Button Text",
-            "initial_value": "14"
-          },
-          {
-            "key": "confirmation_button_color",
-            "type": "color_picker",
-            "label_tooltip": "The font-color for the Confirmation Button Text",
-            "initial_value": "#ffffff"
-          }
-        ]
+        "key": "confirmation_button_font_ios",
+        "type": "ios_font_selector",
+        "label_tooltip": "The font for the Confirmation Button Text"
+      },
+      {
+        "key": "confirmation_button_font_android",
+        "type": "android_font_selector",
+        "label_tooltip": "The font for the Confirmation Button Text"
+      },
+      {
+        "key": "confirmation_button_size_phone",
+        "type": "number_input",
+        "label_tooltip": "The font-size for the Confirmation Button Text",
+        "initial_value": "14"
+      },
+      {
+        "key": "confirmation_button_size_pad",
+        "type": "number_input",
+        "label_tooltip": "The font-size for the Confirmation Button Text",
+        "initial_value": "14"
+      },
+      {
+        "key": "confirmation_button_color",
+        "type": "color_picker",
+        "label_tooltip": "The font-color for the Confirmation Button Text",
+        "initial_value": "#ffffff"
       },
       {
         "key": "payment_confirmation_title_text",
