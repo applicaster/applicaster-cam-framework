@@ -383,7 +383,7 @@
             "key": "offer_alternative_authentication",
             "type": "switch",
             "label_tooltip": "<p>Determine whether to offer alternative methods of authentication outside of the custom form determined by the custom “Authentication Input Fields” configuration field.</p><p>If this field is switched on, whatever alternative authentication options that are supported (e.g. Facebook, Apple) will be offered as an option to the end-users.</p>",
-            "initial_value": "false",
+            "initial_value": "true",
             "conditional_fields": [
               {
                 "condition_value": [
