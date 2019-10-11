@@ -81,13 +81,13 @@ extension CAMFlow {
         case .authAndStorefront:
             switch (currentState.isAuthenticated, currentState.isPurchaseNeeded) {
             case (true, true):
-                self = .no
-            case (true, false):
                 self = .storefront
+            case (true, false):
+                self = .no
             case (false, true):
-                self = .authentication
-            case (false, false):
                 self = .authAndStorefront
+            case (false, false):
+                self = .authentication
             }
         case .no:
             break
