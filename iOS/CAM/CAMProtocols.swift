@@ -17,6 +17,7 @@ public enum CAMDefaultAuthScreen {
 public protocol CAMDelegate: AnyObject {
     func getPluginConfig() -> [String: String]
     func isPurchaseNeeded() -> Bool
+    func IsUserLoggedIn() -> Bool
     func facebookLogin(userData: (email: String, userId: String), completion: @escaping (LoginResult) -> Void)
     func facebookSignUp(userData: (email: String, userId: String), completion: @escaping (SignupResult) -> Void)
     func login(authData: [String: String], completion: @escaping (LoginResult) -> Void)
