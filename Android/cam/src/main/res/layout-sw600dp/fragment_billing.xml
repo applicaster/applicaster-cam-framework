@@ -23,15 +23,14 @@
             app:layout_constraintTop_toBottomOf="@+id/toolbar"/>
 
     <include
-            android:id="@+id/container_restore"
-            layout="@layout/layout_text_with_action"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/billing_layout_details_margin_top"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintTop_toBottomOf="@+id/tv_billing_title_text"/>
+        android:id="@+id/container_restore"
+        layout="@layout/layout_text_with_action"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/billing_layout_details_margin_top"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_billing_title_text" />
 
     <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_billing_items"

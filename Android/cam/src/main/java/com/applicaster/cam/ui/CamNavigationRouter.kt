@@ -15,6 +15,7 @@ import com.applicaster.cam.ui.base.view.IBaseActivity
 import com.applicaster.cam.ui.confirmation.ConfirmationDialog
 import com.applicaster.cam.ui.billing.BillingFragment
 import com.applicaster.cam.ui.auth.password.reset.PasswordResetFragment
+import com.applicaster.cam.ui.base.view.BaseFragment
 
 class CamNavigationRouter(private val baseActivity: IBaseActivity) : BaseNavigationRouter(baseActivity) {
 
@@ -117,6 +118,13 @@ class CamNavigationRouter(private val baseActivity: IBaseActivity) : BaseNavigat
             }
         }
     }
+
+    fun callFragmentBackPressed() {
+        if (isLastFragment())
+            fragmentManager.fragments.forEach { (it as? BaseFragment)?.onLastFragmentClosed() }
+    }
+
+    private fun isLastFragment(): Boolean = fragmentManager.backStackEntryCount == 0
 
     private fun attachByScreenType(authScreenType: AuthScreenType) {
         when (authScreenType) {

@@ -36,8 +36,8 @@ abstract class UserAuthPresenter(private val view: IBaseInputView?) : BaseInputP
                     ConfirmationAlertData(
                         false,
                         ConfirmationCause.NONE,
-                        "",
-                            errorMessage,
+                        AnalyticsUtil.KEY_NON_PROVIDED,
+                            AnalyticsUtil.KEY_NON_PROVIDED,
                             errorMessage
                     )
                 )
@@ -75,8 +75,8 @@ abstract class UserAuthPresenter(private val view: IBaseInputView?) : BaseInputP
             ConfirmationAlertData(
                 false,
                 ConfirmationCause.NONE,
-                "",
-                    errorMessage,
+                AnalyticsUtil.KEY_NON_PROVIDED,
+                    AnalyticsUtil.KEY_NON_PROVIDED,
                     errorMessage
             )
         )

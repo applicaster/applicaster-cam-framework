@@ -8,4 +8,5 @@ interface IBasePresenter {
     fun onViewDestroyed()
     fun onToolbarBackClicked()
     fun onToolbarCloseClicked()
+    fun onLastFragmentClosed()
 }
