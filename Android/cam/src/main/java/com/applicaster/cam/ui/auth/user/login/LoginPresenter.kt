@@ -62,6 +62,7 @@ class LoginPresenter(
 
     override fun onActionSuccess() {
         view?.hideLoadingIndicator()
+        view?.hideKeyboard()
         AnalyticsUtil.logStandardLoginSuccess()
         if (ContentAccessManager.contract.isPurchaseRequired()) {
             when (ContentAccessManager.contract.getCamFlow()) {
