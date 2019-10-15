@@ -115,7 +115,7 @@ class LoginViewController: UIViewController {
         facebookButton.translatesAutoresizingMaskIntoConstraints = false
         facebookButton.heightAnchor.constraint(equalToConstant: 36).isActive = true
         facebookButton.widthAnchor.constraint(equalToConstant: 36).isActive = true
-        facebookButton.addTarget(self, action: #selector(facebookSignUp), for: .touchUpInside)
+        facebookButton.addTarget(self, action: #selector(facebookLogin), for: .touchUpInside)
        
         stackView.axis = .horizontal
         stackView.distribution = .equalCentering
@@ -208,7 +208,7 @@ class LoginViewController: UIViewController {
         presenter?.login(data: authFields)
     }
     
-    @objc func facebookSignUp() {
+    @objc private func facebookLogin() {
         presenter?.showFacebookAuthScreen()
     }
     

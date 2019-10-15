@@ -8,12 +8,14 @@
 import Foundation
 
 extension CAMFlow {
-    mutating func update(with config: [String: String]) {
+    mutating func update(with config: [String: String],
+                         and currentState: (isAuthenticated: Bool, isPurchaseNeeded: Bool)) {
         let authRequirement = parseAuthRequirement(from: config)
         let paymentRequirement = parsePaymentRequirement(from: config)
         
-        updateFlow(with: authRequirement,
-                   and: paymentRequirement)
+        update(with: authRequirement,
+               and: paymentRequirement)
+        update(with: currentState)
     }
     
     // MARK: - Private methods
@@ -32,8 +34,8 @@ extension CAMFlow {
         return result
     }
     
-    private mutating func updateFlow(with authRequirement: AuthRequirement,
-                            and paymentRequirement: Bool) {
+    private mutating func update(with authRequirement: AuthRequirement,
+                                 and paymentRequirement: Bool) {
         switch authRequirement {
         case .never:
             switch self {
@@ -67,6 +69,28 @@ extension CAMFlow {
                     self = .no
                 }
             }
+        }
+    }
+    
+    private mutating func update(with currentState: (isAuthenticated: Bool, isPurchaseNeeded: Bool)) {
+        switch self {
+        case .authentication:
+            self = currentState.isAuthenticated ? .no : .authentication
+        case .storefront:
+            self = currentState.isPurchaseNeeded ? .no : .storefront
+        case .authAndStorefront:
+            switch (currentState.isAuthenticated, currentState.isPurchaseNeeded) {
+            case (true, true):
+                self = .storefront
+            case (true, false):
+                self = .no
+            case (false, true):
+                self = .authAndStorefront
+            case (false, false):
+                self = .authentication
+            }
+        case .no:
+            break
         }
     }
 }

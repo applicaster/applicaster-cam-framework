@@ -8,6 +8,33 @@
 import UIKit
 import ZappPlugins
 
+class UIConfigurator {
+    
+    static func color(from config: [String: String],
+                      for style: CAMStyles) -> UIColor {
+        let baseKey = style.rawValue
+        let colorKey = baseKey + "_color"
+        let colorValue = config[colorKey] ?? ""
+        return UIColor(argbHexString: colorValue) ?? .black
+    }
+    
+    static func font(from config: [String: String],
+                     for style: CAMStyles) -> UIFont {
+        let baseKey = style.rawValue
+        let sizeKey =  baseKey + (UIDevice.current.userInterfaceIdiom == .pad ? "_size_pad" : "_size_phone")
+        let fontKey = baseKey + "_font_ios"
+        
+        let defaultFontSize: CGFloat = 12.0
+        let fontSizeValue = config[sizeKey] ?? ""
+        let fontSize = CGFloat(fontSizeValue) ?? defaultFontSize
+        
+        let fontName = config[fontKey] ?? ""
+        let font = UIFont(name: fontName, size: fontSize)
+        
+        return font ?? UIFont.systemFont(ofSize: fontSize)
+    }
+}
+
 extension UIImage {
     static func image(forAsset asset: String) -> UIImage? {
         let connector = ZAAppConnector.sharedInstance()
