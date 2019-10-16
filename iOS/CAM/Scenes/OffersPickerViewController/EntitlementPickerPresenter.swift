@@ -190,7 +190,7 @@ class EntitlementPickerPresenter {
                                                                                      playableInfo,
                                                                                      voucherProperties)
                         }
-                        
+                        self?.view.showLoadingScreen(false)
                     }
                     
                     ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: purchaseResultEvent.key,
