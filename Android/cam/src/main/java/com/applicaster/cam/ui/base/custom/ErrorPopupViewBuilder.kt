@@ -1,6 +1,7 @@
 package com.applicaster.cam.ui.base.custom
 
 import android.content.Context
+import android.graphics.drawable.ColorDrawable
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -27,6 +28,7 @@ class ErrorPopupViewBuilder(var context: Context?, var layoutInflater: LayoutInf
                     errorPopupHeight
             )
             popupWindow.isFocusable = true
+            popupWindow.setBackgroundDrawable(ColorDrawable()) //workaround for popup
             val location = IntArray(2)
             anchorView.getLocationOnScreen(location)
 

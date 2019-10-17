@@ -13,4 +13,5 @@ interface IBaseView {
     fun hideLoadingIndicator()
     fun getFragmentContainerType(): ContainerType
     fun showAlert(msg: String)
+    fun hideKeyboard()
 }

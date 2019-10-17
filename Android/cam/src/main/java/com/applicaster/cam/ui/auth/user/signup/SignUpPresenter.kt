@@ -43,6 +43,7 @@ class SignUpPresenter(
 
     override fun onActionSuccess() {
         view?.hideLoadingIndicator()
+        view?.hideKeyboard()
         AnalyticsUtil.logStandardSignUpSuccess()
         if (ContentAccessManager.contract.isPurchaseRequired()) {
             when (ContentAccessManager.contract.getCamFlow()) {

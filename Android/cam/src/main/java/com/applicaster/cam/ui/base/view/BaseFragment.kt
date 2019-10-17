@@ -6,9 +6,11 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat.getSystemService
 import android.support.v7.app.AlertDialog
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.applicaster.cam.R
 import com.applicaster.cam.ui.base.presenter.IBasePresenter
@@ -122,6 +124,14 @@ abstract class BaseFragment : Fragment(), IBaseView {
         rootLayout?.apply {
             fitsSystemWindows = true
             parent?.requestFitSystemWindows()
+        }
+    }
+
+    override fun hideKeyboard() {
+        // Check if no view has focus:
+        view?.rootView?.windowToken?.let {
+            val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+            imm?.hideSoftInputFromWindow( it, 0)
         }
     }
 
