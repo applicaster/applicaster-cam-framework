@@ -64,6 +64,11 @@ class LoginPresenter(
         view?.hideLoadingIndicator()
         view?.hideKeyboard()
         AnalyticsUtil.logStandardLoginSuccess()
+        AnalyticsUtil.logUserProperties(
+            AnalyticsUtil.collectPurchaseData(
+                ContentAccessManager.contract.getAnalyticsDataProvider().purchaseData
+            )
+        )
         if (ContentAccessManager.contract.isPurchaseRequired()) {
             when (ContentAccessManager.contract.getCamFlow()) {
                 CamFlow.AUTH_AND_STOREFRONT -> navigationRouter.attachBillingFragment()
@@ -88,7 +93,7 @@ class LoginPresenter(
 
     override fun onError(error: Exception?) {
         super.onError(error)
-        AnalyticsUtil.logAlternativeSignUpFailure()
+        AnalyticsUtil.logAlternativeLoginFailure()
         AnalyticsUtil.logViewAlert(
             ConfirmationAlertData(
                 false,
