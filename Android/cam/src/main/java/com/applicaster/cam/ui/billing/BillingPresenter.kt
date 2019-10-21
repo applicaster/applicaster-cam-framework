@@ -61,10 +61,6 @@ class BillingPresenter(
             }
         })
         view?.showLoadingIndicator()
-        AnalyticsUtil.logUserProperties(
-            collectPurchaseData(
-                ContentAccessManager.contract.getAnalyticsDataProvider().purchaseData
-            ))
     }
 
     override fun onBillingClientError(statusCode: Int, description: String) {
@@ -78,7 +74,7 @@ class BillingPresenter(
         }?.also { skuDetails ->
             if (activity != null) GoogleBillingHelper.purchase(activity, skuDetails)
             // Analytics events
-            collectPurchaseData(camContract.getAnalyticsDataProvider().purchaseData).forEach {
+            AnalyticsUtil.collectPurchaseData(camContract.getAnalyticsDataProvider().purchaseData).forEach {
                 AnalyticsUtil.logTapPurchaseButton(it)
             }
         }
@@ -112,6 +108,12 @@ class BillingPresenter(
 
             override fun onActionSuccess() {
                 view?.hideLoadingIndicator()
+                //Analytics call
+                AnalyticsUtil.logUserProperties(
+                        AnalyticsUtil.collectPurchaseData(
+                                ContentAccessManager.contract.getAnalyticsDataProvider().purchaseData
+                        ))
+                //
                 if (ContentAccessManager.pluginConfigurator.isShowConfirmationPayment()) {
                     navigationRouter.showConfirmationDialog(AlertDialogType.BILLING)
                 } else {
@@ -119,7 +121,7 @@ class BillingPresenter(
                 }
             }
         })
-        collectPurchaseData(camContract.getAnalyticsDataProvider().purchaseData, purchases).forEach {
+        AnalyticsUtil.collectPurchaseData(camContract.getAnalyticsDataProvider().purchaseData, purchases).forEach {
             AnalyticsUtil.logCompletePurchase(it)
         }
     }
@@ -134,11 +136,11 @@ class BillingPresenter(
 
         // Analytics events
         if (purchases.isEmpty()) {
-            collectPurchaseData(camContract.getAnalyticsDataProvider().purchaseData, purchases).forEach {
+            AnalyticsUtil.collectPurchaseData(camContract.getAnalyticsDataProvider().purchaseData, purchases).forEach {
                 AnalyticsUtil.logStoreRestorePurchaseError("Restore purchases error", it)
             }
         } else {
-            collectPurchaseData(
+            AnalyticsUtil.collectPurchaseData(
                     camContract.getAnalyticsDataProvider().purchaseData,
                     purchases
             ).forEach {
@@ -178,11 +180,11 @@ class BillingPresenter(
                 )
         )
         if (statusCode == BillingClient.BillingResponse.USER_CANCELED) {
-            collectPurchaseData(camContract.getAnalyticsDataProvider().purchaseData).forEach {
+            AnalyticsUtil.collectPurchaseData(camContract.getAnalyticsDataProvider().purchaseData).forEach {
                 AnalyticsUtil.logCancelPurchase(it)
             }
         } else {
-            collectPurchaseData(camContract.getAnalyticsDataProvider().purchaseData).forEach {
+            AnalyticsUtil.collectPurchaseData(camContract.getAnalyticsDataProvider().purchaseData).forEach {
                 AnalyticsUtil.logStorePurchaseError(statusCode.toString(), description, it)
             }
         }
@@ -267,6 +269,11 @@ class BillingPresenter(
         if (ContentAccessManager.pluginConfigurator.isShowConfirmationRestorePurchases()) {
             navigationRouter.showConfirmationDialog(AlertDialogType.RESTORE)
             // Analytics events
+            AnalyticsUtil.logUserProperties(
+                    AnalyticsUtil.collectPurchaseData(
+                            ContentAccessManager.contract.getAnalyticsDataProvider().purchaseData
+                    ))
+
             AnalyticsUtil.logViewAlert(
                     ConfirmationAlertData(
                             true,
@@ -291,29 +298,6 @@ class BillingPresenter(
             Action.RESTORE_PURCHASE
         )
         GoogleBillingHelper.restorePurchasesForAllTypes()
-    }
-
-    // Analytics related function
-    private fun collectPurchaseData(
-            purchasesData: List<PurchaseData>,
-            purchases: List<Purchase> = arrayListOf()
-    ): List<PurchaseProductPropertiesData> {
-        val result: ArrayList<PurchaseProductPropertiesData> = arrayListOf()
-        purchasesData.forEach { data ->
-            val productData = PurchaseProductPropertiesData(
-                    camContract.getAnalyticsDataProvider().isUserSubscribed,
-                    data.title,
-                    data.price,
-                    purchases.find { it.sku == data.androidProductId }?.orderId ?: AnalyticsUtil.KEY_NON_PROVIDED,
-                    data.androidProductId,
-                    data.purchaseType,
-                    data.subscriptionDuration,
-                    data.trialPeriod,
-                    data.purchaseEntityType
-            )
-            result.add(productData)
-        }
-        return result
     }
 
     override fun onLastFragmentClosed() {

@@ -1,7 +1,9 @@
 package com.applicaster.cam.analytics
 
+import com.android.billingclient.api.Purchase
 import com.applicaster.analytics.AnalyticsAgentUtil
 import com.applicaster.cam.ContentAccessManager
+import com.applicaster.cam.PurchaseData
 import com.applicaster.cam.params.auth.AuthScreenType
 import com.applicaster.plugin_manager.Plugin
 import com.applicaster.plugin_manager.PluginManager
@@ -323,15 +325,37 @@ class AnalyticsUtil {
             var isUserSubscribed: Boolean = false
             purchaseProductPropertiesData.forEach {
                 isUserSubscribed = it.isUserSubscribed
-                productNames.add(it.productName)
+                if (it.productName.isEmpty()) productNames.add(KEY_NON_PROVIDED) else productNames.add(it.productName)
             }
             val productName: String = productNames.joinToString(separator = "; ")
             val userProps = JSONObject()
             userProps.put(UserProperties.LOGGED_IN.value, matchBooleanValue(isUserLoggedIn))
             userProps.put(UserProperties.AUTH_PROVIDER.value, pluginProvider)
-            userProps.put(UserProperties.PURCHASE_PRODUCT_NAME.value, productName)
+            userProps.put(UserProperties.PURCHASE_PRODUCT_NAME.value, if (productName.isEmpty()) KEY_NON_PROVIDED else productName )
             userProps.put(UserProperties.SUBSCRIBER.value, matchBooleanValue(isUserSubscribed))
             AnalyticsAgentUtil.sendUserProperties(userProps)
+        }
+
+        fun collectPurchaseData(
+            purchasesData: List<PurchaseData>,
+            purchases: List<Purchase> = arrayListOf()
+        ): List<PurchaseProductPropertiesData> {
+            val result: ArrayList<PurchaseProductPropertiesData> = arrayListOf()
+            purchasesData.forEach { data ->
+                val productData = PurchaseProductPropertiesData(
+                    ContentAccessManager.contract.getAnalyticsDataProvider().isUserSubscribed,
+                    data.title,
+                    data.price,
+                    purchases.find { it.sku == data.androidProductId }?.orderId ?: KEY_NON_PROVIDED,
+                    data.androidProductId,
+                    data.purchaseType,
+                    data.subscriptionDuration,
+                    data.trialPeriod,
+                    data.purchaseEntityType
+                )
+                result.add(productData)
+            }
+            return result
         }
     }
 }

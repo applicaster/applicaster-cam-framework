@@ -45,6 +45,11 @@ class SignUpPresenter(
         view?.hideLoadingIndicator()
         view?.hideKeyboard()
         AnalyticsUtil.logStandardSignUpSuccess()
+        AnalyticsUtil.logUserProperties(
+            AnalyticsUtil.collectPurchaseData(
+                ContentAccessManager.contract.getAnalyticsDataProvider().purchaseData
+            )
+        )
         if (ContentAccessManager.contract.isPurchaseRequired()) {
             when (ContentAccessManager.contract.getCamFlow()) {
                 CamFlow.AUTH_AND_STOREFRONT -> navigationRouter.attachBillingFragment()
