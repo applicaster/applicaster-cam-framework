@@ -58,7 +58,6 @@ enum AnalyticsEvents {
     case resetPassword
     case viewAlert(AlertInfo, apiError: String?)
     case tapPurchaseButton(PlayableItemInfo, PurchaseProperties)
-    case startPurchase(PlayableItemInfo, PurchaseProperties)
     case completePurchase(PlayableItemInfo, PurchaseProperties)
     case cancelPurchase(PlayableItemInfo, PurchaseProperties)
     case storePurchaseError(Error, PlayableItemInfo, PurchaseProperties)
@@ -89,7 +88,6 @@ enum AnalyticsEvents {
         case .resetPassword: return "Reset Password"
         case .viewAlert: return "View Alert"
         case .tapPurchaseButton: return "Tap Purchase Button"
-        case .startPurchase: return "Start Purchase"
         case .completePurchase: return "Complete Purchase"
         case .cancelPurchase: return "Cancel Purchase"
         case .storePurchaseError: return "Store Purchase Error"
@@ -132,21 +130,21 @@ enum AnalyticsEvents {
         case .viewAlert(let alert, let apiError):
             metadata = metadata
                 .merge(alert.metadata)
-                
-            if let error = apiError {
-                metadata = metadata.merge(["API Error Message": error])
-            }
-        case .tapPurchaseButton(let info, let voucher),
-             .startPurchase(let info, let voucher),
-             .completePurchase(let info, let voucher),
-             .cancelPurchase(let info, let voucher):
+                .merge(["API Error Message": apiError ?? kNoneProvided])
+        case .tapPurchaseButton(let info, let voucher):
             metadata = metadata
                 .merge(info.metadata)
+                .merge(voucher.metadata)
+        case .completePurchase(let info, let voucher),
+             .cancelPurchase(let info, let voucher):
+            metadata = metadata
+                .merge(["Purchase Entity Name": info.name])
                 .merge(voucher.metadata)
         case .storePurchaseError(let error, let info, let voucher):
             metadata = metadata
                 .merge(["Error Message": error.localizedDescription])
-                .merge(info.metadata)
+                .merge(["Error Code ID": error.code])
+                .merge(["Purchase Entity Name": info.name])
                 .merge(voucher.metadata)
             switch error {
             case let skError as SKError:
@@ -161,12 +159,14 @@ enum AnalyticsEvents {
             metadata = metadata.merge(info.metadata)
         case .completeRestorePurchase(let info, let purchaseProperties):
             metadata = metadata
-                .merge(info.metadata)
+                .merge(["Purchase Entity Name": info.name])
                 .merge([PurchaseProperties.key: purchaseProperties.map({ $0.metadata })])
         case .storeRestorePurchaseError(let error, let info, _):
             metadata = metadata
                 .merge(["Error Message": error.localizedDescription])
-                .merge(info.metadata)
+                .merge(["Error Code ID": error.code])
+                .merge(["Purchase Entity Name": info.name])
+                .merge([PurchaseProperties.key: kNoneProvided])
         }
         
         return metadata
@@ -183,3 +183,18 @@ enum AnalyticsEvents {
                                          apiError: error.localizedDescription)
     }
 }
+
+private extension Error {
+    var code: String {
+        switch self {
+        case let error as SKError:
+        return "\(error.code)"
+        case let error as NSError:
+            return "\(error.code)"
+        default:
+            return kNoneProvided
+        }
+    }
+}
+
+private let kNoneProvided = "None provided"
