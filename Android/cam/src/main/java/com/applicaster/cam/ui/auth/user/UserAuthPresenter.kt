@@ -36,8 +36,8 @@ abstract class UserAuthPresenter(private val view: IBaseInputView?) : BaseInputP
                     ConfirmationAlertData(
                         false,
                         ConfirmationCause.NONE,
-                        "",
-                            errorMessage,
+                        AnalyticsUtil.KEY_NON_PROVIDED,
+                            AnalyticsUtil.KEY_NON_PROVIDED,
                             errorMessage
                     )
                 )
@@ -70,13 +70,12 @@ abstract class UserAuthPresenter(private val view: IBaseInputView?) : BaseInputP
                 if (error?.message.isNullOrEmpty()) "Facebook auth failed" else error?.message.orEmpty()
         view?.showAlert(errorMessage)
 
-        AnalyticsUtil.logAlternativeLoginFailure()
         AnalyticsUtil.logViewAlert(
             ConfirmationAlertData(
                 false,
                 ConfirmationCause.NONE,
-                "",
-                    errorMessage,
+                AnalyticsUtil.KEY_NON_PROVIDED,
+                    AnalyticsUtil.KEY_NON_PROVIDED,
                     errorMessage
             )
         )

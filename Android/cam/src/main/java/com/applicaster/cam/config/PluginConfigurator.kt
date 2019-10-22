@@ -99,7 +99,26 @@ class PluginConfigurator(private val pluginConfig: Map<String, String>) : Config
     override fun isTriggerOnAppLaunch(): Boolean =
         pluginConfig.getValue(KEY_TRIGGER_NO_APP_LAUNCH).toBoolean()
 
+    override fun getAlertDialogFields(): AlertFieldsText =
+        AlertFieldsText(
+            billingConfirmationTitle = pluginConfig.getValue(KEY_BILLING_CONFIRMATION_TITLE),
+            billingConfirmationDescription = pluginConfig.getValue(KEY_BILLING_CONFIRMATION_DESC),
+            pwdResetTitle = pluginConfig.getValue(KEY_PWD_RESET_TITLE),
+            pwdResetDescription = pluginConfig.getValue(KEY_PWD_RESET_DESC),
+            restoreConfirmationTitle = pluginConfig.getValue(KEY_RESTORE_CONFIRMATION_TITLE),
+            restoreConfirmationDescription = pluginConfig.getValue(KEY_RESTORE_CONFIRMATION_DESC)
+        )
 }
+
+// Analytics related data class
+data class AlertFieldsText(
+    var billingConfirmationTitle: String,
+    var billingConfirmationDescription: String,
+    var pwdResetTitle: String,
+    var pwdResetDescription: String,
+    var restoreConfirmationTitle: String,
+    var restoreConfirmationDescription: String
+)
 
 const val KEY_AUTH_FIELDS = "authentication_input_fields"
 const val KEY_DEFAULT_AUTH_SCREEN = "default_authentication_screen"
@@ -114,3 +133,11 @@ const val KEY_REQUIRE_PAYMENT = "require_payment"
 const val KEY_PAYMENT_CONFIRMATION_TITLE_TEXT = "payment_confirmation_title_text"
 const val KEY_PAYMENT_CONFIRMATION_DESC_TEXT = "payment_confirmation_description_text"
 const val KEY_TRIGGER_NO_APP_LAUNCH = "trigger_on_app_launch"
+
+//Analytics related keys
+const val KEY_BILLING_CONFIRMATION_TITLE = "payment_confirmation_title_text"
+const val KEY_BILLING_CONFIRMATION_DESC = "payment_confirmation_description_text"
+const val KEY_PWD_RESET_TITLE = "password_reset_confirmation_title_text"
+const val KEY_PWD_RESET_DESC = "password_reset_confirmation_description_text"
+const val KEY_RESTORE_CONFIRMATION_TITLE = "restore_purchase_confirmation_title_text"
+const val KEY_RESTORE_CONFIRMATION_DESC = "restore_purchase_confirmation_description_text"

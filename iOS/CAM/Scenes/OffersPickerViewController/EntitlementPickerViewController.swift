@@ -69,7 +69,7 @@ class EntitlementPickerViewController: UIViewController {
         closeButton.setStyle(iconAsset: .closeButton)
         logoImageView.setStyle(asset: .headerLogo)
         helpInfoContainer.setStyle(config: configDictionary, backgroundColor: .legalDetailsBackgroundColor)
-        titleLabel.setStyle(config: configDictionary, style: CAMStyles.paymentOptionTitleFont)
+        titleLabel.setStyle(config: configDictionary, style: CAMStyles.screenTitleFont)
 
         setupGradient()
         

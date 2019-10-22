@@ -28,6 +28,10 @@ open class BasePresenter(private var view: IBaseView?) : IBasePresenter {
         view?.close()
     }
 
+    override fun onLastFragmentClosed() {
+        view?.onLastFragmentClosed()
+    }
+
     protected val context = view?.getViewContext()
 
     fun getString(@StringRes resId: Int) = context?.run { getString(resId) } ?: ""

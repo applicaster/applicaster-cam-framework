@@ -36,23 +36,29 @@ open class ContentAccessManager {
         self.completion = completion
         self.navigationController = UINavigationController()
         self.navigationController.isNavigationBarHidden = true
-        
-        let launchEvent = AnalyticsEvents.launchContentGatewayPlugin(delegate.trigger(),
-                                                                     firstScreen: camFlow.firstScreen,
-                                                                     PlayableItemInfo(name: delegate.itemName(),
-                                                                                      type: delegate.itemType()))
-        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: launchEvent.key,
-                                                                     parameters: launchEvent.metadata,
-                                                                     timed: true)
     }
     
     public func startFlow() {
+        camFlow.update(with: delegate.getPluginConfig(),
+                       and: (delegate.IsUserLoggedIn(), delegate.isPurchaseNeeded()))
+        
         let event = AnalyticsEvents.contentGatewaySession(delegate.trigger())
         ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: event.key,
                                                                      parameters: event.metadata,
                                                                      timed: true)
         
-        camFlow.update(with: delegate.getPluginConfig())
+        var firstScreen = camFlow.firstScreen
+        if camFlow == .authentication || camFlow == .authAndStorefront {
+            let dictionary = delegate.getPluginConfig()
+            firstScreen = dictionary[CAMKeys.defaultAuthScreen.rawValue] ?? firstScreen
+        }
+        let launchEvent = AnalyticsEvents.launchContentGatewayPlugin(delegate.trigger(),
+                                                                     firstScreen: firstScreen,
+                                                                     PlayableItemInfo(name: delegate.itemName(),
+                                                                                      type: delegate.itemType()))
+        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: launchEvent.key,
+                                                                     parameters: launchEvent.metadata,
+                                                                     timed: true)
         
         switch camFlow {
         case .authentication:

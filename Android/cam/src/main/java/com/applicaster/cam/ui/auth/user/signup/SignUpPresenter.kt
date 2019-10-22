@@ -6,6 +6,7 @@ import com.applicaster.cam.ContentAccessManager
 import com.applicaster.cam.FacebookAuthCallback
 import com.applicaster.cam.SignUpCallback
 import com.applicaster.cam.analytics.*
+import com.applicaster.cam.params.auth.AuthField
 import com.applicaster.cam.params.auth.AuthFieldConfig
 import com.applicaster.cam.params.auth.AuthScreenType
 import com.applicaster.cam.ui.CamNavigationRouter
@@ -23,13 +24,6 @@ class SignUpPresenter(
             AuthScreenType.SIGNUP -> view?.initBackButton(!ContentAccessManager.pluginConfigurator.isTriggerOnAppLaunch())
             else -> view?.initBackButton(enable = true)
         }
-
-        //Analytics event
-        AnalyticsUtil.logContentGatewaySession(
-            TimedEvent.START,
-            ContentAccessManager.contract.getAnalyticsDataProvider().trigger.value,
-            Action.SIGNUP
-        )
     }
 
     override fun onFailure(msg: String) {
@@ -40,8 +34,8 @@ class SignUpPresenter(
             ConfirmationAlertData(
                 false,
                 ConfirmationCause.NONE,
-                "",
-                msg,
+                AnalyticsUtil.KEY_NON_PROVIDED,
+                AnalyticsUtil.KEY_NON_PROVIDED,
                 msg
             )
         )
@@ -49,7 +43,13 @@ class SignUpPresenter(
 
     override fun onActionSuccess() {
         view?.hideLoadingIndicator()
+        view?.hideKeyboard()
         AnalyticsUtil.logStandardSignUpSuccess()
+        AnalyticsUtil.logUserProperties(
+            AnalyticsUtil.collectPurchaseData(
+                ContentAccessManager.contract.getAnalyticsDataProvider().purchaseData
+            )
+        )
         if (ContentAccessManager.contract.isPurchaseRequired()) {
             when (ContentAccessManager.contract.getCamFlow()) {
                 CamFlow.AUTH_AND_STOREFRONT -> navigationRouter.attachBillingFragment()
@@ -66,12 +66,16 @@ class SignUpPresenter(
 
     override fun performAuthAction(input: HashMap<String, String>) {
         ContentAccessManager.contract.signUp(input, this)
-        AnalyticsUtil.logTapStandardSignUpButton()
     }
 
     override fun onAuthHintClicked() {
         navigationRouter.attachLoginFragment()
         AnalyticsUtil.logSwitchToLoginScreen()
+    }
+
+    override fun onAuthActionButtonClicked(inputValues: HashMap<AuthField, String>) {
+        AnalyticsUtil.logTapStandardSignUpButton()
+        super.onAuthActionButtonClicked(inputValues)
     }
 
     override fun onFacebookAuthActionCompleted(email: String, id: String) {
@@ -87,9 +91,9 @@ class SignUpPresenter(
             ConfirmationAlertData(
                 false,
                 ConfirmationCause.NONE,
-                "",
-                error?.message.orEmpty(),
-                error?.message.orEmpty()
+                AnalyticsUtil.KEY_NON_PROVIDED,
+                AnalyticsUtil.KEY_NON_PROVIDED,
+                error?.message ?: AnalyticsUtil.KEY_NON_PROVIDED
             )
         )
     }
@@ -97,5 +101,13 @@ class SignUpPresenter(
     override fun onFacebookButtonClicked(activity: Activity?) {
         super.onFacebookButtonClicked(activity)
         AnalyticsUtil.logTapAlternativeSignUp()
+    }
+
+    override fun onLastFragmentClosed() {
+        AnalyticsUtil.logContentGatewaySession(
+            TimedEvent.END,
+            ContentAccessManager.contract.getAnalyticsDataProvider().trigger.value,
+            Action.SIGNUP
+        )
     }
 }

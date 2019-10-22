@@ -106,7 +106,7 @@ const val UI_KEY_BILLING_ITEM_IMAGE = "cam_storefront_component_asset"
 const val UI_KEY_BILLING_ITEM_REDEEM_TEXT = "payment_option_redeem_text"
 // region Billing fragments
 const val UI_KEY_BILLING_TITLE_TEXT = "storefront_screen_title_text"
-const val UI_KEY_BILLING_RESTORE_DESC = "restore_promt_text"
+const val UI_KEY_BILLING_RESTORE_DESC = "restore_prompt_text"
 const val UI_KEY_BILLING_RESTORE_ACTION = "restore_link_text"
 // endregion
 // endregion

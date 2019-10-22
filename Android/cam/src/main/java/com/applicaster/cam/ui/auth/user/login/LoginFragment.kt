@@ -50,4 +50,8 @@ class LoginFragment : UserAuthFragment(), ILoginView {
             map(tv_hint_action, UIKey.LOGIN_PROMPT_ACTION_TEXT)
         }
     }
+
+    override fun onLastFragmentClosed() {
+        presenter?.onLastFragmentClosed()
+    }
 }

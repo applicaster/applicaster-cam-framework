@@ -95,8 +95,14 @@ class EntitlementPickerPresenter {
                     return
                 }
                 
-                let resultArray = response.compactMap {(transaction) -> PurchasedProduct in
-                    let item = PurchasedProduct(transaction: transaction,
+                let resultArray = response.compactMap {(transaction) -> PurchasedProduct? in
+                    var restoredTransaction = transaction
+                    if let originalTransaction = transaction.original,
+                        transaction.transactionState == .restored {
+                        restoredTransaction = originalTransaction
+                    }
+                    
+                    let item = PurchasedProduct(transaction: restoredTransaction,
                                                 receipt: receipt,
                                                 state: .restored)
                     return item
@@ -112,7 +118,7 @@ class EntitlementPickerPresenter {
                     self.view.showLoadingScreen(false)
                     switch result {
                     case .success:
-                        if self.camDelegate.isPurchaseNeeded() == true {
+                        if self.camDelegate.isPurchaseNeeded() == false {
                             self.showConfirmationScreen(for: .restore)
                         } else {
                             let alertDescription = self.camDelegate.getPluginConfig()[CAMKeys.restoreNonMatchingAlertText.rawValue]
@@ -190,7 +196,7 @@ class EntitlementPickerPresenter {
                                                                                      playableInfo,
                                                                                      voucherProperties)
                         }
-                        
+                        self?.view.showLoadingScreen(false)
                     }
                     
                     ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: purchaseResultEvent.key,

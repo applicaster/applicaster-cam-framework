@@ -6,7 +6,11 @@ import android.support.v4.app.DialogFragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.applicaster.cam.ContentAccessManager
 import com.applicaster.cam.R
+import com.applicaster.cam.analytics.AnalyticsUtil
+import com.applicaster.cam.analytics.ConfirmationAlertData
+import com.applicaster.cam.analytics.ConfirmationCause
 import com.applicaster.cam.config.ui.UIKey
 import com.applicaster.cam.config.ui.UIMapper
 import com.applicaster.cam.ui.base.view.IBaseActivity
@@ -67,6 +71,15 @@ class ConfirmationDialog : DialogFragment() {
                     map(dialogView?.tv_confirmation_desc!!, UIKey.BILLING_CONFIRMATION_DESC_TEXT)
                     map(dialogView?.btn_confirmation_ok!!, UIKey.BILLING_CONFIRMATION_BUTTON_TEXT)
                 }
+                AnalyticsUtil.logViewAlert(
+                    ConfirmationAlertData(
+                        true,
+                        ConfirmationCause.PURCHASE,
+                        ContentAccessManager.pluginConfigurator.getAlertDialogFields().billingConfirmationTitle,
+                        ContentAccessManager.pluginConfigurator.getAlertDialogFields().billingConfirmationDescription,
+                        AnalyticsUtil.KEY_NON_PROVIDED
+                    )
+                )
             }
             AlertDialogType.RESET_PASSWORD -> {
                 UIMapper.apply {
@@ -75,6 +88,15 @@ class ConfirmationDialog : DialogFragment() {
                     map(dialogView?.tv_confirmation_desc!!, UIKey.RESET_PWD_CONFIRMATION_DESC_TEXT)
                     map(dialogView?.btn_confirmation_ok!!, UIKey.RESET_PWD_CONFIRMATION_BUTTON_TEXT)
                 }
+                AnalyticsUtil.logViewAlert(
+                    ConfirmationAlertData(
+                        true,
+                        ConfirmationCause.PASSWORD_RESET,
+                        ContentAccessManager.pluginConfigurator.getAlertDialogFields().pwdResetTitle,
+                        ContentAccessManager.pluginConfigurator.getAlertDialogFields().pwdResetDescription,
+                        AnalyticsUtil.KEY_NON_PROVIDED
+                    )
+                )
             }
             AlertDialogType.RESTORE -> {
                 UIMapper.apply {
@@ -83,6 +105,15 @@ class ConfirmationDialog : DialogFragment() {
                     map(dialogView?.tv_confirmation_desc!!, UIKey.RESTORE_CONFIRMATION_DESC_TEXT)
                     map(dialogView?.btn_confirmation_ok!!, UIKey.RESTORE_CONFIRMATION_BUTTON_TEXT)
                 }
+                AnalyticsUtil.logViewAlert(
+                    ConfirmationAlertData(
+                        true,
+                        ConfirmationCause.RESTORE_PURCHASE,
+                        ContentAccessManager.pluginConfigurator.getAlertDialogFields().restoreConfirmationTitle,
+                        ContentAccessManager.pluginConfigurator.getAlertDialogFields().restoreConfirmationDescription,
+                        AnalyticsUtil.KEY_NON_PROVIDED
+                    )
+                )
             }
             AlertDialogType.UNDEFINED -> {
             }

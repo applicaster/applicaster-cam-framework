@@ -1,13 +1,20 @@
 package com.applicaster.cam.analytics
 
+import com.android.billingclient.api.Purchase
 import com.applicaster.analytics.AnalyticsAgentUtil
 import com.applicaster.cam.ContentAccessManager
+import com.applicaster.cam.PurchaseData
 import com.applicaster.cam.params.auth.AuthScreenType
 import com.applicaster.plugin_manager.Plugin
 import com.applicaster.plugin_manager.PluginManager
+import org.json.JSONObject
 
 class AnalyticsUtil {
     companion object {
+
+        const val KEY_YES = "Yes"
+        const val KEY_NO = "No"
+        const val KEY_NON_PROVIDED = "Non provided"
 
         private fun getPluginProvider(): String =
             PluginManager.getInstance().getInitiatedPlugin(Plugin.Type.LOGIN)?.plugin?.name.orEmpty()
@@ -17,20 +24,20 @@ class AnalyticsUtil {
             Properties.TRIGGER.value to when (ContentAccessManager.pluginConfigurator.getDefaultAuthScreen()) {
                 AuthScreenType.LOGIN -> AuthScreenType.LOGIN.getKey()
                 AuthScreenType.SIGNUP -> AuthScreenType.SIGNUP.getKey()
-                else -> ""
+                else -> KEY_NON_PROVIDED
             }
 
         private fun matchIsUserSubscribed(isUserSubscribed: Boolean): String =
             when (isUserSubscribed) {
-                true -> "Yes"
-                else -> "No"
+                true -> KEY_YES
+                else -> KEY_NO
             }
 
         private fun getContentEntityName() =
             ContentAccessManager.contract.getAnalyticsDataProvider().entityName
 
         private fun getContentEntityType() =
-            ContentAccessManager.contract.getAnalyticsDataProvider().entityName
+            ContentAccessManager.contract.getAnalyticsDataProvider().entityType
 
         private fun generateProductPropertiesMap(productPropertiesData: PurchaseProductPropertiesData) =
             mapOf(
@@ -213,8 +220,8 @@ class AnalyticsUtil {
 
         fun logViewAlert(confirmationAlertData: ConfirmationAlertData) {
             val confirmationAlert = when (confirmationAlertData.isConfirmationAlert) {
-                true -> "true"
-                else -> "false"
+                true -> KEY_YES
+                else -> KEY_NO
             }
             val params = mapOf(
                 Properties.PLUGIN_PROVIDER.value to getPluginProvider(),
@@ -304,14 +311,51 @@ class AnalyticsUtil {
 
 
         // user analytics
-        fun logIsUserLogged(purchaseProductPropertiesData: List<PurchaseProductPropertiesData>) {
+        private fun matchBooleanValue(value: Boolean): String {
+            return when (value) {
+                true -> KEY_YES
+                else -> KEY_NO
+            }
+        }
+
+        fun logUserProperties(purchaseProductPropertiesData: List<PurchaseProductPropertiesData>) {
             val pluginProvider: String = PluginManager.getInstance().getInitiatedPlugin(Plugin.Type.LOGIN)?.plugin?.name.orEmpty()
+            val isUserLoggedIn = ContentAccessManager.contract.isUserLogged()
             val productNames = arrayListOf<String>()
+            var isUserSubscribed: Boolean = false
             purchaseProductPropertiesData.forEach {
-                val isUserSubscribed: Boolean = it.isUserSubscribed
-                productNames.add(it.productName)
+                isUserSubscribed = it.isUserSubscribed
+                if (it.productName.isEmpty()) productNames.add(KEY_NON_PROVIDED) else productNames.add(it.productName)
             }
             val productName: String = productNames.joinToString(separator = "; ")
+            val userProps = JSONObject()
+            userProps.put(UserProperties.LOGGED_IN.value, matchBooleanValue(isUserLoggedIn))
+            userProps.put(UserProperties.AUTH_PROVIDER.value, pluginProvider)
+            userProps.put(UserProperties.PURCHASE_PRODUCT_NAME.value, if (productName.isEmpty()) KEY_NON_PROVIDED else productName )
+            userProps.put(UserProperties.SUBSCRIBER.value, matchBooleanValue(isUserSubscribed))
+            AnalyticsAgentUtil.sendUserProperties(userProps)
+        }
+
+        fun collectPurchaseData(
+            purchasesData: List<PurchaseData>,
+            purchases: List<Purchase> = arrayListOf()
+        ): List<PurchaseProductPropertiesData> {
+            val result: ArrayList<PurchaseProductPropertiesData> = arrayListOf()
+            purchasesData.forEach { data ->
+                val productData = PurchaseProductPropertiesData(
+                    ContentAccessManager.contract.getAnalyticsDataProvider().isUserSubscribed,
+                    data.title,
+                    data.price,
+                    purchases.find { it.sku == data.androidProductId }?.orderId ?: KEY_NON_PROVIDED,
+                    data.androidProductId,
+                    data.purchaseType,
+                    data.subscriptionDuration,
+                    data.trialPeriod,
+                    data.purchaseEntityType
+                )
+                result.add(productData)
+            }
+            return result
         }
     }
 }
@@ -394,7 +438,7 @@ enum class ConfirmationCause(val value: String) {
     PURCHASE        ("Purchase"),
     RESTORE_PURCHASE("Restore Purchase"),
     PASSWORD_RESET  ("Password Reset"),
-    NONE            ("")
+    NONE            ("None Provided")
     // @formatter:on
 }
 
@@ -408,6 +452,13 @@ enum class PurchaseType(val value: String) {
 
 enum class TimedEvent {
     START, END
+}
+
+enum class UserProperties(val value: String) {
+    LOGGED_IN("Logged In"),
+    AUTH_PROVIDER("Authentication Provider"),
+    SUBSCRIBER("Subscriber"),
+    PURCHASE_PRODUCT_NAME("Purchase Product Name")
 }
 
 data class ConfirmationAlertData(

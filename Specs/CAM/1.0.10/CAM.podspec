@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'CAM'
-  s.version      = '1.0.12'
+  s.version      = '1.0.10'
   s.summary      = 'Content Access Manager framework'
   s.license      = 'MIT'
   s.homepage     = 'https://github.com/applicaster/applicaster-cam-framework'

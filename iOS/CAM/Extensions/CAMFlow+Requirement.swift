@@ -8,12 +8,14 @@
 import Foundation
 
 extension CAMFlow {
-    mutating func update(with config: [String: String]) {
+    mutating func update(with config: [String: String],
+                         and currentState: (isAuthenticated: Bool, isPurchaseNeeded: Bool)) {
         let authRequirement = parseAuthRequirement(from: config)
         let paymentRequirement = parsePaymentRequirement(from: config)
         
-        updateFlow(with: authRequirement,
-                   and: paymentRequirement)
+        update(with: authRequirement,
+               and: paymentRequirement)
+        update(with: currentState)
     }
     
     // MARK: - Private methods
@@ -32,8 +34,8 @@ extension CAMFlow {
         return result
     }
     
-    private mutating func updateFlow(with authRequirement: AuthRequirement,
-                            and paymentRequirement: Bool) {
+    private mutating func update(with authRequirement: AuthRequirement,
+                                 and paymentRequirement: Bool) {
         switch authRequirement {
         case .never:
             switch self {
@@ -45,28 +47,48 @@ extension CAMFlow {
         case .always:
             switch self {
             case .authentication, .no:
-                break
-            case .storefront:
-                self = paymentRequirement == true ? .storefront : .no
-            case .authAndStorefront:
+                self = .authentication
+            case .storefront, .authAndStorefront:
                 self = paymentRequirement == true ? .authAndStorefront : .authentication
             }
         case .purchasableItems:
             switch self {
-            case .authentication, .authAndStorefront, .no:
-                break
-            case .storefront:
-                self = paymentRequirement == true ? .authAndStorefront : .no
+            case .authentication, .no:
+                self = .no
+            case .storefront, .authAndStorefront:
+                self = paymentRequirement == true ? .authAndStorefront : .authentication
             }
         case .dataSourceBased:
             switch self {
             case .authentication, .no:
                 break
-            case .storefront, .authAndStorefront:
-                if paymentRequirement == false {
-                    self = .no
-                }
+            case .storefront:
+                self = paymentRequirement == true ? .storefront: .no
+            case .authAndStorefront:
+                self = paymentRequirement == true ? .authAndStorefront: .authentication
             }
+        }
+    }
+    
+    private mutating func update(with currentState: (isAuthenticated: Bool, isPurchaseNeeded: Bool)) {
+        switch self {
+        case .authentication:
+            self = currentState.isAuthenticated ? .no : .authentication
+        case .storefront:
+            self = currentState.isPurchaseNeeded ? .storefront : .no
+        case .authAndStorefront:
+            switch (currentState.isAuthenticated, currentState.isPurchaseNeeded) {
+            case (true, true):
+                self = .storefront
+            case (true, false):
+                self = .no
+            case (false, true):
+                self = .authAndStorefront
+            case (false, false):
+                self = .authentication
+            }
+        case .no:
+            break
         }
     }
 }
