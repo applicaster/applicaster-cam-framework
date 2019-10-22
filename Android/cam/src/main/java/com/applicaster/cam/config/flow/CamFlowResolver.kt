@@ -16,7 +16,8 @@ class CamFlowResolver {
         ): CamFlow {
             val authRequirement: AuthenticationRequirement = pluginConfigurator.getAuthRequirement()
             val paymentRequired: Boolean = pluginConfigurator.isPaymentRequired()
-            return when (authRequirement) {
+            val isUserLogged: Boolean = ContentAccessManager.contract.isUserLogged()
+            val configUpdatedFlow: CamFlow = when (authRequirement) {
                 AuthenticationRequirement.NEVER -> {
                     when (originalFlow) {
                         CamFlow.AUTHENTICATION, CamFlow.EMPTY -> CamFlow.EMPTY
@@ -45,6 +46,31 @@ class CamFlowResolver {
                     }
                 }
                 else -> originalFlow
+            }
+            return updateFlowByUserState(configUpdatedFlow, paymentRequired, isUserLogged)
+        }
+
+        /**
+         * Updating [CamFlow] based on user state (logged or not)
+         */
+        private fun updateFlowByUserState(
+            currentFlow: CamFlow,
+            paymentRequired: Boolean,
+            isUserLogged: Boolean
+        ): CamFlow {
+            return when (currentFlow) {
+                CamFlow.AUTHENTICATION -> if (isUserLogged) CamFlow.EMPTY else currentFlow
+                CamFlow.STOREFRONT -> if (paymentRequired) currentFlow else CamFlow.EMPTY
+                CamFlow.AUTH_AND_STOREFRONT -> {
+                    when (isUserLogged to paymentRequired) {
+                        (isUserLogged to paymentRequired) -> CamFlow.STOREFRONT
+                        (isUserLogged to !paymentRequired) -> CamFlow.EMPTY
+                        (!isUserLogged to paymentRequired) -> CamFlow.AUTH_AND_STOREFRONT
+                        (!isUserLogged to !paymentRequired) -> CamFlow.AUTHENTICATION
+                        else -> CamFlow.EMPTY
+                    }
+                }
+                CamFlow.EMPTY -> currentFlow
             }
         }
     }
