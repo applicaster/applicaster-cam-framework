@@ -21,7 +21,7 @@ public enum PurchaseEntityType: String {
     case vod = "VOD Item"
     case category = "Category"
     
-    var key: String {
+    static var key: String {
         return "Purchase Entity Type"
     }
 }
@@ -54,39 +54,30 @@ public struct PurchaseProperties {
     }
     
     var metadata: [String: String] {
+        let noneProvided = "None provided"
+        
         var result: [String: String] = [ProductPropertiesKeys.productID.rawValue: productID]
-        
         result[ProductPropertiesKeys.subscriber.rawValue] = isSubscriber ? "Yes" : "No"
-        
-        if let name = productName {
-            result[ProductPropertiesKeys.productName.rawValue] = name
-        }
-        
-        if let price = self.price {
-            result[ProductPropertiesKeys.price.rawValue] = price
-        }
-        
-        if let transactionID = self.transactionID {
-            result[ProductPropertiesKeys.transactionID.rawValue] = transactionID
-        }
+        result[ProductPropertiesKeys.productName.rawValue] = productName ?? noneProvided
+        result[ProductPropertiesKeys.price.rawValue] = price ?? noneProvided
+        result[ProductPropertiesKeys.transactionID.rawValue] = transactionID ?? noneProvided
         
         var purchaseType: PurchaseType
         
-        if let duration = subscriptionDuration {
+        if subscriptionDuration != nil {
             purchaseType = .subscription
-            result[ProductPropertiesKeys.subscriptionDuration.rawValue] = duration.capitalized
         } else {
             purchaseType = .consumable
         }
         
         result[purchaseType.key] = purchaseType.rawValue
-        
-        if let type = purchaseEntityType {
-            result[type.key] = type.rawValue
-        }
+        result[ProductPropertiesKeys.subscriptionDuration.rawValue] = subscriptionDuration?.capitalized ?? noneProvided
+        result[PurchaseEntityType.key] = purchaseEntityType?.rawValue ?? noneProvided
         
         if let trial = trialPeriod {
             result[ProductPropertiesKeys.trialPeriod.rawValue] = trial + " Days"
+        } else {
+            result[ProductPropertiesKeys.trialPeriod.rawValue] = noneProvided
         }
         
         return result
