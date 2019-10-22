@@ -10,70 +10,90 @@
         android:background="@android:color/transparent"
         android:id="@+id/root_layout_billing_item">
 
-    <LinearLayout
-            android:id="@+id/layout_billing_item"
-            android:background="@color/white"
-            android:layout_width="@dimen/layout_billing_item_width"
-            android:layout_height="@dimen/layout_billing_item_height"
-            android:orientation="vertical"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/billing_layout_margin_top"
-            android:layout_marginBottom="@dimen/billing_layout_margin_bottom"
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/layout_billing_item"
+        android:layout_width="@dimen/layout_billing_item_width"
+        android:layout_height="@dimen/layout_billing_item_height"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="@dimen/billing_layout_margin_top"
+        android:layout_marginBottom="@dimen/billing_layout_margin_bottom"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.applicaster.util.ui.CustomTextView
+            android:id="@+id/tv_billing_item_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="17dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="17dp"
+            android:layout_marginBottom="9dp"
+            android:gravity="center"
+            android:text="@string/tv_billing_default_text"
+            android:textSize="@dimen/billing_tv_title_text_size"
+            app:layout_constraintBottom_toTopOf="@+id/tv_billing_item_details"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="spread_inside" />
 
         <com.applicaster.util.ui.CustomTextView
-                android:id="@+id/tv_billing_item_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/billing_tv_title_text_size"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center"
-                android:layout_marginTop="@dimen/billing_title_margin_top"
-                android:text="@string/tv_billing_default_text"/>
-
-        <com.applicaster.util.ui.CustomTextView
-                android:id="@+id/tv_billing_item_details"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/billing_details_margin_left_right"
-                android:layout_marginRight="@dimen/billing_details_margin_left_right"
-                android:layout_marginTop="@dimen/billing_details_margin_top"
-                android:textSize="@dimen/billing_tv_details_text_size"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center"
-                android:maxLines="2"
-                android:ellipsize="end"
-                android:text="@string/tv_billing_default_text"/>
+            android:id="@+id/tv_billing_item_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="17dp"
+            android:layout_marginEnd="17dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="2"
+            android:text="@string/tv_billing_default_text"
+            android:textSize="@dimen/billing_tv_details_text_size"
+            app:layout_constraintBottom_toTopOf="@+id/btn_billing_item_subscribe"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_billing_item_title" />
 
         <com.applicaster.util.ui.CustomButton
-                android:id="@+id/btn_billing_item_subscribe"
-                android:layout_width="@dimen/billing_btn_subscribe_width"
-                android:layout_height="@dimen/billing_btn_subscribe_height"
-                android:textSize="@dimen/billing_btn_subscribe_text_size"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/billing_btn_subscribe_margin_top"
-                android:gravity="center_horizontal"
-                android:text="@string/tv_billing_default_text"/>
+            android:id="@+id/btn_billing_item_subscribe"
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginEnd="48dp"
+            android:gravity="center_horizontal"
+            android:text="@string/tv_billing_default_text"
+            android:textSize="@dimen/billing_btn_subscribe_text_size"
+            app:layout_constraintBottom_toTopOf="@+id/tv_billing_item_redeem"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_billing_item_details" />
 
         <com.applicaster.util.ui.CustomTextView
-                android:id="@+id/tv_billing_item_redeem"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/billing_tv_redeem_text_size"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/billing_tv_redeem_margin_top"
-                android:layout_marginBottom="@dimen/billing_tv_redeem_margin_bottom"
-                android:gravity="center_horizontal"
-                android:text="@string/tv_billing_default_text"
-                tools:visibility="visible"/>
+            android:id="@+id/tv_billing_item_redeem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="17dp"
+            android:layout_marginEnd="17dp"
+            android:layout_marginBottom="25dp"
+            android:gravity="center_horizontal"
+            android:text="@string/tv_billing_default_text"
+            android:textSize="@dimen/billing_tv_redeem_text_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_billing_item_subscribe"
+            tools:visibility="visible" />
 
-    </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
 
     <com.applicaster.util.ui.CustomTextView
             android:id="@+id/tv_billing_item_label"

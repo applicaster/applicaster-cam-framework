@@ -100,9 +100,9 @@ const val UI_KEY_PWD_RESET_BUTTON_IMAGE= "cam_action_button_asset"
 // endregion
 
 // region Billing item UI keys
-const val UI_KEY_BILLING_ITEM_SUBS_BUTTON_IMAGE = "cam_storefront_button_asset"
+const val UI_KEY_BILLING_ITEM_SUBS_BUTTON_IMAGE = "cam_payment_option_button_asset"
 const val UI_KEY_BILLING_ITEM_SUBS_BUTTON_TEXT = "payment_option_button_text"
-const val UI_KEY_BILLING_ITEM_IMAGE = "cam_storefront_component_asset"
+const val UI_KEY_BILLING_ITEM_IMAGE = "cam_payment_option_component_asset"
 const val UI_KEY_BILLING_ITEM_REDEEM_TEXT = "payment_option_redeem_text"
 // region Billing fragments
 const val UI_KEY_BILLING_TITLE_TEXT = "storefront_screen_title_text"

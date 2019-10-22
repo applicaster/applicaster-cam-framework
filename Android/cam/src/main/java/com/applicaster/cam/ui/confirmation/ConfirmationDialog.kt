@@ -48,6 +48,7 @@ class ConfirmationDialog : DialogFragment() {
             val dialogWidth = resources.getDimension(R.dimen.confirmation_layout_width).toInt()
             val dialogHeight = resources.getDimension(R.dimen.confirmation_layout_height).toInt()
             it.window?.setLayout(dialogWidth, dialogHeight)
+            it.setCancelable(false)
         }
     }
 
