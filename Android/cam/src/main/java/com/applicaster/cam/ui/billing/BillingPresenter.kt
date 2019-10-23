@@ -18,305 +18,313 @@ import com.applicaster.iap.BillingListener
 import com.applicaster.iap.GoogleBillingHelper
 
 class BillingPresenter(
-        private val view: IBillingView?,
-        private val navigationRouter: CamNavigationRouter
+		private val view: IBillingView?,
+		private val navigationRouter: CamNavigationRouter
 ) : BasePresenter(view),
-        IBillingPresenter,
-        BillingListener, RestoreCallback {
+		IBillingPresenter,
+		BillingListener, RestoreCallback {
 
-    private val TAG = BillingPresenter::class.java.canonicalName
+	private val TAG = BillingPresenter::class.java.canonicalName
 
-    private val skuDetailsList: ArrayList<SkuDetails> = arrayListOf()
-    private val camContract: ICamContract = ContentAccessManager.contract
+	private val skuDetailsList: ArrayList<SkuDetails> = arrayListOf()
+	private val camContract: ICamContract = ContentAccessManager.contract
 
-    override fun onViewCreated() {
-        super.onViewCreated()
+	override fun onViewCreated() {
+		super.onViewCreated()
 
-        view?.getViewContext()?.applicationContext?.apply {
-            GoogleBillingHelper.init(this, this@BillingPresenter)
-        }
-        view?.setListeners()
-        view?.initBackButton(!ContentAccessManager.pluginConfigurator.isTriggerOnAppLaunch())
+		view?.getViewContext()?.applicationContext?.apply {
+			GoogleBillingHelper.init(this, this@BillingPresenter)
+		}
+		view?.setListeners()
+		view?.initBackButton(!ContentAccessManager.pluginConfigurator.isTriggerOnAppLaunch())
 
-        // obtain redeem code and set billing item type which depends on redeem code availability
-        val billingItemType: BillingItemType = {
-            if (camContract.isRedeemActivated())
-                BillingItemType.REDEEM
-            else
-                BillingItemType.NO_REDEEM
-        }.invoke()
+		// obtain redeem code and set billing item type which depends on redeem code availability
+		val billingItemType: BillingItemType = {
+			if (camContract.isRedeemActivated())
+				BillingItemType.REDEEM
+			else
+				BillingItemType.NO_REDEEM
+		}.invoke()
 
-        view?.initViewComponents(view.getFragmentContainerType(), billingItemType)
-        view?.customize()
+		view?.initViewComponents(view.getFragmentContainerType(), billingItemType)
+		view?.customize()
 
-        //load entitlements
-        camContract.loadEntitlements(object : EntitlementsLoadCallback {
-            override fun onFailure(msg: String) {
-                view?.hideLoadingIndicator()
-                showHandledError(msg)
-            }
+		//load entitlements
+		camContract.loadEntitlements(object : EntitlementsLoadCallback {
+			override fun onFailure(msg: String) {
+				view?.hideLoadingIndicator()
+				showHandledError(msg)
+			}
 
-            override fun onSuccess(billingOffers: List<BillingOffer>) {
-                fetchSkuDetailsByType(billingOffers)
-            }
-        })
-        view?.showLoadingIndicator()
-    }
+			override fun onSuccess(billingOffers: List<BillingOffer>) {
+				fetchSkuDetailsByType(billingOffers)
+			}
+		})
+		view?.showLoadingIndicator()
+	}
 
-    override fun onBillingClientError(statusCode: Int, description: String) {
-        view?.hideLoadingIndicator()
-        view?.showAlert(ContentAccessManager.pluginConfigurator.getDefaultAlertText())
-    }
+	override fun onBillingClientError(statusCode: Int, description: String) {
+		view?.hideLoadingIndicator()
+		view?.showAlert(ContentAccessManager.pluginConfigurator.getDefaultAlertText())
+	}
 
-    override fun onPurchaseButtonClicked(activity: Activity?, skuId: String) {
-        skuDetailsList.find { skuDetails ->
-            skuDetails.sku == skuId
-        }?.also { skuDetails ->
-            if (activity != null) GoogleBillingHelper.purchase(activity, skuDetails)
-            // Analytics events
-            AnalyticsUtil.collectPurchaseData(camContract.getAnalyticsDataProvider().purchaseData).forEach {
-                AnalyticsUtil.logTapPurchaseButton(it)
-            }
-        }
-    }
+	override fun onPurchaseButtonClicked(activity: Activity?, skuId: String) {
+		skuDetailsList.find { skuDetails ->
+			skuDetails.sku == skuId
+		}?.also { skuDetails ->
+			if (activity != null) GoogleBillingHelper.purchase(activity, skuDetails)
+			// Analytics events
+			AnalyticsUtil.collectPurchaseData(camContract.getAnalyticsDataProvider().purchaseData).forEach {
+				AnalyticsUtil.logTapPurchaseButton(it)
+			}
+		}
+	}
 
-    override fun onPurchaseConsumed(purchaseToken: String) {
-        Log.i(TAG, "PurchaseConsumed")
-    }
+	override fun onPurchaseConsumed(purchaseToken: String) {
+		Log.i(TAG, "PurchaseConsumed")
+	}
 
-    override fun onPurchaseConsumptionFailed(statusCode: Int, description: String) {
-        Log.e(TAG, "PurchaseConsumptionFailed: $description")
-        // Analytics events
-        AnalyticsUtil.logViewAlert(
-                ConfirmationAlertData(
-                        false,
-                        ConfirmationCause.NONE,
-                        AnalyticsUtil.KEY_NON_PROVIDED,
-                        ContentAccessManager.pluginConfigurator.getDefaultAlertText(),
-                        description
-                )
-        )
-    }
+	override fun onPurchaseConsumptionFailed(statusCode: Int, description: String) {
+		Log.e(TAG, "PurchaseConsumptionFailed: $description")
+		// Analytics events
+		AnalyticsUtil.logViewAlert(
+				ConfirmationAlertData(
+						false,
+						ConfirmationCause.NONE,
+						AnalyticsUtil.KEY_NON_PROVIDED,
+						ContentAccessManager.pluginConfigurator.getDefaultAlertText(),
+						description
+				)
+		)
+	}
 
-    override fun onPurchaseLoaded(purchases: List<Purchase>) {
-        view?.showLoadingIndicator()
-        camContract.onItemPurchased(purchases, object : PurchaseCallback {
-            override fun onFailure(msg: String) {
-                view?.hideLoadingIndicator()
-                showHandledError(msg)
-            }
+	override fun onPurchaseLoaded(purchases: List<Purchase>) {
+		view?.showLoadingIndicator()
+		camContract.onItemPurchased(purchases, object : PurchaseCallback {
+			override fun onFailure(msg: String) {
+				view?.hideLoadingIndicator()
+				showHandledError(msg)
+			}
 
-            override fun onActionSuccess() {
-                view?.hideLoadingIndicator()
-                //Analytics call
-                AnalyticsUtil.logUserProperties(
-                        AnalyticsUtil.collectPurchaseData(
-                                ContentAccessManager.contract.getAnalyticsDataProvider().purchaseData
-                        ))
-                //
-                if (ContentAccessManager.pluginConfigurator.isShowConfirmationPayment()) {
-                    navigationRouter.showConfirmationDialog(AlertDialogType.BILLING)
-                } else {
-                    view?.close()
-                }
-            }
-        })
-        AnalyticsUtil.collectPurchaseData(camContract.getAnalyticsDataProvider().purchaseData, purchases).forEach {
-            AnalyticsUtil.logCompletePurchase(it)
-        }
-    }
+			override fun onActionSuccess() {
+				view?.hideLoadingIndicator()
+				//Analytics call
+				AnalyticsUtil.logUserProperties(
+						AnalyticsUtil.collectPurchaseData(
+								ContentAccessManager.contract.getAnalyticsDataProvider().purchaseData
+						))
+				//
+				if (ContentAccessManager.pluginConfigurator.isShowConfirmationPayment()) {
+					navigationRouter.showConfirmationDialog(AlertDialogType.BILLING)
+				} else {
+					view?.close()
+				}
+			}
+		})
+		AnalyticsUtil.collectPurchaseData(camContract.getAnalyticsDataProvider().purchaseData, purchases).forEach {
+			AnalyticsUtil.logCompletePurchase(it)
+		}
+	}
 
-    override fun onPurchasesRestored(purchases: List<Purchase>) {
-        view?.hideLoadingIndicator()
+	override fun onPurchasesRestored(purchases: List<Purchase>) {
+		view?.hideLoadingIndicator()
 
-        if (!handleRestoringPurchasesError(purchases)) { //purchase succeed
-            view?.showLoadingIndicator()
-            ContentAccessManager.contract.onPurchasesRestored(purchases, this)
-        }
+		if (!handleRestoringPurchasesError(purchases)) { //purchase succeed
+			view?.showLoadingIndicator()
+			ContentAccessManager.contract.onPurchasesRestored(purchases, this)
+		}
 
-        // Analytics events
-        if (purchases.isEmpty()) {
-            AnalyticsUtil.collectPurchaseData(camContract.getAnalyticsDataProvider().purchaseData, purchases).forEach {
-                AnalyticsUtil.logStoreRestorePurchaseError("Restore purchases error", it)
-            }
-        } else {
-            AnalyticsUtil.collectPurchaseData(
-                    camContract.getAnalyticsDataProvider().purchaseData,
-                    purchases
-            ).forEach {
-                AnalyticsUtil.logCompleteRestorePurchase(it)
-            }
-        }
-    }
+		// Analytics events
+		if (purchases.isEmpty()) {
+			AnalyticsUtil.collectPurchaseData(camContract.getAnalyticsDataProvider().purchaseData, purchases).forEach {
+				AnalyticsUtil.logStoreRestorePurchaseError("Restore purchases error", it)
+			}
+		} else {
+			AnalyticsUtil.collectPurchaseData(
+					camContract.getAnalyticsDataProvider().purchaseData,
+					purchases
+			).forEach {
+				AnalyticsUtil.logCompleteRestorePurchase(it)
+			}
+		}
+	}
 
-    private fun handleRestoringPurchasesError(purchases: List<Purchase>): Boolean {
-        var purchaseSucceed = false
-        if (purchases.isEmpty()) {
-            showHandledError(ContentAccessManager.pluginConfigurator.getNoPurchasesToRestoreText())
-            purchaseSucceed = true
-        } else {
-            val isNonMatchingRestoredPurchasesExists = skuDetailsList.none { details ->
-                purchases.find { purchase -> details.sku == purchase.sku } != null
-            }
-            if (isNonMatchingRestoredPurchasesExists) {
-                showHandledError(ContentAccessManager.pluginConfigurator.getNonMatchingRestoredPurchasesText())
-                purchaseSucceed = true
-            }
-        }
-        return purchaseSucceed
-    }
+	private fun handleRestoringPurchasesError(purchases: List<Purchase>): Boolean {
+		var purchaseSucceed = false
+		if (purchases.isEmpty()) {
+			showHandledError(ContentAccessManager.pluginConfigurator.getNoPurchasesToRestoreText())
+			purchaseSucceed = true
+		} else {
+			val isNonMatchingRestoredPurchasesExists = skuDetailsList.none { details ->
+				purchases.find { purchase -> details.sku == purchase.sku } != null
+			}
+			if (isNonMatchingRestoredPurchasesExists) {
+				showHandledError(ContentAccessManager.pluginConfigurator.getNonMatchingRestoredPurchasesText())
+				purchaseSucceed = true
+			}
+		}
+		return purchaseSucceed
+	}
 
-    override fun onPurchaseLoadingFailed(statusCode: Int, description: String) {
-        view?.showAlert(ContentAccessManager.pluginConfigurator.getDefaultAlertText())
+	override fun onPurchaseLoadingFailed(statusCode: Int, description: String) {
+		view?.showAlert(ContentAccessManager.pluginConfigurator.getDefaultAlertText())
 
-        // Analytics events
-        AnalyticsUtil.logViewAlert(
-                ConfirmationAlertData(
-                        false,
-                        ConfirmationCause.NONE,
-                        AnalyticsUtil.KEY_NON_PROVIDED,
-                        ContentAccessManager.pluginConfigurator.getDefaultAlertText(),
-                        description
-                )
-        )
-        if (statusCode == BillingClient.BillingResponse.USER_CANCELED) {
-            AnalyticsUtil.collectPurchaseData(camContract.getAnalyticsDataProvider().purchaseData).forEach {
-                AnalyticsUtil.logCancelPurchase(it)
-            }
-        } else {
-            AnalyticsUtil.collectPurchaseData(camContract.getAnalyticsDataProvider().purchaseData).forEach {
-                AnalyticsUtil.logStorePurchaseError(statusCode.toString(), description, it)
-            }
-        }
-    }
+		// Analytics events
+		AnalyticsUtil.logViewAlert(
+				ConfirmationAlertData(
+						false,
+						ConfirmationCause.NONE,
+						AnalyticsUtil.KEY_NON_PROVIDED,
+						ContentAccessManager.pluginConfigurator.getDefaultAlertText(),
+						description
+				)
+		)
+		if (statusCode == BillingClient.BillingResponse.USER_CANCELED) {
+			AnalyticsUtil.collectPurchaseData(camContract.getAnalyticsDataProvider().purchaseData).forEach {
+				AnalyticsUtil.logCancelPurchase(it)
+			}
+		} else {
+			AnalyticsUtil.collectPurchaseData(camContract.getAnalyticsDataProvider().purchaseData).forEach {
+				AnalyticsUtil.logStorePurchaseError(statusCode.toString(), description, it)
+			}
+		}
+	}
 
-    override fun onSkuDetailsLoaded(skuDetails: List<SkuDetails>) {
-        skuDetailsList.addAll(skuDetails)
-        view?.populateBillingContainer(skuDetails.map {
-            PurchaseItem(
-                    it.sku,
-                    it.title,
-                    it.description,
-                    it.price,
-                    ""
-            )
-        })
-        view?.hideLoadingIndicator()
-    }
+	override fun onSkuDetailsLoaded(skuDetails: List<SkuDetails>) {
+		skuDetailsList.addAll(skuDetails)
+		view?.populateBillingContainer(skuDetails.map {
+			PurchaseItem(
+					it.sku,
+					it.title,
+					it.description,
+					it.price,
+					""
+			)
+		})
+		view?.hideLoadingIndicator()
+	}
 
-    override fun onSkuDetailsLoadingFailed(statusCode: Int, description: String) {
-        view?.hideLoadingIndicator()
-        view?.showAlert(ContentAccessManager.pluginConfigurator.getDefaultAlertText())
-    }
+	override fun onSkuDetailsLoadingFailed(statusCode: Int, description: String) {
+		view?.hideLoadingIndicator()
+		view?.showAlert(ContentAccessManager.pluginConfigurator.getDefaultAlertText())
+	}
 
-    private fun fetchSkuDetailsByType(billingOffers: List<BillingOffer>) {
-        //add billingOffers to skus map and call function for obtaining SkuDetails for these offers
-        val skusMap = hashMapOf<String, String>()
-        billingOffers.forEach {
-            skusMap[it.productId] =
-                    if (it.productType == ProductType.INAPP)
-                        BillingClient.SkuType.INAPP
-                    else
-                        BillingClient.SkuType.SUBS
-        }
+	private fun fetchSkuDetailsByType(billingOffers: List<BillingOffer>) {
+		//add billingOffers to skus map and call function for obtaining SkuDetails for these offers
+		val skusMap = hashMapOf<String, String>()
+		billingOffers.forEach {
+			skusMap[it.productId] =
+					if (it.productType == ProductType.INAPP)
+						BillingClient.SkuType.INAPP
+					else
+						BillingClient.SkuType.SUBS
+		}
 
-        GoogleBillingHelper.loadSkuDetailsForAllTypes(skusMap)
-    }
+		GoogleBillingHelper.loadSkuDetailsForAllTypes(skusMap)
+	}
 
-    private fun showHandledError(msg: String) {
-        if (msg.isEmpty()) {
-            view?.showAlert(ContentAccessManager.pluginConfigurator.getDefaultAlertText())
+	private fun showHandledError(msg: String) {
+		if (msg.isEmpty()) {
+			view?.showAlert(ContentAccessManager.pluginConfigurator.getDefaultAlertText())
 
-            // Analytics events
-            AnalyticsUtil.logViewAlert(
-                    ConfirmationAlertData(
-                            false,
-                            ConfirmationCause.NONE,
-                            AnalyticsUtil.KEY_NON_PROVIDED,
-                            ContentAccessManager.pluginConfigurator.getDefaultAlertText(),
-                            msg
-                    )
-            )
-        } else {
-            view?.showAlert(msg)
+			// Analytics events
+			AnalyticsUtil.logViewAlert(
+					ConfirmationAlertData(
+							false,
+							ConfirmationCause.NONE,
+							AnalyticsUtil.KEY_NON_PROVIDED,
+							ContentAccessManager.pluginConfigurator.getDefaultAlertText(),
+							msg
+					)
+			)
+		} else {
+			view?.showAlert(msg)
 
-            // Analytics events
-            AnalyticsUtil.logViewAlert(
-                    ConfirmationAlertData(
-                            false,
-                            ConfirmationCause.NONE,
-                            AnalyticsUtil.KEY_NON_PROVIDED,
-                            AnalyticsUtil.KEY_NON_PROVIDED,
-                            msg
-                    )
-            )
-        }
-    }
+			// Analytics events
+			AnalyticsUtil.logViewAlert(
+					ConfirmationAlertData(
+							false,
+							ConfirmationCause.NONE,
+							AnalyticsUtil.KEY_NON_PROVIDED,
+							AnalyticsUtil.KEY_NON_PROVIDED,
+							msg
+					)
+			)
+		}
+	}
 
-    /**
-     * Purchase verification failed on Cleeng side
-     */
-    override fun onFailure(msg: String) {
-        view?.hideLoadingIndicator()
-        view?.showAlert(msg)
-    }
+	/**
+	 * Purchase verification failed on Cleeng side
+	 */
+	override fun onFailure(msg: String) {
+		view?.hideLoadingIndicator()
+		view?.showAlert(msg)
+	}
 
-    /**
-     * Purchase verification succeeded on Cleeng side
-     */
-    override fun onActionSuccess() {
-        view?.hideLoadingIndicator()
-        if (ContentAccessManager.pluginConfigurator.isShowConfirmationRestorePurchases()) {
-            navigationRouter.showConfirmationDialog(AlertDialogType.RESTORE)
-            // Analytics events
-            AnalyticsUtil.logUserProperties(
-                    AnalyticsUtil.collectPurchaseData(
-                            ContentAccessManager.contract.getAnalyticsDataProvider().purchaseData
-                    ))
+	/**
+	 * Purchase verification succeeded on Cleeng side
+	 */
+	override fun onActionSuccess() {
+		view?.hideLoadingIndicator()
+		if (ContentAccessManager.pluginConfigurator.isShowConfirmationRestorePurchases()) {
+			navigationRouter.showConfirmationDialog(AlertDialogType.RESTORE)
+			// Analytics events
+			AnalyticsUtil.logUserProperties(
+					AnalyticsUtil.collectPurchaseData(
+							ContentAccessManager.contract.getAnalyticsDataProvider().purchaseData
+					))
 
-            AnalyticsUtil.logViewAlert(
-                    ConfirmationAlertData(
-                            true,
-                            ConfirmationCause.RESTORE_PURCHASE,
-                            ContentAccessManager.pluginConfigurator.getPaymentConfirmationTitle(),
-                            ContentAccessManager.pluginConfigurator.getPaymentConfirmationDescription(),
-                            AnalyticsUtil.KEY_NON_PROVIDED
-                    )
-            )
-        } else {
-            view?.goBack()
-        }
-    }
-    //
+			AnalyticsUtil.logViewAlert(
+					ConfirmationAlertData(
+							true,
+							ConfirmationCause.RESTORE_PURCHASE,
+							ContentAccessManager.pluginConfigurator.getPaymentConfirmationTitle(),
+							ContentAccessManager.pluginConfigurator.getPaymentConfirmationDescription(),
+							AnalyticsUtil.KEY_NON_PROVIDED
+					)
+			)
+		} else {
+			view?.goBack()
+		}
 
-    override fun onRestoreClicked() {
-        view?.showLoadingIndicator()
-        AnalyticsUtil.logTapRestorePurchaseLink()
-        AnalyticsUtil.logContentGatewaySession(
-            TimedEvent.START,
-            Trigger.OTHER.value,
-            Action.RESTORE_PURCHASE
-        )
-        GoogleBillingHelper.restorePurchasesForAllTypes()
-    }
+		//Analytics
+		when (ContentAccessManager.contract.getCamFlow()) {
+			CamFlow.STOREFRONT -> {
+				AnalyticsUtil.logContentGatewaySession(
+						TimedEvent.END,
+						ContentAccessManager.contract.getAnalyticsDataProvider().trigger.value,
+						Action.PURCHASE
+				)
+			}
+			CamFlow.AUTH_AND_STOREFRONT -> {
+				AnalyticsUtil.logContentGatewaySession(
+						TimedEvent.END,
+						ContentAccessManager.contract.getAnalyticsDataProvider().trigger.value,
+						Action.SIGNUP_AND_PURCHASE
+				)
+			}
+			else -> {
+			}
+		}
+	}
+	//
 
-    override fun onLastFragmentClosed() {
-        when (ContentAccessManager.contract.getCamFlow()) {
-            CamFlow.STOREFRONT -> {
-                AnalyticsUtil.logContentGatewaySession(
-                    TimedEvent.END,
-                    ContentAccessManager.contract.getAnalyticsDataProvider().trigger.value,
-                    Action.PURCHASE
-                )
-            }
-            CamFlow.AUTH_AND_STOREFRONT -> {
-                AnalyticsUtil.logContentGatewaySession(
-                    TimedEvent.END,
-                    ContentAccessManager.contract.getAnalyticsDataProvider().trigger.value,
-                    Action.SIGNUP_AND_PURCHASE
-                )
-            }
-            else -> {}
-        }
-    }
+	override fun onRestoreClicked() {
+		view?.showLoadingIndicator()
+		AnalyticsUtil.logTapRestorePurchaseLink()
+		AnalyticsUtil.logContentGatewaySession(
+				TimedEvent.START,
+				Trigger.OTHER.value,
+				Action.RESTORE_PURCHASE
+		)
+		GoogleBillingHelper.restorePurchasesForAllTypes()
+	}
+
+	override fun onLastFragmentClosed() {
+		AnalyticsUtil.logContentGatewaySession(
+				TimedEvent.END,
+				ContentAccessManager.contract.getAnalyticsDataProvider().trigger.value,
+				Action.CANCEL
+		)
+	}
 }

@@ -14,7 +14,7 @@ class AnalyticsUtil {
 
         const val KEY_YES = "Yes"
         const val KEY_NO = "No"
-        const val KEY_NON_PROVIDED = "Non provided"
+        const val KEY_NON_PROVIDED = "None provided"
 
         private fun getPluginProvider(): String =
             PluginManager.getInstance().getInitiatedPlugin(Plugin.Type.LOGIN)?.plugin?.name.orEmpty()
