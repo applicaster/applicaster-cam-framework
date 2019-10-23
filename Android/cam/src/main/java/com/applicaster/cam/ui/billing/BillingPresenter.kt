@@ -146,6 +146,11 @@ class BillingPresenter(
 			).forEach {
 				AnalyticsUtil.logCompleteRestorePurchase(it)
 			}
+			AnalyticsUtil.logContentGatewaySession(
+					TimedEvent.END,
+					camContract.getAnalyticsDataProvider().trigger.value,
+					Action.RESTORE_PURCHASE
+			)
 		}
 	}
 
@@ -312,11 +317,6 @@ class BillingPresenter(
 	override fun onRestoreClicked() {
 		view?.showLoadingIndicator()
 		AnalyticsUtil.logTapRestorePurchaseLink()
-		AnalyticsUtil.logContentGatewaySession(
-				TimedEvent.START,
-				Trigger.OTHER.value,
-				Action.RESTORE_PURCHASE
-		)
 		GoogleBillingHelper.restorePurchasesForAllTypes()
 	}
 

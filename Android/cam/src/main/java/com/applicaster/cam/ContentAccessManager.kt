@@ -73,11 +73,19 @@ object ContentAccessManager : IContentAccessManager {
                 )
             }
             CamFlow.AUTH_AND_STOREFRONT -> {
-                AnalyticsUtil.logContentGatewaySession(
-                    TimedEvent.START,
-                    this.contract.getAnalyticsDataProvider().trigger.value,
-                    Action.SIGNUP_AND_PURCHASE
-                )
+                if (authScreenType == AuthScreenType.LOGIN) {
+                    AnalyticsUtil.logContentGatewaySession(
+                            TimedEvent.START,
+                            this.contract.getAnalyticsDataProvider().trigger.value,
+                            Action.LOGIN_AND_PURCHASE
+                    )
+                } else if (authScreenType == AuthScreenType.SIGNUP) {
+                    AnalyticsUtil.logContentGatewaySession(
+                            TimedEvent.START,
+                            this.contract.getAnalyticsDataProvider().trigger.value,
+                            Action.SIGNUP_AND_PURCHASE
+                    )
+                }
             }
             CamFlow.EMPTY -> {}
         }

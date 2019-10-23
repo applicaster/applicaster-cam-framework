@@ -426,6 +426,7 @@ enum class Action(val value: String) {
     LOGIN                 ("Login"),
     SIGNUP                ("Sign Up"),
     SIGNUP_AND_PURCHASE   ("Sign Up & Purchase"),
+    LOGIN_AND_PURCHASE    ("Log In & Purchase"),
     RESTORE_PURCHASE      ("Restore Purchase"),
     CANCEL                ("Cancel"),
     FAILED_ATTEMPT        ("Failed Attempt"),
