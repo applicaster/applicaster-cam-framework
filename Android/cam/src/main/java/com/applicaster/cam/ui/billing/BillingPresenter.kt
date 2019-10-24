@@ -61,6 +61,8 @@ class BillingPresenter(
 			}
 		})
 		view?.showLoadingIndicator()
+
+		AnalyticsGatewaySession.sessionData.add(Action.PURCHASE)
 	}
 
 	override fun onBillingClientError(statusCode: Int, description: String) {
@@ -121,6 +123,7 @@ class BillingPresenter(
 				}
 			}
 		})
+		//Analytics call
 		AnalyticsUtil.collectPurchaseData(camContract.getAnalyticsDataProvider().purchaseData, purchases).forEach {
 			AnalyticsUtil.logCompletePurchase(it)
 		}
@@ -134,7 +137,11 @@ class BillingPresenter(
 			ContentAccessManager.contract.onPurchasesRestored(purchases, this)
 		}
 
-		// Analytics events
+		sendPurchasesRestoredAnalytics(purchases)
+		AnalyticsGatewaySession.sessionData.add(Action.RESTORE_PURCHASE)
+	}
+
+	private fun sendPurchasesRestoredAnalytics(purchases: List<Purchase>) {
 		if (purchases.isEmpty()) {
 			AnalyticsUtil.collectPurchaseData(camContract.getAnalyticsDataProvider().purchaseData, purchases).forEach {
 				AnalyticsUtil.logStoreRestorePurchaseError("Restore purchases error", it)
@@ -146,11 +153,6 @@ class BillingPresenter(
 			).forEach {
 				AnalyticsUtil.logCompleteRestorePurchase(it)
 			}
-			AnalyticsUtil.logContentGatewaySession(
-					TimedEvent.END,
-					camContract.getAnalyticsDataProvider().trigger.value,
-					Action.RESTORE_PURCHASE
-			)
 		}
 	}
 
@@ -173,8 +175,10 @@ class BillingPresenter(
 
 	override fun onPurchaseLoadingFailed(statusCode: Int, description: String) {
 		view?.showAlert(ContentAccessManager.pluginConfigurator.getDefaultAlertText())
+		sendPurchaseLoadingFailureAnalytics(statusCode, description)
+	}
 
-		// Analytics events
+	private fun sendPurchaseLoadingFailureAnalytics(statusCode: Int, description: String) {
 		AnalyticsUtil.logViewAlert(
 				ConfirmationAlertData(
 						false,
@@ -291,28 +295,7 @@ class BillingPresenter(
 		} else {
 			view?.goBack()
 		}
-
-		//Analytics
-		when (ContentAccessManager.contract.getCamFlow()) {
-			CamFlow.STOREFRONT -> {
-				AnalyticsUtil.logContentGatewaySession(
-						TimedEvent.END,
-						ContentAccessManager.contract.getAnalyticsDataProvider().trigger.value,
-						Action.PURCHASE
-				)
-			}
-			CamFlow.AUTH_AND_STOREFRONT -> {
-				AnalyticsUtil.logContentGatewaySession(
-						TimedEvent.END,
-						ContentAccessManager.contract.getAnalyticsDataProvider().trigger.value,
-						Action.SIGNUP_AND_PURCHASE
-				)
-			}
-			else -> {
-			}
-		}
 	}
-	//
 
 	override fun onRestoreClicked() {
 		view?.showLoadingIndicator()
@@ -321,10 +304,6 @@ class BillingPresenter(
 	}
 
 	override fun onLastFragmentClosed() {
-		AnalyticsUtil.logContentGatewaySession(
-				TimedEvent.END,
-				ContentAccessManager.contract.getAnalyticsDataProvider().trigger.value,
-				Action.CANCEL
-		)
+		AnalyticsGatewaySession.sessionData.add(Action.CANCEL)
 	}
 }

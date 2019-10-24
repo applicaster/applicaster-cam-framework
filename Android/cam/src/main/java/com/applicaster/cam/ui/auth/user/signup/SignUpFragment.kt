@@ -42,6 +42,6 @@ class SignUpFragment : UserAuthFragment(), ISignUpView {
     }
 
     override fun onLastFragmentClosed() {
-
+        presenter?.onLastFragmentClosed()
     }
 }

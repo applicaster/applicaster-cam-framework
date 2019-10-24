@@ -172,10 +172,10 @@ class AnalyticsUtil {
             AnalyticsAgentUtil.logEvent(AnalyticsEvent.LAUNCH_CONTENT_GATEWAY_PLUGIN.value, params)
         }
 
-        fun logContentGatewaySession(timedEvent: TimedEvent, trigger: String, action: Action) {
+        fun logContentGatewaySession(timedEvent: TimedEvent, trigger: String, action: List<Action>) {
             val params = mapOf(
                 Properties.TRIGGER.value to trigger,
-                Properties.ACTION.value to action.value,
+                Properties.ACTION.value to action.joinToString(separator = " & ") { it.value },
                 Properties.PLUGIN_PROVIDER.value to getPluginProvider()
             )
             if (timedEvent == TimedEvent.START)
@@ -425,11 +425,9 @@ enum class Action(val value: String) {
     PURCHASE              ("Purchase"),
     LOGIN                 ("Login"),
     SIGNUP                ("Sign Up"),
-    SIGNUP_AND_PURCHASE   ("Sign Up & Purchase"),
-    LOGIN_AND_PURCHASE    ("Log In & Purchase"),
+    PASSWORD_RESET        ("Password Reset"),
     RESTORE_PURCHASE      ("Restore Purchase"),
     CANCEL                ("Cancel"),
-    FAILED_ATTEMPT        ("Failed Attempt"),
     SEND_APP_TO_BACKGROUND("Send App To Background")
     // @formatter:on
 }
@@ -456,9 +454,9 @@ enum class TimedEvent {
 }
 
 enum class UserProperties(val value: String) {
-    LOGGED_IN("Logged In"),
-    AUTH_PROVIDER("Authentication Provider"),
-    SUBSCRIBER("Subscriber"),
+    LOGGED_IN            ("Logged In"),
+    AUTH_PROVIDER        ("Authentication Provider"),
+    SUBSCRIBER           ("Subscriber"),
     PURCHASE_PRODUCT_NAME("Purchase Product Name")
 }
 
@@ -482,3 +480,6 @@ data class PurchaseProductPropertiesData(
     val purchaseEntityType: String
 )
 
+object AnalyticsGatewaySession {
+    val sessionData: ArrayList<Action> = arrayListOf()
+}

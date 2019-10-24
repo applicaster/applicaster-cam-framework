@@ -32,6 +32,7 @@ abstract class UserAuthPresenter(private val view: IBaseInputView?) : BaseInputP
                 val errorMessage: String =
                         if (error.message.isNullOrEmpty()) "Facebook auth failed" else error.message.orEmpty()
                 view?.showAlert(errorMessage)
+                //Analytics
                 AnalyticsUtil.logViewAlert(
                     ConfirmationAlertData(
                         false,
@@ -41,6 +42,7 @@ abstract class UserAuthPresenter(private val view: IBaseInputView?) : BaseInputP
                             errorMessage
                     )
                 )
+                //
             }
 
             override fun onTaskComplete(result: APUser) {
@@ -69,7 +71,7 @@ abstract class UserAuthPresenter(private val view: IBaseInputView?) : BaseInputP
         val errorMessage: String = 
                 if (error?.message.isNullOrEmpty()) "Facebook auth failed" else error?.message.orEmpty()
         view?.showAlert(errorMessage)
-
+        //Analytics
         AnalyticsUtil.logViewAlert(
             ConfirmationAlertData(
                 false,
@@ -79,6 +81,7 @@ abstract class UserAuthPresenter(private val view: IBaseInputView?) : BaseInputP
                     errorMessage
             )
         )
+        //
     }
 
     override fun onFacebookButtonClicked(activity: Activity?) {
