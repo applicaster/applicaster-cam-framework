@@ -21,7 +21,7 @@ class AnalyticsUtil {
 
 
         private fun getFirstScreen() =
-            Properties.TRIGGER.value to when (ContentAccessManager.pluginConfigurator.getDefaultAuthScreen()) {
+            Properties.FIRST_SCREEN.value to when (ContentAccessManager.pluginConfigurator.getDefaultAuthScreen()) {
                 AuthScreenType.LOGIN -> AuthScreenType.LOGIN.getKey()
                 AuthScreenType.SIGNUP -> AuthScreenType.SIGNUP.getKey()
                 else -> KEY_NON_PROVIDED
@@ -161,7 +161,7 @@ class AnalyticsUtil {
             AnalyticsAgentUtil.logEvent(AnalyticsEvent.ALTERNATIVE_SIGNUP_FAILURE.value, params)
         }
 
-        fun logLaunchContentGatwayPlugin(trigger: String) {
+        fun logLaunchContentGatewayPlugin(trigger: String) {
             val params = mapOf(
                 Properties.TRIGGER.value to trigger,
                 getFirstScreen(),

@@ -12,7 +12,6 @@ import com.applicaster.cam.config.ui.PluginUIProvider
 import com.applicaster.cam.config.ui.UIProvider
 import com.applicaster.cam.params.auth.AuthScreenType
 import com.applicaster.cam.ui.CamActivity
-import kotlin.math.log
 import kotlin.properties.Delegates
 
 object ContentAccessManager : IContentAccessManager {
@@ -47,7 +46,7 @@ object ContentAccessManager : IContentAccessManager {
     }
 
     private fun logAnalyticsEvents() {
-        AnalyticsUtil.logLaunchContentGatwayPlugin(this.contract.getAnalyticsDataProvider().trigger.value)
+        AnalyticsUtil.logLaunchContentGatewayPlugin(this.contract.getAnalyticsDataProvider().trigger.value)
         val flow = this.contract.getCamFlow()
         val authScreenType = pluginConfigurator.getDefaultAuthScreen()
         when(flow) {
