@@ -42,6 +42,7 @@ class SignUpPresenter(
                 msg
             )
         )
+        AnalyticsGatewaySession.sessionData.add(Action.FAILED_ATTEMPT)
         //
     }
 
@@ -104,6 +105,11 @@ class SignUpPresenter(
             )
         )
         //
+    }
+
+    override fun onCancel() {
+        super.onCancel()
+        AnalyticsUtil.logAlternativeSignUpCancel()
     }
 
     override fun onFacebookButtonClicked(activity: Activity?) {

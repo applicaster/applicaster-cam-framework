@@ -3,6 +3,7 @@ package com.applicaster.cam
 import android.content.Context
 import android.content.Intent
 import com.applicaster.cam.analytics.Action
+import com.applicaster.cam.analytics.AnalyticsGatewaySession
 import com.applicaster.cam.analytics.AnalyticsUtil
 import com.applicaster.cam.analytics.TimedEvent
 import com.applicaster.cam.config.Configurator
@@ -46,6 +47,7 @@ object ContentAccessManager : IContentAccessManager {
     }
 
     private fun logAnalyticsEvents() {
+        AnalyticsGatewaySession.sessionData.clear()
         AnalyticsUtil.logLaunchContentGatewayPlugin(this.contract.getAnalyticsDataProvider().trigger.value)
         val flow = this.contract.getCamFlow()
         val authScreenType = pluginConfigurator.getDefaultAuthScreen()

@@ -106,6 +106,24 @@ class AnalyticsUtil {
             )
             AnalyticsAgentUtil.logEvent(AnalyticsEvent.ALTERNATIVE_LOGIN_FAILURE.value, params)
         }
+        
+        fun logAlternativeLoginCancel() {
+            val params = mapOf(
+                    Properties.CONTENT_ENTITY_NAME.value to getContentEntityName(),
+                    Properties.CONTENT_ENTITY_TYPE.value to getContentEntityType(),
+                    Properties.PLUGIN_PROVIDER.value to getPluginProvider()
+            )
+            AnalyticsAgentUtil.logEvent(AnalyticsEvent.ALTERNATIVE_LOGIN_CANCEL.value, params)
+        }
+
+        fun logAlternativeSignUpCancel() {
+            val params = mapOf(
+                    Properties.CONTENT_ENTITY_NAME.value to getContentEntityName(),
+                    Properties.CONTENT_ENTITY_TYPE.value to getContentEntityType(),
+                    Properties.PLUGIN_PROVIDER.value to getPluginProvider()
+            )
+            AnalyticsAgentUtil.logEvent(AnalyticsEvent.ALTERNATIVE_SIGNUP_CANCEL.value, params)
+        }
 
         fun logTapStandardSignUpButton() {
             val params = mapOf(
@@ -368,12 +386,14 @@ enum class AnalyticsEvent(val value: String) {
     TAP_ALTERNATIVE_LOGIN        ("Tap Alternative Login"),
     ALTERNATIVE_LOGIN_SUCCESS    ("Alternative Login Success"),
     ALTERNATIVE_LOGIN_FAILURE    ("Alternative Login Failure"),
+    ALTERNATIVE_LOGIN_CANCEL     ("Alternative Login Cancel"),
     TAP_STANDARD_SIGNUP_BUTTON   ("Tap Standard Sign-Up Button"),
     STANDARD_SIGNUP_SUCCESS      ("Standard Sign-Up Success"),
     STANDARD_SIGNUP_FAILURE      ("Standard Sign-Up Failure"),
     TAP_ALTERNATIVE_SIGNUP       ("Tap Alternative Sign-Up"),
     ALTERNATIVE_SIGNUP_SUCCESS   ("Alternative Sign-Up Success"),
     ALTERNATIVE_SIGNUP_FAILURE   ("Alternative Sign-Up Failure"),
+    ALTERNATIVE_SIGNUP_CANCEL    ("Alternative Sign-Up Cancel"),
     LAUNCH_CONTENT_GATEWAY_PLUGIN("Launch Content Gateway Plugin"),
     CONTENT_GATEWAY_SESSION      ("Content Gateway Session"),
     SWITCH_TO_LOGIN_SCREEN       ("Switch to Login Screen"),
@@ -425,9 +445,10 @@ enum class Action(val value: String) {
     PURCHASE              ("Purchase"),
     LOGIN                 ("Login"),
     SIGNUP                ("Sign Up"),
-    PASSWORD_RESET        ("Password Reset"),
+    RESET_PASSWORD        ("Reset Password"),
     RESTORE_PURCHASE      ("Restore Purchase"),
     CANCEL                ("Cancel"),
+    FAILED_ATTEMPT        ("Failed Attempt"),
     SEND_APP_TO_BACKGROUND("Send App To Background")
     // @formatter:on
 }

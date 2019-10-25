@@ -20,7 +20,7 @@ class PasswordResetPresenter(
 
         view?.customize()
         
-        AnalyticsGatewaySession.sessionData.add(Action.PASSWORD_RESET)
+        AnalyticsGatewaySession.sessionData.add(Action.RESET_PASSWORD)
     }
 
     override fun performAuthAction(input: HashMap<String, String>) {
@@ -45,6 +45,7 @@ class PasswordResetPresenter(
                 msg
             )
         )
+        AnalyticsGatewaySession.sessionData.add(Action.FAILED_ATTEMPT)
         //
     }
 

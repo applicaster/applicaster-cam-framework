@@ -106,6 +106,8 @@ class BillingPresenter(
 			override fun onFailure(msg: String) {
 				view?.hideLoadingIndicator()
 				showHandledError(msg)
+				//Analytics
+				AnalyticsGatewaySession.sessionData.add(Action.FAILED_ATTEMPT)
 			}
 
 			override fun onActionSuccess() {
@@ -146,6 +148,7 @@ class BillingPresenter(
 			AnalyticsUtil.collectPurchaseData(camContract.getAnalyticsDataProvider().purchaseData, purchases).forEach {
 				AnalyticsUtil.logStoreRestorePurchaseError("Restore purchases error", it)
 			}
+			AnalyticsGatewaySession.sessionData.add(Action.FAILED_ATTEMPT)
 		} else {
 			AnalyticsUtil.collectPurchaseData(
 					camContract.getAnalyticsDataProvider().purchaseData,
