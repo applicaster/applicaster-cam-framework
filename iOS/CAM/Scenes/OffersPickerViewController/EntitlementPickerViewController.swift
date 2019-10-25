@@ -76,6 +76,12 @@ class EntitlementPickerViewController: UIViewController {
         closeButton.isHidden = presenter?.camDelegate.trigger() == .appLaunch
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        AnalyticsEvents.userFlow.append("Purchase")
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         loadingPopover.frame = self.view.bounds
@@ -97,6 +103,7 @@ class EntitlementPickerViewController: UIViewController {
     }
     
     @IBAction func restore(_ sender: Any) {
+        AnalyticsEvents.userFlow.append("Restore Purchase")
         presenter?.restore()
     }
     

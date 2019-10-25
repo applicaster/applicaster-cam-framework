@@ -87,6 +87,7 @@ class SignUpPresenter {
                     let viewAlertEvent = AnalyticsEvents.makeViewAlert(from: error)
                     ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: viewAlertEvent.key,
                                                                                  parameters: viewAlertEvent.metadata)
+                    AnalyticsEvents.userFlow.append("Failed Attempt")
                     
                     self.view.showLoadingScreen(false)
                     self.view.showError(description: error.localizedDescription)
@@ -148,6 +149,8 @@ class SignUpPresenter {
                 let failureEvent = AnalyticsEvents.alternativeSignUpFailure(playableInfo)
                 ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: failureEvent.key,
                                                                              parameters: failureEvent.metadata)
+                AnalyticsEvents.userFlow.append("Failed Attempt")
+                
                 if let error = error {
                     self.view.showError(description: error.localizedDescription)
                 }

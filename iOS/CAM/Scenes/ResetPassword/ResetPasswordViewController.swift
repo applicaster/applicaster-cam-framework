@@ -51,6 +51,12 @@ class ResetPasswordViewController: UIViewController {
         setupConstraints()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        AnalyticsEvents.userFlow.append("Reset Password")
+    }
+    
     func configureElements() {
         backgroundImageView.setStyle(asset: .background)
         backButton.setStyle(iconAsset: .backButton)

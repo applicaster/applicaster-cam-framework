@@ -65,6 +65,7 @@ class ResetPasswordPresenter {
                     let viewAlertEvent = AnalyticsEvents.makeViewAlert(from: error)
                     ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: viewAlertEvent.key,
                                                                                  parameters: viewAlertEvent.metadata)
+                    AnalyticsEvents.userFlow.append("Failed Attempt")
                 }
             })
         } else {

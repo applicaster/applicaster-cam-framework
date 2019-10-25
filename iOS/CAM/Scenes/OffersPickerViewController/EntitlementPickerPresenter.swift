@@ -71,6 +71,7 @@ class EntitlementPickerPresenter {
                     }
                 })
             case .failure(let error):
+                AnalyticsEvents.userFlow.append("Failed Attempt")
                 self.view.showAlert(description: error.localizedDescription)
                 self.view.showLoadingScreen(false)
             }
@@ -131,6 +132,7 @@ class EntitlementPickerPresenter {
                         ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: successfulRestoreEvent.key,
                                                                                      parameters: successfulRestoreEvent.metadata)
                     case .failure(let error):
+                        AnalyticsEvents.userFlow.append("Failed Attempt")
                         self.view.showAlert(description: error.localizedDescription)
                         self.sendAnalyticsEvent(for: error)
                         let restoreFailureEvent = AnalyticsEvents.storeRestorePurchaseError(error,
@@ -142,6 +144,7 @@ class EntitlementPickerPresenter {
                     }
                 })
             case .failure(let error):
+                AnalyticsEvents.userFlow.append("Failed Attempt")
                 self.view.showLoadingScreen(false)
                 print(error.localizedDescription)
             }

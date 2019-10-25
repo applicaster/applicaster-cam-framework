@@ -82,6 +82,12 @@ class SignUpViewController: UIViewController {
         authFieldsTable.isScrollEnabled = authFieldsTable.contentSize.height > authFieldsTable.frame.height
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        AnalyticsEvents.userFlow.append("Sign Up")
+    }
+    
     func setupUI() {
         self.navigationController?.isNavigationBarHidden = true
         if let isHidden = presenter?.isRoot {
