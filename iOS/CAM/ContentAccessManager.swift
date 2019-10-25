@@ -54,6 +54,7 @@ open class ContentAccessManager {
         ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: launchEvent.key,
                                                                      parameters: launchEvent.metadata,
                                                                      timed: true)
+        AnalyticsEvents.userFlow.removeAll()
         
         switch camFlow {
         case .authentication:
