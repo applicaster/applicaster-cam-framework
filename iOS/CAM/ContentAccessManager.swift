@@ -42,11 +42,6 @@ open class ContentAccessManager {
         camFlow.update(with: delegate.getPluginConfig(),
                        and: (delegate.IsUserLoggedIn(), delegate.isPurchaseNeeded()))
         
-        let event = AnalyticsEvents.contentGatewaySession(delegate.trigger())
-        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: event.key,
-                                                                     parameters: event.metadata,
-                                                                     timed: true)
-        
         var firstScreen = camFlow.firstScreen
         if camFlow == .authentication || camFlow == .authAndStorefront {
             let dictionary = delegate.getPluginConfig()
@@ -59,6 +54,7 @@ open class ContentAccessManager {
         ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: launchEvent.key,
                                                                      parameters: launchEvent.metadata,
                                                                      timed: true)
+        AnalyticsEvents.userFlow.removeAll()
         
         switch camFlow {
         case .authentication:
@@ -70,6 +66,11 @@ open class ContentAccessManager {
         case .no:
             completion(true)
         }
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(appSendToBackground),
+                                               name: UIApplication.didEnterBackgroundNotification,
+                                               object: nil)
     }
     
     // MARK: - Private methods
@@ -120,11 +121,23 @@ open class ContentAccessManager {
     }
     
     private func finishFlow(_ result: Bool) {
+        if result == false {
+            AnalyticsEvents.userFlow.append("Cancel")
+        }
+        let event = AnalyticsEvents.contentGatewaySession(delegate.trigger())
+        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: event.key,
+                                                                     parameters: event.metadata,
+                                                                     timed: true)
+        
         childCoordinator = nil
         navigationController.viewControllers.removeAll()
         self.navigationController.dismiss(animated: true, completion: {
             self.completion(result)
         })
+    }
+    
+    @objc private func appSendToBackground() {
+        AnalyticsEvents.userFlow.append("Send app to background")
     }
 }
 

@@ -41,7 +41,7 @@ public extension UIViewController {
         confirmationPopover.actionButton.setStyle(config: config,
                                                   backgroundAsset: .alertButton,
                                                   camTitleKey: buttonKey,
-                                                  style: .actionButtonFont)
+                                                  style: .confirmationButtonFont)
         self.view.addSubview(confirmationPopover)
     }
     

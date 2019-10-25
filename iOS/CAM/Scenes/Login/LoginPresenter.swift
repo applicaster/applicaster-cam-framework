@@ -88,6 +88,11 @@ class LoginPresenter {
                     let failureLoginEvent = AnalyticsEvents.standardLoginFailure(playableInfo)
                     ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: failureLoginEvent.key,
                                                                                  parameters: failureLoginEvent.metadata)
+                    let viewAlert = AnalyticsEvents.makeViewAlert(from: error)
+                    ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: viewAlert.key,
+                                                                                 parameters: viewAlert.metadata)
+                    AnalyticsEvents.userFlow.append("Failed Attempt")
+                    
                     self.view.showLoadingScreen(false)
                     self.view.showError(description: error.localizedDescription)
                 }
@@ -148,6 +153,8 @@ class LoginPresenter {
                 let failureLoginEvent = AnalyticsEvents.alternativaLoginFailure(playableInfo)
                 ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: failureLoginEvent.key,
                                                                              parameters: failureLoginEvent.metadata)
+                AnalyticsEvents.userFlow.append("Failed Attempt")
+                
                 self.view.showLoadingScreen(false)
                 if let error = error {
                     self.view.showError(description: error.localizedDescription)

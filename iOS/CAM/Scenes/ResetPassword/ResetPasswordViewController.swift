@@ -51,6 +51,12 @@ class ResetPasswordViewController: UIViewController {
         setupConstraints()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        AnalyticsEvents.userFlow.append("Reset Password")
+    }
+    
     func configureElements() {
         backgroundImageView.setStyle(asset: .background)
         backButton.setStyle(iconAsset: .backButton)
@@ -145,8 +151,11 @@ extension ResetPasswordViewController: ResetPasswordViewProtocol {
         if let alertTitle = configDictionary[CAMKeys.passwordAlertTitleText.rawValue],
            let alertDescription = configDictionary[CAMKeys.passwordAlertInfoText.rawValue],
            let _ = configDictionary[CAMKeys.alertButtonText.rawValue] {
-            self.showConfirmationScreen(config: configDictionary, titleKey: .passwordAlertTitleText, descriptionKey: .passwordAlertInfoText,
-                                        buttonKey: .alertButtonText, action: { [weak self] in
+            self.showConfirmationScreen(config: configDictionary,
+                                        titleKey: .passwordAlertTitleText,
+                                        descriptionKey: .passwordAlertInfoText,
+                                        buttonKey: .alertButtonText,
+                                        action: { [weak self] in
                 self?.presenter?.backToPreviousScreen()
             })
             

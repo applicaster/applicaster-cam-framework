@@ -66,6 +66,8 @@ enum AnalyticsEvents {
     case completeRestorePurchase(PlayableItemInfo, [PurchaseProperties])
     case storeRestorePurchaseError(Error, PlayableItemInfo, PurchaseProperties?)
     
+    static var userFlow: [String] = []
+    
     var key: String {
         switch self {
         case .tapStandardLoginButton: return "Tap Standard Login Button"
@@ -120,8 +122,10 @@ enum AnalyticsEvents {
                 .merge(["First Screen": firstScreen])
                 .merge(info.metadata)
         case .contentGatewaySession(let trigger):
+            let action = AnalyticsEvents.userFlow.joined(separator: " & ")
             metadata = metadata
                 .merge(trigger.metadata)
+                .merge(["Action": action])
         case .switchToLoginScreen,
              .switchToSignUpScreen,
              .launchPasswordResetScreen,
