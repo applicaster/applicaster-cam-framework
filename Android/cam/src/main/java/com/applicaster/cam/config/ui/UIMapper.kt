@@ -8,8 +8,8 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import com.applicaster.cam.ContentAccessManager
+import com.applicaster.util.OSUtil
 import com.applicaster.util.TextUtil
-import com.applicaster.util.ui.APUIUtils
 
 class UIMapper {
     companion object {
@@ -56,9 +56,9 @@ class UIMapper {
             view.setTextColor(uiProvider.getColor(styleKey.getHexColor()))
 
             //customize text size
-            if (APUIUtils.isPhoneLandscape()) {
+            if (!OSUtil.isTablet()) {
                 view.textSize = uiProvider.getTextSize(styleKey.getTextSizePhone())
-            } else if (APUIUtils.isTabletPortrait()) {
+            } else {
                 view.textSize = uiProvider.getTextSize(styleKey.getTextSizeTablet())
             }
 
