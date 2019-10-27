@@ -159,13 +159,13 @@
           {
             "key": "screen_title_size_phone",
             "type": "number_input",
-            "label_tooltip": "The font-size that will be used for the text at the top of each screen in the gateway process",
+            "label_tooltip": "The font-size (for smartphones) that will be used for the text at the top of each screen in the gateway process",
             "initial_value": "19"
           },
           {
             "key": "screen_title_size_pad",
             "type": "number_input",
-            "label_tooltip": "The font-size that will be used for the text at the top of each screen in the gateway process",
+            "label_tooltip": "The font-size (for tablets) that will be used for the text at the top of each screen in the gateway process",
             "initial_value": "19"
           },
           {
@@ -187,13 +187,13 @@
           {
             "key": "screen_description_size_phone",
             "type": "number_input",
-            "label_tooltip": "The font-size that will be used for the text describing the purpose of the given screen in the gateway process (below the title text). Note: Not all screens include description text.",
+            "label_tooltip": "The font-size (for smartphones) that will be used for the text describing the purpose of the given screen in the gateway process (below the title text). Note: Not all screens include description text.",
             "initial_value": "13"
           },
           {
             "key": "screen_description_size_pad",
             "type": "number_input",
-            "label_tooltip": "The font-size that will be used for the text describing the purpose of the given screen in the gateway process (below the title text). Note: Not all screens include description text.",
+            "label_tooltip": "The font-size (for tablets) that will be used for the text describing the purpose of the given screen in the gateway process (below the title text). Note: Not all screens include description text.",
             "initial_value": "13"
           },
           {
@@ -250,7 +250,7 @@
           {
             "key": "input_field_label_size_phone",
             "type": "number_input",
-            "label_tooltip": "The font-size for the labels (aka “hints”) displayed within text input fields prior to the user starting to input a value.",
+            "label_tooltip": "The font-size (for smartphones) for the labels (aka “hints”) displayed within text input fields prior to the user starting to input a value.",
             "initial_value": "13",
             "conditional_fields": [
               {
@@ -264,7 +264,7 @@
               {
                 "key": "input_field_label_size_pad",
                 "type": "number_input",
-                "label_tooltip": "The font-size for the labels (aka “hints”) displayed within text input fields prior to the user starting to input a value.",
+                "label_tooltip": "The font-size (for tablets) for the labels (aka “hints”) displayed within text input fields prior to the user starting to input a value.",
                 "initial_value": "13",
                 "conditional_fields": [
                   {
@@ -308,13 +308,13 @@
           {
             "key": "action_button_size_phone",
             "type": "number_input",
-            "label_tooltip": "The font-size for the button in any screen of the gateway process which has one primary call-to-action button (e.g. login, sign-up, restore password)",
+            "label_tooltip": "The font-size (for smartphones) for the button in any screen of the gateway process which has one primary call-to-action button (e.g. login, sign-up, restore password)",
             "initial_value": "14"
           },
           {
             "key": "action_button_size_pad",
             "type": "number_input",
-            "label_tooltip": "The font-size for the button in any screen of the gateway process which has one primary call-to-action button (e.g. login, sign-up, restore password)",
+            "label_tooltip": "The font-size (for tablets) for the button in any screen of the gateway process which has one primary call-to-action button (e.g. login, sign-up, restore password)",
             "initial_value": "14"
           },
           {
@@ -336,13 +336,13 @@
           {
             "key": "prompt_size_phone",
             "type": "number_input",
-            "label_tooltip": "<p>One screen may present an option to lead to another screen or action. For example, on the login screen, the text “Don’t have an account?” may appear before a link which leads to the sign-up screen.</p><p>This field will determine the font-size used in the prompt prior to the link for such scenarios.</p>",
+            "label_tooltip": "<p>One screen may present an option to lead to another screen or action. For example, on the login screen, the text “Don’t have an account?” may appear before a link which leads to the sign-up screen.</p><p>This field will determine the font-size (for smartphones) used in the prompt prior to the link for such scenarios.</p>",
             "initial_value": "13"
           },
           {
             "key": "prompt_size_pad",
             "type": "number_input",
-            "label_tooltip": "<p>One screen may present an option to lead to another screen or action. For example, on the login screen, the text “Don’t have an account?” may appear before a link which leads to the sign-up screen.</p><p>This field will determine the font-size used in the prompt prior to the link for such scenarios.</p>",
+            "label_tooltip": "<p>One screen may present an option to lead to another screen or action. For example, on the login screen, the text “Don’t have an account?” may appear before a link which leads to the sign-up screen.</p><p>This field will determine the font-size (for tablets) used in the prompt prior to the link for such scenarios.</p>",
             "initial_value": "13"
           },
           {
@@ -364,13 +364,13 @@
           {
             "key": "link_size_phone",
             "type": "number_input",
-            "label_tooltip": "One screen may present an option to lead to another screen or action. For example, on the login screen, the text “Sign Up” may be lead to the sign-up screen when tapped. This field will determine the font-size used for such linkable text in the gateway screens.",
+            "label_tooltip": "One screen may present an option to lead to another screen or action. For example, on the login screen, the text “Sign Up” may be lead to the sign-up screen when tapped. This field will determine the font-size (for smartphones) used for such linkable text in the gateway screens.",
             "initial_value": "13"
           },
           {
             "key": "link_size_pad",
             "type": "number_input",
-            "label_tooltip": "One screen may present an option to lead to another screen or action. For example, on the login screen, the text “Sign Up” may be lead to the sign-up screen when tapped. This field will determine the font-size used for such linkable text in the gateway screens.",
+            "label_tooltip": "One screen may present an option to lead to another screen or action. For example, on the login screen, the text “Sign Up” may be lead to the sign-up screen when tapped. This field will determine the font-size (for tablets) used for such linkable text in the gateway screens.",
             "initial_value": "13"
           },
           {
@@ -452,7 +452,7 @@
           {
             "key": "alternative_authentication_separator_size_phone",
             "type": "number_input",
-            "label_tooltip": "The font-size for the alternative authorization separator text.",
+            "label_tooltip": "The font-size (for smartphones) for the alternative authorization separator text.",
             "initial_value": "12",
             "conditional_fields": [
               {
@@ -466,7 +466,7 @@
           {
             "key": "alternative_authentication_separator_size_pad",
             "type": "number_input",
-            "label_tooltip": "The font-size for the alternative authorization separator text.",
+            "label_tooltip": "The font-size (for tablets) for the alternative authorization separator text.",
             "initial_value": "12",
             "conditional_fields": [
               {
@@ -534,7 +534,7 @@
           {
             "key": "alternative_authentication_prompt_size_phone",
             "type": "number_input",
-            "label_tooltip": "The font-size prompting the user to use a third party option (e.g. Facebook) to login or sign-up.",
+            "label_tooltip": "The font-size (for smartphones) prompting the user to use a third party option (e.g. Facebook) to login or sign-up.",
             "conditional_fields": [
               {
                 "condition_value": [
@@ -548,7 +548,7 @@
           {
             "key": "alternative_authentication_prompt_size_pad",
             "type": "number_input",
-            "label_tooltip": "The font-size prompting the user to use a third party option (e.g. Facebook) to login or sign-up.",
+            "label_tooltip": "The font-size (for tablets) prompting the user to use a third party option (e.g. Facebook) to login or sign-up.",
             "conditional_fields": [
               {
                 "condition_value": [
@@ -756,7 +756,7 @@
           {
             "key": "reset_password_size_phone",
             "type": "number_input",
-            "label_tooltip": "The font-size for the text that will be displayed to prompt the user to restore their password",
+            "label_tooltip": "The font-size (for smartphones) for the text that will be displayed to prompt the user to restore their password",
             "initial_value": "11",
             "conditional_fields": [
               {
@@ -772,7 +772,7 @@
           {
             "key": "reset_password_size_pad",
             "type": "number_input",
-            "label_tooltip": "The font-size for the text that will be displayed to prompt the user to restore their password",
+            "label_tooltip": "The font-size (for tablets) for the text that will be displayed to prompt the user to restore their password",
             "initial_value": "11",
             "conditional_fields": [
               {
@@ -1046,7 +1046,7 @@
           {
             "key": "payment_option_title_size_phone",
             "type": "number_input",
-            "label_tooltip": "The font-size used in the title of each payment option",
+            "label_tooltip": "The font-size (for smartphones) used in the title of each payment option",
             "initial_value": "20",
             "conditional_fields": [
               {
@@ -1060,7 +1060,7 @@
           {
             "key": "payment_option_title_size_pad",
             "type": "number_input",
-            "label_tooltip": "The font-size used in the title of each payment option",
+            "label_tooltip": "The font-size (for tablets) used in the title of each payment option",
             "initial_value": "20",
             "conditional_fields": [
               {
@@ -1114,7 +1114,7 @@
           {
             "key": "payment_option_description_size_phone",
             "type": "number_input",
-            "label_tooltip": "The font-size used in the description of each payment option (below the title and above the button for selecting the given payment option)",
+            "label_tooltip": "The font-size (for smartphones) used in the description of each payment option (below the title and above the button for selecting the given payment option)",
             "conditional_fields": [
               {
                 "condition_value": [
@@ -1128,7 +1128,7 @@
           {
             "key": "payment_option_description_size_pad",
             "type": "number_input",
-            "label_tooltip": "The font-size used in the description of each payment option (below the title and above the button for selecting the given payment option)",
+            "label_tooltip": "The font-size (for tablets) used in the description of each payment option (below the title and above the button for selecting the given payment option)",
             "initial_value": "14",
             "conditional_fields": [
               {
@@ -1210,7 +1210,7 @@
           {
             "key": "legal_details_size_phone",
             "type": "number_input",
-            "label_tooltip": "The font-size used for the payment options screen legal text",
+            "label_tooltip": "The font-size (for smartphones) used for the payment options screen legal text",
             "initial_value": "10",
             "conditional_fields": [
               {
@@ -1224,7 +1224,7 @@
           {
             "key": "legal_details_size_pad",
             "type": "number_input",
-            "label_tooltip": "The font-size used for the payment options screen legal text",
+            "label_tooltip": "The font-size (for tablets) used for the payment options screen legal text",
             "conditional_fields": [
               {
                 "condition_value": [
@@ -1340,13 +1340,13 @@
           {
             "key": "confirmation_title_size_phone",
             "type": "number_input",
-            "label_tooltip": "The font-size used as the title of confirmation screens",
+            "label_tooltip": "The font-size (for smartphones) used as the title of confirmation screens",
             "initial_value": "25"
           },
           {
             "key": "confirmation_title_size_pad",
             "type": "number_input",
-            "label_tooltip": "The font-size used as the title of confirmation screens",
+            "label_tooltip": "The font-size (for tablets) used as the title of confirmation screens",
             "initial_value": "25"
           },
           {
@@ -1368,13 +1368,13 @@
           {
             "key": "confirmation_description_size_phone",
             "type": "number_input",
-            "label_tooltip": "The font-size used in the description of confirmation screens (below the title and above the button)",
+            "label_tooltip": "The font-size (for smartphones) used in the description of confirmation screens (below the title and above the button)",
             "initial_value": "20"
           },
           {
             "key": "confirmation_description_size_pad",
             "type": "number_input",
-            "label_tooltip": "The font-size used in the description of confirmation screens (below the title and above the button)",
+            "label_tooltip": "The font-size (for tablets) used in the description of confirmation screens (below the title and above the button)",
             "initial_value": "20"
           },
           {
@@ -1402,13 +1402,13 @@
           {
             "key": "confirmation_button_size_phone",
             "type": "number_input",
-            "label_tooltip": "The font-size for the Confirmation Button Text",
+            "label_tooltip": "The font-size (for smartphones) for the Confirmation Button Text",
             "initial_value": "14"
           },
           {
             "key": "confirmation_button_size_pad",
             "type": "number_input",
-            "label_tooltip": "The font-size for the Confirmation Button Text",
+            "label_tooltip": "The font-size (for tablets) for the Confirmation Button Text",
             "initial_value": "14"
           },
           {
