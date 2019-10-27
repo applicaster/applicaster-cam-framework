@@ -149,12 +149,12 @@
           {
             "key": "screen_title_font_ios",
             "type": "ios_font_selector",
-            "label_tooltip": "The font that will be used for the text at the top of each screen in the gateway process"
+            "label_tooltip": "The font (for iOS) that will be used for the text at the top of each screen in the gateway process"
           },
           {
             "key": "screen_title_font_android",
             "type": "android_font_selector",
-            "label_tooltip": "The font that will be used for the text at the top of each screen in the gateway process"
+            "label_tooltip": "The font (for Android) that will be used for the text at the top of each screen in the gateway process"
           },
           {
             "key": "screen_title_size_phone",
@@ -177,12 +177,12 @@
           {
             "key": "screen_description_font_ios",
             "type": "ios_font_selector",
-            "label_tooltip": "The font that will be used for the text describing the purpose of the given screen in the gateway process (below the title text). Note: Not all screens include description text."
+            "label_tooltip": "The font (for iOS) that will be used for the text describing the purpose of the given screen in the gateway process (below the title text). Note: Not all screens include description text."
           },
           {
             "key": "screen_description_font_android",
             "type": "android_font_selector",
-            "label_tooltip": "The font that will be used for the text describing the purpose of the given screen in the gateway process (below the title text). Note: Not all screens include description text."
+            "label_tooltip": "The font (for Android) that will be used for the text describing the purpose of the given screen in the gateway process (below the title text). Note: Not all screens include description text."
           },
           {
             "key": "screen_description_size_phone",
@@ -220,7 +220,7 @@
           {
             "key": "input_field_label_font_ios",
             "type": "ios_font_selector",
-            "label_tooltip": "The font for the labels (aka “hints”) displayed within text input fields prior to the user starting to input a value.",
+            "label_tooltip": "The font (for iOS) for the labels (aka “hints”) displayed within text input fields prior to the user starting to input a value.",
             "conditional_fields": [
               {
                 "condition_value": [
@@ -235,7 +235,7 @@
           {
             "key": "input_field_label_font_android",
             "type": "android_font_selector",
-            "label_tooltip": "The font for the labels (aka “hints”) displayed within text input fields prior to the user starting to input a value.",
+            "label_tooltip": "The font (for Android) for the labels (aka “hints”) displayed within text input fields prior to the user starting to input a value.",
             "conditional_fields": [
               {
                 "condition_value": [
@@ -298,12 +298,12 @@
           {
             "key": "action_button_font_ios",
             "type": "ios_font_selector",
-            "label_tooltip": "The font for the button in any screen of the gateway process which has one primary call-to-action button (e.g. login, sign-up, restore password)"
+            "label_tooltip": "The font (for iOS) for the button in any screen of the gateway process which has one primary call-to-action button (e.g. login, sign-up, restore password)"
           },
           {
             "key": "action_button_font_android",
             "type": "android_font_selector",
-            "label_tooltip": "The font for the button in any screen of the gateway process which has one primary call-to-action button (e.g. login, sign-up, restore password)"
+            "label_tooltip": "The font (for Android) for the button in any screen of the gateway process which has one primary call-to-action button (e.g. login, sign-up, restore password)"
           },
           {
             "key": "action_button_size_phone",
@@ -326,12 +326,12 @@
           {
             "key": "prompt_font_ios",
             "type": "ios_font_selector",
-            "label_tooltip": "<p>One screen may present an option to lead to another screen or action. For example, on the login screen, the text “Don’t have an account?” may appear before a link which leads to the sign-up screen.</p><p>This field will determine the font used in the prompt prior to the link for such scenarios.</p>"
+            "label_tooltip": "<p>One screen may present an option to lead to another screen or action. For example, on the login screen, the text “Don’t have an account?” may appear before a link which leads to the sign-up screen.</p><p>This field will determine the font (for iOS) used in the prompt prior to the link for such scenarios.</p>"
           },
           {
             "key": "prompt_font_android",
             "type": "android_font_selector",
-            "label_tooltip": "<p>One screen may present an option to lead to another screen or action. For example, on the login screen, the text “Don’t have an account?” may appear before a link which leads to the sign-up screen.</p><p>This field will determine the font used in the prompt prior to the link for such scenarios.</p>"
+            "label_tooltip": "<p>One screen may present an option to lead to another screen or action. For example, on the login screen, the text “Don’t have an account?” may appear before a link which leads to the sign-up screen.</p><p>This field will determine the font (for Android) used in the prompt prior to the link for such scenarios.</p>"
           },
           {
             "key": "prompt_size_phone",
@@ -354,12 +354,12 @@
           {
             "key": "link_font_ios",
             "type": "ios_font_selector",
-            "label_tooltip": "One screen may present an option to lead to another screen or action. For example, on the login screen, the text “Sign Up” may be lead to the sign-up screen when tapped. This field will determine the font used for such linkable text in the gateway screens."
+            "label_tooltip": "One screen may present an option to lead to another screen or action. For example, on the login screen, the text “Sign Up” may be lead to the sign-up screen when tapped. This field will determine the font (for iOS) used for such linkable text in the gateway screens."
           },
           {
             "key": "link_font_android",
             "type": "android_font_selector",
-            "label_tooltip": "One screen may present an option to lead to another screen or action. For example, on the login screen, the text “Sign Up” may be lead to the sign-up screen when tapped. This field will determine the font used for such linkable text in the gateway screens."
+            "label_tooltip": "One screen may present an option to lead to another screen or action. For example, on the login screen, the text “Sign Up” may be lead to the sign-up screen when tapped. This field will determine the font (for Android) used for such linkable text in the gateway screens."
           },
           {
             "key": "link_size_phone",
@@ -426,7 +426,7 @@
           {
             "key": "alternative_authentication_separator_font_ios",
             "type": "ios_font_selector",
-            "label_tooltip": "The font for the alternative authorization separator text.",
+            "label_tooltip": "The font (for iOS) for the alternative authorization separator text.",
             "conditional_fields": [
               {
                 "condition_value": [
@@ -439,7 +439,7 @@
           {
             "key": "alternative_authentication_separator_font_android",
             "type": "android_font_selector",
-            "label_tooltip": "The font for the alternative authorization separator text.",
+            "label_tooltip": "The font (for Android) for the alternative authorization separator text.",
             "conditional_fields": [
               {
                 "condition_value": [
@@ -508,7 +508,7 @@
           {
             "key": "alternative_authentication_prompt_font_ios",
             "type": "ios_font_selector",
-            "label_tooltip": "The font prompting the user to use a third party option (e.g. Facebook) to login or sign-up.",
+            "label_tooltip": "The font (for iOS) prompting the user to use a third party option (e.g. Facebook) to login or sign-up.",
             "conditional_fields": [
               {
                 "condition_value": [
@@ -521,7 +521,7 @@
           {
             "key": "alternative_authentication_prompt_font_android",
             "type": "android_font_selector",
-            "label_tooltip": "The font prompting the user to use a third party option (e.g. Facebook) to login or sign-up.",
+            "label_tooltip": "The font (for Android) prompting the user to use a third party option (e.g. Facebook) to login or sign-up.",
             "conditional_fields": [
               {
                 "condition_value": [
@@ -726,7 +726,7 @@
           {
             "key": "reset_password_font_ios",
             "type": "ios_font_selector",
-            "label_tooltip": "The font for the text that will be displayed to prompt the user to restore their password",
+            "label_tooltip": "The font (for iOS) for the text that will be displayed to prompt the user to restore their password",
             "conditional_fields": [
               {
                 "condition_value": [
@@ -741,7 +741,7 @@
           {
             "key": "reset_password_font_android",
             "type": "android_font_selector",
-            "label_tooltip": "The font for the text that will be displayed to prompt the user to restore their password",
+            "label_tooltip": "The font (for Android) for the text that will be displayed to prompt the user to restore their password",
             "conditional_fields": [
               {
                 "condition_value": [
@@ -1020,7 +1020,7 @@
           {
             "key": "payment_option_title_font_ios",
             "type": "ios_font_selector",
-            "label_tooltip": "The font used in the title of each payment option",
+            "label_tooltip": "The font (for iOS) used in the title of each payment option",
             "conditional_fields": [
               {
                 "condition_value": [
@@ -1033,7 +1033,7 @@
           {
             "key": "payment_option_title_font_android",
             "type": "android_font_selector",
-            "label_tooltip": "The font used in the title of each payment option",
+            "label_tooltip": "The font (for Android) used in the title of each payment option",
             "conditional_fields": [
               {
                 "condition_value": [
@@ -1088,7 +1088,7 @@
           {
             "key": "payment_option_description_font_ios",
             "type": "ios_font_selector",
-            "label_tooltip": "The font used in the description of each payment option (below the title and above the button for selecting the given payment option)",
+            "label_tooltip": "The font (for iOS) used in the description of each payment option (below the title and above the button for selecting the given payment option)",
             "conditional_fields": [
               {
                 "condition_value": [
@@ -1101,7 +1101,7 @@
           {
             "key": "payment_option_description_font_android",
             "type": "android_font_selector",
-            "label_tooltip": "The font used in the description of each payment option (below the title and above the button for selecting the given payment option)",
+            "label_tooltip": "The font (for Android) used in the description of each payment option (below the title and above the button for selecting the given payment option)",
             "conditional_fields": [
               {
                 "condition_value": [
@@ -1184,7 +1184,7 @@
           {
             "key": "legal_details_font_ios",
             "type": "ios_font_selector",
-            "label_tooltip": "The font used for the payment options screen legal text",
+            "label_tooltip": "The font (for iOS) used for the payment options screen legal text",
             "conditional_fields": [
               {
                 "condition_value": [
@@ -1197,7 +1197,7 @@
           {
             "key": "legal_details_font_android",
             "type": "android_font_selector",
-            "label_tooltip": "The font used for the payment options screen legal text",
+            "label_tooltip": "The font (for Android) used for the payment options screen legal text",
             "conditional_fields": [
               {
                 "condition_value": [
@@ -1330,12 +1330,12 @@
           {
             "key": "confirmation_title_font_ios",
             "type": "ios_font_selector",
-            "label_tooltip": "The font used as the title of confirmation screens"
+            "label_tooltip": "The font (for iOS) used as the title of confirmation screens"
           },
           {
             "key": "confirmation_title_font_android",
             "type": "android_font_selector",
-            "label_tooltip": "The font used as the title of confirmation screens"
+            "label_tooltip": "The font (for Android) used as the title of confirmation screens"
           },
           {
             "key": "confirmation_title_size_phone",
@@ -1358,12 +1358,12 @@
           {
             "key": "confirmation_description_font_ios",
             "type": "ios_font_selector",
-            "label_tooltip": "The font used in the description of confirmation screens (below the title and above the button)"
+            "label_tooltip": "The font (for iOS) used in the description of confirmation screens (below the title and above the button)"
           },
           {
             "key": "confirmation_description_font_android",
             "type": "android_font_selector",
-            "label_tooltip": "The font used in the description of confirmation screens (below the title and above the button)"
+            "label_tooltip": "The font (for Android) used in the description of confirmation screens (below the title and above the button)"
           },
           {
             "key": "confirmation_description_size_phone",
@@ -1392,12 +1392,12 @@
           {
             "key": "confirmation_button_font_ios",
             "type": "ios_font_selector",
-            "label_tooltip": "The font for the Confirmation Button Text"
+            "label_tooltip": "The font (for iOS) for the Confirmation Button Text"
           },
           {
             "key": "confirmation_button_font_android",
             "type": "android_font_selector",
-            "label_tooltip": "The font for the Confirmation Button Text"
+            "label_tooltip": "The font (for Android) for the Confirmation Button Text"
           },
           {
             "key": "confirmation_button_size_phone",
