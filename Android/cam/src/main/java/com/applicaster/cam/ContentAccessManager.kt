@@ -3,6 +3,7 @@ package com.applicaster.cam
 import android.content.Context
 import android.content.Intent
 import com.applicaster.cam.analytics.Action
+import com.applicaster.cam.analytics.AnalyticsGatewaySession
 import com.applicaster.cam.analytics.AnalyticsUtil
 import com.applicaster.cam.analytics.TimedEvent
 import com.applicaster.cam.config.Configurator
@@ -12,7 +13,6 @@ import com.applicaster.cam.config.ui.PluginUIProvider
 import com.applicaster.cam.config.ui.UIProvider
 import com.applicaster.cam.params.auth.AuthScreenType
 import com.applicaster.cam.ui.CamActivity
-import kotlin.math.log
 import kotlin.properties.Delegates
 
 object ContentAccessManager : IContentAccessManager {
@@ -47,7 +47,8 @@ object ContentAccessManager : IContentAccessManager {
     }
 
     private fun logAnalyticsEvents() {
-        AnalyticsUtil.logLaunchContentGatwayPlugin(this.contract.getAnalyticsDataProvider().trigger.value)
+        AnalyticsGatewaySession.sessionData.clear()
+        AnalyticsUtil.logLaunchContentGatewayPlugin(this.contract.getAnalyticsDataProvider().trigger.value)
         val flow = this.contract.getCamFlow()
         val authScreenType = pluginConfigurator.getDefaultAuthScreen()
         when(flow) {
@@ -56,30 +57,23 @@ object ContentAccessManager : IContentAccessManager {
                     AnalyticsUtil.logContentGatewaySession(
                         TimedEvent.START,
                         this.contract.getAnalyticsDataProvider().trigger.value,
-                        Action.LOGIN
+                        listOf(Action.LOGIN)
                     )
                 if (authScreenType == AuthScreenType.SIGNUP)
                     AnalyticsUtil.logContentGatewaySession(
                         TimedEvent.START,
                         this.contract.getAnalyticsDataProvider().trigger.value,
-                        Action.SIGNUP
+                        listOf(Action.SIGNUP)
                     )
             }
             CamFlow.STOREFRONT -> {
                 AnalyticsUtil.logContentGatewaySession(
                     TimedEvent.START,
                     this.contract.getAnalyticsDataProvider().trigger.value,
-                    Action.PURCHASE
+                    listOf(Action.PURCHASE)
                 )
             }
-            CamFlow.AUTH_AND_STOREFRONT -> {
-                AnalyticsUtil.logContentGatewaySession(
-                    TimedEvent.START,
-                    this.contract.getAnalyticsDataProvider().trigger.value,
-                    Action.SIGNUP_AND_PURCHASE
-                )
-            }
-            CamFlow.EMPTY -> {}
+            else -> Unit
         }
     }
 }

@@ -14,14 +14,14 @@ class AnalyticsUtil {
 
         const val KEY_YES = "Yes"
         const val KEY_NO = "No"
-        const val KEY_NON_PROVIDED = "Non provided"
+        const val KEY_NON_PROVIDED = "None provided"
 
         private fun getPluginProvider(): String =
             PluginManager.getInstance().getInitiatedPlugin(Plugin.Type.LOGIN)?.plugin?.name.orEmpty()
 
 
         private fun getFirstScreen() =
-            Properties.TRIGGER.value to when (ContentAccessManager.pluginConfigurator.getDefaultAuthScreen()) {
+            Properties.FIRST_SCREEN.value to when (ContentAccessManager.pluginConfigurator.getDefaultAuthScreen()) {
                 AuthScreenType.LOGIN -> AuthScreenType.LOGIN.getKey()
                 AuthScreenType.SIGNUP -> AuthScreenType.SIGNUP.getKey()
                 else -> KEY_NON_PROVIDED
@@ -106,6 +106,24 @@ class AnalyticsUtil {
             )
             AnalyticsAgentUtil.logEvent(AnalyticsEvent.ALTERNATIVE_LOGIN_FAILURE.value, params)
         }
+        
+        fun logAlternativeLoginCancel() {
+            val params = mapOf(
+                    Properties.CONTENT_ENTITY_NAME.value to getContentEntityName(),
+                    Properties.CONTENT_ENTITY_TYPE.value to getContentEntityType(),
+                    Properties.PLUGIN_PROVIDER.value to getPluginProvider()
+            )
+            AnalyticsAgentUtil.logEvent(AnalyticsEvent.ALTERNATIVE_LOGIN_CANCEL.value, params)
+        }
+
+        fun logAlternativeSignUpCancel() {
+            val params = mapOf(
+                    Properties.CONTENT_ENTITY_NAME.value to getContentEntityName(),
+                    Properties.CONTENT_ENTITY_TYPE.value to getContentEntityType(),
+                    Properties.PLUGIN_PROVIDER.value to getPluginProvider()
+            )
+            AnalyticsAgentUtil.logEvent(AnalyticsEvent.ALTERNATIVE_SIGNUP_CANCEL.value, params)
+        }
 
         fun logTapStandardSignUpButton() {
             val params = mapOf(
@@ -161,7 +179,7 @@ class AnalyticsUtil {
             AnalyticsAgentUtil.logEvent(AnalyticsEvent.ALTERNATIVE_SIGNUP_FAILURE.value, params)
         }
 
-        fun logLaunchContentGatwayPlugin(trigger: String) {
+        fun logLaunchContentGatewayPlugin(trigger: String) {
             val params = mapOf(
                 Properties.TRIGGER.value to trigger,
                 getFirstScreen(),
@@ -172,10 +190,10 @@ class AnalyticsUtil {
             AnalyticsAgentUtil.logEvent(AnalyticsEvent.LAUNCH_CONTENT_GATEWAY_PLUGIN.value, params)
         }
 
-        fun logContentGatewaySession(timedEvent: TimedEvent, trigger: String, action: Action) {
+        fun logContentGatewaySession(timedEvent: TimedEvent, trigger: String, action: List<Action>) {
             val params = mapOf(
                 Properties.TRIGGER.value to trigger,
-                Properties.ACTION.value to action.value,
+                Properties.ACTION.value to action.joinToString(separator = " & ") { it.value },
                 Properties.PLUGIN_PROVIDER.value to getPluginProvider()
             )
             if (timedEvent == TimedEvent.START)
@@ -368,12 +386,14 @@ enum class AnalyticsEvent(val value: String) {
     TAP_ALTERNATIVE_LOGIN        ("Tap Alternative Login"),
     ALTERNATIVE_LOGIN_SUCCESS    ("Alternative Login Success"),
     ALTERNATIVE_LOGIN_FAILURE    ("Alternative Login Failure"),
+    ALTERNATIVE_LOGIN_CANCEL     ("Alternative Login Cancel"),
     TAP_STANDARD_SIGNUP_BUTTON   ("Tap Standard Sign-Up Button"),
     STANDARD_SIGNUP_SUCCESS      ("Standard Sign-Up Success"),
     STANDARD_SIGNUP_FAILURE      ("Standard Sign-Up Failure"),
     TAP_ALTERNATIVE_SIGNUP       ("Tap Alternative Sign-Up"),
     ALTERNATIVE_SIGNUP_SUCCESS   ("Alternative Sign-Up Success"),
     ALTERNATIVE_SIGNUP_FAILURE   ("Alternative Sign-Up Failure"),
+    ALTERNATIVE_SIGNUP_CANCEL    ("Alternative Sign-Up Cancel"),
     LAUNCH_CONTENT_GATEWAY_PLUGIN("Launch Content Gateway Plugin"),
     CONTENT_GATEWAY_SESSION      ("Content Gateway Session"),
     SWITCH_TO_LOGIN_SCREEN       ("Switch to Login Screen"),
@@ -425,7 +445,7 @@ enum class Action(val value: String) {
     PURCHASE              ("Purchase"),
     LOGIN                 ("Login"),
     SIGNUP                ("Sign Up"),
-    SIGNUP_AND_PURCHASE   ("Sign Up & Purchase"),
+    RESET_PASSWORD        ("Reset Password"),
     RESTORE_PURCHASE      ("Restore Purchase"),
     CANCEL                ("Cancel"),
     FAILED_ATTEMPT        ("Failed Attempt"),
@@ -455,9 +475,9 @@ enum class TimedEvent {
 }
 
 enum class UserProperties(val value: String) {
-    LOGGED_IN("Logged In"),
-    AUTH_PROVIDER("Authentication Provider"),
-    SUBSCRIBER("Subscriber"),
+    LOGGED_IN            ("Logged In"),
+    AUTH_PROVIDER        ("Authentication Provider"),
+    SUBSCRIBER           ("Subscriber"),
     PURCHASE_PRODUCT_NAME("Purchase Product Name")
 }
 
@@ -481,3 +501,6 @@ data class PurchaseProductPropertiesData(
     val purchaseEntityType: String
 )
 
+object AnalyticsGatewaySession {
+    val sessionData: ArrayList<Action> = arrayListOf()
+}

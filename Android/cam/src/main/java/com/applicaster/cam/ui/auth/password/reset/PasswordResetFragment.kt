@@ -53,8 +53,6 @@ class PasswordResetFragment : BaseInputFragment(), IPasswordResetView {
 
     override fun getAuthInputScrollableParent() = container_scrollable_reset_input
 
-    override fun onLastFragmentClosed() {
-
-    }
+    override fun onLastFragmentClosed() = Unit
 }
 

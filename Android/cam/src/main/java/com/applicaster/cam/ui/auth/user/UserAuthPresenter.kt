@@ -2,9 +2,7 @@ package com.applicaster.cam.ui.auth.user
 
 import android.app.Activity
 import com.applicaster.cam.ContentAccessManager
-import com.applicaster.cam.analytics.AnalyticsUtil
-import com.applicaster.cam.analytics.ConfirmationAlertData
-import com.applicaster.cam.analytics.ConfirmationCause
+import com.applicaster.cam.analytics.*
 import com.applicaster.cam.ui.auth.base.BaseInputPresenter
 import com.applicaster.cam.ui.auth.base.IBaseInputView
 import com.applicaster.model.APUser
@@ -32,6 +30,7 @@ abstract class UserAuthPresenter(private val view: IBaseInputView?) : BaseInputP
                 val errorMessage: String =
                         if (error.message.isNullOrEmpty()) "Facebook auth failed" else error.message.orEmpty()
                 view?.showAlert(errorMessage)
+                //Analytics
                 AnalyticsUtil.logViewAlert(
                     ConfirmationAlertData(
                         false,
@@ -41,6 +40,7 @@ abstract class UserAuthPresenter(private val view: IBaseInputView?) : BaseInputP
                             errorMessage
                     )
                 )
+                //
             }
 
             override fun onTaskComplete(result: APUser) {
@@ -69,7 +69,7 @@ abstract class UserAuthPresenter(private val view: IBaseInputView?) : BaseInputP
         val errorMessage: String = 
                 if (error?.message.isNullOrEmpty()) "Facebook auth failed" else error?.message.orEmpty()
         view?.showAlert(errorMessage)
-
+        //Analytics
         AnalyticsUtil.logViewAlert(
             ConfirmationAlertData(
                 false,
@@ -79,6 +79,8 @@ abstract class UserAuthPresenter(private val view: IBaseInputView?) : BaseInputP
                     errorMessage
             )
         )
+        AnalyticsGatewaySession.sessionData.add(Action.FAILED_ATTEMPT)
+        //
     }
 
     override fun onFacebookButtonClicked(activity: Activity?) {
