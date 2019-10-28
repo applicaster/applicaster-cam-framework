@@ -62,6 +62,7 @@ class BillingPresenter(
 		})
 		view?.showLoadingIndicator()
 
+		// Analytics call
 		AnalyticsGatewaySession.sessionData.add(Action.PURCHASE)
 	}
 
@@ -191,6 +192,7 @@ class BillingPresenter(
 						description
 				)
 		)
+		//Analytics
 		if (statusCode == BillingClient.BillingResponse.USER_CANCELED) {
 			AnalyticsUtil.collectPurchaseData(camContract.getAnalyticsDataProvider().purchaseData).forEach {
 				AnalyticsUtil.logCancelPurchase(it)
@@ -306,6 +308,7 @@ class BillingPresenter(
 		GoogleBillingHelper.restorePurchasesForAllTypes()
 	}
 
+	//Calls when user press system back button or toolbar back button
 	override fun onLastFragmentClosed() {
 		AnalyticsGatewaySession.sessionData.add(Action.CANCEL)
 	}
