@@ -21,7 +21,7 @@ class UIConfigurator {
     static func font(from config: [String: String],
                      for style: CAMStyles) -> UIFont {
         let baseKey = style.rawValue
-        let sizeKey =  baseKey + (UIDevice.current.userInterfaceIdiom == .pad ? "_size_pad" : "_size_phone")
+        let sizeKey =  baseKey + (UIDevice.current.userInterfaceIdiom == .pad ? "_size_tablet" : "_size_phone")
         let fontKey = baseKey + "_font_ios"
         
         let defaultFontSize: CGFloat = 12.0
@@ -64,7 +64,7 @@ extension UIView {
         }
         let baseKey = style.rawValue
         var size: CGFloat = 12.0
-        let sizeKey =  baseKey + (UIDevice.current.userInterfaceIdiom == .pad ? "_size_pad" : "_size_phone")
+        let sizeKey =  baseKey + (UIDevice.current.userInterfaceIdiom == .pad ? "_size_tablet" : "_size_phone")
         if let value = config[sizeKey], let configSize = CGFloat(value) {
             size = configSize
         }
