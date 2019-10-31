@@ -45,6 +45,10 @@ abstract class UserAuthPresenter(private val view: IBaseInputView?) : BaseInputP
 
             override fun onTaskComplete(result: APUser) {
                 onFacebookAuthActionCompleted(result.email, result.id)
+                //Analytics
+                AnalyticsUtil.logUserProperties(AnalyticsUtil.collectPurchaseData(
+                    ContentAccessManager.contract.getAnalyticsDataProvider().purchaseData
+                ))
             }
 
             override fun onTaskStart() {

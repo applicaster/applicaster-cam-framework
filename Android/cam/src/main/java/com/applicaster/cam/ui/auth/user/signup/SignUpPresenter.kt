@@ -25,7 +25,11 @@ class SignUpPresenter(
             else -> view?.initBackButton(enable = true)
         }
 
+        //Analytics
         AnalyticsGatewaySession.sessionData.add(Action.SIGNUP)
+        AnalyticsUtil.logUserProperties(AnalyticsUtil.collectPurchaseData(
+            ContentAccessManager.contract.getAnalyticsDataProvider().purchaseData
+        ))
     }
 
     override fun onFailure(msg: String) {
