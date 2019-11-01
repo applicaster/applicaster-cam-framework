@@ -27,9 +27,6 @@ class LoginPresenter(
 
         //Analytics
         AnalyticsGatewaySession.sessionData.add(Action.LOGIN)
-        AnalyticsUtil.logUserProperties(AnalyticsUtil.collectPurchaseData(
-            ContentAccessManager.contract.getAnalyticsDataProvider().purchaseData
-        ))
     }
 
     override fun getAuthFieldConfig(): AuthFieldConfig =
