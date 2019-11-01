@@ -47,6 +47,9 @@ object ContentAccessManager : IContentAccessManager {
     }
 
     private fun logAnalyticsEvents() {
+        AnalyticsUtil.logUserProperties(AnalyticsUtil.collectPurchaseData(
+            contract.getAnalyticsDataProvider().purchaseData
+        ))
         AnalyticsGatewaySession.sessionData.clear()
         AnalyticsUtil.logLaunchContentGatewayPlugin(this.contract.getAnalyticsDataProvider().trigger.value)
         val flow = this.contract.getCamFlow()
