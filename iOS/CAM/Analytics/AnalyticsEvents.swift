@@ -44,12 +44,14 @@ enum AnalyticsEvents {
     case tapAlternativeLogin(PlayableItemInfo)
     case alternativaLoginSucess(PlayableItemInfo)
     case alternativaLoginFailure(PlayableItemInfo)
+    case alternativeLoginCancel(PlayableItemInfo)
     case tapStandardSignUpButton(PlayableItemInfo)
     case standardSignUpSuccess(PlayableItemInfo)
     case standardSignUpFailure(PlayableItemInfo)
     case tapAlternativeSignUp(PlayableItemInfo)
     case alternativeSignUpSuccess(PlayableItemInfo)
     case alternativeSignUpFailure(PlayableItemInfo)
+    case alternativeSignUpCancel(PlayableItemInfo)
     case launchContentGatewayPlugin(Trigger, firstScreen: String, PlayableItemInfo)
     case contentGatewaySession(Trigger)
     case switchToLoginScreen
@@ -76,12 +78,14 @@ enum AnalyticsEvents {
         case .tapAlternativeLogin: return "Tap Alternative Login"
         case .alternativaLoginSucess: return "Alternative Login Success"
         case .alternativaLoginFailure: return "Alternative Login Failure"
+        case .alternativeLoginCancel: return "Alternative Login Cancel"
         case .tapStandardSignUpButton: return "Tap Standard Sign-Up Button"
         case .standardSignUpSuccess: return "Standard Sign-Up Success"
         case .standardSignUpFailure: return "Standard Sign-Up Failure"
         case .tapAlternativeSignUp: return "Tap Alternative Sign-Up"
         case .alternativeSignUpSuccess: return "Alternative Sign-Up Success"
         case .alternativeSignUpFailure: return "Alternative Sign-Up Failure"
+        case .alternativeSignUpCancel: return "Alternative Sign-Up Cancel"
         case .launchContentGatewayPlugin: return "Launch Content Gateway Plugin"
         case .contentGatewaySession: return "Content Gateway Session"
         case .switchToLoginScreen: return "Switch to Login Screen"
@@ -109,12 +113,14 @@ enum AnalyticsEvents {
              .tapAlternativeLogin(let info),
              .alternativaLoginSucess(let info),
              .alternativaLoginFailure(let info),
+             .alternativeLoginCancel(let info),
              .tapStandardSignUpButton(let info),
              .standardSignUpSuccess(let info),
              .standardSignUpFailure(let info),
              .tapAlternativeSignUp(let info),
              .alternativeSignUpSuccess(let info),
-             .alternativeSignUpFailure(let info):
+             .alternativeSignUpFailure(let info),
+             .alternativeSignUpCancel(let info):
             metadata = metadata.merge(info.metadata)
         case .launchContentGatewayPlugin(let trigger, let firstScreen, let info):
             metadata = metadata
@@ -181,7 +187,7 @@ enum AnalyticsEvents {
     }
     
     static public func makeViewAlert(from error: Error) -> AnalyticsEvents {
-        return AnalyticsEvents.viewAlert(AlertInfo(title: "",
+        return AnalyticsEvents.viewAlert(AlertInfo(title: kNoneProvided,
                                                    description: error.localizedDescription,
                                                    isConfirmation: IsConfirmationAlert.no),
                                          apiError: error.localizedDescription)

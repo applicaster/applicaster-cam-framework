@@ -146,9 +146,9 @@ class SignUpPresenter {
                 self.getFacebookUser(client: facebookClient)
             } else {
                 self.view.showLoadingScreen(false)
-                let failureEvent = AnalyticsEvents.alternativeSignUpFailure(playableInfo)
-                ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: failureEvent.key,
-                                                                             parameters: failureEvent.metadata)
+                let cancelEvent = AnalyticsEvents.alternativeSignUpCancel(playableInfo)
+                ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: cancelEvent.key,
+                                                                             parameters: cancelEvent.metadata)
                 AnalyticsEvents.userFlow.append("Failed Attempt")
                 
                 if let error = error {

@@ -187,7 +187,7 @@ class EntitlementPickerPresenter {
                         if let productName = voucherProperties.productName {
                             properties["Purchase Product Name"] = productName
                         }
-                        storage?.setUserGenericProperties(properties)
+                        APAnalyticsManager.setEventUserGenericProperties(properties)
                         
                         self?.purchaseAction(purchase: purchase)
                     case .failure(let error):
