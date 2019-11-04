@@ -187,7 +187,7 @@ enum AnalyticsEvents {
     }
     
     static public func makeViewAlert(from error: Error) -> AnalyticsEvents {
-        return AnalyticsEvents.viewAlert(AlertInfo(title: "",
+        return AnalyticsEvents.viewAlert(AlertInfo(title: kNoneProvided,
                                                    description: error.localizedDescription,
                                                    isConfirmation: IsConfirmationAlert.no),
                                          apiError: error.localizedDescription)
