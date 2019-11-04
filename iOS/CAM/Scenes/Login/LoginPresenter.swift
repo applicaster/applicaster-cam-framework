@@ -150,9 +150,9 @@ class LoginPresenter {
             if isUserLogged {
                 self.getFacebookUser(client: facebookClient)
             } else {
-                let failureLoginEvent = AnalyticsEvents.alternativaLoginFailure(playableInfo)
-                ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: failureLoginEvent.key,
-                                                                             parameters: failureLoginEvent.metadata)
+                let cancelLoginEvent = AnalyticsEvents.alternativeLoginCancel(playableInfo)
+                ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: cancelLoginEvent.key,
+                                                                             parameters: cancelLoginEvent.metadata)
                 AnalyticsEvents.userFlow.append("Failed Attempt")
                 
                 self.view.showLoadingScreen(false)
