@@ -75,8 +75,8 @@ class AuthorizationCoordinator: AuthorizationCoordinatorProtocol {
     func finishAuthorizationFlow(isUserLogged: Bool) {
         let loggedInValue = isUserLogged == true ? "Yes" : "No"
         let pluginName = ZPPluginManager.pluginModel(.Login)?.pluginName ?? ""
-        APAnalyticsStorage.sharedInstance()?.setUserGenericProperties(["Logged In": loggedInValue,
-                                                                       "Authentication Provider": pluginName])
+        APAnalyticsManager.setEventUserGenericProperties(["Logged In": loggedInValue,
+                                                          "Authentication Provider": pluginName])
         completionHandler?(isUserLogged)
     }
 }
