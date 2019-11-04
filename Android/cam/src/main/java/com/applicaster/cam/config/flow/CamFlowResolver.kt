@@ -62,11 +62,11 @@ class CamFlowResolver {
                 CamFlow.AUTHENTICATION -> if (isUserLogged) CamFlow.EMPTY else currentFlow
                 CamFlow.STOREFRONT -> if (paymentRequired) currentFlow else CamFlow.EMPTY
                 CamFlow.AUTH_AND_STOREFRONT -> {
-                    when (isUserLogged to paymentRequired) {
-                        (isUserLogged to paymentRequired) -> CamFlow.STOREFRONT
-                        (isUserLogged to !paymentRequired) -> CamFlow.EMPTY
-                        (!isUserLogged to paymentRequired) -> CamFlow.AUTH_AND_STOREFRONT
-                        (!isUserLogged to !paymentRequired) -> CamFlow.AUTHENTICATION
+                    when {
+                        isUserLogged && paymentRequired -> CamFlow.STOREFRONT
+                        isUserLogged && !paymentRequired -> CamFlow.EMPTY
+                        !isUserLogged && paymentRequired -> CamFlow.AUTH_AND_STOREFRONT
+                        !isUserLogged && !paymentRequired -> CamFlow.AUTHENTICATION
                         else -> CamFlow.EMPTY
                     }
                 }

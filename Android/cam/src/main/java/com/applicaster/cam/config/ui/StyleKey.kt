@@ -43,5 +43,5 @@ const val STYLE_KEY_CONFIRMATION_BUTTON = "confirmation_button"
 
 const val KEY_FONT = "_font_android"
 const val KEY_SIZE_PHONE = "_size_phone"
-const val KEY_SIZE_TABLET = "_size_pad"
+const val KEY_SIZE_TABLET = "_size_tablet"
 const val KEY_COLOR = "_color"

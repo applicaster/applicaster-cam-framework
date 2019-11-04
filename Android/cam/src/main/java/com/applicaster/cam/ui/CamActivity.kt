@@ -7,6 +7,7 @@ import android.view.View
 import com.applicaster.cam.ContentAccessManager
 import com.applicaster.cam.R
 import com.applicaster.cam.analytics.Action
+import com.applicaster.cam.analytics.AnalyticsGatewaySession
 import com.applicaster.cam.analytics.AnalyticsUtil
 import com.applicaster.cam.analytics.TimedEvent
 import com.applicaster.cam.ui.base.view.ContainerType
@@ -62,11 +63,17 @@ class CamActivity : AppCompatActivity(), IBaseActivity {
 
     override fun onPause() {
         // Analytics event
-        AnalyticsUtil.logContentGatewaySession(
-            TimedEvent.END,
-            ContentAccessManager.contract.getAnalyticsDataProvider().trigger.value,
-            Action.SEND_APP_TO_BACKGROUND
-        )
+        AnalyticsGatewaySession.sessionData.add(Action.SEND_APP_TO_BACKGROUND)
         super.onPause()
+    }
+
+    override fun onDestroy() {
+        // Analytics event
+        AnalyticsUtil.logContentGatewaySession(
+                TimedEvent.END,
+                ContentAccessManager.contract.getAnalyticsDataProvider().trigger.value,
+                AnalyticsGatewaySession.sessionData
+        )
+        super.onDestroy()
     }
 }

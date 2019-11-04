@@ -72,6 +72,7 @@ class ConfirmationDialog : DialogFragment() {
                     map(dialogView?.tv_confirmation_desc!!, UIKey.BILLING_CONFIRMATION_DESC_TEXT)
                     map(dialogView?.btn_confirmation_ok!!, UIKey.BILLING_CONFIRMATION_BUTTON_TEXT)
                 }
+                //Analytics
                 AnalyticsUtil.logViewAlert(
                     ConfirmationAlertData(
                         true,
@@ -81,6 +82,7 @@ class ConfirmationDialog : DialogFragment() {
                         AnalyticsUtil.KEY_NON_PROVIDED
                     )
                 )
+                //
             }
             AlertDialogType.RESET_PASSWORD -> {
                 UIMapper.apply {
@@ -89,6 +91,7 @@ class ConfirmationDialog : DialogFragment() {
                     map(dialogView?.tv_confirmation_desc!!, UIKey.RESET_PWD_CONFIRMATION_DESC_TEXT)
                     map(dialogView?.btn_confirmation_ok!!, UIKey.RESET_PWD_CONFIRMATION_BUTTON_TEXT)
                 }
+                //Analytics
                 AnalyticsUtil.logViewAlert(
                     ConfirmationAlertData(
                         true,
@@ -98,6 +101,7 @@ class ConfirmationDialog : DialogFragment() {
                         AnalyticsUtil.KEY_NON_PROVIDED
                     )
                 )
+                //
             }
             AlertDialogType.RESTORE -> {
                 UIMapper.apply {
@@ -106,6 +110,7 @@ class ConfirmationDialog : DialogFragment() {
                     map(dialogView?.tv_confirmation_desc!!, UIKey.RESTORE_CONFIRMATION_DESC_TEXT)
                     map(dialogView?.btn_confirmation_ok!!, UIKey.RESTORE_CONFIRMATION_BUTTON_TEXT)
                 }
+                //Analytics
                 AnalyticsUtil.logViewAlert(
                     ConfirmationAlertData(
                         true,
@@ -115,6 +120,7 @@ class ConfirmationDialog : DialogFragment() {
                         AnalyticsUtil.KEY_NON_PROVIDED
                     )
                 )
+                //
             }
             AlertDialogType.UNDEFINED -> {
             }
