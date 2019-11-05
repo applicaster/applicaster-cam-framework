@@ -14,7 +14,7 @@ class AnalyticsUtil {
 
         const val KEY_YES = "Yes"
         const val KEY_NO = "No"
-        const val KEY_NON_PROVIDED = "None provided"
+        const val KEY_NONE_PROVIDED = "None provided"
 
         private fun getPluginProvider(): String =
             PluginManager.getInstance().getInitiatedPlugin(Plugin.Type.LOGIN)?.plugin?.name.orEmpty()
@@ -24,7 +24,7 @@ class AnalyticsUtil {
             Properties.FIRST_SCREEN.value to when (ContentAccessManager.pluginConfigurator.getDefaultAuthScreen()) {
                 AuthScreenType.LOGIN -> AuthScreenType.LOGIN.getKey()
                 AuthScreenType.SIGNUP -> AuthScreenType.SIGNUP.getKey()
-                else -> KEY_NON_PROVIDED
+                else -> KEY_NONE_PROVIDED
             }
 
         private fun matchIsUserSubscribed(isUserSubscribed: Boolean): String =
@@ -190,12 +190,16 @@ class AnalyticsUtil {
             AnalyticsAgentUtil.logEvent(AnalyticsEvent.LAUNCH_CONTENT_GATEWAY_PLUGIN.value, params)
         }
 
-        fun logContentGatewaySession(timedEvent: TimedEvent, trigger: String, action: List<Action>) {
-            val params = mapOf(
-                Properties.TRIGGER.value to trigger,
-                Properties.ACTION.value to action.joinToString(separator = " & ") { it.value },
-                Properties.PLUGIN_PROVIDER.value to getPluginProvider()
-            )
+        fun logContentGatewaySession(timedEvent: TimedEvent, trigger: String, action: List<Action> = listOf()) {
+            val params = hashMapOf<String, String>()
+            if (action.isEmpty()) {
+                params[Properties.TRIGGER.value] = trigger
+                params[Properties.PLUGIN_PROVIDER.value] = getPluginProvider()
+            } else {
+                params[Properties.TRIGGER.value] = trigger
+                params[Properties.ACTION.value] = action.joinToString(separator = " & ") { it.value }
+                params[Properties.PLUGIN_PROVIDER.value] = getPluginProvider()
+            }
             if (timedEvent == TimedEvent.START)
                 AnalyticsAgentUtil.logTimedEvent(
                     AnalyticsEvent.CONTENT_GATEWAY_SESSION.value,
@@ -320,6 +324,7 @@ class AnalyticsUtil {
         ) {
             val params = mapOf(
                 Properties.ERROR_MESSAGE.value to errorMessage,
+                Properties.ERROR_CODE_ID.value to KEY_NONE_PROVIDED,
                 Properties.PLUGIN_PROVIDER.value to getPluginProvider(),
                 Properties.CONTENT_ENTITY_NAME.value to getContentEntityName(),
                 Properties.CONTENT_ENTITY_TYPE.value to getContentEntityType()
@@ -340,16 +345,16 @@ class AnalyticsUtil {
             val pluginProvider: String = PluginManager.getInstance().getInitiatedPlugin(Plugin.Type.LOGIN)?.plugin?.name.orEmpty()
             val isUserLoggedIn = ContentAccessManager.contract.isUserLogged()
             val productNames = arrayListOf<String>()
-            var isUserSubscribed: Boolean = false
+            var isUserSubscribed: Boolean = !ContentAccessManager.contract.isPurchaseRequired()
             purchaseProductPropertiesData.forEach {
                 isUserSubscribed = it.isUserSubscribed
-                if (it.productName.isEmpty()) productNames.add(KEY_NON_PROVIDED) else productNames.add(it.productName)
+                if (it.productName.isEmpty()) productNames.add(KEY_NONE_PROVIDED) else productNames.add(it.productName)
             }
             val productName: String = productNames.joinToString(separator = "; ")
             val userProps = JSONObject()
             userProps.put(UserProperties.LOGGED_IN.value, matchBooleanValue(isUserLoggedIn))
             userProps.put(UserProperties.AUTH_PROVIDER.value, pluginProvider)
-            userProps.put(UserProperties.PURCHASE_PRODUCT_NAME.value, if (productName.isEmpty()) KEY_NON_PROVIDED else productName )
+            userProps.put(UserProperties.PURCHASE_PRODUCT_NAME.value, if (productName.isEmpty()) KEY_NONE_PROVIDED else productName )
             userProps.put(UserProperties.SUBSCRIBER.value, matchBooleanValue(isUserSubscribed))
             AnalyticsAgentUtil.sendUserProperties(userProps)
         }
@@ -359,20 +364,20 @@ class AnalyticsUtil {
             purchases: List<Purchase> = arrayListOf()
         ): List<PurchaseProductPropertiesData> {
             val result: ArrayList<PurchaseProductPropertiesData> = arrayListOf()
-            purchasesData.forEach { data ->
-                val productData = PurchaseProductPropertiesData(
-                    ContentAccessManager.contract.getAnalyticsDataProvider().isUserSubscribed,
-                    data.title,
-                    data.price,
-                    purchases.find { it.sku == data.androidProductId }?.orderId ?: KEY_NON_PROVIDED,
-                    data.androidProductId,
-                    data.purchaseType,
-                    data.subscriptionDuration,
-                    data.trialPeriod,
-                    data.purchaseEntityType
-                )
-                result.add(productData)
-            }
+                purchasesData.forEach { data ->
+                    val productData = PurchaseProductPropertiesData(
+                            ContentAccessManager.contract.getAnalyticsDataProvider().isUserSubscribed,
+                            data.title,
+                            data.price,
+                            purchases.find { it.sku == data.androidProductId }?.orderId ?: KEY_NONE_PROVIDED,
+                            data.androidProductId,
+                            data.purchaseType,
+                            data.subscriptionDuration,
+                            data.trialPeriod,
+                            data.purchaseEntityType
+                    )
+                    result.add(productData)
+                }
             return result
         }
     }
@@ -468,6 +473,11 @@ enum class PurchaseType(val value: String) {
     CONSUMABLE  ("Consumable"),
     UNSPECIFIED ("Unspecified")
     // @formatter:on
+}
+
+enum class PurchaseEntityType(val value: String) {
+    VOD_ITEM("VOD Item"),
+    CATEGORY("Category")
 }
 
 enum class TimedEvent {

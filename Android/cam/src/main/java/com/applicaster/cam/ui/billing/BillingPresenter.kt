@@ -61,9 +61,6 @@ class BillingPresenter(
 			}
 		})
 		view?.showLoadingIndicator()
-
-		// Analytics call
-		AnalyticsGatewaySession.sessionData.add(Action.PURCHASE)
 	}
 
 	override fun onBillingClientError(statusCode: Int, description: String) {
@@ -91,13 +88,13 @@ class BillingPresenter(
 		Log.e(TAG, "PurchaseConsumptionFailed: $description")
 		// Analytics events
 		AnalyticsUtil.logViewAlert(
-				ConfirmationAlertData(
-						false,
-						ConfirmationCause.NONE,
-						AnalyticsUtil.KEY_NON_PROVIDED,
-						ContentAccessManager.pluginConfigurator.getDefaultAlertText(),
-						description
-				)
+			ConfirmationAlertData(
+				false,
+				ConfirmationCause.NONE,
+				AnalyticsUtil.KEY_NONE_PROVIDED,
+				ContentAccessManager.pluginConfigurator.getDefaultAlertText(),
+				description
+			)
 		)
 	}
 
@@ -112,13 +109,14 @@ class BillingPresenter(
 			}
 
 			override fun onActionSuccess() {
-				view?.hideLoadingIndicator()
 				//Analytics call
 				AnalyticsUtil.logUserProperties(
-						AnalyticsUtil.collectPurchaseData(
-								ContentAccessManager.contract.getAnalyticsDataProvider().purchaseData
-						))
+					AnalyticsUtil.collectPurchaseData(
+						ContentAccessManager.contract.getAnalyticsDataProvider().purchaseData
+					))
+				AnalyticsGatewaySession.sessionData.add(Action.PURCHASE)
 				//
+				view?.hideLoadingIndicator()
 				if (ContentAccessManager.pluginConfigurator.isShowConfirmationPayment()) {
 					navigationRouter.showConfirmationDialog(AlertDialogType.BILLING)
 				} else {
@@ -135,28 +133,23 @@ class BillingPresenter(
 	override fun onPurchasesRestored(purchases: List<Purchase>) {
 		view?.hideLoadingIndicator()
 
+		AnalyticsGatewaySession.sessionData.add(Action.RESTORE_PURCHASE)
+
 		if (!handleRestoringPurchasesError(purchases)) { //purchase succeed
 			view?.showLoadingIndicator()
 			ContentAccessManager.contract.onPurchasesRestored(purchases, this)
 		}
 
-		sendPurchasesRestoredAnalytics(purchases)
-		AnalyticsGatewaySession.sessionData.add(Action.RESTORE_PURCHASE)
+		if (purchases.isEmpty()) {
+
+		}
 	}
 
-	private fun sendPurchasesRestoredAnalytics(purchases: List<Purchase>) {
-		if (purchases.isEmpty()) {
-			AnalyticsUtil.collectPurchaseData(camContract.getAnalyticsDataProvider().purchaseData, purchases).forEach {
-				AnalyticsUtil.logStoreRestorePurchaseError("Restore purchases error", it)
-			}
-			AnalyticsGatewaySession.sessionData.add(Action.FAILED_ATTEMPT)
-		} else {
-			AnalyticsUtil.collectPurchaseData(
-					camContract.getAnalyticsDataProvider().purchaseData,
-					purchases
-			).forEach {
-				AnalyticsUtil.logCompleteRestorePurchase(it)
-			}
+	private fun sendPurchasesRestoredAnalytics() {
+		AnalyticsUtil.collectPurchaseData(
+			camContract.getAnalyticsDataProvider().purchaseData
+		).forEach {
+			AnalyticsUtil.logCompleteRestorePurchase(it)
 		}
 	}
 
@@ -184,13 +177,13 @@ class BillingPresenter(
 
 	private fun sendPurchaseLoadingFailureAnalytics(statusCode: Int, description: String) {
 		AnalyticsUtil.logViewAlert(
-				ConfirmationAlertData(
-						false,
-						ConfirmationCause.NONE,
-						AnalyticsUtil.KEY_NON_PROVIDED,
-						ContentAccessManager.pluginConfigurator.getDefaultAlertText(),
-						description
-				)
+			ConfirmationAlertData(
+				false,
+				ConfirmationCause.NONE,
+				AnalyticsUtil.KEY_NONE_PROVIDED,
+				ContentAccessManager.pluginConfigurator.getDefaultAlertText(),
+				description
+			)
 		)
 		//Analytics
 		if (statusCode == BillingClient.BillingResponse.USER_CANCELED) {
@@ -208,11 +201,11 @@ class BillingPresenter(
 		skuDetailsList.addAll(skuDetails)
 		view?.populateBillingContainer(skuDetails.map {
 			PurchaseItem(
-					it.sku,
-					it.title,
-					it.description,
-					it.price,
-					""
+				it.sku,
+				it.title,
+				it.description,
+				it.price,
+				""
 			)
 		})
 		view?.hideLoadingIndicator()
@@ -243,26 +236,26 @@ class BillingPresenter(
 
 			// Analytics events
 			AnalyticsUtil.logViewAlert(
-					ConfirmationAlertData(
-							false,
-							ConfirmationCause.NONE,
-							AnalyticsUtil.KEY_NON_PROVIDED,
-							ContentAccessManager.pluginConfigurator.getDefaultAlertText(),
-							msg
-					)
+				ConfirmationAlertData(
+					false,
+					ConfirmationCause.NONE,
+					AnalyticsUtil.KEY_NONE_PROVIDED,
+					ContentAccessManager.pluginConfigurator.getDefaultAlertText(),
+					msg
+				)
 			)
 		} else {
 			view?.showAlert(msg)
 
 			// Analytics events
 			AnalyticsUtil.logViewAlert(
-					ConfirmationAlertData(
-							false,
-							ConfirmationCause.NONE,
-							AnalyticsUtil.KEY_NON_PROVIDED,
-							AnalyticsUtil.KEY_NON_PROVIDED,
-							msg
-					)
+				ConfirmationAlertData(
+					false,
+					ConfirmationCause.NONE,
+					AnalyticsUtil.KEY_NONE_PROVIDED,
+					AnalyticsUtil.KEY_NONE_PROVIDED,
+					msg
+				)
 			)
 		}
 	}
@@ -280,22 +273,23 @@ class BillingPresenter(
 	 */
 	override fun onActionSuccess() {
 		view?.hideLoadingIndicator()
+		sendPurchasesRestoredAnalytics()
 		if (ContentAccessManager.pluginConfigurator.isShowConfirmationRestorePurchases()) {
 			navigationRouter.showConfirmationDialog(AlertDialogType.RESTORE)
 			// Analytics events
 			AnalyticsUtil.logUserProperties(
 					AnalyticsUtil.collectPurchaseData(
-							ContentAccessManager.contract.getAnalyticsDataProvider().purchaseData
+						ContentAccessManager.contract.getAnalyticsDataProvider().purchaseData
 					))
 
 			AnalyticsUtil.logViewAlert(
-					ConfirmationAlertData(
-							true,
-							ConfirmationCause.RESTORE_PURCHASE,
-							ContentAccessManager.pluginConfigurator.getPaymentConfirmationTitle(),
-							ContentAccessManager.pluginConfigurator.getPaymentConfirmationDescription(),
-							AnalyticsUtil.KEY_NON_PROVIDED
-					)
+				ConfirmationAlertData(
+					true,
+					ConfirmationCause.RESTORE_PURCHASE,
+					ContentAccessManager.pluginConfigurator.getPaymentConfirmationTitle(),
+					ContentAccessManager.pluginConfigurator.getPaymentConfirmationDescription(),
+					AnalyticsUtil.KEY_NONE_PROVIDED
+				)
 			)
 		} else {
 			view?.goBack()
