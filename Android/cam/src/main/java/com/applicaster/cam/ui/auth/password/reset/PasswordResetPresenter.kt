@@ -19,8 +19,6 @@ class PasswordResetPresenter(
         super.onViewCreated()
 
         view?.customize()
-        
-        AnalyticsGatewaySession.sessionData.add(Action.RESET_PASSWORD)
     }
 
     override fun performAuthAction(input: HashMap<String, String>) {
@@ -28,6 +26,8 @@ class PasswordResetPresenter(
     }
 
     override fun onAuthActionButtonClicked(inputValues: HashMap<AuthField, String>) {
+        //Analytics
+        AnalyticsGatewaySession.sessionData.add(Action.RESET_PASSWORD)
         AnalyticsUtil.logResetPassword()
         super.onAuthActionButtonClicked(inputValues)
     }
@@ -40,8 +40,8 @@ class PasswordResetPresenter(
             ConfirmationAlertData(
                 false,
                 ConfirmationCause.NONE,
-                AnalyticsUtil.KEY_NON_PROVIDED,
-                AnalyticsUtil.KEY_NON_PROVIDED,
+                AnalyticsUtil.KEY_NONE_PROVIDED,
+                AnalyticsUtil.KEY_NONE_PROVIDED,
                 msg
             )
         )

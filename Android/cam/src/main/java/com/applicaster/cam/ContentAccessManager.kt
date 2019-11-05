@@ -52,45 +52,9 @@ object ContentAccessManager : IContentAccessManager {
         ))
         AnalyticsGatewaySession.sessionData.clear()
         AnalyticsUtil.logLaunchContentGatewayPlugin(this.contract.getAnalyticsDataProvider().trigger.value)
-        val flow = this.contract.getCamFlow()
-        val authScreenType = pluginConfigurator.getDefaultAuthScreen()
-        when(flow) {
-            CamFlow.AUTHENTICATION -> {
-                if (authScreenType == AuthScreenType.LOGIN)
-                    AnalyticsUtil.logContentGatewaySession(
-                        TimedEvent.START,
-                        this.contract.getAnalyticsDataProvider().trigger.value,
-                        listOf(Action.LOGIN)
-                    )
-                if (authScreenType == AuthScreenType.SIGNUP)
-                    AnalyticsUtil.logContentGatewaySession(
-                        TimedEvent.START,
-                        this.contract.getAnalyticsDataProvider().trigger.value,
-                        listOf(Action.SIGNUP)
-                    )
-            }
-            CamFlow.STOREFRONT -> {
-                AnalyticsUtil.logContentGatewaySession(
-                    TimedEvent.START,
-                    this.contract.getAnalyticsDataProvider().trigger.value,
-                    listOf(Action.PURCHASE)
-                )
-            }
-            CamFlow.AUTH_AND_STOREFRONT -> {
-                if (authScreenType == AuthScreenType.LOGIN)
-                    AnalyticsUtil.logContentGatewaySession(
-                        TimedEvent.START,
-                        this.contract.getAnalyticsDataProvider().trigger.value,
-                        listOf(Action.LOGIN)
-                    )
-                if (authScreenType == AuthScreenType.SIGNUP)
-                    AnalyticsUtil.logContentGatewaySession(
-                        TimedEvent.START,
-                        this.contract.getAnalyticsDataProvider().trigger.value,
-                        listOf(Action.SIGNUP)
-                    )
-            }
-            else -> Unit
-        }
+        AnalyticsUtil.logContentGatewaySession(
+                TimedEvent.START,
+                this.contract.getAnalyticsDataProvider().trigger.value
+        )
     }
 }

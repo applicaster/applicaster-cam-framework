@@ -63,7 +63,7 @@ class ConfirmationDialog : DialogFragment() {
         }
     }
 
-    fun customize() {
+    private fun customize() {
         when (dialogType) {
             AlertDialogType.BILLING -> {
                 UIMapper.apply {
@@ -79,7 +79,7 @@ class ConfirmationDialog : DialogFragment() {
                         ConfirmationCause.PURCHASE,
                         ContentAccessManager.pluginConfigurator.getAlertDialogFields().billingConfirmationTitle,
                         ContentAccessManager.pluginConfigurator.getAlertDialogFields().billingConfirmationDescription,
-                        AnalyticsUtil.KEY_NON_PROVIDED
+                        AnalyticsUtil.KEY_NONE_PROVIDED
                     )
                 )
                 //
@@ -98,7 +98,7 @@ class ConfirmationDialog : DialogFragment() {
                         ConfirmationCause.PASSWORD_RESET,
                         ContentAccessManager.pluginConfigurator.getAlertDialogFields().pwdResetTitle,
                         ContentAccessManager.pluginConfigurator.getAlertDialogFields().pwdResetDescription,
-                        AnalyticsUtil.KEY_NON_PROVIDED
+                        AnalyticsUtil.KEY_NONE_PROVIDED
                     )
                 )
                 //
@@ -117,13 +117,12 @@ class ConfirmationDialog : DialogFragment() {
                         ConfirmationCause.RESTORE_PURCHASE,
                         ContentAccessManager.pluginConfigurator.getAlertDialogFields().restoreConfirmationTitle,
                         ContentAccessManager.pluginConfigurator.getAlertDialogFields().restoreConfirmationDescription,
-                        AnalyticsUtil.KEY_NON_PROVIDED
+                        AnalyticsUtil.KEY_NONE_PROVIDED
                     )
                 )
                 //
             }
-            AlertDialogType.UNDEFINED -> {
-            }
+            AlertDialogType.UNDEFINED -> Unit
         }
     }
 

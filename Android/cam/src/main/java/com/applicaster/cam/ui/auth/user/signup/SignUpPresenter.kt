@@ -24,9 +24,6 @@ class SignUpPresenter(
             AuthScreenType.SIGNUP -> view?.initBackButton(!ContentAccessManager.pluginConfigurator.isTriggerOnAppLaunch())
             else -> view?.initBackButton(enable = true)
         }
-
-        //Analytics
-        AnalyticsGatewaySession.sessionData.add(Action.SIGNUP)
     }
 
     override fun onFailure(msg: String) {
@@ -38,8 +35,8 @@ class SignUpPresenter(
             ConfirmationAlertData(
                 false,
                 ConfirmationCause.NONE,
-                AnalyticsUtil.KEY_NON_PROVIDED,
-                AnalyticsUtil.KEY_NON_PROVIDED,
+                AnalyticsUtil.KEY_NONE_PROVIDED,
+                AnalyticsUtil.KEY_NONE_PROVIDED,
                 msg
             )
         )
@@ -82,6 +79,8 @@ class SignUpPresenter(
     }
 
     override fun onAuthActionButtonClicked(inputValues: HashMap<AuthField, String>) {
+        //Analytics
+        AnalyticsGatewaySession.sessionData.add(Action.SIGNUP)
         AnalyticsUtil.logTapStandardSignUpButton()
         super.onAuthActionButtonClicked(inputValues)
     }
@@ -100,9 +99,9 @@ class SignUpPresenter(
             ConfirmationAlertData(
                 false,
                 ConfirmationCause.NONE,
-                AnalyticsUtil.KEY_NON_PROVIDED,
-                AnalyticsUtil.KEY_NON_PROVIDED,
-                error?.message ?: AnalyticsUtil.KEY_NON_PROVIDED
+                AnalyticsUtil.KEY_NONE_PROVIDED,
+                AnalyticsUtil.KEY_NONE_PROVIDED,
+                error?.message ?: AnalyticsUtil.KEY_NONE_PROVIDED
             )
         )
         //

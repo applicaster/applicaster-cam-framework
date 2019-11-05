@@ -24,9 +24,6 @@ class LoginPresenter(
             AuthScreenType.LOGIN -> view?.initBackButton(!ContentAccessManager.pluginConfigurator.isTriggerOnAppLaunch())
             else -> view?.initBackButton(enable = true)
         }
-
-        //Analytics
-        AnalyticsGatewaySession.sessionData.add(Action.LOGIN)
     }
 
     override fun getAuthFieldConfig(): AuthFieldConfig =
@@ -42,6 +39,8 @@ class LoginPresenter(
     }
 
     override fun onAuthActionButtonClicked(inputValues: HashMap<AuthField, String>) {
+        //Analytics
+        AnalyticsGatewaySession.sessionData.add(Action.LOGIN)
         AnalyticsUtil.logTapStandardLoginButton()
         super.onAuthActionButtonClicked(inputValues)
     }
@@ -55,8 +54,8 @@ class LoginPresenter(
             ConfirmationAlertData(
                 false,
                 ConfirmationCause.NONE,
-                AnalyticsUtil.KEY_NON_PROVIDED,
-                AnalyticsUtil.KEY_NON_PROVIDED,
+                AnalyticsUtil.KEY_NONE_PROVIDED,
+                AnalyticsUtil.KEY_NONE_PROVIDED,
                 msg
             )
         )
@@ -105,9 +104,9 @@ class LoginPresenter(
             ConfirmationAlertData(
                 false,
                 ConfirmationCause.NONE,
-                AnalyticsUtil.KEY_NON_PROVIDED,
-                AnalyticsUtil.KEY_NON_PROVIDED,
-                error?.message ?: AnalyticsUtil.KEY_NON_PROVIDED
+                AnalyticsUtil.KEY_NONE_PROVIDED,
+                AnalyticsUtil.KEY_NONE_PROVIDED,
+                error?.message ?: AnalyticsUtil.KEY_NONE_PROVIDED
             )
         )
         //
