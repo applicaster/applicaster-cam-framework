@@ -7,22 +7,26 @@
 
     <com.applicaster.util.ui.CustomTextView
         android:id="@+id/tv_hint_desc"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/padding_small"
         android:layout_marginRight="@dimen/padding_small"
         android:paddingStart="@dimen/padding_big"
         android:paddingTop="@dimen/padding_medium"
         android:paddingBottom="@dimen/padding_medium"
+        android:layout_weight="1"
+        android:gravity="end"
         android:text="Have already an account?" />
 
     <com.applicaster.util.ui.CustomTextView
         android:id="@+id/tv_hint_action"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/padding_medium"
         android:paddingEnd="@dimen/padding_big"
         android:paddingBottom="@dimen/padding_medium"
+        android:layout_weight="1"
+        android:gravity="start"
         android:text="Log In" />
 
 </LinearLayout>
