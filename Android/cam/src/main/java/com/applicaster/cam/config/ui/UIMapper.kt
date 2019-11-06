@@ -1,5 +1,6 @@
 package com.applicaster.cam.config.ui
 
+import android.support.annotation.ColorInt
 import android.text.SpannableStringBuilder
 import android.view.View
 import android.view.ViewGroup
@@ -54,6 +55,8 @@ class UIMapper {
         private fun applyTextStyle(view: TextView, styleKey: StyleKey) {
             // customize text color
             view.setTextColor(uiProvider.getColor(styleKey.getHexColor()))
+            val hintColor = obtainHintColor(uiProvider.getColor(styleKey.getHexColor()))
+            view.setHintTextColor(hintColor)
 
             //customize text size
             if (!OSUtil.isTablet()) {
@@ -66,6 +69,26 @@ class UIMapper {
             val fontName = uiProvider.getFontName(styleKey.getFontName())
             if (fontName.isNotEmpty())
                 TextUtil.setTextFont(view, fontName)
+        }
+
+        //customize hint color(it makes alpha channel 60% from current value)
+        @ColorInt
+        private fun obtainHintColor(@ColorInt color: Int): Int {
+            val alphaMultiplier = 0.6f
+            val alpha = ((color shr 24 and 0xff) / 255.0f) * alphaMultiplier
+            val red = (color shr 16 and 0xff) / 255.0f
+            val green = (color shr 8 and 0xff) / 255.0f
+            val blue = (color and 0xff) / 255.0f
+            return argb(alpha, red, green, blue)
+        }
+
+        //convert float values to int color
+        @ColorInt
+        private fun argb(alpha: Float, red: Float, green: Float, blue: Float): Int {
+            return (alpha * 255.0f + 0.5f).toInt() shl 24 or
+                    ((red * 255.0f + 0.5f).toInt() shl 16) or
+                    ((green * 255.0f + 0.5f).toInt() shl 8) or
+                    (blue * 255.0f + 0.5f).toInt()
         }
     }
 }
