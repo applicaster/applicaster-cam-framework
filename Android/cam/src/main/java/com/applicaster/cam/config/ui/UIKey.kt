@@ -2,7 +2,9 @@ package com.applicaster.cam.config.ui
 
 enum class UIKey(
     val text: String? = null,
+    val textLink: String? = null,
     val textStyle: StyleKey? = null,
+    val textLinkStyle: StyleKey? = null,
     val image: String? = null
 ) {
     // @formatter:off
@@ -15,13 +17,11 @@ enum class UIKey(
     LOGIN_RESET_PWD_TEXT(text = UI_KEY_LOGIN_RESET_PWD_TEXT, textStyle = StyleKey.RESET_PASSWORD),
     LOGIN_ALT_AUTH_TEXT(text = UI_KEY_THIRD_PARTY_AUTH_TEXT, textStyle = StyleKey.ALT_AUTH_PROMPT),
     LOGIN_BUTTON(text = UI_KEY_LOGIN_BUTTON_TEXT, image = UI_KEY_LOGIN_BUTTON_IMAGE, textStyle = StyleKey.ACTION_BUTTON),
-    LOGIN_PROMPT_TEXT(text = UI_KEY_LOGIN_PROMPT_TEXT, textStyle = StyleKey.PROMPT),
-    LOGIN_PROMPT_ACTION_TEXT(text = UI_KEY_LOGIN_PROMPT_ACTION_TEXT, textStyle = StyleKey.LINK),
+    LOGIN_PROMPT_TEXT(text = UI_KEY_LOGIN_PROMPT_TEXT, textLink = UI_KEY_LOGIN_PROMPT_ACTION_TEXT, textStyle = StyleKey.PROMPT, textLinkStyle = StyleKey.LINK),
     SIGN_UP_TITLE(text = UI_KEY_SIGN_UP_TITLE_TEXT, textStyle = StyleKey.SCREEN_TITLE),
     SIGN_UP_ALT_AUTH_TEXT(text = UI_KEY_THIRD_PARTY_AUTH_TEXT, textStyle = StyleKey.ALT_AUTH_PROMPT),
     SIGN_UP_BUTTON(text = UI_KEY_SIGN_UP_BUTTON_TEXT, image = UI_KEY_SIGN_UP_BUTTON_IMAGE, textStyle = StyleKey.ACTION_BUTTON),
-    SIGN_UP_PROMPT_TEXT(text = UI_KEY_SIGN_UP_PROMPT_TEXT, textStyle = StyleKey.PROMPT),
-    SIGN_UP_PROMPT_ACTION_TEXT(text = UI_KEY_SIGN_UP_PROMPT_ACTION_TEXT, textStyle = StyleKey.LINK),
+    SIGN_UP_PROMPT_TEXT(text = UI_KEY_SIGN_UP_PROMPT_TEXT, textLink = UI_KEY_SIGN_UP_PROMPT_ACTION_TEXT, textStyle = StyleKey.PROMPT, textLinkStyle = StyleKey.LINK),
     AUTH_SEPARATOR_TEXT(text = UI_KEY_THIRD_PARTY_SEPARATOR_TEXT, textStyle = StyleKey.ALT_AUTH_SEPARATOR),
     AUTH_LEFT_DIVIDER_IMAGE(image = UI_KEY_THIRD_PARTY_DIVIDER_LEFT_IMAGE),
     AUTH_RIGHT_DIVIDER_IMAGE(image = UI_KEY_THIRD_PARTY_DIVIDER_RIGHT_IMAGE),
@@ -40,8 +40,7 @@ enum class UIKey(
     BILLING_ITEM_DETAILS_TEXT(textStyle = StyleKey.PAYMENT_OPTIONS_DESC),
     BILLING_ITEM_REDEEM_TEXT(text = UI_KEY_BILLING_ITEM_REDEEM_TEXT, textStyle = StyleKey.SCREEN_DESC),
     BILLING_TITLE(text = UI_KEY_BILLING_TITLE_TEXT, textStyle = StyleKey.SCREEN_TITLE),
-    BILLING_RESTORE_ACTION_TEXT(text = UI_KEY_BILLING_RESTORE_ACTION, textStyle = StyleKey.LINK),
-    BILLING_RESTORE_HINT_DESC_TEXT(text = UI_KEY_BILLING_RESTORE_DESC, textStyle = StyleKey.PROMPT),
+    BILLING_RESTORE_HINT_DESC_TEXT(text = UI_KEY_BILLING_RESTORE_DESC, textLink = UI_KEY_BILLING_RESTORE_ACTION, textStyle = StyleKey.PROMPT, textLinkStyle = StyleKey.LINK),
 
     CONFIRMATION_DIALOG_IMAGE(image = UI_KEY_ALERT_COMPONENT_IMAGE),
     BILLING_CONFIRMATION_TITLE_TEXT(text = UI_KEY_PAYMENT_CONFIRMATION_TITLE_TEXT, textStyle = StyleKey.CONFIRMATION_TITLE),

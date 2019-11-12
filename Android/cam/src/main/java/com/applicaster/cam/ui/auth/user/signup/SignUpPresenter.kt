@@ -26,6 +26,18 @@ class SignUpPresenter(
         }
     }
 
+    override fun onFacebookAuthFailure(msg: String) {
+        view?.hideLoadingIndicator()
+        view?.showAlert(msg)
+        AnalyticsUtil.logAlternativeSignUpFailure()
+    }
+
+    override fun onFacebookAuthSuccess() {
+        view?.hideLoadingIndicator()
+        view?.hideKeyboard()
+        AnalyticsUtil.logAlternativeSignUpSuccess()
+    }
+
     override fun onFailure(msg: String) {
         view?.hideLoadingIndicator()
         view?.showAlert(msg)
@@ -88,13 +100,11 @@ class SignUpPresenter(
     override fun onFacebookAuthActionCompleted(email: String, id: String) {
         view?.showLoadingIndicator()
         ContentAccessManager.contract.signupWithFacebook(email, id, this)
-        AnalyticsUtil.logAlternativeSignUpSuccess()
     }
 
     override fun onError(error: Exception?) {
         super.onError(error)
         //Analytics
-        AnalyticsUtil.logAlternativeSignUpFailure()
         AnalyticsUtil.logViewAlert(
             ConfirmationAlertData(
                 false,

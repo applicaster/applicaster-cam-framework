@@ -22,12 +22,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar"/>
 
-    <include
+    <TextView
         android:id="@+id/container_restore"
-        layout="@layout/layout_text_with_action"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/billing_layout_details_margin_top"
+        android:padding="@dimen/padding_small"
+        android:gravity="center"
+        android:text="Restore purchases"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_billing_title_text" />

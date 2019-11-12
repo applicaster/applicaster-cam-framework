@@ -45,6 +45,27 @@ class LoginPresenter(
         super.onAuthActionButtonClicked(inputValues)
     }
 
+    override fun onFacebookAuthFailure(msg: String) {
+        view?.hideLoadingIndicator()
+        view?.showAlert(msg)
+        AnalyticsUtil.logAlternativeLoginFailure()
+        AnalyticsUtil.logViewAlert(
+            ConfirmationAlertData(
+                false,
+                ConfirmationCause.NONE,
+                AnalyticsUtil.KEY_NONE_PROVIDED,
+                AnalyticsUtil.KEY_NONE_PROVIDED,
+                msg
+            )
+        )
+    }
+
+    override fun onFacebookAuthSuccess() {
+        view?.hideLoadingIndicator()
+        view?.hideKeyboard()
+        AnalyticsUtil.logAlternativeLoginSuccess()
+    }
+
     override fun onFailure(msg: String) {
         view?.hideLoadingIndicator()
         view?.showAlert(msg)
@@ -93,13 +114,11 @@ class LoginPresenter(
     override fun onFacebookAuthActionCompleted(email: String, id: String) {
         view?.showLoadingIndicator()
         ContentAccessManager.contract.loginWithFacebook(email, id, this)
-        AnalyticsUtil.logAlternativeLoginSuccess()
     }
 
     override fun onError(error: Exception?) {
         super.onError(error)
         //Analytics
-        AnalyticsUtil.logAlternativeLoginFailure()
         AnalyticsUtil.logViewAlert(
             ConfirmationAlertData(
                 false,

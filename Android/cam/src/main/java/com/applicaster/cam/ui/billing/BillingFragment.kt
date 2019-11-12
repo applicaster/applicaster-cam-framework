@@ -21,7 +21,6 @@ import com.applicaster.cam.ui.billing.adapter.recycler.BillingItemType
 import com.applicaster.cam.ui.billing.adapter.recycler.RecyclerBillingAdapter
 import com.applicaster.cam.ui.billing.adapter.recycler.SpaceItemDecoration
 import kotlinx.android.synthetic.main.fragment_billing.*
-import kotlinx.android.synthetic.main.layout_text_with_action.*
 import kotlinx.android.synthetic.main.layout_toolbar_template.*
 
 
@@ -52,8 +51,6 @@ class BillingFragment : BaseFragment(), IBillingView {
     }
 
     override fun setListeners() {
-        tv_hint_desc.setOnClickListener { presenter?.onRestoreClicked() }
-        tv_hint_action.setOnClickListener { presenter?.onRestoreClicked() }
         purchaseListener = object : PurchaseInteractionListener {
             override fun onPurchaseButtonClicked(skuId: String) {
                 presenter?.onPurchaseButtonClicked(baseActivity as Activity, skuId)
@@ -114,8 +111,7 @@ class BillingFragment : BaseFragment(), IBillingView {
             map(app_logo, UIKey.TOOLBAR_HEADER_LOGO_IMAGE)
             map(layout_billing, UIKey.BACKGROUND_IMAGE)
             map(tv_billing_title_text, UIKey.BILLING_TITLE)
-            map(tv_hint_desc, UIKey.BILLING_RESTORE_HINT_DESC_TEXT)
-            map(tv_hint_action, UIKey.BILLING_RESTORE_ACTION_TEXT)
+            map(container_restore, UIKey.BILLING_RESTORE_HINT_DESC_TEXT) { presenter?.onRestoreClicked() }
         }
     }
 
