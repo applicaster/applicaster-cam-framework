@@ -9,7 +9,6 @@ import com.applicaster.cam.ui.auth.user.UserAuthFragment
 import kotlinx.android.synthetic.main.fragment_auth.*
 import kotlinx.android.synthetic.main.layout_additional_auth.*
 import kotlinx.android.synthetic.main.layout_auth_input.*
-import kotlinx.android.synthetic.main.layout_text_with_action.*
 import kotlinx.android.synthetic.main.layout_toolbar_template.*
 
 class SignUpFragment : UserAuthFragment(), ISignUpView {
@@ -28,8 +27,7 @@ class SignUpFragment : UserAuthFragment(), ISignUpView {
             map(btn_input_action, UIKey.SIGN_UP_BUTTON)
             map(tv_add_auth_or, UIKey.AUTH_SEPARATOR_TEXT)
             map(tv_add_auth_desc, UIKey.SIGN_UP_ALT_AUTH_TEXT)
-            map(tv_hint_desc, UIKey.SIGN_UP_PROMPT_TEXT)
-            map(tv_hint_action, UIKey.SIGN_UP_PROMPT_ACTION_TEXT)
+            map(container_auth_hint, UIKey.SIGN_UP_PROMPT_TEXT) { (presenter as? SignUpPresenter)?.onAuthHintClicked() }
         }
     }
 

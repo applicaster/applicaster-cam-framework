@@ -1,7 +1,11 @@
 package com.applicaster.cam.config.ui
 
+import android.graphics.Color
 import android.support.annotation.ColorInt
 import android.text.SpannableStringBuilder
+import android.text.TextPaint
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
@@ -11,6 +15,7 @@ import android.widget.TextView
 import com.applicaster.cam.ContentAccessManager
 import com.applicaster.util.OSUtil
 import com.applicaster.util.TextUtil
+
 
 class UIMapper {
     companion object {
@@ -25,6 +30,19 @@ class UIMapper {
             }
             if (!key.image.isNullOrEmpty()) {
                 setImage(view, key.image!!)
+            }
+        }
+        
+        fun map(view: View, key: UIKey, linkActionCallback: () -> Unit) {
+            if (key.text != null && key.text.isNotEmpty() && key.textLink != null) {
+                val textParamsHolder = TextParamsHolder.build {
+                    this.text = uiProvider.getText(key.text)
+                    this.textLink = uiProvider.getText(key.textLink)
+                    this.textStyle = key.textStyle
+                    this.textLinkStyle = key.textLinkStyle
+                    this.linkActionCallback = linkActionCallback
+                }
+                customizeSpannableText(view, textParamsHolder)
             }
         }
 
@@ -42,6 +60,36 @@ class UIMapper {
             when (view) {
                 is TextView -> view.text = uiProvider.getText(key)
                 is EditText -> view.text = SpannableStringBuilder(uiProvider.getText(key))
+            }
+        }
+
+        private fun customizeSpannableText(view: View, textParamsHolder: TextParamsHolder) {
+            if (view is TextView) {
+                val spanText = SpannableStringBuilder()
+                spanText.append(textParamsHolder.text)
+                //space symbol to prevent sticking two text lines together
+                //if first part of text doesn't contain last 'space' symbol
+                //or second part of text doesn't contain first 'space' symbol
+                if (textParamsHolder.text?.last() != ' ') {
+                    if (textParamsHolder.textLink?.first() != ' ')
+                        spanText.append(' ')
+                }
+                spanText.append(textParamsHolder.textLink)
+                spanText.setSpan(object : ClickableSpan() {
+                    override fun onClick(widget: View) {
+                        //call function to perform click action
+                        textParamsHolder.linkActionCallback()
+                    }
+
+                    override fun updateDrawState(textPaint: TextPaint) {
+                        textParamsHolder.textStyle?.let { setTextStyle(view, it) }
+                        textParamsHolder.textLinkStyle?.let { setTextStyle(view, it) }
+                        textPaint.isUnderlineText = true
+                    }
+                }, spanText.length - (textParamsHolder.textLink?.length ?: 0), spanText.length, 0)
+                view.movementMethod = LinkMovementMethod.getInstance()
+                view.setText(spanText, TextView.BufferType.SPANNABLE)
+                view.highlightColor = Color.TRANSPARENT
             }
         }
 
@@ -90,5 +138,31 @@ class UIMapper {
                     ((green * 255.0f + 0.5f).toInt() shl 8) or
                     (blue * 255.0f + 0.5f).toInt()
         }
+    }
+}
+
+private class TextParamsHolder (
+    val text: String?,
+    val textLink: String?,
+    val textStyle: StyleKey?,
+    val textLinkStyle: StyleKey?,
+    val linkActionCallback: () -> Unit
+) {
+
+    private constructor(builder: Builder) :
+            this(builder.text, builder.textLink, builder.textStyle, builder.textLinkStyle, builder.linkActionCallback)
+
+    companion object {
+        inline fun build(block: Builder.() -> Unit) = Builder().apply(block).build()
+    }
+
+    class Builder {
+        var text: String? = null
+        var textLink: String? = null
+        var textStyle: StyleKey? = null
+        var textLinkStyle: StyleKey? = null
+        var linkActionCallback: () -> Unit = {}
+
+        fun build() = TextParamsHolder(this)
     }
 }

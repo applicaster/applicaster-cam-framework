@@ -10,7 +10,6 @@ import kotlinx.android.synthetic.main.fragment_auth.*
 import kotlinx.android.synthetic.main.layout_additional_auth.*
 import kotlinx.android.synthetic.main.layout_auth_input.*
 import kotlinx.android.synthetic.main.layout_bottom_bar.*
-import kotlinx.android.synthetic.main.layout_text_with_action.*
 import kotlinx.android.synthetic.main.layout_toolbar_template.*
 
 abstract class UserAuthFragment : BaseInputFragment() {
@@ -18,8 +17,6 @@ abstract class UserAuthFragment : BaseInputFragment() {
     override fun setListeners() {
         val presenter = presenter as? IUserAuthPresenter
         btn_input_action.setOnClickListener { presenter?.onAuthActionButtonClicked(getInputFieldsValues()) }
-        tv_hint_desc.setOnClickListener { presenter?.onAuthHintClicked() }
-        tv_hint_action.setOnClickListener { presenter?.onAuthHintClicked() }
         tv_bottom_bar_desc.setOnClickListener { presenter?.onRestoreClicked() }
         tv_bottom_bar_action.setOnClickListener { presenter?.onRestoreClicked() }
         iv_facebook_auth.setOnClickListener { presenter?.onFacebookButtonClicked(activity) }

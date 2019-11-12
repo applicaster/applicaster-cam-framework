@@ -10,7 +10,6 @@ import com.applicaster.cam.ui.auth.user.UserAuthFragment
 import kotlinx.android.synthetic.main.fragment_auth.*
 import kotlinx.android.synthetic.main.layout_additional_auth.*
 import kotlinx.android.synthetic.main.layout_auth_input.*
-import kotlinx.android.synthetic.main.layout_text_with_action.*
 import kotlinx.android.synthetic.main.layout_toolbar_template.*
 
 class LoginFragment : UserAuthFragment(), ILoginView {
@@ -46,8 +45,7 @@ class LoginFragment : UserAuthFragment(), ILoginView {
             map(btn_input_action, UIKey.LOGIN_BUTTON)
             map(tv_add_auth_or, UIKey.AUTH_SEPARATOR_TEXT)
             map(tv_add_auth_desc, UIKey.LOGIN_ALT_AUTH_TEXT)
-            map(tv_hint_desc, UIKey.LOGIN_PROMPT_TEXT)
-            map(tv_hint_action, UIKey.LOGIN_PROMPT_ACTION_TEXT)
+            map(container_auth_hint, UIKey.LOGIN_PROMPT_TEXT) { (presenter as? ILoginPresenter)?.onAuthHintClicked() }
         }
     }
 
