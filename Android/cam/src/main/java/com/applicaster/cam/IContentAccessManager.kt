@@ -14,7 +14,10 @@ interface LoginCallback : ActionCallback
 interface SignUpCallback : ActionCallback
 interface PasswordResetCallback : ActionCallback
 interface RedeemCodeActivationCallback: ActionCallback
-interface FacebookAuthCallback: ActionCallback
+interface FacebookAuthCallback {
+    fun onFacebookAuthFailure(msg: String)
+    fun onFacebookAuthSuccess()
+}
 interface ActionCallback {
     fun onFailure(msg: String)
     fun onActionSuccess()
