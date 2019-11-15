@@ -54,8 +54,8 @@ class LoginPresenter(
                 false,
                 ConfirmationCause.NONE,
                 AnalyticsUtil.KEY_NONE_PROVIDED,
-                AnalyticsUtil.KEY_NONE_PROVIDED,
-                msg
+                msg,
+                AnalyticsUtil.KEY_NONE_PROVIDED
             )
         )
     }
@@ -76,8 +76,8 @@ class LoginPresenter(
                 false,
                 ConfirmationCause.NONE,
                 AnalyticsUtil.KEY_NONE_PROVIDED,
-                AnalyticsUtil.KEY_NONE_PROVIDED,
-                msg
+                msg,
+                AnalyticsUtil.KEY_NONE_PROVIDED
             )
         )
         AnalyticsGatewaySession.sessionData.add(Action.FAILED_ATTEMPT)

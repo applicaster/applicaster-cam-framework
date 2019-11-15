@@ -70,10 +70,13 @@ class UIMapper {
                 //space symbol to prevent sticking two text lines together
                 //if first part of text doesn't contain last 'space' symbol
                 //or second part of text doesn't contain first 'space' symbol
-                if (textParamsHolder.text?.last() != ' ') {
-                    if (textParamsHolder.textLink?.first() != ' ')
-                        spanText.append(' ')
+                val textSeparator = ' '
+                if (textParamsHolder.text?.last() != textSeparator) {
+                    if (textParamsHolder.textLink?.first() != textSeparator)
+                        spanText.append(textSeparator)
                 }
+                //apply text style to view
+                textParamsHolder.textStyle?.let { setTextStyle(view, it) }
                 spanText.append(textParamsHolder.textLink)
                 spanText.setSpan(object : ClickableSpan() {
                     override fun onClick(widget: View) {
@@ -82,8 +85,10 @@ class UIMapper {
                     }
 
                     override fun updateDrawState(textPaint: TextPaint) {
-                        textParamsHolder.textStyle?.let { setTextStyle(view, it) }
-                        textParamsHolder.textLinkStyle?.let { setTextStyle(view, it) }
+                        //apply text style only for text link
+                        textPaint.color = uiProvider.getColor(
+                            textParamsHolder.textLinkStyle?.getHexColor() ?: Color.WHITE.toString()
+                        )
                         textPaint.isUnderlineText = true
                     }
                 }, spanText.length - (textParamsHolder.textLink?.length ?: 0), spanText.length, 0)
