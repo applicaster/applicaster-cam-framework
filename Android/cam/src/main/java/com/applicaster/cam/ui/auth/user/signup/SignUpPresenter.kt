@@ -30,6 +30,13 @@ class SignUpPresenter(
         view?.hideLoadingIndicator()
         view?.showAlert(msg)
         AnalyticsUtil.logAlternativeSignUpFailure()
+        ConfirmationAlertData(
+            false,
+            ConfirmationCause.NONE,
+            AnalyticsUtil.KEY_NONE_PROVIDED,
+            msg,
+            AnalyticsUtil.KEY_NONE_PROVIDED
+        )
     }
 
     override fun onFacebookAuthSuccess() {
@@ -48,8 +55,8 @@ class SignUpPresenter(
                 false,
                 ConfirmationCause.NONE,
                 AnalyticsUtil.KEY_NONE_PROVIDED,
-                AnalyticsUtil.KEY_NONE_PROVIDED,
-                msg
+                msg,
+                AnalyticsUtil.KEY_NONE_PROVIDED
             )
         )
         AnalyticsGatewaySession.sessionData.add(Action.FAILED_ATTEMPT)

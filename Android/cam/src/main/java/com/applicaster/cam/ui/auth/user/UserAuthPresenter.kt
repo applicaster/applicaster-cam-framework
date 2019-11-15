@@ -30,17 +30,6 @@ abstract class UserAuthPresenter(private val view: IBaseInputView?) : BaseInputP
                 val errorMessage: String =
                         if (error.message.isNullOrEmpty()) "Facebook auth failed" else error.message.orEmpty()
                 view?.showAlert(errorMessage)
-                //Analytics
-                AnalyticsUtil.logViewAlert(
-                    ConfirmationAlertData(
-                        false,
-                        ConfirmationCause.NONE,
-                        AnalyticsUtil.KEY_NONE_PROVIDED,
-                            AnalyticsUtil.KEY_NONE_PROVIDED,
-                            errorMessage
-                    )
-                )
-                //
             }
 
             override fun onTaskComplete(result: APUser) {
