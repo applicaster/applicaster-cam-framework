@@ -12,6 +12,7 @@ import ZappPlugins
 public enum Trigger: String {
     case tapCell = "Tap Cell"
     case appLaunch = "App Launch"
+    case userAccountComponent = "UserAccounts Component"
     
     var key: String {
         return "Trigger"
