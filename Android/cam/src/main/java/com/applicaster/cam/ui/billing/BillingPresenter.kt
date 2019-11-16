@@ -110,6 +110,9 @@ class BillingPresenter(
 
 			override fun onActionSuccess() {
 				//Analytics call
+				AnalyticsUtil.collectPurchaseData(camContract.getAnalyticsDataProvider().purchaseData, purchases).forEach {
+					AnalyticsUtil.logCompletePurchase(it)
+				}
 				AnalyticsUtil.logUserProperties(
 						AnalyticsUtil.collectPurchaseData(
 								ContentAccessManager.contract.getAnalyticsDataProvider().purchaseData
@@ -124,10 +127,6 @@ class BillingPresenter(
 				}
 			}
 		})
-		//Analytics call
-		AnalyticsUtil.collectPurchaseData(camContract.getAnalyticsDataProvider().purchaseData, purchases).forEach {
-			AnalyticsUtil.logCompletePurchase(it)
-		}
 	}
 
 	override fun onPurchasesRestored(purchases: List<Purchase>) {
@@ -146,6 +145,14 @@ class BillingPresenter(
 				camContract.getAnalyticsDataProvider().purchaseData
 		).forEach {
 			AnalyticsUtil.logCompleteRestorePurchase(it)
+		}
+	}
+
+	private fun sendRestoreFailureAnalytics(msg: String) {
+		AnalyticsUtil.collectPurchaseData(
+			camContract.getAnalyticsDataProvider().purchaseData
+		).forEach {
+			AnalyticsUtil.logStoreRestorePurchaseError(msg, it)
 		}
 	}
 
@@ -244,15 +251,16 @@ class BillingPresenter(
 	}
 
 	/**
-	 * Purchase verification failed on Cleeng side
+	 * Restore action failed on Cleeng side
 	 */
 	override fun onFailure(msg: String) {
 		view?.hideLoadingIndicator()
 		view?.showAlert(msg)
+		sendRestoreFailureAnalytics(msg)
 	}
 
 	/**
-	 * Purchase verification succeeded on Cleeng side
+	 * Restore action succeeded on Cleeng side
 	 */
 	override fun onActionSuccess() {
 		view?.hideLoadingIndicator()
@@ -264,16 +272,6 @@ class BillingPresenter(
 					AnalyticsUtil.collectPurchaseData(
 							ContentAccessManager.contract.getAnalyticsDataProvider().purchaseData
 					))
-
-			AnalyticsUtil.logViewAlert(
-					ConfirmationAlertData(
-							true,
-							ConfirmationCause.RESTORE_PURCHASE,
-							ContentAccessManager.pluginConfigurator.getPaymentConfirmationTitle(),
-							ContentAccessManager.pluginConfigurator.getPaymentConfirmationDescription(),
-							AnalyticsUtil.KEY_NONE_PROVIDED
-					)
-			)
 		} else {
 			view?.goBack()
 		}
