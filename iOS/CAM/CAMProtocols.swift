@@ -17,16 +17,16 @@ public enum CAMDefaultAuthScreen {
 public protocol CAMDelegate: AnyObject {
     func getPluginConfig() -> [String: String]
     func isPurchaseNeeded() -> Bool
-    func IsUserLoggedIn() -> Bool
-    func facebookLogin(userData: (email: String, userId: String), completion: @escaping (LoginResult) -> Void)
-    func facebookSignUp(userData: (email: String, userId: String), completion: @escaping (SignupResult) -> Void)
-    func login(authData: [String: String], completion: @escaping (LoginResult) -> Void)
-    func signUp(authData: [String: String], completion: @escaping (SignupResult) -> Void)
-    func resetPassword(data: [String: String], completion: @escaping (Result<Void>) -> Void)
+    func isUserLoggedIn() -> Bool
+    func facebookLogin(userData: (email: String, userId: String), completion: @escaping (Result<Void, Error>) -> Void)
+    func facebookSignUp(userData: (email: String, userId: String), completion: @escaping (Result<Void, Error>) -> Void)
+    func login(authData: [String: String], completion: @escaping (Result<Void, Error>) -> Void)
+    func signUp(authData: [String: String], completion: @escaping (Result<Void, Error>) -> Void)
+    func resetPassword(data: [String: String], completion: @escaping (Result<Void, Error>) -> Void)
     
-    func availableProducts(completion: @escaping (AvailableProductsResult) -> Void)
-    func itemPurchased(purchasedItem: PurchasedProduct, completion: @escaping (PurchaseResult) -> Void)
-    func itemsRestored(restoredItems: [PurchasedProduct], completion: @escaping (PurchaseResult) -> Void)
+    func availableProducts(completion: @escaping (Result<[String], Error>) -> Void)
+    func itemPurchased(purchasedItem: PurchasedProduct, completion: @escaping (Result<Void, Error>) -> Void)
+    func itemsRestored(restoredItems: [PurchasedProduct], completion: @escaping (Result<Void, Error>) -> Void)
     
     func itemName() -> String
     func itemType() -> String

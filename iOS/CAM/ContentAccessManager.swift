@@ -40,7 +40,7 @@ open class ContentAccessManager {
     
     public func startFlow() {
         camFlow.update(with: delegate.getPluginConfig(),
-                       and: (delegate.IsUserLoggedIn(), delegate.isPurchaseNeeded()))
+                       and: (delegate.isUserLoggedIn(), delegate.isPurchaseNeeded()))
         
         var firstScreen = camFlow.firstScreen
         if camFlow == .authentication || camFlow == .authAndStorefront {
