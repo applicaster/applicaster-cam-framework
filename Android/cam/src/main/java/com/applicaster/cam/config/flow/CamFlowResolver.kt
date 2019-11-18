@@ -23,6 +23,7 @@ class CamFlowResolver {
                         CamFlow.AUTHENTICATION, CamFlow.EMPTY -> CamFlow.EMPTY
                         CamFlow.STOREFRONT, CamFlow.AUTH_AND_STOREFRONT ->
                             if (paymentRequired) CamFlow.STOREFRONT else CamFlow.EMPTY
+                        CamFlow.LOGOUT -> originalFlow
                     }
                 }
                 AuthenticationRequirement.ALWAYS -> {
@@ -30,12 +31,14 @@ class CamFlowResolver {
                         CamFlow.AUTHENTICATION, CamFlow.EMPTY -> originalFlow
                         CamFlow.STOREFRONT -> if (paymentRequired) CamFlow.STOREFRONT else CamFlow.EMPTY
                         CamFlow.AUTH_AND_STOREFRONT -> if (paymentRequired) CamFlow.AUTH_AND_STOREFRONT else CamFlow.AUTHENTICATION
+                        CamFlow.LOGOUT -> originalFlow
                     }
                 }
                 AuthenticationRequirement.REQUIRE_ON_PURCHASABLE_ITEMS -> {
                     when (originalFlow) {
                         CamFlow.AUTHENTICATION, CamFlow.AUTH_AND_STOREFRONT, CamFlow.EMPTY -> originalFlow
                         CamFlow.STOREFRONT -> if (paymentRequired) CamFlow.AUTH_AND_STOREFRONT else CamFlow.EMPTY
+                        CamFlow.LOGOUT -> originalFlow
                     }
                 }
                 AuthenticationRequirement.REQUIRE_WHEN_SPECIFIED_IN_DATA_SOURCE -> {
@@ -43,6 +46,7 @@ class CamFlowResolver {
                         CamFlow.AUTHENTICATION, CamFlow.EMPTY -> originalFlow
                         CamFlow.STOREFRONT, CamFlow.AUTH_AND_STOREFRONT ->
                             if (paymentRequired) originalFlow else CamFlow.EMPTY
+                        CamFlow.LOGOUT -> originalFlow
                     }
                 }
                 else -> originalFlow
@@ -70,6 +74,7 @@ class CamFlowResolver {
                         else -> CamFlow.EMPTY
                     }
                 }
+                CamFlow.LOGOUT -> currentFlow
                 CamFlow.EMPTY -> currentFlow
             }
         }

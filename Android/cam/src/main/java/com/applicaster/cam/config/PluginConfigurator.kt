@@ -106,7 +106,9 @@ class PluginConfigurator(private val pluginConfig: Map<String, String>) : Config
             pwdResetTitle = pluginConfig.getValue(KEY_PWD_RESET_TITLE),
             pwdResetDescription = pluginConfig.getValue(KEY_PWD_RESET_DESC),
             restoreConfirmationTitle = pluginConfig.getValue(KEY_RESTORE_CONFIRMATION_TITLE),
-            restoreConfirmationDescription = pluginConfig.getValue(KEY_RESTORE_CONFIRMATION_DESC)
+            restoreConfirmationDescription = pluginConfig.getValue(KEY_RESTORE_CONFIRMATION_DESC),
+            logoutConfirmationTitle = pluginConfig.getValue(KEY_LOGOUT_CONFIRMATION_TITLE),
+            logoutConfirmationDescription = pluginConfig.getValue(KEY_LOGOUT_CONFIRMATION_DESC)
         )
 }
 
@@ -117,7 +119,9 @@ data class AlertFieldsText(
     var pwdResetTitle: String,
     var pwdResetDescription: String,
     var restoreConfirmationTitle: String,
-    var restoreConfirmationDescription: String
+    var restoreConfirmationDescription: String,
+    var logoutConfirmationTitle: String,
+    var logoutConfirmationDescription: String
 )
 
 const val KEY_AUTH_FIELDS = "authentication_input_fields"
@@ -141,3 +145,5 @@ const val KEY_PWD_RESET_TITLE = "password_reset_confirmation_title_text"
 const val KEY_PWD_RESET_DESC = "password_reset_confirmation_description_text"
 const val KEY_RESTORE_CONFIRMATION_TITLE = "restore_purchase_confirmation_title_text"
 const val KEY_RESTORE_CONFIRMATION_DESC = "restore_purchase_confirmation_description_text"
+const val KEY_LOGOUT_CONFIRMATION_TITLE = "logout_title_text"
+const val KEY_LOGOUT_CONFIRMATION_DESC = "logout_description_text"

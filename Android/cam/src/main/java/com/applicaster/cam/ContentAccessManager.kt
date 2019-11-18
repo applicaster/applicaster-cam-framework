@@ -1,7 +1,9 @@
 package com.applicaster.cam
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.support.v4.app.FragmentActivity
 import com.applicaster.cam.analytics.Action
 import com.applicaster.cam.analytics.AnalyticsGatewaySession
 import com.applicaster.cam.analytics.AnalyticsUtil
@@ -13,6 +15,8 @@ import com.applicaster.cam.config.ui.PluginUIProvider
 import com.applicaster.cam.config.ui.UIProvider
 import com.applicaster.cam.params.auth.AuthScreenType
 import com.applicaster.cam.ui.CamActivity
+import com.applicaster.cam.ui.confirmation.AlertDialogType
+import com.applicaster.cam.ui.confirmation.ConfirmationDialog
 import kotlin.properties.Delegates
 
 object ContentAccessManager : IContentAccessManager {
@@ -29,7 +33,12 @@ object ContentAccessManager : IContentAccessManager {
             context.applicationContext
         )
         setCamFlow(contract)
-        startCamActivity(context)
+        if (camFlow == CamFlow.LOGOUT) {
+            if (context is FragmentActivity) {
+                ConfirmationDialog.newInstance(AlertDialogType.RESTORE).show(context.supportFragmentManager, "")
+            }
+        } else
+            startCamActivity(context)
 
         //analytics events
         logAnalyticsEvents()
