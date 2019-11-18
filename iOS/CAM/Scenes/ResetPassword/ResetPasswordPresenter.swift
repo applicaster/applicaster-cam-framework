@@ -49,8 +49,7 @@ class ResetPasswordPresenter {
     }
     
     func resetPassword(data: [AuthField]) {
-        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: AnalyticsEvents.resetPassword.key,
-                                                                     parameters: AnalyticsEvents.resetPassword.metadata)
+        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: AnalyticsEvents.resetPassword)
         self.view.showLoadingScreen(true)
         if let data = validate(data: data) {
             camDelegate.resetPassword(data: data, completion: { [weak self] (result) in
@@ -63,8 +62,7 @@ class ResetPasswordPresenter {
                     self.view.showError(description: error.localizedDescription)
                     
                     let viewAlertEvent = AnalyticsEvents.makeViewAlert(from: error)
-                    ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: viewAlertEvent.key,
-                                                                                 parameters: viewAlertEvent.metadata)
+                    ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: viewAlertEvent)
                     AnalyticsEvents.userFlow.append("Failed Attempt")
                 }
             })

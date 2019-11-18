@@ -83,11 +83,9 @@ class EntitlementPickerPresenter {
     }
     
     func restore() {
-        let playableInfo = PlayableItemInfo(name: camDelegate.itemName(),
-                                            type: camDelegate.itemType())
+        let playableInfo = camDelegate.playableItemInfo
         let tapRestoreEvent = AnalyticsEvents.tapRestorePurchaseLink(playableInfo)
-        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: tapRestoreEvent.key,
-                                                                     parameters: tapRestoreEvent.metadata)
+        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: tapRestoreEvent)
         self.view.showLoadingScreen(true)
         BillingHelper.sharedInstance.restore { (result) in
             switch result {
@@ -129,18 +127,15 @@ class EntitlementPickerPresenter {
                         let productsProperties = resultArray.map({ self.createProductProperties(for: $0.productIdentifier) })
                         let successfulRestoreEvent = AnalyticsEvents.completeRestorePurchase(playableInfo,
                                                                                              productsProperties)
-                        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: successfulRestoreEvent.key,
-                                                                                     parameters: successfulRestoreEvent.metadata)
+                        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: successfulRestoreEvent  )
                     case .failure(let error):
                         AnalyticsEvents.userFlow.append("Failed Attempt")
                         self.view.showAlert(description: error.localizedDescription)
                         self.sendAnalyticsEvent(for: error)
                         let restoreFailureEvent = AnalyticsEvents.storeRestorePurchaseError(error,
-                                                                                            PlayableItemInfo(name: self.camDelegate.itemName(),
-                                                                                                             type: self.camDelegate.itemType()),
+                                                                                            self.camDelegate.playableItemInfo,
                                                                                             nil)
-                        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: restoreFailureEvent.key,
-                                                                                     parameters: restoreFailureEvent.metadata)
+                        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: restoreFailureEvent)
                     }
                 })
             case .failure(let error):
@@ -154,27 +149,23 @@ class EntitlementPickerPresenter {
     // MARK: - Private methods
     
     private func showOffers() {
+        let playableInfo = camDelegate.playableItemInfo
+        
         let viewModels = availableProducts.map({ (skProduct) -> OfferViewModel in
-            let itemName = camDelegate.itemName()
-            let itemType = camDelegate.itemType()
-            var voucherProperties = camDelegate.purchaseProperties(for: skProduct.productIdentifier)
-            voucherProperties.update(with: skProduct)
+            var voucherProperties = camDelegate.analyticsStorage().purchasesProperties[skProduct.productIdentifier]
+            voucherProperties?.update(with: skProduct)
             
             let buyAction = {
-                let playableInfo = PlayableItemInfo(name: itemName,
-                                                    type: itemType)
-                
                 let buyEvent = AnalyticsEvents.tapPurchaseButton(playableInfo,
                                                                  voucherProperties)
-                ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: buyEvent.key,
-                                                                             parameters: buyEvent.metadata)
+                ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: buyEvent)
                 
                 self.view.showLoadingScreen(true)
                 BillingHelper.sharedInstance.purchase(skProduct, completion: { [weak self] (result) in
                     let purchaseResultEvent: AnalyticsEvents
                     switch result {
                     case .success(let purchase):
-                        voucherProperties.transactionID = purchase.transaction?.transactionIdentifier
+                        voucherProperties?.transactionID = purchase.transaction?.transactionIdentifier
                         purchaseResultEvent = AnalyticsEvents.completePurchase(playableInfo,
                                                                                voucherProperties)
                         
@@ -184,7 +175,7 @@ class EntitlementPickerPresenter {
                         if storage?.userGenericProperties()["Logged in"] == nil {
                             properties["Logged In"] = "No"
                         }
-                        if let productName = voucherProperties.productName {
+                        if let productName = voucherProperties?.productName {
                             properties["Purchase Product Name"] = productName
                         }
                         APAnalyticsManager.setEventUserGenericProperties(properties)
@@ -202,8 +193,7 @@ class EntitlementPickerPresenter {
                         self?.view.showLoadingScreen(false)
                     }
                     
-                    ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: purchaseResultEvent.key,
-                                                                                 parameters: purchaseResultEvent.metadata)
+                    ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: purchaseResultEvent)
                 })
             }
             
@@ -262,8 +252,7 @@ class EntitlementPickerPresenter {
                                                                  description: alertDescription,
                                                                  isConfirmation: IsConfirmationAlert.yes(type: event.analyticsEvent)),
                                                        apiError: nil)
-        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: viewAlertEvent.key,
-                                                                     parameters: viewAlertEvent.metadata)
+        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: viewAlertEvent)
         
         self.view.showConfirmationScreen(config: configDictionary,
                                           titleKey: alertTitleKey,
@@ -293,12 +282,13 @@ class EntitlementPickerPresenter {
     
     private func sendAnalyticsEvent(for error: Error) {
         let viewAlertEvent = AnalyticsEvents.makeViewAlert(from: error)
-        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: viewAlertEvent.key,
-                                                                     parameters: viewAlertEvent.metadata)
+        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: viewAlertEvent)
     }
     
-    private func createProductProperties(for productIdentifier: String) -> PurchaseProperties {
-        var purchaseProperties = self.camDelegate.purchaseProperties(for: productIdentifier)
+    private func createProductProperties(for productIdentifier: String) -> PurchaseProperties? {
+        guard var purchaseProperties = camDelegate.analyticsStorage().purchasesProperties[productIdentifier] else {
+            return nil
+        }
         
         if let skProduct = self.availableProducts.first(where: { $0.productIdentifier == productIdentifier }) {
             purchaseProperties.update(with: skProduct)

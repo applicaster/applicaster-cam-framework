@@ -73,7 +73,7 @@ class EntitlementPickerViewController: UIViewController {
 
         setupGradient()
         
-        closeButton.isHidden = presenter?.camDelegate.trigger() == .appLaunch
+        closeButton.isHidden = presenter?.camDelegate.analyticsStorage().trigger == .appLaunch
     }
     
     override func viewDidAppear(_ animated: Bool) {

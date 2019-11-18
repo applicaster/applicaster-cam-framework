@@ -59,13 +59,13 @@ enum AnalyticsEvents {
     case launchPasswordResetScreen
     case resetPassword
     case viewAlert(AlertInfo, apiError: String?)
-    case tapPurchaseButton(PlayableItemInfo, PurchaseProperties)
-    case completePurchase(PlayableItemInfo, PurchaseProperties)
-    case cancelPurchase(PlayableItemInfo, PurchaseProperties)
-    case storePurchaseError(Error, PlayableItemInfo, PurchaseProperties)
+    case tapPurchaseButton(PlayableItemInfo, PurchaseProperties?)
+    case completePurchase(PlayableItemInfo, PurchaseProperties?)
+    case cancelPurchase(PlayableItemInfo, PurchaseProperties?)
+    case storePurchaseError(Error, PlayableItemInfo, PurchaseProperties?)
     case tapRestorePurchaseLink(PlayableItemInfo)
     case startRestorePurchase(PlayableItemInfo)
-    case completeRestorePurchase(PlayableItemInfo, [PurchaseProperties])
+    case completeRestorePurchase(PlayableItemInfo, [PurchaseProperties?])
     case storeRestorePurchaseError(Error, PlayableItemInfo, PurchaseProperties?)
     
     static var userFlow: [String] = []
@@ -144,18 +144,18 @@ enum AnalyticsEvents {
         case .tapPurchaseButton(let info, let voucher):
             metadata = metadata
                 .merge(info.metadata)
-                .merge(voucher.metadata)
+                .merge(voucher?.metadata ?? [:])
         case .completePurchase(let info, let voucher),
              .cancelPurchase(let info, let voucher):
             metadata = metadata
                 .merge(["Purchase Entity Name": info.name])
-                .merge(voucher.metadata)
+                .merge(voucher?.metadata ?? [:])
         case .storePurchaseError(let error, let info, let voucher):
             metadata = metadata
                 .merge(["Error Message": error.localizedDescription])
                 .merge(["Error Code ID": error.code])
                 .merge(["Purchase Entity Name": info.name])
-                .merge(voucher.metadata)
+                .merge(voucher?.metadata ?? [:])
             switch error {
             case let skError as SKError:
                 metadata = metadata.merge(["Error Code ID": "\(skError.errorCode)"])
@@ -170,7 +170,7 @@ enum AnalyticsEvents {
         case .completeRestorePurchase(let info, let purchaseProperties):
             metadata = metadata
                 .merge(["Purchase Entity Name": info.name])
-                .merge([PurchaseProperties.key: purchaseProperties.map({ $0.metadata })])
+                .merge([PurchaseProperties.key: purchaseProperties.compactMap({ $0?.metadata })])
         case .storeRestorePurchaseError(let error, let info, _):
             metadata = metadata
                 .merge(["Error Message": error.localizedDescription])

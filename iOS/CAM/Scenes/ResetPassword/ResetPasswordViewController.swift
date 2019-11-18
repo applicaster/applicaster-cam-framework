@@ -79,7 +79,7 @@ class ResetPasswordViewController: UIViewController {
     func setupUI() {
         resetPasswordFieldsTable.backgroundView = UIView()
         resetPasswordFieldsTable.allowsSelection = false
-        closeButton.isHidden = presenter?.camDelegate.trigger() == .appLaunch
+        closeButton.isHidden = presenter?.camDelegate.analyticsStorage().trigger == .appLaunch
     }
     
     // MARK: - Keyboard
@@ -163,8 +163,7 @@ extension ResetPasswordViewController: ResetPasswordViewProtocol {
                                                                      description: alertDescription,
                                                                      isConfirmation: IsConfirmationAlert.yes(type: .passwordReset)),
                                                            apiError: nil)
-            ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: viewAlertEvent.key,
-                                                                         parameters: viewAlertEvent.metadata)
+            ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: viewAlertEvent)
         } else {
             presenter?.backToPreviousScreen()
         }

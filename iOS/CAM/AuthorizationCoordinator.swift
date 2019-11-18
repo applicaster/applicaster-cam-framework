@@ -61,8 +61,7 @@ class AuthorizationCoordinator: AuthorizationCoordinatorProtocol {
     }
     
     func showResetPasswordScreen() {
-        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: AnalyticsEvents.launchPasswordResetScreen.key,
-                                                                     parameters: AnalyticsEvents.launchPasswordResetScreen.metadata)
+        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: AnalyticsEvents.launchPasswordResetScreen)
         let controller = ViewControllerFactory.createResetPasswordScreen(pluginDataProvider: parentCoordinator,
                                                                          authCoordinator: self)
         navigationController?.pushViewController(controller, animated: true)

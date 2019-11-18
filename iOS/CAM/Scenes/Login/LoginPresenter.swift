@@ -46,8 +46,7 @@ class LoginPresenter {
     }
     
     func showSignUpScreen() {
-        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: AnalyticsEvents.switchToSignUpScreen.key,
-                                                                     parameters: AnalyticsEvents.switchToSignUpScreen.metadata)
+        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: AnalyticsEvents.switchToSignUpScreen)
         if isRoot {
             coordinatorDelegate.showSingUpScreen(isCoordinatorRootController: false)
         } else {
@@ -67,11 +66,9 @@ class LoginPresenter {
     }
     
     func login(data: [AuthField]) {
-        let playableInfo = PlayableItemInfo(name: camDelegate.itemName(),
-                                            type: camDelegate.itemType())
+        let playableInfo = camDelegate.playableItemInfo
         let tapLoginEvent = AnalyticsEvents.tapStandardLoginButton(playableInfo)
-        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: tapLoginEvent.key,
-                                                                     parameters: tapLoginEvent.metadata)
+        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: tapLoginEvent)
         
         view.showLoadingScreen(true)
         if let data = validate(data: data) {
@@ -81,16 +78,13 @@ class LoginPresenter {
                 switch result {
                 case .success:
                     let successLoginEvent = AnalyticsEvents.standardLoginSuccess(playableInfo)
-                    ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: successLoginEvent.key,
-                                                                                 parameters: successLoginEvent.metadata)
+                    ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: successLoginEvent)
                     self.coordinatorDelegate.finishAuthorizationFlow(isUserLogged: true)
                 case .failure(let error):
                     let failureLoginEvent = AnalyticsEvents.standardLoginFailure(playableInfo)
-                    ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: failureLoginEvent.key,
-                                                                                 parameters: failureLoginEvent.metadata)
-                    let viewAlert = AnalyticsEvents.makeViewAlert(from: error)
-                    ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: viewAlert.key,
-                                                                                 parameters: viewAlert.metadata)
+                    ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: failureLoginEvent)
+                    let viewAlertEvent = AnalyticsEvents.makeViewAlert(from: error)
+                    ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: viewAlertEvent)
                     AnalyticsEvents.userFlow.append("Failed Attempt")
                     
                     self.view.showLoadingScreen(false)
@@ -133,11 +127,9 @@ class LoginPresenter {
     }
     
     func showFacebookAuthScreen() {
-        let playableInfo = PlayableItemInfo(name: camDelegate.itemName(),
-                                            type: camDelegate.itemType())
+        let playableInfo = camDelegate.playableItemInfo
         let tapLoginEvent = AnalyticsEvents.tapAlternativeLogin(playableInfo)
-        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: tapLoginEvent.key,
-                                                                     parameters: tapLoginEvent.metadata)
+        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: tapLoginEvent)
         
         view.showLoadingScreen(true)
 
@@ -151,8 +143,7 @@ class LoginPresenter {
                 self.getFacebookUser(client: facebookClient)
             } else {
                 let cancelLoginEvent = AnalyticsEvents.alternativeLoginCancel(playableInfo)
-                ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: cancelLoginEvent.key,
-                                                                             parameters: cancelLoginEvent.metadata)
+                ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: cancelLoginEvent)
                 AnalyticsEvents.userFlow.append("Failed Attempt")
                 
                 self.view.showLoadingScreen(false)
@@ -180,8 +171,7 @@ class LoginPresenter {
     }
     
     func facebookLogin(email: String, userId: String) {
-        let playableInfo = PlayableItemInfo(name: camDelegate.itemName(),
-                                            type: camDelegate.itemType())
+        let playableInfo = camDelegate.playableItemInfo
 
         self.camDelegate.facebookLogin(userData: (email: email, userId: userId), completion: { [weak self] (result) in
             guard let self = self else { return }
@@ -189,13 +179,11 @@ class LoginPresenter {
             switch result {
             case .success:
                 let successLoginEvent = AnalyticsEvents.alternativaLoginSucess(playableInfo)
-                ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: successLoginEvent.key,
-                                                                             parameters: successLoginEvent.metadata)
+                ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: successLoginEvent)
                 self.coordinatorDelegate.finishAuthorizationFlow(isUserLogged: true)
             case .failure(let error):
                 let failureLoginEvent = AnalyticsEvents.alternativaLoginFailure(playableInfo)
-                ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: failureLoginEvent.key,
-                                                                             parameters: failureLoginEvent.metadata)
+                ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: failureLoginEvent)
                 self.view.showError(description: error.localizedDescription)
             }
         })

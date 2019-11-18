@@ -8,10 +8,19 @@
 
 import Foundation
 import StoreKit
+import ZappPlugins
 
 public enum CAMDefaultAuthScreen {
     case login
     case registration
+}
+
+public protocol AnalyticsStorageProtocol {
+    
+    var trigger: Trigger { get }
+    var itemName: String { get }
+    var itemType: String { get }
+    var purchasesProperties: [String: PurchaseProperties] { get }    
 }
 
 public protocol CAMDelegate: AnyObject {
@@ -28,10 +37,7 @@ public protocol CAMDelegate: AnyObject {
     func itemPurchased(purchasedItem: PurchasedProduct, completion: @escaping (Result<Void, Error>) -> Void)
     func itemsRestored(restoredItems: [PurchasedProduct], completion: @escaping (Result<Void, Error>) -> Void)
     
-    func itemName() -> String
-    func itemType() -> String
-    func purchaseProperties(for productIdentifier: String) -> PurchaseProperties
-    func trigger() -> Trigger
+    func analyticsStorage() -> AnalyticsStorageProtocol
 }
 
 public enum ItemState {
