@@ -40,6 +40,8 @@ class PluginConfigurator(private val pluginConfig: Map<String, String>) : Config
 
     override fun getDefaultAlertText(): String = pluginConfig.getValue(KEY_DEFAULT_ALERT_TEXT)
 
+    override fun getLogoutErrorAlertText(): String = pluginConfig.getValue(KEY_LOGOUT_ERROR_ALERT_TEXT)
+
     override fun getNoPurchasesToRestoreText(): String = pluginConfig.getValue(
         KEY_NO_PURCHASES_TO_RESTORE_TEXT
     )
@@ -147,3 +149,4 @@ const val KEY_RESTORE_CONFIRMATION_TITLE = "restore_purchase_confirmation_title_
 const val KEY_RESTORE_CONFIRMATION_DESC = "restore_purchase_confirmation_description_text"
 const val KEY_LOGOUT_CONFIRMATION_TITLE = "logout_title_text"
 const val KEY_LOGOUT_CONFIRMATION_DESC = "logout_description_text"
+const val KEY_LOGOUT_ERROR_ALERT_TEXT = "logout_error_alert_text"

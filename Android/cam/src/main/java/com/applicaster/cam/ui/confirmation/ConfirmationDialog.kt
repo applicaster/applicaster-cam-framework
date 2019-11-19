@@ -65,6 +65,9 @@ class ConfirmationDialog : DialogFragment() {
                 else -> baseActivity?.goBack()
             }
         }
+        if (dialogType == AlertDialogType.LOGOUT) {
+            dialogView?.btn_confirmation_cancel?.setOnClickListener { dismiss() }
+        }
     }
 
     private fun customize() {
@@ -127,11 +130,13 @@ class ConfirmationDialog : DialogFragment() {
                 //
             }
             AlertDialogType.LOGOUT -> {
+                dialogView?.btn_confirmation_cancel?.visibility = View.VISIBLE
                 UIMapper.apply {
                     map(dialogView?.layout_confirmation_background!!, UIKey.CONFIRMATION_DIALOG_IMAGE)
                     map(dialogView?.tv_confirmation_title!!, UIKey.LOGOUT_TITLE_TEXT)
                     map(dialogView?.tv_confirmation_desc!!, UIKey.LOGOUT_DESC_TEXT)
-                    map(dialogView?.btn_confirmation_ok!!, UIKey.LOGOUT_BUTTON_TEXT)
+                    map(dialogView?.btn_confirmation_ok!!, UIKey.LOGOUT_OK_BUTTON_TEXT)
+                    map(dialogView?.btn_confirmation_cancel!!, UIKey.LOGOUT_CANCEL_BUTTON_TEXT)
                 }
                 //Analytics
                 AnalyticsUtil.logViewAlert(
