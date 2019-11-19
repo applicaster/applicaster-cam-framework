@@ -93,7 +93,7 @@ class LoginViewController: UIViewController {
         if let isHidden = presenter?.isRoot {
             backButton.isHidden = isHidden
         }
-        closeButton.isHidden = presenter?.camDelegate.trigger() == .appLaunch
+        closeButton.isHidden = presenter?.camDelegate.analyticsStorage().trigger == .appLaunch
         signUpButton.titleLabel?.numberOfLines = 0
         signUpButton.titleLabel?.textAlignment = .center
         socialNetworksContainer.isHidden = !(configDictionary[CAMKeys.isAlternativeAuthenticationEnabled.rawValue]?.bool ?? false)

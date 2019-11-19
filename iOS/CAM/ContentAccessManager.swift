@@ -40,19 +40,17 @@ open class ContentAccessManager {
     
     public func startFlow() {
         camFlow.update(with: delegate.getPluginConfig(),
-                       and: (delegate.IsUserLoggedIn(), delegate.isPurchaseNeeded()))
+                       and: (delegate.isUserLoggedIn(), delegate.isPurchaseNeeded()))
         
         var firstScreen = camFlow.firstScreen
         if camFlow == .authentication || camFlow == .authAndStorefront {
             let dictionary = delegate.getPluginConfig()
             firstScreen = dictionary[CAMKeys.defaultAuthScreen.rawValue] ?? firstScreen
         }
-        let launchEvent = AnalyticsEvents.launchContentGatewayPlugin(delegate.trigger(),
+        let launchEvent = AnalyticsEvents.launchContentGatewayPlugin(delegate.analyticsStorage().trigger,
                                                                      firstScreen: firstScreen,
-                                                                     PlayableItemInfo(name: delegate.itemName(),
-                                                                                      type: delegate.itemType()))
-        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: launchEvent.key,
-                                                                     parameters: launchEvent.metadata,
+                                                                     delegate.playableItemInfo)
+        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: launchEvent,
                                                                      timed: true)
         AnalyticsEvents.userFlow.removeAll()
         
@@ -124,9 +122,8 @@ open class ContentAccessManager {
         if result == false {
             AnalyticsEvents.userFlow.append("Cancel")
         }
-        let event = AnalyticsEvents.contentGatewaySession(delegate.trigger())
-        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: event.key,
-                                                                     parameters: event.metadata,
+        let event = AnalyticsEvents.contentGatewaySession(delegate.analyticsStorage().trigger)
+        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: event,
                                                                      timed: true)
         
         childCoordinator = nil

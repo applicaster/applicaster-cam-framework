@@ -49,8 +49,7 @@ class SignUpPresenter {
     }
     
     func showLoginScreen() {
-        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: AnalyticsEvents.switchToLoginScreen.key,
-                                                                     parameters: AnalyticsEvents.switchToLoginScreen.metadata)
+        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: AnalyticsEvents.switchToLoginScreen)
         
         if isRoot {
             coordinatorDelegate.showLoginScreen(isCoordinatorRootController: false)
@@ -64,11 +63,9 @@ class SignUpPresenter {
     }
     
     func signUp(data: [AuthField]) {
-        let playableInfo = PlayableItemInfo(name: camDelegate.itemName(),
-                                            type: camDelegate.itemType())
+        let playableInfo = camDelegate.playableItemInfo
         let signupEvent = AnalyticsEvents.tapStandardSignUpButton(playableInfo)
-        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: signupEvent.key,
-                                                                     parameters: signupEvent.metadata)
+        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: signupEvent)
         
         view.showLoadingScreen(true)
         if let data = validate(data: data) {
@@ -77,16 +74,13 @@ class SignUpPresenter {
                 switch result {
                 case .success:
                     let signupSuccessEvent = AnalyticsEvents.standardSignUpSuccess(playableInfo)
-                    ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: signupSuccessEvent.key,
-                                                                                 parameters: signupSuccessEvent.metadata)
+                    ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: signupSuccessEvent)
                     self.coordinatorDelegate.finishAuthorizationFlow(isUserLogged: true)
                 case .failure(let error):
                     let signupFailureEvent = AnalyticsEvents.standardSignUpFailure(playableInfo)
-                    ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: signupFailureEvent.key,
-                                                                                 parameters: signupFailureEvent.metadata)
+                    ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: signupFailureEvent)
                     let viewAlertEvent = AnalyticsEvents.makeViewAlert(from: error)
-                    ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: viewAlertEvent.key,
-                                                                                 parameters: viewAlertEvent.metadata)
+                    ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: viewAlertEvent)
                     AnalyticsEvents.userFlow.append("Failed Attempt")
                     
                     self.view.showLoadingScreen(false)
@@ -129,11 +123,9 @@ class SignUpPresenter {
     }
     
     func showFacebookAuthScreen() {
-        let playableInfo = PlayableItemInfo(name: camDelegate.itemName(),
-                                            type: camDelegate.itemType())
+        let playableInfo = camDelegate.playableItemInfo
         let alternativeSignUpEvent = AnalyticsEvents.tapAlternativeSignUp(playableInfo)
-        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: alternativeSignUpEvent.key,
-                                                                     parameters: alternativeSignUpEvent.metadata)
+        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: alternativeSignUpEvent)
         view.showLoadingScreen(true)
         guard let facebookClient = ZAAppConnector.sharedInstance().facebookAccountKitDelegate else {
             self.view.showLoadingScreen(false)
@@ -147,8 +139,7 @@ class SignUpPresenter {
             } else {
                 self.view.showLoadingScreen(false)
                 let cancelEvent = AnalyticsEvents.alternativeSignUpCancel(playableInfo)
-                ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: cancelEvent.key,
-                                                                             parameters: cancelEvent.metadata)
+                ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: cancelEvent)
                 AnalyticsEvents.userFlow.append("Failed Attempt")
                 
                 if let error = error {
@@ -176,8 +167,7 @@ class SignUpPresenter {
     }
     
     func facebookSignUp(email: String, userId: String) {
-        let playableInfo = PlayableItemInfo(name: camDelegate.itemName(),
-                                            type: camDelegate.itemType())
+        let playableInfo = camDelegate.playableItemInfo
         
         self.camDelegate.facebookSignUp(userData: (email: email, userId: userId), completion: { [weak self] (result) in
             guard let self = self else { return }
@@ -185,13 +175,11 @@ class SignUpPresenter {
             switch result {
             case .success:
                 let successEvent = AnalyticsEvents.alternativeSignUpSuccess(playableInfo)
-                ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: successEvent.key,
-                                                                             parameters: successEvent.metadata)
+                ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: successEvent)
                 self.coordinatorDelegate.finishAuthorizationFlow(isUserLogged: true)
             case .failure(let error):
                 let failureEvent = AnalyticsEvents.alternativeSignUpFailure(playableInfo)
-                ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(name: failureEvent.key,
-                                                                             parameters: failureEvent.metadata)
+                ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: failureEvent)
                 self.view.showError(description: error.localizedDescription)
             }
         })
