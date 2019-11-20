@@ -40,9 +40,10 @@ class BillingPresenter(
 
 		// obtain redeem code and set billing item type which depends on redeem code availability
 		val billingItemType: BillingItemType = {
-			if (camContract.isRedeemActivated())
-				BillingItemType.REDEEM
-			else
+		// TODO: for current impl redeem feature is frozen. TBD: Add proper UI & logic, update contract
+//			if (camContract.isRedeemActivated())
+//				BillingItemType.REDEEM
+//			else
 				BillingItemType.NO_REDEEM
 		}.invoke()
 

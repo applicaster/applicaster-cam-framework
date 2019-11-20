@@ -32,23 +32,17 @@ class MockCamContract(private val context: Context) : ICamContract {
         Handler().postDelayed({ callback.onActionSuccess() }, 1250)
     }
 
-    override fun activateRedeemCode(redeemCode: String, callback: RedeemCodeActivationCallback) {
-        Handler().postDelayed({ callback.onActionSuccess() }, 1250)
-    }
-
     override fun loginWithFacebook(email: String, id: String, callback: FacebookAuthCallback) {
-        Handler().postDelayed({ callback.onActionSuccess() }, 1250)
+        Handler().postDelayed({ callback.onFacebookAuthSuccess() }, 1250)
     }
 
     override fun signupWithFacebook(email: String, id: String, callback: FacebookAuthCallback) {
-        Handler().postDelayed({ callback.onActionSuccess() }, 1250)
+        Handler().postDelayed({ callback.onFacebookAuthSuccess() }, 1250)
     }
 
     override fun isUserLogged() = false
 
     override fun getPluginConfig() = MockPluginConfiguration.getPluginConfiguration(context)
-
-    override fun isRedeemActivated(): Boolean = false
 
     override fun getCamFlow(): CamFlow = CamFlow.AUTH_AND_STOREFRONT
 
