@@ -10,8 +10,6 @@ interface ICamContract {
 
     fun resetPassword(authFieldsInput: HashMap<String, String>, callback: PasswordResetCallback)
 
-    fun activateRedeemCode(redeemCode: String, callback: RedeemCodeActivationCallback)
-
     fun loginWithFacebook(email: String, id: String, callback: FacebookAuthCallback)
 
     fun signupWithFacebook(email: String, id: String, callback: FacebookAuthCallback)
@@ -27,8 +25,6 @@ interface ICamContract {
     fun isPurchaseRequired(): Boolean
 
     fun getPluginConfig(): Map<String, String>
-
-    fun isRedeemActivated(): Boolean
 
     fun getCamFlow(): CamFlow
 
