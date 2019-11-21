@@ -55,7 +55,12 @@ enum class UIKey(
     RESTORE_CONFIRMATION_IMAGE(image = UI_KEY_ALERT_COMPONENT_IMAGE),
     RESTORE_CONFIRMATION_TITLE_TEXT(text = UI_KEY_RESTORE_CONFIRMATION_TITLE_TEXT, textStyle = StyleKey.CONFIRMATION_TITLE),
     RESTORE_CONFIRMATION_DESC_TEXT(text = UI_KEY_RESTORE_CONFIRMATION_DESC_TEXT, textStyle = StyleKey.CONFIRMATION_DESC),
-    RESTORE_CONFIRMATION_BUTTON_TEXT(text = UI_KEY_RESTORE_CONFIRMATION_BUTTON_TEXT, textStyle = StyleKey.CONFIRMATION_BUTTON, image = UI_KEY_ALERT_BUTTON_IMAGE)
+    RESTORE_CONFIRMATION_BUTTON_TEXT(text = UI_KEY_RESTORE_CONFIRMATION_BUTTON_TEXT, textStyle = StyleKey.CONFIRMATION_BUTTON, image = UI_KEY_ALERT_BUTTON_IMAGE),
+
+    LOGOUT_TITLE_TEXT(text = UI_KEY_LOGOUT_TITLE_TEXT, textStyle = StyleKey.CONFIRMATION_TITLE),
+    LOGOUT_DESC_TEXT(text = UI_KEY_LOGOUT_DESC_TEXT, textStyle = StyleKey.CONFIRMATION_DESC),
+    LOGOUT_OK_BUTTON_TEXT(text = UI_KEY_LOGOUT_BUTTON_TEXT, textStyle = StyleKey.CONFIRMATION_BUTTON, image = UI_KEY_ALERT_BUTTON_IMAGE),
+    LOGOUT_CANCEL_BUTTON_TEXT(text = UI_KEY_LOGOUT_CANCEL_BUTTON_TEXT, textStyle = StyleKey.CANCEL_BUTTON, image = UI_KEY_CANCEL_BUTTON_IMAGE)
     // @formatter:on
 }
 
@@ -66,6 +71,7 @@ const val UI_KEY_TOOLBAR_LOGO_IMAGE = "cam_header_logo"
 const val UI_KEY_BACKGROUND_IMAGE = "cam_background_image"
 const val UI_KEY_ALERT_COMPONENT_IMAGE = "cam_alert_component"
 const val UI_KEY_ALERT_BUTTON_IMAGE = "cam_alert_button_asset"
+const val UI_KEY_CANCEL_BUTTON_IMAGE = "cam_cancel_button_asset"
 // endregion
 
 // region auth UI keys
@@ -123,6 +129,11 @@ const val UI_KEY_PWD_CONFIRMATION_BUTTON_TEXT = "confirmation_button_text"
 const val UI_KEY_RESTORE_CONFIRMATION_TITLE_TEXT = "restore_purchase_confirmation_title_text"
 const val UI_KEY_RESTORE_CONFIRMATION_DESC_TEXT = "restore_purchase_confirmation_description_text"
 const val UI_KEY_RESTORE_CONFIRMATION_BUTTON_TEXT = "confirmation_button_text"
+// logout
+const val UI_KEY_LOGOUT_TITLE_TEXT = "logout_title_text"
+const val UI_KEY_LOGOUT_DESC_TEXT = "logout_description_text"
+const val UI_KEY_LOGOUT_BUTTON_TEXT = "confirmation_button_text"
+const val UI_KEY_LOGOUT_CANCEL_BUTTON_TEXT = "cancel_button_text"
 // endregion
 
 // region Other

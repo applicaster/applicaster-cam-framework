@@ -114,6 +114,7 @@ class CamNavigationRouter(private val baseActivity: IBaseActivity) : BaseNavigat
                 CamFlow.AUTHENTICATION -> attachByScreenType(authScreenType)
                 CamFlow.AUTH_AND_STOREFRONT -> attachByScreenType(authScreenType)
                 CamFlow.STOREFRONT -> attachBillingFragment()
+                CamFlow.LOGOUT -> showConfirmationDialog(AlertDialogType.RESET_PASSWORD)
                 else -> baseActivity.close()
             }
         }

@@ -16,6 +16,15 @@
         <item name="colorAccent">@color/white</item>
     </style>
 
+    <style name="Theme.CamTransparent" parent="AppTheme">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
     <style name="ImageAdditionalAuth">
         <item name="android:layout_width">@dimen/additional_auth_iv_size</item>
         <item name="android:layout_height">@dimen/additional_auth_iv_size</item>

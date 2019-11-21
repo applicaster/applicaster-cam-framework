@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
+import com.applicaster.cam.CamFlow
 import com.applicaster.cam.ContentAccessManager
 import com.applicaster.cam.R
 import com.applicaster.cam.analytics.Action

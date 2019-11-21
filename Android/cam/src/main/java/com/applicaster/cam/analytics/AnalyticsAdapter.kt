@@ -463,6 +463,7 @@ enum class ConfirmationCause(val value: String) {
     PURCHASE        ("Purchase"),
     RESTORE_PURCHASE("Restore Purchase"),
     PASSWORD_RESET  ("Password Reset"),
+    LOGOUT          ("Log Out"),
     NONE            ("None Provided")
     // @formatter:on
 }

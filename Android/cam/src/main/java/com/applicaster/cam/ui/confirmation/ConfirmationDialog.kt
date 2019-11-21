@@ -1,11 +1,14 @@
 package com.applicaster.cam.ui.confirmation
 
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import com.applicaster.cam.ContentAccessManager
 import com.applicaster.cam.R
 import com.applicaster.cam.analytics.AnalyticsUtil
@@ -20,6 +23,7 @@ enum class AlertDialogType {
     BILLING,
     RESET_PASSWORD,
     RESTORE,
+    LOGOUT,
     UNDEFINED
 }
 
@@ -60,6 +64,9 @@ class ConfirmationDialog : DialogFragment() {
                 AlertDialogType.RESET_PASSWORD -> baseActivity?.goBack()
                 else -> baseActivity?.goBack()
             }
+        }
+        if (dialogType == AlertDialogType.LOGOUT) {
+            dialogView?.btn_confirmation_cancel?.setOnClickListener { dismiss() }
         }
     }
 
@@ -117,6 +124,27 @@ class ConfirmationDialog : DialogFragment() {
                         ConfirmationCause.RESTORE_PURCHASE,
                         ContentAccessManager.pluginConfigurator.getAlertDialogFields().restoreConfirmationTitle,
                         ContentAccessManager.pluginConfigurator.getAlertDialogFields().restoreConfirmationDescription,
+                        AnalyticsUtil.KEY_NONE_PROVIDED
+                    )
+                )
+                //
+            }
+            AlertDialogType.LOGOUT -> {
+                dialogView?.btn_confirmation_cancel?.visibility = View.VISIBLE
+                UIMapper.apply {
+                    map(dialogView?.layout_confirmation_background!!, UIKey.CONFIRMATION_DIALOG_IMAGE)
+                    map(dialogView?.tv_confirmation_title!!, UIKey.LOGOUT_TITLE_TEXT)
+                    map(dialogView?.tv_confirmation_desc!!, UIKey.LOGOUT_DESC_TEXT)
+                    map(dialogView?.btn_confirmation_ok!!, UIKey.LOGOUT_OK_BUTTON_TEXT)
+                    map(dialogView?.btn_confirmation_cancel!!, UIKey.LOGOUT_CANCEL_BUTTON_TEXT)
+                }
+                //Analytics
+                AnalyticsUtil.logViewAlert(
+                    ConfirmationAlertData(
+                        true,
+                        ConfirmationCause.LOGOUT,
+                        ContentAccessManager.pluginConfigurator.getAlertDialogFields().logoutConfirmationTitle,
+                        ContentAccessManager.pluginConfigurator.getAlertDialogFields().logoutConfirmationDescription,
                         AnalyticsUtil.KEY_NONE_PROVIDED
                     )
                 )

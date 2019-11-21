@@ -17,7 +17,8 @@ enum class StyleKey(
     PAYMENT_OPTIONS_DESC(STYLE_KEY_PAYMENT_OPTIONS_DESC),
     CONFIRMATION_TITLE(STYLE_KEY_CONFIRMATION_TITLE),
     CONFIRMATION_DESC(STYLE_KEY_CONFIRMATION_DESC),
-    CONFIRMATION_BUTTON(STYLE_KEY_CONFIRMATION_BUTTON);
+    CONFIRMATION_BUTTON(STYLE_KEY_CONFIRMATION_BUTTON),
+    CANCEL_BUTTON(STYLE_KEY_CANCEL_BUTTON);
     // @formatter:on
 
     fun getFontName() = key + KEY_FONT
@@ -40,6 +41,7 @@ const val STYLE_KEY_PAYMENT_OPTIONS_DESC = "payment_option_description"
 const val STYLE_KEY_CONFIRMATION_TITLE = "confirmation_title"
 const val STYLE_KEY_CONFIRMATION_DESC = "confirmation_description"
 const val STYLE_KEY_CONFIRMATION_BUTTON = "confirmation_button"
+const val STYLE_KEY_CANCEL_BUTTON = "cancel_button"
 
 const val KEY_FONT = "_font_android"
 const val KEY_SIZE_PHONE = "_size_phone"

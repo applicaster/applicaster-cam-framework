@@ -20,6 +20,8 @@ interface Configurator {
 
     fun getDefaultAlertText(): String
 
+    fun getLogoutErrorAlertText(): String
+
     fun getNoPurchasesToRestoreText(): String
 
     fun getNonMatchingRestoredPurchasesText(): String
