@@ -30,12 +30,14 @@ class SignUpPresenter(
         view?.hideLoadingIndicator()
         view?.showAlert(msg)
         AnalyticsUtil.logAlternativeSignUpFailure()
-        ConfirmationAlertData(
-            false,
-            ConfirmationCause.NONE,
-            AnalyticsUtil.KEY_NONE_PROVIDED,
-            msg,
-            AnalyticsUtil.KEY_NONE_PROVIDED
+        AnalyticsUtil.logViewAlert(
+            ConfirmationAlertData(
+                false,
+                AlertType.ERROR_ALERT,
+                AnalyticsUtil.KEY_NONE_PROVIDED,
+                msg,
+                AnalyticsUtil.KEY_NONE_PROVIDED
+            )
         )
     }
 
@@ -53,7 +55,7 @@ class SignUpPresenter(
         AnalyticsUtil.logViewAlert(
             ConfirmationAlertData(
                 false,
-                ConfirmationCause.NONE,
+                AlertType.ERROR_ALERT,
                 AnalyticsUtil.KEY_NONE_PROVIDED,
                 msg,
                 AnalyticsUtil.KEY_NONE_PROVIDED
@@ -115,7 +117,7 @@ class SignUpPresenter(
         AnalyticsUtil.logViewAlert(
             ConfirmationAlertData(
                 false,
-                ConfirmationCause.NONE,
+                AlertType.ERROR_ALERT,
                 AnalyticsUtil.KEY_NONE_PROVIDED,
                 AnalyticsUtil.KEY_NONE_PROVIDED,
                 error?.message ?: AnalyticsUtil.KEY_NONE_PROVIDED
