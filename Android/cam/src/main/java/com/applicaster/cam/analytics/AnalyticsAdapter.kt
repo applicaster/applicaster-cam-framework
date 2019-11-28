@@ -241,14 +241,9 @@ class AnalyticsUtil {
         }
 
         fun logViewAlert(confirmationAlertData: ConfirmationAlertData) {
-            val confirmationAlert = when (confirmationAlertData.isConfirmationAlert) {
-                true -> KEY_YES
-                else -> KEY_NO
-            }
             val params = mapOf(
                 Properties.PLUGIN_PROVIDER.value to getPluginProvider(),
-                Properties.CONFIRMATION_ALERT.value to confirmationAlert,
-                Properties.CONFIRMATION_CAUSE.value to confirmationAlertData.confirmationCause.value,
+                Properties.ALERT_TYPE.value to confirmationAlertData.alertType.value,
                 Properties.ALERT_TITLE.value to confirmationAlertData.alertTitle,
                 Properties.ALERT_DESCRIPTION.value to confirmationAlertData.alertDescription,
                 Properties.API_ERROR_MESSAGE.value to confirmationAlertData.apiErrorMessage
@@ -425,8 +420,7 @@ enum class Properties(val value: String) {
     TRIGGER              ("Trigger"),
     ACTION               ("Action"),
     FIRST_SCREEN         ("First Screen"),
-    CONFIRMATION_ALERT   ("Confirmation Alert"),
-    CONFIRMATION_CAUSE   ("Confirmation Cause" ),
+    ALERT_TYPE           ("Alert Type"),
     ALERT_TITLE          ("Alert Title"),
     ALERT_DESCRIPTION    ("Alert Description"),
     API_ERROR_MESSAGE    ("API Error Message"),
@@ -458,13 +452,13 @@ enum class Action(val value: String) {
     // @formatter:on
 }
 
-enum class ConfirmationCause(val value: String) {
+enum class AlertType(val value: String) {
     // @formatter:off
-    PURCHASE        ("Purchase"),
-    RESTORE_PURCHASE("Restore Purchase"),
-    PASSWORD_RESET  ("Password Reset"),
-    LOGOUT          ("Log Out"),
-    NONE            ("None Provided")
+    PURCHASE_CONFIRMATION        ("Purchase Confirmation"),
+    RESTORE_PURCHASE_CONFIRMATION("Restore Purchase Confirmation"),
+    PASSWORD_RESET_CONFIRMATION  ("Password Reset Confirmation"),
+    LOGOUT                       ("Logout"),
+    ERROR_ALERT                  ("Error Alert")
     // @formatter:on
 }
 
@@ -494,7 +488,7 @@ enum class UserProperties(val value: String) {
 
 data class ConfirmationAlertData(
     val isConfirmationAlert: Boolean,
-    val confirmationCause: ConfirmationCause,
+    val alertType: AlertType,
     val alertTitle: String,
     val alertDescription: String,
     val apiErrorMessage: String

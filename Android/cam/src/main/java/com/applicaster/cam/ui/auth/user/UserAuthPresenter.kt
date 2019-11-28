@@ -66,7 +66,7 @@ abstract class UserAuthPresenter(private val view: IBaseInputView?) : BaseInputP
         AnalyticsUtil.logViewAlert(
             ConfirmationAlertData(
                 false,
-                ConfirmationCause.NONE,
+                AlertType.ERROR_ALERT,
                 AnalyticsUtil.KEY_NONE_PROVIDED,
                     AnalyticsUtil.KEY_NONE_PROVIDED,
                     errorMessage

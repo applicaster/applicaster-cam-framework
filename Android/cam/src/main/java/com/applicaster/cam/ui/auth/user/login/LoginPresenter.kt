@@ -52,7 +52,7 @@ class LoginPresenter(
         AnalyticsUtil.logViewAlert(
             ConfirmationAlertData(
                 false,
-                ConfirmationCause.NONE,
+                AlertType.ERROR_ALERT,
                 AnalyticsUtil.KEY_NONE_PROVIDED,
                 msg,
                 AnalyticsUtil.KEY_NONE_PROVIDED
@@ -74,7 +74,7 @@ class LoginPresenter(
         AnalyticsUtil.logViewAlert(
             ConfirmationAlertData(
                 false,
-                ConfirmationCause.NONE,
+                AlertType.ERROR_ALERT,
                 AnalyticsUtil.KEY_NONE_PROVIDED,
                 msg,
                 AnalyticsUtil.KEY_NONE_PROVIDED
@@ -122,7 +122,7 @@ class LoginPresenter(
         AnalyticsUtil.logViewAlert(
             ConfirmationAlertData(
                 false,
-                ConfirmationCause.NONE,
+                AlertType.ERROR_ALERT,
                 AnalyticsUtil.KEY_NONE_PROVIDED,
                 AnalyticsUtil.KEY_NONE_PROVIDED,
                 error?.message ?: AnalyticsUtil.KEY_NONE_PROVIDED

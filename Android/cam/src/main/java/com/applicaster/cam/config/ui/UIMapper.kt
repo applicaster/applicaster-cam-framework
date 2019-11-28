@@ -1,6 +1,7 @@
 package com.applicaster.cam.config.ui
 
 import android.graphics.Color
+import android.graphics.Typeface
 import android.support.annotation.ColorInt
 import android.text.SpannableStringBuilder
 import android.text.TextPaint
@@ -86,6 +87,9 @@ class UIMapper {
 
                     override fun updateDrawState(textPaint: TextPaint) {
                         //apply text style only for text link
+                        val fontName: String = uiProvider.getFontName(textParamsHolder.textLinkStyle?.getFontName().orEmpty())
+                        val typeface: Typeface? = TextUtil.getTypefaceFromFontKey(fontName)
+                        typeface?.let { textPaint.typeface = it}
                         textPaint.color = uiProvider.getColor(
                             textParamsHolder.textLinkStyle?.getHexColor() ?: Color.WHITE.toString()
                         )

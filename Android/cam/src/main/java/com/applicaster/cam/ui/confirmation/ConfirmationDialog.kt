@@ -1,19 +1,16 @@
 package com.applicaster.cam.ui.confirmation
 
 import android.content.Context
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import com.applicaster.cam.ContentAccessManager
 import com.applicaster.cam.R
+import com.applicaster.cam.analytics.AlertType
 import com.applicaster.cam.analytics.AnalyticsUtil
 import com.applicaster.cam.analytics.ConfirmationAlertData
-import com.applicaster.cam.analytics.ConfirmationCause
 import com.applicaster.cam.config.ui.UIKey
 import com.applicaster.cam.config.ui.UIMapper
 import com.applicaster.cam.ui.base.view.IBaseActivity
@@ -83,7 +80,7 @@ class ConfirmationDialog : DialogFragment() {
                 AnalyticsUtil.logViewAlert(
                     ConfirmationAlertData(
                         true,
-                        ConfirmationCause.PURCHASE,
+                        AlertType.PURCHASE_CONFIRMATION,
                         ContentAccessManager.pluginConfigurator.getAlertDialogFields().billingConfirmationTitle,
                         ContentAccessManager.pluginConfigurator.getAlertDialogFields().billingConfirmationDescription,
                         AnalyticsUtil.KEY_NONE_PROVIDED
@@ -102,7 +99,7 @@ class ConfirmationDialog : DialogFragment() {
                 AnalyticsUtil.logViewAlert(
                     ConfirmationAlertData(
                         true,
-                        ConfirmationCause.PASSWORD_RESET,
+                        AlertType.PASSWORD_RESET_CONFIRMATION,
                         ContentAccessManager.pluginConfigurator.getAlertDialogFields().pwdResetTitle,
                         ContentAccessManager.pluginConfigurator.getAlertDialogFields().pwdResetDescription,
                         AnalyticsUtil.KEY_NONE_PROVIDED
@@ -121,7 +118,7 @@ class ConfirmationDialog : DialogFragment() {
                 AnalyticsUtil.logViewAlert(
                     ConfirmationAlertData(
                         true,
-                        ConfirmationCause.RESTORE_PURCHASE,
+                        AlertType.RESTORE_PURCHASE_CONFIRMATION,
                         ContentAccessManager.pluginConfigurator.getAlertDialogFields().restoreConfirmationTitle,
                         ContentAccessManager.pluginConfigurator.getAlertDialogFields().restoreConfirmationDescription,
                         AnalyticsUtil.KEY_NONE_PROVIDED
@@ -142,7 +139,7 @@ class ConfirmationDialog : DialogFragment() {
                 AnalyticsUtil.logViewAlert(
                     ConfirmationAlertData(
                         true,
-                        ConfirmationCause.LOGOUT,
+                        AlertType.LOGOUT,
                         ContentAccessManager.pluginConfigurator.getAlertDialogFields().logoutConfirmationTitle,
                         ContentAccessManager.pluginConfigurator.getAlertDialogFields().logoutConfirmationDescription,
                         AnalyticsUtil.KEY_NONE_PROVIDED

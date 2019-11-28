@@ -91,7 +91,7 @@ class BillingPresenter(
 		AnalyticsUtil.logViewAlert(
 				ConfirmationAlertData(
 						false,
-						ConfirmationCause.NONE,
+						AlertType.ERROR_ALERT,
 						AnalyticsUtil.KEY_NONE_PROVIDED,
 						ContentAccessManager.pluginConfigurator.getDefaultAlertText(),
 						description
@@ -183,7 +183,7 @@ class BillingPresenter(
 		AnalyticsUtil.logViewAlert(
 				ConfirmationAlertData(
 						false,
-						ConfirmationCause.NONE,
+						AlertType.ERROR_ALERT,
 						AnalyticsUtil.KEY_NONE_PROVIDED,
 						ContentAccessManager.pluginConfigurator.getDefaultAlertText(),
 						description
@@ -244,7 +244,7 @@ class BillingPresenter(
 		// Analytics events
 		AnalyticsUtil.logViewAlert(ConfirmationAlertData(
 				false,
-				ConfirmationCause.NONE,
+				AlertType.ERROR_ALERT,
 				AnalyticsUtil.KEY_NONE_PROVIDED,
 				if (description.isNotEmpty()) description else AnalyticsUtil.KEY_NONE_PROVIDED,
 				if (apiMsg.isNotEmpty()) apiMsg else AnalyticsUtil.KEY_NONE_PROVIDED
