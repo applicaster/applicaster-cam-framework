@@ -47,6 +47,16 @@ class ViewControllerFactory {
         return resetPasswordVC
     }
     
+    static func createLogoutScreen(pluginDataProvider: PluginDataProviderProtocol,
+                                   authCoordinator: AuthorizationCoordinatorProtocol) -> LogoutViewController {
+        let logoutVC = LogoutViewController.instantiateVC()
+        let presenter = LogoutPresenter(view: logoutVC,
+                                        coordinatorDelegate: authCoordinator,
+                                        camDelegate: pluginDataProvider.getCamDelegate())
+        logoutVC.presenter = presenter
+        return logoutVC
+    }
+    
     static func createEntitlementPicker(pluginDataProvider: PluginDataProviderProtocol,
                                         billingCoordinator: BillingCoordinatorProtocol) -> EntitlementPickerViewController {
         let pickerVC = EntitlementPickerViewController.instantiateVC()

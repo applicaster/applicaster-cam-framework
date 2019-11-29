@@ -30,6 +30,7 @@ public protocol CAMDelegate: AnyObject {
     func facebookLogin(userData: (email: String, userId: String), completion: @escaping (Result<Void, Error>) -> Void)
     func facebookSignUp(userData: (email: String, userId: String), completion: @escaping (Result<Void, Error>) -> Void)
     func login(authData: [String: String], completion: @escaping (Result<Void, Error>) -> Void)
+    func logout(completion: @escaping (Result<Void, Error>) -> Void)
     func signUp(authData: [String: String], completion: @escaping (Result<Void, Error>) -> Void)
     func resetPassword(data: [String: String], completion: @escaping (Result<Void, Error>) -> Void)
     

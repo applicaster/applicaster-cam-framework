@@ -11,6 +11,7 @@ public enum CAMFlow {
     case authentication
     case storefront
     case authAndStorefront
+    case logout
     case no
 }
 

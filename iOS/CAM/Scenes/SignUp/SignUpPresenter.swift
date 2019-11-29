@@ -44,7 +44,7 @@ class SignUpPresenter {
     func backToPreviousScreen() {
         coordinatorDelegate.popCurrentScreen()
         if isRoot {
-            coordinatorDelegate.finishAuthorizationFlow(isUserLogged: false)
+            coordinatorDelegate.finishCoordinatorFlow(result: false)
         }
     }
     
@@ -59,7 +59,7 @@ class SignUpPresenter {
     }
     
     func close() {
-        coordinatorDelegate.finishAuthorizationFlow(isUserLogged: false)
+        coordinatorDelegate.finishCoordinatorFlow(result: false)
     }
     
     func signUp(data: [AuthField]) {
@@ -75,7 +75,7 @@ class SignUpPresenter {
                 case .success:
                     let signupSuccessEvent = AnalyticsEvents.standardSignUpSuccess(playableInfo)
                     ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: signupSuccessEvent)
-                    self.coordinatorDelegate.finishAuthorizationFlow(isUserLogged: true)
+                    self.coordinatorDelegate.finishCoordinatorFlow(result: true)
                 case .failure(let error):
                     let signupFailureEvent = AnalyticsEvents.standardSignUpFailure(playableInfo)
                     ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: signupFailureEvent)
@@ -176,7 +176,7 @@ class SignUpPresenter {
             case .success:
                 let successEvent = AnalyticsEvents.alternativeSignUpSuccess(playableInfo)
                 ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: successEvent)
-                self.coordinatorDelegate.finishAuthorizationFlow(isUserLogged: true)
+                self.coordinatorDelegate.finishCoordinatorFlow(result: true)
             case .failure(let error):
                 let failureEvent = AnalyticsEvents.alternativeSignUpFailure(playableInfo)
                 ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: failureEvent)

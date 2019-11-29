@@ -102,6 +102,6 @@ class ResetPasswordPresenter {
     }
     
     func close() {
-        coordinatorDelegate.finishAuthorizationFlow(isUserLogged: false)
+        coordinatorDelegate.finishCoordinatorFlow(result: false)
     }
 }

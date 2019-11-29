@@ -43,6 +43,8 @@ extension CAMFlow {
                 self = .no
             case .storefront, .authAndStorefront:
                 self = paymentRequirement == true ? .storefront : .no
+            default:
+                break
             }
         case .always:
             switch self {
@@ -50,6 +52,8 @@ extension CAMFlow {
                 self = .authentication
             case .storefront, .authAndStorefront:
                 self = paymentRequirement == true ? .authAndStorefront : .authentication
+            default:
+                break
             }
         case .purchasableItems:
             switch self {
@@ -57,6 +61,8 @@ extension CAMFlow {
                 self = .no
             case .storefront, .authAndStorefront:
                 self = paymentRequirement == true ? .authAndStorefront : .authentication
+            default:
+                break
             }
         case .dataSourceBased:
             switch self {
@@ -66,6 +72,8 @@ extension CAMFlow {
                 self = paymentRequirement == true ? .storefront: .no
             case .authAndStorefront:
                 self = paymentRequirement == true ? .authAndStorefront: .authentication
+            default:
+                break
             }
         }
     }
@@ -88,6 +96,8 @@ extension CAMFlow {
                 self = .authentication
             }
         case .no:
+            break
+        default:
             break
         }
     }

@@ -10,23 +10,34 @@ import UIKit
 import ZappPlugins
 import ApplicasterSDK
 
+enum AuthorizationCoordinatorFlow {
+    case auth
+    case logout
+}
+
 protocol AuthorizationCoordinatorProtocol: Coordinator {
     func showLoginScreen(isCoordinatorRootController: Bool)
     func showSingUpScreen(isCoordinatorRootController: Bool)
     func showResetPasswordScreen()
     func popCurrentScreen()
-    func finishAuthorizationFlow(isUserLogged: Bool)
+    func finishCoordinatorFlow(result: Bool)
 }
 
 class AuthorizationCoordinator: AuthorizationCoordinatorProtocol {
 
+    var coordinatorFlow: AuthorizationCoordinatorFlow = .auth
+    weak var rootViewController: UIViewController?
     weak var navigationController: UINavigationController?
     unowned var parentCoordinator: PluginDataProviderProtocol
     var completionHandler: ((Bool) -> Void)?
     
-    public init(navigationController: UINavigationController,
+    public init(navigationController: UINavigationController? = nil,
                 parentCoordinator: PluginDataProviderProtocol,
+                rootViewController: UIViewController? = nil,
+                flow: AuthorizationCoordinatorFlow,
                 completion: @escaping (Bool) -> Void) {
+        self.coordinatorFlow = flow
+        self.rootViewController = rootViewController
         self.navigationController = navigationController
         self.parentCoordinator = parentCoordinator
         self.completionHandler = completion
@@ -35,6 +46,15 @@ class AuthorizationCoordinator: AuthorizationCoordinatorProtocol {
     // MARK: - AuthorizationCoordinatorProtocol
     
     func start() {
+        switch coordinatorFlow {
+        case .auth:
+            startAuthFlow()
+        case .logout:
+            startLogoutFlow()
+        }
+    }
+    
+    func startAuthFlow() {
         let dictionary = self.parentCoordinator.getCamDelegate().getPluginConfig()
         switch dictionary[CAMKeys.defaultAuthScreen.rawValue] {
         case "Login":
@@ -46,11 +66,21 @@ class AuthorizationCoordinator: AuthorizationCoordinatorProtocol {
         }
     }
     
+    func startLogoutFlow() {
+        showLogoutScreen()
+    }
+    
     func showLoginScreen(isCoordinatorRootController: Bool) {
         let controller = ViewControllerFactory.createLoginScreen(pluginDataProvider: parentCoordinator,
                                                                  isRoot: isCoordinatorRootController,
                                                                  authCoordinator: self)
         navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    func showLogoutScreen() {
+        let controller = ViewControllerFactory.createLogoutScreen(pluginDataProvider: parentCoordinator,
+                                                                  authCoordinator: self)
+        self.rootViewController?.addChildViewController(controller)
     }
     
     func showSingUpScreen(isCoordinatorRootController: Bool) {
@@ -71,11 +101,16 @@ class AuthorizationCoordinator: AuthorizationCoordinatorProtocol {
         navigationController?.popViewController(animated: true)
     }
     
-    func finishAuthorizationFlow(isUserLogged: Bool) {
-        let loggedInValue = isUserLogged == true ? "Yes" : "No"
-        let pluginName = ZPPluginManager.pluginModel(.Login)?.pluginName ?? ""
-        APAnalyticsManager.setEventUserGenericProperties(["Logged In": loggedInValue,
-                                                          "Authentication Provider": pluginName])
-        completionHandler?(isUserLogged)
+    func finishCoordinatorFlow(result: Bool) {
+        switch coordinatorFlow {
+        case .auth:
+            let loggedInValue = result == true ? "Yes" : "No"
+            let pluginName = ZPPluginManager.pluginModel(.Login)?.pluginName ?? ""
+            APAnalyticsManager.setEventUserGenericProperties(["Logged In": loggedInValue,
+                                                              "Authentication Provider": pluginName])
+        case .logout:
+            break
+        }
+        completionHandler?(result)
     }
 }

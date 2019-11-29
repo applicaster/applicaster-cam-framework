@@ -61,6 +61,8 @@ open class ContentAccessManager {
             startStorefrontFlow()
         case .authAndStorefront:
             startAuthAndStorefrontFlow()
+        case .logout:
+            startLogoutFlow()
         case .no:
             completion(true)
         }
@@ -99,10 +101,25 @@ open class ContentAccessManager {
         }
     }
     
+    private func startLogoutFlow() {
+        logout { (isLogoutSucceeded) in
+            self.finishFlow(isLogoutSucceeded)
+        }
+    }
+    
     private func authenticate(with completion: @escaping (Bool) -> Void) {
         rootViewController.present(navigationController, animated: true, completion: nil)
         childCoordinator = AuthorizationCoordinator(navigationController: self.navigationController,
                                                     parentCoordinator: self,
+                                                    flow: .auth,
+                                                    completion: completion)
+        childCoordinator!.start()
+    }
+    
+    private func logout(with completion: @escaping (Bool) -> Void) {
+        childCoordinator = AuthorizationCoordinator(parentCoordinator: self,
+                                                    rootViewController: rootViewController,
+                                                    flow: .logout,
                                                     completion: completion)
         childCoordinator!.start()
     }
@@ -127,10 +144,15 @@ open class ContentAccessManager {
                                                                      timed: true)
         
         childCoordinator = nil
-        navigationController.viewControllers.removeAll()
-        self.navigationController.dismiss(animated: true, completion: {
+        switch camFlow {
+        case .logout:
             self.completion(result)
-        })
+        default:
+            navigationController.viewControllers.removeAll()
+            self.navigationController.dismiss(animated: true, completion: {
+                self.completion(result)
+            })
+        }
     }
     
     @objc private func appSendToBackground() {
