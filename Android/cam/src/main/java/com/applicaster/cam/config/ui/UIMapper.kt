@@ -9,10 +9,7 @@ import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import com.applicaster.cam.ContentAccessManager
 import com.applicaster.util.OSUtil
 import com.applicaster.util.TextUtil
@@ -89,7 +86,7 @@ class UIMapper {
                         //apply text style only for text link
                         val fontName: String = uiProvider.getFontName(textParamsHolder.textLinkStyle?.getFontName().orEmpty())
                         val typeface: Typeface? = TextUtil.getTypefaceFromFontKey(fontName)
-                        typeface?.let { textPaint.typeface = it}
+                        typeface?.let { textPaint.typeface = it }
                         textPaint.color = uiProvider.getColor(
                             textParamsHolder.textLinkStyle?.getHexColor() ?: Color.WHITE.toString()
                         )
