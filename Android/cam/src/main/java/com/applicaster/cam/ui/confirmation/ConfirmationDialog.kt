@@ -59,11 +59,14 @@ class ConfirmationDialog : DialogFragment() {
             when (dialogType) {
                 AlertDialogType.BILLING, AlertDialogType.RESTORE -> baseActivity?.close()
                 AlertDialogType.RESET_PASSWORD -> baseActivity?.goBack()
+                AlertDialogType.LOGOUT -> ContentAccessManager.contract.logout(true)
                 else -> baseActivity?.goBack()
             }
         }
         if (dialogType == AlertDialogType.LOGOUT) {
-            dialogView?.btn_confirmation_cancel?.setOnClickListener { dismiss() }
+            dialogView?.btn_confirmation_cancel?.setOnClickListener {
+                ContentAccessManager.contract.logout(false)
+            }
         }
     }
 

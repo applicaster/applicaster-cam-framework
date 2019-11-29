@@ -6,6 +6,8 @@ interface ICamContract {
 
     fun login(authFieldsInput: HashMap<String, String>, callback: LoginCallback)
 
+    fun logout(isLogoutSuccess: Boolean)
+
     fun signUp(authFieldsInput: HashMap<String, String>, callback: SignUpCallback)
 
     fun resetPassword(authFieldsInput: HashMap<String, String>, callback: PasswordResetCallback)
