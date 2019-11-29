@@ -67,8 +67,8 @@
                                                 </state>
                                                 <variation key="default">
                                                     <mask key="constraints">
-                                                        <exclude reference="blp-3q-cbJ"/>
                                                         <exclude reference="Bkm-GI-vPg"/>
+                                                        <exclude reference="blp-3q-cbJ"/>
                                                     </mask>
                                                 </variation>
                                                 <variation key="heightClass=compact-widthClass=compact">
@@ -81,6 +81,9 @@
                                                         <include reference="blp-3q-cbJ"/>
                                                     </mask>
                                                 </variation>
+                                                <connections>
+                                                    <action selector="logout:" destination="6mD-Hc-Yy3" eventType="touchUpInside" id="qAt-l6-B2P"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5cg-LN-xWx">
                                                 <rect key="frame" x="43.5" y="316" width="255" height="47"/>
@@ -91,6 +94,9 @@
                                                 <state key="normal" title="Cancel">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="cancel:" destination="6mD-Hc-Yy3" eventType="touchUpInside" id="Lve-r9-avo"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
