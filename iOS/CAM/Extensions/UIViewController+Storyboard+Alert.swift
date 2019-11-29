@@ -65,4 +65,11 @@ public extension UIViewController {
             })
         }
     }
+    
+    func addChildViewController(_ controller: UIViewController) {
+        self.addChild(controller)
+        controller.view.frame = self.view.frame
+        view.addSubview(controller.view)
+        controller.didMove(toParent: self)
+    }
 }

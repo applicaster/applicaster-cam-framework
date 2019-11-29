@@ -11,6 +11,7 @@ public enum CAMKeys: String {
     
     enum Images: String {
         case actionButton = "cam_action_button_asset"
+        case cancelButton = "cam_cancel_button_asset"
         case alertButton = "cam_alert_button_asset"
         case alertBackground = "cam_alert_component"
         case authField = "cam_input_field_asset"
@@ -46,6 +47,12 @@ public enum CAMKeys: String {
     case loginSingUpPromtText = "sign_up_prompt_text"
     case loginSingUpActionText = "sign_up_link_text"
     
+    //Logout
+    
+    case logoutTitleText = "logout_title_text"
+    case logoutInfoText = "logout_description_text"
+    case logoutErrorText = "logout_error_alert_text"
+    
     //SignUp
     
     case signUpScreenTitleText = "sign_up_title_text"
@@ -64,7 +71,8 @@ public enum CAMKeys: String {
     case alertButtonText = "confirmation_button_text"
     case passwordAlertTitleText = "password_reset_confirmation_title_text"
     case passwordAlertInfoText = "password_reset_confirmation_description_text"
-   
+    case cancelButtonText = "cancel_button_text"
+    
     // Payment alert
     
     case paymentAlertTitle = "payment_confirmation_title_text"
@@ -132,4 +140,6 @@ public enum CAMStyles: String {
     case confirmationDescriptionFont = "confirmation_description"
     
     case confirmationButtonFont = "confirmation_button"
+    
+    case cancelButtonFont = "cancel_button"
 }

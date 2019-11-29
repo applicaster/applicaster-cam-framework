@@ -32,6 +32,8 @@ extension CAMFlow {
             return "Storefront"
         case .authAndStorefront:
             return "Login"
+        case .logout:
+            return "Logout"
         case .no:
             return "No"
         }
