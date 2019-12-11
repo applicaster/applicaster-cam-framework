@@ -8,7 +8,6 @@
 
 import UIKit
 import ZappPlugins
-import ApplicasterSDK
 
 enum AuthorizationCoordinatorFlow {
     case auth
@@ -106,8 +105,9 @@ class AuthorizationCoordinator: AuthorizationCoordinatorProtocol {
         case .auth:
             let loggedInValue = result == true ? "Yes" : "No"
             let pluginName = ZPPluginManager.pluginModel(.Login)?.pluginName ?? ""
-            APAnalyticsManager.setEventUserGenericProperties(["Logged In": loggedInValue,
-                                                              "Authentication Provider": pluginName])
+            
+            ZAAppConnector.sharedInstance().pluginsDelegate?.analyticsPluginsManager?.setEventUserGenericProperties(["Logged In": loggedInValue,
+            "Authentication Provider": pluginName])
         case .logout:
             break
         }

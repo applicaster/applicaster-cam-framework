@@ -10,7 +10,6 @@ import Foundation
 import ApplicasterIAP
 import StoreKit
 import ZappPlugins
-import ApplicasterSDK
 
 private enum IAPEvent {
     case purchase
@@ -169,16 +168,18 @@ class EntitlementPickerPresenter {
                         purchaseResultEvent = AnalyticsEvents.completePurchase(playableInfo,
                                                                                voucherProperties)
                         
-                        let storage = APAnalyticsStorage.sharedInstance()
                         let pluginName = ZPPluginManager.pluginModel(.Login)?.pluginName ?? ""
                         var properties = ["Authentication Provider": pluginName]
-                        if storage?.userGenericProperties()["Logged in"] == nil {
+                        let userGenericProperties = ZAAppConnector.sharedInstance().pluginsDelegate?.analyticsPluginsManager?.userGenericProperties()
+                        
+                        if let userGenericProperties = userGenericProperties,
+                            userGenericProperties["Logged in"] == nil {
                             properties["Logged In"] = "No"
                         }
                         if let productName = voucherProperties?.productName {
                             properties["Purchase Product Name"] = productName
                         }
-                        APAnalyticsManager.setEventUserGenericProperties(properties)
+                    ZAAppConnector.sharedInstance().pluginsDelegate?.analyticsPluginsManager?.setEventUserGenericProperties(properties)
                         
                         self?.purchaseAction(purchase: purchase)
                     case .failure(let error):
