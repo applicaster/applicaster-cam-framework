@@ -5,11 +5,15 @@ import android.graphics.Typeface
 import android.support.annotation.ColorInt
 import android.text.SpannableStringBuilder
 import android.text.TextPaint
+import android.text.TextUtils
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.TextView
 import com.applicaster.cam.ContentAccessManager
 import com.applicaster.util.OSUtil
 import com.applicaster.util.TextUtil
@@ -30,7 +34,7 @@ class UIMapper {
                 setImage(view, key.image!!)
             }
         }
-        
+
         fun map(view: View, key: UIKey, linkActionCallback: () -> Unit) {
             if (key.text != null && key.text.isNotEmpty() && key.textLink != null) {
                 val textParamsHolder = TextParamsHolder.build {
@@ -69,9 +73,11 @@ class UIMapper {
                 //if first part of text doesn't contain last 'space' symbol
                 //or second part of text doesn't contain first 'space' symbol
                 val textSeparator = ' '
-                if (textParamsHolder.text?.last() != textSeparator) {
-                    if (textParamsHolder.textLink?.first() != textSeparator)
-                        spanText.append(textSeparator)
+                textParamsHolder.text?.let {
+                    if (it.isNotEmpty() && it.last() != textSeparator) {
+                        if (!TextUtils.isEmpty(textParamsHolder.textLink) && textParamsHolder.textLink?.first() != textSeparator)
+                            spanText.append(textSeparator)
+                    }
                 }
                 //apply text style to view
                 textParamsHolder.textStyle?.let { setTextStyle(view, it) }
@@ -88,7 +94,8 @@ class UIMapper {
                         val typeface: Typeface? = TextUtil.getTypefaceFromFontKey(fontName)
                         typeface?.let { textPaint.typeface = it }
                         textPaint.color = uiProvider.getColor(
-                            textParamsHolder.textLinkStyle?.getHexColor() ?: Color.WHITE.toString()
+                                textParamsHolder.textLinkStyle?.getHexColor()
+                                        ?: Color.WHITE.toString()
                         )
                         textPaint.isUnderlineText = true
                     }
@@ -147,12 +154,12 @@ class UIMapper {
     }
 }
 
-private class TextParamsHolder (
-    val text: String?,
-    val textLink: String?,
-    val textStyle: StyleKey?,
-    val textLinkStyle: StyleKey?,
-    val linkActionCallback: () -> Unit
+private class TextParamsHolder(
+        val text: String?,
+        val textLink: String?,
+        val textStyle: StyleKey?,
+        val textLinkStyle: StyleKey?,
+        val linkActionCallback: () -> Unit
 ) {
 
     private constructor(builder: Builder) :
