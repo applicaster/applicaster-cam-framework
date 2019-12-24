@@ -8,6 +8,8 @@
 import UIKit
 
 class SignUpViewController: UIViewController {
+    let cellHeight: CGFloat = 48.0
+    let cellSpacing: CGFloat = 7.0
     
     var loadingPopover = LoadingPopover.nibInstance()
     var authFields = [AuthField]()
@@ -33,7 +35,9 @@ class SignUpViewController: UIViewController {
     
     @IBOutlet var loginContainer: UIView!
     @IBOutlet var loginButton: UIButton!
+    @IBOutlet var camLinksStackView: UIStackView!
     
+    @IBOutlet var camLinksHeightConstraint: NSLayoutConstraint!
     @IBOutlet var authFieldsTableHeightConstraint: NSLayoutConstraint!
     @IBOutlet var socialNetworksContainerTopConstraint: NSLayoutConstraint!
     @IBOutlet var inputContainerYConstraint: NSLayoutConstraint!
@@ -44,14 +48,27 @@ class SignUpViewController: UIViewController {
     }
     var presenter: SignUpPresenter?
     
+    var isCustomLinksVisible: Bool {
+        return[[CAMKeys.signUpScreenFirstCustomLink.rawValue,CAMKeys.signUpScreenFirstCustomLinkText.rawValue],
+               [CAMKeys.signUpScreenSecondCustomLink.rawValue,CAMKeys.signUpScreenSecondCustomLinkText.rawValue]].reduce(false) {
+                (result, keyArray) -> Bool in
+                for key in keyArray {
+                    guard let value = configDictionary[key], !value.isEmpty else {
+                        return result || false
+                    }
+                }
+                return true
+        }
+    }
+    
     var visibleAuthFieldsCount: Int {
         let centerFreeSpace = loginContainer.frame.minY - logoImageView.frame.maxY
         let topSpace: CGFloat = 50.0
         var bottomSpace = socialNetworksContainer.isHidden ? 0 : socialNetworksContainer.frame.height + 20 // 20 - min spacing
         bottomSpace = bottomSpace == 0 ? 50 : bottomSpace
         let inputComponentMaxHeight = centerFreeSpace - topSpace - bottomSpace
-        let tableMaxHeight = inputComponentMaxHeight - 13 - 46
-        var maxCount = Int((tableMaxHeight - 7) / (48 + 7))
+        let tableMaxHeight = inputComponentMaxHeight - 13 - signUpButton.bounds.height
+        var maxCount = Int((tableMaxHeight - cellSpacing) / (cellHeight + cellSpacing))
         let fieldsCount = authFields.count
         if UIDevice.current.userInterfaceIdiom == .phone {
             maxCount = maxCount > 4 ? 4 : maxCount
@@ -62,7 +79,7 @@ class SignUpViewController: UIViewController {
     }
     
     var authFieldsTableHeight: CGFloat {
-        let height = CGFloat(visibleAuthFieldsCount * 48 + (visibleAuthFieldsCount - 1) * 7)
+        let height = CGFloat(visibleAuthFieldsCount) * cellHeight + CGFloat(visibleAuthFieldsCount - 1) * cellSpacing
         return height
     }
     
@@ -99,6 +116,9 @@ class SignUpViewController: UIViewController {
         socialNetworksContainer.isHidden = !(configDictionary[CAMKeys.isAlternativeAuthenticationEnabled.rawValue]?.bool ?? false)
         authFieldsTable.backgroundView = UIView()
         authFieldsTable.allowsSelection = false
+        if isCustomLinksVisible {
+            setupCamLinksContainer()
+        }
         setupSocialNetworksContainer()
         configureElements()
     }
@@ -118,7 +138,36 @@ class SignUpViewController: UIViewController {
         stackView.addArrangedSubview(facebookButton)
     }
     
+    func setupCamLinksContainer() {
+        let linkButtonFirst = UIButton()
+        let linkButtonSecond = UIButton()
+        if let link = configDictionary[CAMKeys.signUpScreenFirstCustomLink.rawValue], !link.isEmpty,
+           let linkText = configDictionary[CAMKeys.signUpScreenFirstCustomLinkText.rawValue], !linkText.isEmpty {
+            linkButtonFirst.addTarget(self, action: #selector(showFirstCustomLink), for: .touchUpInside)
+            linkButtonFirst.titleLabel?.lineBreakMode = .byTruncatingTail
+            linkButtonFirst.setStyle(config: configDictionary, camTitleKey: .signUpScreenFirstCustomLinkText, style: .customlinkFont)
+            camLinksStackView.addArrangedSubview(linkButtonFirst)
+        }
+        
+        if let link = configDictionary[CAMKeys.signUpScreenSecondCustomLink.rawValue], !link.isEmpty,
+           let linkText = configDictionary[CAMKeys.signUpScreenSecondCustomLinkText.rawValue], !linkText.isEmpty {
+            linkButtonSecond.addTarget(self, action: #selector(showSecondCustomLink), for: .touchUpInside)
+            linkButtonSecond.titleLabel?.lineBreakMode = .byTruncatingTail
+            linkButtonSecond.setStyle(config: configDictionary, camTitleKey: .signUpScreenSecondCustomLinkText, style: .customlinkFont)
+            camLinksStackView.addArrangedSubview(linkButtonSecond)
+        }
+        if camLinksStackView.subviews.count == 2 {
+            linkButtonFirst.contentHorizontalAlignment = .right
+            linkButtonSecond.contentHorizontalAlignment = .left
+        }
+        camLinksStackView.axis = .horizontal
+        camLinksStackView.spacing = 5.0
+        camLinksStackView.distribution = .fillEqually
+        camLinksStackView.alignment = .center
+    }
+    
     func setupConstraints() {
+        camLinksHeightConstraint.constant = isCustomLinksVisible ? 39 : 0
         let inputContainerHeight = authFieldsTableHeight + signUpButton.frame.height + 13
         authFieldsTableHeightConstraint.constant = authFieldsTableHeight
         inputContainerHeightConstraint.constant = inputContainerHeight
@@ -200,6 +249,28 @@ class SignUpViewController: UIViewController {
     
     @objc func facebookSignUp() {
         presenter?.showFacebookAuthScreen()
+    }
+    
+    @objc private func showFirstCustomLink() {
+        guard let link = configDictionary[CAMKeys.signUpScreenFirstCustomLink.rawValue],
+              let customURL = URL(string: link) else {
+            return
+        }
+
+        if UIApplication.shared.canOpenURL(customURL) {
+            UIApplication.shared.open(customURL)
+        }
+    }
+    
+    @objc private func showSecondCustomLink() {
+        guard let link = configDictionary[CAMKeys.signUpScreenSecondCustomLink.rawValue],
+              let customURL = URL(string: link) else {
+            return
+        }
+
+        if UIApplication.shared.canOpenURL(customURL) {
+            UIApplication.shared.open(customURL)
+        }
     }
     
     deinit {
