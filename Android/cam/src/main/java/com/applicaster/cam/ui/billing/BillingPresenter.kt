@@ -11,6 +11,7 @@ import com.applicaster.cam.params.billing.BillingOffer
 import com.applicaster.cam.params.billing.ProductType
 import com.applicaster.cam.ui.CamNavigationRouter
 import com.applicaster.cam.ui.base.presenter.BasePresenter
+import com.applicaster.cam.ui.base.presenter.ICustomLinkActionHandler
 import com.applicaster.cam.ui.billing.adapter.PurchaseItem
 import com.applicaster.cam.ui.billing.adapter.recycler.BillingItemType
 import com.applicaster.cam.ui.confirmation.AlertDialogType
@@ -22,7 +23,7 @@ class BillingPresenter(
 		private val navigationRouter: CamNavigationRouter
 ) : BasePresenter(view),
 		IBillingPresenter,
-		BillingListener, RestoreCallback {
+		BillingListener, RestoreCallback, ICustomLinkActionHandler {
 
 	private val TAG = BillingPresenter::class.java.canonicalName
 
@@ -287,5 +288,9 @@ class BillingPresenter(
 	//Calls when user press system back button or toolbar back button
 	override fun onLastFragmentClosed() {
 		AnalyticsGatewaySession.sessionData.add(Action.CANCEL)
+	}
+
+	override fun onCustomLinkClicked(url: String) {
+		navigationRouter.openBrowserWithUrl(url)
 	}
 }

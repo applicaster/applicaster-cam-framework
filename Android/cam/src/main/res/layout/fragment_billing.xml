@@ -1,36 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/layout_billing"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout_billing"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <include
-            android:id="@+id/toolbar"
-            layout="@layout/layout_toolbar_template"
-            app:layout_constraintTop_toTopOf="parent"/>
+        android:id="@+id/toolbar"
+        layout="@layout/layout_toolbar_template"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.applicaster.util.ui.CustomTextView
-            android:id="@+id/tv_billing_title_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_marginTop="@dimen/billing_tv_title_text_margin_top"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar"/>
+        android:id="@+id/tv_billing_title_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/billing_tv_title_text_margin_top"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <TextView
         android:id="@+id/container_restore"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/billing_details_margin_left_right"
-        android:layout_marginEnd="@dimen/billing_details_margin_left_right"
-        android:padding="@dimen/padding_small"
         android:layout_marginTop="@dimen/billing_layout_details_margin_top"
+        android:layout_marginEnd="@dimen/billing_details_margin_left_right"
         android:gravity="center"
+        android:padding="@dimen/padding_small"
         android:text="Restore purchases"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -38,17 +36,27 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_billing_title_text" />
 
     <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_billing_items"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="@dimen/billing_rv_items_margin_end"
-            android:layout_marginStart="@dimen/billing_rv_items_margin_start"
-            android:orientation="vertical"
-            android:overScrollMode="never"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/container_restore"/>
+        android:id="@+id/rv_billing_items"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/billing_rv_items_margin_start"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="@dimen/billing_rv_items_margin_end"
+        android:orientation="vertical"
+        android:overScrollMode="never"
+        app:layout_constraintBottom_toBottomOf="@+id/container_bottom_links"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/container_restore" />
+
+    <include
+        android:id="@+id/container_bottom_links"
+        layout="@layout/layout_bottom_links"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

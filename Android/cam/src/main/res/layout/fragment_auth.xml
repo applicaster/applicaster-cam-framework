@@ -8,7 +8,7 @@
     <include
         android:id="@+id/container_toolbar"
         layout="@layout/layout_toolbar_template"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.applicaster.util.ui.CustomTextView
         android:id="@+id/tv_auth_title"
@@ -42,18 +42,28 @@
         android:layout_marginStart="@dimen/auth_hint_margin_bottom"
         android:layout_marginEnd="@dimen/auth_hint_margin_bottom"
         android:layout_marginBottom="@dimen/auth_hint_margin_bottom"
+        android:gravity="center"
+        android:paddingStart="@dimen/padding_big"
+        android:text="Have already an account? Login"
         app:layout_constraintBottom_toTopOf="@id/container_bottom_bar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:paddingStart="@dimen/padding_big"
-        android:gravity="center"
-        android:text="Have already an account? Login" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <include
         android:id="@+id/container_bottom_bar"
         layout="@layout/layout_bottom_bar"
         android:layout_width="0dp"
         android:layout_height="@dimen/bottom_bar_height"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/container_bottom_links"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <include
+        android:id="@+id/container_bottom_links"
+        layout="@layout/layout_bottom_links"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -18,10 +18,14 @@ enum class UIKey(
     LOGIN_ALT_AUTH_TEXT(text = UI_KEY_THIRD_PARTY_AUTH_TEXT, textStyle = StyleKey.ALT_AUTH_PROMPT),
     LOGIN_BUTTON(text = UI_KEY_LOGIN_BUTTON_TEXT, image = UI_KEY_LOGIN_BUTTON_IMAGE, textStyle = StyleKey.ACTION_BUTTON),
     LOGIN_PROMPT_TEXT(text = UI_KEY_LOGIN_PROMPT_TEXT, textLink = UI_KEY_LOGIN_PROMPT_ACTION_TEXT, textStyle = StyleKey.PROMPT, textLinkStyle = StyleKey.LINK),
+    LOGIN_LINK_1_TEXT(text = UI_KEY_LOGIN_LINK_1_DESC_TEXT, textLink = UI_KEY_LOGIN_LINK_1_URL_TEXT, textStyle = StyleKey.CUSTOM_LINK),
+    LOGIN_LINK_2_TEXT(text = UI_KEY_LOGIN_LINK_2_DESC_TEXT, textLink = UI_KEY_LOGIN_LINK_2_URL_TEXT, textStyle = StyleKey.CUSTOM_LINK),
     SIGN_UP_TITLE(text = UI_KEY_SIGN_UP_TITLE_TEXT, textStyle = StyleKey.SCREEN_TITLE),
     SIGN_UP_ALT_AUTH_TEXT(text = UI_KEY_THIRD_PARTY_AUTH_TEXT, textStyle = StyleKey.ALT_AUTH_PROMPT),
     SIGN_UP_BUTTON(text = UI_KEY_SIGN_UP_BUTTON_TEXT, image = UI_KEY_SIGN_UP_BUTTON_IMAGE, textStyle = StyleKey.ACTION_BUTTON),
     SIGN_UP_PROMPT_TEXT(text = UI_KEY_SIGN_UP_PROMPT_TEXT, textLink = UI_KEY_SIGN_UP_PROMPT_ACTION_TEXT, textStyle = StyleKey.PROMPT, textLinkStyle = StyleKey.LINK),
+    SIGN_UP_LINK_1_TEXT(text = UI_KEY_SIGN_UP_LINK_1_DESC_TEXT, textLink = UI_KEY_SIGN_UP_LINK_1_URL_TEXT, textStyle = StyleKey.CUSTOM_LINK),
+    SIGN_UP_LINK_2_TEXT(text = UI_KEY_SIGN_UP_LINK_2_DESC_TEXT, textLink = UI_KEY_SIGN_UP_LINK_2_URL_TEXT, textStyle = StyleKey.CUSTOM_LINK),
     AUTH_SEPARATOR_TEXT(text = UI_KEY_THIRD_PARTY_SEPARATOR_TEXT, textStyle = StyleKey.ALT_AUTH_SEPARATOR),
     AUTH_LEFT_DIVIDER_IMAGE(image = UI_KEY_THIRD_PARTY_DIVIDER_LEFT_IMAGE),
     AUTH_RIGHT_DIVIDER_IMAGE(image = UI_KEY_THIRD_PARTY_DIVIDER_RIGHT_IMAGE),
@@ -41,7 +45,8 @@ enum class UIKey(
     BILLING_ITEM_REDEEM_TEXT(text = UI_KEY_BILLING_ITEM_REDEEM_TEXT, textStyle = StyleKey.SCREEN_DESC),
     BILLING_TITLE(text = UI_KEY_BILLING_TITLE_TEXT, textStyle = StyleKey.SCREEN_TITLE),
     BILLING_RESTORE_HINT_DESC_TEXT(text = UI_KEY_BILLING_RESTORE_DESC, textLink = UI_KEY_BILLING_RESTORE_ACTION, textStyle = StyleKey.PROMPT, textLinkStyle = StyleKey.LINK),
-
+    STOREFRONT_LINK_1_TEXT(text = UI_KEY_STOREFRONT_LINK_1_DESC_TEXT, textLink = UI_KEY_STOREFRONT_LINK_1_URL_TEXT, textStyle = StyleKey.CUSTOM_LINK),
+    STOREFRONT_LINK_2_TEXT(text = UI_KEY_STOREFRONT_LINK_2_DESC_TEXT, textLink = UI_KEY_STOREFRONT_LINK_2_URL_TEXT, textStyle = StyleKey.CUSTOM_LINK),
     CONFIRMATION_DIALOG_IMAGE(image = UI_KEY_ALERT_COMPONENT_IMAGE),
     BILLING_CONFIRMATION_TITLE_TEXT(text = UI_KEY_PAYMENT_CONFIRMATION_TITLE_TEXT, textStyle = StyleKey.CONFIRMATION_TITLE),
     BILLING_CONFIRMATION_DESC_TEXT(text = UI_KEY_PAYMENT_CONFIRMATION_DESC_TEXT, textStyle = StyleKey.CONFIRMATION_DESC),
@@ -86,6 +91,14 @@ const val UI_KEY_LOGIN_BUTTON_TEXT = "login_button_text"
 const val UI_KEY_LOGIN_BUTTON_IMAGE = "cam_action_button_asset"
 const val UI_KEY_LOGIN_PROMPT_TEXT = "sign_up_prompt_text"
 const val UI_KEY_LOGIN_PROMPT_ACTION_TEXT = "sign_up_link_text"
+const val UI_KEY_LOGIN_LINK_1_DESC_TEXT = "login_screen_custom_link_1_text"
+const val UI_KEY_LOGIN_LINK_1_URL_TEXT = "login_screen_custom_link_1"
+const val UI_KEY_LOGIN_LINK_2_DESC_TEXT = "login_screen_custom_link_2_text"
+const val UI_KEY_LOGIN_LINK_2_URL_TEXT = "login_screen_custom_link_2"
+const val UI_KEY_SIGN_UP_LINK_1_DESC_TEXT = "sign_up_screen_custom_link_1_text"
+const val UI_KEY_SIGN_UP_LINK_1_URL_TEXT = "sign_up_screen_custom_link_1"
+const val UI_KEY_SIGN_UP_LINK_2_DESC_TEXT = "sign_up_screen_custom_link_2_text"
+const val UI_KEY_SIGN_UP_LINK_2_URL_TEXT = "sign_up_screen_custom_link_2"
 const val UI_KEY_THIRD_PARTY_AUTH_TEXT = "alternative_authentication_prompt_text"
 const val UI_KEY_THIRD_PARTY_SEPARATOR_TEXT = "alternative_authentication_separator_text"
 const val UI_KEY_THIRD_PARTY_DIVIDER_LEFT_IMAGE = "cam_separator_asset_left"
@@ -113,6 +126,10 @@ const val UI_KEY_BILLING_ITEM_REDEEM_TEXT = "payment_option_redeem_text"
 const val UI_KEY_BILLING_TITLE_TEXT = "storefront_screen_title_text"
 const val UI_KEY_BILLING_RESTORE_DESC = "restore_prompt_text"
 const val UI_KEY_BILLING_RESTORE_ACTION = "restore_link_text"
+const val UI_KEY_STOREFRONT_LINK_1_DESC_TEXT = "storefront_screen_custom_link_1_text"
+const val UI_KEY_STOREFRONT_LINK_1_URL_TEXT = "storefront_screen_custom_link_1"
+const val UI_KEY_STOREFRONT_LINK_2_DESC_TEXT = "storefront_screen_custom_link_2_text"
+const val UI_KEY_STOREFRONT_LINK_2_URL_TEXT = "storefront_screen_custom_link_2"
 // endregion
 // endregion
 

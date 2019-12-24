@@ -15,6 +15,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import com.applicaster.cam.ContentAccessManager
+import com.applicaster.cam.ui.base.presenter.ICustomLinkActionHandler
 import com.applicaster.util.OSUtil
 import com.applicaster.util.TextUtil
 
@@ -24,28 +25,31 @@ class UIMapper {
         private val uiProvider: UIProvider = ContentAccessManager.pluginUIProvider
 
         fun map(view: View, key: UIKey) {
-            if (!key.text.isNullOrEmpty()) {
-                setText(view, key.text!!)
-            }
-            if (key.textStyle != null) {
-                setTextStyle(view, key.textStyle)
-            }
-            if (!key.image.isNullOrEmpty()) {
-                setImage(view, key.image!!)
-            }
+            key.text?.let { if (it.isNotEmpty()) setText(view, it) }
+            key.image?.let { if (it.isNotEmpty()) setImage(view, it) }
+            key.textStyle?.let { setTextStyle(view, it) }
         }
 
         fun map(view: View, key: UIKey, linkActionCallback: () -> Unit) {
             if (key.text != null && key.text.isNotEmpty() && key.textLink != null) {
-                val textParamsHolder = TextParamsHolder.build {
-                    this.text = uiProvider.getText(key.text)
-                    this.textLink = uiProvider.getText(key.textLink)
-                    this.textStyle = key.textStyle
-                    this.textLinkStyle = key.textLinkStyle
-                    this.linkActionCallback = linkActionCallback
-                }
-                customizeSpannableText(view, textParamsHolder)
+                customizeTextWithLink(key.text, key.textLink, key, linkActionCallback, view)
             }
+        }
+
+        fun map(view: View, key: UIKey, listener: ICustomLinkActionHandler) {
+            map(view, key)
+            key.textLink?.run { view.setOnClickListener { listener.onCustomLinkClicked(this) } }
+        }
+
+        private fun customizeTextWithLink(text: String, textLink: String, key: UIKey, linkActionCallback: () -> Unit, view: View) {
+            val textParamsHolder = TextParamsHolder.build {
+                this.text = uiProvider.getText(text)
+                this.textLink = uiProvider.getText(textLink)
+                this.textStyle = key.textStyle
+                this.textLinkStyle = key.textLinkStyle
+                this.linkActionCallback = linkActionCallback
+            }
+            customizeSpannableText(view, textParamsHolder)
         }
 
         private fun setImage(view: View, key: String) {

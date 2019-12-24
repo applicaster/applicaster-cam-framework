@@ -8,6 +8,7 @@ enum class StyleKey(
     ACTION_BUTTON(STYLE_KEY_ACTION_BUTTON),
     PROMPT(STYLE_KEY_PROMPT),
     LINK(STYLE_KEY_LINK),
+    CUSTOM_LINK(STYLE_KEY_CUSTOM_LINK),
     SCREEN_TITLE(STYLE_KEY_SCREEN_TITLE),
     SCREEN_DESC(STYLE_KEY_SCREEN_DESC),
     ALT_AUTH_SEPARATOR(STYLE_KEY_ALT_AUTH_SEPARATOR),
@@ -31,6 +32,7 @@ const val STYLE_KEY_INPUT_FIELD_LABEL = "input_field_label"
 const val STYLE_KEY_ACTION_BUTTON = "action_button"
 const val STYLE_KEY_PROMPT = "prompt"
 const val STYLE_KEY_LINK = "link"
+const val STYLE_KEY_CUSTOM_LINK = "custom_link"
 const val STYLE_KEY_SCREEN_TITLE = "screen_title"
 const val STYLE_KEY_SCREEN_DESC = "screen_description"
 const val STYLE_KEY_ALT_AUTH_SEPARATOR = "alternative_authentication_separator"

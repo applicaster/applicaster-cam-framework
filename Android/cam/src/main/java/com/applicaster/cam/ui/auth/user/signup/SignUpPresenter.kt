@@ -11,12 +11,13 @@ import com.applicaster.cam.params.auth.AuthFieldConfig
 import com.applicaster.cam.params.auth.AuthScreenType
 import com.applicaster.cam.ui.CamNavigationRouter
 import com.applicaster.cam.ui.auth.user.UserAuthPresenter
+import com.applicaster.cam.ui.base.presenter.ICustomLinkActionHandler
 
 class SignUpPresenter(
     private val view: ISignUpView?,
     private val navigationRouter: CamNavigationRouter
 ) :
-    UserAuthPresenter(view), ISignUpPresenter, SignUpCallback, FacebookAuthCallback {
+    UserAuthPresenter(view), ISignUpPresenter, SignUpCallback, FacebookAuthCallback, ICustomLinkActionHandler {
 
     override fun onViewCreated() {
         super.onViewCreated()
@@ -138,5 +139,9 @@ class SignUpPresenter(
 
     override fun onLastFragmentClosed() {
         AnalyticsGatewaySession.sessionData.add(Action.CANCEL)
+    }
+
+    override fun onCustomLinkClicked(url: String) {
+        navigationRouter.openBrowserWithUrl(url)
     }
 }
