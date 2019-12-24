@@ -5,13 +5,16 @@ import android.view.View
 import android.widget.TextView
 
 class CustomLinkViewCustomizationHelper {
-    fun customize(leftLinkView: TextView, rightLinkView: TextView) {
+    fun customize(leftLinkView: TextView, rightLinkView: TextView, parentView: View) {
+        parentView.visibility = View.VISIBLE
         if (leftLinkView.text.isEmpty() && rightLinkView.text.isNotEmpty()) {
             rightLinkView.gravity = Gravity.CENTER
             leftLinkView.visibility = View.GONE
         } else if (leftLinkView.text.isNotEmpty() && rightLinkView.text.isEmpty()) {
             leftLinkView.gravity = Gravity.CENTER
             rightLinkView.visibility = View.GONE
+        } else if (leftLinkView.text.isEmpty() && rightLinkView.text.isEmpty()) {
+            parentView.visibility = View.GONE
         } else {
             leftLinkView.gravity = Gravity.END
             rightLinkView.gravity = Gravity.START

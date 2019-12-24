@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_bottom_links_parent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="horizontal"
-    android:paddingLeft="20dp"
-    android:paddingRight="20dp"
-    android:paddingTop="14dp"
-    android:paddingBottom="14dp">
+    android:paddingLeft="@dimen/bottom_bar_padding_horizontal"
+    android:paddingTop="@dimen/bottom_links_bar_padding_vertical"
+    android:paddingRight="@dimen/bottom_bar_padding_horizontal"
+    android:paddingBottom="@dimen/bottom_links_bar_padding_vertical">
 
     <com.applicaster.util.ui.CustomTextView
         android:id="@+id/tv_bottom_link_1"
@@ -16,8 +17,7 @@
         android:layout_weight="1"
         android:ellipsize="marquee"
         android:gravity="center"
-        android:singleLine="true"
-        android:text="Terms of Service looooooooooooooooooooooooooong" />
+        android:singleLine="true" />
 
     <com.applicaster.util.ui.CustomTextView
         android:id="@+id/tv_bottom_link_2"
@@ -26,7 +26,6 @@
         android:layout_weight="1"
         android:ellipsize="marquee"
         android:gravity="start"
-        android:singleLine="true"
-        android:text="Terms of Service looooooooooooooooooooooooooong" />
+        android:singleLine="true" />
 
 </LinearLayout>
