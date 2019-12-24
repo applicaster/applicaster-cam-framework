@@ -84,7 +84,7 @@ class RecyclerBillingAdapter(
                 updateStoreInfo(holder)
                 // init listeners
                 holder.btnSubscribe.setOnClickListener {
-                    purchaseListener.onPurchaseButtonClicked(billingItem.value?.productId ?: "")
+                    purchaseListener.onPurchaseButtonClicked(billingItem.value?.productId.orEmpty())
                 }
             }
             is BillingItemRedeemViewHolder -> {
@@ -96,12 +96,7 @@ class RecyclerBillingAdapter(
                 holder.tvRedeem.setOnClickListener { purchaseListener.onRedeemClicked() }
             }
             is CustomLinksViewHolder -> {
-                val customLinksListener = customLinksListener
-                        ?: object : ICustomLinkActionHandler {
-                            override fun onCustomLinkClicked(url: String) {
-                            }
-                        }
-                customizeFooter(holder, customLinksListener)
+                customLinksListener?.let { customizeFooter(holder, it) }
             }
         }
     }
@@ -153,7 +148,7 @@ class RecyclerBillingAdapter(
         val btnSubscribeText = holder.btnSubscribe.text
         holder.btnSubscribe.text = updateItemPrice(
                 btnSubscribeText.toString(),
-                purchaseItemsList[holder.adapterPosition].value?.productPrice ?: ""
+                purchaseItemsList[holder.adapterPosition].value?.productPrice.orEmpty()
         )
     }
 

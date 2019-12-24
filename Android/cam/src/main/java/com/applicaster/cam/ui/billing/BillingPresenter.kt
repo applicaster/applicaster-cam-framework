@@ -290,7 +290,8 @@ class BillingPresenter(
 		AnalyticsGatewaySession.sessionData.add(Action.CANCEL)
 	}
 
-	override fun onCustomLinkClicked(url: String) {
-		navigationRouter.openBrowserWithUrl(url)
-	}
+    override fun onCustomLinkClicked(linkText: String, linkUrl: String) {
+        AnalyticsUtil.logTapCustomLink(CustomLinkData(linkUrl, linkText, ScreenName.STOREFRONT))
+        navigationRouter.openBrowserWithUrl(linkUrl)
+    }
 }

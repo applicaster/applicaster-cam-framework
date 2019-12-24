@@ -240,6 +240,16 @@ class AnalyticsUtil {
             )
         }
 
+        fun logTapCustomLink(customLinkData: CustomLinkData) {
+            val params = mapOf(
+                    Properties.PLUGIN_PROVIDER.value to getPluginProvider(),
+                    Properties.CUSTOM_LINK.value to customLinkData.customLinkUrl,
+                    Properties.CUSTOM_LINK_TEXT.value to customLinkData.customLinkText,
+                    Properties.SCREEN_NAME.value to customLinkData.screenName.value
+            )
+            AnalyticsAgentUtil.logEvent(AnalyticsEvent.TAP_CUSTOM_LINK.value, params)
+        }
+
         fun logViewAlert(confirmationAlertData: ConfirmationAlertData) {
             val params = mapOf(
                 Properties.PLUGIN_PROVIDER.value to getPluginProvider(),
@@ -400,6 +410,7 @@ enum class AnalyticsEvent(val value: String) {
     SWITCH_TO_SIGNUP_SCREEN      ("Switch to Sign-Up Screen"),
     LAUNCH_PASSWORD_RESET_SCREEN ("Launch Password Reset Screen"),
     RESET_PASSWORD               ("Reset Password"),
+    TAP_CUSTOM_LINK              ("Tap Custom Link"),
     VIEW_ALERT                   ("View Alert"),
     TAP_PURCHASE_BUTTON          ("Tap Purchase Button"),
     COMPLETE_PURCHASE            ("Complete Purchase"),
@@ -426,6 +437,9 @@ enum class Properties(val value: String) {
     API_ERROR_MESSAGE    ("API Error Message"),
     ERROR_CODE_ID        ("Error Code ID"),
     ERROR_MESSAGE        ("Error message"),
+    SCREEN_NAME          ("Screen Name"),
+    CUSTOM_LINK          ("Custom Link"),
+    CUSTOM_LINK_TEXT     ("Custom Link Text"),
     //Purchase product properties
     SUBSCRIBER           ("Subscriber"),
     PRODUCT_NAME         ("Product Name"),
@@ -486,6 +500,12 @@ enum class UserProperties(val value: String) {
     PURCHASE_PRODUCT_NAME("Purchase Product Name")
 }
 
+enum class ScreenName(val value: String) {
+    LOGIN                ("Login"),
+    SIGN_UP              ("Signup"),
+    STOREFRONT           ("Storefront")
+}
+
 data class ConfirmationAlertData(
     val isConfirmationAlert: Boolean,
     val alertType: AlertType,
@@ -504,6 +524,12 @@ data class PurchaseProductPropertiesData(
     val subscriptionDuration: String,
     val trialPeriod: String,
     val purchaseEntityType: String
+)
+
+data class CustomLinkData(
+    val customLinkUrl: String,
+    val customLinkText: String,
+    val screenName: ScreenName
 )
 
 object AnalyticsGatewaySession {
