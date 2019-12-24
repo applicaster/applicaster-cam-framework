@@ -47,6 +47,11 @@ public enum CAMKeys: String {
     case loginSingUpPromtText = "sign_up_prompt_text"
     case loginSingUpActionText = "sign_up_link_text"
     
+    case loginScreenFirstCustomLink = "login_screen_custom_link_1"
+    case loginScreenFirstCustomLinkText = "login_screen_custom_link_1_text"
+    case loginScreenSecondCustomLink = "login_screen_custom_link_2"
+    case loginScreenSecondCustomLinkText = "login_screen_custom_link_2_text"
+    
     //Logout
     
     case logoutTitleText = "logout_title_text"
@@ -59,6 +64,11 @@ public enum CAMKeys: String {
     case signUpButtonText = "sign_up_button_text"
     case singUpLoginPromtText = "login_prompt_text"
     case singUpLoginActionText = "login_link_text"
+    
+    case signUpScreenFirstCustomLink = "sign_up_screen_custom_link_1"
+    case signUpScreenFirstCustomLinkText = "sign_up_screen_custom_link_1_text"
+    case signUpScreenSecondCustomLink = "sign_up_screen_custom_link_2"
+    case signUpScreenSecondCustomLinkText = "sign_up_screen_custom_link_2_text"
     
     //Reset Password
     
@@ -116,6 +126,8 @@ public enum CAMStyles: String {
     case promptFont = "prompt"
     
     case linkFont = "link"
+    
+    case customlinkFont = "custom_link"
     
     case screenTitleFont = "screen_title"
     
