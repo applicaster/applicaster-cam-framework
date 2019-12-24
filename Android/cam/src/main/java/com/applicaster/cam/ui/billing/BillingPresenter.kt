@@ -23,7 +23,7 @@ class BillingPresenter(
 		private val navigationRouter: CamNavigationRouter
 ) : BasePresenter(view),
 		IBillingPresenter,
-		BillingListener, RestoreCallback, ICustomLinkActionHandler {
+		BillingListener, RestoreCallback {
 
 	private val TAG = BillingPresenter::class.java.canonicalName
 

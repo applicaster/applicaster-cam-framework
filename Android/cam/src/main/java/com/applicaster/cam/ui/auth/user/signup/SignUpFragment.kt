@@ -31,8 +31,8 @@ class SignUpFragment : UserAuthFragment(), ISignUpView {
             map(tv_add_auth_or, UIKey.AUTH_SEPARATOR_TEXT)
             map(tv_add_auth_desc, UIKey.SIGN_UP_ALT_AUTH_TEXT)
             map(container_auth_hint, UIKey.SIGN_UP_PROMPT_TEXT) { (presenter as? SignUpPresenter)?.onAuthHintClicked() }
-            map(tv_bottom_link_1, UIKey.LOGIN_LINK_1_TEXT, presenter as ICustomLinkActionHandler)
-            map(tv_bottom_link_2, UIKey.LOGIN_LINK_2_TEXT, presenter as ICustomLinkActionHandler)
+            map(tv_bottom_link_1, UIKey.SIGN_UP_LINK_1_TEXT, presenter as ICustomLinkActionHandler)
+            map(tv_bottom_link_2, UIKey.SIGN_UP_LINK_2_TEXT, presenter as ICustomLinkActionHandler)
         }
         CustomLinkViewCustomizationHelper().customize(tv_bottom_link_1, tv_bottom_link_2, ll_bottom_links_parent)
     }
