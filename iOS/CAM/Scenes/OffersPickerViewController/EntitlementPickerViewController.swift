@@ -25,6 +25,7 @@ class EntitlementPickerViewController: UIViewController {
     @IBOutlet private var entitlementCollectionView: UICollectionView!
     @IBOutlet private var restoreText: UITextView!
     
+    @IBOutlet weak var camLinksContainer: CamLinksView!
     @IBOutlet private var helpInfoContainer: UIView!
     @IBOutlet private var helpInfoTextView: UITextView!
     private var gradientLayer: CAGradientLayer!
@@ -35,6 +36,19 @@ class EntitlementPickerViewController: UIViewController {
     
     var configDictionary: [String: String] {
         return presenter?.camDelegate.getPluginConfig() ?? [String: String]()
+    }
+    
+    var isCustomLinksVisible: Bool {
+        return [[CAMKeys.storefrontScreenFirstCustomLink.rawValue,CAMKeys.storefrontScreenFirstCustomLinkText.rawValue],
+                [CAMKeys.storefrontScreenSecondCustomLink.rawValue,CAMKeys.storefrontScreenSecondCustomLinkText.rawValue]].reduce(false) {
+                (result, keyArray) -> Bool in
+                for key in keyArray {
+                    guard let value = configDictionary[key], !value.isEmpty else {
+                        return result || false
+                    }
+                }
+                return true
+        }
     }
     
     var itemSize: CGSize {
@@ -57,6 +71,7 @@ class EntitlementPickerViewController: UIViewController {
             setupRestoreText()
             helpInfoTextView.setStyle(config: configDictionary, style: .legalDetailsFont)
             helpInfoTextView.text = viewModel?.legalDetails
+            setupCamLinks()
         }
     }
     
@@ -121,6 +136,20 @@ class EntitlementPickerViewController: UIViewController {
     }
     
     // MARK: - Private methods
+    
+    private func setupCamLinks() {
+        if isCustomLinksVisible {
+            camLinksContainer.isHidden = self.offerViewModels.count > 1
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                camLinksContainer.isHidden = false
+            }
+            let camKeys = [(text: CAMKeys.storefrontScreenFirstCustomLinkText,
+                            link: CAMKeys.storefrontScreenFirstCustomLink),
+                           (text: CAMKeys.storefrontScreenSecondCustomLinkText,
+                            link: CAMKeys.storefrontScreenSecondCustomLink)]
+            camLinksContainer.setupParameters(camLinkKeys: camKeys, configDictionary: configDictionary)
+        }
+    }
     
     private func setupGradient() {
         self.gradientLayer = CAGradientLayer()
@@ -241,5 +270,33 @@ extension EntitlementPickerViewController: UICollectionViewDelegate, UICollectio
         return UIDevice.current.userInterfaceIdiom == .pad
             ? CGPoint(x: CGFloat(currentItemIndex) * pageWidth, y: 0)
             : proposedContentOffset
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        if UIDevice.current.userInterfaceIdiom == .phone &&
+           self.offerViewModels.count > 1 &&
+           isCustomLinksVisible {
+            return CGSize(width: collectionView.bounds.width, height: 39)
+        }
+        return .zero
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        switch kind {
+        case UICollectionView.elementKindSectionFooter:
+            guard let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "CamLinksFooter", for: indexPath)
+                as? CamLinksFooterReusableView else {
+                return UICollectionReusableView()
+            }
+            let camLinksKeys = [(text: CAMKeys.storefrontScreenFirstCustomLinkText,
+                                 link: CAMKeys.storefrontScreenFirstCustomLink),
+                                (text: CAMKeys.storefrontScreenSecondCustomLinkText,
+                                 link: CAMKeys.storefrontScreenSecondCustomLink)
+                                ]
+            view.setupParameters(camLinkKeys: camLinksKeys, configDictionary: configDictionary)
+            return view
+        default:
+            return UICollectionReusableView()
+        }
     }
 }

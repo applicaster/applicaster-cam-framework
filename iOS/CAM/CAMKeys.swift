@@ -96,6 +96,11 @@ public enum CAMKeys: String {
     case restoreButtonText = "restore_link_text"
     case legalDetailsText = "legal_details_text"
     
+    case storefrontScreenFirstCustomLink = "storefront_screen_custom_link_1"
+    case storefrontScreenFirstCustomLinkText = "storefront_screen_custom_link_1_text"
+    case storefrontScreenSecondCustomLink = "storefront_screen_custom_link_2"
+    case storefrontScreenSecondCustomLinkText = "storefront_screen_custom_link_2_text"
+    
     // Restore
     
     case restoreAlertTitle = "restore_purchase_confirmation_title_text"
