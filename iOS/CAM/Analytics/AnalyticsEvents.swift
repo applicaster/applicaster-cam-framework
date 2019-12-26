@@ -71,21 +71,6 @@ enum CamScreen: String {
     }
 }
 
-extension CAMKeys {
-    var screenForKey: CamScreen {
-        switch self {
-        case .loginScreenFirstCustomLink, .loginScreenSecondCustomLink:
-            return .loginScreen
-        case .signUpScreenFirstCustomLink, .signUpScreenSecondCustomLink:
-            return .loginScreen
-        case .storefrontScreenFirstCustomLink, .storefrontScreenSecondCustomLink:
-            return .loginScreen
-        default:
-            return .undefined
-        }
-    }
-}
-
 enum AnalyticsEvents {
     case tapStandardLoginButton(PlayableItemInfo)
     case standardLoginSuccess(PlayableItemInfo)
