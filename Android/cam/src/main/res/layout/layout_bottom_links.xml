@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/ll_bottom_links_parent"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:gravity="center"
     android:orientation="horizontal"
     android:paddingLeft="@dimen/bottom_bar_padding_horizontal"
@@ -17,6 +17,7 @@
         android:layout_weight="1"
         android:ellipsize="marquee"
         android:gravity="center"
+        android:padding="@dimen/bottom_bar_item_padding_horizontal"
         android:singleLine="true" />
 
     <com.applicaster.util.ui.CustomTextView
@@ -26,6 +27,7 @@
         android:layout_weight="1"
         android:ellipsize="marquee"
         android:gravity="start"
+        android:padding="@dimen/bottom_bar_item_padding_horizontal"
         android:singleLine="true" />
 
 </LinearLayout>

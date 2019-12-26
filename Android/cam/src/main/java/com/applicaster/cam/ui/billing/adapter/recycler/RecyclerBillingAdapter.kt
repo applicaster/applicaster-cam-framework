@@ -19,8 +19,32 @@ enum class BillingItemType {
     NO_REDEEM,
 }
 
-data class AdapterPurchaseData(val value: PurchaseItem?) {
-    fun isEmptyFooterItem() = value == null
+sealed class AdapterPurchaseData {
+    class PurchaseItemData : AdapterPurchaseData() {
+        private lateinit var purchaseItem: PurchaseItem
+        fun setItem(purchaseItem: PurchaseItem) {
+            this.purchaseItem = purchaseItem
+        }
+
+        override fun getItem() = purchaseItem
+        override fun getIntViewType() = 1
+    }
+
+    class CustomLinksFooter : AdapterPurchaseData() {
+        override fun getItem() = null
+        override fun getIntViewType() = 0
+    }
+
+    abstract fun getItem(): PurchaseItem?
+    abstract fun getIntViewType(): Int
+
+    companion object {
+        fun fromInt(value: Int): AdapterPurchaseData = when (value) {
+            1 -> PurchaseItemData()
+            0 -> CustomLinksFooter()
+            else -> CustomLinksFooter()
+        }
+    }
 }
 
 class RecyclerBillingAdapter(
@@ -30,20 +54,11 @@ class RecyclerBillingAdapter(
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(),
         IBillingAdapter {
 
-    enum class BillingViewType(val value: Int) {
-        BILLING_VIEW(0),
-        FOOTER_VIEW(1);
-
-        companion object {
-            fun fromInt(value: Int) = values().first { it.value == value }
-        }
-    }
-
     private val purchaseItemsList: ArrayList<AdapterPurchaseData> = arrayListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return when (BillingViewType.fromInt(viewType)) {
-            BillingViewType.BILLING_VIEW -> {
+        return when (AdapterPurchaseData.fromInt(viewType)) {
+            is AdapterPurchaseData.PurchaseItemData -> {
                 when (itemType) {
                     BillingItemType.REDEEM -> {
                         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.billing_item, parent, false)
@@ -56,7 +71,7 @@ class RecyclerBillingAdapter(
                     }
                 }
             }
-            BillingViewType.FOOTER_VIEW -> {
+            is AdapterPurchaseData.CustomLinksFooter -> {
                 val itemView =
                         LayoutInflater.from(parent.context).inflate(R.layout.layout_bottom_links, parent, false)
                 CustomLinksViewHolder(itemView)
@@ -64,13 +79,9 @@ class RecyclerBillingAdapter(
         }
     }
 
-    override fun getItemViewType(position: Int)
-            : Int {
-        return if (position < purchaseItemsList.size && !purchaseItemsList[position].isEmptyFooterItem()) BillingViewType.BILLING_VIEW.ordinal else BillingViewType.FOOTER_VIEW.ordinal
-    }
+    override fun getItemViewType(position: Int) = purchaseItemsList[position].getIntViewType()
 
-    override fun getItemCount()
-            : Int = purchaseItemsList.size
+    override fun getItemCount() = purchaseItemsList.size
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder
                                   , position: Int
@@ -84,7 +95,7 @@ class RecyclerBillingAdapter(
                 updateStoreInfo(holder)
                 // init listeners
                 holder.btnSubscribe.setOnClickListener {
-                    purchaseListener.onPurchaseButtonClicked(billingItem.value?.productId.orEmpty())
+                    purchaseListener.onPurchaseButtonClicked(billingItem.getItem()?.productId.orEmpty())
                 }
             }
             is BillingItemRedeemViewHolder -> {
@@ -143,12 +154,12 @@ class RecyclerBillingAdapter(
     }
 
     private fun updateStoreInfo(holder: BillingItemViewHolder) {
-        holder.tvTitle.text = purchaseItemsList[holder.adapterPosition].value?.productTitle
-        holder.tvDetails.text = purchaseItemsList[holder.adapterPosition].value?.productDescription
+        holder.tvTitle.text = purchaseItemsList[holder.adapterPosition].getItem()?.productTitle
+        holder.tvDetails.text = purchaseItemsList[holder.adapterPosition].getItem()?.productDescription
         val btnSubscribeText = holder.btnSubscribe.text
         holder.btnSubscribe.text = updateItemPrice(
                 btnSubscribeText.toString(),
-                purchaseItemsList[holder.adapterPosition].value?.productPrice.orEmpty()
+                purchaseItemsList[holder.adapterPosition].getItem()?.productPrice.orEmpty()
         )
     }
 
