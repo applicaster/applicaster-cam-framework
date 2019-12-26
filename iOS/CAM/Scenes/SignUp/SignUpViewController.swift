@@ -50,17 +50,30 @@ class SignUpViewController: UIViewController {
     var presenter: SignUpPresenter?
     
     var isCustomLinksVisible: Bool {
-        return [[CAMKeys.signUpScreenFirstCustomLink.rawValue,CAMKeys.signUpScreenFirstCustomLinkText.rawValue],
-               [CAMKeys.signUpScreenSecondCustomLink.rawValue,CAMKeys.signUpScreenSecondCustomLinkText.rawValue]].reduce(false) {
-                (result, keyArray) -> Bool in
-                for key in keyArray {
-                    guard let value = configDictionary[key], !value.isEmpty else {
-                        return result || false
-                    }
-                }
-                return true
+        return CamScreen.signUpScreen.customLinkKeys.reduce(false) {
+                (result, customLink) -> Bool in
+            guard let link = configDictionary[customLink.link.rawValue], !link.isEmpty else {
+                    return result || false
+            }
+            guard let text = configDictionary[customLink.text.rawValue], !text.isEmpty else {
+                    return result || false
+            }
+            return true
         }
     }
+        
+        
+//        return [[CAMKeys.signUpScreenFirstCustomLink.rawValue,CAMKeys.signUpScreenFirstCustomLinkText.rawValue],
+//               [CAMKeys.signUpScreenSecondCustomLink.rawValue,CAMKeys.signUpScreenSecondCustomLinkText.rawValue]].reduce(false) {
+//                (result, keyArray) -> Bool in
+//                for key in keyArray {
+//                    guard let value = configDictionary[key], !value.isEmpty else {
+//                        return result || false
+//                    }
+//                }
+//                return true
+//        }
+    
     
     var visibleAuthFieldsCount: Int {
         let centerFreeSpace = loginContainer.frame.minY - logoImageView.frame.maxY

@@ -49,15 +49,15 @@ class LoginViewController: UIViewController {
     var presenter: LoginPresenter?
     
     var isCustomLinksVisible: Bool {
-        return[[CAMKeys.loginScreenFirstCustomLink.rawValue,CAMKeys.loginScreenFirstCustomLinkText.rawValue],
-               [CAMKeys.loginScreenSecondCustomLink.rawValue,CAMKeys.loginScreenSecondCustomLinkText.rawValue]].reduce(false) {
-                (result, keyArray) -> Bool in
-                for key in keyArray {
-                    guard let value = configDictionary[key], !value.isEmpty else {
-                        return result || false
-                    }
-                }
-                return true
+        return CamScreen.loginScreen.customLinkKeys.reduce(false) {
+                (result, customLink) -> Bool in
+            guard let link = configDictionary[customLink.link.rawValue], !link.isEmpty else {
+                    return result || false
+            }
+            guard let text = configDictionary[customLink.text.rawValue], !text.isEmpty else {
+                    return result || false
+            }
+            return true
         }
     }
     

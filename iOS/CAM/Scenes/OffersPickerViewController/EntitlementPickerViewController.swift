@@ -39,15 +39,15 @@ class EntitlementPickerViewController: UIViewController {
     }
     
     var isCustomLinksVisible: Bool {
-        return [[CAMKeys.storefrontScreenFirstCustomLink.rawValue,CAMKeys.storefrontScreenFirstCustomLinkText.rawValue],
-                [CAMKeys.storefrontScreenSecondCustomLink.rawValue,CAMKeys.storefrontScreenSecondCustomLinkText.rawValue]].reduce(false) {
-                (result, keyArray) -> Bool in
-                for key in keyArray {
-                    guard let value = configDictionary[key], !value.isEmpty else {
-                        return result || false
-                    }
-                }
-                return true
+        return CamScreen.storefront.customLinkKeys.reduce(false) {
+                (result, customLink) -> Bool in
+            guard let link = configDictionary[customLink.link.rawValue], !link.isEmpty else {
+                    return result || false
+            }
+            guard let text = configDictionary[customLink.text.rawValue], !text.isEmpty else {
+                    return result || false
+            }
+            return true
         }
     }
     
