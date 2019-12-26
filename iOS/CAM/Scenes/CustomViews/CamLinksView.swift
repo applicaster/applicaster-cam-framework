@@ -6,9 +6,9 @@
 //
 
 import UIKit
+import ZappPlugins
 
 class CamLinksView: UIView {
-    
     
     @IBOutlet var camLinksStackView: UIStackView!
     
@@ -72,7 +72,11 @@ class CamLinksView: UIView {
     }
     
     @objc private func showFirstCustomLink() {
-        guard let link = configDictionary[CAMKeys.loginScreenFirstCustomLink.rawValue],
+        let tapLinkEvent = AnalyticsEvents.tapCustomLink(link: configDictionary[camLinkKeys[0].link.rawValue] ?? "",
+                                                         text: configDictionary[camLinkKeys[0].text.rawValue] ?? "",
+                                                         screenName: camLinkKeys[0].link.screenForKey.rawValue)
+        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: tapLinkEvent)
+        guard let link = configDictionary[camLinkKeys[0].link.rawValue],
               let customURL = URL(string: link) else {
             return
         }
@@ -83,7 +87,11 @@ class CamLinksView: UIView {
     }
     
     @objc private func showSecondCustomLink() {
-        guard let link = configDictionary[CAMKeys.loginScreenSecondCustomLink.rawValue],
+        let tapLinkEvent = AnalyticsEvents.tapCustomLink(link: configDictionary[camLinkKeys[1].link.rawValue] ?? "",
+                                                         text: configDictionary[camLinkKeys[1].text.rawValue] ?? "",
+                                                         screenName: camLinkKeys[1].link.screenForKey.rawValue)
+        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: tapLinkEvent)
+        guard let link = configDictionary[camLinkKeys[1].link.rawValue],
               let customURL = URL(string: link) else {
             return
         }

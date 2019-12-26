@@ -40,6 +40,29 @@ extension CAMFlow {
     }
 }
 
+enum CamScreen: String {
+    case loginScreen = "Login"
+    case signUpScreen = "Signup"
+    case resetPasswordScreen = "Reset Password"
+    case storefront = "Storefront"
+    case undefined = "Unspecified"
+}
+
+extension CAMKeys {
+    var screenForKey: CamScreen {
+        switch self {
+        case .loginScreenFirstCustomLink, .loginScreenSecondCustomLink:
+            return .loginScreen
+        case .signUpScreenFirstCustomLink, .signUpScreenSecondCustomLink:
+            return .loginScreen
+        case .storefrontScreenFirstCustomLink, .storefrontScreenSecondCustomLink:
+            return .loginScreen
+        default:
+            return .undefined
+        }
+    }
+}
+
 enum AnalyticsEvents {
     case tapStandardLoginButton(PlayableItemInfo)
     case standardLoginSuccess(PlayableItemInfo)
@@ -70,7 +93,7 @@ enum AnalyticsEvents {
     case startRestorePurchase(PlayableItemInfo)
     case completeRestorePurchase(PlayableItemInfo, [PurchaseProperties?])
     case storeRestorePurchaseError(Error, PlayableItemInfo, PurchaseProperties?)
-    
+    case tapCustomLink(link: String, text: String, screenName: String)
     static var userFlow: [String] = []
     
     var key: String {
@@ -104,6 +127,7 @@ enum AnalyticsEvents {
         case .startRestorePurchase: return "Start Restore Purchase"
         case .completeRestorePurchase: return "Complete Restore Purchase"
         case .storeRestorePurchaseError: return "Store Restore Purchase Error"
+        case .tapCustomLink: return "Tap Custom Link"
         }
     }
     
@@ -180,6 +204,11 @@ enum AnalyticsEvents {
                 .merge(["Error Code ID": error.code])
                 .merge(["Purchase Entity Name": info.name])
                 .merge([PurchaseProperties.key: kNoneProvided])
+        case .tapCustomLink(let link, let text, let screenName):
+            metadata = metadata
+                .merge(["Custom Link": link])
+                .merge(["Custom Link Text": text])
+                .merge(["Screen Name": screenName])
         }
         
         return metadata
