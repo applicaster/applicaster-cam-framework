@@ -1,6 +1,7 @@
 package com.applicaster.cam.ui.auth.user.login
 
 import android.app.Activity
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.support.v4.content.ContextCompat
 import com.applicaster.cam.CamFlow
@@ -14,6 +15,7 @@ import com.applicaster.cam.params.auth.AuthScreenType
 import com.applicaster.cam.ui.CamNavigationRouter
 import com.applicaster.cam.ui.auth.user.UserAuthPresenter
 import com.applicaster.cam.ui.base.presenter.ICustomLinkActionHandler
+import java.lang.NullPointerException
 
 class LoginPresenter(
     private val view: ILoginView?,
@@ -150,6 +152,12 @@ class LoginPresenter(
 
     override fun onCustomLinkClicked(linkText: String, linkUrl: String) {
         AnalyticsUtil.logTapCustomLink(CustomLinkData(linkUrl, linkText, ScreenName.LOGIN))
-        navigationRouter.openBrowserWithUrl(linkUrl)
+        try {
+            navigationRouter.openBrowserWithUrl(linkUrl)
+        } catch (exception: ActivityNotFoundException) {
+            view?.showAlert(ContentAccessManager.pluginConfigurator.getDefaultAlertText())
+        } catch (exception: NullPointerException) {
+            view?.showAlert(ContentAccessManager.pluginConfigurator.getDefaultAlertText())
+        }
     }
 }

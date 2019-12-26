@@ -1,6 +1,7 @@
 package com.applicaster.cam.ui.billing
 
 import android.app.Activity
+import android.content.ActivityNotFoundException
 import android.util.Log
 import com.android.billingclient.api.BillingClient
 import com.android.billingclient.api.Purchase
@@ -17,6 +18,7 @@ import com.applicaster.cam.ui.billing.adapter.recycler.BillingItemType
 import com.applicaster.cam.ui.confirmation.AlertDialogType
 import com.applicaster.iap.BillingListener
 import com.applicaster.iap.GoogleBillingHelper
+import java.lang.NullPointerException
 
 class BillingPresenter(
 		private val view: IBillingView?,
@@ -292,6 +294,12 @@ class BillingPresenter(
 
     override fun onCustomLinkClicked(linkText: String, linkUrl: String) {
         AnalyticsUtil.logTapCustomLink(CustomLinkData(linkUrl, linkText, ScreenName.STOREFRONT))
-        navigationRouter.openBrowserWithUrl(linkUrl)
+		try {
+			navigationRouter.openBrowserWithUrl(linkUrl)
+		} catch (exception: ActivityNotFoundException) {
+			view?.showAlert(ContentAccessManager.pluginConfigurator.getDefaultAlertText())
+		} catch (exception: NullPointerException) {
+			view?.showAlert(ContentAccessManager.pluginConfigurator.getDefaultAlertText())
+		}
     }
 }
