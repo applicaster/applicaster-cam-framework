@@ -13,14 +13,18 @@ import com.applicaster.cam.R
 import com.applicaster.cam.config.ui.UIKey
 import com.applicaster.cam.config.ui.UIMapper
 import com.applicaster.cam.ui.CamNavigationRouter
+import com.applicaster.cam.ui.base.custom.CustomLinkViewCustomizationHelper
+import com.applicaster.cam.ui.base.presenter.ICustomLinkActionHandler
 import com.applicaster.cam.ui.base.view.BaseFragment
 import com.applicaster.cam.ui.base.view.ContainerType
 import com.applicaster.cam.ui.billing.adapter.PurchaseInteractionListener
 import com.applicaster.cam.ui.billing.adapter.PurchaseItem
+import com.applicaster.cam.ui.billing.adapter.recycler.AdapterPurchaseData
 import com.applicaster.cam.ui.billing.adapter.recycler.BillingItemType
 import com.applicaster.cam.ui.billing.adapter.recycler.RecyclerBillingAdapter
 import com.applicaster.cam.ui.billing.adapter.recycler.SpaceItemDecoration
 import kotlinx.android.synthetic.main.fragment_billing.*
+import kotlinx.android.synthetic.main.layout_bottom_links.*
 import kotlinx.android.synthetic.main.layout_toolbar_template.*
 
 
@@ -34,9 +38,9 @@ class BillingFragment : BaseFragment(), IBillingView {
     private var containerType: ContainerType = ContainerType.PHONE
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         baseActivity?.apply {
             val navigationManager = if (getNavigationRouter() is CamNavigationRouter)
@@ -75,7 +79,7 @@ class BillingFragment : BaseFragment(), IBillingView {
         // init toolbar here
         when (containerType) {
             ContainerType.PHONE -> {
-                recyclerBillingAdapter = RecyclerBillingAdapter(purchaseListener, billingItemType)
+                recyclerBillingAdapter = RecyclerBillingAdapter(purchaseListener, presenter, billingItemType)
                 val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
                 rv_billing_items?.apply {
                     this.layoutManager = layoutManager
@@ -87,7 +91,7 @@ class BillingFragment : BaseFragment(), IBillingView {
             }
 
             ContainerType.TABLET -> {
-                pagerBillingAdapter = RecyclerBillingAdapter(purchaseListener, billingItemType)
+                pagerBillingAdapter = RecyclerBillingAdapter(purchaseListener, presenter, billingItemType)
                 // add padding to the recycler view to set child to the center of the root container
                 val layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                 // init custom snap helper
@@ -119,8 +123,18 @@ class BillingFragment : BaseFragment(), IBillingView {
 
     override fun populateBillingContainer(purchaseItems: List<PurchaseItem>) {
         super.populateBillingContainer(purchaseItems)
-        recyclerBillingAdapter?.apply { addPurchaseItems(purchaseItems) }
-        pagerBillingAdapter?.apply { addPurchaseItems(purchaseItems) }
+        val adapterData: MutableList<AdapterPurchaseData> = arrayListOf()
+        adapterData.addAll(purchaseItems.map { AdapterPurchaseData(it) })
+        if (purchaseItems.size > 1 && containerType == ContainerType.PHONE) {
+            adapterData.add(AdapterPurchaseData(null))
+            ll_bottom_links_parent.visibility = View.GONE
+        } else {
+            UIMapper.map(tv_bottom_link_1, UIKey.STOREFRONT_LINK_1_TEXT, presenter as ICustomLinkActionHandler)
+            UIMapper.map(tv_bottom_link_2, UIKey.STOREFRONT_LINK_2_TEXT, presenter as ICustomLinkActionHandler)
+            CustomLinkViewCustomizationHelper().customize(tv_bottom_link_1, tv_bottom_link_2, ll_bottom_links_parent)
+        }
+        pagerBillingAdapter?.apply { addPurchaseItems(adapterData) }
+        recyclerBillingAdapter?.apply { addPurchaseItems(adapterData) }
     }
 
     override fun clearBillingContainer() {
@@ -132,12 +146,14 @@ class BillingFragment : BaseFragment(), IBillingView {
         if (containerType == ContainerType.TABLET) {
             val rootWidth = Resources.getSystem().displayMetrics.widthPixels
             val childWidth = resources.getDimension(R.dimen.layout_billing_item_width).toInt()
-            val childrenWidth = (childWidth + (itemDecoration.horizontalSpaceHeight ?: 0)) * itemsCount
+            val childrenWidth = (childWidth + (itemDecoration.horizontalSpaceHeight
+                    ?: 0)) * itemsCount
             if (childrenWidth <= rootWidth) {
                 val parentPadding = (rootWidth - childrenWidth) / 2
                 rv_billing_items?.setPadding(parentPadding, 0, parentPadding, 0)
             } else {
-                val parentPadding = (rootWidth - childWidth + (itemDecoration.horizontalSpaceHeight ?: 0)) / 2
+                val parentPadding = (rootWidth - childWidth + (itemDecoration.horizontalSpaceHeight
+                        ?: 0)) / 2
                 rv_billing_items?.setPadding(parentPadding, 0, parentPadding, 0)
             }
         }

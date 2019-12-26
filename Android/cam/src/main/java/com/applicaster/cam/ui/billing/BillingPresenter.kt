@@ -11,6 +11,7 @@ import com.applicaster.cam.params.billing.BillingOffer
 import com.applicaster.cam.params.billing.ProductType
 import com.applicaster.cam.ui.CamNavigationRouter
 import com.applicaster.cam.ui.base.presenter.BasePresenter
+import com.applicaster.cam.ui.base.presenter.ICustomLinkActionHandler
 import com.applicaster.cam.ui.billing.adapter.PurchaseItem
 import com.applicaster.cam.ui.billing.adapter.recycler.BillingItemType
 import com.applicaster.cam.ui.confirmation.AlertDialogType
@@ -288,4 +289,9 @@ class BillingPresenter(
 	override fun onLastFragmentClosed() {
 		AnalyticsGatewaySession.sessionData.add(Action.CANCEL)
 	}
+
+    override fun onCustomLinkClicked(linkText: String, linkUrl: String) {
+        AnalyticsUtil.logTapCustomLink(CustomLinkData(linkUrl, linkText, ScreenName.STOREFRONT))
+        navigationRouter.openBrowserWithUrl(linkUrl)
+    }
 }

@@ -7,56 +7,97 @@ import android.view.ViewGroup
 import com.applicaster.cam.R
 import com.applicaster.cam.config.ui.UIKey
 import com.applicaster.cam.config.ui.UIMapper
-import com.applicaster.cam.ui.billing.adapter.PurchaseItem
+import com.applicaster.cam.ui.base.custom.CustomLinkViewCustomizationHelper
+import com.applicaster.cam.ui.base.presenter.ICustomLinkActionHandler
 import com.applicaster.cam.ui.billing.adapter.IBillingAdapter
 import com.applicaster.cam.ui.billing.adapter.PurchaseInteractionListener
+import com.applicaster.cam.ui.billing.adapter.PurchaseItem
 import kotlinx.android.synthetic.main.billing_item.view.*
 
 enum class BillingItemType {
     REDEEM,
-    NO_REDEEM
+    NO_REDEEM,
+}
+
+data class AdapterPurchaseData(val value: PurchaseItem?) {
+    fun isEmptyFooterItem() = value == null
 }
 
 class RecyclerBillingAdapter(
-    private val purchaseListener: PurchaseInteractionListener,
-    private val itemType: BillingItemType
+        private val purchaseListener: PurchaseInteractionListener,
+        private val customLinksListener: ICustomLinkActionHandler?,
+        private val itemType: BillingItemType
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(),
-    IBillingAdapter {
+        IBillingAdapter {
 
-    private val purchaseItemsList: ArrayList<PurchaseItem> = arrayListOf()
+    enum class BillingViewType(val value: Int) {
+        BILLING_VIEW(0),
+        FOOTER_VIEW(1);
+
+        companion object {
+            fun fromInt(value: Int) = values().first { it.value == value }
+        }
+    }
+
+    private val purchaseItemsList: ArrayList<AdapterPurchaseData> = arrayListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return when (itemType) {
-            BillingItemType.REDEEM -> {
-                val itemView = LayoutInflater.from(parent.context).inflate(R.layout.billing_item, parent, false)
-                BillingItemRedeemViewHolder(itemView)
+        return when (BillingViewType.fromInt(viewType)) {
+            BillingViewType.BILLING_VIEW -> {
+                when (itemType) {
+                    BillingItemType.REDEEM -> {
+                        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.billing_item, parent, false)
+                        BillingItemRedeemViewHolder(itemView)
+                    }
+                    BillingItemType.NO_REDEEM -> {
+                        val itemView =
+                                LayoutInflater.from(parent.context).inflate(R.layout.billing_item_no_redeem, parent, false)
+                        BillingItemViewHolder(itemView)
+                    }
+                }
             }
-            BillingItemType.NO_REDEEM -> {
+            BillingViewType.FOOTER_VIEW -> {
                 val itemView =
-                    LayoutInflater.from(parent.context).inflate(R.layout.billing_item_no_redeem, parent, false)
-                BillingItemViewHolder(itemView)
+                        LayoutInflater.from(parent.context).inflate(R.layout.layout_bottom_links, parent, false)
+                CustomLinksViewHolder(itemView)
             }
         }
     }
 
-    override fun getItemCount(): Int = purchaseItemsList.size
+    override fun getItemViewType(position: Int)
+            : Int {
+        return if (position < purchaseItemsList.size && !purchaseItemsList[position].isEmptyFooterItem()) BillingViewType.BILLING_VIEW.ordinal else BillingViewType.FOOTER_VIEW.ordinal
+    }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (holder is BillingItemViewHolder) {
-            // customize views
-            val billingItem = purchaseItemsList[holder.adapterPosition]
-            customize(holder.itemView, itemType)
-            // update item title, description and price info that was obtained from store
-            updateStoreInfo(holder)
-            // init listeners
-            holder.btnSubscribe.setOnClickListener { purchaseListener.onPurchaseButtonClicked(billingItem.productId) }
-        } else if (holder is BillingItemRedeemViewHolder) {
-            // customize views
-            customize(holder.itemView, itemType)
-            // update item title, description and price info that was obtained from store
-            updateStoreInfo(holder)
-            // init listeners
-            holder.tvRedeem.setOnClickListener { purchaseListener.onRedeemClicked() }
+    override fun getItemCount()
+            : Int = purchaseItemsList.size
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder
+                                  , position: Int
+    ) {
+        when (holder) {
+            is BillingItemViewHolder -> {
+                // customize views
+                val billingItem = purchaseItemsList[holder.adapterPosition]
+                customize(holder.itemView, itemType)
+                // update item title, description and price info that was obtained from store
+                updateStoreInfo(holder)
+                // init listeners
+                holder.btnSubscribe.setOnClickListener {
+                    purchaseListener.onPurchaseButtonClicked(billingItem.value?.productId.orEmpty())
+                }
+            }
+            is BillingItemRedeemViewHolder -> {
+                // customize views
+                customize(holder.itemView, itemType)
+                // update item title, description and price info that was obtained from store
+                updateStoreInfo(holder)
+                // init listeners
+                holder.tvRedeem.setOnClickListener { purchaseListener.onRedeemClicked() }
+            }
+            is CustomLinksViewHolder -> {
+                customLinksListener?.let { customizeFooter(holder, it) }
+            }
         }
     }
 
@@ -82,7 +123,16 @@ class RecyclerBillingAdapter(
         }
     }
 
-    override fun addPurchaseItems(items: List<PurchaseItem>) {
+    private fun customizeFooter(holder: CustomLinksViewHolder, customLinksListener: ICustomLinkActionHandler) {
+        UIMapper.apply {
+            map(holder.tvLeftLink, UIKey.STOREFRONT_LINK_1_TEXT, customLinksListener)
+            map(holder.tvRightLink, UIKey.STOREFRONT_LINK_2_TEXT, customLinksListener)
+        }
+        CustomLinkViewCustomizationHelper().customize(holder.tvLeftLink, holder.tvRightLink, holder.parentLayout)
+    }
+
+    override fun addPurchaseItems(items: List<AdapterPurchaseData>
+    ) {
         purchaseItemsList.addAll(items)
         notifyDataSetChanged()
     }
@@ -93,25 +143,15 @@ class RecyclerBillingAdapter(
     }
 
     private fun updateStoreInfo(holder: BillingItemViewHolder) {
-        holder.tvTitle.text = purchaseItemsList[holder.adapterPosition].productTitle
-        holder.tvDetails.text = purchaseItemsList[holder.adapterPosition].productDescription
+        holder.tvTitle.text = purchaseItemsList[holder.adapterPosition].value?.productTitle
+        holder.tvDetails.text = purchaseItemsList[holder.adapterPosition].value?.productDescription
         val btnSubscribeText = holder.btnSubscribe.text
         holder.btnSubscribe.text = updateItemPrice(
-            btnSubscribeText.toString(),
-            purchaseItemsList[holder.adapterPosition].productPrice
-        )
-    }
-
-    private fun updateStoreInfo(holder: BillingItemRedeemViewHolder) {
-        holder.tvTitle.text = purchaseItemsList[holder.adapterPosition].productTitle
-        holder.tvDetails.text = purchaseItemsList[holder.adapterPosition].productDescription
-        val btnSubscribeText = holder.btnSubscribe.text
-        holder.btnSubscribe.text = updateItemPrice(
-            btnSubscribeText.toString(),
-            purchaseItemsList[holder.adapterPosition].productPrice
+                btnSubscribeText.toString(),
+                purchaseItemsList[holder.adapterPosition].value?.productPrice.orEmpty()
         )
     }
 
     private fun updateItemPrice(subsBtnText: String, productPrice: String) =
-        "$subsBtnText $productPrice"
+            "$subsBtnText $productPrice"
 }

@@ -12,8 +12,9 @@ import com.applicaster.util.facebook.listeners.FBAuthoriziationListener
 import com.applicaster.util.facebook.permissions.APPermissionsType
 import com.applicaster.util.facebook.permissions.CustomFBPermissions
 
+
 abstract class UserAuthPresenter(private val view: IBaseInputView?) : BaseInputPresenter(view),
-    IUserAuthPresenter {
+        IUserAuthPresenter {
 
     override fun onRestoreClicked() {
         view?.showToastMessage("restore action")
@@ -36,7 +37,7 @@ abstract class UserAuthPresenter(private val view: IBaseInputView?) : BaseInputP
                 onFacebookAuthActionCompleted(result.email, result.id)
                 //Analytics
                 AnalyticsUtil.logUserProperties(AnalyticsUtil.collectPurchaseData(
-                    ContentAccessManager.contract.getAnalyticsDataProvider().purchaseData
+                        ContentAccessManager.contract.getAnalyticsDataProvider().purchaseData
                 ))
             }
 
@@ -59,18 +60,18 @@ abstract class UserAuthPresenter(private val view: IBaseInputView?) : BaseInputP
     override fun onError(error: Exception?) {
         view?.hideLoadingIndicator()
         error?.printStackTrace()
-        val errorMessage: String = 
+        val errorMessage: String =
                 if (error?.message.isNullOrEmpty()) "Facebook auth failed" else error?.message.orEmpty()
         view?.showAlert(errorMessage)
         //Analytics
         AnalyticsUtil.logViewAlert(
-            ConfirmationAlertData(
-                false,
-                AlertType.ERROR_ALERT,
-                AnalyticsUtil.KEY_NONE_PROVIDED,
-                    AnalyticsUtil.KEY_NONE_PROVIDED,
-                    errorMessage
-            )
+                ConfirmationAlertData(
+                        false,
+                        AlertType.ERROR_ALERT,
+                        AnalyticsUtil.KEY_NONE_PROVIDED,
+                        AnalyticsUtil.KEY_NONE_PROVIDED,
+                        errorMessage
+                )
         )
         AnalyticsGatewaySession.sessionData.add(Action.FAILED_ATTEMPT)
         //
