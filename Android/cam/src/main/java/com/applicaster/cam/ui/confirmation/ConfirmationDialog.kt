@@ -66,6 +66,7 @@ class ConfirmationDialog : DialogFragment() {
         if (dialogType == AlertDialogType.LOGOUT) {
             dialogView?.btn_confirmation_cancel?.setOnClickListener {
                 ContentAccessManager.contract.logout(false)
+                dismiss()
             }
         }
     }

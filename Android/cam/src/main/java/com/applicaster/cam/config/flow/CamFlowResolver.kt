@@ -28,8 +28,8 @@ class CamFlowResolver {
                 }
                 AuthenticationRequirement.ALWAYS -> {
                     when (originalFlow) {
-                        CamFlow.AUTHENTICATION, CamFlow.EMPTY -> originalFlow
-                        CamFlow.STOREFRONT -> if (paymentRequired) CamFlow.STOREFRONT else CamFlow.EMPTY
+                        CamFlow.AUTHENTICATION, CamFlow.EMPTY -> CamFlow.AUTHENTICATION
+                        CamFlow.STOREFRONT -> if (paymentRequired) CamFlow.AUTH_AND_STOREFRONT else CamFlow.AUTHENTICATION
                         CamFlow.AUTH_AND_STOREFRONT -> if (paymentRequired) CamFlow.AUTH_AND_STOREFRONT else CamFlow.AUTHENTICATION
                         CamFlow.LOGOUT -> originalFlow
                     }
