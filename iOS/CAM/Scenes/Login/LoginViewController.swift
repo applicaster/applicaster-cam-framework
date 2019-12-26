@@ -149,11 +149,7 @@ class LoginViewController: UIViewController {
     
     func setupCamLinks() {
         if isCustomLinksVisible {
-            let camKeys = [(text: CAMKeys.loginScreenFirstCustomLinkText,
-                            link: CAMKeys.loginScreenFirstCustomLink),
-                           (text: CAMKeys.loginScreenSecondCustomLinkText,
-                            link: CAMKeys.loginScreenSecondCustomLink)]
-            camLinksContainer.setupParameters(camLinkKeys: camKeys, configDictionary: configDictionary)
+            camLinksContainer.setupParameters(camScreen: .loginScreen, configDictionary: configDictionary)
         }
     }
     

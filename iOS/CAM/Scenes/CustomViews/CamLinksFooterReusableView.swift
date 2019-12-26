@@ -11,10 +11,10 @@ class CamLinksFooterReusableView: UICollectionReusableView {
  
     @IBOutlet var camLinksView: CamLinksView!
 
-    func setupParameters(camLinkKeys: [(text: CAMKeys, link: CAMKeys)],
+    func setupParameters(camScreen: CamScreen,
                          configDictionary: [String: String]) {
-        if camLinksView.camLinkKeys.count != 2 {
-            camLinksView.setupParameters(camLinkKeys: camLinkKeys, configDictionary: configDictionary)
+        if camLinksView.camScreen == nil {
+            camLinksView.setupParameters(camScreen: camScreen, configDictionary: configDictionary)
         }
     }
 }

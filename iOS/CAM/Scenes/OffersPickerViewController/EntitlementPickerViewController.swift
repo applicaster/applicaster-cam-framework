@@ -71,7 +71,6 @@ class EntitlementPickerViewController: UIViewController {
             setupRestoreText()
             helpInfoTextView.setStyle(config: configDictionary, style: .legalDetailsFont)
             helpInfoTextView.text = viewModel?.legalDetails
-            setupCamLinks()
         }
     }
     
@@ -124,6 +123,7 @@ class EntitlementPickerViewController: UIViewController {
     
     public func showOffers(_ offers: [OfferViewModel]) {
         self.offerViewModels = offers
+        setupCamLinks()
         self.entitlementCollectionView.reloadData()
     }
     
@@ -143,11 +143,7 @@ class EntitlementPickerViewController: UIViewController {
             if UIDevice.current.userInterfaceIdiom == .pad {
                 camLinksContainer.isHidden = false
             }
-            let camKeys = [(text: CAMKeys.storefrontScreenFirstCustomLinkText,
-                            link: CAMKeys.storefrontScreenFirstCustomLink),
-                           (text: CAMKeys.storefrontScreenSecondCustomLinkText,
-                            link: CAMKeys.storefrontScreenSecondCustomLink)]
-            camLinksContainer.setupParameters(camLinkKeys: camKeys, configDictionary: configDictionary)
+            camLinksContainer.setupParameters(camScreen: .storefront, configDictionary: configDictionary)
         }
     }
     
@@ -288,12 +284,7 @@ extension EntitlementPickerViewController: UICollectionViewDelegate, UICollectio
                 as? CamLinksFooterReusableView else {
                 return UICollectionReusableView()
             }
-            let camLinksKeys = [(text: CAMKeys.storefrontScreenFirstCustomLinkText,
-                                 link: CAMKeys.storefrontScreenFirstCustomLink),
-                                (text: CAMKeys.storefrontScreenSecondCustomLinkText,
-                                 link: CAMKeys.storefrontScreenSecondCustomLink)
-                                ]
-            view.setupParameters(camLinkKeys: camLinksKeys, configDictionary: configDictionary)
+            view.setupParameters(camScreen: .storefront, configDictionary: configDictionary)
             return view
         default:
             return UICollectionReusableView()

@@ -46,6 +46,29 @@ enum CamScreen: String {
     case resetPasswordScreen = "Reset Password"
     case storefront = "Storefront"
     case undefined = "Unspecified"
+    
+    var customLinkKeys: [(text: CAMKeys,
+                          link: CAMKeys)] {
+        switch self {
+        case .loginScreen:
+            return [(text: CAMKeys.loginScreenFirstCustomLinkText,
+                     link: CAMKeys.loginScreenFirstCustomLink),
+                    (text: CAMKeys.loginScreenSecondCustomLinkText,
+                     link: CAMKeys.loginScreenSecondCustomLink)]
+        case .signUpScreen:
+            return [(text: CAMKeys.signUpScreenFirstCustomLinkText,
+                     link: CAMKeys.signUpScreenFirstCustomLink),
+                    (text: CAMKeys.signUpScreenSecondCustomLinkText,
+                     link: CAMKeys.signUpScreenSecondCustomLink)]
+        case .storefront:
+            return [(text: CAMKeys.storefrontScreenFirstCustomLinkText,
+                     link: CAMKeys.storefrontScreenFirstCustomLink),
+                    (text: CAMKeys.storefrontScreenSecondCustomLinkText,
+                     link: CAMKeys.storefrontScreenSecondCustomLink)]
+        default:
+            return [(text: CAMKeys, link: CAMKeys)]()
+        }
+    }
 }
 
 extension CAMKeys {

@@ -12,8 +12,12 @@ class CamLinksView: UIView {
     
     @IBOutlet var camLinksStackView: UIStackView!
     
-    public var camLinkKeys = [(text: CAMKeys, link: CAMKeys)]()
-    
+    public var camScreen: CamScreen? {
+        didSet {
+            self.camLinkKeys = self.camScreen?.customLinkKeys ?? [(text: CAMKeys, link: CAMKeys)]()
+        }
+    }
+    private var camLinkKeys = [(text: CAMKeys, link: CAMKeys)]()
     private var configDictionary = [String: String]() {
         didSet {
             configureStackView()
@@ -34,14 +38,14 @@ class CamLinksView: UIView {
         return nib.instantiate(withOwner: self, options: nil).first as? UIView
     }
     
-    public func setupParameters(camLinkKeys: [(text: CAMKeys, link: CAMKeys)],
+    public func setupParameters(camScreen: CamScreen,
                                 configDictionary: [String: String]) {
-        self.camLinkKeys = camLinkKeys
+        self.camScreen = camScreen
         self.configDictionary = configDictionary
     }
     
     private func configureStackView() {
-        if camLinkKeys.count != 2 {
+        if camScreen?.customLinkKeys.count != 2 {
             return
         }
         let linkButtonFirst = UIButton()
@@ -74,7 +78,7 @@ class CamLinksView: UIView {
     @objc private func showFirstCustomLink() {
         let tapLinkEvent = AnalyticsEvents.tapCustomLink(link: configDictionary[camLinkKeys[0].link.rawValue] ?? "",
                                                          text: configDictionary[camLinkKeys[0].text.rawValue] ?? "",
-                                                         screenName: camLinkKeys[0].link.screenForKey.rawValue)
+                                                         screenName: camScreen?.rawValue ?? "")
         ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: tapLinkEvent)
         guard let link = configDictionary[camLinkKeys[0].link.rawValue],
               let customURL = URL(string: link) else {
@@ -89,7 +93,7 @@ class CamLinksView: UIView {
     @objc private func showSecondCustomLink() {
         let tapLinkEvent = AnalyticsEvents.tapCustomLink(link: configDictionary[camLinkKeys[1].link.rawValue] ?? "",
                                                          text: configDictionary[camLinkKeys[1].text.rawValue] ?? "",
-                                                         screenName: camLinkKeys[1].link.screenForKey.rawValue)
+                                                         screenName: camScreen?.rawValue ?? "")
         ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: tapLinkEvent)
         guard let link = configDictionary[camLinkKeys[1].link.rawValue],
               let customURL = URL(string: link) else {

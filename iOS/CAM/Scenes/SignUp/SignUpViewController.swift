@@ -50,7 +50,7 @@ class SignUpViewController: UIViewController {
     var presenter: SignUpPresenter?
     
     var isCustomLinksVisible: Bool {
-        return[[CAMKeys.signUpScreenFirstCustomLink.rawValue,CAMKeys.signUpScreenFirstCustomLinkText.rawValue],
+        return [[CAMKeys.signUpScreenFirstCustomLink.rawValue,CAMKeys.signUpScreenFirstCustomLinkText.rawValue],
                [CAMKeys.signUpScreenSecondCustomLink.rawValue,CAMKeys.signUpScreenSecondCustomLinkText.rawValue]].reduce(false) {
                 (result, keyArray) -> Bool in
                 for key in keyArray {
@@ -139,11 +139,7 @@ class SignUpViewController: UIViewController {
     
     func setupCamLinks() {
         if isCustomLinksVisible {
-            let camKeys = [(text: CAMKeys.signUpScreenFirstCustomLinkText,
-                            link: CAMKeys.signUpScreenFirstCustomLink),
-                           (text: CAMKeys.signUpScreenSecondCustomLinkText,
-                            link: CAMKeys.signUpScreenSecondCustomLink)]
-            camLinksContainer.setupParameters(camLinkKeys: camKeys, configDictionary: configDictionary)
+            camLinksContainer.setupParameters(camScreen: .signUpScreen, configDictionary: configDictionary)
         }
     }
     
