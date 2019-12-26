@@ -206,9 +206,9 @@ enum AnalyticsEvents {
                 .merge([PurchaseProperties.key: kNoneProvided])
         case .tapCustomLink(let link, let text, let screenName):
             metadata = metadata
-                .merge(["Custom Link": link])
-                .merge(["Custom Link Text": text])
-                .merge(["Screen Name": screenName])
+                .merge(["Custom Link": link,
+                        "Custom Link Text": text,
+                        "Screen Name": screenName])
         }
         
         return metadata
