@@ -6,6 +6,7 @@ enum class Trigger(val value: String) {
     // @formatter:off
     TAP_SELL  ("Tap Cell"),
     APP_LAUNCH("App Launch"),
+    UAC       ("User Accounts Component"),
     OTHER     ("Other")
     // @formatter:on
 }
