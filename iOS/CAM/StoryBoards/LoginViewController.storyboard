@@ -215,6 +215,13 @@
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="szx-wQ-fAQ" secondAttribute="trailing" constant="32" id="dmU-GI-2fj"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gO4-QR-eM0" customClass="CamLinksView" customModule="CAM" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="529" width="320" height="39"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="39" id="Mv7-uz-ieU"/>
+                                </constraints>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sma-WQ-wT6" userLabel="closeButton">
                                 <rect key="frame" x="0.0" y="0.0" width="38" height="44"/>
                                 <constraints>
@@ -226,12 +233,6 @@
                                     <action selector="backToPreviousScreen:" destination="OpA-kT-jU3" eventType="touchUpInside" id="s7g-BO-l0k"/>
                                 </connections>
                             </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="TvS-3y-KC7">
-                                <rect key="frame" x="0.0" y="529" width="320" height="39"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="39" id="1QE-Uo-283"/>
-                                </constraints>
-                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.23921568630000001" green="0.28235294119999998" blue="0.3294117647" alpha="1" colorSpace="calibratedRGB"/>
                         <gestureRecognizers/>
@@ -240,27 +241,27 @@
                             <constraint firstItem="uuM-0v-2FY" firstAttribute="leading" secondItem="CaI-6u-xm9" secondAttribute="leading" id="4Ip-ab-lYg"/>
                             <constraint firstItem="Ua5-cN-U8d" firstAttribute="centerX" secondItem="ffi-pc-jcB" secondAttribute="centerX" id="5u1-eA-hlD"/>
                             <constraint firstItem="rPw-cz-xFd" firstAttribute="centerX" secondItem="ffi-pc-jcB" secondAttribute="centerX" id="63A-xx-qv3"/>
-                            <constraint firstItem="TvS-3y-KC7" firstAttribute="top" secondItem="uuM-0v-2FY" secondAttribute="bottom" id="88b-ci-O4M"/>
-                            <constraint firstItem="TvS-3y-KC7" firstAttribute="trailing" secondItem="CaI-6u-xm9" secondAttribute="trailing" id="8pJ-7V-p14"/>
                             <constraint firstItem="Sma-WQ-wT6" firstAttribute="leading" secondItem="CaI-6u-xm9" secondAttribute="leading" id="9NO-ec-WGJ"/>
                             <constraint firstItem="Ua5-cN-U8d" firstAttribute="centerY" secondItem="ffi-pc-jcB" secondAttribute="centerY" constant="-50" id="B6f-Tg-82U"/>
+                            <constraint firstItem="CaI-6u-xm9" firstAttribute="trailing" secondItem="gO4-QR-eM0" secondAttribute="trailing" id="DKo-vH-xyw"/>
                             <constraint firstItem="CaI-6u-xm9" firstAttribute="trailing" secondItem="yqR-eQ-1AS" secondAttribute="trailing" constant="10" id="EXx-hM-0QH"/>
-                            <constraint firstItem="TvS-3y-KC7" firstAttribute="bottom" secondItem="CaI-6u-xm9" secondAttribute="bottom" id="HyF-UP-Yna"/>
                             <constraint firstItem="Sma-WQ-wT6" firstAttribute="top" secondItem="CaI-6u-xm9" secondAttribute="top" id="JTo-M6-pUO"/>
                             <constraint firstItem="rPw-cz-xFd" firstAttribute="top" secondItem="Ua5-cN-U8d" secondAttribute="bottom" constant="41" id="Qdh-Hz-xjw"/>
                             <constraint firstItem="8YH-d8-P5Z" firstAttribute="trailing" secondItem="CaI-6u-xm9" secondAttribute="trailing" id="Syz-9r-btr"/>
                             <constraint firstItem="Qt9-xh-807" firstAttribute="centerX" secondItem="ffi-pc-jcB" secondAttribute="centerX" id="TSP-6l-3GW"/>
                             <constraint firstItem="5I9-bH-qGg" firstAttribute="trailing" secondItem="CaI-6u-xm9" secondAttribute="trailing" id="Tun-YQ-mLD"/>
+                            <constraint firstItem="gO4-QR-eM0" firstAttribute="leading" secondItem="CaI-6u-xm9" secondAttribute="leading" id="Uol-mj-nvV"/>
                             <constraint firstItem="Ua5-cN-U8d" firstAttribute="top" secondItem="yqR-eQ-1AS" secondAttribute="bottom" id="V5m-d9-uIr"/>
                             <constraint firstItem="uuM-0v-2FY" firstAttribute="trailing" secondItem="CaI-6u-xm9" secondAttribute="trailing" id="Vl0-GL-i4s"/>
                             <constraint firstItem="yqR-eQ-1AS" firstAttribute="leading" secondItem="CaI-6u-xm9" secondAttribute="leading" constant="10" id="aL3-ij-5sr"/>
+                            <constraint firstItem="CaI-6u-xm9" firstAttribute="bottom" secondItem="gO4-QR-eM0" secondAttribute="bottom" id="bfK-bo-9RS"/>
                             <constraint firstItem="8YH-d8-P5Z" firstAttribute="top" secondItem="CaI-6u-xm9" secondAttribute="top" id="cBG-cU-dlJ"/>
                             <constraint firstItem="yqR-eQ-1AS" firstAttribute="top" secondItem="Qt9-xh-807" secondAttribute="bottom" id="dLY-GA-QYG"/>
                             <constraint firstItem="Qt9-xh-807" firstAttribute="top" secondItem="CaI-6u-xm9" secondAttribute="top" id="dP7-yQ-Ctk"/>
                             <constraint firstItem="5I9-bH-qGg" firstAttribute="leading" secondItem="CaI-6u-xm9" secondAttribute="leading" id="hqw-PR-jLG"/>
                             <constraint firstItem="5I9-bH-qGg" firstAttribute="top" secondItem="ffi-pc-jcB" secondAttribute="top" id="kjd-s6-exS"/>
-                            <constraint firstItem="TvS-3y-KC7" firstAttribute="leading" secondItem="CaI-6u-xm9" secondAttribute="leading" id="wXj-aq-jU0"/>
                             <constraint firstItem="5I9-bH-qGg" firstAttribute="bottom" secondItem="ffi-pc-jcB" secondAttribute="bottom" id="yX4-LT-zQX"/>
+                            <constraint firstItem="gO4-QR-eM0" firstAttribute="top" secondItem="uuM-0v-2FY" secondAttribute="bottom" id="zeU-St-pJF"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="CaI-6u-xm9"/>
                         <connections>
@@ -273,8 +274,8 @@
                         <outlet property="authFieldsTableHeightConstraint" destination="a6J-HC-uBj" id="e8V-XW-HoH"/>
                         <outlet property="backButton" destination="Sma-WQ-wT6" id="f62-3G-6h9"/>
                         <outlet property="backgroundImageView" destination="5I9-bH-qGg" id="Pfa-HE-f1s"/>
-                        <outlet property="camLinksHeightConstraint" destination="1QE-Uo-283" id="U9d-2f-oWC"/>
-                        <outlet property="camLinksStackView" destination="TvS-3y-KC7" id="UaB-Hz-kQr"/>
+                        <outlet property="camLinksContainer" destination="gO4-QR-eM0" id="1Ip-UH-y9w"/>
+                        <outlet property="camLinksHeightConstraint" destination="Mv7-uz-ieU" id="HTA-2I-U6A"/>
                         <outlet property="closeButton" destination="8YH-d8-P5Z" id="GC2-K4-HDt"/>
                         <outlet property="inputContainerHeightConstraint" destination="f96-cR-pkM" id="waS-aj-hlg"/>
                         <outlet property="inputContainerYConstraint" destination="B6f-Tg-82U" id="d0e-ow-Z0C"/>

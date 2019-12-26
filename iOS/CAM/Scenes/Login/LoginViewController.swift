@@ -35,7 +35,7 @@ class LoginViewController: UIViewController {
     @IBOutlet var signUpContainer: UIView!
     @IBOutlet var signUpButton: UIButton!
     
-    @IBOutlet var camLinksStackView: UIStackView!
+    @IBOutlet var camLinksContainer: CamLinksView!
     
     @IBOutlet var camLinksHeightConstraint: NSLayoutConstraint!
     @IBOutlet var inputContainerYConstraint: NSLayoutConstraint!
@@ -115,9 +115,7 @@ class LoginViewController: UIViewController {
         socialNetworksContainer.isHidden = !(configDictionary[CAMKeys.isAlternativeAuthenticationEnabled.rawValue]?.bool ?? false)
         authFieldsTable.backgroundView = UIView()
         authFieldsTable.allowsSelection = false
-        if isCustomLinksVisible {
-            setupCamLinksContainer()
-        }
+        setupCamLinks()
         setupResetPasswordButton()
         setupSocialNetworksContainer()
         configureElements()
@@ -149,32 +147,14 @@ class LoginViewController: UIViewController {
         stackView.addArrangedSubview(facebookButton)
     }
     
-    func setupCamLinksContainer() {
-        let linkButtonFirst = UIButton()
-        let linkButtonSecond = UIButton()
-        if let link = configDictionary[CAMKeys.loginScreenFirstCustomLink.rawValue], !link.isEmpty,
-           let linkText = configDictionary[CAMKeys.loginScreenFirstCustomLinkText.rawValue], !linkText.isEmpty {
-            linkButtonFirst.addTarget(self, action: #selector(showFirstCustomLink), for: .touchUpInside)
-            linkButtonFirst.titleLabel?.lineBreakMode = .byTruncatingTail
-            linkButtonFirst.setStyle(config: configDictionary, camTitleKey: .loginScreenFirstCustomLinkText, style: .customlinkFont)
-            camLinksStackView.addArrangedSubview(linkButtonFirst)
+    func setupCamLinks() {
+        if isCustomLinksVisible {
+            let camKeys = [(text: CAMKeys.loginScreenFirstCustomLinkText,
+                            link: CAMKeys.loginScreenFirstCustomLink),
+                           (text: CAMKeys.loginScreenSecondCustomLinkText,
+                            link: CAMKeys.loginScreenSecondCustomLink)]
+            camLinksContainer.setupParameters(camLinkKeys: camKeys, configDictionary: configDictionary)
         }
-        
-        if let link = configDictionary[CAMKeys.loginScreenSecondCustomLink.rawValue], !link.isEmpty,
-           let linkText = configDictionary[CAMKeys.loginScreenSecondCustomLinkText.rawValue], !linkText.isEmpty {
-            linkButtonSecond.addTarget(self, action: #selector(showSecondCustomLink), for: .touchUpInside)
-            linkButtonSecond.titleLabel?.lineBreakMode = .byTruncatingTail
-            linkButtonSecond.setStyle(config: configDictionary, camTitleKey: .loginScreenSecondCustomLinkText, style: .customlinkFont)
-            camLinksStackView.addArrangedSubview(linkButtonSecond)
-        }
-        if camLinksStackView.subviews.count == 2 {
-            linkButtonFirst.contentHorizontalAlignment = .right
-            linkButtonSecond.contentHorizontalAlignment = .left
-        }
-        camLinksStackView.axis = .horizontal
-        camLinksStackView.spacing = 5.0
-        camLinksStackView.distribution = .fillEqually
-        camLinksStackView.alignment = .center
     }
     
     func configureElements() {
@@ -260,28 +240,6 @@ class LoginViewController: UIViewController {
     @IBAction func login(_ sender: UIButton) {
         hideKeyboard()
         presenter?.login(data: authFields)
-    }
-    
-    @objc private func showFirstCustomLink() {
-        guard let link = configDictionary[CAMKeys.loginScreenFirstCustomLink.rawValue],
-              let customURL = URL(string: link) else {
-            return
-        }
-
-        if UIApplication.shared.canOpenURL(customURL) {
-            UIApplication.shared.open(customURL)
-        }
-    }
-    
-    @objc private func showSecondCustomLink() {
-        guard let link = configDictionary[CAMKeys.loginScreenSecondCustomLink.rawValue],
-              let customURL = URL(string: link) else {
-            return
-        }
-
-        if UIApplication.shared.canOpenURL(customURL) {
-            UIApplication.shared.open(customURL)
-        }
     }
     
     @objc private func facebookLogin() {
