@@ -205,26 +205,30 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="ATy-DN-C2J"/>
                                     <constraint firstItem="0TR-Um-XAB" firstAttribute="centerX" secondItem="35d-kS-uOU" secondAttribute="centerX" id="E8J-hg-DUg"/>
+                                    <constraint firstAttribute="bottom" secondItem="0TR-Um-XAB" secondAttribute="bottom" id="PXj-a9-Huw"/>
                                     <constraint firstItem="0TR-Um-XAB" firstAttribute="top" secondItem="35d-kS-uOU" secondAttribute="top" id="Pop-7l-LYO"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="0TR-Um-XAB" secondAttribute="trailing" constant="32" id="flE-Qg-DfC"/>
                                     <constraint firstItem="0TR-Um-XAB" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="35d-kS-uOU" secondAttribute="leading" constant="32" id="rdr-8R-aPa"/>
                                 </constraints>
                             </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QLt-fS-23h">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qNS-LH-bUW" customClass="CamLinksView" customModule="CAM" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="628" width="375" height="39"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="39" id="cQx-9b-BNl"/>
+                                    <constraint firstAttribute="height" constant="39" id="5Pc-Dy-veX"/>
                                 </constraints>
-                            </stackView>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.23921568630000001" green="0.28235294119999998" blue="0.3294117647" alpha="1" colorSpace="calibratedRGB"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="qNS-LH-bUW" firstAttribute="leading" secondItem="50m-OE-UOc" secondAttribute="leading" id="1IZ-Aw-I3S"/>
                             <constraint firstItem="9L2-y3-bnH" firstAttribute="centerX" secondItem="8nE-V8-aaX" secondAttribute="centerX" id="2Ms-Sw-eDI"/>
                             <constraint firstItem="5RK-MM-w7P" firstAttribute="top" secondItem="50m-OE-UOc" secondAttribute="top" id="5I0-kp-ydC"/>
                             <constraint firstItem="7ky-A3-QmL" firstAttribute="trailing" secondItem="50m-OE-UOc" secondAttribute="trailing" id="8Io-LV-TIB"/>
                             <constraint firstItem="9L2-y3-bnH" firstAttribute="centerY" secondItem="8nE-V8-aaX" secondAttribute="centerY" constant="-70" id="EfO-b4-VXG"/>
-                            <constraint firstItem="QLt-fS-23h" firstAttribute="bottom" secondItem="50m-OE-UOc" secondAttribute="bottom" id="F4Z-r1-vV4"/>
+                            <constraint firstItem="50m-OE-UOc" firstAttribute="trailing" secondItem="qNS-LH-bUW" secondAttribute="trailing" id="H3O-Uw-jCd"/>
+                            <constraint firstItem="qNS-LH-bUW" firstAttribute="top" secondItem="35d-kS-uOU" secondAttribute="bottom" id="JdC-ng-fF0"/>
                             <constraint firstItem="TJT-92-e4a" firstAttribute="top" secondItem="8nE-V8-aaX" secondAttribute="top" id="T1c-Dy-73p"/>
                             <constraint firstItem="44O-Vj-bh7" firstAttribute="top" secondItem="50m-OE-UOc" secondAttribute="top" id="UJJ-lj-kUo"/>
                             <constraint firstItem="7ky-A3-QmL" firstAttribute="top" secondItem="50m-OE-UOc" secondAttribute="top" id="Ubo-1b-xzV"/>
@@ -232,18 +236,16 @@
                             <constraint firstItem="fUH-ug-4EB" firstAttribute="width" secondItem="9L2-y3-bnH" secondAttribute="width" id="XLA-ns-33k"/>
                             <constraint firstItem="50m-OE-UOc" firstAttribute="trailing" secondItem="5Ge-wn-yW9" secondAttribute="trailing" constant="10" id="YbS-Ht-af2"/>
                             <constraint firstItem="TJT-92-e4a" firstAttribute="leading" secondItem="50m-OE-UOc" secondAttribute="leading" id="Z10-iR-isC"/>
-                            <constraint firstItem="QLt-fS-23h" firstAttribute="leading" secondItem="50m-OE-UOc" secondAttribute="leading" id="ZYl-uP-WhX"/>
                             <constraint firstItem="5RK-MM-w7P" firstAttribute="leading" secondItem="50m-OE-UOc" secondAttribute="leading" id="cfW-5e-HVi"/>
                             <constraint firstItem="9L2-y3-bnH" firstAttribute="top" secondItem="5Ge-wn-yW9" secondAttribute="bottom" id="cjm-OV-amP"/>
                             <constraint firstItem="fUH-ug-4EB" firstAttribute="centerX" secondItem="8nE-V8-aaX" secondAttribute="centerX" id="dde-Rg-fGL"/>
+                            <constraint firstItem="50m-OE-UOc" firstAttribute="bottom" secondItem="qNS-LH-bUW" secondAttribute="bottom" id="iRV-tJ-7bn"/>
                             <constraint firstItem="35d-kS-uOU" firstAttribute="trailing" secondItem="50m-OE-UOc" secondAttribute="trailing" id="jYt-pY-vGH"/>
                             <constraint firstItem="35d-kS-uOU" firstAttribute="leading" secondItem="50m-OE-UOc" secondAttribute="leading" id="oQo-9I-vAp"/>
                             <constraint firstItem="5Ge-wn-yW9" firstAttribute="leading" secondItem="50m-OE-UOc" secondAttribute="leading" constant="10" id="ofl-Ic-JYz"/>
                             <constraint firstItem="5Ge-wn-yW9" firstAttribute="top" secondItem="7ky-A3-QmL" secondAttribute="bottom" id="piG-qy-QMj"/>
                             <constraint firstItem="TJT-92-e4a" firstAttribute="bottom" secondItem="8nE-V8-aaX" secondAttribute="bottom" id="xI4-lw-dkz"/>
-                            <constraint firstItem="QLt-fS-23h" firstAttribute="trailing" secondItem="50m-OE-UOc" secondAttribute="trailing" id="xzE-6w-fKf"/>
                             <constraint firstItem="TJT-92-e4a" firstAttribute="trailing" secondItem="50m-OE-UOc" secondAttribute="trailing" id="y3i-Pl-WQM"/>
-                            <constraint firstItem="QLt-fS-23h" firstAttribute="top" secondItem="35d-kS-uOU" secondAttribute="bottom" id="zjs-QF-oPI"/>
                             <constraint firstItem="44O-Vj-bh7" firstAttribute="centerX" secondItem="8nE-V8-aaX" secondAttribute="centerX" id="zpd-av-9Fg"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="50m-OE-UOc"/>
@@ -257,8 +259,8 @@
                         <outlet property="authFieldsTableHeightConstraint" destination="3sT-Uy-aKT" id="9AX-Dn-XL8"/>
                         <outlet property="backButton" destination="5RK-MM-w7P" id="B1w-J6-C8k"/>
                         <outlet property="backgroundImageView" destination="TJT-92-e4a" id="V69-Vr-inz"/>
-                        <outlet property="camLinksHeightConstraint" destination="cQx-9b-BNl" id="u9p-JS-INW"/>
-                        <outlet property="camLinksStackView" destination="QLt-fS-23h" id="1p9-xU-Ad1"/>
+                        <outlet property="camLinksContainer" destination="qNS-LH-bUW" id="sSo-CL-CIw"/>
+                        <outlet property="camLinksHeightConstraint" destination="5Pc-Dy-veX" id="piN-HW-9Yt"/>
                         <outlet property="closeButton" destination="7ky-A3-QmL" id="o7k-k6-6YX"/>
                         <outlet property="inputContainerHeightConstraint" destination="lTi-ce-Es6" id="o2r-nS-H2D"/>
                         <outlet property="inputContainerYConstraint" destination="EfO-b4-VXG" id="SBL-NB-ICc"/>

@@ -35,8 +35,9 @@ class SignUpViewController: UIViewController {
     
     @IBOutlet var loginContainer: UIView!
     @IBOutlet var loginButton: UIButton!
-    @IBOutlet var camLinksStackView: UIStackView!
+  
     
+    @IBOutlet var camLinksContainer: CamLinksView!
     @IBOutlet var camLinksHeightConstraint: NSLayoutConstraint!
     @IBOutlet var authFieldsTableHeightConstraint: NSLayoutConstraint!
     @IBOutlet var socialNetworksContainerTopConstraint: NSLayoutConstraint!
@@ -116,9 +117,7 @@ class SignUpViewController: UIViewController {
         socialNetworksContainer.isHidden = !(configDictionary[CAMKeys.isAlternativeAuthenticationEnabled.rawValue]?.bool ?? false)
         authFieldsTable.backgroundView = UIView()
         authFieldsTable.allowsSelection = false
-        if isCustomLinksVisible {
-            setupCamLinksContainer()
-        }
+        setupCamLinks()
         setupSocialNetworksContainer()
         configureElements()
     }
@@ -138,32 +137,14 @@ class SignUpViewController: UIViewController {
         stackView.addArrangedSubview(facebookButton)
     }
     
-    func setupCamLinksContainer() {
-        let linkButtonFirst = UIButton()
-        let linkButtonSecond = UIButton()
-        if let link = configDictionary[CAMKeys.signUpScreenFirstCustomLink.rawValue], !link.isEmpty,
-           let linkText = configDictionary[CAMKeys.signUpScreenFirstCustomLinkText.rawValue], !linkText.isEmpty {
-            linkButtonFirst.addTarget(self, action: #selector(showFirstCustomLink), for: .touchUpInside)
-            linkButtonFirst.titleLabel?.lineBreakMode = .byTruncatingTail
-            linkButtonFirst.setStyle(config: configDictionary, camTitleKey: .signUpScreenFirstCustomLinkText, style: .customlinkFont)
-            camLinksStackView.addArrangedSubview(linkButtonFirst)
+    func setupCamLinks() {
+        if isCustomLinksVisible {
+            let camKeys = [(text: CAMKeys.signUpScreenFirstCustomLinkText,
+                            link: CAMKeys.signUpScreenFirstCustomLink),
+                           (text: CAMKeys.signUpScreenSecondCustomLinkText,
+                            link: CAMKeys.signUpScreenSecondCustomLink)]
+            camLinksContainer.setupParameters(camLinkKeys: camKeys, configDictionary: configDictionary)
         }
-        
-        if let link = configDictionary[CAMKeys.signUpScreenSecondCustomLink.rawValue], !link.isEmpty,
-           let linkText = configDictionary[CAMKeys.signUpScreenSecondCustomLinkText.rawValue], !linkText.isEmpty {
-            linkButtonSecond.addTarget(self, action: #selector(showSecondCustomLink), for: .touchUpInside)
-            linkButtonSecond.titleLabel?.lineBreakMode = .byTruncatingTail
-            linkButtonSecond.setStyle(config: configDictionary, camTitleKey: .signUpScreenSecondCustomLinkText, style: .customlinkFont)
-            camLinksStackView.addArrangedSubview(linkButtonSecond)
-        }
-        if camLinksStackView.subviews.count == 2 {
-            linkButtonFirst.contentHorizontalAlignment = .right
-            linkButtonSecond.contentHorizontalAlignment = .left
-        }
-        camLinksStackView.axis = .horizontal
-        camLinksStackView.spacing = 5.0
-        camLinksStackView.distribution = .fillEqually
-        camLinksStackView.alignment = .center
     }
     
     func setupConstraints() {
@@ -249,28 +230,6 @@ class SignUpViewController: UIViewController {
     
     @objc func facebookSignUp() {
         presenter?.showFacebookAuthScreen()
-    }
-    
-    @objc private func showFirstCustomLink() {
-        guard let link = configDictionary[CAMKeys.signUpScreenFirstCustomLink.rawValue],
-              let customURL = URL(string: link) else {
-            return
-        }
-
-        if UIApplication.shared.canOpenURL(customURL) {
-            UIApplication.shared.open(customURL)
-        }
-    }
-    
-    @objc private func showSecondCustomLink() {
-        guard let link = configDictionary[CAMKeys.signUpScreenSecondCustomLink.rawValue],
-              let customURL = URL(string: link) else {
-            return
-        }
-
-        if UIApplication.shared.canOpenURL(customURL) {
-            UIApplication.shared.open(customURL)
-        }
     }
     
     deinit {
