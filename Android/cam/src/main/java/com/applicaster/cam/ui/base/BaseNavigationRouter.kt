@@ -19,7 +19,7 @@ open class BaseNavigationRouter() {
     }
 
     fun openBrowserWithUrl(url: String) {
-        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url)).apply { flags = Intent.FLAG_ACTIVITY_NEW_TASK }
         context?.get()?.startActivity(browserIntent)
     }
 }

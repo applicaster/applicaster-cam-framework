@@ -53,7 +53,7 @@ class LoginFragment : UserAuthFragment(), ILoginView {
             map(tv_bottom_link_1, UIKey.LOGIN_LINK_1_TEXT, presenter as ICustomLinkActionHandler)
             map(tv_bottom_link_2, UIKey.LOGIN_LINK_2_TEXT, presenter as ICustomLinkActionHandler)
         }
-        CustomLinkViewCustomizationHelper().customize(tv_bottom_link_1, tv_bottom_link_2, ll_bottom_links_parent)
+        CustomLinkViewCustomizationHelper().customize(tv_bottom_link_1, tv_bottom_link_2, container_bottom_links)
 
     }
 
