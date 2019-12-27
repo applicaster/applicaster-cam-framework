@@ -13,8 +13,6 @@ class CamLinksFooterReusableView: UICollectionReusableView {
 
     func setupParameters(camScreen: CamScreen,
                          configDictionary: [String: String]) {
-        if camLinksView.camScreen == nil {
-            camLinksView.setupParameters(camScreen: camScreen, configDictionary: configDictionary)
-        }
+        camLinksView.setupParameters(camScreen: camScreen, configDictionary: configDictionary)
     }
 }

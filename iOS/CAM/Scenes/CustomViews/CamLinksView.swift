@@ -12,18 +12,9 @@ class CamLinksView: UIView {
     
     @IBOutlet var camLinksStackView: UIStackView!
     var openLinkErrorAction: (() -> Void)?
-    
-    public var camScreen: CamScreen? {
-        didSet {
-            self.camLinkKeys = self.camScreen?.customLinkKeys ?? [(text: CAMKeys, link: CAMKeys)]()
-        }
-    }
+    private var camScreen: CamScreen?
     private var camLinkKeys = [(text: CAMKeys, link: CAMKeys)]()
-    private var configDictionary = [String: String]() {
-        didSet {
-            configureStackView()
-        }
-    }
+    private var configDictionary = [String: String]()
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -41,22 +32,26 @@ class CamLinksView: UIView {
     
     public func setupParameters(camScreen: CamScreen,
                                 configDictionary: [String: String]) {
-        self.camScreen = camScreen
-        self.configDictionary = configDictionary
+        if self.camScreen != camScreen {
+            self.camScreen = camScreen
+            self.configDictionary = configDictionary
+            self.camLinkKeys = self.camScreen?.customLinkKeys ?? [(text: CAMKeys, link: CAMKeys)]()
+            configureStackView()
+        }
     }
     
     private func configureStackView() {
         if camScreen?.customLinkKeys.count != 2 {
             return
         }
-        for index in 0..<camLinkKeys.count {
+        for (index,key) in camLinkKeys.enumerated() {
             let linkButton = UIButton()
             linkButton.tag = index
-            if let link = configDictionary[camLinkKeys[index].link.rawValue], !link.isEmpty,
-               let linkText = configDictionary[camLinkKeys[index].text.rawValue], !linkText.isEmpty {
+            if let link = configDictionary[key.link.rawValue], !link.isEmpty,
+               let linkText = configDictionary[key.text.rawValue], !linkText.isEmpty {
                 linkButton.addTarget(self, action: #selector(showCustomLink(sender:)), for: .touchUpInside)
                 linkButton.titleLabel?.lineBreakMode = .byTruncatingTail
-                linkButton.setStyle(config: configDictionary, camTitleKey: camLinkKeys[index].text, style: .customlinkFont)
+                linkButton.setStyle(config: configDictionary, camTitleKey: key.text, style: .customlinkFont)
                 camLinksStackView.addArrangedSubview(linkButton)
             }
         }
@@ -64,10 +59,6 @@ class CamLinksView: UIView {
             (camLinksStackView.subviews[0] as? UIButton)?.contentHorizontalAlignment = .right
             (camLinksStackView.subviews[1] as? UIButton)?.contentHorizontalAlignment = .left
         }
-        camLinksStackView.axis = .horizontal
-        camLinksStackView.spacing = 5.0
-        camLinksStackView.distribution = .fillEqually
-        camLinksStackView.alignment = .center
     }
     
     @objc private func showCustomLink(sender: UIButton) {
@@ -81,10 +72,10 @@ class CamLinksView: UIView {
             return
         }
 
-        if UIApplication.shared.canOpenURL(customURL) {
-            UIApplication.shared.open(customURL)
-        } else {
+        guard UIApplication.shared.canOpenURL(customURL) else {
             openLinkErrorAction?()
+            return
         }
+        UIApplication.shared.open(customURL)
     }
 }

@@ -138,12 +138,10 @@ class SignUpViewController: UIViewController {
     }
     
     func setupCamLinks() {
-        if isCustomLinksVisible {
-            camLinksContainer.openLinkErrorAction = { [unowned self] in
-                self.showAlert(description: self.configDictionary[CAMKeys.defaultAlertText.rawValue])
-            }
-            camLinksContainer.setupParameters(camScreen: .signUpScreen, configDictionary: configDictionary)
+        camLinksContainer.openLinkErrorAction = { [unowned self] in
+            self.showAlert(description: self.configDictionary[CAMKeys.defaultAlertText.rawValue])
         }
+        camLinksContainer.setupParameters(camScreen: .signUpScreen, configDictionary: configDictionary)
     }
     
     func setupConstraints() {

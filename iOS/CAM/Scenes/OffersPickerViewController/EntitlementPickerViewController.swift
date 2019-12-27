@@ -63,7 +63,15 @@ class EntitlementPickerViewController: UIViewController {
         return CGFloat(itemSize.width + itemSpacing)
     }
     
-    private var offerViewModels: [OfferViewModel] = []
+    private var offerViewModels: [OfferViewModel] = [] {
+        didSet {
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                camLinksContainer.isHidden = !isCustomLinksVisible
+            } else {
+                camLinksContainer.isHidden = !(isCustomLinksVisible && self.offerViewModels.count <= 1)
+            }
+        }
+    }
     
     var viewModel: OffersViewModel? {
         didSet {
@@ -76,6 +84,7 @@ class EntitlementPickerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupCamLinks()
         setupCollectionView()
         presenter?.viewDidLoad()
         
@@ -123,7 +132,6 @@ class EntitlementPickerViewController: UIViewController {
     
     public func showOffers(_ offers: [OfferViewModel]) {
         self.offerViewModels = offers
-        setupCamLinks()
         self.entitlementCollectionView.reloadData()
     }
     
@@ -138,16 +146,14 @@ class EntitlementPickerViewController: UIViewController {
     // MARK: - Private methods
     
     private func setupCamLinks() {
-        if isCustomLinksVisible {
-            camLinksContainer.isHidden = self.offerViewModels.count > 1
-            if UIDevice.current.userInterfaceIdiom == .pad {
-                camLinksContainer.isHidden = false
-            }
-            camLinksContainer.openLinkErrorAction = { [unowned self] in
-                self.showAlert(description: self.configDictionary[CAMKeys.defaultAlertText.rawValue])
-            }
-            camLinksContainer.setupParameters(camScreen: .storefront, configDictionary: configDictionary)
+        camLinksContainer.isHidden = !isCustomLinksVisible && self.offerViewModels.count > 1
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            camLinksContainer.isHidden = !isCustomLinksVisible
         }
+        camLinksContainer.openLinkErrorAction = { [unowned self] in
+            self.showAlert(description: self.configDictionary[CAMKeys.defaultAlertText.rawValue])
+        }
+        camLinksContainer.setupParameters(camScreen: .storefront, configDictionary: configDictionary)
     }
     
     private func setupGradient() {
