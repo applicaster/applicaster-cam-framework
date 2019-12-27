@@ -39,16 +39,21 @@ class EntitlementPickerViewController: UIViewController {
     }
     
     var isCustomLinksVisible: Bool {
-        return CamScreen.storefront.customLinkKeys.reduce(false) {
-                (result, customLink) -> Bool in
-            guard let link = configDictionary[customLink.link.rawValue], !link.isEmpty else {
-                    return result || false
-            }
-            guard let text = configDictionary[customLink.text.rawValue], !text.isEmpty else {
-                    return result || false
-            }
-            return true
+        let firstLink = CamScreen.storefront.firstLink
+        let secondLink = CamScreen.storefront.secondLink
+        var isFirstLinkVisible = false
+        var isSecondLinkVisible = false
+        
+        if let link = configDictionary[firstLink.link.rawValue], !link.isEmpty,
+           let text = configDictionary[firstLink.text.rawValue], !text.isEmpty {
+            isFirstLinkVisible = true
         }
+        
+        if let link = configDictionary[secondLink.link.rawValue], !link.isEmpty,
+           let text = configDictionary[secondLink.text.rawValue], !text.isEmpty {
+            isSecondLinkVisible = true
+        }
+        return isFirstLinkVisible || isSecondLinkVisible
     }
     
     var itemSize: CGSize {

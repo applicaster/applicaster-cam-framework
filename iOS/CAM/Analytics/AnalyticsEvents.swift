@@ -41,32 +41,37 @@ extension CAMFlow {
 }
 
 enum CamScreen: String {
-    case loginScreen = "Login"
-    case signUpScreen = "Signup"
-    case resetPasswordScreen = "Reset Password"
+    case login = "Login"
+    case signUp = "Signup"
     case storefront = "Storefront"
-    case undefined = "Unspecified"
     
-    var customLinkKeys: [(text: CAMKeys,
-                          link: CAMKeys)] {
+    var firstLink: (text: CAMKeys,
+                    link: CAMKeys) {
         switch self {
-        case .loginScreen:
-            return [(text: CAMKeys.loginScreenFirstCustomLinkText,
-                     link: CAMKeys.loginScreenFirstCustomLink),
-                    (text: CAMKeys.loginScreenSecondCustomLinkText,
-                     link: CAMKeys.loginScreenSecondCustomLink)]
-        case .signUpScreen:
-            return [(text: CAMKeys.signUpScreenFirstCustomLinkText,
-                     link: CAMKeys.signUpScreenFirstCustomLink),
-                    (text: CAMKeys.signUpScreenSecondCustomLinkText,
-                     link: CAMKeys.signUpScreenSecondCustomLink)]
+        case .login:
+            return (text: CAMKeys.loginScreenFirstCustomLinkText,
+                    link: CAMKeys.loginScreenFirstCustomLink)
+        case .signUp:
+            return (text: CAMKeys.signUpScreenFirstCustomLinkText,
+                    link: CAMKeys.signUpScreenFirstCustomLink)
         case .storefront:
-            return [(text: CAMKeys.storefrontScreenFirstCustomLinkText,
-                     link: CAMKeys.storefrontScreenFirstCustomLink),
-                    (text: CAMKeys.storefrontScreenSecondCustomLinkText,
-                     link: CAMKeys.storefrontScreenSecondCustomLink)]
-        default:
-            return [(text: CAMKeys, link: CAMKeys)]()
+            return (text: CAMKeys.storefrontScreenFirstCustomLinkText,
+                    link: CAMKeys.storefrontScreenFirstCustomLink)
+        }
+    }
+    
+    var secondLink: (text: CAMKeys,
+                     link: CAMKeys) {
+        switch self {
+        case .login:
+            return (text: CAMKeys.loginScreenSecondCustomLinkText,
+                    link: CAMKeys.loginScreenSecondCustomLink)
+        case .signUp:
+            return (text: CAMKeys.signUpScreenSecondCustomLinkText,
+                    link: CAMKeys.signUpScreenSecondCustomLink)
+        case .storefront:
+            return (text: CAMKeys.storefrontScreenSecondCustomLinkText,
+                    link: CAMKeys.storefrontScreenSecondCustomLink)
         }
     }
 }

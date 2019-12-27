@@ -9,12 +9,12 @@ import UIKit
 import ZappPlugins
 
 class CamLinksView: UIView {
-    
     @IBOutlet var camLinksStackView: UIStackView!
     var openLinkErrorAction: (() -> Void)?
-    private var camScreen: CamScreen?
-    private var camLinkKeys = [(text: CAMKeys, link: CAMKeys)]()
+    private var camScreen: CamScreen!
     private var configDictionary = [String: String]()
+    private let firstLinkButton = UIButton()
+    private let secondLinkButton = UIButton()
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -35,26 +35,27 @@ class CamLinksView: UIView {
         if self.camScreen != camScreen {
             self.camScreen = camScreen
             self.configDictionary = configDictionary
-            self.camLinkKeys = self.camScreen?.customLinkKeys ?? [(text: CAMKeys, link: CAMKeys)]()
             configureStackView()
         }
     }
     
     private func configureStackView() {
-        if camScreen?.customLinkKeys.count != 2 {
-            return
+        if let link = configDictionary[camScreen.firstLink.link.rawValue], !link.isEmpty,
+           let linkText = configDictionary[camScreen.firstLink.text.rawValue], !linkText.isEmpty {
+            firstLinkButton.addTarget(self, action: #selector(showCustomLink(sender:)), for: .touchUpInside)
+            firstLinkButton.titleLabel?.lineBreakMode = .byTruncatingTail
+            firstLinkButton.setStyle(config: configDictionary, camTitleKey: camScreen.firstLink.text, style: .customlinkFont)
+            camLinksStackView.addArrangedSubview(firstLinkButton)
         }
-        for (index,key) in camLinkKeys.enumerated() {
-            let linkButton = UIButton()
-            linkButton.tag = index
-            if let link = configDictionary[key.link.rawValue], !link.isEmpty,
-               let linkText = configDictionary[key.text.rawValue], !linkText.isEmpty {
-                linkButton.addTarget(self, action: #selector(showCustomLink(sender:)), for: .touchUpInside)
-                linkButton.titleLabel?.lineBreakMode = .byTruncatingTail
-                linkButton.setStyle(config: configDictionary, camTitleKey: key.text, style: .customlinkFont)
-                camLinksStackView.addArrangedSubview(linkButton)
-            }
+        
+        if let link = configDictionary[camScreen.secondLink.link.rawValue], !link.isEmpty,
+           let linkText = configDictionary[camScreen.secondLink.text.rawValue], !linkText.isEmpty {
+            secondLinkButton.addTarget(self, action: #selector(showCustomLink(sender:)), for: .touchUpInside)
+            secondLinkButton.titleLabel?.lineBreakMode = .byTruncatingTail
+            secondLinkButton.setStyle(config: configDictionary, camTitleKey: camScreen.secondLink.text, style: .customlinkFont)
+            camLinksStackView.addArrangedSubview(secondLinkButton)
         }
+        
         if camLinksStackView.subviews.count == 2 {
             (camLinksStackView.subviews[0] as? UIButton)?.contentHorizontalAlignment = .right
             (camLinksStackView.subviews[1] as? UIButton)?.contentHorizontalAlignment = .left
@@ -62,17 +63,14 @@ class CamLinksView: UIView {
     }
     
     @objc private func showCustomLink(sender: UIButton) {
-        let tapLinkEvent = AnalyticsEvents.tapCustomLink(link: configDictionary[camLinkKeys[sender.tag].link.rawValue] ?? "",
-                                                         text: configDictionary[camLinkKeys[sender.tag].text.rawValue] ?? "",
-                                                         screenName: camScreen?.rawValue ?? "")
+        let linkKey = sender == firstLinkButton ? camScreen.firstLink : camScreen.secondLink
+        let tapLinkEvent = AnalyticsEvents.tapCustomLink(link: configDictionary[linkKey.link.rawValue] ?? "",
+                                                         text: configDictionary[linkKey.text.rawValue] ?? "",
+                                                         screenName: camScreen.rawValue)
         ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: tapLinkEvent)
-        guard let link = configDictionary[camLinkKeys[sender.tag].link.rawValue],
-              let customURL = URL(string: link) else {
-            openLinkErrorAction?()
-            return
-        }
-
-        guard UIApplication.shared.canOpenURL(customURL) else {
+        guard let link = configDictionary[linkKey.link.rawValue],
+              let customURL = URL(string: link),
+              UIApplication.shared.canOpenURL(customURL) else {
             openLinkErrorAction?()
             return
         }

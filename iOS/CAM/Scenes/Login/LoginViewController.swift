@@ -49,16 +49,21 @@ class LoginViewController: UIViewController {
     var presenter: LoginPresenter?
     
     var isCustomLinksVisible: Bool {
-        return CamScreen.loginScreen.customLinkKeys.reduce(false) {
-                (result, customLink) -> Bool in
-            guard let link = configDictionary[customLink.link.rawValue], !link.isEmpty else {
-                    return result || false
-            }
-            guard let text = configDictionary[customLink.text.rawValue], !text.isEmpty else {
-                    return result || false
-            }
-            return true
+        let firstLink = CamScreen.login.firstLink
+        let secondLink = CamScreen.login.secondLink
+        var isFirstLinkVisible = false
+        var isSecondLinkVisible = false
+    
+        if let link = configDictionary[firstLink.link.rawValue], !link.isEmpty,
+           let text = configDictionary[firstLink.text.rawValue], !text.isEmpty {
+            isFirstLinkVisible = true
         }
+        
+        if let link = configDictionary[secondLink.link.rawValue], !link.isEmpty,
+           let text = configDictionary[secondLink.text.rawValue], !text.isEmpty {
+            isSecondLinkVisible = true
+        }
+        return isFirstLinkVisible || isSecondLinkVisible
     }
     
     var visibleAuthFieldsCount: Int {
@@ -151,7 +156,7 @@ class LoginViewController: UIViewController {
         camLinksContainer.openLinkErrorAction = { [unowned self] in
             self.showAlert(description: self.configDictionary[CAMKeys.defaultAlertText.rawValue])
         }
-        camLinksContainer.setupParameters(camScreen: .loginScreen, configDictionary: configDictionary)
+        camLinksContainer.setupParameters(camScreen: .login, configDictionary: configDictionary)
     }
     
     func configureElements() {
