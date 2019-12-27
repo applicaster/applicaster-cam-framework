@@ -149,6 +149,9 @@ class LoginViewController: UIViewController {
     
     func setupCamLinks() {
         if isCustomLinksVisible {
+            camLinksContainer.openLinkErrorAction = { [unowned self] in
+                self.showAlert(description: self.configDictionary[CAMKeys.defaultAlertText.rawValue])
+            }
             camLinksContainer.setupParameters(camScreen: .loginScreen, configDictionary: configDictionary)
         }
     }

@@ -143,6 +143,9 @@ class EntitlementPickerViewController: UIViewController {
             if UIDevice.current.userInterfaceIdiom == .pad {
                 camLinksContainer.isHidden = false
             }
+            camLinksContainer.openLinkErrorAction = { [unowned self] in
+                self.showAlert(description: self.configDictionary[CAMKeys.defaultAlertText.rawValue])
+            }
             camLinksContainer.setupParameters(camScreen: .storefront, configDictionary: configDictionary)
         }
     }
@@ -280,12 +283,15 @@ extension EntitlementPickerViewController: UICollectionViewDelegate, UICollectio
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
         case UICollectionView.elementKindSectionFooter:
-            guard let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "CamLinksFooter", for: indexPath)
+            guard let camLinksFooter = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "CamLinksFooter", for: indexPath)
                 as? CamLinksFooterReusableView else {
                 return UICollectionReusableView()
             }
-            view.setupParameters(camScreen: .storefront, configDictionary: configDictionary)
-            return view
+            camLinksFooter.camLinksView.openLinkErrorAction = { [unowned self] in
+                self.showAlert(description: self.configDictionary[CAMKeys.defaultAlertText.rawValue])
+            }
+            camLinksFooter.setupParameters(camScreen: .storefront, configDictionary: configDictionary)
+            return camLinksFooter
         default:
             return UICollectionReusableView()
         }

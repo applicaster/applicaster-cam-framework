@@ -61,19 +61,6 @@ class SignUpViewController: UIViewController {
             return true
         }
     }
-        
-        
-//        return [[CAMKeys.signUpScreenFirstCustomLink.rawValue,CAMKeys.signUpScreenFirstCustomLinkText.rawValue],
-//               [CAMKeys.signUpScreenSecondCustomLink.rawValue,CAMKeys.signUpScreenSecondCustomLinkText.rawValue]].reduce(false) {
-//                (result, keyArray) -> Bool in
-//                for key in keyArray {
-//                    guard let value = configDictionary[key], !value.isEmpty else {
-//                        return result || false
-//                    }
-//                }
-//                return true
-//        }
-    
     
     var visibleAuthFieldsCount: Int {
         let centerFreeSpace = loginContainer.frame.minY - logoImageView.frame.maxY
@@ -152,6 +139,9 @@ class SignUpViewController: UIViewController {
     
     func setupCamLinks() {
         if isCustomLinksVisible {
+            camLinksContainer.openLinkErrorAction = { [unowned self] in
+                self.showAlert(description: self.configDictionary[CAMKeys.defaultAlertText.rawValue])
+            }
             camLinksContainer.setupParameters(camScreen: .signUpScreen, configDictionary: configDictionary)
         }
     }

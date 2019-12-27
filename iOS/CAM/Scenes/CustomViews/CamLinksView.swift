@@ -11,6 +11,7 @@ import ZappPlugins
 class CamLinksView: UIView {
     
     @IBOutlet var camLinksStackView: UIStackView!
+    var openLinkErrorAction: (() -> Void)?
     
     public var camScreen: CamScreen? {
         didSet {
@@ -82,11 +83,14 @@ class CamLinksView: UIView {
         ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: tapLinkEvent)
         guard let link = configDictionary[camLinkKeys[0].link.rawValue],
               let customURL = URL(string: link) else {
+            openLinkErrorAction?()
             return
         }
 
         if UIApplication.shared.canOpenURL(customURL) {
             UIApplication.shared.open(customURL)
+        } else {
+            openLinkErrorAction?()
         }
     }
     
@@ -97,11 +101,14 @@ class CamLinksView: UIView {
         ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: tapLinkEvent)
         guard let link = configDictionary[camLinkKeys[1].link.rawValue],
               let customURL = URL(string: link) else {
+            openLinkErrorAction?()
             return
         }
 
         if UIApplication.shared.canOpenURL(customURL) {
             UIApplication.shared.open(customURL)
+        } else {
+            openLinkErrorAction?()
         }
     }
 }

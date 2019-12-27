@@ -36,6 +36,7 @@ public enum CAMKeys: String {
     case separatorText = "alternative_authentication_separator_text"
     case alternativeAuthenticationPromtText = "alternative_authentication_prompt_text"
     
+    case defaultAlertText = "default_alert_text"
     case emptyFieldsMessage = "required_field_alert_text"
     case wrongEmailMessage = "invalid_email_alert_text"
     
