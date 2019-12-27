@@ -1,5 +1,6 @@
 package com.applicaster.cam.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
@@ -43,6 +44,8 @@ class CamActivity : AppCompatActivity(), IBaseActivity {
             else -> ContainerType.TABLET
         }
     }
+
+    override fun getContext() = this
 
     override fun getFragmentContainerId() = fragmentsContainer.id
 

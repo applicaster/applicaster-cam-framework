@@ -38,7 +38,12 @@ class UIMapper {
 
         fun map(view: View, key: UIKey, listener: ICustomLinkActionHandler) {
             map(view, key)
-            view.setOnClickListener { listener.onCustomLinkClicked(key.text.orEmpty(), key.textLink.orEmpty()) }
+            view.setOnClickListener {
+                listener.onCustomLinkClicked(
+                        uiProvider.getText(key.text.orEmpty()),
+                        uiProvider.getText(key.textLink.orEmpty())
+                )
+            }
         }
 
         private fun customizeTextWithLink(text: String, textLink: String, key: UIKey, linkActionCallback: () -> Unit, view: View) {

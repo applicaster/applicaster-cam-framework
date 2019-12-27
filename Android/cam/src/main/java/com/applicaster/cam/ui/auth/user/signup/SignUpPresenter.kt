@@ -1,6 +1,7 @@
 package com.applicaster.cam.ui.auth.user.signup
 
 import android.app.Activity
+import android.content.ActivityNotFoundException
 import com.applicaster.cam.CamFlow
 import com.applicaster.cam.ContentAccessManager
 import com.applicaster.cam.FacebookAuthCallback
@@ -12,12 +13,13 @@ import com.applicaster.cam.params.auth.AuthScreenType
 import com.applicaster.cam.ui.CamNavigationRouter
 import com.applicaster.cam.ui.auth.user.UserAuthPresenter
 import com.applicaster.cam.ui.base.presenter.ICustomLinkActionHandler
+import java.lang.NullPointerException
 
 class SignUpPresenter(
-    private val view: ISignUpView?,
-    private val navigationRouter: CamNavigationRouter
+        private val view: ISignUpView?,
+        private val navigationRouter: CamNavigationRouter
 ) :
-    UserAuthPresenter(view), ISignUpPresenter, SignUpCallback, FacebookAuthCallback, ICustomLinkActionHandler {
+        UserAuthPresenter(view), ISignUpPresenter, SignUpCallback, FacebookAuthCallback, ICustomLinkActionHandler {
 
     override fun onViewCreated() {
         super.onViewCreated()
@@ -32,13 +34,13 @@ class SignUpPresenter(
         view?.showAlert(msg)
         AnalyticsUtil.logAlternativeSignUpFailure()
         AnalyticsUtil.logViewAlert(
-            ConfirmationAlertData(
-                false,
-                AlertType.ERROR_ALERT,
-                AnalyticsUtil.KEY_NONE_PROVIDED,
-                msg,
-                AnalyticsUtil.KEY_NONE_PROVIDED
-            )
+                ConfirmationAlertData(
+                        false,
+                        AlertType.ERROR_ALERT,
+                        AnalyticsUtil.KEY_NONE_PROVIDED,
+                        msg,
+                        AnalyticsUtil.KEY_NONE_PROVIDED
+                )
         )
     }
 
@@ -54,13 +56,13 @@ class SignUpPresenter(
         //Analytics
         AnalyticsUtil.logStandardSignUpFailure()
         AnalyticsUtil.logViewAlert(
-            ConfirmationAlertData(
-                false,
-                AlertType.ERROR_ALERT,
-                AnalyticsUtil.KEY_NONE_PROVIDED,
-                msg,
-                AnalyticsUtil.KEY_NONE_PROVIDED
-            )
+                ConfirmationAlertData(
+                        false,
+                        AlertType.ERROR_ALERT,
+                        AnalyticsUtil.KEY_NONE_PROVIDED,
+                        msg,
+                        AnalyticsUtil.KEY_NONE_PROVIDED
+                )
         )
         AnalyticsGatewaySession.sessionData.add(Action.FAILED_ATTEMPT)
         //
@@ -72,9 +74,9 @@ class SignUpPresenter(
         //Analytics
         AnalyticsUtil.logStandardSignUpSuccess()
         AnalyticsUtil.logUserProperties(
-            AnalyticsUtil.collectPurchaseData(
-                ContentAccessManager.contract.getAnalyticsDataProvider().purchaseData
-            )
+                AnalyticsUtil.collectPurchaseData(
+                        ContentAccessManager.contract.getAnalyticsDataProvider().purchaseData
+                )
         )
         //
         if (ContentAccessManager.contract.isPurchaseRequired()) {
@@ -89,7 +91,7 @@ class SignUpPresenter(
     }
 
     override fun getAuthFieldConfig(): AuthFieldConfig =
-        ContentAccessManager.pluginConfigurator.getSignInAuthFields()
+            ContentAccessManager.pluginConfigurator.getSignInAuthFields()
 
     override fun performAuthAction(input: HashMap<String, String>) {
         ContentAccessManager.contract.signUp(input, this)
@@ -116,13 +118,13 @@ class SignUpPresenter(
         super.onError(error)
         //Analytics
         AnalyticsUtil.logViewAlert(
-            ConfirmationAlertData(
-                false,
-                AlertType.ERROR_ALERT,
-                AnalyticsUtil.KEY_NONE_PROVIDED,
-                AnalyticsUtil.KEY_NONE_PROVIDED,
-                error?.message ?: AnalyticsUtil.KEY_NONE_PROVIDED
-            )
+                ConfirmationAlertData(
+                        false,
+                        AlertType.ERROR_ALERT,
+                        AnalyticsUtil.KEY_NONE_PROVIDED,
+                        AnalyticsUtil.KEY_NONE_PROVIDED,
+                        error?.message ?: AnalyticsUtil.KEY_NONE_PROVIDED
+                )
         )
         //
     }
@@ -143,6 +145,12 @@ class SignUpPresenter(
 
     override fun onCustomLinkClicked(linkText: String, linkUrl: String) {
         AnalyticsUtil.logTapCustomLink(CustomLinkData(linkUrl, linkText, ScreenName.SIGN_UP))
-        navigationRouter.openBrowserWithUrl(linkUrl)
+        try {
+            navigationRouter.openBrowserWithUrl(linkUrl)
+        } catch (exception: ActivityNotFoundException) {
+            view?.showAlert(ContentAccessManager.pluginConfigurator.getDefaultAlertText())
+        } catch (exception: NullPointerException) {
+            view?.showAlert(ContentAccessManager.pluginConfigurator.getDefaultAlertText())
+        }
     }
 }

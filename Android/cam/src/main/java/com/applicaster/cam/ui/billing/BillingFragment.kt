@@ -121,20 +121,19 @@ class BillingFragment : BaseFragment(), IBillingView {
 
     override fun getParentView() = layout_billing
 
-    override fun populateBillingContainer(purchaseItems: List<PurchaseItem>) {
-        super.populateBillingContainer(purchaseItems)
-        val adapterData: MutableList<AdapterPurchaseData> = arrayListOf()
-        adapterData.addAll(purchaseItems.map { AdapterPurchaseData(it) })
-        if (purchaseItems.size > 1 && containerType == ContainerType.PHONE) {
-            adapterData.add(AdapterPurchaseData(null))
-            ll_bottom_links_parent.visibility = View.GONE
-        } else {
-            UIMapper.map(tv_bottom_link_1, UIKey.STOREFRONT_LINK_1_TEXT, presenter as ICustomLinkActionHandler)
-            UIMapper.map(tv_bottom_link_2, UIKey.STOREFRONT_LINK_2_TEXT, presenter as ICustomLinkActionHandler)
-            CustomLinkViewCustomizationHelper().customize(tv_bottom_link_1, tv_bottom_link_2, ll_bottom_links_parent)
-        }
-        pagerBillingAdapter?.apply { addPurchaseItems(adapterData) }
-        recyclerBillingAdapter?.apply { addPurchaseItems(adapterData) }
+    override fun populateBillingContainer(purchaseItems: List<AdapterPurchaseData>) {
+        pagerBillingAdapter?.apply { addPurchaseItems(purchaseItems) }
+        recyclerBillingAdapter?.apply { addPurchaseItems(purchaseItems) }
+    }
+
+    override fun populateCustomLinksContainer() {
+        UIMapper.map(tv_bottom_link_1, UIKey.STOREFRONT_LINK_1_TEXT, presenter as ICustomLinkActionHandler)
+        UIMapper.map(tv_bottom_link_2, UIKey.STOREFRONT_LINK_2_TEXT, presenter as ICustomLinkActionHandler)
+        CustomLinkViewCustomizationHelper().customize(tv_bottom_link_1, tv_bottom_link_2, container_bottom_links)
+    }
+
+    override fun hideCustomLinksContainer() {
+        container_bottom_links.visibility = View.GONE
     }
 
     override fun clearBillingContainer() {

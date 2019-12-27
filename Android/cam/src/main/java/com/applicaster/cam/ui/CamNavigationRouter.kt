@@ -24,12 +24,12 @@ class CamNavigationRouter(private val baseActivity: IBaseActivity) : BaseNavigat
 
     fun attachSignUpFragment(initialLoad: Boolean = false) {
         val tag = SignUpFragment::class.java.canonicalName
-        val isAddedToBackStack: Boolean = fragmentManager.findFragmentByTag(tag) != null
-        val fragment: Fragment = fragmentManager.findFragmentByTag(tag) ?: SignUpFragment()
-        val fragmentTransaction: FragmentTransaction? = fragmentManager.beginTransaction()
-        if (fragmentManager.backStackEntryCount == 1) {
-            fragmentManager.popBackStackImmediate()
-            fragmentManager.executePendingTransactions()
+        val isAddedToBackStack: Boolean = fragmentManager?.findFragmentByTag(tag) != null
+        val fragment: Fragment = fragmentManager?.findFragmentByTag(tag) ?: SignUpFragment()
+        val fragmentTransaction: FragmentTransaction? = fragmentManager?.beginTransaction()
+        if (fragmentManager?.backStackEntryCount == 1) {
+            fragmentManager?.popBackStackImmediate()
+            fragmentManager?.executePendingTransactions()
         }
         if (!initialLoad && !isAddedToBackStack) {
             fragmentTransaction?.addToBackStack(tag)
@@ -40,12 +40,12 @@ class CamNavigationRouter(private val baseActivity: IBaseActivity) : BaseNavigat
 
     fun attachLoginFragment(initialLoad: Boolean = false) {
         val tag = LoginFragment::class.java.canonicalName
-        val isAddedToBackStack: Boolean = fragmentManager.findFragmentByTag(tag) != null
-        val fragment: Fragment = fragmentManager.findFragmentByTag(tag) ?: LoginFragment()
-        val fragmentTransaction: FragmentTransaction? = fragmentManager.beginTransaction()
-        if (fragmentManager.backStackEntryCount == 1) {
-            fragmentManager.popBackStackImmediate()
-            fragmentManager.executePendingTransactions()
+        val isAddedToBackStack: Boolean = fragmentManager?.findFragmentByTag(tag) != null
+        val fragment: Fragment = fragmentManager?.findFragmentByTag(tag) ?: LoginFragment()
+        val fragmentTransaction: FragmentTransaction? = fragmentManager?.beginTransaction()
+        if (fragmentManager?.backStackEntryCount == 1) {
+            fragmentManager?.popBackStackImmediate()
+            fragmentManager?.executePendingTransactions()
         }
         if (!initialLoad && !isAddedToBackStack) {
             fragmentTransaction?.addToBackStack(tag)
@@ -56,8 +56,8 @@ class CamNavigationRouter(private val baseActivity: IBaseActivity) : BaseNavigat
 
     fun attachPasswordResetFragment() {
         val tag = PasswordResetFragment::class.java.canonicalName
-        val fragment: Fragment = fragmentManager.findFragmentByTag(tag) ?: PasswordResetFragment()
-        val fragmentTransaction: FragmentTransaction? = fragmentManager.beginTransaction()
+        val fragment: Fragment = fragmentManager?.findFragmentByTag(tag) ?: PasswordResetFragment()
+        val fragmentTransaction: FragmentTransaction? = fragmentManager?.beginTransaction()
         fragmentTransaction?.addToBackStack(tag)
         fragmentTransaction?.replace(fragmentContainer!!, fragment, tag)
         fragmentTransaction?.commit()
@@ -65,11 +65,11 @@ class CamNavigationRouter(private val baseActivity: IBaseActivity) : BaseNavigat
 
     fun attachBillingFragment() {
         val tag = BillingFragment::class.java.canonicalName
-        val fragment: Fragment = fragmentManager.findFragmentByTag(tag) ?: BillingFragment()
-        val fragmentTransaction: FragmentTransaction? = fragmentManager.beginTransaction()
+        val fragment: Fragment = fragmentManager?.findFragmentByTag(tag) ?: BillingFragment()
+        val fragmentTransaction: FragmentTransaction? = fragmentManager?.beginTransaction()
 
         //clearing back stack
-        fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        fragmentManager?.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
 
         fragmentTransaction?.replace(fragmentContainer!!, fragment, tag)
         fragmentTransaction?.commit()
@@ -77,7 +77,7 @@ class CamNavigationRouter(private val baseActivity: IBaseActivity) : BaseNavigat
 
     fun showConfirmationDialog(dialogType: AlertDialogType) {
         val tag = "$confirmationDialogPrefix${dialogType.name}"
-        val dialog: DialogFragment? = fragmentManager.findFragmentByTag(tag) as? DialogFragment
+        val dialog: DialogFragment? = fragmentManager?.findFragmentByTag(tag) as? DialogFragment
         if (dialog == null) {
             ConfirmationDialog.newInstance(dialogType).show(fragmentManager, tag)
         } else {
@@ -88,21 +88,21 @@ class CamNavigationRouter(private val baseActivity: IBaseActivity) : BaseNavigat
     }
 
     fun attachLastFragment(authScreenType: AuthScreenType, camFlow: CamFlow) {
-        val fragmentTransaction: FragmentTransaction? = fragmentManager.beginTransaction()
-        val fragmentList = fragmentManager.fragments
-        if (fragmentList.size != 0) {
-            val lastFragment = fragmentList.last().takeIf {
-                it.tag?.contains(confirmationDialogPrefix) ?: false
+        val fragmentTransaction: FragmentTransaction? = fragmentManager?.beginTransaction()
+        val fragmentList = fragmentManager?.fragments
+        if (fragmentList?.size != 0) {
+            val lastFragment = fragmentList?.last().takeIf {
+                it?.tag?.contains(confirmationDialogPrefix) ?: false
             }
             if (lastFragment != null) {
-                val fragment = fragmentList[fragmentList.size - 2]
+                val fragment = fragmentList?.get(fragmentList.size - 2)
                 fragment?.apply {
                     val tag = this.javaClass.canonicalName
                     fragmentTransaction?.replace(fragmentContainer!!, fragment, tag)
                     fragmentTransaction?.commit()
                 }
             } else {
-                val fragment = fragmentList.last()
+                val fragment = fragmentList?.last()
                 fragment?.apply {
                     val tag = this.javaClass.canonicalName
                     fragmentTransaction?.replace(fragmentContainer!!, fragment, tag)
@@ -122,10 +122,10 @@ class CamNavigationRouter(private val baseActivity: IBaseActivity) : BaseNavigat
 
     fun callFragmentBackPressed() {
         if (isLastFragment())
-            fragmentManager.fragments.forEach { (it as? BaseFragment)?.onLastFragmentClosed() }
+            fragmentManager?.fragments?.forEach { (it as? BaseFragment)?.onLastFragmentClosed() }
     }
 
-    private fun isLastFragment(): Boolean = fragmentManager.backStackEntryCount == 0
+    private fun isLastFragment(): Boolean = fragmentManager?.backStackEntryCount == 0
 
     private fun attachByScreenType(authScreenType: AuthScreenType) {
         when (authScreenType) {
