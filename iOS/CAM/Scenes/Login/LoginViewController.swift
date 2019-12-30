@@ -9,6 +9,8 @@
 import UIKit
 
 class LoginViewController: UIViewController {
+    let cellHeight: CGFloat = 48.0
+    let cellSpacing: CGFloat = 7.0
     
     var loadingPopover = LoadingPopover.nibInstance()
     var authFields = [AuthField]()
@@ -18,7 +20,6 @@ class LoginViewController: UIViewController {
     @IBOutlet var logoImageView: UIImageView!
     
     @IBOutlet var titleLabel: UILabel!
-    
     @IBOutlet var authFieldsTable: UITableView!
     @IBOutlet var loginButton: UIButton!
     @IBOutlet var resetPasswordButton: UIButton!
@@ -34,6 +35,9 @@ class LoginViewController: UIViewController {
     @IBOutlet var signUpContainer: UIView!
     @IBOutlet var signUpButton: UIButton!
     
+    @IBOutlet var camLinksContainer: CamLinksView!
+    
+    @IBOutlet var camLinksHeightConstraint: NSLayoutConstraint!
     @IBOutlet var inputContainerYConstraint: NSLayoutConstraint!
     @IBOutlet var socialNetworksContainerTopConstraint: NSLayoutConstraint!
     @IBOutlet var inputContainerHeightConstraint: NSLayoutConstraint!
@@ -44,14 +48,31 @@ class LoginViewController: UIViewController {
     }
     var presenter: LoginPresenter?
     
+    var isCustomLinksVisible: Bool {
+        let firstLink = CamScreen.login.firstLink
+        let secondLink = CamScreen.login.secondLink
+        var isFirstLinkVisible = false
+        var isSecondLinkVisible = false
+    
+        if let link = configDictionary[firstLink.link.rawValue], !link.isEmpty,
+           let text = configDictionary[firstLink.text.rawValue], !text.isEmpty {
+            isFirstLinkVisible = true
+        }
+        
+        if let link = configDictionary[secondLink.link.rawValue], !link.isEmpty,
+           let text = configDictionary[secondLink.text.rawValue], !text.isEmpty {
+            isSecondLinkVisible = true
+        }
+        return isFirstLinkVisible || isSecondLinkVisible
+    }
+    
     var visibleAuthFieldsCount: Int {
         let centerFreeSpace = signUpContainer.frame.minY - logoImageView.frame.maxY
         let topSpace: CGFloat = 50.0
-        var bottomSpace = socialNetworksContainer.isHidden ? 0 : socialNetworksContainer.frame.height + 20 // 20 - min spacing
-        bottomSpace = bottomSpace == 0 ? 50 : bottomSpace
+        let bottomSpace = socialNetworksContainer.isHidden ? 50 : socialNetworksContainer.frame.height + 20 // 20 - min spacing
         let inputComponentMaxHeight = centerFreeSpace - topSpace - bottomSpace
-        let tableMaxHeight = inputComponentMaxHeight - 33 - 46
-        var maxCount = Int((tableMaxHeight - 7) / (48 + 7))
+        let tableMaxHeight = inputComponentMaxHeight - resetPasswordButton.bounds.height - loginButton.bounds.height
+        var maxCount = Int((tableMaxHeight - cellSpacing) / (cellHeight + cellSpacing))
         let fieldsCount = authFields.count
         if UIDevice.current.userInterfaceIdiom == .phone {
             maxCount = maxCount > 4 ? 4 : maxCount
@@ -62,7 +83,7 @@ class LoginViewController: UIViewController {
     }
     
     var authFieldsTableHeight: CGFloat {
-        let height = CGFloat(visibleAuthFieldsCount * 48 + (visibleAuthFieldsCount - 1) * 7)
+        let height = CGFloat(visibleAuthFieldsCount) * cellHeight + CGFloat(visibleAuthFieldsCount - 1) * cellSpacing
         return height
     }
     
@@ -99,6 +120,7 @@ class LoginViewController: UIViewController {
         socialNetworksContainer.isHidden = !(configDictionary[CAMKeys.isAlternativeAuthenticationEnabled.rawValue]?.bool ?? false)
         authFieldsTable.backgroundView = UIView()
         authFieldsTable.allowsSelection = false
+        setupCamLinks()
         setupResetPasswordButton()
         setupSocialNetworksContainer()
         configureElements()
@@ -130,6 +152,13 @@ class LoginViewController: UIViewController {
         stackView.addArrangedSubview(facebookButton)
     }
     
+    func setupCamLinks() {
+        camLinksContainer.openLinkErrorAction = { [unowned self] in
+            self.showAlert(description: self.configDictionary[CAMKeys.defaultAlertText.rawValue])
+        }
+        camLinksContainer.setupParameters(camScreen: .login, configDictionary: configDictionary)
+    }
+    
     func configureElements() {
         backgroundImageView.setStyle(asset: .background)
         closeButton.setStyle(iconAsset: .closeButton)
@@ -151,6 +180,7 @@ class LoginViewController: UIViewController {
     }
     
     func setupConstraints() {
+        camLinksHeightConstraint.constant = isCustomLinksVisible ? 39 : 0
         let inputContainerHeight = authFieldsTableHeight + loginButton.frame.height + resetPasswordButton.frame.height
         authFieldsTableHeightConstraint.constant = authFieldsTableHeight
         inputContainerHeightConstraint.constant = inputContainerHeight
