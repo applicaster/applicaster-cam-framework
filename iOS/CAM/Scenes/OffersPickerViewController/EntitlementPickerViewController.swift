@@ -70,9 +70,7 @@ class EntitlementPickerViewController: UIViewController {
     
     private var offerViewModels: [OfferViewModel] = [] {
         didSet {
-            if UIDevice.current.userInterfaceIdiom == .pad {
-                camLinksContainer.isHidden = !isCustomLinksVisible
-            } else {
+            if UIDevice.current.userInterfaceIdiom == .phone {
                 camLinksContainer.isHidden = !(isCustomLinksVisible && self.offerViewModels.count <= 1)
             }
         }
