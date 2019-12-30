@@ -4,7 +4,7 @@ Pod::Spec.new do |s|
   s.summary      = 'Content Access Manager framework'
   s.license      = 'MIT'
   s.homepage     = 'https://github.com/applicaster/applicaster-cam-framework'
-  s.author       = {"Avi Levin" => "a.levin@applicaster.com"}
+  s.author       = {"Brel Egor" => "ebrel@applicaster.com"}
   s.ios.deployment_target = '10.0'
   s.swift_version = '5.1'
   s.source       = { :git => "https://github.com/applicaster/applicaster-cam-framework", :tag => 'ios-' + s.version.to_s }
