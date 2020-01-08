@@ -15,6 +15,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import com.applicaster.cam.ContentAccessManager
+import com.applicaster.cam.ui.base.custom.CustomLinkTextView
 import com.applicaster.cam.ui.base.presenter.ICustomLinkActionHandler
 import com.applicaster.util.OSUtil
 import com.applicaster.util.TextUtil
@@ -38,11 +39,11 @@ class UIMapper {
 
         fun map(view: View, key: UIKey, listener: ICustomLinkActionHandler) {
             map(view, key)
-            view.setOnClickListener {
-                listener.onCustomLinkClicked(
-                        uiProvider.getText(key.text.orEmpty()),
-                        uiProvider.getText(key.textLink.orEmpty())
-                )
+            if (view is CustomLinkTextView) {
+                val linkText = uiProvider.getText(key.text.orEmpty())
+                val linkUrl = uiProvider.getText(key.textLink.orEmpty())
+                view.customizeWithLinkData(linkText, linkUrl)
+                view.setClickListener(listener)
             }
         }
 

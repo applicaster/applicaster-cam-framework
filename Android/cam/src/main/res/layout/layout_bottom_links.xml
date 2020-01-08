@@ -10,7 +10,7 @@
     android:paddingRight="@dimen/bottom_bar_padding_horizontal"
     android:paddingBottom="@dimen/bottom_links_bar_padding_vertical">
 
-    <com.applicaster.util.ui.CustomTextView
+    <com.applicaster.cam.ui.base.custom.CustomLinkTextView
         android:id="@+id/tv_bottom_link_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,7 +20,7 @@
         android:padding="@dimen/bottom_bar_item_padding_horizontal"
         android:singleLine="true" />
 
-    <com.applicaster.util.ui.CustomTextView
+    <com.applicaster.cam.ui.base.custom.CustomLinkTextView
         android:id="@+id/tv_bottom_link_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
