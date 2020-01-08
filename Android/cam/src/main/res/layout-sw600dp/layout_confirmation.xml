@@ -52,16 +52,37 @@
             app:layout_constraintStart_toStartOf="parent"/>
 
     <com.applicaster.util.ui.CustomButton
-            android:id="@+id/btn_confirmation_ok"
-            android:layout_width="@dimen/confirmation_btn_width"
-            android:layout_height="@dimen/confirmation_btn_height"
-            android:text="Dummy"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="@dimen/confirmation_btn_text_margin_bottom"
-            android:layout_marginEnd="@dimen/confirmation_btn_margin_end"
-            android:layout_marginStart="@dimen/confirmation_btn_margin_start"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+        android:id="@+id/btn_confirmation_ok"
+        android:layout_width="@dimen/confirmation_btn_width"
+        android:layout_height="@dimen/confirmation_btn_height"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="@dimen/confirmation_btn_margin_start"
+        android:layout_marginEnd="@dimen/confirmation_btn_margin_end"
+        android:layout_marginBottom="7dp"
+        android:text="OK"
+        app:layout_constraintBottom_toTopOf="@+id/btn_confirmation_cancel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.applicaster.util.ui.CustomButton
+        android:id="@+id/btn_confirmation_cancel"
+        android:layout_width="@dimen/confirmation_btn_width"
+        android:layout_height="@dimen/confirmation_btn_height"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="@dimen/confirmation_btn_margin_start"
+        android:layout_marginEnd="@dimen/confirmation_btn_margin_end"
+        android:visibility="gone"
+        android:layout_marginBottom="7dp"
+        android:text="Cancel"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_cancel_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline_cancel_margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="5dp" />
 
 </android.support.constraint.ConstraintLayout>
