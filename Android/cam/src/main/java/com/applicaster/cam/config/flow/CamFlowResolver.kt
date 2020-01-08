@@ -36,16 +36,18 @@ class CamFlowResolver {
                 }
                 AuthenticationRequirement.REQUIRE_ON_PURCHASABLE_ITEMS -> {
                     when (originalFlow) {
-                        CamFlow.AUTHENTICATION, CamFlow.AUTH_AND_STOREFRONT, CamFlow.EMPTY -> originalFlow
-                        CamFlow.STOREFRONT -> if (paymentRequired) CamFlow.AUTH_AND_STOREFRONT else CamFlow.EMPTY
+                        CamFlow.AUTHENTICATION -> CamFlow.EMPTY
+                        CamFlow.AUTH_AND_STOREFRONT, CamFlow.STOREFRONT ->
+                            if (paymentRequired) CamFlow.AUTH_AND_STOREFRONT else CamFlow.EMPTY
+                        CamFlow.EMPTY -> originalFlow
                         CamFlow.LOGOUT -> originalFlow
                     }
                 }
                 AuthenticationRequirement.REQUIRE_WHEN_SPECIFIED_IN_DATA_SOURCE -> {
                     when (originalFlow) {
                         CamFlow.AUTHENTICATION, CamFlow.EMPTY -> originalFlow
-                        CamFlow.STOREFRONT, CamFlow.AUTH_AND_STOREFRONT ->
-                            if (paymentRequired) originalFlow else CamFlow.EMPTY
+                        CamFlow.AUTH_AND_STOREFRONT -> if (paymentRequired) originalFlow else CamFlow.AUTHENTICATION
+                        CamFlow.STOREFRONT -> if (paymentRequired) originalFlow else CamFlow.EMPTY
                         CamFlow.LOGOUT -> originalFlow
                     }
                 }
