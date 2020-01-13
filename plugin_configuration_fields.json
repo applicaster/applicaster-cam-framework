@@ -10,7 +10,7 @@
           {
             "key": "authentication_requirement",
             "type": "select",
-            "label_tooltip": "<p>This field determines if/when authentication would be required to access content and also influences what configuration fields are available for the plugin.</p><p>If “Require when specified on the data source” is selected, then the feeds delivered by the data source provider must identify relevant content as requiring authentication.</p>",
+            "label_tooltip": "<p>This field determines if/when authentication would be required to access content and also influences what configuration fields are available for the plugin.</p><p>If “Require when specified on the data source” is selected, then the feeds delivered by the data source provider must identify relevant content as requiring authentication, per the protocol described here. The word here should link to the following document: <a href='https://developer.applicaster.com/Zapp-Pipes/protocols/login_and_payment_protocol.html'/></p>",
             "initial_value": "Always require",
             "options": [
               {
@@ -33,6 +33,7 @@
           },
           {
             "key": "require_payment",
+            "label": "App Includes Purchasable Content",
             "type": "switch",
             "label_tooltip": "<p>When this field is on, the plugin will check if content requires payment (an entitlement or purchasable product) when given content is triggered.</p><p>This field also influences what configuration fields are available for the plugin.</p>",
             "initial_value": "true"
@@ -658,6 +659,37 @@
               }
             ],
             "initial_value": "Please provide Facebook permission to share email information in order to login with Facebook."
+          },
+          {
+            "key": "custom_link_font_ios",
+            "type": "ios_font_selector",
+            "label_tooltip": "The font (for iOS) for any custom links presented. The links and text for these would be defined in the configuration for the given screens (supported in login, sign-up, and storefront screens)."
+          },
+          {
+            "key": "custom_link_font_android",
+            "type": "android_font_selector",
+            "label_tooltip": "The font (for Android) for any custom links presented. The links and text for these would be defined in the configuration for the given screens (supported in login, sign-up, and storefront screens)."
+          },
+          {
+            "key": "custom_link_size_phone",
+            "label": "Custom Link Font Size Phone",
+            "type": "number_input",
+            "label_tooltip": "The font size (for smartphones) for any custom links presented. The links and text for these would be defined in the configuration for the given screens (supported in login, sign-up, and storefront screens).",
+            "initial_value": "11"
+          },
+          {
+            "key": "custom_link_size_tablet",
+            "label": "Custom Link Font Size Tablet",
+            "type": "number_input",
+            "label_tooltip": "The font size (for tablets) for any custom links presented. The links and text for these would be defined in the configuration for the given screens (supported in login, sign-up, and storefront screens).",
+            "initial_value": "11"
+          },
+          {
+            "key": "custom_link_color",
+            "label": "Custom Link Font Color",
+            "type": "color_picker",
+            "label_tooltip": "The font color for any custom links presented. The links and text for these would be defined in the configuration for the given screens (supported in login, sign-up, and storefront screens).",
+            "initial_value": "#ffffff"
           }
         ]
       },
@@ -859,6 +891,69 @@
                 "key": "general/authentication_requirement"
               }
             ]
+          },
+          {
+            "key": "login_screen_custom_link_1",
+            "type": "text_input",
+            "label_tooltip": "The url scheme for where to deliver the end user upon clicking the custom link. If not populated, no links will be presented.",
+            "conditional_fields": [
+              {
+                "condition_value": [
+                  "always_require",
+                  "require_on_all_purchasable_items",
+                  "require_when_specified_on_the_data_source"
+                ],
+                "key": "general/authentication_requirement"
+              }
+            ]
+          },
+          {
+            "key": "login_screen_custom_link_1_text",
+            "type": "text_input",
+            "label_tooltip": "<p>The text the user will see for the first custom link presented to the user. If not populated, no links will be presented.</p><p>We recommend keeping this text short to keep the screen clean (e.g. “Privacy”)</p>",
+            "initial_value": "Leave it blank",
+            "conditional_fields": [
+              {
+                "condition_value": [
+                  "always_require",
+                  "require_on_all_purchasable_items",
+                  "require_when_specified_on_the_data_source"
+                ],
+                "key": "general/authentication_requirement",
+                "key": "general/authentication_requirement"
+              }
+            ]
+          },
+          {
+            "key": "login_screen_custom_link_2",
+            "type": "text_input",
+            "label_tooltip": "The url scheme for where to deliver the end user upon clicking the custom link. If not populated, a second link will not be presented to the user.",
+            "conditional_fields": [
+              {
+                "condition_value": [
+                  "always_require",
+                  "require_on_all_purchasable_items",
+                  "require_when_specified_on_the_data_source"
+                ],
+                "key": "general/authentication_requirement"
+              }
+            ]
+          },
+          {
+            "key": "login_screen_custom_link_2_text",
+            "type": "text_input",
+            "label_tooltip": "<p>The text the user will see for the second custom link presented to the user. If not populated, the second link will not be presented.</p><p>We recommend keeping this text short to keep the screen clean (e.g. “Privacy”)</p>",
+            "initial_value": "Leave it blank",
+            "conditional_fields": [
+              {
+                "condition_value": [
+                  "always_require",
+                  "require_on_all_purchasable_items",
+                  "require_when_specified_on_the_data_source"
+                ],
+                "key": "general/authentication_requirement"
+              }
+            ]
           }
         ]
       },
@@ -947,6 +1042,68 @@
               }
             ],
             "initial_value": "This user already exists. Try logging in."
+          },
+          {
+            "key": "sign_up_screen_custom_link_1",
+            "type": "text_input",
+            "label_tooltip": "The url scheme for where to deliver the end user upon clicking the custom link. If not populated, no links will be presented.",
+            "conditional_fields": [
+              {
+                "condition_value": [
+                  "always_require",
+                  "require_on_all_purchasable_items",
+                  "require_when_specified_on_the_data_source"
+                ],
+                "key": "general/authentication_requirement"
+              }
+            ]
+          },
+          {
+            "key": "sign_up_screen_custom_link_1_text",
+            "type": "text_input",
+            "label_tooltip": "<p>The text the user will see for the first custom link presented to the user. If not populated, no links will be presented.</p><p>We recommend keeping this text short to keep the screen clean (e.g. “Privacy”)</p>",
+            "initial_value": "Leave it blank",
+            "conditional_fields": [
+              {
+                "condition_value": [
+                  "always_require",
+                  "require_on_all_purchasable_items",
+                  "require_when_specified_on_the_data_source"
+                ],
+                "key": "general/authentication_requirement"
+              }
+            ]
+          },
+          {
+            "key": "sign_up_screen_custom_link_2",
+            "type": "text_input",
+            "label_tooltip": "The url scheme for where to deliver the end user upon clicking the custom link. If not populated, a second link will not be presented to the user.",
+            "conditional_fields": [
+              {
+                "condition_value": [
+                  "always_require",
+                  "require_on_all_purchasable_items",
+                  "require_when_specified_on_the_data_source"
+                ],
+                "key": "general/authentication_requirement"
+              }
+            ]
+          },
+          {
+            "key": "sign_up_screen_custom_link_2_text",
+            "type": "text_input",
+            "label_tooltip": "<p>The text the user will see for the second custom link presented to the user. If not populated, the second link will not be presented.</p><p>We recommend keeping this text short to keep the screen clean (e.g. “Privacy”)</p>",
+            "initial_value": "Leave it blank",
+            "conditional_fields": [
+              {
+                "condition_value": [
+                  "always_require",
+                  "require_on_all_purchasable_items",
+                  "require_when_specified_on_the_data_source"
+                ],
+                "key": "general/authentication_requirement"
+              }
+            ]
           }
         ]
       },
@@ -1020,11 +1177,9 @@
             "conditional_fields": [
               {
                 "condition_value": [
-                  "always_require",
-                  "require_on_all_purchasable_items",
-                  "require_when_specified_on_the_data_source"
+                  true
                 ],
-                "key": "general/authentication_requirement"
+                "key": "general/require_payment"
               }
             ]
           },
@@ -1036,11 +1191,9 @@
             "conditional_fields": [
               {
                 "condition_value": [
-                  "always_require",
-                  "require_on_all_purchasable_items",
-                  "require_when_specified_on_the_data_source"
+                  true
                 ],
-                "key": "general/authentication_requirement"
+                "key": "general/require_payment"
               }
             ]
           },
@@ -1298,6 +1451,60 @@
               }
             ],
             "initial_value": "#122040"
+          },
+          {
+            "key": "storefront_screen_custom_link_1",
+            "type": "text_input",
+            "label_tooltip": "The url scheme for where to deliver the end user upon clicking the custom link. If not populated, no links will be presented.",
+            "conditional_fields": [
+              {
+                "condition_value": [
+                  true
+                ],
+                "key": "general/require_payment"
+              }
+            ]
+          },
+          {
+            "key": "storefront_screen_custom_link_1_text",
+            "type": "text_input",
+            "label_tooltip": "<p>The text the user will see for the first custom link presented to the user. If not populated, no links will be presented.</p><p>We recommend keeping this text short to keep the screen clean (e.g. “Privacy”)</p>",
+            "initial_value": "Leave it blank",
+            "conditional_fields": [
+              {
+                "condition_value": [
+                  true
+                ],
+                "key": "general/require_payment"
+              }
+            ]
+          },
+          {
+            "key": "storefront_screen_custom_link_2",
+            "type": "text_input",
+            "label_tooltip": "The url scheme for where to deliver the end user upon clicking the custom link. If not populated, a second link will not be presented to the user.",
+            "conditional_fields": [
+              {
+                "condition_value": [
+                  true
+                ],
+                "key": "general/require_payment"
+              }
+            ]
+          },
+          {
+            "key": "storefront_screen_custom_link_2_text",
+            "type": "text_input",
+            "label_tooltip": "<p>The text the user will see for the second custom link presented to the user. If not populated, the second link will not be presented.</p><p>We recommend keeping this text short to keep the screen clean (e.g. “Privacy”)</p>",
+            "initial_value": "Leave it blank",
+            "conditional_fields": [
+              {
+                "condition_value": [
+                  true
+                ],
+                "key": "general/require_payment"
+              }
+            ]
           }
         ]
       },
