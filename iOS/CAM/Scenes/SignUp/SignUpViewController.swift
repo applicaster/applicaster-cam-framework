@@ -119,6 +119,7 @@ class SignUpViewController: UIViewController {
         closeButton.isHidden = presenter?.camDelegate.analyticsStorage().trigger == .appLaunch
         loginButton.titleLabel?.numberOfLines = 0
         loginButton.titleLabel?.textAlignment = .center
+        loginButton.isUserInteractionEnabled = (configDictionary[CAMKeys.singUpLoginActionText.rawValue] ?? "").isEmpty ? false : true
         socialNetworksContainer.isHidden = !(configDictionary[CAMKeys.isAlternativeAuthenticationEnabled.rawValue]?.bool ?? false)
         authFieldsTable.backgroundView = UIView()
         authFieldsTable.allowsSelection = false

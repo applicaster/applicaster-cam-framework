@@ -283,6 +283,7 @@
                         <outlet property="loginButton" destination="g7t-dz-Krv" id="vrg-rP-ZtI"/>
                         <outlet property="logoImageView" destination="Qt9-xh-807" id="zwZ-UU-HOP"/>
                         <outlet property="resetPasswordButton" destination="C3Q-q8-bf3" id="3bV-cX-m5G"/>
+                        <outlet property="resetPasswordHeightConstraint" destination="NfB-Qt-Qtz" id="ged-iQ-0Wx"/>
                         <outlet property="rightSeparatorView" destination="tMe-xl-QJE" id="VFq-Cr-yOC"/>
                         <outlet property="signUpButton" destination="szx-wQ-fAQ" id="c6F-Xb-d8r"/>
                         <outlet property="signUpContainer" destination="uuM-0v-2FY" id="BMm-ZP-253"/>
