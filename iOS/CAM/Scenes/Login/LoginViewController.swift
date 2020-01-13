@@ -42,7 +42,8 @@ class LoginViewController: UIViewController {
     @IBOutlet var socialNetworksContainerTopConstraint: NSLayoutConstraint!
     @IBOutlet var inputContainerHeightConstraint: NSLayoutConstraint!
     @IBOutlet var authFieldsTableHeightConstraint: NSLayoutConstraint!
-
+    @IBOutlet var resetPasswordHeightConstraint: NSLayoutConstraint!
+    
     var configDictionary: [String: String] {
         return presenter?.camDelegate.getPluginConfig() ?? [String: String]()
     }
@@ -117,6 +118,7 @@ class LoginViewController: UIViewController {
         closeButton.isHidden = presenter?.camDelegate.analyticsStorage().trigger == .appLaunch
         signUpButton.titleLabel?.numberOfLines = 0
         signUpButton.titleLabel?.textAlignment = .center
+        signUpButton.isUserInteractionEnabled = (configDictionary[CAMKeys.loginSingUpActionText.rawValue] ?? "").isEmpty ? false : true
         socialNetworksContainer.isHidden = !(configDictionary[CAMKeys.isAlternativeAuthenticationEnabled.rawValue]?.bool ?? false)
         authFieldsTable.backgroundView = UIView()
         authFieldsTable.allowsSelection = false
@@ -128,7 +130,9 @@ class LoginViewController: UIViewController {
     
     func setupResetPasswordButton() {
         if let json = configDictionary[CAMKeys.authFields.rawValue],
-            let data = json.data(using: .utf8) {
+           let data = json.data(using: .utf8),
+           let resetPasswordText = configDictionary[CAMKeys.loginResetPasswordButtonText.rawValue],
+           !resetPasswordText.isEmpty {
             if let jsonAuthFields = try? JSONDecoder().decode(AuthFields.self, from: data) {
                 resetPasswordButton.isHidden = jsonAuthFields.password == nil
                 return
@@ -180,6 +184,7 @@ class LoginViewController: UIViewController {
     }
     
     func setupConstraints() {
+        resetPasswordHeightConstraint.constant = resetPasswordButton.isHidden ? 12 : 33
         camLinksHeightConstraint.constant = isCustomLinksVisible ? 39 : 0
         let inputContainerHeight = authFieldsTableHeight + loginButton.frame.height + resetPasswordButton.frame.height
         authFieldsTableHeightConstraint.constant = authFieldsTableHeight
