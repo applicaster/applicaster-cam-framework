@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Common-->
+    <dimen name="loading_indicator_size">58dp</dimen>
+    <!-- End region -->
+</resources>
