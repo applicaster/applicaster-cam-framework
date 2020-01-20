@@ -10,7 +10,7 @@ android {
         targetSdkVersion 28
 
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -20,6 +20,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+
+    lintOptions {
+        abortOnError false
     }
 }
 
@@ -87,7 +91,7 @@ def getVersionName = { ->
     try {
         def stdout = new ByteArrayOutputStream()
         exec {
-            commandLine 'git', 'describe', '--match', 'config-fetcher-*', '--abbrev=0', '--tags'
+            commandLine 'git', 'describe', '--match', 'config_fetcher-*', '--abbrev=0', '--tags'
             standardOutput = stdout
         }
         def tag = stdout.toString().trim()
