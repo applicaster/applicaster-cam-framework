@@ -88,7 +88,7 @@ def getVersionName = { ->
     try {
         def stdout = new ByteArrayOutputStream()
         exec {
-            commandLine 'git', 'describe', '--match', 'android-*', '--abbrev=0', '--tags'
+            commandLine 'git', 'describe', '--match', 'config-fetcher-*', '--abbrev=0', '--tags'
             standardOutput = stdout
         }
         def tag = stdout.toString().trim()
@@ -116,8 +116,8 @@ publishing {
             def versionFromTag = getVersionName()
             if (versionFromTag != null) {
                 // Check if version from tag equals to version from properties
-//                if (!compareVersions(versionFromTag, VERSION))
-//                    throw new Exception("Incomparable version value from tag and properties!")
+                if (!compareVersions(versionFromTag, VERSION))
+                    throw new Exception("Incomparable version value from tag and properties!")
 
                 // There is a tag existing on the current commit - we can upload to Bintray
                 version versionFromTag
@@ -184,12 +184,12 @@ publishing {
     }
 }
 
-def getBintrayUserProperty() {
-    return "drazumeev-sc@applicaster-ltd"
+static def getBintrayUserProperty() {
+    return System.getenv("BINTRAY_USER")
 }
 
-def getBintrayApiKeyProperty() {
-    return "cad9fab6cc174e4a38b9342fff9e0a0cf26fe9dd"
+static def getBintrayApiKeyProperty() {
+    return System.getenv("BINTRAY_API_KEY")
 }
 
 bintray {
