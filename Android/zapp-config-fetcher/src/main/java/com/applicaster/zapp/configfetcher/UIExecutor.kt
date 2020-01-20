@@ -4,7 +4,7 @@ import android.content.Context
 import android.support.v4.app.FragmentActivity
 import com.applicaster.zapp.configfetcher.ui.TransparentLoadingFragment
 
-suspend fun <T> UIEnvironment.executeWithUIAndReturn(
+suspend fun <T> UIEnvironment.executeWithResult(
         function: suspend () -> T
 ): T {
     context?.run { if (showLoadingUI) showLoading() }
@@ -13,7 +13,7 @@ suspend fun <T> UIEnvironment.executeWithUIAndReturn(
     return data
 }
 
-suspend fun UIEnvironment.executeWithUI(
+suspend fun UIEnvironment.execute(
         function: suspend () -> Unit
 ) {
     context?.run { if (showLoadingUI) showLoading() }

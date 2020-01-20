@@ -93,12 +93,12 @@ class ScreensDataLoader(private val pluginName: String) {
 
     suspend fun loadCustomFieldsJson(url: String): String {
         //recreate service to load auth_input_fields_config
-        val decodedUrl = URL(url)
-        val baseUrl = "${decodedUrl.protocol}://${decodedUrl.host}"
-        customFieldsLoaderService =
-            createRetrofitService(baseUrl, CustomConfigLoaderService::class.java)
         var result = ""
         try {
+            val decodedUrl = URL(url)
+            val baseUrl = "${decodedUrl.protocol}://${decodedUrl.host}"
+            customFieldsLoaderService =
+                createRetrofitService(baseUrl, CustomConfigLoaderService::class.java)
             val response = customFieldsLoaderService?.loadCustomFieldsJson(url)?.await()
             if (response?.isSuccessful == true) {
                 result = response.body()?.toString() ?: ""

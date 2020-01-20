@@ -1,11 +1,8 @@
 package com.applicaster.zapp.configfetcher
 
 import android.content.Context
-import android.os.Handler
-import android.support.v4.app.FragmentActivity
 import android.util.Log
 import com.applicaster.zapp.configfetcher.screenmetadata.ScreensDataLoader
-import com.applicaster.zapp.configfetcher.ui.TransparentLoadingFragment
 import com.google.gson.Gson
 import org.json.JSONObject
 
@@ -17,7 +14,7 @@ class ZappConfigFetcher(private val pluginName: String) : IConfigFetcher {
             showLoadingUI: Boolean,
             hook: HashMap<String, String?>?
     ): Map<String, String> {
-        return UIEnvironment(context, showLoadingUI).executeWithUIAndReturn {
+        return UIEnvironment(context, showLoadingUI).executeWithResult {
             var screenData = hook?.let { getPluginConfigurationFromHook(hook = it)?.toMutableMap() }
             if (screenData == null || screenData.isEmpty())
                 screenData = screenLoader.loadScreensData()?.toMutableMap()
@@ -30,7 +27,7 @@ class ZappConfigFetcher(private val pluginName: String) : IConfigFetcher {
             context: Context?,
             showLoadingUI: Boolean
     ) {
-        UIEnvironment(context, showLoadingUI).executeWithUI {
+        UIEnvironment(context, showLoadingUI).execute {
             loadCustomConfigField(key = AUTH_FIELDS_KEY)
         }
     }
@@ -40,7 +37,7 @@ class ZappConfigFetcher(private val pluginName: String) : IConfigFetcher {
             showLoadingUI: Boolean,
             hook: HashMap<String, String?>
     ): Map<String, String>? {
-        return UIEnvironment(context, showLoadingUI).executeWithUIAndReturn {
+        return UIEnvironment(context, showLoadingUI).executeWithResult {
             val fullPluginConfig =
                     Gson().fromJson(hook["screenMap"].orEmpty(), Map::class.java) as? Map<String, Any>
             val generalConfig: MutableMap<Any?, Any?>? =
@@ -57,13 +54,13 @@ class ZappConfigFetcher(private val pluginName: String) : IConfigFetcher {
             showLoadingUI: Boolean,
             key: String
     ) {
-        UIEnvironment(context, showLoadingUI).executeWithUI {
+        UIEnvironment(context, showLoadingUI).execute {
             Log.d(this.javaClass.simpleName, "loading plugin config: $this")
             if (this.containsKey(key)) {
                 val authConfigLink = this[key]
                 authConfigLink?.let {
                     val authFields = screenLoader.loadCustomFieldsJson(it)
-                    this@loadCustomConfigField[key] = authFields
+                    this[key] = authFields
                 }
             }
         }
@@ -74,7 +71,7 @@ class ZappConfigFetcher(private val pluginName: String) : IConfigFetcher {
             showLoadingUI: Boolean,
             pluginConfig: Map<String, String>?
     ): JSONObject {
-        return UIEnvironment(context, showLoadingUI).executeWithUIAndReturn {
+        return UIEnvironment(context, showLoadingUI).executeWithResult {
             var result: JSONObject? = null
             if (pluginConfig?.containsKey(AWS_CONFIG_FIELDS_KEY) == true) {
                 val configurationString =

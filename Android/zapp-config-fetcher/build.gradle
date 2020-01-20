@@ -44,7 +44,6 @@ repositories {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(path: ':cam')
     // Applicaster SDK
     def applicasterSDKPath = 'com.applicaster:applicaster-android-sdk:4.0.0'
     // Check if an open SDK is defined - if not use the closed one.
