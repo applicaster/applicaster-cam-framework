@@ -100,14 +100,10 @@ class LoginPresenter(
             )
         )
         //
-        if (ContentAccessManager.contract.isPurchaseRequired()) {
-            when (ContentAccessManager.contract.getCamFlow()) {
-                CamFlow.AUTH_AND_STOREFRONT -> navigationRouter.attachBillingFragment()
-                CamFlow.STOREFRONT -> navigationRouter.attachBillingFragment()
-                else -> view?.close()
-            }
-        } else {
-            view?.close()
+
+        when (ContentAccessManager.camFlow) {
+            CamFlow.AUTH_AND_STOREFRONT, CamFlow.STOREFRONT -> navigationRouter.attachBillingFragment()
+            else -> view?.close()
         }
     }
 
