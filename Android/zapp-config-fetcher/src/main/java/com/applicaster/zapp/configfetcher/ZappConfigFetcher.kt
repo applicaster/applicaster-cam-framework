@@ -2,12 +2,14 @@ package com.applicaster.zapp.configfetcher
 
 import android.content.Context
 import android.util.Log
+import com.applicaster.plugin_manager.Plugin
+import com.applicaster.plugin_manager.PluginManager
 import com.applicaster.zapp.configfetcher.screenmetadata.ScreensDataLoader
 import com.google.gson.Gson
 import org.json.JSONObject
 
-class ZappConfigFetcher(private val pluginName: String) : IConfigFetcher {
-    private val screenLoader: ScreensDataLoader by lazy { ScreensDataLoader(pluginName) }
+class ZappConfigFetcher(private val pluginIdentifier: String? = null) : IConfigFetcher {
+    private val screenLoader: ScreensDataLoader by lazy { ScreensDataLoader(getPluginIdentifier()) }
 
     override suspend fun loadFullConfig(
             context: Context?,
@@ -81,6 +83,22 @@ class ZappConfigFetcher(private val pluginName: String) : IConfigFetcher {
             result ?: JSONObject()
         }
     }
+
+    /**
+     * Return plugin identifier from constructor if it exists, default login plugin identifier otherwise
+     */
+    private fun getPluginIdentifier(): String {
+        return if (pluginIdentifier != null && pluginIdentifier.isNotEmpty())
+            pluginIdentifier
+        else getLoginPluginIdentifier()
+    }
+
+    private fun getLoginPluginIdentifier() =
+        PluginManager.getInstance().getInitiatedPlugin(Plugin.Type.LOGIN)?.plugin?.identifier
+            ?: throw RuntimeException(
+                "Unable to fetch login plugin identifier. " +
+                        "Possibly login plugin not initialized or added multiple login plugins."
+            )
 
     companion object {
         private const val AUTH_FIELDS_KEY = "authentication_input_fields"
