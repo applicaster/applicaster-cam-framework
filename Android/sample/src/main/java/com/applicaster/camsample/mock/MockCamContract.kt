@@ -24,6 +24,9 @@ class MockCamContract(private val context: Context) : ICamContract {
         Handler().postDelayed({ callback.onActionSuccess() }, 1250)
     }
 
+    override fun logout(isConfirmedByUser: Boolean) {
+    }
+
     override fun signUp(authFieldsInput: HashMap<String, String>, callback: SignUpCallback) {
         Handler().postDelayed({ callback.onActionSuccess() }, 1250)
     }

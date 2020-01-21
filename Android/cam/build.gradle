@@ -9,8 +9,8 @@ android {
     defaultConfig {
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 12
-        versionName "2.0.0"
+        versionCode 13
+        versionName "2.0.1"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -59,7 +59,7 @@ dependencies {
         exclude group: 'com.android.support', module:'appcompat-v7'
     }
     api 'com.applicaster:applicaster-iap-framework:0.0.5'
-    api ('com.applicaster:zapp-config-fetcher:1.0.1') {
+    api ('com.applicaster:zapp-config-fetcher:1.0.2') {
          exclude group: 'com.applicaster', module:'applicaster-android-sdk'
     }
     implementation "com.android.support:appcompat-v7:$support_version"

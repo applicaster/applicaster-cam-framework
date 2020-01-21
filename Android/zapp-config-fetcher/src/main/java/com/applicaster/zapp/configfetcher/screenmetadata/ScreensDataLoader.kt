@@ -17,7 +17,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.net.URL
 
-class ScreensDataLoader(private val pluginName: String) {
+class ScreensDataLoader(private val pluginIdentifier: String) {
 
     private val TAG = ScreensDataLoader::class.java.canonicalName
 
@@ -80,7 +80,7 @@ class ScreensDataLoader(private val pluginName: String) {
             val response = screenMetadataService?.loadScreensJson(builder.path)?.await()
             val screensDataList: List<ScreenData>? = response?.body()
             screensDataList?.forEach {
-                if (it.type?.contains(pluginName, ignoreCase = true) == true) {
+                if (it.type?.contains(pluginIdentifier, ignoreCase = true) == true) {
                     return parseScreenConfig(it.general as? Map<String, Any>)
                 }
             }
