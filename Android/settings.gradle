@@ -1,1 +1,1 @@
-include ':sample', ':cam'
+include ':sample', ':cam', "zapp-config-fetcher"
