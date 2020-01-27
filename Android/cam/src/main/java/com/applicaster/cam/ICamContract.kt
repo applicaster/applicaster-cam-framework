@@ -10,6 +10,10 @@ interface ICamContract {
 
     fun signUp(authFieldsInput: HashMap<String, String>, callback: SignUpCallback)
 
+    fun sendActivationCode(authFieldsInput: HashMap<String, String>, callback: SendActivationCodeCallback)
+
+    fun activateAccount(authFieldsInput: HashMap<String, String>, callback: AccountActivationCallback)
+
     fun resetPassword(authFieldsInput: HashMap<String, String>, callback: PasswordResetCallback)
 
     fun loginWithFacebook(email: String, id: String, callback: FacebookAuthCallback)
@@ -23,6 +27,8 @@ interface ICamContract {
     fun loadEntitlements(callback: EntitlementsLoadCallback) //get purchase id (and corresponding data)
 
     fun isUserLogged(): Boolean
+
+    fun isUserActivated(): Boolean
 
     fun isPurchaseRequired(): Boolean
 

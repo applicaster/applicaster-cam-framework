@@ -32,7 +32,7 @@ class LoginPresenter(
     }
 
     override fun getAuthFieldConfig(): AuthFieldConfig =
-        ContentAccessManager.pluginConfigurator.getLoginAuthFields()
+        ContentAccessManager.pluginConfigurator.getAuthFields(AuthScreenType.LOGIN)
 
     override fun onForgotPasswordClicked() {
         navigationRouter.attachPasswordResetFragment()

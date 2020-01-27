@@ -6,13 +6,11 @@ import com.applicaster.cam.params.auth.AuthScreenType
 
 interface Configurator {
 
-    fun getSignInAuthFields(): AuthFieldConfig
-
-    fun getLoginAuthFields(): AuthFieldConfig
-
-    fun getPasswordResetAuthFields(): AuthFieldConfig
+    fun getAuthFields(type: AuthScreenType): AuthFieldConfig
 
     fun getDefaultAuthScreen(): AuthScreenType
+
+    fun isAccountActivationRequired(): Boolean
 
     fun getEmptyInputFieldError(): String
 
@@ -29,6 +27,8 @@ interface Configurator {
     fun isAuthRestoreRequired(): Boolean
 
     fun isPasswordResetRequired(): Boolean
+
+    fun isPasswordUpdateRequired(): Boolean
 
     fun isFacebookLoginRequired(): Boolean
 

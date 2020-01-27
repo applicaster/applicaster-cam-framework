@@ -5,6 +5,7 @@ import com.applicaster.cam.PasswordResetCallback
 import com.applicaster.cam.analytics.*
 import com.applicaster.cam.params.auth.AuthField
 import com.applicaster.cam.params.auth.AuthFieldConfig
+import com.applicaster.cam.params.auth.AuthScreenType
 import com.applicaster.cam.ui.CamNavigationRouter
 import com.applicaster.cam.ui.auth.base.BaseInputPresenter
 import com.applicaster.cam.ui.confirmation.AlertDialogType
@@ -60,5 +61,5 @@ class PasswordResetPresenter(
     }
 
     override fun getAuthFieldConfig(): AuthFieldConfig =
-        ContentAccessManager.pluginConfigurator.getPasswordResetAuthFields()
+        ContentAccessManager.pluginConfigurator.getAuthFields(AuthScreenType.PASSWORD_RESET)
 }

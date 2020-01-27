@@ -14,6 +14,7 @@ enum class StyleKey(
     ALT_AUTH_SEPARATOR(STYLE_KEY_ALT_AUTH_SEPARATOR),
     ALT_AUTH_PROMPT(STYLE_KEY_ALT_AUTH_PROMPT),
     RESET_PASSWORD(STYLE_KEY_RESET_PASSWORD),
+    RESEND_CODE(STYLE_KEY_RESEND_CODE),
     PAYMENT_OPTIONS_TITLE(STYLE_KEY_PAYMENT_OPTIONS_TITLE),
     PAYMENT_OPTIONS_DESC(STYLE_KEY_PAYMENT_OPTIONS_DESC),
     CONFIRMATION_TITLE(STYLE_KEY_CONFIRMATION_TITLE),
@@ -38,6 +39,7 @@ const val STYLE_KEY_SCREEN_DESC = "screen_description"
 const val STYLE_KEY_ALT_AUTH_SEPARATOR = "alternative_authentication_separator"
 const val STYLE_KEY_ALT_AUTH_PROMPT = "alternative_authentication_prompt"
 const val STYLE_KEY_RESET_PASSWORD = "reset_password"
+const val STYLE_KEY_RESEND_CODE = "resend_code"
 const val STYLE_KEY_PAYMENT_OPTIONS_TITLE = "payment_option_title"
 const val STYLE_KEY_PAYMENT_OPTIONS_DESC = "payment_option_description"
 const val STYLE_KEY_CONFIRMATION_TITLE = "confirmation_title"

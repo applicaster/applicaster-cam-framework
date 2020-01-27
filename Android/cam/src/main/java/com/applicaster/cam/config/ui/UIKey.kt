@@ -34,6 +34,11 @@ enum class UIKey(
     AUTH_VALIDATION_TEXT(image = UI_KEY_VALIDATION_BUBBLE_IMAGE, textStyle = StyleKey.INPUT_FIELD_LABEL),
     AUTH_FACEBOOK_IMAGE(image = UI_KEY_FACEBOOK_IMAGE),
 
+    ACCOUNT_ACTIVATION_TITLE_TEXT(text = UI_KEY_ACTIVATION_TITLE_TEXT, textStyle = StyleKey.SCREEN_TITLE),
+    ACCOUNT_ACTIVATION_DESC_TEXT(text = UI_KEY_ACTIVATION_DESC_TEXT, textStyle = StyleKey.SCREEN_DESC),
+    ACCOUNT_ACTIVATION_ACTION_BUTTON(text = UI_KEY_ACTIVATION_BUTTON_TEXT, textStyle = StyleKey.ACTION_BUTTON, image = UI_KEY_ACTIVATION_BUTTON_IMAGE),
+    ACCOUNT_ACTIVATION_RESEND_CODE_BUTTON(text = UI_KEY_ACTIVATION_RESEND_TEXT, textStyle = StyleKey.RESEND_CODE),
+
     PASSWORD_RESET_TITLE_TEXT(text = UI_KEY_PWD_RESET_TITLE_TEXT, textStyle = StyleKey.SCREEN_TITLE),
     PASSWORD_RESET_DESC_TEXT(text = UI_KEY_PWD_RESET_DESC_TEXT, textStyle = StyleKey.SCREEN_DESC),
     PASSWORD_RESET_ACTION_BUTTON(text = UI_KEY_PWD_RESET_BUTTON_TEXT, textStyle = StyleKey.ACTION_BUTTON, image = UI_KEY_PWD_RESET_BUTTON_IMAGE),
@@ -108,6 +113,14 @@ const val UI_KEY_INPUT_ERROR_IMAGE = "cam_input_alert_indicator"
 const val UI_KEY_VALIDATION_PARENT_IMAGE = "cam_field_alert_bubble_shadow"
 const val UI_KEY_VALIDATION_BUBBLE_IMAGE = "cam_field_alert_bubble"
 const val UI_KEY_FACEBOOK_IMAGE = "cam_icon_1"
+// endregion
+
+// region Account activation UI keys
+const val UI_KEY_ACTIVATION_TITLE_TEXT = "account_activation_screen_title_text"
+const val UI_KEY_ACTIVATION_DESC_TEXT = "account_activation_description_text"
+const val UI_KEY_ACTIVATION_BUTTON_TEXT = "activate_account_button_text"
+const val UI_KEY_ACTIVATION_RESEND_TEXT = "resend_code_text"
+const val UI_KEY_ACTIVATION_BUTTON_IMAGE= "cam_action_button_asset"
 // endregion
 
 // region Password reset UI keys

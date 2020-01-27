@@ -16,38 +16,35 @@ class PluginConfigurator(private val pluginConfig: Map<String, String>) : Config
      * If there is no "password reset" config then hide corresponding UI, otherwise show it
      */
     override fun isPasswordResetRequired() =
-        getPasswordResetAuthFields().authFields.isNotEmpty()
+        getAuthFields(AuthScreenType.PASSWORD_RESET).authFields.isNotEmpty()
 
-    override fun getSignInAuthFields(): AuthFieldConfig {
-        val jsonConfig = pluginConfig.getValue(KEY_AUTH_FIELDS)
-        return AuthFieldsConverter.getFromJsonString(jsonConfig, AuthScreenType.SIGNUP)
+    override fun isAccountActivationRequired() =
+        getOrEmpty(KEY_ACCOUNT_ACTIVATION_REQUIRED)?.toBoolean() ?: false
+
+    override fun isPasswordUpdateRequired(): Boolean {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun getLoginAuthFields(): AuthFieldConfig {
+    override fun getAuthFields(type: AuthScreenType): AuthFieldConfig {
         val jsonConfig = pluginConfig.getValue(KEY_AUTH_FIELDS)
-        return AuthFieldsConverter.getFromJsonString(jsonConfig, AuthScreenType.LOGIN)
+        return AuthFieldsConverter.getFromJsonString(jsonConfig, type)
     }
 
-    override fun getPasswordResetAuthFields(): AuthFieldConfig {
-        val jsonConfig = pluginConfig.getValue(KEY_AUTH_FIELDS)
-        return AuthFieldsConverter.getFromJsonString(jsonConfig, AuthScreenType.PASSWORD_RESET)
-    }
-
-    override fun getEmptyInputFieldError() = pluginConfig.getValue(KEY_EMPTY_INPUT_FIELD_ERROR)
+    override fun getEmptyInputFieldError() = getOrDefault(KEY_EMPTY_INPUT_FIELD_ERROR)
 
     override fun getNotValidEmailInputFieldError() =
-        pluginConfig.getValue(KEY_NOT_VALID_EMAIL_INPUT_FIELD_ERROR)
+        getOrDefault(KEY_NOT_VALID_EMAIL_INPUT_FIELD_ERROR)
 
-    override fun getDefaultAlertText(): String = pluginConfig.getValue(KEY_DEFAULT_ALERT_TEXT)
+    override fun getDefaultAlertText(): String = getOrDefault(KEY_DEFAULT_ALERT_TEXT)
 
-    override fun getLogoutErrorAlertText(): String = pluginConfig.getValue(KEY_LOGOUT_ERROR_ALERT_TEXT)
+    override fun getLogoutErrorAlertText(): String = getOrDefault(KEY_LOGOUT_ERROR_ALERT_TEXT)
 
-    override fun getNoPurchasesToRestoreText(): String = pluginConfig.getValue(
+    override fun getNoPurchasesToRestoreText(): String = getOrDefault(
         KEY_NO_PURCHASES_TO_RESTORE_TEXT
     )
 
     override fun getNonMatchingRestoredPurchasesText(): String =
-        pluginConfig.getValue(KEY_NON_MATCHING_RESTORED_PURCHASES_TEXT)
+        getOrDefault(KEY_NON_MATCHING_RESTORED_PURCHASES_TEXT)
 
     override fun isAuthRestoreRequired() =
         false
@@ -139,6 +136,7 @@ const val KEY_REQUIRE_PAYMENT = "require_payment"
 const val KEY_PAYMENT_CONFIRMATION_TITLE_TEXT = "payment_confirmation_title_text"
 const val KEY_PAYMENT_CONFIRMATION_DESC_TEXT = "payment_confirmation_description_text"
 const val KEY_TRIGGER_NO_APP_LAUNCH = "trigger_on_app_launch"
+const val KEY_ACCOUNT_ACTIVATION_REQUIRED = "use_signup_activation_code_method"
 
 //Analytics related keys
 const val KEY_BILLING_CONFIRMATION_TITLE = "payment_confirmation_title_text"

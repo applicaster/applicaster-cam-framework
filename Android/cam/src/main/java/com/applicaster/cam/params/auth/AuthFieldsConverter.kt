@@ -6,9 +6,8 @@ class AuthFieldsConverter {
     companion object {
         fun getFromJsonString(authDataJson: String, configType: AuthScreenType): AuthFieldConfig {
             val jsonArray = JSONObject(authDataJson).getJSONArray(configType.getKey())
-            val authFields: MutableList<AuthField> = ArrayList()
+            val authFields: MutableList<AuthField> = mutableListOf()
             for (i in 0 until jsonArray.length()) {
-
                 (jsonArray.get(i) as JSONObject).let {
                     authFields.add(
                         AuthField().apply {
@@ -20,7 +19,7 @@ class AuthFieldsConverter {
                         })
                 }
             }
-            return AuthFieldConfig(authFields, configType)
+            return AuthFieldConfig(authFields)
         }
     }
 }

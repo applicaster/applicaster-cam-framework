@@ -28,6 +28,12 @@
     <dimen name="additional_auth_divider_height">3dp</dimen>
     <dimen name="additional_auth_margin">8dp</dimen>
 
+    <!-- Region Account Activation-->
+    <dimen name="account_activation_title_margin_top">50dp</dimen>
+    <dimen name="account_activation_input_fields_margin_top">30dp</dimen>
+    <dimen name="account_activation_resend_code_tv_margin_top">50dp</dimen>
+    <!-- End region -->
+
     <!-- Region Password reset-->
     <dimen name="password_reset_title_margin_top">50dp</dimen>
     <dimen name="password_reset_desc_margin_top">20dp</dimen>
