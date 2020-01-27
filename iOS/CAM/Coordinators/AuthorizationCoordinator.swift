@@ -20,15 +20,28 @@ protocol AuthorizationCoordinatorProtocol: Coordinator {
     func showResetPasswordScreen()
     func popCurrentScreen()
     func finishCoordinatorFlow(result: Bool)
+    func finishAuthentification(result: Bool, userData: [String: String]?)
 }
 
 class AuthorizationCoordinator: AuthorizationCoordinatorProtocol {
 
+    private var childCoordinator: Coordinator?
     var coordinatorFlow: AuthorizationCoordinatorFlow = .auth
     weak var rootViewController: UIViewController?
     weak var navigationController: UINavigationController?
     unowned var parentCoordinator: PluginDataProviderProtocol
     var completionHandler: ((Bool) -> Void)?
+    
+    var isAccountActivationEnabled: Bool {
+        let configDictionary = parentCoordinator.getCamDelegate().getPluginConfig()
+        if let json = configDictionary[CAMKeys.authFields.rawValue],
+           let data = json.data(using: .utf8),
+           let jsonAuthFields = try? JSONDecoder().decode(AuthFields.self, from: data),
+           let _ = jsonAuthFields.accountActivation {
+            return true
+        }
+        return false
+    }
     
     public init(navigationController: UINavigationController? = nil,
                 parentCoordinator: PluginDataProviderProtocol,
@@ -69,6 +82,19 @@ class AuthorizationCoordinator: AuthorizationCoordinatorProtocol {
         showLogoutScreen()
     }
     
+    func activateAccount(accountInfo: [String: String],
+                         with completion: @escaping (Bool) -> Void) {
+        let closeAction = {
+            self.finishCoordinatorFlow(result: false)
+        }
+        childCoordinator = AccountActivationCoordinator(accountInfo: accountInfo,
+                                     navigationController: navigationController,
+                                     pluginDataProvider: parentCoordinator,
+                                     closeAction: closeAction,
+                                     completion: completion)
+        childCoordinator!.start()
+    }
+    
     func showLoginScreen(isCoordinatorRootController: Bool) {
         let controller = ViewControllerFactory.createLoginScreen(pluginDataProvider: parentCoordinator,
                                                                  isRoot: isCoordinatorRootController,
@@ -98,6 +124,16 @@ class AuthorizationCoordinator: AuthorizationCoordinatorProtocol {
     
     func popCurrentScreen() {
         navigationController?.popViewController(animated: true)
+    }
+    
+    func finishAuthentification(result: Bool, userData: [String : String]?) {
+        if isAccountActivationEnabled && !parentCoordinator.getCamDelegate().isUserActivated() {
+            activateAccount(accountInfo: userData ?? [String: String]()) { (result) in
+                self.finishCoordinatorFlow(result: false)
+            }
+        } else {
+            finishCoordinatorFlow(result: result)
+        }
     }
     
     func finishCoordinatorFlow(result: Bool) {

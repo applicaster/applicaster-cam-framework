@@ -12,11 +12,13 @@ struct AuthFields: Codable {
     let signup: [AuthField]?
     let login: [AuthField]?
     let password: [AuthField]?
+    let accountActivation: [AuthField]?
     
     private enum CodingKeys: String, CodingKey {
         case signup = "Sign-up"
         case login = "Login"
         case password = "Password-reset"
+        case accountActivation = "Account-activation"
     }
 }
 

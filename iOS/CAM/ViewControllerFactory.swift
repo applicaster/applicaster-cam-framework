@@ -36,6 +36,16 @@ class ViewControllerFactory {
         return signUpVC
     }
     
+    static func createAccountActivationScreen(pluginDataProvider: PluginDataProviderProtocol,
+                                              accountActivationCoordinator: AccountActivationCoordinatorProtocol) -> AccountActivationViewController {
+        let accountActivationVC = AccountActivationViewController.instantiateVC()
+        let presenter = AccountActivationPresenter(view: accountActivationVC,
+                                                   coordinatorDelegate: accountActivationCoordinator,
+                                                   camDelegate: pluginDataProvider.getCamDelegate())
+        accountActivationVC.presenter = presenter
+        return accountActivationVC
+    }
+    
     static func createResetPasswordScreen(pluginDataProvider: PluginDataProviderProtocol,
                                           authCoordinator: AuthorizationCoordinatorProtocol) -> ResetPasswordViewController {
         let resetPasswordVC = ResetPasswordViewController.instantiateVC()
