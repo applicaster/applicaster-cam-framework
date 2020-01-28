@@ -80,9 +80,9 @@ public enum CAMKeys: String {
     
     //Account Activation
     
-    case accountActivationScreenTitleText = "account_activation_title_text"
+    case accountActivationScreenTitleText = "account_activation_screen_title_text"
     case accountActivationScreenDescriptionText = "account_activation_description_text"
-    case accountActivationButtonText = "account_activation_button_text"
+    case accountActivationButtonText = "activate_account_button_text"
     case resendCodeButtonText = "resend_code_text"
     
     //Alert

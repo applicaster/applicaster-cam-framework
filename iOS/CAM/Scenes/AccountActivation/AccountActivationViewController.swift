@@ -11,11 +11,7 @@ import ZappPlugins
 class AccountActivationViewController: UIViewController {
     
     var loadingPopover = LoadingPopover.nibInstance()
-    var codeActivationFields = [AuthField]() {
-        didSet {
-            codeActivationFieldsTable.reloadData()
-        }
-    }
+    var codeActivationFields = [AuthField]()
     @IBOutlet var backgroundImageView: UIImageView!
     @IBOutlet var backButton: UIButton!
     @IBOutlet var closeButton: UIButton!
@@ -127,7 +123,7 @@ class AccountActivationViewController: UIViewController {
     }
 
     @IBAction func resendCode(_ sender: Any) {
-        presenter?.resendCode(data: codeActivationFields)
+        presenter?.resendCode()
     }
 
     deinit {
@@ -180,6 +176,7 @@ extension AccountActivationViewController: AccountActivationViewProtocol {
 
     func updateTable(fields: [AuthField]) {
         codeActivationFields = fields
+        codeActivationFieldsTable.reloadData()
     }
 
     func showLoadingScreen(_ show: Bool) {

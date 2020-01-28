@@ -70,7 +70,6 @@
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="46" id="SKp-qb-Y5n"/>
-                                                    <constraint firstAttribute="width" constant="250" id="ZlU-ng-30L"/>
                                                 </constraints>
                                                 <state key="normal">
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -83,7 +82,9 @@
                                                 <rect key="frame" x="62.5" y="248" width="250" height="100"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="250" id="Fmv-vl-XpX"/>
+                                                    <constraint firstAttribute="width" constant="250" id="Fmv-vl-XpX">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="304"/>
+                                                    </constraint>
                                                     <constraint firstAttribute="height" constant="100" id="nQ1-QI-GsB"/>
                                                 </constraints>
                                                 <prototypes>
@@ -163,6 +164,7 @@
                                             <constraint firstAttribute="trailing" secondItem="gUc-jQ-IFd" secondAttribute="trailing" id="jev-D8-Wse"/>
                                             <constraint firstAttribute="trailing" secondItem="aqe-1v-UPy" secondAttribute="trailing" id="kZn-xd-KbG"/>
                                             <constraint firstItem="V17-6x-7ku" firstAttribute="top" secondItem="Bwd-tC-gRc" secondAttribute="bottom" constant="15" id="tZ1-Xv-oqu"/>
+                                            <constraint firstItem="Bwd-tC-gRc" firstAttribute="width" secondItem="XnT-Yk-s5z" secondAttribute="width" id="zf0-o0-2pU"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -190,7 +192,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="wch-wX-Cs1"/>
                         <connections>
-                            <outletCollection property="gestureRecognizers" destination="OdT-vf-B5A" appends="YES" id="gdN-AT-hWL"/>
+                            <outletCollection property="gestureRecognizers" destination="b00-RU-B67" appends="YES" id="IFD-J9-u1t"/>
                         </connections>
                     </view>
                     <connections>
@@ -207,9 +209,9 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wly-ga-wg0" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="OdT-vf-B5A">
+                <tapGestureRecognizer id="b00-RU-B67">
                     <connections>
-                        <action selector="hideKeyboard" destination="qq0-87-Vro" id="hDp-wS-uhr"/>
+                        <action selector="hideKeyboard" destination="qq0-87-Vro" id="naG-qM-e4Y"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>

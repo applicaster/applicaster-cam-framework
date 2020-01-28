@@ -8,9 +8,8 @@
 import Foundation
 
 protocol AccountActivationCoordinatorProtocol: Coordinator {
-    func finishCAMFlow()
     func finishCoordinatorFlow(result: Bool)
-    func popCurrentScreen()
+    func removeCoordinator()
 }
 
 class AccountActivationCoordinator: AccountActivationCoordinatorProtocol {
@@ -18,19 +17,19 @@ class AccountActivationCoordinator: AccountActivationCoordinatorProtocol {
     var userData: [String: String]
     weak var navigationController: UINavigationController?
     unowned var pluginDataProvider: PluginDataProviderProtocol
-    var closeAction: (() -> Void)?
+    var backAction: (() -> Void)?
     var completionHandler: ((Bool) -> Void)?
     
     public init(userData: [String: String],
                 navigationController: UINavigationController?,
                 pluginDataProvider: PluginDataProviderProtocol,
-                closeAction: @escaping () -> Void,
+                backAction: @escaping () -> Void,
                 completion: @escaping (Bool) -> Void) {
         self.userData = userData
         self.navigationController = navigationController
         self.pluginDataProvider = pluginDataProvider
-        self.closeAction = closeAction
         self.completionHandler = completion
+        self.backAction = backAction
     }
     
     func start() {
@@ -38,21 +37,18 @@ class AccountActivationCoordinator: AccountActivationCoordinatorProtocol {
     }
     
     func showCodeActivationScreen() {
-        let controller = ViewControllerFactory.createAccountActivationScreen(pluginDataProvider: pluginDataProvider,
+        let controller = ViewControllerFactory.createAccountActivationScreen(userData: userData,
+                                                                             pluginDataProvider: pluginDataProvider,
                                                                              accountActivationCoordinator: self)
         navigationController?.pushViewController(controller, animated: true)
     }
     
     func finishCoordinatorFlow(result: Bool) {
-        navigationController?.popViewController(animated: true)
         completionHandler?(result)
     }
     
-    func finishCAMFlow() {
-        closeAction?()
-    }
-    
-    func popCurrentScreen() {
-        self.navigationController?.popViewController(animated: true)
+    func removeCoordinator() {
+        navigationController?.popViewController(animated: true)
+        backAction?()
     }
 }

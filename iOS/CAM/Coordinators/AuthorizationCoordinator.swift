@@ -78,13 +78,13 @@ class AuthorizationCoordinator: AuthorizationCoordinatorProtocol {
     
     func activateAccount(userData: [String: String],
                          with completion: @escaping (Bool) -> Void) {
-        let closeAction = {
-            self.finishCoordinatorFlow(result: false)
+        let backAction = {
+            self.childCoordinator = nil
         }
         childCoordinator = AccountActivationCoordinator(userData: userData,
                                                         navigationController: navigationController,
                                                         pluginDataProvider: parentCoordinator,
-                                                        closeAction: closeAction,
+                                                        backAction: backAction,
                                                         completion: completion)
         childCoordinator!.start()
     }

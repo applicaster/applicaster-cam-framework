@@ -31,6 +31,7 @@ class AccountActivationPresenter {
     }
     
     func viewDidLoad() {
+        resendCode()
         if let json = camDelegate.getPluginConfig()[CAMKeys.authFields.rawValue],
             let data = json.data(using: .utf8) {
             if let jsonAuthFields = try? JSONDecoder().decode(AuthFields.self, from: data),
@@ -73,6 +74,7 @@ class AccountActivationPresenter {
     func activateAccount(data: [AuthField]) {
         self.view.showLoadingScreen(true)
         if let data = validate(data: data) {
+            let data = data.merge(userData)
             camDelegate.activateAccount(data: data, completion: { [weak self] (result) in
                 guard let self = self else { return }
                 switch result {
@@ -89,28 +91,24 @@ class AccountActivationPresenter {
     }
     
     func backToPreviousScreen() {
-        self.coordinatorDelegate.popCurrentScreen()
+        self.coordinatorDelegate.removeCoordinator()
     }
     
-    func resendCode(data: [AuthField]) {
+    func resendCode() {
         self.view.showLoadingScreen(true)
-        if let data = validate(data: data) {
-            camDelegate.sendActivationCode(data: data, completion: { [weak self] (result) in
-                guard let self = self else { return }
-                switch result {
-                case .success:
-                    self.view.showLoadingScreen(false)
-                case .failure(let error):
-                    self.view.showLoadingScreen(false)
-                    self.view.showError(description: error.localizedDescription)
-                }
-            })
-        } else {
-            view.showLoadingScreen(false)
-        }
+        camDelegate.sendActivationCode(data: userData, completion: { [weak self] (result) in
+            guard let self = self else { return }
+            switch result {
+            case .success:
+                self.view.showLoadingScreen(false)
+            case .failure(let error):
+                self.view.showLoadingScreen(false)
+                self.view.showError(description: error.localizedDescription)
+            }
+        })
     }
     
     func close() {
-        coordinatorDelegate.finishCAMFlow()
+        coordinatorDelegate.finishCoordinatorFlow(result: false)
     }
 }
