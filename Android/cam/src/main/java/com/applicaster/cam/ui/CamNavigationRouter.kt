@@ -15,7 +15,9 @@ import com.applicaster.cam.ui.base.view.IBaseActivity
 import com.applicaster.cam.ui.confirmation.ConfirmationDialog
 import com.applicaster.cam.ui.billing.BillingFragment
 import com.applicaster.cam.ui.auth.password.reset.PasswordResetFragment
+import com.applicaster.cam.ui.auth.user.activation.AccountActivationFragment
 import com.applicaster.cam.ui.base.view.BaseFragment
+import java.util.HashMap
 
 class CamNavigationRouter(private val baseActivity: IBaseActivity) : BaseNavigationRouter(baseActivity) {
 
@@ -71,6 +73,20 @@ class CamNavigationRouter(private val baseActivity: IBaseActivity) : BaseNavigat
         //clearing back stack
         fragmentManager?.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
 
+        fragmentTransaction?.replace(fragmentContainer!!, fragment, tag)
+        fragmentTransaction?.commit()
+    }
+
+    fun attachAccountActivation(userInput: HashMap<String, String>) {
+        val tag = AccountActivationFragment::class.java.canonicalName
+        var fragment: Fragment? = fragmentManager?.findFragmentByTag(tag)
+        if (fragment != null) {
+            fragment.arguments = AccountActivationFragment.getBundle(userInput)
+        } else {
+            fragment = AccountActivationFragment.newInstance(userInput)
+        }
+        val fragmentTransaction: FragmentTransaction? = fragmentManager?.beginTransaction()
+        fragmentTransaction?.addToBackStack(tag)
         fragmentTransaction?.replace(fragmentContainer!!, fragment, tag)
         fragmentTransaction?.commit()
     }

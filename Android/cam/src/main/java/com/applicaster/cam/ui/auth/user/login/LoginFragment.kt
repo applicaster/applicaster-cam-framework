@@ -1,6 +1,5 @@
 package com.applicaster.cam.ui.auth.user.login
 
-import android.view.Gravity
 import android.view.View
 import com.applicaster.cam.ContentAccessManager
 import com.applicaster.cam.config.ui.UIKey

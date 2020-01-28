@@ -69,12 +69,12 @@ class AccountActivationFragment : BaseInputFragment(), IAccountActivationView {
     override fun onLastFragmentClosed() = Unit
 
     companion object {
-        const val TAG = "AccountActivationFragment"
         private const val KEY_USER_AUTH_DATA = "user_auth_data"
 
         fun newInstance(authData: HashMap<String, String>): AccountActivationFragment {
-            val args = Bundle().apply { putSerializable(KEY_USER_AUTH_DATA, authData) }
-            return AccountActivationFragment().apply { arguments = args }
+            return AccountActivationFragment().apply { arguments = getBundle(authData) }
         }
+
+        fun getBundle(authData: HashMap<String, String>) = Bundle().apply { putSerializable(KEY_USER_AUTH_DATA, authData) }
     }
 }
