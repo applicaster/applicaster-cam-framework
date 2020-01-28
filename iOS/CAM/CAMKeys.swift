@@ -35,6 +35,7 @@ public enum CAMKeys: String {
     case isAlternativeAuthenticationEnabled = "offer_alternative_authentication"
     case separatorText = "alternative_authentication_separator_text"
     case alternativeAuthenticationPromtText = "alternative_authentication_prompt_text"
+    case signUpActivationCodeEnabled = "use_signup_activation_code_method"
     
     case defaultAlertText = "default_alert_text"
     case emptyFieldsMessage = "required_field_alert_text"
@@ -76,6 +77,13 @@ public enum CAMKeys: String {
     case passwordResetTitleText = "password_reset_title_text"
     case passwordResetInfoText = "password_reset_description_text"
     case passwordResetButtonText = "password_reset_button_text"
+    
+    //Account Activation
+    
+    case accountActivationScreenTitleText = "account_activation_title_text"
+    case accountActivationScreenDescriptionText = "account_activation_description_text"
+    case accountActivationButtonText = "account_activation_button_text"
+    case resendCodeButtonText = "resend_code_text"
     
     //Alert
     
@@ -160,4 +168,6 @@ public enum CAMStyles: String {
     case confirmationButtonFont = "confirmation_button"
     
     case cancelButtonFont = "cancel_button"
+    
+    case resendCodeButtonFont = "resend_code"
 }

@@ -34,13 +34,7 @@ class AuthorizationCoordinator: AuthorizationCoordinatorProtocol {
     
     var isAccountActivationEnabled: Bool {
         let configDictionary = parentCoordinator.getCamDelegate().getPluginConfig()
-        if let json = configDictionary[CAMKeys.authFields.rawValue],
-           let data = json.data(using: .utf8),
-           let jsonAuthFields = try? JSONDecoder().decode(AuthFields.self, from: data),
-           let _ = jsonAuthFields.accountActivation {
-            return true
-        }
-        return false
+        return configDictionary[CAMKeys.signUpActivationCodeEnabled.rawValue] == true.description ? true : false
     }
     
     public init(navigationController: UINavigationController? = nil,
@@ -82,16 +76,16 @@ class AuthorizationCoordinator: AuthorizationCoordinatorProtocol {
         showLogoutScreen()
     }
     
-    func activateAccount(accountInfo: [String: String],
+    func activateAccount(userData: [String: String],
                          with completion: @escaping (Bool) -> Void) {
         let closeAction = {
             self.finishCoordinatorFlow(result: false)
         }
-        childCoordinator = AccountActivationCoordinator(accountInfo: accountInfo,
-                                     navigationController: navigationController,
-                                     pluginDataProvider: parentCoordinator,
-                                     closeAction: closeAction,
-                                     completion: completion)
+        childCoordinator = AccountActivationCoordinator(userData: userData,
+                                                        navigationController: navigationController,
+                                                        pluginDataProvider: parentCoordinator,
+                                                        closeAction: closeAction,
+                                                        completion: completion)
         childCoordinator!.start()
     }
     
@@ -128,7 +122,7 @@ class AuthorizationCoordinator: AuthorizationCoordinatorProtocol {
     
     func finishAuthentification(result: Bool, userData: [String : String]?) {
         if isAccountActivationEnabled && !parentCoordinator.getCamDelegate().isUserActivated() {
-            activateAccount(accountInfo: userData ?? [String: String]()) { (result) in
+            activateAccount(userData: userData ?? [String: String]()) { (result) in
                 self.finishCoordinatorFlow(result: false)
             }
         } else {

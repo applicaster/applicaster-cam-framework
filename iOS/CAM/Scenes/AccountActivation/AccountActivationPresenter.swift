@@ -15,13 +15,16 @@ protocol AccountActivationViewProtocol: AnyObject {
 }
 
 class AccountActivationPresenter {
+    var userData = [String: String]()
     unowned var view: AccountActivationViewProtocol
     unowned var coordinatorDelegate: AccountActivationCoordinatorProtocol
     unowned var camDelegate: CAMDelegate
     
-    init(view: AccountActivationViewProtocol,
+    init(userData: [String: String],
+         view: AccountActivationViewProtocol,
          coordinatorDelegate: AccountActivationCoordinatorProtocol,
          camDelegate: CAMDelegate) {
+        self.userData = userData
         self.view = view
         self.coordinatorDelegate = coordinatorDelegate
         self.camDelegate = camDelegate

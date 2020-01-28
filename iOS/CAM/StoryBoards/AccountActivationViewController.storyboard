@@ -136,7 +136,6 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="Cbg-12-wLE"/>
                                                 </constraints>
-                                                <state key="normal" title="Button"/>
                                                 <connections>
                                                     <action selector="resendCode:" destination="qq0-87-Vro" eventType="touchUpInside" id="GQt-ZJ-jgl"/>
                                                 </connections>

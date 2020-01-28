@@ -76,6 +76,7 @@ class SignUpPresenter {
                     let signupSuccessEvent = AnalyticsEvents.standardSignUpSuccess(playableInfo)
                     ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: signupSuccessEvent)
                     self.coordinatorDelegate.finishAuthentification(result: true, userData: data)
+                    self.view.showLoadingScreen(false)
                 case .failure(let error):
                     let signupFailureEvent = AnalyticsEvents.standardSignUpFailure(playableInfo)
                     ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: signupFailureEvent)

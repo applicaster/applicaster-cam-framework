@@ -15,18 +15,18 @@ protocol AccountActivationCoordinatorProtocol: Coordinator {
 
 class AccountActivationCoordinator: AccountActivationCoordinatorProtocol {
     
-    var accountInfo: [String: String]
+    var userData: [String: String]
     weak var navigationController: UINavigationController?
     unowned var pluginDataProvider: PluginDataProviderProtocol
     var closeAction: (() -> Void)?
     var completionHandler: ((Bool) -> Void)?
     
-    public init(accountInfo: [String: String],
+    public init(userData: [String: String],
                 navigationController: UINavigationController?,
                 pluginDataProvider: PluginDataProviderProtocol,
                 closeAction: @escaping () -> Void,
                 completion: @escaping (Bool) -> Void) {
-        self.accountInfo = accountInfo
+        self.userData = userData
         self.navigationController = navigationController
         self.pluginDataProvider = pluginDataProvider
         self.closeAction = closeAction

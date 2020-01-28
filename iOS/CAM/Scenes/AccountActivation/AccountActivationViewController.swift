@@ -38,8 +38,54 @@ class AccountActivationViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter?.viewDidLoad()
+        setupUI()
+        subscribeKeyboardNotifications()
+        configureElements()
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        loadingPopover.frame = self.view.bounds
+        setupConstraints()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    
+    func configureElements() {
+        backgroundImageView.setStyle(asset: .background)
+        backButton.setStyle(iconAsset: .backButton)
+        closeButton.setStyle(iconAsset: .closeButton)
+        logoImageView.setStyle(asset: .headerLogo)
+        titleLabel.setStyle(config: configDictionary,
+                            camTextKey: .accountActivationScreenTitleText,
+                            style: .screenTitleFont)
+        infoLabel.setStyle(config: configDictionary,
+                           camTextKey: .accountActivationScreenDescriptionText,
+                           style: .screenDescriptionFont)
+        activateAccountButton.setStyle(config: configDictionary,
+                                       backgroundAsset: .actionButton,
+                                       camTitleKey: .accountActivationButtonText,
+                                       style: .actionButtonFont)
+        resendCodeButton.setStyle(config: configDictionary,
+                                  camTitleKey: .resendCodeButtonText,
+                                  style: .resendCodeButtonFont)
+        
+    }
+    
+    func setupConstraints() {
+        activationTableHeightConstraint.constant = codeActivationFieldsTableHeight
+        self.view.layoutIfNeeded()
+    }
+    
+    func setupUI() {
+        codeActivationFieldsTable.backgroundView = UIView()
+        codeActivationFieldsTable.allowsSelection = false
+        closeButton.isHidden = presenter?.camDelegate.analyticsStorage().trigger == .appLaunch
+    }
+    
     // MARK: - Keyboard
 
     @IBAction func hideKeyboard() {
