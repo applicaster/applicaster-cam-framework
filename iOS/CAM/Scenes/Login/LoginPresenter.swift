@@ -42,7 +42,7 @@ class LoginPresenter {
     }
     
     func showResetPasswordScreen() {
-        coordinatorDelegate.showResetPasswordScreen()
+        coordinatorDelegate.startResetPasswordFlow()
     }
     
     func showSignUpScreen() {

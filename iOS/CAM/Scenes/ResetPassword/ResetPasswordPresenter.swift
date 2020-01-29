@@ -40,10 +40,6 @@ class ResetPasswordPresenter {
         }
     }
     
-    func showResetPasswordScreen() {
-        coordinatorDelegate.showResetPasswordScreen()
-    }
-    
     func backToPreviousScreen() {
         coordinatorDelegate.popCurrentScreen()
     }

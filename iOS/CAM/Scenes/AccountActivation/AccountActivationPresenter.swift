@@ -17,12 +17,12 @@ protocol AccountActivationViewProtocol: AnyObject {
 class AccountActivationPresenter {
     var userData = [String: String]()
     unowned var view: AccountActivationViewProtocol
-    unowned var coordinatorDelegate: AccountActivationCoordinatorProtocol
+    unowned var coordinatorDelegate: AuthorizationCoordinatorProtocol
     unowned var camDelegate: CAMDelegate
     
     init(userData: [String: String],
          view: AccountActivationViewProtocol,
-         coordinatorDelegate: AccountActivationCoordinatorProtocol,
+         coordinatorDelegate: AuthorizationCoordinatorProtocol,
          camDelegate: CAMDelegate) {
         self.userData = userData
         self.view = view
@@ -91,7 +91,7 @@ class AccountActivationPresenter {
     }
     
     func backToPreviousScreen() {
-        self.coordinatorDelegate.removeCoordinator()
+        self.coordinatorDelegate.popCurrentScreen()
     }
     
     func resendCode() {

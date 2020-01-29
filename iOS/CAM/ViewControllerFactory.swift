@@ -38,11 +38,11 @@ class ViewControllerFactory {
     
     static func createAccountActivationScreen(userData: [String: String],
                                               pluginDataProvider: PluginDataProviderProtocol,
-                                              accountActivationCoordinator: AccountActivationCoordinatorProtocol) -> AccountActivationViewController {
+                                              authorizationCoordinator: AuthorizationCoordinatorProtocol) -> AccountActivationViewController {
         let accountActivationVC = AccountActivationViewController.instantiateVC()
         let presenter = AccountActivationPresenter(userData: userData,
                                                    view: accountActivationVC,
-                                                   coordinatorDelegate: accountActivationCoordinator,
+                                                   coordinatorDelegate: authorizationCoordinator,
                                                    camDelegate: pluginDataProvider.getCamDelegate())
         accountActivationVC.presenter = presenter
         return accountActivationVC
