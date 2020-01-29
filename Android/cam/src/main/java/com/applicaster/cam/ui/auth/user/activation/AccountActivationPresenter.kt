@@ -2,12 +2,8 @@ package com.applicaster.cam.ui.auth.user.activation
 
 import com.applicaster.cam.AccountActivationCallback
 import com.applicaster.cam.CamFlow
-import com.applicaster.cam.SendActivationCodeCallback
+import com.applicaster.cam.SendAuthActivationCodeCallback
 import com.applicaster.cam.ContentAccessManager
-import com.applicaster.cam.analytics.Action
-import com.applicaster.cam.analytics.AnalyticsGatewaySession
-import com.applicaster.cam.analytics.AnalyticsUtil
-import com.applicaster.cam.params.auth.AuthField
 import com.applicaster.cam.params.auth.AuthFieldConfig
 import com.applicaster.cam.params.auth.AuthScreenType
 import com.applicaster.cam.ui.CamNavigationRouter
@@ -18,14 +14,14 @@ class AccountActivationPresenter(
     private val authData: HashMap<String, String>,
     private val navigationRouter: CamNavigationRouter
 ) :
-    BaseInputPresenter(view), IAccountActivationPresenter, SendActivationCodeCallback,
+    BaseInputPresenter(view), IAccountActivationPresenter, SendAuthActivationCodeCallback,
     AccountActivationCallback {
 
     override fun onViewCreated() {
         super.onViewCreated()
         view?.showLoadingIndicator()
         view?.customize()
-        ContentAccessManager.contract.sendActivationCode(authData, this)
+        ContentAccessManager.contract.sendAuthActivationCode(authData, this)
     }
 
     override fun performAuthAction(input: HashMap<String, String>) {
@@ -35,7 +31,7 @@ class AccountActivationPresenter(
 
     override fun onResendCodeClicked() {
         view?.showLoadingIndicator()
-        ContentAccessManager.contract.sendActivationCode(authData, this)
+        ContentAccessManager.contract.sendAuthActivationCode(authData, this)
     }
 
     override fun onFailure(msg: String) {

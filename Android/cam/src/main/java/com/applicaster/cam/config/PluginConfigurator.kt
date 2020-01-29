@@ -21,9 +21,8 @@ class PluginConfigurator(private val pluginConfig: Map<String, String>) : Config
     override fun isAccountActivationRequired() =
         getOrEmpty(KEY_ACCOUNT_ACTIVATION_REQUIRED)?.toBoolean() ?: false
 
-    override fun isPasswordUpdateRequired(): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun isPasswordUpdateRequired() =
+        getOrEmpty(KEY_PASSWORD_UPDATE_REQUIRED)?.toBoolean() ?: false
 
     override fun getAuthFields(type: AuthScreenType): AuthFieldConfig {
         val jsonConfig = pluginConfig.getValue(KEY_AUTH_FIELDS)
@@ -137,6 +136,7 @@ const val KEY_PAYMENT_CONFIRMATION_TITLE_TEXT = "payment_confirmation_title_text
 const val KEY_PAYMENT_CONFIRMATION_DESC_TEXT = "payment_confirmation_description_text"
 const val KEY_TRIGGER_NO_APP_LAUNCH = "trigger_on_app_launch"
 const val KEY_ACCOUNT_ACTIVATION_REQUIRED = "use_signup_activation_code_method"
+const val KEY_PASSWORD_UPDATE_REQUIRED = "use_activation_code_method"
 
 //Analytics related keys
 const val KEY_BILLING_CONFIRMATION_TITLE = "payment_confirmation_title_text"

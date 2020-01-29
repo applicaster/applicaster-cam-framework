@@ -10,11 +10,15 @@ interface ICamContract {
 
     fun signUp(authFieldsInput: HashMap<String, String>, callback: SignUpCallback)
 
-    fun sendActivationCode(authFieldsInput: HashMap<String, String>, callback: SendActivationCodeCallback)
+    fun sendAuthActivationCode(authFieldsInput: HashMap<String, String>, callback: SendAuthActivationCodeCallback)
 
     fun activateAccount(authFieldsInput: HashMap<String, String>, callback: AccountActivationCallback)
 
     fun resetPassword(authFieldsInput: HashMap<String, String>, callback: PasswordResetCallback)
+
+    fun sendPasswordActivationCode(authFieldsInput: HashMap<String, String>, callback: SendPasswordActivationCodeCallback)
+
+    fun updatePassword(authFieldsInput: HashMap<String, String>, callback: PasswordUpdateCallback)
 
     fun loginWithFacebook(email: String, id: String, callback: FacebookAuthCallback)
 

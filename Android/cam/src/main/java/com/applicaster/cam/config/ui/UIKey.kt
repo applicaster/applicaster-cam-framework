@@ -44,6 +44,11 @@ enum class UIKey(
     PASSWORD_RESET_ACTION_BUTTON(text = UI_KEY_PWD_RESET_BUTTON_TEXT, textStyle = StyleKey.ACTION_BUTTON, image = UI_KEY_PWD_RESET_BUTTON_IMAGE),
     BILLING_ITEM_SUBS_BUTTON(text = UI_KEY_BILLING_ITEM_SUBS_BUTTON_TEXT, textStyle = StyleKey.ACTION_BUTTON, image = UI_KEY_BILLING_ITEM_SUBS_BUTTON_IMAGE),
 
+    PWD_ACTIVATION_CODE_BUTTON_TEXT(text = UI_KEY_PWD_ACTIVATION_CODE_BUTTON_TEXT, textStyle = StyleKey.ACTION_BUTTON, image = UI_KEY_PWD_RESET_BUTTON_IMAGE),
+    PASSWORD_UPDATE_TITLE_TEXT(text = UI_KEY_PWD_UPDATE_TITLE_TEXT, textStyle = StyleKey.SCREEN_TITLE),
+    PASSWORD_UPDATE_DESC_TEXT(text = UI_KEY_PWD_UPDATE_DESC_TEXT, textStyle = StyleKey.SCREEN_DESC),
+    PASSWORD_UPDATE_ACTION_BUTTON(text = UI_KEY_PWD_UPDATE_BUTTON_TEXT, textStyle = StyleKey.ACTION_BUTTON, image = UI_KEY_PWD_RESET_BUTTON_IMAGE),
+
     BILLING_ITEM_PARENT(image = UI_KEY_BILLING_ITEM_IMAGE),
     BILLING_ITEM_TITLE(textStyle = StyleKey.PAYMENT_OPTIONS_TITLE),
     BILLING_ITEM_DETAILS_TEXT(textStyle = StyleKey.PAYMENT_OPTIONS_DESC),
@@ -128,6 +133,13 @@ const val UI_KEY_PWD_RESET_TITLE_TEXT = "password_reset_title_text"
 const val UI_KEY_PWD_RESET_DESC_TEXT = "password_reset_description_text"
 const val UI_KEY_PWD_RESET_BUTTON_TEXT = "password_reset_button_text"
 const val UI_KEY_PWD_RESET_BUTTON_IMAGE= "cam_action_button_asset"
+// endregion
+
+// region Password update UI keys
+const val UI_KEY_PWD_ACTIVATION_CODE_BUTTON_TEXT = "send_pw_activation_code_button_text"
+const val UI_KEY_PWD_UPDATE_TITLE_TEXT = "password_update_title_text"
+const val UI_KEY_PWD_UPDATE_DESC_TEXT = "password_update_description_text"
+const val UI_KEY_PWD_UPDATE_BUTTON_TEXT = "password_update_button_text"
 // endregion
 
 // region Billing item UI keys

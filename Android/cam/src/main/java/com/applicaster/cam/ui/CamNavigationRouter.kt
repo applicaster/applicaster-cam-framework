@@ -15,6 +15,7 @@ import com.applicaster.cam.ui.base.view.IBaseActivity
 import com.applicaster.cam.ui.confirmation.ConfirmationDialog
 import com.applicaster.cam.ui.billing.BillingFragment
 import com.applicaster.cam.ui.auth.password.reset.PasswordResetFragment
+import com.applicaster.cam.ui.auth.password.update.PasswordUpdateFragment
 import com.applicaster.cam.ui.auth.user.activation.AccountActivationFragment
 import com.applicaster.cam.ui.base.view.BaseFragment
 import java.util.HashMap
@@ -59,10 +60,13 @@ class CamNavigationRouter(private val baseActivity: IBaseActivity) : BaseNavigat
     fun attachPasswordResetFragment() {
         val tag = PasswordResetFragment::class.java.canonicalName
         val fragment: Fragment = fragmentManager?.findFragmentByTag(tag) ?: PasswordResetFragment()
-        val fragmentTransaction: FragmentTransaction? = fragmentManager?.beginTransaction()
-        fragmentTransaction?.addToBackStack(tag)
-        fragmentTransaction?.replace(fragmentContainer!!, fragment, tag)
-        fragmentTransaction?.commit()
+        replaceWithBackStack(tag, fragment)
+    }
+
+    fun attachPasswordUpdateFragment() {
+        val tag = PasswordUpdateFragment::class.java.canonicalName
+        val fragment: Fragment = fragmentManager?.findFragmentByTag(tag) ?: PasswordUpdateFragment()
+        replaceWithBackStack(tag, fragment)
     }
 
     fun attachBillingFragment() {
@@ -85,10 +89,7 @@ class CamNavigationRouter(private val baseActivity: IBaseActivity) : BaseNavigat
         } else {
             fragment = AccountActivationFragment.newInstance(userInput)
         }
-        val fragmentTransaction: FragmentTransaction? = fragmentManager?.beginTransaction()
-        fragmentTransaction?.addToBackStack(tag)
-        fragmentTransaction?.replace(fragmentContainer!!, fragment, tag)
-        fragmentTransaction?.commit()
+        replaceWithBackStack(tag, fragment)
     }
 
     fun showConfirmationDialog(dialogType: AlertDialogType) {
@@ -133,6 +134,15 @@ class CamNavigationRouter(private val baseActivity: IBaseActivity) : BaseNavigat
                 CamFlow.LOGOUT -> showConfirmationDialog(AlertDialogType.RESET_PASSWORD)
                 else -> baseActivity.close()
             }
+        }
+    }
+
+    private fun replaceWithBackStack(tag: String?, fragment: Fragment) {
+        fragmentContainer?.let {
+            val fragmentTransaction: FragmentTransaction? = fragmentManager?.beginTransaction()
+            fragmentTransaction?.addToBackStack(tag)
+            fragmentTransaction?.replace(it, fragment, tag)
+            fragmentTransaction?.commit()
         }
     }
 

@@ -18,6 +18,13 @@ open class BaseNavigationRouter() {
         this.fragmentContainer = baseActivity.getFragmentContainerId()
     }
 
+    fun navigateFragmentBackTwice() {
+        fragmentManager?.apply {
+            repeat(2) { popBackStackImmediate() }
+            executePendingTransactions()
+        }
+    }
+
     fun openBrowserWithUrl(url: String) {
         val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url)).apply { flags = Intent.FLAG_ACTIVITY_NEW_TASK }
         context?.get()?.startActivity(browserIntent)
