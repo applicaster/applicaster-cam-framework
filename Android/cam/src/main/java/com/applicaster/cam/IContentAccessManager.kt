@@ -12,14 +12,23 @@ interface IContentAccessManager {
  */
 interface LoginCallback : ActionCallback
 interface SignUpCallback : ActionCallback
+interface AccountActivationCallback : ActionCallback
 interface PasswordResetCallback : ActionCallback
+interface PasswordUpdateCallback : ActionCallback
+interface SendPasswordActivationCodeCallback : ActivationCodeCallback
+interface SendAuthActivationCodeCallback : ActivationCodeCallback
 interface FacebookAuthCallback {
     fun onFacebookAuthFailure(msg: String)
     fun onFacebookAuthSuccess()
 }
+
 interface ActionCallback {
     fun onFailure(msg: String)
     fun onActionSuccess()
+}
+interface ActivationCodeCallback {
+    fun onCodeSendingFailure(msg: String)
+    fun onCodeSendingSuccess()
 }
 
 interface EntitlementsLoadCallback {

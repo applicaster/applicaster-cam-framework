@@ -86,10 +86,35 @@ object MockPluginConfiguration {
     ],
     "Password-reset": [
     {
-    "type": "EMAIL",
-    "key": "email",
-    "title": "Email",
-    "hint": "Email",
+    "type": "TEXT",
+    "key": "username",
+    "title": "Username",
+    "hint": "Username",
+    "mandatory": true
+    }
+    ],
+    "Account-activation": [
+    {
+    "type": "NUMBER",
+    "key": "code",
+    "title": "Code",
+    "hint": "Code",
+    "mandatory": true
+    }
+    ],
+    "Password-update": [
+    {
+    "type": "NUMBER",
+    "key": "code",
+    "title": "Code",
+    "hint": "Code",
+    "mandatory": true
+    },
+    {
+    "type": "TEXT",
+    "key": "new_password",
+    "title": "New password",
+    "hint": "New password",
     "mandatory": true
     }
     ]

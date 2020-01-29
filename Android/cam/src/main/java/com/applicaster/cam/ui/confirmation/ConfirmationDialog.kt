@@ -19,6 +19,7 @@ import kotlinx.android.synthetic.main.layout_confirmation.view.*
 enum class AlertDialogType {
     BILLING,
     RESET_PASSWORD,
+    UPDATE_PASSWORD,
     RESTORE,
     LOGOUT,
     UNDEFINED
@@ -59,6 +60,7 @@ class ConfirmationDialog : DialogFragment() {
             when (dialogType) {
                 AlertDialogType.BILLING, AlertDialogType.RESTORE -> baseActivity?.close()
                 AlertDialogType.RESET_PASSWORD -> baseActivity?.goBack()
+                AlertDialogType.UPDATE_PASSWORD -> baseActivity?.getNavigationRouter()?.navigateFragmentBackTwice()
                 AlertDialogType.LOGOUT -> ContentAccessManager.contract.logout(true)
                 else -> baseActivity?.goBack()
             }
@@ -92,7 +94,7 @@ class ConfirmationDialog : DialogFragment() {
                 )
                 //
             }
-            AlertDialogType.RESET_PASSWORD -> {
+            AlertDialogType.RESET_PASSWORD, AlertDialogType.UPDATE_PASSWORD -> {
                 UIMapper.apply {
                     map(dialogView?.layout_confirmation_background!!, UIKey.CONFIRMATION_DIALOG_IMAGE)
                     map(dialogView?.tv_confirmation_title!!, UIKey.RESET_PWD_CONFIRMATION_TITLE_TEXT)

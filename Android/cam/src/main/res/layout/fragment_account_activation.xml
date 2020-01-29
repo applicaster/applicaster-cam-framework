@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/container_reset_password"
+    android:id="@+id/container_account_activation"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
@@ -13,27 +13,27 @@
         android:layout_height="@dimen/toolbar_height" />
 
     <com.applicaster.util.ui.CustomTextView
-        android:id="@+id/tv_reset_title"
+        android:id="@+id/tv_activation_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="@dimen/password_reset_title_margin_top"
+        android:layout_marginTop="@dimen/account_activation_title_margin_top"
         android:gravity="center"
-        android:text="Reset Password" />
+        android:text="Activate Account" />
 
     <com.applicaster.util.ui.CustomTextView
-        android:id="@+id/tv_reset_title_desc"
+        android:id="@+id/tv_activation_title_desc"
         android:layout_width="@dimen/password_reset_desc_width"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/password_reset_desc_margin_top"
+        android:layout_marginTop="@dimen/account_activation_input_fields_margin_top"
         android:ellipsize="end"
         android:gravity="center_horizontal"
         android:maxLines="2"
-        android:text="Type in you e-mail so we would send you the new password" />
+        android:text="Enter the activation code that was delivered to your mail" />
 
     <ScrollView
-        android:id="@+id/container_scrollable_reset_input"
+        android:id="@+id/container_scrollable_activation_input"
         android:layout_width="wrap_content"
         android:layout_height="match_parent">
 
@@ -44,18 +44,31 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/container_linear_reset_input"
+                android:id="@+id/container_linear_activation_input"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/password_reset_input_fields_margin_top"
+                android:layout_marginTop="@dimen/account_activation_input_fields_margin_top"
                 android:gravity="center_horizontal"
                 android:orientation="vertical" />
 
             <com.applicaster.util.ui.CustomButton
-                android:id="@+id/btn_reset"
+                android:id="@+id/btn_activate"
                 style="@style/EditTextAuthInput"
                 android:layout_marginTop="@dimen/auth_text_margin"
-                android:text="RESTORE" />
+                android:text="ACTIVATE" />
+
+            <com.applicaster.util.ui.CustomTextView
+                android:id="@+id/tv_resend_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/account_activation_resend_code_tv_margin_top"
+                android:padding="@dimen/padding_medium"
+                android:ellipsize="end"
+                android:gravity="center_horizontal"
+                android:maxLines="1"
+                android:text="Resend Code" />
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

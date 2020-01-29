@@ -20,6 +20,7 @@ class SignUpPresenter(
         private val navigationRouter: CamNavigationRouter
 ) :
         UserAuthPresenter(view), ISignUpPresenter, SignUpCallback, FacebookAuthCallback, ICustomLinkActionHandler {
+    private val userInput: HashMap<String, String> = hashMapOf()
 
     override fun onViewCreated() {
         super.onViewCreated()
@@ -80,16 +81,24 @@ class SignUpPresenter(
         )
         //
 
-        when (ContentAccessManager.camFlow) {
-            CamFlow.AUTH_AND_STOREFRONT, CamFlow.STOREFRONT -> navigationRouter.attachBillingFragment()
-            else -> view?.close()
+        if (ContentAccessManager.pluginConfigurator.isAccountActivationRequired() &&
+            !ContentAccessManager.contract.isUserActivated()
+        ) {
+            navigationRouter.attachAccountActivation(userInput)
+        } else {
+            when (ContentAccessManager.camFlow) {
+                CamFlow.AUTH_AND_STOREFRONT, CamFlow.STOREFRONT -> navigationRouter.attachBillingFragment()
+                else -> view?.close()
+            }
         }
     }
 
     override fun getAuthFieldConfig(): AuthFieldConfig =
-            ContentAccessManager.pluginConfigurator.getSignInAuthFields()
+            ContentAccessManager.pluginConfigurator.getAuthFields(AuthScreenType.SIGNUP)
 
     override fun performAuthAction(input: HashMap<String, String>) {
+        userInput.clear()
+        userInput.putAll(input)
         ContentAccessManager.contract.signUp(input, this)
     }
 
