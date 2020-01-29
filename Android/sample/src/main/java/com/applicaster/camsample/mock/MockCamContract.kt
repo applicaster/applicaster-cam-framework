@@ -31,6 +31,22 @@ class MockCamContract(private val context: Context) : ICamContract {
         Handler().postDelayed({ callback.onActionSuccess() }, 1250)
     }
 
+    override fun sendAuthActivationCode(authFieldsInput: HashMap<String, String>, callback: SendAuthActivationCodeCallback) {
+        Handler().postDelayed({ callback.onCodeSendingFailure("Test fail") }, 1250)
+    }
+
+    override fun sendPasswordActivationCode(authFieldsInput: HashMap<String, String>, callback: SendPasswordActivationCodeCallback) {
+        Handler().postDelayed({ callback.onCodeSendingSuccess() }, 1250)
+    }
+
+    override fun updatePassword(authFieldsInput: HashMap<String, String>, callback: PasswordUpdateCallback) {
+        Handler().postDelayed({ callback.onActionSuccess() }, 1250)
+    }
+
+    override fun activateAccount(authFieldsInput: HashMap<String, String>, callback: AccountActivationCallback) {
+        Handler().postDelayed({ callback.onActionSuccess() }, 1250)
+    }
+
     override fun resetPassword(authFieldsInput: HashMap<String, String>, callback: PasswordResetCallback) {
         Handler().postDelayed({ callback.onActionSuccess() }, 1250)
     }
@@ -42,6 +58,8 @@ class MockCamContract(private val context: Context) : ICamContract {
     override fun signupWithFacebook(email: String, id: String, callback: FacebookAuthCallback) {
         Handler().postDelayed({ callback.onFacebookAuthSuccess() }, 1250)
     }
+
+    override fun isUserActivated() = false
 
     override fun isUserLogged() = false
 
