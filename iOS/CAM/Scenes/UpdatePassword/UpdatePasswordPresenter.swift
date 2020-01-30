@@ -17,13 +17,16 @@ protocol UpdatePasswordViewProtocol: AnyObject {
 
 class UpdatePasswordPresenter {
     
+    var userResetPasswordInputData = [String: String]() //user input from previous screen
     unowned var view: ResetPasswordViewProtocol
     unowned var coordinatorDelegate: ResetPasswordCoordinatorProtocol
     unowned var camDelegate: CAMDelegate
     
-    init(view: ResetPasswordViewProtocol,
+    init(userData: [String: String],
+         view: ResetPasswordViewProtocol,
          coordinatorDelegate: ResetPasswordCoordinatorProtocol,
          camDelegate: CAMDelegate) {
+        self.userResetPasswordInputData = userData
         self.view = view
         self.coordinatorDelegate = coordinatorDelegate
         self.camDelegate = camDelegate
@@ -50,6 +53,7 @@ class UpdatePasswordPresenter {
     func updatePassword(data: [AuthField]) {
         self.view.showLoadingScreen(true)
         if let data = validate(data: data) {
+            let data = data.merge(userResetPasswordInputData)
             camDelegate.updatePassword(data: data, completion: { [weak self] (result) in
                 guard let self = self else { return }
                 switch result {

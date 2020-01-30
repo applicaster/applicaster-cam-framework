@@ -59,10 +59,12 @@ class ViewControllerFactory {
         return resetPasswordVC
     }
     
-    static func createUpdatePasswordScreen(pluginDataProvider: PluginDataProviderProtocol,
+    static func createUpdatePasswordScreen(userData: [String: String],
+                                           pluginDataProvider: PluginDataProviderProtocol,
                                            resetPasswordCoordinator: ResetPasswordCoordinatorProtocol) -> UpdatePasswordViewController {
         let updatePasswordVC = UpdatePasswordViewController.instantiateVC()
-        let presenter = UpdatePasswordPresenter(view: updatePasswordVC,
+        let presenter = UpdatePasswordPresenter(userData: userData,
+                                                view: updatePasswordVC,
                                                 coordinatorDelegate: resetPasswordCoordinator,
                                                 camDelegate: pluginDataProvider.getCamDelegate())
         updatePasswordVC.presenter = presenter

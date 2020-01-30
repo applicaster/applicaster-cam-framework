@@ -9,7 +9,7 @@ import ZappPlugins
 
 protocol ResetPasswordCoordinatorProtocol: Coordinator {
     func finishCoordinatorFlow()
-    func showUpdatePasswordScreen()
+    func showUpdatePasswordScreen(userData: [String: String])
     func popCurrentScreen()
     func close()
 }
@@ -45,9 +45,10 @@ class ResetPasswordCoordinator: ResetPasswordCoordinatorProtocol {
         navigationController?.pushViewController(controller, animated: true)
     }
     
-    func showUpdatePasswordScreen() {
-        let controller = ViewControllerFactory.createUpdatePasswordScreen(pluginDataProvider: pluginDataProvider,
-                                                                         resetPasswordCoordinator: self)
+    func showUpdatePasswordScreen(userData: [String: String]) {
+        let controller = ViewControllerFactory.createUpdatePasswordScreen(userData: userData,
+                                                                          pluginDataProvider: pluginDataProvider,
+                                                                          resetPasswordCoordinator: self)
         navigationController?.pushViewController(controller, animated: true)
     }
     

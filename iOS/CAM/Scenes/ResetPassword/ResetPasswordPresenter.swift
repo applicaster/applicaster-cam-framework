@@ -70,7 +70,7 @@ class ResetPasswordPresenter {
     func sendPasswordActivationCode(data: [AuthField]) {
         let playableInfo = camDelegate.playableItemInfo
         let activateAccountEvent = AnalyticsEvents.sendActivationCode(playableInfo,
-                                                                      codePurpose: "PasswordUpdate",
+                                                                      codePurpose: "Password Update",
                                                                       isResend: true)
         ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: activateAccountEvent)
         self.view.showLoadingScreen(true)
@@ -80,7 +80,7 @@ class ResetPasswordPresenter {
                 switch result {
                 case .success:
                     self.view.showLoadingScreen(false)
-                    self.coordinatorDelegate.showUpdatePasswordScreen()
+                    self.coordinatorDelegate.showUpdatePasswordScreen(userData: data)
                 case .failure(let error):
                     self.view.showLoadingScreen(false)
                     self.view.showError(description: error.localizedDescription)
