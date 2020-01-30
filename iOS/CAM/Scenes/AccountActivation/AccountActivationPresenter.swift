@@ -15,7 +15,7 @@ protocol AccountActivationViewProtocol: AnyObject {
 }
 
 class AccountActivationPresenter {
-    var userData = [String: String]()
+    var userAuthScreenInputData = [String: String]()
     unowned var view: AccountActivationViewProtocol
     unowned var coordinatorDelegate: AuthorizationCoordinatorProtocol
     unowned var camDelegate: CAMDelegate
@@ -24,7 +24,7 @@ class AccountActivationPresenter {
          view: AccountActivationViewProtocol,
          coordinatorDelegate: AuthorizationCoordinatorProtocol,
          camDelegate: CAMDelegate) {
-        self.userData = userData
+        self.userAuthScreenInputData = userData
         self.view = view
         self.coordinatorDelegate = coordinatorDelegate
         self.camDelegate = camDelegate
@@ -78,7 +78,7 @@ class AccountActivationPresenter {
         
         self.view.showLoadingScreen(true)
         if let data = validate(data: data) {
-            let data = data.merge(userData)
+            let data = data.merge(userAuthScreenInputData)
             camDelegate.activateAccount(data: data, completion: { [weak self] (result) in
                 guard let self = self else { return }
                 switch result {
@@ -105,7 +105,7 @@ class AccountActivationPresenter {
                                                                       isResend: isResend)
         ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: activateAccountEvent)
         self.view.showLoadingScreen(true)
-        camDelegate.sendAuthActivationCode(data: userData, completion: { [weak self] (result) in
+        camDelegate.sendAuthActivationCode(data: userAuthScreenInputData, completion: { [weak self] (result) in
             guard let self = self else { return }
             switch result {
             case .success:
