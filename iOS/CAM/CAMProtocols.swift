@@ -32,7 +32,13 @@ public protocol CAMDelegate: AnyObject {
     func login(authData: [String: String], completion: @escaping (Result<Void, Error>) -> Void)
     func logout(completion: @escaping (Result<Void, Error>) -> Void)
     func signUp(authData: [String: String], completion: @escaping (Result<Void, Error>) -> Void)
+    func isUserActivated() -> Bool
+    func activateAccount(data: [String: String], completion: @escaping (Result<Void, Error>) -> Void)
+    func sendAuthActivationCode(data: [String: String], completion: @escaping (Result<Void, Error>) -> Void)
+    
+    func updatePassword(data: [String: String], completion: @escaping (Result<Void, Error>) -> Void)
     func resetPassword(data: [String: String], completion: @escaping (Result<Void, Error>) -> Void)
+    func sendPasswordActivationCode(data: [String: String], completion: @escaping (Result<Void, Error>) -> Void)
     
     func availableProducts(completion: @escaping (Result<[String], Error>) -> Void)
     func itemPurchased(purchasedItem: PurchasedProduct, completion: @escaping (Result<Void, Error>) -> Void)

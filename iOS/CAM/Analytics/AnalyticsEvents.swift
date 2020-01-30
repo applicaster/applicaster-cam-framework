@@ -91,6 +91,7 @@ enum AnalyticsEvents {
     case alternativeSignUpSuccess(PlayableItemInfo)
     case alternativeSignUpFailure(PlayableItemInfo)
     case alternativeSignUpCancel(PlayableItemInfo)
+    case activateAccount(PlayableItemInfo)
     case launchContentGatewayPlugin(Trigger, firstScreen: String, PlayableItemInfo)
     case contentGatewaySession(Trigger)
     case switchToLoginScreen
@@ -107,6 +108,7 @@ enum AnalyticsEvents {
     case completeRestorePurchase(PlayableItemInfo, [PurchaseProperties?])
     case storeRestorePurchaseError(Error, PlayableItemInfo, PurchaseProperties?)
     case tapCustomLink(link: String, text: String, screenName: String)
+    case sendActivationCode(PlayableItemInfo, codePurpose: String, isResend: Bool)
     static var userFlow: [String] = []
     
     var key: String {
@@ -141,6 +143,8 @@ enum AnalyticsEvents {
         case .completeRestorePurchase: return "Complete Restore Purchase"
         case .storeRestorePurchaseError: return "Store Restore Purchase Error"
         case .tapCustomLink: return "Tap Custom Link"
+        case .activateAccount: return "Activate Account"
+        case .sendActivationCode: return "Send Activation Code"
         }
     }
     
@@ -160,7 +164,8 @@ enum AnalyticsEvents {
              .tapAlternativeSignUp(let info),
              .alternativeSignUpSuccess(let info),
              .alternativeSignUpFailure(let info),
-             .alternativeSignUpCancel(let info):
+             .alternativeSignUpCancel(let info),
+             .activateAccount(let info):
             metadata = metadata.merge(info.metadata)
         case .launchContentGatewayPlugin(let trigger, let firstScreen, let info):
             metadata = metadata
@@ -222,6 +227,13 @@ enum AnalyticsEvents {
                 .merge(["Custom Link": link,
                         "Custom Link Text": text,
                         "Screen Name": screenName])
+        case .sendActivationCode(let info, let codePurpose, let isResend):
+            metadata = metadata
+                .merge(info.metadata)
+                .merge(["Code Purpose": codePurpose,
+                        "Resend": isResend ? "Yes" : "No",
+                       ])
+            
         }
         
         return metadata

@@ -42,7 +42,7 @@ class LoginPresenter {
     }
     
     func showResetPasswordScreen() {
-        coordinatorDelegate.showResetPasswordScreen()
+        coordinatorDelegate.startResetPasswordFlow()
     }
     
     func showSignUpScreen() {
@@ -79,7 +79,8 @@ class LoginPresenter {
                 case .success:
                     let successLoginEvent = AnalyticsEvents.standardLoginSuccess(playableInfo)
                     ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: successLoginEvent)
-                    self.coordinatorDelegate.finishCoordinatorFlow(result: true)
+                    self.coordinatorDelegate.finishAuthentification(result: true, userData: data)
+                    self.view.showLoadingScreen(false)
                 case .failure(let error):
                     let failureLoginEvent = AnalyticsEvents.standardLoginFailure(playableInfo)
                     ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: failureLoginEvent)

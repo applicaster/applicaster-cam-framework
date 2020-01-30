@@ -1,22 +1,21 @@
 //
-//  ResetPasswordPresenter.swift
-//  CAMFramework
+//  UpdatePasswordPresenter.swift
+//  CAM
 //
-//  Created by Egor Brel on 4/30/19.
-//  Copyright © 2019 Egor Brel. All rights reserved.
+//  Created by Egor Brel on 1/29/20.
 //
 
 import Foundation
 import ZappPlugins
 
-protocol ResetPasswordViewProtocol: AnyObject {
+protocol UpdatePasswordViewProtocol: AnyObject {
     func showError(description: String?)
     func showLoadingScreen(_ show: Bool)
     func showConfirmationScreenIfNeeded()
     func updateTable(fields: [AuthField])
 }
 
-class ResetPasswordPresenter {
+class UpdatePasswordPresenter {
     
     unowned var view: ResetPasswordViewProtocol
     unowned var coordinatorDelegate: ResetPasswordCoordinatorProtocol
@@ -34,21 +33,24 @@ class ResetPasswordPresenter {
         if let json = camDelegate.getPluginConfig()[CAMKeys.authFields.rawValue],
             let data = json.data(using: .utf8) {
             if let jsonAuthFields = try? JSONDecoder().decode(AuthFields.self, from: data),
-                let loginFields = jsonAuthFields.resetPassword {
+                let loginFields = jsonAuthFields.updatePassword {
                 view.updateTable(fields: loginFields)
             }
         }
+    }
+    
+    func backToPreviousScreen() {
+        coordinatorDelegate.popCurrentScreen()
     }
     
     func finishFlow() {
         coordinatorDelegate.finishCoordinatorFlow()
     }
     
-    func resetPassword(data: [AuthField]) {
-        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: AnalyticsEvents.resetPassword)
+    func updatePassword(data: [AuthField]) {
         self.view.showLoadingScreen(true)
         if let data = validate(data: data) {
-            camDelegate.resetPassword(data: data, completion: { [weak self] (result) in
+            camDelegate.updatePassword(data: data, completion: { [weak self] (result) in
                 guard let self = self else { return }
                 switch result {
                 case .success:
@@ -56,37 +58,6 @@ class ResetPasswordPresenter {
                 case .failure(let error):
                     self.view.showLoadingScreen(false)
                     self.view.showError(description: error.localizedDescription)
-                    
-                    let viewAlertEvent = AnalyticsEvents.makeViewAlert(from: error)
-                    ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: viewAlertEvent)
-                    AnalyticsEvents.userFlow.append("Failed Attempt")
-                }
-            })
-        } else {
-            view.showLoadingScreen(false)
-        }
-    }
-    
-    func sendPasswordActivationCode(data: [AuthField]) {
-        let playableInfo = camDelegate.playableItemInfo
-        let activateAccountEvent = AnalyticsEvents.sendActivationCode(playableInfo,
-                                                                      codePurpose: "PasswordUpdate",
-                                                                      isResend: true)
-        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: activateAccountEvent)
-        self.view.showLoadingScreen(true)
-        if let data = validate(data: data) {
-            camDelegate.sendPasswordActivationCode(data: data, completion: { [weak self] (result) in
-                guard let self = self else { return }
-                switch result {
-                case .success:
-                    self.view.showLoadingScreen(false)
-                    self.coordinatorDelegate.showUpdatePasswordScreen()
-                case .failure(let error):
-                    self.view.showLoadingScreen(false)
-                    self.view.showError(description: error.localizedDescription)
-                    
-                    let viewAlertEvent = AnalyticsEvents.makeViewAlert(from: error)
-                    ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: viewAlertEvent)
                     AnalyticsEvents.userFlow.append("Failed Attempt")
                 }
             })
