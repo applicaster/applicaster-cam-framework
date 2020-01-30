@@ -31,7 +31,7 @@ class AccountActivationPresenter {
     }
     
     func viewDidLoad() {
-        resendCode()
+        sendActivationCode(isResend: false)
         if let json = camDelegate.getPluginConfig()[CAMKeys.authFields.rawValue],
             let data = json.data(using: .utf8) {
             if let jsonAuthFields = try? JSONDecoder().decode(AuthFields.self, from: data),
@@ -72,6 +72,10 @@ class AccountActivationPresenter {
     }
     
     func activateAccount(data: [AuthField]) {
+        let playableInfo = camDelegate.playableItemInfo
+        let activateAccountEvent = AnalyticsEvents.activateAccount(playableInfo)
+        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: activateAccountEvent)
+        
         self.view.showLoadingScreen(true)
         if let data = validate(data: data) {
             let data = data.merge(userData)
@@ -94,7 +98,12 @@ class AccountActivationPresenter {
         self.coordinatorDelegate.popCurrentScreen()
     }
     
-    func resendCode() {
+    func sendActivationCode(isResend: Bool) {
+        let playableInfo = camDelegate.playableItemInfo
+        let activateAccountEvent = AnalyticsEvents.sendActivationCode(playableInfo,
+                                                                      codePurpose: "Account Activation",
+                                                                      isResend: isResend)
+        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: activateAccountEvent)
         self.view.showLoadingScreen(true)
         camDelegate.sendAuthActivationCode(data: userData, completion: { [weak self] (result) in
             guard let self = self else { return }

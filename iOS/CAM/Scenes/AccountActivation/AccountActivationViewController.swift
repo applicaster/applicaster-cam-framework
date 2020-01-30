@@ -123,7 +123,7 @@ class AccountActivationViewController: UIViewController {
     }
 
     @IBAction func resendCode(_ sender: Any) {
-        presenter?.resendCode()
+        presenter?.sendActivationCode(isResend: true)
     }
 
     deinit {
