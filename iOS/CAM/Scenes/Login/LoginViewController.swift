@@ -134,7 +134,7 @@ class LoginViewController: UIViewController {
            let resetPasswordText = configDictionary[CAMKeys.loginResetPasswordButtonText.rawValue],
            !resetPasswordText.isEmpty {
             if let jsonAuthFields = try? JSONDecoder().decode(AuthFields.self, from: data) {
-                resetPasswordButton.isHidden = jsonAuthFields.password == nil
+                resetPasswordButton.isHidden = jsonAuthFields.resetPassword == nil
                 return
             }
         }

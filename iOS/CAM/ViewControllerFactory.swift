@@ -49,14 +49,25 @@ class ViewControllerFactory {
     }
     
     static func createResetPasswordScreen(pluginDataProvider: PluginDataProviderProtocol,
-                                          authCoordinator: AuthorizationCoordinatorProtocol) -> ResetPasswordViewController {
+                                          resetPasswordCoordinator: ResetPasswordCoordinatorProtocol) -> ResetPasswordViewController {
         let resetPasswordVC = ResetPasswordViewController.instantiateVC()
         let presenter = ResetPasswordPresenter(view: resetPasswordVC,
-                                               coordinatorDelegate: authCoordinator,
+                                               coordinatorDelegate: resetPasswordCoordinator,
                                                camDelegate: pluginDataProvider.getCamDelegate())
         resetPasswordVC.presenter = presenter
         
         return resetPasswordVC
+    }
+    
+    static func createUpdatePasswordScreen(pluginDataProvider: PluginDataProviderProtocol,
+                                           resetPasswordCoordinator: ResetPasswordCoordinatorProtocol) -> UpdatePasswordViewController {
+        let updatePasswordVC = UpdatePasswordViewController.instantiateVC()
+        let presenter = UpdatePasswordPresenter(view: updatePasswordVC,
+                                                coordinatorDelegate: resetPasswordCoordinator,
+                                                camDelegate: pluginDataProvider.getCamDelegate())
+        updatePasswordVC.presenter = presenter
+        
+        return updatePasswordVC
     }
     
     static func createLogoutScreen(pluginDataProvider: PluginDataProviderProtocol,

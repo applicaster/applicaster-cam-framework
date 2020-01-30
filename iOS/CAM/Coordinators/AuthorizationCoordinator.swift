@@ -25,11 +25,17 @@ protocol AuthorizationCoordinatorProtocol: Coordinator {
 
 class AuthorizationCoordinator: AuthorizationCoordinatorProtocol {
 
+    var childCoordinator: Coordinator?
     var coordinatorFlow: AuthorizationCoordinatorFlow = .auth
     weak var rootViewController: UIViewController?
     weak var navigationController: UINavigationController?
     unowned var parentCoordinator: PluginDataProviderProtocol
     var completionHandler: ((Bool) -> Void)?
+    
+    var isResetPasswordCodeActivationEnabled: Bool {
+        let configDictionary = parentCoordinator.getCamDelegate().getPluginConfig()
+        return configDictionary[CAMKeys.resetPasswordCodeActivationEnabled.rawValue] == true.description ? true : false
+    }
     
     var isAccountActivationEnabled: Bool {
         let configDictionary = parentCoordinator.getCamDelegate().getPluginConfig()
@@ -76,14 +82,25 @@ class AuthorizationCoordinator: AuthorizationCoordinatorProtocol {
     }
     
     func startAccountActivationFlow(userData: [String: String]) {
-        let controller = ViewControllerFactory.createAccountActivationScreen(userData: userData,
-                                                                             pluginDataProvider: parentCoordinator,
-                                                                             authorizationCoordinator: self)
-        navigationController?.pushViewController(controller, animated: true)
+        showAccountActivationScreen(userData: userData)
     }
     
     func startResetPasswordFlow() {
-        showResetPasswordScreen()
+        let closeAction = { [unowned self] in
+            self.childCoordinator = nil
+            self.finishCoordinatorFlow(result: false)
+        }
+        guard let loginVC = navigationController?.topViewController else {
+            return
+        }
+        childCoordinator = ResetPasswordCoordinator(parentViewController: loginVC,
+                                                    navigationController: navigationController,
+                                                    pluginDataProvider: parentCoordinator,
+                                                    closeAction: closeAction,
+                                                    completion: { [unowned self] in
+            self.childCoordinator = nil
+        })
+        childCoordinator!.start()
     }
     
     func showLoginScreen(isCoordinatorRootController: Bool) {
@@ -110,13 +127,6 @@ class AuthorizationCoordinator: AuthorizationCoordinatorProtocol {
         let controller = ViewControllerFactory.createAccountActivationScreen(userData: userData,
                                                                              pluginDataProvider: parentCoordinator,
                                                                              authorizationCoordinator: self)
-        navigationController?.pushViewController(controller, animated: true)
-    }
-    
-    func showResetPasswordScreen() {
-        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: AnalyticsEvents.launchPasswordResetScreen)
-        let controller = ViewControllerFactory.createResetPasswordScreen(pluginDataProvider: parentCoordinator,
-                                                                         authCoordinator: self)
         navigationController?.pushViewController(controller, animated: true)
     }
     

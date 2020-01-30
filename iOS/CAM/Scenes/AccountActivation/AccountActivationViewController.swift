@@ -66,7 +66,7 @@ class AccountActivationViewController: UIViewController {
                                        camTitleKey: .accountActivationButtonText,
                                        style: .actionButtonFont)
         resendCodeButton.setStyle(config: configDictionary,
-                                  camTitleKey: .resendCodeButtonText,
+                                  camTitleKey: .resendAccountActivationCodeButtonText,
                                   style: .resendCodeButtonFont)
         
     }

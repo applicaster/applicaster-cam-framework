@@ -1,18 +1,16 @@
 //
-//  ResetPasswordViewController.swift
-//  CAMFramework
+//  UpdatePasswordViewController.swift
+//  CAM
 //
-//  Created by Egor Brel on 4/30/19.
-//  Copyright © 2019 Egor Brel. All rights reserved.
+//  Created by Egor Brel on 1/29/20.
 //
 
 import UIKit
-import ZappPlugins
 
-class ResetPasswordViewController: UIViewController {
+class UpdatePasswordViewController: UIViewController {
 
     var loadingPopover = LoadingPopover.nibInstance()
-    var resetPasswordFields = [AuthField]()
+    var updatePasswordFields = [AuthField]()
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var backgroundImageView: UIImageView!
     @IBOutlet var backButton: UIButton!
@@ -20,26 +18,21 @@ class ResetPasswordViewController: UIViewController {
     @IBOutlet var logoImageView: UIImageView!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var infoLabel: UILabel!
-    @IBOutlet var resetPasswordFieldsTable: UITableView!
-    @IBOutlet var resetButton: UIButton!
+    @IBOutlet var updatePasswordFieldsTable: UITableView!
+    @IBOutlet var updatePasswordButton: UIButton!
     
     @IBOutlet var tableHeightConstraint: NSLayoutConstraint!
     
-    var isResetPasswordCodeActivationEnabled: Bool {
-        return configDictionary[CAMKeys.resetPasswordCodeActivationEnabled.rawValue] == true.description ? true : false
-    }
     
     var configDictionary: [String: String] {
         return presenter?.camDelegate.getPluginConfig() ?? [String: String]()
     }
     
-    var presenter: ResetPasswordPresenter?
+    var presenter: UpdatePasswordPresenter?
     
     var resetPasswordFieldsTableHeight: CGFloat {
-        return CGFloat(resetPasswordFields.count) * 48 + CGFloat((resetPasswordFields.count - 1) * 7)
+        return CGFloat(updatePasswordFields.count) * 48 + CGFloat((updatePasswordFields.count - 1) * 7)
     }
-    
-    // MARK: - Flow & UI Setup
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,13 +59,12 @@ class ResetPasswordViewController: UIViewController {
         backButton.setStyle(iconAsset: .backButton)
         closeButton.setStyle(iconAsset: .closeButton)
         logoImageView.setStyle(asset: .headerLogo)
-        titleLabel.setStyle(config: configDictionary, camTextKey: .passwordResetTitleText, style: .screenTitleFont)
-        infoLabel.setStyle(config: configDictionary, camTextKey: .passwordResetInfoText,
+        titleLabel.setStyle(config: configDictionary, camTextKey: .passwordUpdateTitleText, style: .screenTitleFont)
+        infoLabel.setStyle(config: configDictionary, camTextKey: .passwordUpdateInfoText,
                                style: .screenDescriptionFont)
-        let resetButtonKey = isResetPasswordCodeActivationEnabled ? CAMKeys.sendPasswordCodeButtonText : CAMKeys.passwordResetButtonText
-        resetButton.setStyle(config: configDictionary,
+        updatePasswordButton.setStyle(config: configDictionary,
                              backgroundAsset: .actionButton,
-                             camTitleKey: resetButtonKey,
+                             camTitleKey: .passwordUpdateButtonText,
                              style: .actionButtonFont)
     }
     
@@ -82,8 +74,8 @@ class ResetPasswordViewController: UIViewController {
     }
     
     func setupUI() {
-        resetPasswordFieldsTable.backgroundView = UIView()
-        resetPasswordFieldsTable.allowsSelection = false
+        updatePasswordFieldsTable.backgroundView = UIView()
+        updatePasswordFieldsTable.allowsSelection = false
         closeButton.isHidden = presenter?.camDelegate.analyticsStorage().trigger == .appLaunch
     }
     
@@ -114,17 +106,13 @@ class ResetPasswordViewController: UIViewController {
     
     // MARK: - Actions
     
-    @IBAction func resetPassword(_ sender: UIButton) {
+    @IBAction func updatePassword(_ sender: UIButton) {
         hideKeyboard()
-        if isResetPasswordCodeActivationEnabled {
-            presenter?.sendPasswordActivationCode(data: resetPasswordFields)
-        } else {
-            presenter?.resetPassword(data: resetPasswordFields)
-        }
+        presenter?.updatePassword(data: updatePasswordFields)
     }
     
     @IBAction func backToPreviousScreen(_ sender: UIButton) {
-        presenter?.finishFlow()
+        presenter?.backToPreviousScreen()
     }
     
     @IBAction func close(_ sender: UIButton) {
@@ -137,11 +125,11 @@ class ResetPasswordViewController: UIViewController {
 }
 
 // MARK: - ResetPasswordViewProtocol
-extension ResetPasswordViewController: ResetPasswordViewProtocol {
+extension UpdatePasswordViewController: ResetPasswordViewProtocol {
     
     func updateTable(fields: [AuthField]) {
-        resetPasswordFields = fields
-        resetPasswordFieldsTable.reloadData()
+        updatePasswordFields = fields
+        updatePasswordFieldsTable.reloadData()
     }
     
     func showLoadingScreen(_ show: Bool) {
@@ -157,8 +145,8 @@ extension ResetPasswordViewController: ResetPasswordViewProtocol {
     }
     
     func showConfirmationScreenIfNeeded() {
-        if let alertTitle = configDictionary[CAMKeys.passwordAlertTitleText.rawValue],
-           let alertDescription = configDictionary[CAMKeys.passwordAlertInfoText.rawValue],
+        if let _ = configDictionary[CAMKeys.passwordAlertTitleText.rawValue],
+           let _ = configDictionary[CAMKeys.passwordAlertInfoText.rawValue],
            let _ = configDictionary[CAMKeys.alertButtonText.rawValue] {
             self.showConfirmationScreen(config: configDictionary,
                                         titleKey: .passwordAlertTitleText,
@@ -167,12 +155,6 @@ extension ResetPasswordViewController: ResetPasswordViewProtocol {
                                         action: { [weak self] in
                 self?.presenter?.finishFlow()
             })
-            
-            let viewAlertEvent = AnalyticsEvents.viewAlert(AlertInfo(title: alertTitle,
-                                                                     description: alertDescription,
-                                                                     isConfirmation: IsConfirmationAlert.yes(type: .passwordReset)),
-                                                           apiError: nil)
-            ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: viewAlertEvent)
         } else {
             presenter?.finishFlow()
         }
@@ -181,14 +163,14 @@ extension ResetPasswordViewController: ResetPasswordViewProtocol {
 
 // MARK: - Table Delegate
 
-extension ResetPasswordViewController: UITableViewDelegate, UITableViewDataSource {
+extension UpdatePasswordViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return resetPasswordFields.count
+        return updatePasswordFields.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == resetPasswordFields.count - 1 {
+        if indexPath.row == updatePasswordFields.count - 1 {
             return 48
         }
         return 55
@@ -199,27 +181,27 @@ extension ResetPasswordViewController: UITableViewDelegate, UITableViewDataSourc
                                                        for: indexPath) as? AuthTableCell else {
                                                         return UITableViewCell()
         }
-        cell.textField.setStyle(config: configDictionary, backgroundAsset: .authField, style: .inputFieldFont, placeholder: resetPasswordFields[indexPath.row].hint)
-        cell.configureInputField(data: resetPasswordFields[indexPath.row])
+        cell.textField.setStyle(config: configDictionary, backgroundAsset: .authField, style: .inputFieldFont, placeholder: updatePasswordFields[indexPath.row].hint)
+        cell.configureInputField(data: updatePasswordFields[indexPath.row])
         cell.backgroundColor = .clear
         cell.showPopover = { [weak self] in
             let bubbleWidth: CGFloat = 320
             self?.showErrorPopover(config: self?.configDictionary ?? [String: String](),
-                                   message: self?.resetPasswordFields[indexPath.row].errorDescription,
+                                   message: self?.updatePasswordFields[indexPath.row].errorDescription,
                                    bubbleWidth: bubbleWidth,
                                    sourceView: cell)
         }
         
         cell.textChanged = { [weak self] text in
-            self?.resetPasswordFields[indexPath.row].state = .none
-            self?.resetPasswordFields[indexPath.row].errorDescription = ""
-            self?.resetPasswordFields[indexPath.row].text = text
+            self?.updatePasswordFields[indexPath.row].state = .none
+            self?.updatePasswordFields[indexPath.row].errorDescription = ""
+            self?.updatePasswordFields[indexPath.row].text = text
         }
         return cell
     }
 }
 
-extension ResetPasswordViewController: UIPopoverPresentationControllerDelegate {
+extension UpdatePasswordViewController: UIPopoverPresentationControllerDelegate {
     func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
         return .none
     }

@@ -11,13 +11,15 @@ import Foundation
 struct AuthFields: Codable {
     let signup: [AuthField]?
     let login: [AuthField]?
-    let password: [AuthField]?
+    let resetPassword: [AuthField]?
+    let updatePassword: [AuthField]?
     let accountActivation: [AuthField]?
     
     private enum CodingKeys: String, CodingKey {
         case signup = "Sign-up"
         case login = "Login"
-        case password = "Password-reset"
+        case resetPassword = "Password-reset"
+        case updatePassword = "Password-update"
         case accountActivation = "Account-activation"
     }
 }

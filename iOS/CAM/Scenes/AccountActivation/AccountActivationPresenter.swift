@@ -96,7 +96,7 @@ class AccountActivationPresenter {
     
     func resendCode() {
         self.view.showLoadingScreen(true)
-        camDelegate.sendActivationCode(data: userData, completion: { [weak self] (result) in
+        camDelegate.sendAuthActivationCode(data: userData, completion: { [weak self] (result) in
             guard let self = self else { return }
             switch result {
             case .success:
