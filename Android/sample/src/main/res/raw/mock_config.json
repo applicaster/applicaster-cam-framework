@@ -16,7 +16,7 @@
   "restore_help_message_text":"If you’ve already made a purchase, you will be able to restore that purchase at no cost once you’ve logged in.",
 
   "use_signup_activation_code_method":"true",
-  "use_activation_code_method": "true",
+  "use_pw_activation_code_method": "true",
   "login_title_text":"Login to Your Account",
   "login_button_text":"Login",
   "password_reset_link_text":"Forgot Your Password?",

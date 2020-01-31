@@ -60,7 +60,6 @@ class PluginConfigurator(private val pluginConfig: Map<String, String>) : Config
                 && UI_KEY_PAYMENT_CONFIRMATION_BUTTON_TEXT in pluginConfig
     }
 
-
     override fun isShowConfirmationRestorePurchases(): Boolean {
         return UI_KEY_RESTORE_CONFIRMATION_TITLE_TEXT in pluginConfig
                 && UI_KEY_RESTORE_CONFIRMATION_DESC_TEXT in pluginConfig
@@ -136,7 +135,7 @@ const val KEY_PAYMENT_CONFIRMATION_TITLE_TEXT = "payment_confirmation_title_text
 const val KEY_PAYMENT_CONFIRMATION_DESC_TEXT = "payment_confirmation_description_text"
 const val KEY_TRIGGER_NO_APP_LAUNCH = "trigger_on_app_launch"
 const val KEY_ACCOUNT_ACTIVATION_REQUIRED = "use_signup_activation_code_method"
-const val KEY_PASSWORD_UPDATE_REQUIRED = "use_activation_code_method"
+const val KEY_PASSWORD_UPDATE_REQUIRED = "use_pw_activation_code_method"
 
 //Analytics related keys
 const val KEY_BILLING_CONFIRMATION_TITLE = "payment_confirmation_title_text"
