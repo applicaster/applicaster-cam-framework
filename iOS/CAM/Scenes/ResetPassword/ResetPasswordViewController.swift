@@ -203,7 +203,7 @@ extension ResetPasswordViewController: UITableViewDelegate, UITableViewDataSourc
         cell.configureInputField(data: resetPasswordFields[indexPath.row])
         cell.backgroundColor = .clear
         cell.showPopover = { [weak self] in
-            let bubbleWidth: CGFloat = 320
+            let bubbleWidth: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 390 : 320
             self?.showErrorPopover(config: self?.configDictionary ?? [String: String](),
                                    message: self?.resetPasswordFields[indexPath.row].errorDescription,
                                    bubbleWidth: bubbleWidth,

@@ -79,6 +79,10 @@ class AccountActivationViewController: UIViewController {
     func setupUI() {
         codeActivationFieldsTable.backgroundView = UIView()
         codeActivationFieldsTable.allowsSelection = false
+        if let resendCodeText = configDictionary[CAMKeys.resendAccountActivationCodeButtonText.rawValue],
+               resendCodeText.isEmpty {
+            resendCodeButton.isHidden = true
+        }
         closeButton.isHidden = presenter?.camDelegate.analyticsStorage().trigger == .appLaunch
     }
     
@@ -155,7 +159,7 @@ extension AccountActivationViewController: UITableViewDelegate, UITableViewDataS
         cell.configureInputField(data: codeActivationFields[indexPath.row])
         cell.backgroundColor = .clear
         cell.showPopover = { [weak self] in
-            let bubbleWidth: CGFloat = 320
+            let bubbleWidth: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 390 : 320
             self?.showErrorPopover(config: self?.configDictionary ?? [String: String](),
                                    message: self?.codeActivationFields[indexPath.row].errorDescription,
                                    bubbleWidth: bubbleWidth,
