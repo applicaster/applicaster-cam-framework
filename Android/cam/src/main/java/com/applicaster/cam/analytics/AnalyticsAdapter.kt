@@ -179,6 +179,37 @@ class AnalyticsUtil {
             AnalyticsAgentUtil.logEvent(AnalyticsEvent.ALTERNATIVE_SIGNUP_FAILURE.value, params)
         }
 
+        fun logActivateAccount() {
+            val params = mapOf(
+                Properties.CONTENT_ENTITY_NAME.value to getContentEntityName(),
+                Properties.CONTENT_ENTITY_TYPE.value to getContentEntityType(),
+                Properties.PLUGIN_PROVIDER.value to getPluginProvider()
+            )
+            AnalyticsAgentUtil.logEvent(AnalyticsEvent.ACTIVATE_ACCOUNT.value, params)
+        }
+
+        fun logSendAccountActivationCode(isResend: CodeResend) {
+            val params = mapOf(
+                Properties.CONTENT_ENTITY_NAME.value to getContentEntityName(),
+                Properties.CONTENT_ENTITY_TYPE.value to getContentEntityType(),
+                Properties.PLUGIN_PROVIDER.value to getPluginProvider(),
+                Properties.CODE_PURPOSE.value to CodePurpose.ACCOUNT_ACTIVATION.value,
+                Properties.RESEND.value to isResend.value
+            )
+            AnalyticsAgentUtil.logEvent(AnalyticsEvent.SEND_ACTIVATION_CODE.value, params)
+        }
+
+        fun logSendPasswordActivationCode(isResend: CodeResend) {
+            val params = mapOf(
+                Properties.CONTENT_ENTITY_NAME.value to getContentEntityName(),
+                Properties.CONTENT_ENTITY_TYPE.value to getContentEntityType(),
+                Properties.PLUGIN_PROVIDER.value to getPluginProvider(),
+                Properties.CODE_PURPOSE.value to CodePurpose.PASSWORD_UPDATE.value,
+                Properties.RESEND.value to isResend.value
+            )
+            AnalyticsAgentUtil.logEvent(AnalyticsEvent.SEND_ACTIVATION_CODE.value, params)
+        }
+
         fun logLaunchContentGatewayPlugin(trigger: String) {
             val params = mapOf(
                 Properties.TRIGGER.value to trigger,
@@ -236,6 +267,13 @@ class AnalyticsUtil {
         fun logResetPassword() {
             AnalyticsAgentUtil.logEvent(
                 AnalyticsEvent.RESET_PASSWORD.value,
+                mapOf(Properties.PLUGIN_PROVIDER.value to getPluginProvider())
+            )
+        }
+
+        fun logUpdatePassword() {
+            AnalyticsAgentUtil.logEvent(
+                AnalyticsEvent.UPDATE_PASSWORD.value,
                 mapOf(Properties.PLUGIN_PROVIDER.value to getPluginProvider())
             )
         }
@@ -410,6 +448,7 @@ enum class AnalyticsEvent(val value: String) {
     SWITCH_TO_SIGNUP_SCREEN      ("Switch to Sign-Up Screen"),
     LAUNCH_PASSWORD_RESET_SCREEN ("Launch Password Reset Screen"),
     RESET_PASSWORD               ("Reset Password"),
+    UPDATE_PASSWORD              ("Update Password"),
     TAP_CUSTOM_LINK              ("Tap Custom Link"),
     VIEW_ALERT                   ("View Alert"),
     TAP_PURCHASE_BUTTON          ("Tap Purchase Button"),
@@ -418,7 +457,9 @@ enum class AnalyticsEvent(val value: String) {
     STORE_PURCHASE_ERROR         ("Store Purchase Error"),
     TAP_RESTORE_PURCHASE_LINK    ("Tap Restore Purchase Link"),
     COMPLETE_RESTORE_PURCHASE    ("Complete Restore Purchase"),
-    STORE_RESTORE_PURCHASE_ERROR ("Store Restore Purchase Error")
+    STORE_RESTORE_PURCHASE_ERROR ("Store Restore Purchase Error"),
+    ACTIVATE_ACCOUNT             ("Activate Account"),
+    SEND_ACTIVATION_CODE         ("Send Activation Code")
     // @formatter:on
 }
 
@@ -440,7 +481,9 @@ enum class Properties(val value: String) {
     SCREEN_NAME          ("Screen Name"),
     CUSTOM_LINK          ("Custom Link"),
     CUSTOM_LINK_TEXT     ("Custom Link Text"),
-    //Purchase product properties
+    CODE_PURPOSE         ("Code purpose"),
+    RESEND               ("Resend"),
+    //    //Purchase product properties
     SUBSCRIBER           ("Subscriber"),
     PRODUCT_NAME         ("Product Name"),
     PRICE                ("Price"),
@@ -473,6 +516,20 @@ enum class AlertType(val value: String) {
     PASSWORD_RESET_CONFIRMATION  ("Password Reset Confirmation"),
     LOGOUT                       ("Logout"),
     ERROR_ALERT                  ("Error Alert")
+    // @formatter:on
+}
+
+enum class CodePurpose(val value: String) {
+    // @formatter:off
+    ACCOUNT_ACTIVATION("Account Activation"),
+    PASSWORD_UPDATE   ("Password Update"),
+    // @formatter:on
+}
+
+enum class CodeResend(val value: String) {
+    // @formatter:off
+    YES("Yes"),
+    NO ("No"),
     // @formatter:on
 }
 

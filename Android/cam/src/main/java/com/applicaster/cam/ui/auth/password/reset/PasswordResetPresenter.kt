@@ -34,8 +34,12 @@ class PasswordResetPresenter(
 
     override fun onAuthActionButtonClicked(inputValues: HashMap<AuthField, String>) {
         //Analytics
-        AnalyticsGatewaySession.sessionData.add(Action.RESET_PASSWORD)
-        AnalyticsUtil.logResetPassword()
+        if (ContentAccessManager.pluginConfigurator.isPasswordUpdateRequired()) {
+            AnalyticsUtil.logSendPasswordActivationCode(CodeResend.NO)
+        } else {
+            AnalyticsGatewaySession.sessionData.add(Action.RESET_PASSWORD)
+            AnalyticsUtil.logResetPassword()
+        }
         super.onAuthActionButtonClicked(inputValues)
     }
 
