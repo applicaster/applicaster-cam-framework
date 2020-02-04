@@ -2,6 +2,8 @@ package com.applicaster.cam.ui.auth.password.update
 
 import com.applicaster.cam.ContentAccessManager
 import com.applicaster.cam.PasswordUpdateCallback
+import com.applicaster.cam.analytics.AnalyticsUtil
+import com.applicaster.cam.params.auth.AuthField
 import com.applicaster.cam.params.auth.AuthFieldConfig
 import com.applicaster.cam.params.auth.AuthScreenType
 import com.applicaster.cam.ui.CamNavigationRouter
@@ -29,6 +31,12 @@ class PasswordUpdatePresenter(
     override fun onFailure(msg: String) {
         view?.hideLoadingIndicator()
         view?.showAlert(msg)
+    }
+
+    override fun onAuthActionButtonClicked(inputValues: HashMap<AuthField, String>) {
+        //Analytics
+        AnalyticsUtil.logUpdatePassword()
+        super.onAuthActionButtonClicked(inputValues)
     }
 
     override fun onActionSuccess() {

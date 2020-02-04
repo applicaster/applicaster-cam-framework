@@ -4,6 +4,9 @@ import com.applicaster.cam.AccountActivationCallback
 import com.applicaster.cam.CamFlow
 import com.applicaster.cam.SendAuthActivationCodeCallback
 import com.applicaster.cam.ContentAccessManager
+import com.applicaster.cam.analytics.AnalyticsUtil
+import com.applicaster.cam.analytics.CodeResend
+import com.applicaster.cam.params.auth.AuthField
 import com.applicaster.cam.params.auth.AuthFieldConfig
 import com.applicaster.cam.params.auth.AuthScreenType
 import com.applicaster.cam.ui.CamNavigationRouter
@@ -21,6 +24,7 @@ class AccountActivationPresenter(
         super.onViewCreated()
         view?.showLoadingIndicator()
         view?.customize()
+        AnalyticsUtil.logSendAccountActivationCode(CodeResend.NO)
         ContentAccessManager.contract.sendAuthActivationCode(authData, this)
     }
 
@@ -29,8 +33,14 @@ class AccountActivationPresenter(
         ContentAccessManager.contract.activateAccount(input, this)
     }
 
+    override fun onAuthActionButtonClicked(inputValues: HashMap<AuthField, String>) {
+        AnalyticsUtil.logActivateAccount()
+        super.onAuthActionButtonClicked(inputValues)
+    }
+
     override fun onResendCodeClicked() {
         view?.showLoadingIndicator()
+        AnalyticsUtil.logSendAccountActivationCode(CodeResend.YES)
         ContentAccessManager.contract.sendAuthActivationCode(authData, this)
     }
 
