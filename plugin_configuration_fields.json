@@ -1800,7 +1800,7 @@
               },
               {
                 "condition_value": [
-                  true
+                  false
                 ],
                 "key": "general/use_pw_activation_code_method"
               }
