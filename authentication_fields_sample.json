@@ -45,12 +45,37 @@
       "mandatory": true
     }
   ],
+  "Account-activation": [
+    {
+      "type": "NUMBER",
+      "key": "code",
+      "title": "Code",
+      "hint": "Code",
+      "mandatory": true
+    }
+  ],
   "Password-reset": [
     {
-      "type": "EMAIL",
-      "key": "email",
-      "title": "Email",
-      "hint": "Email",
+      "type": "NUMBER",
+      "key": "code",
+      "title": "Code",
+      "hint": "Code",
+      "mandatory": true
+    }
+  ],
+  "Password-update": [
+    {
+      "type": "NUMBER",
+      "key": "code",
+      "title": "Code",
+      "hint": "Code",
+      "mandatory": true
+    },
+    {
+      "type": "TEXT",
+      "key": "new_password",
+      "title": "New password",
+      "hint": "New password",
       "mandatory": true
     }
   ]
