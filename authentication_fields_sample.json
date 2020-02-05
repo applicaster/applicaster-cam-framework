@@ -56,10 +56,10 @@
   ],
   "Password-reset": [
     {
-      "type": "NUMBER",
-      "key": "code",
-      "title": "Code",
-      "hint": "Code",
+      "type": "EMAIL",
+      "key": "email",
+      "title": "Email",
+      "hint": "Email",
       "mandatory": true
     }
   ],
