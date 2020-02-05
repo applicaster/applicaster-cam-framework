@@ -56,7 +56,7 @@
   ],
   "Password-reset": [
     {
-     "type": "EMAIL",
+      "type": "EMAIL",
       "key": "email",
       "title": "Email",
       "hint": "Email",
