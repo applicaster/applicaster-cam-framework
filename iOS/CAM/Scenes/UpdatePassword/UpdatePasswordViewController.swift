@@ -185,10 +185,8 @@ extension UpdatePasswordViewController: UITableViewDelegate, UITableViewDataSour
         cell.configureInputField(data: updatePasswordFields[indexPath.row])
         cell.backgroundColor = .clear
         cell.showPopover = { [weak self] in
-            let bubbleWidth: CGFloat = 320
             self?.showErrorPopover(config: self?.configDictionary ?? [String: String](),
                                    message: self?.updatePasswordFields[indexPath.row].errorDescription,
-                                   bubbleWidth: bubbleWidth,
                                    sourceView: cell)
         }
         

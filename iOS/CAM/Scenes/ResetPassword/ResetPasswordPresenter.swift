@@ -71,7 +71,7 @@ class ResetPasswordPresenter {
         let playableInfo = camDelegate.playableItemInfo
         let activateAccountEvent = AnalyticsEvents.sendActivationCode(playableInfo,
                                                                       codePurpose: "Password Update",
-                                                                      isResend: true)
+                                                                      isResend: false)
         ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: activateAccountEvent)
         self.view.showLoadingScreen(true)
         if let data = validate(data: data) {
