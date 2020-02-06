@@ -159,10 +159,8 @@ extension AccountActivationViewController: UITableViewDelegate, UITableViewDataS
         cell.configureInputField(data: codeActivationFields[indexPath.row])
         cell.backgroundColor = .clear
         cell.showPopover = { [weak self] in
-            let bubbleWidth: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 390 : 320
             self?.showErrorPopover(config: self?.configDictionary ?? [String: String](),
                                    message: self?.codeActivationFields[indexPath.row].errorDescription,
-                                   bubbleWidth: bubbleWidth,
                                    sourceView: cell)
         }
 
