@@ -2,7 +2,7 @@ package com.applicaster.cam
 
 import android.content.Context
 import android.content.Intent
-import android.support.v4.app.FragmentActivity
+import androidx.fragment.app.FragmentActivity
 import com.applicaster.cam.analytics.AnalyticsGatewaySession
 import com.applicaster.cam.analytics.AnalyticsUtil
 import com.applicaster.cam.analytics.TimedEvent

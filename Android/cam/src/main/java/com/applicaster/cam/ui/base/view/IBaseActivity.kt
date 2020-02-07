@@ -1,7 +1,7 @@
 package com.applicaster.cam.ui.base.view
 
 import android.content.Context
-import android.support.v4.app.FragmentManager
+import androidx.fragment.app.FragmentManager
 import com.applicaster.cam.ui.base.BaseNavigationRouter
 
 interface IBaseActivity {

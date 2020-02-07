@@ -1,7 +1,7 @@
 package com.applicaster.zapp.configfetcher
 
 import android.content.Context
-import android.support.v4.app.FragmentActivity
+import androidx.fragment.app.FragmentActivity
 import com.applicaster.zapp.configfetcher.ui.TransparentLoadingFragment
 
 suspend fun <T> UIEnvironment.executeWithResult(
@@ -22,7 +22,7 @@ suspend fun UIEnvironment.execute(
 }
 
 fun Context.showLoading() {
-    if (this is FragmentActivity) {
+    if (this is androidx.fragment.app.FragmentActivity) {
         val fragment = supportFragmentManager
                 .findFragmentByTag(TransparentLoadingFragment.TAG)
                 ?: TransparentLoadingFragment.newInstance()
@@ -35,7 +35,7 @@ fun Context.showLoading() {
 }
 
 fun Context.hideLoading() {
-    if (this is FragmentActivity) {
+    if (this is androidx.fragment.app.FragmentActivity) {
         val fragment = supportFragmentManager
                 .findFragmentByTag(TransparentLoadingFragment.TAG)
         if (fragment != null && fragment.isAdded)

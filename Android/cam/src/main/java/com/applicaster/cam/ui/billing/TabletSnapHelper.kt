@@ -1,7 +1,7 @@
 package com.applicaster.cam.ui.billing
 
-import android.support.v7.widget.LinearSnapHelper
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.LinearSnapHelper
+import androidx.recyclerview.widget.RecyclerView
 import kotlin.math.max
 import kotlin.math.min
 

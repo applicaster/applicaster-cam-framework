@@ -3,8 +3,8 @@ package com.applicaster.cam.ui.billing
 import android.app.Activity
 import android.content.res.Resources
 import android.os.Bundle
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -80,12 +80,18 @@ class BillingFragment : BaseFragment(), IBillingView {
         when (containerType) {
             ContainerType.PHONE -> {
                 recyclerBillingAdapter = RecyclerBillingAdapter(purchaseListener, presenter, billingItemType)
-                val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+                val layoutManager =
+                    LinearLayoutManager(
+                        context,
+                        LinearLayoutManager.VERTICAL,
+                        false
+                    )
                 rv_billing_items?.apply {
                     this.layoutManager = layoutManager
                     itemDecoration = SpaceItemDecoration(verticalSpaceHeight = resources.getDimensionPixelSize(R.dimen.billing_list_vertical_space))
                     addItemDecoration(itemDecoration)
-                    this.itemAnimator = DefaultItemAnimator()
+                    this.itemAnimator =
+                        DefaultItemAnimator()
                     this.adapter = recyclerBillingAdapter
                 }
             }
@@ -93,7 +99,12 @@ class BillingFragment : BaseFragment(), IBillingView {
             ContainerType.TABLET -> {
                 pagerBillingAdapter = RecyclerBillingAdapter(purchaseListener, presenter, billingItemType)
                 // add padding to the recycler view to set child to the center of the root container
-                val layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                val layoutManager =
+                    LinearLayoutManager(
+                        context,
+                        LinearLayoutManager.HORIZONTAL,
+                        false
+                    )
                 // init custom snap helper
                 val snapHelper = TabletSnapHelper()
                 rv_billing_items?.apply {
@@ -101,7 +112,8 @@ class BillingFragment : BaseFragment(), IBillingView {
                     this.layoutManager = layoutManager
                     itemDecoration = SpaceItemDecoration(horizontalSpaceHeight = resources.getDimensionPixelSize(R.dimen.billing_list_horizontal_space))
                     addItemDecoration(itemDecoration)
-                    this.itemAnimator = DefaultItemAnimator()
+                    this.itemAnimator =
+                        DefaultItemAnimator()
                     this.adapter = pagerBillingAdapter
                 }
             }

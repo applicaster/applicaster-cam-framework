@@ -1,6 +1,6 @@
 package com.applicaster.cam.ui.base.presenter
 
-import android.support.annotation.StringRes
+import androidx.annotation.StringRes
 import com.applicaster.cam.ui.base.view.IBaseView
 
 open class BasePresenter(private var view: IBaseView?) : IBasePresenter {

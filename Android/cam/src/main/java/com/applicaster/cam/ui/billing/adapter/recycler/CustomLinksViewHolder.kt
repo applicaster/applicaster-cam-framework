@@ -1,6 +1,6 @@
 package com.applicaster.cam.ui.billing.adapter.recycler
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import com.applicaster.cam.ui.base.custom.CustomLinkTextView
 import kotlinx.android.synthetic.main.layout_bottom_links.view.*
