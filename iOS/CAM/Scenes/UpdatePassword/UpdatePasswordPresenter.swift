@@ -51,6 +51,7 @@ class UpdatePasswordPresenter {
     }
     
     func updatePassword(data: [AuthField]) {
+        ZAAppConnector.sharedInstance().analyticsDelegate.trackEvent(event: AnalyticsEvents.updatePassword)
         self.view.showLoadingScreen(true)
         if let data = validate(data: data) {
             let data = data.merge(userResetPasswordInputData)

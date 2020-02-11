@@ -98,6 +98,7 @@ enum AnalyticsEvents {
     case switchToSignUpScreen
     case launchPasswordResetScreen
     case resetPassword
+    case updatePassword
     case viewAlert(AlertInfo, apiError: String?)
     case tapPurchaseButton(PlayableItemInfo, PurchaseProperties?)
     case completePurchase(PlayableItemInfo, PurchaseProperties?)
@@ -133,6 +134,7 @@ enum AnalyticsEvents {
         case .switchToSignUpScreen: return "Switch to Sign-Up Screen"
         case .launchPasswordResetScreen: return "Launch Password Reset Screen"
         case .resetPassword: return "Reset Password"
+        case .updatePassword: return "Update Password"
         case .viewAlert: return "View Alert"
         case .tapPurchaseButton: return "Tap Purchase Button"
         case .completePurchase: return "Complete Purchase"
@@ -180,7 +182,8 @@ enum AnalyticsEvents {
         case .switchToLoginScreen,
              .switchToSignUpScreen,
              .launchPasswordResetScreen,
-             .resetPassword:
+             .resetPassword,
+             .updatePassword:
             break
         case .viewAlert(let alert, let apiError):
             metadata = metadata
