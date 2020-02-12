@@ -6,7 +6,6 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.appcompat.app.AlertDialog
 import android.view.View
 import android.view.ViewGroup
@@ -26,7 +25,7 @@ abstract class BaseFragment : Fragment(), IBaseView {
         basePresenter = presenter
     }
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         baseActivity = context as? IBaseActivity
     }

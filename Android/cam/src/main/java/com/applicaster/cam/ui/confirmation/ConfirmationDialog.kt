@@ -157,7 +157,7 @@ class ConfirmationDialog : DialogFragment() {
         }
     }
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         baseActivity = context as? IBaseActivity
     }

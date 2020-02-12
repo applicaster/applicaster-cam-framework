@@ -20,7 +20,8 @@ import com.applicaster.cam.ui.auth.user.activation.AccountActivationFragment
 import com.applicaster.cam.ui.base.view.BaseFragment
 import java.util.HashMap
 
-class CamNavigationRouter(private val baseActivity: IBaseActivity) : BaseNavigationRouter(baseActivity) {
+class CamNavigationRouter(private val baseActivity: IBaseActivity) :
+    BaseNavigationRouter(baseActivity) {
 
     private val TAG = CamNavigationRouter::class.java.canonicalName
     private val confirmationDialogPrefix: String = "ConfirmationDialog-"
@@ -95,11 +96,13 @@ class CamNavigationRouter(private val baseActivity: IBaseActivity) : BaseNavigat
     fun showConfirmationDialog(dialogType: AlertDialogType) {
         val tag = "$confirmationDialogPrefix${dialogType.name}"
         val dialog: DialogFragment? = fragmentManager?.findFragmentByTag(tag) as? DialogFragment
-        if (dialog == null) {
-            ConfirmationDialog.newInstance(dialogType).show(fragmentManager, tag)
-        } else {
-            if (!dialog.isAdded) {
-                dialog.show(fragmentManager, tag)
+        fragmentManager?.let {
+            if (dialog == null) {
+                ConfirmationDialog.newInstance(dialogType).show(it, tag)
+            } else {
+                if (!dialog.isAdded) {
+                    dialog.show(it, tag)
+                }
             }
         }
     }
@@ -158,7 +161,10 @@ class CamNavigationRouter(private val baseActivity: IBaseActivity) : BaseNavigat
             AuthScreenType.LOGIN -> attachLoginFragment(true)
             AuthScreenType.SIGNUP -> attachSignUpFragment(true)
             else -> {
-                Log.e(TAG, "Illegal AuthScreenType value: [${authScreenType.name}] was set as function parameter!")
+                Log.e(
+                    TAG,
+                    "Illegal AuthScreenType value: [${authScreenType.name}] was set as function parameter!"
+                )
                 throw IllegalArgumentException("Illegal AuthScreenType value: [${authScreenType.name}] was set as function parameter!")
             }
         }
