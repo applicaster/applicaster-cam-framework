@@ -9,7 +9,7 @@ android {
         minSdkVersion 19
         targetSdkVersion 28
 
-        versionCode 3
+        versionCode 4
         versionName "2.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -110,10 +110,11 @@ publishing {
             groupId GROUP
 
             def versionFromTag = getVersionName()
+            project.logger.info(getVersionName())
             if (versionFromTag != null) {
                 // Check if version from tag equals to version from properties
                 if (!compareVersions(versionFromTag, VERSION))
-                    throw new Exception("Incomparable version value from tag and properties!")
+                    throw new Exception("Incomparable version value from tag (${versionFromTag}) and properties (${VERSION})!")
 
                 // There is a tag existing on the current commit - we can upload to Bintray
                 version versionFromTag

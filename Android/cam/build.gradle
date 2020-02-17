@@ -9,8 +9,8 @@ android {
     defaultConfig {
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 14
-        versionName "3.1.0"
+        versionCode 15
+        versionName "4.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -58,7 +58,7 @@ dependencies {
         exclude group: 'com.android.support', module:'appcompat-v7'
     }
     api 'com.applicaster:applicaster-iap-framework:0.0.5'
-    api ('com.applicaster:zapp-config-fetcher:1.0.2') {
+    api ('com.applicaster:zapp-config-fetcher:2.0.0') {
          exclude group: 'com.applicaster', module:'applicaster-android-sdk'
     }
     implementation 'androidx.appcompat:appcompat:1.1.0'
@@ -127,7 +127,7 @@ publishing {
             if (versionFromTag != null) {
                 // Check if version from tag equals to version from properties
                 if (!compareVersions(versionFromTag, VERSION))
-                    throw new Exception("Incomparable version value from tag and properties!")
+                    throw new Exception("Incomparable version value from tag (${versionFromTag}) and properties (${VERSION})!")
 
                 // There is a tag existing on the current commit - we can upload to Bintray
                 version versionFromTag

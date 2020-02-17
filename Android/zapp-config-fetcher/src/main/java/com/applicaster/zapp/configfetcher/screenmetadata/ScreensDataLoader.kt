@@ -10,7 +10,6 @@ import com.applicaster.zapp.configfetcher.screenmetadata.model.ScreenData
 import com.applicaster.zapp.configfetcher.screenmetadata.service.CustomConfigLoaderService
 import com.applicaster.zapp.configfetcher.screenmetadata.service.ScreenMetaDataService
 import com.google.gson.GsonBuilder
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.experimental.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -32,7 +31,6 @@ class ScreensDataLoader(private val pluginIdentifier: String) {
         retrofit = retrofitBuilder.apply {
             baseUrl(baseUrl)
             addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
-            addCallAdapterFactory(CoroutineCallAdapterFactory())
             client(getHttpClient())
         }.build()
         return retrofit.create(serviceClass)
