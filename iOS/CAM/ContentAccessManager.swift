@@ -19,7 +19,7 @@ protocol Coordinator: AnyObject {
 
 open class ContentAccessManager {
     
-    private var navigationController: UINavigationController
+    private var navigationController: CAMNavigationController
     private var completion: (Bool) -> Void
     private var delegate: CAMDelegate
     private weak var rootViewController: UIViewController!
@@ -34,7 +34,7 @@ open class ContentAccessManager {
         self.delegate = camDelegate
         self.camFlow = camFlow
         self.completion = completion
-        self.navigationController = UINavigationController()
+        self.navigationController = CAMNavigationController()
         self.navigationController.modalPresentationStyle = .fullScreen
         self.navigationController.isNavigationBarHidden = true
     }
