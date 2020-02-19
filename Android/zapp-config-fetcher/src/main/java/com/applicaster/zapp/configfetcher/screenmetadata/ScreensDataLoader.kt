@@ -10,7 +10,6 @@ import com.applicaster.zapp.configfetcher.screenmetadata.model.ScreenData
 import com.applicaster.zapp.configfetcher.screenmetadata.service.CustomConfigLoaderService
 import com.applicaster.zapp.configfetcher.screenmetadata.service.ScreenMetaDataService
 import com.google.gson.GsonBuilder
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.experimental.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -32,7 +31,6 @@ class ScreensDataLoader(private val pluginIdentifier: String) {
         retrofit = retrofitBuilder.apply {
             baseUrl(baseUrl)
             addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
-            addCallAdapterFactory(CoroutineCallAdapterFactory())
             client(getHttpClient())
         }.build()
         return retrofit.create(serviceClass)
@@ -77,7 +75,7 @@ class ScreensDataLoader(private val pluginIdentifier: String) {
         screenMetadataService = createRetrofitService(baseUrl, ScreenMetaDataService::class.java)
 
         try {
-            val response = screenMetadataService?.loadScreensJson(builder.path)?.await()
+            val response = screenMetadataService?.loadScreensJson(builder.path)
             val screensDataList: List<ScreenData>? = response?.body()
             screensDataList?.forEach {
                 if (it.type?.contains(pluginIdentifier, ignoreCase = true) == true) {
@@ -99,7 +97,7 @@ class ScreensDataLoader(private val pluginIdentifier: String) {
             val baseUrl = "${decodedUrl.protocol}://${decodedUrl.host}"
             customFieldsLoaderService =
                 createRetrofitService(baseUrl, CustomConfigLoaderService::class.java)
-            val response = customFieldsLoaderService?.loadCustomFieldsJson(url)?.await()
+            val response = customFieldsLoaderService?.loadCustomFieldsJson(url)
             if (response?.isSuccessful == true) {
                 result = response.body()?.toString() ?: ""
             }

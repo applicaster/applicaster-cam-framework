@@ -3,7 +3,7 @@ package com.applicaster.cam.ui.auth.user.login
 import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.Intent
-import android.support.v4.content.ContextCompat
+import androidx.core.content.ContextCompat
 import com.applicaster.cam.CamFlow
 import com.applicaster.cam.ContentAccessManager
 import com.applicaster.cam.FacebookAuthCallback

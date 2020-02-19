@@ -2,7 +2,7 @@ package com.applicaster.cam.config.ui
 
 import android.graphics.Color
 import android.graphics.Typeface
-import android.support.annotation.ColorInt
+import androidx.annotation.ColorInt
 import android.text.SpannableStringBuilder
 import android.text.TextPaint
 import android.text.TextUtils

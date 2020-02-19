@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -10,7 +10,7 @@
         android:background="@android:color/transparent"
         android:id="@+id/root_layout_billing_item">
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_billing_item"
         android:layout_width="@dimen/layout_billing_item_width"
         android:layout_height="@dimen/layout_billing_item_height"
@@ -91,7 +91,7 @@
             app:layout_constraintTop_toBottomOf="@+id/btn_billing_item_subscribe"
             tools:visibility="visible" />
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.applicaster.util.ui.CustomTextView
             android:id="@+id/tv_billing_item_label"
@@ -109,4 +109,4 @@
             app:layout_constraintBottom_toTopOf="@+id/layout_billing_item"
             app:layout_constraintEnd_toEndOf="@+id/layout_billing_item"/>
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

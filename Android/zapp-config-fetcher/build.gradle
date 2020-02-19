@@ -9,10 +9,10 @@ android {
         minSdkVersion 19
         targetSdkVersion 28
 
-        versionCode 3
-        versionName "1.0.2"
+        versionCode 4
+        versionName "2.0.0"
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -49,7 +49,7 @@ repositories {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     // Applicaster SDK
-    api('com.applicaster:applicaster-android-sdk:4.0.0')
+    api('com.applicaster:applicaster-android-sdk:5.0.1')
 
     implementation ('com.github.LiquidPlayer:LiquidCore:0.6.2'){
         exclude group: 'com.android.support', module:'appcompat-v7'
@@ -70,7 +70,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath 'com.android.tools.build:gradle:3.5.3'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
         classpath "org.jetbrains.dokka:dokka-android-gradle-plugin:0.9.17"
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
@@ -110,10 +110,11 @@ publishing {
             groupId GROUP
 
             def versionFromTag = getVersionName()
+            project.logger.info(getVersionName())
             if (versionFromTag != null) {
                 // Check if version from tag equals to version from properties
                 if (!compareVersions(versionFromTag, VERSION))
-                    throw new Exception("Incomparable version value from tag and properties!")
+                    throw new Exception("Incomparable version value from tag (${versionFromTag}) and properties (${VERSION})!")
 
                 // There is a tag existing on the current commit - we can upload to Bintray
                 version versionFromTag
@@ -122,8 +123,10 @@ publishing {
                 artifact ("build/outputs/aar/${project.getName()}-release.aar") {
                     builtBy assemble
                 }
-                artifact androidJavadocsJar
-                artifact androidSourcesJar
+                afterEvaluate {
+                    artifact androidJavadocsJar
+                    artifact androidSourcesJar
+                }
                 pom.withXml {
                     Node root = asNode()
                     root.appendNode('name', ARTIFACT_ID)

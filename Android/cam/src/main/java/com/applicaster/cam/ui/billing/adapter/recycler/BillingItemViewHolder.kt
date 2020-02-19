@@ -1,6 +1,6 @@
 package com.applicaster.cam.ui.billing.adapter.recycler
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.widget.Button
 import com.applicaster.util.ui.CustomTextView

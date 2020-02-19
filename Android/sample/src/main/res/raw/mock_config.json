@@ -16,7 +16,7 @@
   "restore_help_message_text":"If you’ve already made a purchase, you will be able to restore that purchase at no cost once you’ve logged in.",
 
   "use_signup_activation_code_method":"true",
-  "use_pw_activation_code_method": "true",
+  "use_pw_activation_code_method": "false",
   "login_title_text":"Login to Your Account",
   "login_button_text":"Login",
   "password_reset_link_text":"Forgot Your Password?",
@@ -49,6 +49,9 @@
   "restore_purchase_confirmation_description_text":"Any pre-existing purchases you’ve made have been restored and assigned to your account.",
   "password_reset_confirmation_title_text":"Password Reset Delivered",
   "password_reset_confirmation_description_text":"Check your email in order reset your password for this account",
+  "logout_title_text": "Logout title",
+  "logout_description_text": "Logout desc",
+  "logout_error_alert_text": "Logout error",
 
   "account_activation_screen_title_text":"Activate account",
   "account_activation_description_text":"Enter the activation code that was delivered to your mail",

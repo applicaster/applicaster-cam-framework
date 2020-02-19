@@ -1,7 +1,7 @@
 package com.applicaster.camsample
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.applicaster.cam.ContentAccessManager
 import com.applicaster.camsample.mock.MockCamContract
 import kotlinx.android.synthetic.main.activity_main.*
