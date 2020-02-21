@@ -33,7 +33,7 @@ class LoginViewController: UIViewController {
     @IBOutlet var stackView: UIStackView!
     
     @IBOutlet var signUpContainer: UIView!
-    @IBOutlet var signUpButton: UIButton!
+    @IBOutlet var signUpTextView: UITextView!
     
     @IBOutlet var camLinksContainer: CamLinksView!
     
@@ -43,6 +43,7 @@ class LoginViewController: UIViewController {
     @IBOutlet var inputContainerHeightConstraint: NSLayoutConstraint!
     @IBOutlet var authFieldsTableHeightConstraint: NSLayoutConstraint!
     @IBOutlet var resetPasswordHeightConstraint: NSLayoutConstraint!
+    @IBOutlet var signUpContainerBottom: NSLayoutConstraint!
     
     var configDictionary: [String: String] {
         return presenter?.camDelegate.getPluginConfig() ?? [String: String]()
@@ -116,9 +117,7 @@ class LoginViewController: UIViewController {
             backButton.isHidden = isHidden
         }
         closeButton.isHidden = presenter?.camDelegate.analyticsStorage().trigger == .appLaunch
-        signUpButton.titleLabel?.numberOfLines = 0
-        signUpButton.titleLabel?.textAlignment = .center
-        signUpButton.isUserInteractionEnabled = (configDictionary[CAMKeys.loginSingUpActionText.rawValue] ?? "").isEmpty ? false : true
+        setupSignUpTextView()
         socialNetworksContainer.isHidden = !(configDictionary[CAMKeys.isAlternativeAuthenticationEnabled.rawValue]?.bool ?? false)
         authFieldsTable.backgroundView = UIView()
         authFieldsTable.allowsSelection = false
@@ -174,18 +173,15 @@ class LoginViewController: UIViewController {
         leftSeparatorView.setStyle(asset: .leftSeparator)
         rightSeparatorView.setStyle(asset: .rightSeparator)
         alternateLabel.setStyle(config: configDictionary, camTextKey: .separatorText, style: .separatorFont)
-        socialNetworksLabel.setStyle(config: configDictionary, camTextKey: .alternativeAuthenticationPromtText, style: .alternativeAuthenticationFont)
-        signUpButton.setAttributedStyle(config: configDictionary, attributedTitle: [(style: CAMStyles.promptFont,
-                                                                                     string: configDictionary[CAMKeys.loginSingUpPromtText.rawValue] ?? "",
-                                                                                     additionalAttributes: nil),
-                                                                                    (style: CAMStyles.linkFont,
-                                                                                     string: "\n\(configDictionary[CAMKeys.loginSingUpActionText.rawValue] ?? "")",
-                                                                                        additionalAttributes: nil)])
+        socialNetworksLabel.setStyle(config: configDictionary,
+                                     camTextKey: .alternativeAuthenticationPromtText,
+                                     style: .alternativeAuthenticationFont)
     }
     
     func setupConstraints() {
         resetPasswordHeightConstraint.constant = resetPasswordButton.isHidden ? 12 : 33
         camLinksHeightConstraint.constant = isCustomLinksVisible ? 39 : 0
+        signUpContainerBottom.constant = isCustomLinksVisible ? 0 : 39
         let inputContainerHeight = authFieldsTableHeight + loginButton.frame.height + resetPasswordButton.frame.height
         authFieldsTableHeightConstraint.constant = authFieldsTableHeight
         inputContainerHeightConstraint.constant = inputContainerHeight
@@ -197,6 +193,37 @@ class LoginViewController: UIViewController {
             self.inputContainerYConstraint.constant = 0
         }
         self.view.layoutIfNeeded()
+    }
+    
+    private func setupSignUpTextView() {
+        let config = configDictionary
+        
+        let restoreTextString = config[CAMKeys.loginSingUpPromtText.rawValue] ?? ""
+        let restoreLinkString = config[CAMKeys.loginSingUpActionText.rawValue] ?? ""
+        
+        let restoreMessageText = NSAttributedString(string: restoreTextString + " ",
+                                                    attributes: [.font: UIConfigurator.font(from: config,
+                                                                                            for: .promptFont),
+                                                                 .foregroundColor: UIConfigurator.color(from: config,
+                                                                                                        for: .promptFont)])
+        
+        let restoreLink = NSAttributedString(string: restoreLinkString,
+                                             attributes: [.font: UIConfigurator.font(from: config,
+                                                                                     for: .linkFont),
+                                                          .foregroundColor: UIConfigurator.color(from: config,
+                                                                                                 for: .linkFont),
+                                                          .underlineStyle: NSUnderlineStyle.single.rawValue])
+        let paragraph = NSMutableParagraphStyle()
+        paragraph.alignment = .center
+        
+        let restoreText = NSMutableAttributedString()
+        restoreText.append(restoreMessageText)
+        restoreText.append(restoreLink)
+        restoreText.addAttribute(.paragraphStyle,
+                                 value: paragraph,
+                                 range: NSRange(location: 0, length: restoreText.length))
+        
+        self.signUpTextView.attributedText = restoreText
     }
     
     // MARK: - Keyboard
@@ -239,14 +266,27 @@ class LoginViewController: UIViewController {
         presenter?.showResetPasswordScreen()
     }
     
-    @IBAction func showSignUpScreen(_ sender: Any) {
-        hideKeyboard()
-        presenter?.showSignUpScreen()
-    }
-    
     @IBAction func login(_ sender: UIButton) {
         hideKeyboard()
         presenter?.login(data: authFields)
+    }
+    
+    @IBAction func switchToSignUpTapped(_ sender: UITapGestureRecognizer) {
+        if let textView = sender.view as? UITextView {
+            var location = sender.location(in: textView)
+            location.x -= textView.textContainerInset.left
+            location.y -= textView.textContainerInset.top
+            
+            let tappedCharacterIndex = textView.layoutManager.characterIndex(for: location,
+                                                                             in: textView.textContainer,
+                                                                             fractionOfDistanceBetweenInsertionPoints: nil)
+            
+            let linkRange = (textView.text as NSString).range(of: configDictionary[CAMKeys.loginSingUpActionText.rawValue]!)
+            if linkRange.contains(tappedCharacterIndex) {
+                hideKeyboard()
+                presenter?.showSignUpScreen()
+            }
+        }
     }
     
     @objc private func facebookLogin() {
