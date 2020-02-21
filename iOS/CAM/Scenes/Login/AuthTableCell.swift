@@ -10,6 +10,7 @@ import UIKit
 class AuthTableCell: UITableViewCell, UITextFieldDelegate {
 
     @IBOutlet var textField: UITextField!
+    var updateFirstResponder: ((AuthTableCell?) -> Void)?
     var textChanged: ((String?) -> Void)?
     var showPopover: (() -> Void)?
     
@@ -55,6 +56,14 @@ class AuthTableCell: UITableViewCell, UITextFieldDelegate {
     @objc func textFieldDidChange() {
         textField.rightView = nil
         textChanged?(textField.text)
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        updateFirstResponder?(self)
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        updateFirstResponder?(nil)
     }
     
     func textField(_ textField: UITextField,
