@@ -9,6 +9,7 @@
 import UIKit
 
 class LoginViewController: UIViewController {
+    var activeTextCell: AuthTableCell?
     let cellHeight: CGFloat = 48.0
     let cellSpacing: CGFloat = 7.0
     
@@ -233,22 +234,12 @@ class LoginViewController: UIViewController {
     }
     
     func subscribeKeyboardNotifications() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardNotification(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardNotification(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    @objc func keyboardNotification(_ notification: NSNotification) {
-        if notification.name == UIResponder.keyboardWillShowNotification {
-            setViewYCoordinate(value: -100)
-        } else {
-            setViewYCoordinate(value: 0)
-        }
-    }
-    
-    func setViewYCoordinate(value: CGFloat) {
-        if self.view.frame.origin.y > value || value == 0 {
-            self.view.frame.origin.y = value
-        }
+    @objc func keyboardWillShow(_ notification: NSNotification) {
+        self.keyboardWillShow(notification, tableView: authFieldsTable, activeCell: activeTextCell)
     }
     
     // MARK: - Actions
@@ -325,11 +316,14 @@ extension LoginViewController: UITableViewDelegate, UITableViewDataSource {
                                    message: self?.authFields[indexPath.row].errorDescription,
                                    sourceView: cell)
         }
-        
         cell.textChanged = { [weak self] text in
             self?.authFields[indexPath.row].state = .none
             self?.authFields[indexPath.row].errorDescription = ""
             self?.authFields[indexPath.row].text = text
+        }
+        
+        cell.updateFirstResponder = { [weak self] tableCell in
+            self?.activeTextCell = tableCell
         }
         return cell
     }

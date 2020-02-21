@@ -9,6 +9,7 @@ import UIKit
 
 class UpdatePasswordViewController: UIViewController {
 
+    var activeTextCell: AuthTableCell?
     var loadingPopover = LoadingPopover.nibInstance()
     var updatePasswordFields = [AuthField]()
     @IBOutlet var scrollView: UIScrollView!
@@ -86,22 +87,12 @@ class UpdatePasswordViewController: UIViewController {
     }
     
     func subscribeKeyboardNotifications() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardNotification(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardNotification(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    @objc func keyboardNotification(_ notification: NSNotification) {
-        if notification.name == UIResponder.keyboardWillShowNotification {
-            setViewYCoordinate(value: -100)
-        } else {
-            setViewYCoordinate(value: 0)
-        }
-    }
-    
-    func setViewYCoordinate(value: CGFloat) {
-        if self.view.frame.origin.y > value || value == 0 {
-            self.view.frame.origin.y = value
-        }
+    @objc func keyboardWillShow(_ notification: NSNotification) {
+        self.keyboardWillShow(notification, tableView: updatePasswordFieldsTable, activeCell: activeTextCell)
     }
     
     // MARK: - Actions
@@ -194,6 +185,10 @@ extension UpdatePasswordViewController: UITableViewDelegate, UITableViewDataSour
             self?.updatePasswordFields[indexPath.row].state = .none
             self?.updatePasswordFields[indexPath.row].errorDescription = ""
             self?.updatePasswordFields[indexPath.row].text = text
+        }
+        
+        cell.updateFirstResponder = { [weak self] tableCell in
+            self?.activeTextCell = tableCell
         }
         return cell
     }

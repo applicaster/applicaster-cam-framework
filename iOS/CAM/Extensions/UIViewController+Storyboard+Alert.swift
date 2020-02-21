@@ -76,4 +76,27 @@ public extension UIViewController {
         view.addSubview(controller.view)
         controller.didMove(toParent: self)
     }
+    
+    @objc func keyboardWillHide(_ notification: NSNotification) {
+        setViewYCoordinate(value: 0)
+    }
+    
+    @objc func keyboardWillShow(_ notification: NSNotification, tableView: UITableView, activeCell: UITableViewCell?) {
+        guard let activeCell = activeCell else {
+            return
+        }
+        let responderFrame = tableView.convert(activeCell.frame, to: view)
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            if keyboardRectangle.minY < responderFrame.maxY {
+                setViewYCoordinate(value: keyboardRectangle.minY - responderFrame.maxY)
+            }
+        }
+    }
+    
+    func setViewYCoordinate(value: CGFloat) {
+        if self.view.frame.origin.y > value || value == 0 {
+            self.view.frame.origin.y = value
+        }
+    }
 }
