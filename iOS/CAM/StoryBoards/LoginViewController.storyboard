@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -192,27 +192,35 @@
                                 </constraints>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uuM-0v-2FY" userLabel="bottomInfoView">
-                                <rect key="frame" x="0.0" y="465" width="320" height="64"/>
+                                <rect key="frame" x="0.0" y="481" width="320" height="33"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="szx-wQ-fAQ">
-                                        <rect key="frame" x="133" y="0.0" width="54" height="64"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="64" id="zF5-zq-fG9"/>
-                                        </constraints>
-                                        <state key="normal" title="Button"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wf5-8x-nJI">
+                                        <rect key="frame" x="32" y="0.0" width="256" height="33"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <gestureRecognizers/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="Kek">
+                                                <attributes>
+                                                    <color key="NSColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <font key="NSFont" metaFont="menu" size="14"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <dataDetectorType key="dataDetectorTypes" link="YES"/>
                                         <connections>
-                                            <action selector="showSignUpScreen:" destination="OpA-kT-jU3" eventType="touchUpInside" id="ycH-6E-Rie"/>
+                                            <outletCollection property="gestureRecognizers" destination="pMj-Sb-IOz" appends="YES" id="1Ab-Gn-tN0"/>
                                         </connections>
-                                    </button>
+                                    </textView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="szx-wQ-fAQ" firstAttribute="top" secondItem="uuM-0v-2FY" secondAttribute="top" id="3ia-Nk-1fd"/>
-                                    <constraint firstAttribute="bottom" secondItem="szx-wQ-fAQ" secondAttribute="bottom" id="D1i-IB-d8L"/>
-                                    <constraint firstAttribute="height" constant="64" id="RdD-UE-1hp"/>
-                                    <constraint firstItem="szx-wQ-fAQ" firstAttribute="centerX" secondItem="uuM-0v-2FY" secondAttribute="centerX" id="UEH-MQ-eyi"/>
-                                    <constraint firstItem="szx-wQ-fAQ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="uuM-0v-2FY" secondAttribute="leading" constant="32" id="XGM-0B-sfb"/>
-                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="szx-wQ-fAQ" secondAttribute="trailing" constant="32" id="dmU-GI-2fj"/>
+                                    <constraint firstAttribute="bottom" secondItem="wf5-8x-nJI" secondAttribute="bottom" id="3nT-eC-tzT"/>
+                                    <constraint firstItem="wf5-8x-nJI" firstAttribute="leading" secondItem="uuM-0v-2FY" secondAttribute="leading" constant="32" id="Ms2-D5-YaY"/>
+                                    <constraint firstItem="wf5-8x-nJI" firstAttribute="height" secondItem="uuM-0v-2FY" secondAttribute="height" id="lI6-ke-dOT"/>
+                                    <constraint firstItem="wf5-8x-nJI" firstAttribute="top" secondItem="uuM-0v-2FY" secondAttribute="top" id="rLv-pk-wlH"/>
+                                    <constraint firstAttribute="trailing" secondItem="wf5-8x-nJI" secondAttribute="trailing" constant="32" id="xW5-tL-hDu"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gO4-QR-eM0" customClass="CamLinksView" customModule="CAM" customModuleProvider="target">
@@ -256,12 +264,12 @@
                             <constraint firstItem="yqR-eQ-1AS" firstAttribute="leading" secondItem="CaI-6u-xm9" secondAttribute="leading" constant="10" id="aL3-ij-5sr"/>
                             <constraint firstItem="CaI-6u-xm9" firstAttribute="bottom" secondItem="gO4-QR-eM0" secondAttribute="bottom" id="bfK-bo-9RS"/>
                             <constraint firstItem="8YH-d8-P5Z" firstAttribute="top" secondItem="CaI-6u-xm9" secondAttribute="top" id="cBG-cU-dlJ"/>
+                            <constraint firstItem="gO4-QR-eM0" firstAttribute="top" secondItem="uuM-0v-2FY" secondAttribute="bottom" constant="15" id="dAN-Kr-PoD"/>
                             <constraint firstItem="yqR-eQ-1AS" firstAttribute="top" secondItem="Qt9-xh-807" secondAttribute="bottom" id="dLY-GA-QYG"/>
                             <constraint firstItem="Qt9-xh-807" firstAttribute="top" secondItem="CaI-6u-xm9" secondAttribute="top" id="dP7-yQ-Ctk"/>
                             <constraint firstItem="5I9-bH-qGg" firstAttribute="leading" secondItem="CaI-6u-xm9" secondAttribute="leading" id="hqw-PR-jLG"/>
                             <constraint firstItem="5I9-bH-qGg" firstAttribute="top" secondItem="ffi-pc-jcB" secondAttribute="top" id="kjd-s6-exS"/>
                             <constraint firstItem="5I9-bH-qGg" firstAttribute="bottom" secondItem="ffi-pc-jcB" secondAttribute="bottom" id="yX4-LT-zQX"/>
-                            <constraint firstItem="gO4-QR-eM0" firstAttribute="top" secondItem="uuM-0v-2FY" secondAttribute="bottom" id="zeU-St-pJF"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="CaI-6u-xm9"/>
                         <connections>
@@ -285,8 +293,9 @@
                         <outlet property="resetPasswordButton" destination="C3Q-q8-bf3" id="3bV-cX-m5G"/>
                         <outlet property="resetPasswordHeightConstraint" destination="NfB-Qt-Qtz" id="ged-iQ-0Wx"/>
                         <outlet property="rightSeparatorView" destination="tMe-xl-QJE" id="VFq-Cr-yOC"/>
-                        <outlet property="signUpButton" destination="szx-wQ-fAQ" id="c6F-Xb-d8r"/>
                         <outlet property="signUpContainer" destination="uuM-0v-2FY" id="BMm-ZP-253"/>
+                        <outlet property="signUpContainerBottom" destination="dAN-Kr-PoD" id="NeO-wO-Fy1"/>
+                        <outlet property="signUpTextView" destination="wf5-8x-nJI" id="iFc-wc-Gt6"/>
                         <outlet property="socialNetworksContainer" destination="rPw-cz-xFd" id="ack-an-19a"/>
                         <outlet property="socialNetworksContainerTopConstraint" destination="Qdh-Hz-xjw" id="E93-xJ-F7m"/>
                         <outlet property="socialNetworksLabel" destination="2hZ-yk-KYh" id="127-ig-Tnk"/>
@@ -298,6 +307,11 @@
                 <tapGestureRecognizer id="uc4-NR-AqZ">
                     <connections>
                         <action selector="hideKeyboard" destination="OpA-kT-jU3" id="12H-vC-0NK"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="pMj-Sb-IOz">
+                    <connections>
+                        <action selector="switchToSignUpTapped:" destination="OpA-kT-jU3" id="XPa-jK-3KO"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>

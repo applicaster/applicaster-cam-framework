@@ -182,7 +182,8 @@ class EntitlementPickerViewController: UIViewController {
                                              attributes: [.font: UIConfigurator.font(from: config,
                                                                                      for: .linkFont),
                                                           .foregroundColor: UIConfigurator.color(from: config,
-                                                                                                 for: .linkFont)])
+                                                                                                 for: .linkFont),
+                                                          .underlineStyle: NSUnderlineStyle.single.rawValue])
         let paragraph = NSMutableParagraphStyle()
         paragraph.alignment = .center
         

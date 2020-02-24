@@ -35,8 +35,7 @@ class SignUpViewController: UIViewController {
     @IBOutlet var stackView: UIStackView!
     
     @IBOutlet var loginContainer: UIView!
-    @IBOutlet var loginButton: UIButton!
-  
+    @IBOutlet var switchToLoginTextView: UITextView!
     
     @IBOutlet var camLinksContainer: CamLinksView!
     @IBOutlet var camLinksHeightConstraint: NSLayoutConstraint!
@@ -44,6 +43,7 @@ class SignUpViewController: UIViewController {
     @IBOutlet var socialNetworksContainerTopConstraint: NSLayoutConstraint!
     @IBOutlet var inputContainerYConstraint: NSLayoutConstraint!
     @IBOutlet var inputContainerHeightConstraint: NSLayoutConstraint!
+    @IBOutlet var switchToLoginTextViewBottom: NSLayoutConstraint!
     
     var configDictionary: [String: String] {
         return presenter?.camDelegate.getPluginConfig() ?? [String: String]()
@@ -118,15 +118,13 @@ class SignUpViewController: UIViewController {
             backButton.isHidden = isHidden
         }
         closeButton.isHidden = presenter?.camDelegate.analyticsStorage().trigger == .appLaunch
-        loginButton.titleLabel?.numberOfLines = 0
-        loginButton.titleLabel?.textAlignment = .center
-        loginButton.isUserInteractionEnabled = (configDictionary[CAMKeys.singUpLoginActionText.rawValue] ?? "").isEmpty ? false : true
         socialNetworksContainer.isHidden = !(configDictionary[CAMKeys.isAlternativeAuthenticationEnabled.rawValue]?.bool ?? false)
         authFieldsTable.backgroundView = UIView()
         authFieldsTable.allowsSelection = false
         setupCamLinks()
         setupSocialNetworksContainer()
         configureElements()
+        setupSignUpTextView()
     }
     
     func setupSocialNetworksContainer() {
@@ -153,6 +151,7 @@ class SignUpViewController: UIViewController {
     
     func setupConstraints() {
         camLinksHeightConstraint.constant = isCustomLinksVisible ? 39 : 0
+        switchToLoginTextViewBottom.constant = isCustomLinksVisible ? 0 : 39
         let inputContainerHeight = authFieldsTableHeight + signUpButton.frame.height + 13
         authFieldsTableHeightConstraint.constant = authFieldsTableHeight
         inputContainerHeightConstraint.constant = inputContainerHeight
@@ -179,13 +178,37 @@ class SignUpViewController: UIViewController {
         leftSeparatorView.setStyle(asset: .leftSeparator)
         rightSeparatorView.setStyle(asset: .rightSeparator)
         alternateLabel.setStyle(config: configDictionary, camTextKey: .separatorText, style: .separatorFont)
-        socialNetworksLabel.setStyle(config: configDictionary, camTextKey: .alternativeAuthenticationPromtText, style: .alternativeAuthenticationFont)
-        loginButton.setAttributedStyle(config: configDictionary, attributedTitle: [(style: .promptFont,
-                                                                                    string: configDictionary[CAMKeys.singUpLoginPromtText.rawValue] ?? "",
-                                                                                    additionalAttributes: nil),
-                                                                                   (style: .linkFont,
-                                                                                    string: "\n\(configDictionary[CAMKeys.singUpLoginActionText.rawValue] ?? "")",
-                                                                                    additionalAttributes: nil)])
+        socialNetworksLabel.setStyle(config: configDictionary,
+                                     camTextKey: .alternativeAuthenticationPromtText,
+                                     style: .alternativeAuthenticationFont)
+    }
+    
+    private func setupSignUpTextView() {
+        let config = configDictionary
+        
+        let switchToSignUpPromptText = NSAttributedString(string: config[CAMKeys.singUpLoginPromtText.rawValue] ?? "",
+                                                    attributes: [.font: UIConfigurator.font(from: config,
+                                                                                            for: .promptFont),
+                                                                 .foregroundColor: UIConfigurator.color(from: config,
+                                                                                                        for: .promptFont)])
+        
+        let switchToSignUpLinkText = NSAttributedString(string: config[CAMKeys.singUpLoginActionText.rawValue] ?? "",
+                                                        attributes: [.font: UIConfigurator.font(from: config,
+                                                                                                for: .linkFont),
+                                                                     .foregroundColor: UIConfigurator.color(from: config,
+                                                                                                            for: .linkFont),
+                                                                     .underlineStyle: NSUnderlineStyle.single.rawValue])
+        let paragraph = NSMutableParagraphStyle()
+        paragraph.alignment = .center
+        
+        let switchToLoginText = NSMutableAttributedString()
+        switchToLoginText.append(switchToSignUpPromptText)
+        switchToLoginText.append(switchToSignUpLinkText)
+        switchToLoginText.addAttribute(.paragraphStyle,
+                                 value: paragraph,
+                                 range: NSRange(location: 0, length: switchToLoginText.length))
+        
+        self.switchToLoginTextView.attributedText = switchToLoginText
     }
     
     // MARK: - Keyboard
@@ -218,8 +241,21 @@ class SignUpViewController: UIViewController {
         presenter?.signUp(data: authFields)
     }
     
-    @IBAction func showLoginScreen(_ sender: Any) {
-        presenter?.showLoginScreen()
+    @IBAction func switchToLoginTapped(_ sender: UITapGestureRecognizer) {
+        if let textView = sender.view as? UITextView {
+            var location = sender.location(in: textView)
+            location.x -= textView.textContainerInset.left
+            location.y -= textView.textContainerInset.top
+            
+            let tappedCharacterIndex = textView.layoutManager.characterIndex(for: location,
+                                                                             in: textView.textContainer,
+                                                                             fractionOfDistanceBetweenInsertionPoints: nil)
+            
+            let linkRange = (textView.text as NSString).range(of: configDictionary[CAMKeys.singUpLoginActionText.rawValue]!)
+            if linkRange.contains(tappedCharacterIndex) {
+                presenter?.showLoginScreen()
+            }
+        }
     }
     
     @objc func facebookSignUp() {

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -188,27 +188,33 @@
                                 </constraints>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="35d-kS-uOU" userLabel="bottonInfoView">
-                                <rect key="frame" x="0.0" y="564" width="375" height="64"/>
+                                <rect key="frame" x="0.0" y="595" width="375" height="33"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0TR-Um-XAB" userLabel="loginButton">
-                                        <rect key="frame" x="160.5" y="0.0" width="54" height="64"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="64" id="Met-h9-wc3"/>
-                                        </constraints>
-                                        <state key="normal" title="Button"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Smi-Q0-eog">
+                                        <rect key="frame" x="32" y="0.0" width="311" height="33"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <gestureRecognizers/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="Kek">
+                                                <attributes>
+                                                    <color key="NSColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <font key="NSFont" metaFont="menu" size="14"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         <connections>
-                                            <action selector="showLoginScreen:" destination="e86-j8-Zrq" eventType="touchUpInside" id="Je9-KK-eM8"/>
+                                            <outletCollection property="gestureRecognizers" destination="dO3-gu-Xvg" appends="YES" id="tjI-GZ-Hdi"/>
                                         </connections>
-                                    </button>
+                                    </textView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="64" id="ATy-DN-C2J"/>
-                                    <constraint firstItem="0TR-Um-XAB" firstAttribute="centerX" secondItem="35d-kS-uOU" secondAttribute="centerX" id="E8J-hg-DUg"/>
-                                    <constraint firstAttribute="bottom" secondItem="0TR-Um-XAB" secondAttribute="bottom" id="PXj-a9-Huw"/>
-                                    <constraint firstItem="0TR-Um-XAB" firstAttribute="top" secondItem="35d-kS-uOU" secondAttribute="top" id="Pop-7l-LYO"/>
-                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="0TR-Um-XAB" secondAttribute="trailing" constant="32" id="flE-Qg-DfC"/>
-                                    <constraint firstItem="0TR-Um-XAB" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="35d-kS-uOU" secondAttribute="leading" constant="32" id="rdr-8R-aPa"/>
+                                    <constraint firstAttribute="bottom" secondItem="Smi-Q0-eog" secondAttribute="bottom" id="7k4-dG-ijZ"/>
+                                    <constraint firstItem="Smi-Q0-eog" firstAttribute="top" secondItem="35d-kS-uOU" secondAttribute="top" id="HQG-bE-Rb7"/>
+                                    <constraint firstItem="Smi-Q0-eog" firstAttribute="leading" secondItem="35d-kS-uOU" secondAttribute="leading" constant="32" id="PNy-yq-QwH"/>
+                                    <constraint firstAttribute="trailing" secondItem="Smi-Q0-eog" secondAttribute="trailing" constant="32" id="dg6-T1-KeI"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qNS-LH-bUW" customClass="CamLinksView" customModule="CAM" customModuleProvider="target">
@@ -265,7 +271,6 @@
                         <outlet property="inputContainerHeightConstraint" destination="lTi-ce-Es6" id="o2r-nS-H2D"/>
                         <outlet property="inputContainerYConstraint" destination="EfO-b4-VXG" id="SBL-NB-ICc"/>
                         <outlet property="leftSeparatorView" destination="Wyt-au-ez2" id="6Yc-dY-Ngp"/>
-                        <outlet property="loginButton" destination="0TR-Um-XAB" id="w5B-7J-JdL"/>
                         <outlet property="loginContainer" destination="35d-kS-uOU" id="A79-cG-nX3"/>
                         <outlet property="logoImageView" destination="44O-Vj-bh7" id="nhW-FS-umj"/>
                         <outlet property="rightSeparatorView" destination="16U-az-gZk" id="nYR-qI-gJl"/>
@@ -274,6 +279,8 @@
                         <outlet property="socialNetworksContainerTopConstraint" destination="Vd7-nJ-KRM" id="MVH-AS-pMo"/>
                         <outlet property="socialNetworksLabel" destination="ure-l1-hnT" id="E3Y-FG-yCD"/>
                         <outlet property="stackView" destination="27I-7z-Nre" id="vPM-Mj-JOJ"/>
+                        <outlet property="switchToLoginTextView" destination="Smi-Q0-eog" id="kwJ-pc-8gd"/>
+                        <outlet property="switchToLoginTextViewBottom" destination="JdC-ng-fF0" id="VuO-yv-S9c"/>
                         <outlet property="titleLabel" destination="5Ge-wn-yW9" id="2zY-xS-yvY"/>
                     </connections>
                 </viewController>
@@ -281,6 +288,11 @@
                 <tapGestureRecognizer id="QEf-Bn-Fj2">
                     <connections>
                         <action selector="hideKeyboard" destination="e86-j8-Zrq" id="Qpp-cG-gJ7"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="dO3-gu-Xvg">
+                    <connections>
+                        <action selector="switchToLoginTapped:" destination="e86-j8-Zrq" id="4p0-E9-nl4"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
