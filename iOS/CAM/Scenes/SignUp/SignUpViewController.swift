@@ -183,36 +183,33 @@ class SignUpViewController: UIViewController {
                                      style: .alternativeAuthenticationFont)
     }
     
-        private func setupSignUpTextView() {
-            let config = configDictionary
-            
-            let restoreTextString = config[CAMKeys.singUpLoginPromtText.rawValue] ?? ""
-            let restoreLinkString = config[CAMKeys.singUpLoginActionText.rawValue] ?? ""
-            
-            let restoreMessageText = NSAttributedString(string: restoreTextString + " ",
+    private func setupSignUpTextView() {
+        let config = configDictionary
+        
+        let switchToSignUpPromptText = NSAttributedString(string: config[CAMKeys.singUpLoginPromtText.rawValue] ?? "",
+                                                    attributes: [.font: UIConfigurator.font(from: config,
+                                                                                            for: .promptFont),
+                                                                 .foregroundColor: UIConfigurator.color(from: config,
+                                                                                                        for: .promptFont)])
+        
+        let switchToSignUpLinkText = NSAttributedString(string: config[CAMKeys.singUpLoginActionText.rawValue] ?? "",
                                                         attributes: [.font: UIConfigurator.font(from: config,
-                                                                                                for: .promptFont),
+                                                                                                for: .linkFont),
                                                                      .foregroundColor: UIConfigurator.color(from: config,
-                                                                                                            for: .promptFont)])
-            
-            let restoreLink = NSAttributedString(string: restoreLinkString,
-                                                 attributes: [.font: UIConfigurator.font(from: config,
-                                                                                         for: .linkFont),
-                                                              .foregroundColor: UIConfigurator.color(from: config,
-                                                                                                     for: .linkFont),
-                                                              .underlineStyle: NSUnderlineStyle.single.rawValue])
-            let paragraph = NSMutableParagraphStyle()
-            paragraph.alignment = .center
-            
-            let restoreText = NSMutableAttributedString()
-            restoreText.append(restoreMessageText)
-            restoreText.append(restoreLink)
-            restoreText.addAttribute(.paragraphStyle,
-                                     value: paragraph,
-                                     range: NSRange(location: 0, length: restoreText.length))
-            
-            self.switchToLoginTextView.attributedText = restoreText
-        }
+                                                                                                            for: .linkFont),
+                                                                     .underlineStyle: NSUnderlineStyle.single.rawValue])
+        let paragraph = NSMutableParagraphStyle()
+        paragraph.alignment = .center
+        
+        let switchToLoginText = NSMutableAttributedString()
+        switchToLoginText.append(switchToSignUpPromptText)
+        switchToLoginText.append(switchToSignUpLinkText)
+        switchToLoginText.addAttribute(.paragraphStyle,
+                                 value: paragraph,
+                                 range: NSRange(location: 0, length: switchToLoginText.length))
+        
+        self.switchToLoginTextView.attributedText = switchToLoginText
+    }
     
     // MARK: - Keyboard
     

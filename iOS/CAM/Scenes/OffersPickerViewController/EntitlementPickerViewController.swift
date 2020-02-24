@@ -172,7 +172,7 @@ class EntitlementPickerViewController: UIViewController {
     private func setupRestoreText() {
         let config = configDictionary
         
-        let restoreMessageText = NSAttributedString(string: viewModel!.restoreHint + " ",
+        let restoreMessageText = NSAttributedString(string: viewModel!.restoreHint,
                                                     attributes: [.font: UIConfigurator.font(from: config,
                                                                                             for: .promptFont),
                                                                  .foregroundColor: UIConfigurator.color(from: config,
