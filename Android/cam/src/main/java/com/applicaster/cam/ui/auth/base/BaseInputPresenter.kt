@@ -22,6 +22,11 @@ abstract class BaseInputPresenter(
         view?.showErrorPopup(rootView, errorMsg)
     }
 
+    override fun onActionDoneTriggered() {
+        val inputFields = view?.getInputFieldsValues() ?: hashMapOf()
+        onAuthActionButtonClicked(inputFields)
+    }
+
     override fun onAuthActionButtonClicked(inputValues: HashMap<AuthField, String>) {
         val inputFieldValidationErrors = validateAuthInputFields(inputValues)
         if (inputFieldValidationErrors.isNotEmpty()) {

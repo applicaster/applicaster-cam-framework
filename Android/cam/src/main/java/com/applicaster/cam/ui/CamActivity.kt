@@ -2,10 +2,10 @@ package com.applicaster.cam.ui
 
 import android.content.Context
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import android.util.Log
+import android.view.MotionEvent
 import android.view.View
-import com.applicaster.cam.CamFlow
+import android.view.inputmethod.InputMethodManager
+import androidx.appcompat.app.AppCompatActivity
 import com.applicaster.cam.ContentAccessManager
 import com.applicaster.cam.R
 import com.applicaster.cam.analytics.Action
@@ -15,6 +15,7 @@ import com.applicaster.cam.analytics.TimedEvent
 import com.applicaster.cam.ui.base.view.ContainerType
 import com.applicaster.cam.ui.base.view.IBaseActivity
 import kotlinx.android.synthetic.main.activity_cam.*
+
 
 class CamActivity : AppCompatActivity(), IBaseActivity {
 
@@ -74,10 +75,19 @@ class CamActivity : AppCompatActivity(), IBaseActivity {
     override fun onDestroy() {
         // Analytics event
         AnalyticsUtil.logContentGatewaySession(
-                TimedEvent.END,
-                ContentAccessManager.contract.getAnalyticsDataProvider().trigger.value,
-                AnalyticsGatewaySession.sessionData
+            TimedEvent.END,
+            ContentAccessManager.contract.getAnalyticsDataProvider().trigger.value,
+            AnalyticsGatewaySession.sessionData
         )
         super.onDestroy()
+    }
+
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        currentFocus?.let{
+            val imm =
+                getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
+            imm?.hideSoftInputFromWindow(it.windowToken, 0)
+        }
+        return super.dispatchTouchEvent(ev)
     }
 }

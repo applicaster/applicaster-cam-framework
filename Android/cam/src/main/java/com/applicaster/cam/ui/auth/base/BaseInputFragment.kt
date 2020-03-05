@@ -50,7 +50,7 @@ abstract class BaseInputFragment : BaseFragment(), IBaseInputView {
         }
     }
 
-    protected fun getInputFieldsValues(): HashMap<AuthField, String> {
+    override fun getInputFieldsValues(): HashMap<AuthField, String> {
         val inputValues = HashMap<AuthField, String>()
         val numberOfChildViews = getAuthInputLinearParent()?.childCount ?: 0
         if (numberOfChildViews > 0) {

@@ -26,6 +26,7 @@ class InputFieldViewCustomizer {
 
             for (field in authFieldConfig.authFields) {
                 val editText = AuthInputFieldView(context, field, listener)
+                editText.setOnSubmitListener { listener.onActionDoneTriggered() }
                 editText.applyCustomizations(etWidth, etHeight, etMarginTop, field)
                 linearParent.addView(editText)
             }
