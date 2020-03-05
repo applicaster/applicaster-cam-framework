@@ -85,7 +85,7 @@ class CamActivity : AppCompatActivity(), IBaseActivity {
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
         currentFocus?.let{
             val imm =
-                getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
+                getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager?
             imm?.hideSoftInputFromWindow(it.windowToken, 0)
         }
         return super.dispatchTouchEvent(ev)
