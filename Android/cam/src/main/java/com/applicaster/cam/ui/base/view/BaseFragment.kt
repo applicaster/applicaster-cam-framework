@@ -70,7 +70,7 @@ abstract class BaseFragment : Fragment(), IBaseView {
 
     @SuppressLint("ShowToast")
     override fun showToastMessage(msg: String) {
-        if (isAdded && context != null && !activity?.isFinishing!!) {
+        if (isAdded && context != null && activity?.isFinishing == false) {
             if (toast == null) {
                 toast = Toast.makeText(context, msg, Toast.LENGTH_SHORT)
             } else {

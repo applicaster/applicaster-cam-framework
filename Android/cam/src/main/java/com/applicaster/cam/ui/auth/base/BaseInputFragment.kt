@@ -11,6 +11,7 @@ import com.applicaster.cam.params.auth.AuthFieldConfig
 import com.applicaster.cam.ui.CamNavigationRouter
 import com.applicaster.cam.ui.base.custom.AuthInputFieldView
 import com.applicaster.cam.ui.base.custom.ErrorPopupViewBuilder
+import com.applicaster.cam.ui.base.custom.InputFieldViewListener
 import com.applicaster.cam.ui.base.view.BaseFragment
 
 abstract class BaseInputFragment : BaseFragment(), IBaseInputView {
@@ -39,13 +40,16 @@ abstract class BaseInputFragment : BaseFragment(), IBaseInputView {
     }
 
     override fun populateAuthFieldsViews(authFieldConfig: AuthFieldConfig) {
-        if (context != null && getAuthInputLinearParent() != null) {
+        val context = this@BaseInputFragment.context
+        val inputViewsParent = getAuthInputLinearParent()
+        val listener : InputFieldViewListener? = presenter
+        if (context != null && inputViewsParent != null && listener != null) {
             InputFieldViewCustomizer.populateAuthFields(
-                context = context!!,
-                linearParent = getAuthInputLinearParent()!!,
+                context = context,
+                linearParent = inputViewsParent,
                 scrollableParent = getAuthInputScrollableParent(),
                 authFieldConfig = authFieldConfig,
-                listener = presenter!!
+                listener = listener
             )
         }
     }
@@ -67,11 +71,13 @@ abstract class BaseInputFragment : BaseFragment(), IBaseInputView {
         val numberOfChildViews = getAuthInputLinearParent()?.childCount ?: 0
         if (numberOfChildViews > 0)
             for (i in 0 until numberOfChildViews) {
-                val child = getAuthInputLinearParent()!!.getChildAt(i) as? AuthInputFieldView
-                for (error in inputFieldValidationErrors) {
-                    if (child != null && child.authField.key == error.key.key) {
-                        child.showError(errorMsg = error.value)
-                        break
+                getAuthInputLinearParent()?.let {
+                    val child = it.getChildAt(i) as? AuthInputFieldView
+                    for (error in inputFieldValidationErrors) {
+                        if (child != null && child.authField.key == error.key.key) {
+                            child.showError(errorMsg = error.value)
+                            break
+                        }
                     }
                 }
             }

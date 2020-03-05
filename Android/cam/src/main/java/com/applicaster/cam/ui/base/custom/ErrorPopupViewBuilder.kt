@@ -14,11 +14,13 @@ import com.applicaster.cam.config.ui.UIMapper
 class ErrorPopupViewBuilder(var context: Context?, var layoutInflater: LayoutInflater?) {
 
     fun build(anchorView: View, msg: String) {
-        if (context != null && layoutInflater != null) {
-            val errorPopupWidth = context!!.resources.getDimensionPixelSize(R.dimen.auth_error_popup_width)
-            val errorPopupHeight = context!!.resources.getDimensionPixelSize(R.dimen.auth_error_popup_height)
-            val authEtWidth = context!!.resources.getDimensionPixelSize(R.dimen.auth_et_width)
-            val popupView = layoutInflater!!.inflate(R.layout.layout_input_validation_popup, null)
+        val context = this@ErrorPopupViewBuilder.context
+        val inflater = this@ErrorPopupViewBuilder.layoutInflater
+        if (context != null && inflater != null) {
+            val errorPopupWidth = context.resources.getDimensionPixelSize(R.dimen.auth_error_popup_width)
+            val errorPopupHeight = context.resources.getDimensionPixelSize(R.dimen.auth_error_popup_height)
+            val authEtWidth = context.resources.getDimensionPixelSize(R.dimen.auth_et_width)
+            val popupView = inflater.inflate(R.layout.layout_input_validation_popup, null)
 
             val tvValidationMessage = popupView.findViewById<TextView>(R.id.tv_validation_msg)
             tvValidationMessage.text = msg
