@@ -6,6 +6,7 @@ import android.text.InputType
 import android.text.TextWatcher
 import android.view.MotionEvent
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.LinearLayout
 import com.applicaster.cam.ContentAccessManager
@@ -63,6 +64,15 @@ class AuthInputFieldView(context: Context, var authField: AuthField, listener: I
         }
     }
 
+    fun setOnSubmitListener(func: () -> Unit) {
+        setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                func()
+            }
+            false // false to not override default editor behavior
+        }
+    }
+
     fun applyCustomizations(
             etWidth: Int,
             etHeight: Int,
@@ -93,4 +103,5 @@ class AuthInputFieldView(context: Context, var authField: AuthField, listener: I
 
 interface InputFieldViewListener {
     fun onErrorIconClicked(rootView: View, errorMsg: String)
+    fun onActionDoneTriggered()
 }

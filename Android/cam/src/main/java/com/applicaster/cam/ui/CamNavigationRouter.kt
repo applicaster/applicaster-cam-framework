@@ -38,8 +38,10 @@ class CamNavigationRouter(private val baseActivity: IBaseActivity) :
         if (!initialLoad && !isAddedToBackStack) {
             fragmentTransaction?.addToBackStack(tag)
         }
-        fragmentTransaction?.replace(fragmentContainer!!, fragment, tag)
-        fragmentTransaction?.commit()
+        fragmentContainer?.let{
+            fragmentTransaction?.replace(it, fragment, tag)
+            fragmentTransaction?.commit()
+        }
     }
 
     fun attachLoginFragment(initialLoad: Boolean = false) {
@@ -54,8 +56,10 @@ class CamNavigationRouter(private val baseActivity: IBaseActivity) :
         if (!initialLoad && !isAddedToBackStack) {
             fragmentTransaction?.addToBackStack(tag)
         }
-        fragmentTransaction?.replace(fragmentContainer!!, fragment, tag)
-        fragmentTransaction?.commit()
+        fragmentContainer?.let{
+            fragmentTransaction?.replace(it, fragment, tag)
+            fragmentTransaction?.commit()
+        }
     }
 
     fun attachPasswordResetFragment() {
@@ -78,8 +82,10 @@ class CamNavigationRouter(private val baseActivity: IBaseActivity) :
         //clearing back stack
         fragmentManager?.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
 
-        fragmentTransaction?.replace(fragmentContainer!!, fragment, tag)
-        fragmentTransaction?.commit()
+        fragmentContainer?.let{
+            fragmentTransaction?.replace(it, fragment, tag)
+            fragmentTransaction?.commit()
+        }
     }
 
     fun attachAccountActivation(userInput: HashMap<String, String>) {
@@ -110,7 +116,8 @@ class CamNavigationRouter(private val baseActivity: IBaseActivity) :
     fun attachLastFragment(authScreenType: AuthScreenType, camFlow: CamFlow) {
         val fragmentTransaction: FragmentTransaction? = fragmentManager?.beginTransaction()
         val fragmentList = fragmentManager?.fragments
-        if (fragmentList?.size != 0) {
+        val container = fragmentContainer
+        if (fragmentList?.size != 0 && container != null) {
             val lastFragment = fragmentList?.last().takeIf {
                 it?.tag?.contains(confirmationDialogPrefix) ?: false
             }
@@ -118,14 +125,14 @@ class CamNavigationRouter(private val baseActivity: IBaseActivity) :
                 val fragment = fragmentList?.get(fragmentList.size - 2)
                 fragment?.apply {
                     val tag = this.javaClass.canonicalName
-                    fragmentTransaction?.replace(fragmentContainer!!, fragment, tag)
+                    fragmentTransaction?.replace(container, fragment, tag)
                     fragmentTransaction?.commit()
                 }
             } else {
                 val fragment = fragmentList?.last()
                 fragment?.apply {
                     val tag = this.javaClass.canonicalName
-                    fragmentTransaction?.replace(fragmentContainer!!, fragment, tag)
+                    fragmentTransaction?.replace(container, fragment, tag)
                     fragmentTransaction?.commit()
                 }
             }

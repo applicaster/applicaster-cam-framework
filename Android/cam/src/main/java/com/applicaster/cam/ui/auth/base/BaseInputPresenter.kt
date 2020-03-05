@@ -22,6 +22,11 @@ abstract class BaseInputPresenter(
         view?.showErrorPopup(rootView, errorMsg)
     }
 
+    override fun onActionDoneTriggered() {
+        val inputFields = view?.getInputFieldsValues() ?: hashMapOf()
+        onAuthActionButtonClicked(inputFields)
+    }
+
     override fun onAuthActionButtonClicked(inputValues: HashMap<AuthField, String>) {
         val inputFieldValidationErrors = validateAuthInputFields(inputValues)
         if (inputFieldValidationErrors.isNotEmpty()) {
@@ -29,16 +34,21 @@ abstract class BaseInputPresenter(
             return
         }
         view?.showLoadingIndicator()
-        val input = inputValues.entries.associate { entry -> entry.key.key!! to entry.value }
+        val input = inputValues.entries.associate { entry
+            ->
+            val key = entry.key.key ?: ""
+            key to entry.value
+        }
         performAuthAction(input.toMutableMap() as HashMap<String, String>)
     }
 
     private fun validateAuthInputFields(inputValues: HashMap<AuthField, String>): HashMap<AuthField, String> {
         val inputErrors = HashMap<AuthField, String>()
         for (inputValue in inputValues) {
-            if (inputValue.key.mandatory!!) {
+            if (inputValue.key.mandatory == true) {
                 if (inputValue.value.isEmpty()) {
-                    inputErrors[inputValue.key] = ContentAccessManager.pluginConfigurator.getEmptyInputFieldError()
+                    inputErrors[inputValue.key] =
+                        ContentAccessManager.pluginConfigurator.getEmptyInputFieldError()
                 } else if (inputValue.key.type == AuthField.Type.EMAIL && !(isEmailValid(inputValue.value))) {
                     inputErrors[inputValue.key] =
                         ContentAccessManager.pluginConfigurator.getNotValidEmailInputFieldError()
