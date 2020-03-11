@@ -49,6 +49,7 @@ class SignUpPresenter(
         view?.hideLoadingIndicator()
         view?.hideKeyboard()
         AnalyticsUtil.logAlternativeSignUpSuccess()
+        navigateOnAuthSuccess(navigationRouter)
     }
 
     override fun onFailure(msg: String) {
@@ -86,10 +87,7 @@ class SignUpPresenter(
         ) {
             navigationRouter.attachAccountActivation(userInput)
         } else {
-            when (ContentAccessManager.camFlow) {
-                CamFlow.AUTH_AND_STOREFRONT, CamFlow.STOREFRONT -> navigationRouter.attachBillingFragment()
-                else -> view?.close()
-            }
+            navigateOnAuthSuccess(navigationRouter)
         }
     }
 
