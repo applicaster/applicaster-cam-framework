@@ -72,6 +72,7 @@ class LoginPresenter(
         view?.hideLoadingIndicator()
         view?.hideKeyboard()
         AnalyticsUtil.logAlternativeLoginSuccess()
+        navigateOnAuthSuccess(navigationRouter)
     }
 
     override fun onFailure(msg: String) {
@@ -109,10 +110,7 @@ class LoginPresenter(
         ) {
             navigationRouter.attachAccountActivation(userInput)
         } else {
-            when (ContentAccessManager.camFlow) {
-                CamFlow.AUTH_AND_STOREFRONT, CamFlow.STOREFRONT -> navigationRouter.attachBillingFragment()
-                else -> view?.close()
-            }
+            navigateOnAuthSuccess(navigationRouter)
         }
     }
 

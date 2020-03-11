@@ -1,8 +1,10 @@
 package com.applicaster.cam.ui.auth.user
 
 import android.app.Activity
+import com.applicaster.cam.CamFlow
 import com.applicaster.cam.ContentAccessManager
 import com.applicaster.cam.analytics.*
+import com.applicaster.cam.ui.CamNavigationRouter
 import com.applicaster.cam.ui.auth.base.BaseInputPresenter
 import com.applicaster.cam.ui.auth.base.IBaseInputView
 import com.applicaster.model.APUser
@@ -81,6 +83,13 @@ abstract class UserAuthPresenter(private val view: IBaseInputView?) : BaseInputP
         if (activity != null && !activity.isFinishing) {
             CustomFBPermissions.getInstance().basicPermissions = listOf("public_profile", "email")
             FacebookUtil.updateTokenIfNeeded(activity, APPermissionsType.Custom, this)
+        }
+    }
+
+    protected fun navigateOnAuthSuccess(navigationRouter: CamNavigationRouter) {
+        when (ContentAccessManager.camFlow) {
+            CamFlow.AUTH_AND_STOREFRONT, CamFlow.STOREFRONT -> navigationRouter.attachBillingFragment()
+            else -> view?.close()
         }
     }
 
