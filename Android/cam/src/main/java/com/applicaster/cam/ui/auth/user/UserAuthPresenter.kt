@@ -88,7 +88,12 @@ abstract class UserAuthPresenter(private val view: IBaseInputView?) : BaseInputP
 
     protected fun navigateOnAuthSuccess(navigationRouter: CamNavigationRouter) {
         when (ContentAccessManager.camFlow) {
-            CamFlow.AUTH_AND_STOREFRONT, CamFlow.STOREFRONT -> navigationRouter.attachBillingFragment()
+            CamFlow.AUTH_AND_STOREFRONT, CamFlow.STOREFRONT -> {
+                if (ContentAccessManager.contract.isPurchaseRequired())
+                    navigationRouter.attachBillingFragment()
+                else
+                    view?.close()
+            }
             else -> view?.close()
         }
     }
