@@ -154,7 +154,10 @@ class RecyclerBillingAdapter(
     }
 
     private fun updateStoreInfo(holder: BillingItemViewHolder) {
-        holder.tvTitle.text = purchaseItemsList[holder.adapterPosition].getItem()?.productTitle
+        val skuTitleAppNameRegex = """(?> \(.+?\))$""".toRegex()
+        val productTitle = purchaseItemsList[holder.adapterPosition].getItem()?.productTitle
+        val titleWithoutAppName = productTitle?.replace(skuTitleAppNameRegex, "")
+        holder.tvTitle.text = titleWithoutAppName
         holder.tvDetails.text = purchaseItemsList[holder.adapterPosition].getItem()?.productDescription
         val btnSubscribeText = holder.btnSubscribe.text
         holder.btnSubscribe.text = updateItemPrice(
