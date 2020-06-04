@@ -63,7 +63,9 @@ class CamActivity : AppCompatActivity(), IBaseActivity {
 
     override fun onBackPressed() {
         navigationRouter.callFragmentBackPressed()
-        ContentAccessManager.contract.onCamFinished(false)
+        if(navigationRouter.isLastFragment()) {
+            ContentAccessManager.contract.onCamFinished(false)
+        }
         super.onBackPressed()
     }
 
