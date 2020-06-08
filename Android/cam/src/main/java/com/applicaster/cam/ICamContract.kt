@@ -40,7 +40,7 @@ interface ICamContract {
 
     fun getCamFlow(): CamFlow
 
-    fun onCamFinished()
+    fun onCamFinished(success: Boolean)
 
     //========= Analytics ============//
 

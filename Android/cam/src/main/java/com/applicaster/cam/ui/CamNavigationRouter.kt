@@ -161,7 +161,7 @@ class CamNavigationRouter(private val baseActivity: IBaseActivity) :
             fragmentManager?.fragments?.forEach { (it as? BaseFragment)?.onLastFragmentClosed() }
     }
 
-    private fun isLastFragment(): Boolean = fragmentManager?.backStackEntryCount == 0
+    fun isLastFragment(): Boolean = fragmentManager?.backStackEntryCount == 0
 
     private fun attachByScreenType(authScreenType: AuthScreenType) {
         when (authScreenType) {

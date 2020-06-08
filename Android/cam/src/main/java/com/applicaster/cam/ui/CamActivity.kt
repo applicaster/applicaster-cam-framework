@@ -57,12 +57,15 @@ class CamActivity : AppCompatActivity(), IBaseActivity {
     }
 
     override fun close() {
-        ContentAccessManager.contract.onCamFinished()
+        ContentAccessManager.contract.onCamFinished(true)
         finish()
     }
 
     override fun onBackPressed() {
         navigationRouter.callFragmentBackPressed()
+        if(navigationRouter.isLastFragment()) {
+            ContentAccessManager.contract.onCamFinished(false)
+        }
         super.onBackPressed()
     }
 
