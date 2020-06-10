@@ -1,6 +1,7 @@
 package com.applicaster.cam.ui
 
 import android.content.Context
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
@@ -28,8 +29,14 @@ class CamActivity : AppCompatActivity(), IBaseActivity {
         setContentView(R.layout.activity_cam)
 
         when {
-            fragments_container_phone != null -> fragmentsContainer = fragments_container_phone
-            fragments_container_tablet != null -> fragmentsContainer = fragments_container_tablet
+            fragments_container_phone != null -> {
+                fragmentsContainer = fragments_container_phone
+                requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+            }
+            fragments_container_tablet != null -> {
+                fragmentsContainer = fragments_container_tablet
+                requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+            }
         }
 
         navigationRouter = CamNavigationRouter(this)
