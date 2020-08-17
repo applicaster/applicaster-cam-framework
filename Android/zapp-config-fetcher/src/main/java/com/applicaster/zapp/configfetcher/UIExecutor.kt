@@ -2,6 +2,7 @@ package com.applicaster.zapp.configfetcher
 
 import android.content.Context
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.Lifecycle
 import com.applicaster.zapp.configfetcher.ui.TransparentLoadingFragment
 
 fun FragmentActivity.showLoading() {
@@ -31,11 +32,14 @@ class UIEnvironment(context: Context?, showLoadingUI: Boolean){
     suspend fun <T> executeWithResult(
             function: suspend () -> T
     ): T {
-        activity?.run { if(!activity.isFinishing) showLoading() }
+        activity?.run { if(isVisible(activity)) showLoading() }
         val data = function()
-        activity?.run { if(!activity.isFinishing) hideLoading() }
+        activity?.run { if(isVisible(activity)) hideLoading() }
         return data
     }
+
+    private fun isVisible(activity: FragmentActivity) =
+            activity.lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED)
 
     suspend fun execute(
             function: suspend () -> Unit
