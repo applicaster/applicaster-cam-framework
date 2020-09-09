@@ -145,7 +145,7 @@ class BillingFragment : BaseFragment(), IBillingView {
     }
 
     override fun hideCustomLinksContainer() {
-        container_bottom_links.visibility = View.GONE
+        container_bottom_links?.visibility = View.GONE
     }
 
     override fun clearBillingContainer() {
