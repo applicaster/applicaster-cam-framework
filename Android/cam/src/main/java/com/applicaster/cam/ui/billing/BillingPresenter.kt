@@ -171,8 +171,8 @@ class BillingPresenter(
                 purchases.find { purchase -> details.sku == purchase.sku } != null
             }
             if (isNonMatchingRestoredPurchasesExists) {
-                showHandledError(ContentAccessManager.pluginConfigurator.getNonMatchingRestoredPurchasesText())
-                purchaseSucceed = true
+                // not an error
+                Log.i(TAG, "Restored legacy item")
             }
         }
         return purchaseSucceed
