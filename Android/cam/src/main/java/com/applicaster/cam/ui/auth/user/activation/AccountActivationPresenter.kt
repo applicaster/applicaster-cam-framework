@@ -1,5 +1,6 @@
 package com.applicaster.cam.ui.auth.user.activation
 
+import android.util.Log
 import com.applicaster.cam.AccountActivationCallback
 import com.applicaster.cam.CamFlow
 import com.applicaster.cam.SendAuthActivationCodeCallback
@@ -19,6 +20,8 @@ class AccountActivationPresenter(
 ) :
     BaseInputPresenter(view), IAccountActivationPresenter, SendAuthActivationCodeCallback,
     AccountActivationCallback {
+
+    private val TAG = "AccountActivationPresenter"
 
     override fun onViewCreated() {
         super.onViewCreated()
@@ -45,6 +48,7 @@ class AccountActivationPresenter(
     }
 
     override fun onFailure(msg: String) {
+        Log.e(TAG, "onFailure: $msg")
         view?.hideLoadingIndicator()
         view?.showAlert(msg)
     }

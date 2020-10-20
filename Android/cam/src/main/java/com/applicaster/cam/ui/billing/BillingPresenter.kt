@@ -27,7 +27,7 @@ class BillingPresenter(
         IBillingPresenter,
         BillingListener, RestoreCallback {
 
-    private val TAG = BillingPresenter::class.java.canonicalName
+    private val TAG = "BillingPresenter"
 
     private val skuDetailsList: ArrayList<SkuDetails> = arrayListOf()
     private val camContract: ICamContract = ContentAccessManager.contract
@@ -69,6 +69,7 @@ class BillingPresenter(
     }
 
     override fun onBillingClientError(statusCode: Int, description: String) {
+        Log.e(TAG, "onBillingClientError: $statusCode $description")
         view?.hideLoadingIndicator()
         view?.showAlert(ContentAccessManager.pluginConfigurator.getDefaultAlertText())
     }
@@ -265,11 +266,12 @@ class BillingPresenter(
     }
 
     private fun showHandledError(description: String = "", apiMsg: String = "") {
+        Log.e(TAG, "Handled error: $description  $apiMsg")
         view?.showAlert(
-                if (apiMsg.isEmpty())
+                if (description.isEmpty())
                     ContentAccessManager.pluginConfigurator.getDefaultAlertText()
                 else
-                    apiMsg
+                    description
         )
         // Analytics events
         AnalyticsUtil.logViewAlert(ConfirmationAlertData(
@@ -285,6 +287,7 @@ class BillingPresenter(
      * Restore action failed on Cleeng side
      */
     override fun onFailure(msg: String) {
+        Log.e(TAG, "onFailure: $msg")
         view?.hideLoadingIndicator()
         view?.showAlert(msg)
         sendRestoreFailureAnalytics(msg)

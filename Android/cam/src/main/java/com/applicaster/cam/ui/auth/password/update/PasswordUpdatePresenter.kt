@@ -1,5 +1,6 @@
 package com.applicaster.cam.ui.auth.password.update
 
+import android.util.Log
 import com.applicaster.cam.ContentAccessManager
 import com.applicaster.cam.PasswordUpdateCallback
 import com.applicaster.cam.analytics.AnalyticsUtil
@@ -18,6 +19,8 @@ class PasswordUpdatePresenter(
 ) :
     BaseInputPresenter(view), IBaseInputPresenter, PasswordUpdateCallback {
 
+    private val TAG = "PasswordUpdatePresenter"
+
     override fun onViewCreated() {
         super.onViewCreated()
 
@@ -29,6 +32,7 @@ class PasswordUpdatePresenter(
     }
 
     override fun onFailure(msg: String) {
+        Log.e(TAG, "onFailure: $msg")
         view?.hideLoadingIndicator()
         view?.showAlert(msg)
     }
