@@ -266,10 +266,10 @@ class BillingPresenter(
 
     private fun showHandledError(description: String = "", apiMsg: String = "") {
         view?.showAlert(
-                if (apiMsg.isEmpty())
+                if (description.isEmpty())
                     ContentAccessManager.pluginConfigurator.getDefaultAlertText()
                 else
-                    apiMsg
+                    description
         )
         // Analytics events
         AnalyticsUtil.logViewAlert(ConfirmationAlertData(
