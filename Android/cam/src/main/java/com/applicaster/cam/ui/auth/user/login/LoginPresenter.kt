@@ -2,9 +2,7 @@ package com.applicaster.cam.ui.auth.user.login
 
 import android.app.Activity
 import android.content.ActivityNotFoundException
-import android.content.Intent
-import androidx.core.content.ContextCompat
-import com.applicaster.cam.CamFlow
+import android.util.Log
 import com.applicaster.cam.ContentAccessManager
 import com.applicaster.cam.FacebookAuthCallback
 import com.applicaster.cam.LoginCallback
@@ -15,13 +13,15 @@ import com.applicaster.cam.params.auth.AuthScreenType
 import com.applicaster.cam.ui.CamNavigationRouter
 import com.applicaster.cam.ui.auth.user.UserAuthPresenter
 import com.applicaster.cam.ui.base.presenter.ICustomLinkActionHandler
-import java.lang.NullPointerException
 
 class LoginPresenter(
     private val view: ILoginView?,
     private val navigationRouter: CamNavigationRouter
 ) :
     UserAuthPresenter(view), ILoginPresenter, LoginCallback, FacebookAuthCallback, ICustomLinkActionHandler {
+
+    private val TAG = "LoginPresenter"
+
     private val userInput: HashMap<String, String> = hashMapOf()
 
     override fun onViewCreated() {
@@ -54,6 +54,7 @@ class LoginPresenter(
     }
 
     override fun onFacebookAuthFailure(msg: String) {
+        Log.e(TAG, "onFacebookAuthFailure: $msg")
         view?.hideLoadingIndicator()
         view?.showAlert(msg)
         AnalyticsUtil.logAlternativeLoginFailure()
@@ -76,6 +77,7 @@ class LoginPresenter(
     }
 
     override fun onFailure(msg: String) {
+        Log.e(TAG, "onFailure: $msg")
         view?.hideLoadingIndicator()
         view?.showAlert(msg)
         //Analytics

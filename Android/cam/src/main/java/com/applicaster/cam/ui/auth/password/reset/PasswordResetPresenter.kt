@@ -1,5 +1,6 @@
 package com.applicaster.cam.ui.auth.password.reset
 
+import android.util.Log
 import com.applicaster.cam.ContentAccessManager
 import com.applicaster.cam.PasswordResetCallback
 import com.applicaster.cam.SendPasswordActivationCodeCallback
@@ -18,6 +19,8 @@ class PasswordResetPresenter(
     private val navigationRouter: CamNavigationRouter
 ) :
     BaseInputPresenter(view), IBaseInputPresenter, PasswordResetCallback, SendPasswordActivationCodeCallback {
+
+    private val TAG = "PasswordResetPresenter"
 
     override fun onViewCreated() {
         super.onViewCreated()
@@ -44,6 +47,7 @@ class PasswordResetPresenter(
     }
 
     override fun onFailure(msg: String) {
+        Log.e(TAG, "onFailure: $msg")
         view?.hideLoadingIndicator()
         view?.showAlert(msg)
         //Analytics
