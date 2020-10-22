@@ -170,15 +170,19 @@ class EntitlementPickerViewController: UIViewController {
     }
     
     private func setupRestoreText() {
-        let config = configDictionary
+        guard let viewModel = viewModel else {
+            return
+        }
         
-        let restoreMessageText = NSAttributedString(string: viewModel!.restoreHint,
+        let config = configDictionary
+
+        let restoreMessageText = NSAttributedString(string: viewModel.restoreHint,
                                                     attributes: [.font: UIConfigurator.font(from: config,
                                                                                             for: .promptFont),
                                                                  .foregroundColor: UIConfigurator.color(from: config,
                                                                                                         for: .promptFont)])
         
-        let restoreLink = NSAttributedString(string: viewModel!.restoreButtonText,
+        let restoreLink = NSAttributedString(string: viewModel.restoreButtonText,
                                              attributes: [.font: UIConfigurator.font(from: config,
                                                                                      for: .linkFont),
                                                           .foregroundColor: UIConfigurator.color(from: config,
@@ -207,9 +211,11 @@ class EntitlementPickerViewController: UIViewController {
                                                                              in: textView.textContainer,
                                                                              fractionOfDistanceBetweenInsertionPoints: nil)
             
-            let linkRange = (textView.text as NSString).range(of: viewModel!.restoreButtonText)
-            if linkRange.contains(tappedCharacterIndex) {
-                presenter?.restore()
+            if let restoreText = viewModel?.restoreButtonText {
+                let linkRange = (textView.text as NSString).range(of: restoreText)
+                if linkRange.contains(tappedCharacterIndex) {
+                    presenter?.restore()
+                }
             }
         }
     }

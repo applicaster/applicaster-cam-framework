@@ -100,7 +100,7 @@ class AuthorizationCoordinator: AuthorizationCoordinatorProtocol {
                                                     completion: { [unowned self] in
             self.childCoordinator = nil
         })
-        childCoordinator!.start()
+        childCoordinator?.start()
     }
     
     func showLoginScreen(isCoordinatorRootController: Bool) {

@@ -21,8 +21,11 @@ class CustomFlowLayout: UICollectionViewFlowLayout {
             return
         }
         if UIDevice.current.userInterfaceIdiom == .pad {
-            var itemsAmount = collectionView.dataSource!.collectionView(collectionView,
-                                                                        numberOfItemsInSection: 0)
+            guard let datasource = collectionView.dataSource else {
+                return
+            }
+            var itemsAmount = datasource.collectionView(collectionView,
+                                                        numberOfItemsInSection: 0)
             
             if itemsAmount > 3 {
                 itemsAmount = 3
