@@ -114,7 +114,7 @@ open class ContentAccessManager {
                                                     parentCoordinator: self,
                                                     flow: .auth,
                                                     completion: completion)
-        childCoordinator!.start()
+        childCoordinator?.start()
     }
     
     private func logout(with completion: @escaping (Bool) -> Void) {
@@ -122,7 +122,7 @@ open class ContentAccessManager {
                                                     rootViewController: rootViewController,
                                                     flow: .logout,
                                                     completion: completion)
-        childCoordinator!.start()
+        childCoordinator?.start()
     }
     
     private func purchase(with completion: @escaping (Bool) -> Void) {
@@ -133,7 +133,7 @@ open class ContentAccessManager {
         childCoordinator = BillingCoordinator(navigationController: navigationController,
                                               parentCoordinator: self,
                                               completion: completion)
-        childCoordinator!.start()
+        childCoordinator?.start()
     }
     
     private func finishFlow(_ result: Bool) {
