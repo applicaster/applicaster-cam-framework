@@ -90,6 +90,9 @@ class EntitlementPickerPresenter {
             switch result {
             case .success(let response):
                 guard let receipt = BillingHelper.sharedInstance.localReceiptData() else {
+                    let alertDescription = self.camDelegate.getPluginConfig()[CAMKeys.restoreNoPurchaseAlertText.rawValue]
+                    self.view.showAlert(description: alertDescription)
+                    self.view.showLoadingScreen(false)
                     return
                 }
                 
